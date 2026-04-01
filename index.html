@@ -77,11 +77,34 @@
             color: white;
         }
 
+        .logo-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-img {
+            height: 38px;
+        }
+
+        .logo-divider {
+            width: 1px;
+            height: 28px;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .logo-text-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
         .logo-title {
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: -0.3px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
             color: white;
+            line-height: 1.2;
         }
 
         .logo-title span {
@@ -90,17 +113,8 @@
 
         .logo-subtitle {
             font-size: 11px;
-            color: rgba(255,255,255,0.5);
-            letter-spacing: 0.5px;
-        }
-
-        .logo-subtitle a {
-            color: var(--accent-light);
-            text-decoration: none;
-        }
-
-        .logo-subtitle a:hover {
-            color: white;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.2;
         }
 
         .header-link {
@@ -382,9 +396,13 @@
     <header class="header">
         <div class="header-inner">
             <a href="/" class="logo">
-                <div>
-                    <div class="logo-title">DUSCHOP <span>TOOLS</span></div>
-                    <div class="logo-subtitle">Interaktive Produktfinder von <a href="https://duschop.de">duschop.de</a></div>
+                <div class="logo-left">
+                    <img src="/Kristhal_Logo_Marke_trans.png" alt="Kristhal" class="logo-img">
+                    <div class="logo-divider"></div>
+                    <div class="logo-text-group">
+                        <div class="logo-title">DUSCHOP <span>TOOLS</span></div>
+                        <div class="logo-subtitle">Online-Shop der Marke Kristhal</div>
+                    </div>
                 </div>
             </a>
             <a href="https://duschop.de" class="header-link">&rarr; zum Shop</a>
