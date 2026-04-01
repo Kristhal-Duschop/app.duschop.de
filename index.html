@@ -77,23 +77,30 @@
             color: white;
         }
 
-        .logo-img {
-            height: 36px;
-            mix-blend-mode: screen;
+        .logo-title {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            color: white;
         }
 
-        .logo-divider {
-            width: 1px;
-            height: 24px;
-            background: rgba(255,255,255,0.25);
-        }
-
-        .logo-text {
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+        .logo-title span {
             color: var(--accent);
+        }
+
+        .logo-subtitle {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-subtitle a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+
+        .logo-subtitle a:hover {
+            color: white;
         }
 
         .header-link {
@@ -375,9 +382,10 @@
     <header class="header">
         <div class="header-inner">
             <a href="/" class="logo">
-                <img src="https://duschop.de/cdn/shop/files/Logo_Duschop_26.11_410x.png?v=1768583797" alt="Duschop" class="logo-img">
-                <div class="logo-divider"></div>
-                <div class="logo-text">Tools</div>
+                <div>
+                    <div class="logo-title">DUSCHOP <span>TOOLS</span></div>
+                    <div class="logo-subtitle">Interaktive Produktfinder von <a href="https://duschop.de">duschop.de</a></div>
+                </div>
             </a>
             <a href="https://duschop.de" class="header-link">&rarr; zum Shop</a>
         </div>
