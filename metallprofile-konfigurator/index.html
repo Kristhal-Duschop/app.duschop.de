@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metallprofile-Konfigurator | duschop.de</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #c8956c;
+            --accent-light: #e8c4a8;
+            --bg: #f8f6f3;
+            --card-bg: #ffffff;
+            --text: #2d2d2d;
+            --text-light: #6b6b6b;
+            --border: #e8e4df;
+            --shadow: 0 2px 20px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --success: #27ae60;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 14px; }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+        .logo-text span { font-size: 12px; opacity: 0.65; font-weight: 400; }
+
+        .header-badges { display: flex; gap: 8px; }
+
+        .header-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: white;
+            padding: 48px 24px 56px;
+            text-align: center;
+        }
+
+        .hero h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .hero p { font-size: 16px; opacity: 0.75; max-width: 620px; margin: 0 auto; }
+
+        /* Progress Bar */
+        .progress-bar {
+            max-width: 800px;
+            margin: -28px auto 0;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .progress-inner {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            right: 24px;
+            height: 3px;
+            background: var(--border);
+            z-index: 0;
+        }
+
+        .progress-steps::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            height: 3px;
+            background: var(--accent);
+            z-index: 1;
+            transition: width 0.4s ease;
+            width: var(--progress, 0%);
+        }
+
+        .step-dot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .step-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 3px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active .step-circle {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: white;
+        }
+
+        .step-dot.done .step-circle {
+            border-color: var(--success);
+            background: var(--success);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-light);
+            text-align: center;
+            max-width: 80px;
+            transition: color 0.3s;
+        }
+
+        .step-dot.active .step-label { color: var(--accent); }
+        .step-dot.done .step-label { color: var(--success); }
+
+        /* Configurator Container */
+        .configurator {
+            max-width: 800px;
+            margin: 28px auto 60px;
+            padding: 0 24px;
+        }
+
+        .step-panel {
+            display: none;
+            animation: fadeSlideIn 0.4s ease;
+        }
+
+        .step-panel.active { display: block; }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+            text-align: center;
+        }
+
+        .step-subtitle {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Option Cards */
+        .options-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .options-grid.cols-2 > .option-card { flex: 0 1 320px; max-width: 360px; }
+        .options-grid.cols-3 > .option-card { flex: 0 1 240px; max-width: 280px; }
+
+        .option-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .option-card.selected {
+            border-color: var(--accent);
+            background: #fdf8f4;
+            box-shadow: 0 0 0 3px rgba(200,149,108,0.15);
+        }
+
+        .option-card.selected::after {
+            content: '\2713';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .option-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+        }
+
+        .option-card.selected .option-icon { background: rgba(200,149,108,0.15); }
+
+        .option-name {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .option-desc {
+            font-size: 12px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .option-meta {
+            margin-top: 10px;
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Color Swatches */
+        .color-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            border: 2px solid rgba(0,0,0,0.08);
+        }
+
+        .color-info { flex: 1; }
+        .color-name { font-size: 14px; font-weight: 600; }
+        .color-finish { font-size: 12px; color: var(--text-light); }
+
+        /* Results */
+        .results-panel {
+            display: none;
+            animation: fadeSlideIn 0.4s ease;
+        }
+
+        .results-panel.active { display: block; }
+
+        .result-summary {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: white;
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .result-summary h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #ffffff;
+        }
+
+        .result-choices {
+            justify-content: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .result-choice {
+            background: rgba(255,255,255,0.12);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+        }
+
+        .result-products { display: flex; flex-direction: column; gap: 12px; }
+
+        .result-product-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .result-product-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+            border-color: var(--accent-light);
+        }
+
+        .result-product-inner {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 18px 20px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .result-product-img {
+            width: 72px;
+            height: 72px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: var(--bg);
+        }
+
+        .result-product-info { flex: 1; min-width: 0; }
+        .result-product-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+        .result-product-desc { font-size: 12px; color: var(--text-light); margin-bottom: 6px; }
+        .result-product-price { font-size: 15px; font-weight: 700; color: var(--accent); }
+
+        .result-product-arrow {
+            color: var(--accent);
+            flex-shrink: 0;
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: all 0.2s;
+        }
+
+        .result-product-card:hover .result-product-arrow { opacity: 1; transform: translateX(0); }
+
+        .result-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-badge {
+            background: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .result-section { margin-bottom: 28px; }
+
+        .result-hint {
+            background: #fef9f0;
+            border: 1px solid var(--accent-light);
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .result-hint strong { color: var(--accent); }
+
+        /* Navigation */
+        .step-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 32px;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 12px;
+            border: none;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { background: #b8845c; transform: translateY(-1px); }
+        .btn-primary:disabled { background: var(--border); color: var(--text-light); cursor: not-allowed; transform: none; }
+
+        .btn-secondary { background: var(--bg); color: var(--text); border: 2px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--accent-light); }
+
+        .btn-restart { background: transparent; color: var(--text-light); text-decoration: underline; border: none; padding: 12px 0; }
+        .btn-restart:hover { color: var(--accent); }
+
+        /* No match */
+        .no-match {
+            text-align: center;
+            padding: 48px 24px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .no-match-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.4; }
+        .no-match h3 { font-size: 18px; margin-bottom: 8px; }
+        .no-match p { color: var(--text-light); font-size: 14px; max-width: 400px; margin: 0 auto; }
+
+        /* Info Box */
+        .info-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .info-box strong { color: var(--text); }
+
+        @media (max-width: 640px) {
+            .header-badges { display: none; }
+            .hero { padding: 36px 20px 44px; }
+            .step-label { display: none; }
+            .step-circle { width: 32px; height: 32px; font-size: 12px; }
+            .options-grid.cols-2, .options-grid.cols-3 { grid-template-columns: 1fr; }
+            .result-product-inner { flex-wrap: wrap; }
+        }
+    </style>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://app.duschop.de/metallprofile-konfigurator/">
+<meta property="og:title" content="Metallprofile-Konfigurator | Duschop Tools">
+<meta property="og:description" content="Konfiguriere dein Metallprofil fuer die Glasdusche.">
+<meta property="og:site_name" content="Duschop Tools">
+</head>
+<body>
+<div style="background:#1a1a2e;padding:10px 20px;text-align:left;position:sticky;top:0;z-index:9999;">
+    <a href="/" style="color:#c8956c;text-decoration:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        Alle Tools
+    </a>
+</div>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 2v20"/>
+                    <path d="M4 2h8v20H4"/>
+                    <path d="M12 6h4"/>
+                    <path d="M12 10h4"/>
+                    <path d="M12 18h4"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <h1>Metallprofile</h1>
+                <span>Konfigurator &middot; duschop.de</span>
+            </div>
+        </div>
+        <div class="header-badges">
+            <div class="header-badge">Schritt-f&uuml;r-Schritt</div>
+            <div class="header-badge">Fliesenprofile &amp; Duschprofile</div>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <h2>Finden Sie das passende Metallprofil</h2>
+    <p>In wenigen Schritten zum richtigen Fliesen- oder Duschprofil &ndash; Material, Einbauart, Oberfl&auml;che und Abschlussart w&auml;hlen.</p>
+</section>
+
+<div class="progress-bar">
+    <div class="progress-inner">
+        <div class="progress-steps" id="progressSteps" style="--progress: 0%">
+            <div class="step-dot active" data-step="0">
+                <div class="step-circle">1</div>
+                <div class="step-label">Material</div>
+            </div>
+            <div class="step-dot" data-step="1">
+                <div class="step-circle">2</div>
+                <div class="step-label">Einbauart</div>
+            </div>
+            <div class="step-dot" data-step="2">
+                <div class="step-circle">3</div>
+                <div class="step-label">Oberfl&auml;che</div>
+            </div>
+            <div class="step-dot" data-step="3">
+                <div class="step-circle">4</div>
+                <div class="step-label">Abschluss</div>
+            </div>
+            <div class="step-dot" data-step="4">
+                <div class="step-circle">5</div>
+                <div class="step-label">Ergebnis</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="configurator">
+
+    <!-- STEP 0: Material -->
+    <div class="step-panel active" id="step0">
+        <h3 class="step-title">Aus welchem Material soll das Profil sein?</h3>
+        <p class="step-subtitle">Das Material beeinflusst Haltbarkeit, Optik und Preis. Beide Materialien sind feuchtraumgeeignet.</p>
+
+        <div class="options-grid cols-2">
+            <div class="option-card" data-value="alu" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+                        <rect x="8" y="6" width="24" height="28" rx="3" fill="#e0e0e0" stroke="#b0b0b0" stroke-width="2"/>
+                        <text x="20" y="24" text-anchor="middle" font-size="9" fill="#777" font-weight="700">ALU</text>
+                    </svg>
+                </div>
+                <div class="option-name">Aluminium</div>
+                <div class="option-desc">Leichtes, eloxiertes Aluminium. Gro&szlig;e Farbauswahl durch Beschichtungen und Eloxierung. Preisg&uuml;nstiger.</div>
+                <div class="option-meta">Gro&szlig;e Farbauswahl</div>
+            </div>
+
+            <div class="option-card" data-value="edelstahl" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+                        <rect x="8" y="6" width="24" height="28" rx="3" fill="#c8c4be" stroke="#999" stroke-width="2"/>
+                        <text x="20" y="24" text-anchor="middle" font-size="7" fill="#666" font-weight="700">V2A</text>
+                    </svg>
+                </div>
+                <div class="option-name">Edelstahl</div>
+                <div class="option-desc">Massiver V2A-Edelstahl. Extrem langlebig und korrosionsbest&auml;ndig. Premium-Qualit&auml;t.</div>
+                <div class="option-meta">Premium &amp; langlebig</div>
+            </div>
+        </div>
+
+        <div class="step-nav">
+            <div></div>
+            <button class="btn btn-primary" id="nextBtn0" disabled onclick="nextStep(0)">
+                Weiter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 1: Einbauart -->
+    <div class="step-panel" id="step1">
+        <h3 class="step-title">Wie wird das Profil eingebaut?</h3>
+        <p class="step-subtitle">Die Einbauart h&auml;ngt davon ab, ob das Profil b&uuml;ndig in die Fliesenebene oder auf die fertige Fliese montiert wird.</p>
+
+        <div class="options-grid cols-2" id="einbauOptions"></div>
+
+        <div class="info-box" id="einbauInfo" style="display:none;"></div>
+
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(1)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-primary" id="nextBtn1" disabled onclick="nextStep(1)">
+                Weiter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 2: Oberfl&auml;che -->
+    <div class="step-panel" id="step2">
+        <h3 class="step-title">Welche Oberfl&auml;che soll es sein?</h3>
+        <p class="step-subtitle">Verf&uuml;gbare Farben und Oberfl&auml;chen f&uuml;r Ihre Auswahl.</p>
+
+        <div class="options-grid cols-2" id="colorOptions"></div>
+
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(2)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-primary" id="nextBtn2" disabled onclick="nextStep(2)">
+                Weiter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 3: Abschlussart -->
+    <div class="step-panel" id="step3">
+        <h3 class="step-title">Wie soll das Glas im Profil befestigt werden?</h3>
+        <p class="step-subtitle">W&auml;hlen Sie die Befestigungsart: Silikonverklebung, Kunststoff-Einlage oder Klemmprofil.</p>
+
+        <div class="options-grid cols-2" id="abschlussOptions"></div>
+
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(3)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-primary" id="nextBtn3" disabled onclick="nextStep(3)">
+                Ergebnis anzeigen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 4: Ergebnis -->
+    <div class="step-panel" id="step4">
+        <div id="resultsContent"></div>
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(4)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-restart" onclick="restart()">Neue Konfiguration starten</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// Product Database — echte Shopify-Produkte
+// ============================================================
+const products = [
+    // ====================================
+    // IN FLIESENEBENE: Fliesen-U-Winkelprofile (nur diese!)
+    // ====================================
+    {
+        id: 'fliesen-slimline-edelstahl-gebuerstet',
+        title: 'Fliesen-U-Winkelprofil "Slimline" Edelstahl K220 geb\u00fcrstet \u2013 Art.Nr. UEK220',
+        handle: 'fliesen-u-winkelprofil-slimline-edelstahl-matt-geschliffen',
+        type: 'profil',
+        material: 'edelstahl',
+        einbau: 'in-fliesenebene',
+        colors: ['edelstahl-gebuerstet'],
+        abschluss: ['silikonverklebung'],
+        price: '59,90',
+        priceMax: '119,90',
+        desc: '"Slimline" mit Schenkel als Fliesenunterlage. F\u00fcr 8 und 10 mm Glas. 116\u2013250 cm. Montage ohne Bohren.',
+        isMain: true
+    },
+    {
+        id: 'fliesen-alu-silber-matt',
+        title: 'Alu-U-Winkelprofil mit Auflageschenkel f\u00fcr Fliesen \u2013 Typ PP-TGU1214',
+        handle: 'fliesen-u-winkelprofil-aluminium-silber-matt',
+        type: 'profil',
+        material: 'alu',
+        einbau: 'in-fliesenebene',
+        colors: ['silber-matt'],
+        abschluss: ['silikonverklebung'],
+        price: '20,90',
+        priceMax: '67,90',
+        desc: 'Alu-U-Winkelprofil mit Auflageschenkel unter Fliesen. F\u00fcr 8 oder 10 mm Glas. 130\u2013250 cm. Ohne Bohren.',
+        isMain: true
+    },
+    {
+        id: 'fliesen-edelstahl-gps2',
+        title: 'Fliesen-U-Winkelprofil Edelstahl geb\u00fcrstet \u2013 Typ PP-GPS2, Art.Nr. 31543',
+        handle: 'fliesen-u-winkelprofil-edelstahl-gebuerstet',
+        type: 'profil',
+        material: 'edelstahl',
+        einbau: 'in-fliesenebene',
+        colors: ['edelstahl-gebuerstet'],
+        abschluss: ['silikonverklebung'],
+        price: '99,50',
+        priceMax: '139,90',
+        desc: 'Edelstahl geb\u00fcrstet. F\u00fcr 8 oder 10 mm Glas. Fliesen 10\u201319 mm. 200\u2013250 cm. Ohne Bohren.',
+        isMain: true
+    },
+    {
+        id: 'fliesen-slimline-gefaellekeil',
+        title: 'Fliesen-U-Winkelprofil "Slimline" mit Gef\u00e4llekeil f\u00fcr Duschboden \u2013 Art.Nr. GPDU',
+        handle: 'fliesen-u-winkelprofil-mit-gefallekeil-typ-slimline-edelstahl-matt-geschliffen',
+        type: 'profil',
+        material: 'edelstahl',
+        einbau: 'in-fliesenebene',
+        colors: ['edelstahl-gebuerstet'],
+        abschluss: ['silikonverklebung'],
+        price: '114,00',
+        priceMax: '152,00',
+        desc: '"Slimline" mit 2-tlg. Gef\u00e4llekeil f\u00fcr Duschboden. Edelstahl K220. 116\u2013200 cm. Links/Rechts w\u00e4hlbar.',
+        isMain: true
+    },
+    {
+        id: 'fliesen-slimline-chrom',
+        title: 'Fliesen-U-Winkelprofil "Slimline" Edelstahl verchromt hochglanz \u2013 Art.Nr. UCHR',
+        handle: 'fliesen-u-winkelprofil-slimline-edelstahl-chrom-glanz-art-nr-u-chr',
+        type: 'profil',
+        material: 'edelstahl',
+        einbau: 'in-fliesenebene',
+        colors: ['chrom-poliert'],
+        abschluss: ['silikonverklebung'],
+        price: '139,90',
+        desc: '"Slimline" Edelstahl verchromt (hochglanz). F\u00fcr 8 und 10 mm Glas. 250 cm. Ohne Bohren.',
+        isMain: true
+    },
+
+    // ====================================
+    // AUF FLIESE: U-Profile
+    // ====================================
+    {
+        id: 'alu-u-profil-silikon',
+        title: 'Alu U-Profil zur Silikonverklebung \u2013 13 Farben \u2013 Art.Nr. SDCD3812',
+        handle: 'alu-u-profil',
+        type: 'profil',
+        material: 'alu',
+        einbau: 'auf-fliese',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'schwarz-matt', 'silber-matt', 'graphit-poliert', 'graphit-matt', 'messing-poliert', 'messing-matt', 'messing-matt-gebuerstet', 'bronze-matt', 'weiss-matt', 'kupfer-poliert', 'kupfer-matt'],
+        abschluss: ['silikonverklebung'],
+        price: '39,50',
+        priceMax: '99,90',
+        desc: 'Alu U-Profil, 19 mm H\u00f6he. \u00d6ffnungsweite 10 oder 13 mm. F\u00fcr 6\u201310 mm Glas. 2000 oder 2400 mm.',
+        isMain: true
+    },
+    {
+        id: 'alu-u-profil-kunststoff',
+        title: 'Alu U-Profil mit L-Vinyl und Kederstab \u2013 silikonfrei \u2013 Art.Nr. DUC',
+        handle: 'alu-u-wandprofil',
+        type: 'profil',
+        material: 'alu',
+        einbau: 'auf-fliese',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'schwarz-matt'],
+        abschluss: ['kunststoff-einlage'],
+        price: '59,90',
+        priceMax: '89,90',
+        desc: 'Silikonfreie Klemmung mit L-Vinyl und Kederstab. F\u00fcr 8 oder 10 mm Glas. 2000 oder 2400 mm.',
+        isMain: true
+    },
+    {
+        id: 'edelstahl-mantel-u-profil',
+        title: 'U-Profil mit Edelstahlmantel \u2013 11 Farben \u2013 2400 mm inkl. 2 Endkappen',
+        handle: 'u-profil-mit-edelstahlmantel-fur-8-10-mm-esg-farblich-passend-zu-bellagio-2-400-mm-inkl-2-endkappen',
+        type: 'profil',
+        material: 'edelstahl',
+        materialAll: true,
+        einbau: 'auf-fliese',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'schwarz-matt', 'bronze-matt', 'messing-matt', 'messing-poliert', 'weiss-matt', 'graphit-poliert', 'graphit-matt', 'kupfer-poliert', 'kupfer-matt'],
+        abschluss: ['silikonverklebung'],
+        price: '64,90',
+        priceMax: '89,90',
+        desc: 'Premium: Alu-Kern mit Edelstahl-Blenden in 11 Farben. 2400 mm, k\u00fcrzbar. Inkl. 2 Endkappen. F\u00fcr 8 mm Glas.',
+        isMain: true
+    },
+
+    // ====================================
+    // AUF FLIESE: Klemmprofile
+    // ====================================
+    {
+        id: 'klemmprofil-cr-eumb',
+        title: 'Klemmprofil-Set Typ CR mit Abdeckprofilen \u2013 Inkl. 5 Glasklemmen \u2013 Art.Nr. EUMB',
+        handle: 'klemmprofil-set-mit-abdeckprofilen-art-nr-eumb',
+        type: 'klemmprofil',
+        material: 'alu',
+        einbau: 'auf-fliese',
+        colors: ['chrom-poliert', 'schwarz-matt'],
+        abschluss: ['klemmung'],
+        price: '125,90',
+        priceMax: '159,50',
+        desc: 'Klemmprofil-Set mit Abdeckprofilen. F\u00fcr 8 mm Glas. Inkl. 5 Klemmhalter. Ohne Glasbohrung.',
+        isMain: true
+    },
+    {
+        id: 'klemmprofil-gr-eckig',
+        title: 'Klemmprofil-Set Typ GR mit eckigen Abdeckprofilen \u2013 Art.Nr. 74127',
+        handle: 'klemmprofil-set-mit-eckigen-abdeckprofilen-art-nr-74127',
+        type: 'klemmprofil',
+        material: 'alu',
+        einbau: 'auf-fliese',
+        colors: ['chrom-poliert', 'silber-matt', 'schwarz-matt'],
+        abschluss: ['klemmung'],
+        price: '159,90',
+        priceMax: '286,90',
+        desc: 'Eckige Abdeckprofile. F\u00fcr 8 mm Glas. Inkl. 5 Klemmhalter. Ohne Glasbohrung.',
+        isMain: true
+    },
+    {
+        id: 'klemmprofil-gr-rund',
+        title: 'Klemmprofil-Set Typ GR mit abgerundeten Abdeckprofilen \u2013 Art.Nr. 74128',
+        handle: 'klemmprofil-set-mit-abgerundeten-abdeckprofilen-fur-wandbefestigung-art-nr-74128',
+        type: 'klemmprofil',
+        material: 'alu',
+        einbau: 'auf-fliese',
+        colors: ['chrom-poliert'],
+        abschluss: ['klemmung'],
+        price: '198,90',
+        desc: 'Abgerundete Abdeckprofile. F\u00fcr 8 mm Glas. Inkl. 5 Klemmhalter. Ohne Glasbohrung.',
+        isMain: true
+    },
+    {
+        id: 'led-klemmprofil-eckig',
+        title: 'LED-Klemmprofil-Set mit eckigen Abdeckprofilen \u2013 inkl. L-Profil f\u00fcr LED',
+        handle: 'led-klemmprofil-set-mit-eckigen-abdeckprofilen-typ-gr-fur-glasdicke-8-mm-inkl-l-profil-13-x-13-mm-fur-led-lichtband',
+        type: 'klemmprofil',
+        material: 'alu',
+        einbau: 'auf-fliese',
+        colors: ['chrom-poliert', 'silber-matt', 'schwarz-matt'],
+        abschluss: ['klemmung'],
+        price: '199,90',
+        priceMax: '319,90',
+        desc: 'Eckige Abdeckprofile mit L-Profil 13\u00d713 mm f\u00fcr LED-Lichtband. F\u00fcr 8 mm Glas.',
+        isMain: true
+    },
+    {
+        id: 'led-klemmprofil-rund',
+        title: 'LED-Klemmprofil-Set mit abgerundeten Abdeckprofilen \u2013 inkl. L-Profil f\u00fcr LED',
+        handle: 'led-klemmprofil-set-mit-abgerundeten-abdeckprofilen-fur-wandbefestigung-art-nr-74128',
+        type: 'klemmprofil',
+        material: 'alu',
+        einbau: 'auf-fliese',
+        colors: ['chrom-poliert'],
+        abschluss: ['klemmung'],
+        price: '224,90',
+        desc: 'Abgerundete Abdeckprofile mit L-Profil 13\u00d713 mm f\u00fcr LED-Lichtband. F\u00fcr 8 mm Glas.',
+        isMain: true
+    },
+
+    // ====================================
+    // ZUBEH\u00d6R: OTTO S100 Silikon
+    // ====================================
+    {
+        id: 'otto-s100-silikon',
+        title: 'OTTO S100 Premium Sanit\u00e4r-Silikon 300 ml transparent',
+        handle: 'sanitaer-silikon-otto-s100-premium-qualitat-300-ml',
+        type: 'zubehoer',
+        material: 'alu',
+        materialAll: true,
+        einbau: 'auf-fliese',
+        einbauAll: true,
+        colors: ['transparent'],
+        abschluss: ['silikonverklebung'],
+        price: '10,90',
+        desc: 'Profi-Silikon f\u00fcr Glasduschen, Fugen und Glasverklebung. Schimmelhemmend, transparent.',
+        isMain: false
+    },
+    {
+        id: 'transparente-unterlagen',
+        title: 'Transparente Unterlagen f\u00fcr rahmenlose Glasduschen \u2013 6 \u00d7 51 mm \u2013 Art.Nr. PSB',
+        handle: 'transparente-unterlagen-fur-rahmenlose-glasduschen',
+        type: 'zubehoer',
+        material: 'alu',
+        materialAll: true,
+        einbau: 'auf-fliese',
+        einbauAll: true,
+        colors: ['transparent'],
+        abschluss: ['silikonverklebung'],
+        price: '0,25',
+        priceMax: '39,00',
+        desc: 'Transparente Abstandhalter zwischen Glas und Bauteil. F\u00fcr 6/8/10 mm Glas. In 1\u201310 mm St\u00e4rke erh\u00e4ltlich.',
+        isMain: false
+    }
+];
+
+// Product images from Shopify CDN
+const productImages = {
+    // Fliesen-U-Winkelprofile
+    'fliesen-u-winkelprofil-slimline-edelstahl-matt-geschliffen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/UEK220.png?v=1773299573',
+    'fliesen-u-winkelprofil-aluminium-silber-matt': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/TGU1214.png?v=1773299775',
+    'fliesen-u-winkelprofil-edelstahl-gebuerstet': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/31543.png?v=1773300035',
+    'fliesen-u-winkelprofil-mit-gefallekeil-typ-slimline-edelstahl-matt-geschliffen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/GPDU.png?v=1773304613',
+    'fliesen-u-winkelprofil-slimline-edelstahl-chrom-glanz-art-nr-u-chr': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/U-CHR.png?v=1752907501',
+    // U-Profile auf Fliese
+    'alu-u-profil': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/SDCD_CH.png?v=1774367302',
+    'alu-u-wandprofil': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DUC.png?v=1773300407',
+    'u-profil-mit-edelstahlmantel-fur-8-10-mm-esg-farblich-passend-zu-bellagio-2-400-mm-inkl-2-endkappen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/poliert_2ee0851e-6413-4b90-bf10-f108a45e6cf0.png',
+    // Klemmprofile
+    'klemmprofil-set-mit-abdeckprofilen-art-nr-eumb': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8115.png?v=1766944402',
+    'klemmprofil-set-mit-eckigen-abdeckprofilen-art-nr-74127': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/127_2024-06-09T08_59_03.530Z.png?v=1742635526',
+    'klemmprofil-set-mit-abgerundeten-abdeckprofilen-fur-wandbefestigung-art-nr-74128': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/GR-Profil_rund.jpg?v=1763023810',
+    'led-klemmprofil-set-mit-eckigen-abdeckprofilen-typ-gr-fur-glasdicke-8-mm-inkl-l-profil-13-x-13-mm-fur-led-lichtband': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Klemmprofil_4.jpg?v=1763023712',
+    'led-klemmprofil-set-mit-abgerundeten-abdeckprofilen-fur-wandbefestigung-art-nr-74128': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/GR-Profil_rund.jpg?v=1763023810',
+    // Zubeh\u00f6r
+    'sanitaer-silikon-otto-s100-premium-qualitat-300-ml': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/S100.png?v=1770918900',
+    'transparente-unterlagen-fur-rahmenlose-glasduschen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_8afe7acc-8818-46bf-ad58-e05d0f0569b9.jpg?v=1757793855'
+};
+
+// Color definitions
+const colorDefs = {
+    'chrom-poliert': { name: 'Chrom poliert gl\u00e4nzend', gradient: 'linear-gradient(135deg, #e8e8e8 0%, #c0c0c0 25%, #f5f5f5 50%, #a8a8a8 75%, #d4d4d4 100%)', finish: 'Gl\u00e4nzend' },
+    'edelstahl-gebuerstet': { name: 'Edelstahl geb\u00fcrstet matt', gradient: 'linear-gradient(135deg, #c8c4be 0%, #b5b0a8 25%, #d0ccc5 50%, #a8a39a 75%, #bfbab2 100%)', finish: 'Matt' },
+    'edelstahl-poliert': { name: 'Edelstahl poliert', gradient: 'linear-gradient(135deg, #d6d2cc 0%, #bfbab3 25%, #e0dcd6 50%, #b0aaa2 75%, #ccc7c0 100%)', finish: 'Gl\u00e4nzend' },
+    'silber-matt': { name: 'Silber matt', gradient: 'linear-gradient(135deg, #c5c5c5 0%, #b0b0b0 25%, #cbcbcb 50%, #a0a0a0 75%, #bdbdbd 100%)', finish: 'Matt' },
+    'schwarz-matt': { name: 'Schwarz matt', gradient: 'linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 25%, #333333 50%, #111111 75%, #262626 100%)', finish: 'Matt' },
+    'messing-poliert': { name: 'Messing poliert gl\u00e4nzend (goldfarbig)', gradient: 'linear-gradient(135deg, #dcc260 0%, #c4a840 25%, #e8d070 50%, #b89a30 75%, #d0b850 100%)', finish: 'Gl\u00e4nzend' },
+    'messing-matt': { name: 'Messing matt (goldfarbig)', gradient: 'linear-gradient(135deg, #c8a84e 0%, #b08f30 25%, #d4b55a 50%, #a08228 75%, #bfa042 100%)', finish: 'Matt' },
+    'messing-matt-gebuerstet': { name: 'Messing matt geb\u00fcrstet (goldfarbig)', gradient: 'linear-gradient(135deg, #c0a048 0%, #a8882c 25%, #ccac54 50%, #987a24 75%, #b79840 100%)', finish: 'Matt' },
+    'bronze-matt': { name: 'Bronze matt geb\u00fcrstet', gradient: 'linear-gradient(135deg, #8B6914 0%, #6d5010 25%, #9a7520 50%, #5c430d 75%, #7d5e12 100%)', finish: 'Matt' },
+    'graphit-poliert': { name: 'Graphit poliert gl\u00e4nzend', gradient: 'linear-gradient(135deg, #5a5a5a 0%, #454545 25%, #666666 50%, #3a3a3a 75%, #525252 100%)', finish: 'Gl\u00e4nzend' },
+    'graphit-matt': { name: 'Graphit matt geb\u00fcrstet', gradient: 'linear-gradient(135deg, #686868 0%, #555555 25%, #737373 50%, #484848 75%, #606060 100%)', finish: 'Matt' },
+    'kupfer-poliert': { name: 'Kupfer poliert gl\u00e4nzend (Rose-Gold)', gradient: 'linear-gradient(135deg, #d4956a 0%, #c07d50 25%, #e0a57a 50%, #b07040 75%, #cc8d60 100%)', finish: 'Gl\u00e4nzend' },
+    'kupfer-matt': { name: 'Kupfer matt geb\u00fcrstet', gradient: 'linear-gradient(135deg, #b8805a 0%, #a06840 25%, #c49068 50%, #905a32 75%, #af7850 100%)', finish: 'Matt' },
+    'weiss-matt': { name: 'Wei\u00df matt', gradient: 'linear-gradient(135deg, #f5f2ef 0%, #e8e4e0 25%, #faf8f6 50%, #e0dcd8 75%, #f0ece8 100%)', finish: 'Matt' },
+    'transparent': { name: 'Transparent', gradient: 'linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 25%, #fafafa 50%, #e0e0e0 75%, #f5f5f5 100%)', finish: 'Transparent' }
+};
+
+// Einbauart definitions
+const einbauDefs = {
+    'in-fliesenebene': {
+        name: 'In Fliesenebene (b\u00fcndig)',
+        desc: 'Das Profil wird unter der Fliese eingebaut und schlie\u00dft b\u00fcndig mit der Fliesenoberfl\u00e4che ab. Muss vor dem Fliesen montiert werden.',
+        info: 'Das Profil wird beim Fliesen in den Fliesenkleber eingebettet. Das Ergebnis ist eine glatte, b\u00fcndige Oberfl\u00e4che \u2013 sehr edel und modern.'
+    },
+    'auf-fliese': {
+        name: 'Auf Fliese (Aufputz)',
+        desc: 'Das Profil wird auf die fertige Fliese aufgesetzt und verschraubt oder verklebt. Auch nachtr\u00e4glich montierbar.',
+        info: 'Ideal f\u00fcr nachtr\u00e4gliche Montage oder Renovierung. Das Profil sitzt auf der Fliese und wird mit Schrauben oder Spezialkleber befestigt.'
+    }
+};
+
+// Abschluss definitions
+const abschlussDefs = {
+    'kunststoff-einlage': {
+        name: 'Kunststoff-Einlage (L-Vinyl)',
+        desc: 'Eine weiche Kunststofflippe (L-Vinyl mit Kederstab) im Profil klemmt das Glas fest. Kein Silikon n\u00f6tig \u2013 das Glas kann sp\u00e4ter entnommen werden.',
+        pro: ['Glas herausnehmbar', 'Kein Silikon n\u00f6tig', 'Saubere Optik'],
+        contra: ['Weniger Farbauswahl']
+    },
+    'silikonverklebung': {
+        name: 'Silikonverklebung',
+        desc: 'Das Glas wird mit Sanit\u00e4rsilikon im Profil fixiert. Dauerhafte, feste Verbindung.',
+        pro: ['Maximale Dichtheit', 'Gro\u00dfe Farbauswahl', 'Sehr stabile Verbindung'],
+        contra: ['Glas nicht herausnehmbar', 'Silikon muss sauber verarbeitet werden']
+    },
+    'klemmung': {
+        name: 'Klemmprofil (ohne Silikon)',
+        desc: 'Das Glas wird mit Klemmhaltern im Profil gehalten. Kein Bohren ins Glas n\u00f6tig. Abdeckprofile verdecken die Schrauben.',
+        pro: ['Ohne Glasbohrung', 'Professionelle Optik', 'Glas austauschbar'],
+        contra: ['Nur f\u00fcr 8 mm Glas', 'H\u00f6here Investition']
+    }
+};
+
+// ============================================================
+// State
+// ============================================================
+let currentStep = 0;
+const selections = {
+    material: null,
+    einbau: null,
+    color: null,
+    abschluss: null
+};
+
+// ============================================================
+// Step Logic
+// ============================================================
+function selectOption(step, el) {
+    const parent = el.closest('.options-grid') || el.closest('.step-panel');
+    parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+
+    const value = el.dataset.value;
+
+    if (step === 0) selections.material = value;
+    else if (step === 1) {
+        selections.einbau = value;
+        const info = document.getElementById('einbauInfo');
+        if (einbauDefs[value]) {
+            info.innerHTML = '<strong>Hinweis:</strong> ' + einbauDefs[value].info;
+            info.style.display = 'block';
+        }
+    }
+    else if (step === 2) selections.color = value;
+    else if (step === 3) selections.abschluss = value;
+
+    document.getElementById('nextBtn' + step).disabled = false;
+}
+
+function nextStep(from) {
+    const panels = document.querySelectorAll('.step-panel');
+    panels[from].classList.remove('active');
+
+    currentStep = from + 1;
+
+    // Build dynamic step content
+    if (currentStep === 1) buildEinbauOptions();
+    else if (currentStep === 2) buildColorOptions();
+    else if (currentStep === 3) {
+        const available = getAvailableAbschluss();
+        if (available.length === 1) {
+            // Nur eine Option: automatisch ausw\u00e4hlen und \u00fcberspringen
+            selections.abschluss = available[0];
+            currentStep = 4;
+            buildResults();
+            panels[currentStep].classList.add('active');
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+        buildAbschlussOptions();
+    }
+    else if (currentStep === 4) buildResults();
+
+    panels[currentStep].classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevStep(to) {
+    const panels = document.querySelectorAll('.step-panel');
+    panels[currentStep].classList.remove('active');
+    let target = to - 1;
+    // Wenn Schritt 3 (Abschluss) \u00fcbersprungen wurde und wir von Ergebnis zur\u00fcckkommen
+    if (target === 3 && getAvailableAbschluss().length === 1) {
+        target = 2; // Direkt zur Oberfl\u00e4che
+    }
+    currentStep = target;
+    panels[currentStep].classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+    selections.material = null;
+    selections.einbau = null;
+    selections.color = null;
+    selections.abschluss = null;
+    currentStep = 0;
+
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('step0').classList.add('active');
+    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('[id^="nextBtn"]').forEach(b => b.disabled = true);
+    document.getElementById('einbauInfo').style.display = 'none';
+
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+    const dots = document.querySelectorAll('.step-dot');
+    const totalSteps = 4; // 5 steps, 4 transitions
+    const progressPercent = currentStep === 0 ? 0 : (currentStep / totalSteps) * 100;
+
+    document.getElementById('progressSteps').style.setProperty('--progress', progressPercent + '%');
+
+    dots.forEach((dot, i) => {
+        dot.classList.remove('active', 'done');
+        if (i < currentStep) dot.classList.add('done');
+        else if (i === currentStep) dot.classList.add('active');
+    });
+
+    // Allow clicking completed steps
+    dots.forEach(dot => {
+        dot.onclick = () => {
+            const stepIdx = parseInt(dot.dataset.step);
+            if (stepIdx < currentStep) {
+                document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+                currentStep = stepIdx;
+                document.getElementById('step' + stepIdx).classList.add('active');
+                updateProgress();
+            }
+        };
+    });
+}
+
+// ============================================================
+// Dynamic Content Builders
+// ============================================================
+function getAvailableEinbau() {
+    const material = selections.material;
+    const einbauSet = new Set();
+    products.forEach(p => {
+        if (p.material === material || p.materialAll) {
+            if (p.einbauAll) {
+                einbauSet.add('in-fliesenebene');
+                einbauSet.add('auf-fliese');
+            } else {
+                einbauSet.add(p.einbau);
+            }
+        }
+    });
+    return [...einbauSet];
+}
+
+function buildEinbauOptions() {
+    const available = getAvailableEinbau();
+    const container = document.getElementById('einbauOptions');
+
+    const svgIcons = {
+        'in-fliesenebene': '<svg width="28" height="28" viewBox="0 0 40 40" fill="none"><rect x="4" y="20" width="32" height="8" rx="1" fill="#e8e4df" stroke="#999" stroke-width="1.5"/><rect x="14" y="8" width="4" height="20" rx="0.5" fill="#d4eeff" stroke="#7ab8e0" stroke-width="1.5" stroke-dasharray="3 2"/><rect x="12" y="12" width="8" height="8" rx="1" fill="none" stroke="#c8956c" stroke-width="2"/><line x1="4" y1="20" x2="36" y2="20" stroke="#c8956c" stroke-width="1" stroke-dasharray="2 2"/></svg>',
+        'auf-fliese': '<svg width="28" height="28" viewBox="0 0 40 40" fill="none"><rect x="4" y="22" width="32" height="8" rx="1" fill="#e8e4df" stroke="#999" stroke-width="1.5"/><rect x="14" y="8" width="4" height="22" rx="0.5" fill="#d4eeff" stroke="#7ab8e0" stroke-width="1.5" stroke-dasharray="3 2"/><rect x="10" y="14" width="10" height="8" rx="1" fill="none" stroke="#c8956c" stroke-width="2"/><line x1="10" y1="22" x2="20" y2="22" stroke="#c8956c" stroke-width="2"/></svg>'
+    };
+
+    container.innerHTML = available.map(einbauId => {
+        const e = einbauDefs[einbauId];
+        const productCount = products.filter(p =>
+            (p.material === selections.material || p.materialAll) &&
+            (p.einbau === einbauId || p.einbauAll) &&
+            p.isMain
+        ).length;
+        return `
+        <div class="option-card" data-value="${einbauId}" onclick="selectOption(1, this)">
+            <div class="option-icon">${svgIcons[einbauId]}</div>
+            <div class="option-name">${e.name}</div>
+            <div class="option-desc">${e.desc}</div>
+            <div class="option-meta">${productCount} Profil${productCount !== 1 ? 'e' : ''}</div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('einbauInfo').style.display = 'none';
+}
+
+function getAvailableColors() {
+    const { material, einbau } = selections;
+    const colorSet = new Set();
+    products.forEach(p => {
+        if ((p.material === material || p.materialAll) && (p.einbau === einbau || p.einbauAll) && p.isMain) {
+            p.colors.forEach(c => { if (c !== 'transparent') colorSet.add(c); });
+        }
+    });
+    return [...colorSet];
+}
+
+function buildColorOptions() {
+    const available = getAvailableColors();
+    const container = document.getElementById('colorOptions');
+
+    container.innerHTML = available.map(colorId => {
+        const c = colorDefs[colorId];
+        if (!c) return '';
+        return `
+        <div class="option-card color-option" data-value="${colorId}" onclick="selectOption(2, this)">
+            <div class="color-swatch" style="background: ${c.gradient}"></div>
+            <div class="color-info">
+                <div class="color-name">${c.name}</div>
+                <div class="color-finish">${c.finish}</div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function getAvailableAbschluss() {
+    const { material, einbau, color } = selections;
+    const abschlussSet = new Set();
+    products.forEach(p => {
+        if ((p.material === material || p.materialAll) &&
+            (p.einbau === einbau || p.einbauAll) &&
+            p.isMain &&
+            p.colors.includes(color)) {
+            p.abschluss.forEach(a => abschlussSet.add(a));
+        }
+    });
+    return [...abschlussSet];
+}
+
+function buildAbschlussOptions() {
+    const available = getAvailableAbschluss();
+    const container = document.getElementById('abschlussOptions');
+
+    const svgIcons = {
+        'kunststoff-einlage': '<svg width="28" height="28" viewBox="0 0 40 40" fill="none"><rect x="8" y="8" width="6" height="24" rx="1" fill="#c8c4be" stroke="#999" stroke-width="1.5"/><rect x="14" y="10" width="3" height="20" rx="0.5" fill="#7ab8e0" stroke="#5a9cc0" stroke-width="1"/><rect x="17" y="8" width="4" height="24" rx="0.5" fill="#d4eeff" stroke="#7ab8e0" stroke-width="1.5" stroke-dasharray="3 2"/><path d="M14 12 Q15.5 16 14 20 Q15.5 24 14 28" stroke="#c8956c" stroke-width="1.5" fill="none"/></svg>',
+        'silikonverklebung': '<svg width="28" height="28" viewBox="0 0 40 40" fill="none"><rect x="8" y="8" width="6" height="24" rx="1" fill="#c8c4be" stroke="#999" stroke-width="1.5"/><rect x="17" y="8" width="4" height="24" rx="0.5" fill="#d4eeff" stroke="#7ab8e0" stroke-width="1.5" stroke-dasharray="3 2"/><path d="M14 10 L14 30 L17 30 L17 10 Z" fill="#e8e8e8" stroke="none" opacity="0.6"/><line x1="15.5" y1="12" x2="15.5" y2="28" stroke="#c8956c" stroke-width="1.5" stroke-dasharray="2 3"/></svg>',
+        'klemmung': '<svg width="28" height="28" viewBox="0 0 40 40" fill="none"><rect x="6" y="8" width="8" height="24" rx="1" fill="#c8c4be" stroke="#999" stroke-width="1.5"/><rect x="20" y="8" width="4" height="24" rx="0.5" fill="#d4eeff" stroke="#7ab8e0" stroke-width="1.5" stroke-dasharray="3 2"/><rect x="14" y="14" width="6" height="4" rx="1" fill="#c8956c"/><rect x="14" y="22" width="6" height="4" rx="1" fill="#c8956c"/><rect x="24" y="8" width="8" height="24" rx="1" fill="#c8c4be" stroke="#999" stroke-width="1.5"/></svg>'
+    };
+
+    container.innerHTML = available.map(abschlussId => {
+        const a = abschlussDefs[abschlussId];
+        const proList = a.pro.map(p => `<span style="display:inline-flex; align-items:center; gap:3px; font-size:11px; color:#27ae60;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>${p}</span>`).join(' ');
+        const contraList = a.contra.map(c => `<span style="display:inline-flex; align-items:center; gap:3px; font-size:11px; color:var(--text-light);">\u2013 ${c}</span>`).join(' ');
+
+        return `
+        <div class="option-card" data-value="${abschlussId}" onclick="selectOption(3, this)">
+            <div class="option-icon">${svgIcons[abschlussId]}</div>
+            <div class="option-name">${a.name}</div>
+            <div class="option-desc">${a.desc}</div>
+            <div style="margin-top:12px; display:flex; flex-direction:column; gap:4px;">
+                <div style="display:flex; flex-wrap:wrap; gap:6px;">${proList}</div>
+                <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;">${contraList}</div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function buildResults() {
+    const { material, einbau, color, abschluss } = selections;
+    const container = document.getElementById('resultsContent');
+
+    const materialLabels = { 'alu': 'Aluminium', 'edelstahl': 'Edelstahl V2A' };
+    const einbauLabels = { 'in-fliesenebene': 'In Fliesenebene', 'auf-fliese': 'Auf Fliese' };
+    const colorName = colorDefs[color] ? colorDefs[color].name : color;
+    const abschlussName = abschlussDefs[abschluss] ? abschlussDefs[abschluss].name : abschluss;
+
+    // 1) Passende Profile (exakte \u00dcbereinstimmung)
+    const matchingProfiles = products.filter(p =>
+        p.isMain &&
+        (p.material === material || p.materialAll) &&
+        (p.einbau === einbau || p.einbauAll) &&
+        p.colors.includes(color) &&
+        p.abschluss.includes(abschluss)
+    );
+
+    // 2) Alternative Farben (gleiche Konfiguration, aber andere Farbe)
+    const altProfiles = products.filter(p =>
+        p.isMain &&
+        (p.material === material || p.materialAll) &&
+        (p.einbau === einbau || p.einbauAll) &&
+        !p.colors.includes(color) &&
+        p.abschluss.includes(abschluss)
+    );
+
+    // 3) Passendes Zubeh\u00f6r
+    const zubehoer = products.filter(p =>
+        !p.isMain &&
+        (p.material === material || p.materialAll) &&
+        (p.einbau === einbau || p.einbauAll) &&
+        p.abschluss.includes(abschluss)
+    );
+
+    // Build HTML
+    let html = `
+    <div class="result-summary">
+        <h3>Ihre Konfiguration</h3>
+        <div class="result-choices">
+            <span class="result-choice">${materialLabels[material]}</span>
+            <span class="result-choice">${einbauLabels[einbau]}</span>
+            <span class="result-choice">${colorName}</span>
+            <span class="result-choice">${abschlussName}</span>
+        </div>
+    </div>`;
+
+    // Hint
+    if (abschluss === 'kunststoff-einlage') {
+        html += `
+        <div class="result-hint">
+            <strong>Tipp:</strong> Bei Profilen mit Kunststoff-Einlage (L-Vinyl) kann das Glas sp\u00e4ter jederzeit entnommen werden \u2013 ideal f\u00fcr Reinigung oder Glasaustausch.
+        </div>`;
+    } else if (abschluss === 'klemmung') {
+        html += `
+        <div class="result-hint">
+            <strong>Tipp:</strong> Klemmprofile halten das Glas mit Klemmhaltern \u2013 ohne Bohren ins Glas. Die Abdeckprofile sorgen f\u00fcr eine saubere Optik.
+        </div>`;
+    } else {
+        html += `
+        <div class="result-hint">
+            <strong>Empfehlung:</strong> F\u00fcr die Silikonverklebung empfehlen wir das OTTO S100 Premium Sanit\u00e4r-Silikon \u2013 Profi-Qualit\u00e4t, schimmelhemmend und transparent. Sie finden es unten bei den Empfehlungen.
+        </div>`;
+    }
+
+    // Section 1: Passende Profile
+    if (matchingProfiles.length > 0) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Passende Profile <span class="result-badge">${matchingProfiles.length}</span>
+            </div>
+            <div class="result-products">
+                ${matchingProfiles.map(p => productCard(p, true)).join('')}
+            </div>
+        </div>`;
+    }
+
+    // Section 2: Weitere Profile (andere Farben)
+    if (altProfiles.length > 0) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">
+                Weitere Profile in anderen Oberfl\u00e4chen <span class="result-badge" style="background: var(--text-light)">${altProfiles.length}</span>
+            </div>
+            <div class="result-products">
+                ${altProfiles.map(p => productCard(p, false, true)).join('')}
+            </div>
+        </div>`;
+    }
+
+    // No profiles?
+    if (matchingProfiles.length === 0 && altProfiles.length === 0) {
+        html += `
+        <div class="no-match">
+            <div class="no-match-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#c8956c" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+            </div>
+            <h3>Keine exakte \u00dcbereinstimmung</h3>
+            <p>F\u00fcr diese Kombination ist aktuell kein Profil verf\u00fcgbar. Probieren Sie eine andere Konfiguration oder kontaktieren Sie uns f\u00fcr eine individuelle L\u00f6sung.</p>
+        </div>`;
+    }
+
+    // Section 3: Zubeh\u00f6r
+    if (zubehoer.length > 0) {
+        html += `
+        <div class="result-section" style="margin-top: 8px;">
+            <div class="result-section-title" style="font-size: 18px; margin-bottom: 4px;">
+                Empfohlenes Zubeh\u00f6r <span class="result-badge" style="background: var(--primary)">${zubehoer.length}</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-light); margin-bottom: 20px;">Empfohlenes Zubeh\u00f6r passend zu Ihrer Konfiguration.</p>
+            <div class="result-products">
+                ${zubehoer.map(p => productCard(p, true)).join('')}
+            </div>
+        </div>`;
+    }
+
+    container.innerHTML = html;
+}
+
+function productCard(p, colorMatch, showAvailableColors) {
+    const priceStr = p.priceMax ? `ab ${p.price} \u20ac` : `${p.price} \u20ac`;
+
+    const imgUrl = productImages[p.handle];
+    const imgHtml = imgUrl
+        ? `<img class="result-product-img" src="${imgUrl}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+           <div class="result-product-img result-product-img-fallback" style="display:none; align-items:center; justify-content:center;">
+               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c8956c" stroke-width="1.5"><path d="M4 2v20"/><path d="M4 2h8v20H4"/><path d="M12 6h4"/></svg>
+           </div>`
+        : `<div class="result-product-img" style="display:flex; align-items:center; justify-content:center;">
+               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c8956c" stroke-width="1.5"><path d="M4 2v20"/><path d="M4 2h8v20H4"/><path d="M12 6h4"/></svg>
+           </div>`;
+
+    // Color match indicator
+    let colorIndicator = '';
+    if (colorMatch === false && !showAvailableColors) {
+        colorIndicator = `<div style="font-size:11px; color:var(--text-light); margin-top:4px;">Nicht in der gew\u00e4hlten Oberfl\u00e4che</div>`;
+    }
+
+    // Show available color swatches for "other profiles"
+    let colorSwatches = '';
+    if (showAvailableColors && p.colors) {
+        const swatches = p.colors.filter(cId => cId !== 'transparent').map(cId => {
+            const cd = colorDefs[cId];
+            if (!cd) return '';
+            return `<span title="${cd.name}" style="display:inline-block; width:18px; height:18px; border-radius:5px; background:${cd.gradient}; border:1.5px solid rgba(0,0,0,0.1);"></span>`;
+        }).join('');
+        if (swatches) {
+            colorSwatches = `<div style="display:flex; flex-wrap:wrap; gap:4px; margin-top:6px;">${swatches}</div>`;
+        }
+    }
+
+    // Match badge
+    const matchBadge = colorMatch
+        ? `<span style="display:inline-block; background:#e8f5e9; color:#27ae60; font-size:10px; font-weight:600; padding:2px 8px; border-radius:6px; margin-left:6px;">Passend</span>`
+        : '';
+
+    return `
+    <div class="result-product-card" style="${colorMatch === false ? 'opacity:0.85;' : ''}">
+        <a class="result-product-inner" href="https://duschop.de/products/${p.handle}" target="_blank" rel="noopener">
+            ${imgHtml}
+            <div class="result-product-info">
+                <div class="result-product-title">${p.title}${matchBadge}</div>
+                <div class="result-product-desc">${p.desc}</div>
+                ${colorIndicator}
+                ${colorSwatches}
+                <div class="result-product-price">${priceStr}</div>
+            </div>
+            <div class="result-product-arrow">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </div>
+        </a>
+    </div>`;
+}
+
+// Init
+updateProgress();
+</script>
+
+</body>
+</html>

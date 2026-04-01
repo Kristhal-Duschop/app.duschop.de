@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farbenfinder | duschop.de</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #c8956c;
+            --accent-light: #e8c4a8;
+            --bg: #f8f6f3;
+            --card-bg: #ffffff;
+            --text: #2d2d2d;
+            --text-light: #6b6b6b;
+            --border: #e8e4df;
+            --shadow: 0 2px 20px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.12);
+            --radius: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 14px; }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+        .logo-text span { font-size: 12px; opacity: 0.65; font-weight: 400; }
+
+        .header-badges { display: flex; gap: 8px; }
+
+        .header-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-badge.loading { animation: pulse 1.5s infinite; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: white;
+            padding: 48px 24px 56px;
+            text-align: center;
+        }
+
+        .hero h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .hero p { font-size: 16px; opacity: 0.75; max-width: 560px; margin: 0 auto; }
+
+        .filter-bar {
+            max-width: 1200px;
+            margin: -28px auto 0;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .filter-inner {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow-hover);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-label { font-size: 13px; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.8px; margin-right: 6px; }
+
+        .filter-btn {
+            padding: 8px 18px;
+            border: 2px solid var(--border);
+            border-radius: 30px;
+            background: transparent;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .filter-btn.active { background: var(--primary); border-color: var(--primary); color: white; }
+
+
+        .results-info { max-width: 1200px; margin: 20px auto 0; padding: 0 24px; font-size: 13px; color: var(--text-light); }
+        .results-info strong { color: var(--text); }
+
+        .grid {
+            max-width: 1200px;
+            margin: 16px auto 60px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            animation: cardIn 0.4s ease backwards;
+        }
+
+        .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); border-color: var(--accent-light); }
+
+        .card-swatch { height: 140px; position: relative; overflow: hidden; }
+        .card-swatch-color { width: 100%; height: 100%; transition: transform 0.4s ease; }
+        .card:hover .card-swatch-color { transform: scale(1.05); }
+
+        .card-finish-badge {
+            position: absolute; top: 12px; right: 12px;
+            background: rgba(0,0,0,0.55); color: white;
+            padding: 4px 12px; border-radius: 20px;
+            font-size: 11px; font-weight: 500;
+            backdrop-filter: blur(8px);
+        }
+
+        .card-body { padding: 20px; }
+        .card-name { font-size: 17px; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.2px; }
+        .card-category { font-size: 13px; color: var(--accent); font-weight: 500; margin-bottom: 12px; }
+        .card-desc { font-size: 13px; color: var(--text-light); line-height: 1.5; margin-bottom: 16px; }
+        .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { background: var(--bg); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 500; color: var(--text-light); }
+
+        .card-product-count {
+            display: flex; align-items: center; gap: 6px;
+            margin-top: 12px; padding-top: 12px;
+            border-top: 1px solid var(--border);
+            font-size: 12px; color: var(--accent); font-weight: 600;
+        }
+
+        .card-product-count svg { flex-shrink: 0; }
+
+        /* Detail Modal */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.7); z-index: 1000;
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.25s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex; align-items: flex-start; justify-content: center;
+            padding: 24px; overflow-y: auto;
+        }
+
+        .modal {
+            background: #ffffff; border-radius: 20px;
+            max-width: 680px; width: 100%;
+            animation: slideUp 0.3s ease;
+            margin: auto 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-swatch { height: 180px; position: relative; border-radius: 20px 20px 0 0; }
+
+        .modal-close {
+            position: absolute; top: 14px; right: 14px;
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(0,0,0,0.4); border: none; color: white;
+            font-size: 18px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(8px); transition: background 0.2s;
+        }
+
+        .modal-close:hover { background: rgba(0,0,0,0.6); }
+
+        .modal-body { padding: 28px; }
+        .modal-name { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+        .modal-category { font-size: 14px; color: var(--accent); font-weight: 500; margin-bottom: 16px; }
+        .modal-desc { font-size: 14px; color: var(--text-light); line-height: 1.7; margin-bottom: 24px; }
+
+        .modal-details { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+        .detail-item { background: var(--bg); padding: 14px; border-radius: 12px; }
+        .detail-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); margin-bottom: 4px; }
+        .detail-value { font-size: 14px; font-weight: 600; }
+
+        .modal-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+        .modal-tag { background: var(--bg); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 500; color: var(--text-light); }
+
+        /* Products Section */
+        .products-section { border-top: 2px solid var(--border); padding-top: 24px; }
+
+        .products-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+
+        .products-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+
+        .products-count-badge {
+            background: var(--accent); color: white;
+            font-size: 11px; font-weight: 700;
+            padding: 2px 8px; border-radius: 10px;
+        }
+
+        .products-loading {
+            text-align: center; padding: 24px;
+            font-size: 13px; color: var(--text-light);
+        }
+
+        .products-loading .spinner {
+            display: inline-block; width: 20px; height: 20px;
+            border: 2px solid var(--border); border-top-color: var(--accent);
+            border-radius: 50%; animation: spin 0.8s linear infinite;
+            margin-bottom: 8px;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .product-list { display: flex; flex-direction: column; gap: 8px; }
+
+        .product-item {
+            display: flex; align-items: center; gap: 14px;
+            padding: 12px 14px; background: var(--bg); border-radius: 12px;
+            text-decoration: none; color: var(--text);
+            transition: all 0.2s ease; border: 2px solid transparent;
+        }
+
+        .product-item:hover {
+            border-color: var(--accent-light); background: #fff;
+            box-shadow: var(--shadow);
+        }
+
+        .product-thumb {
+            width: 56px; height: 56px; border-radius: 10px;
+            object-fit: cover; flex-shrink: 0;
+            background: var(--border);
+        }
+
+        .product-thumb-placeholder {
+            width: 56px; height: 56px; border-radius: 10px;
+            flex-shrink: 0; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 24px;
+        }
+
+        .product-info { flex: 1; min-width: 0; }
+        .product-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; line-height: 1.3; }
+        .product-price { font-size: 12px; color: var(--accent); font-weight: 600; }
+        .product-variants-info { font-size: 11px; color: var(--text-light); }
+
+        .product-arrow {
+            color: var(--accent); flex-shrink: 0;
+            opacity: 0; transform: translateX(-4px);
+            transition: all 0.2s;
+        }
+
+        .product-item:hover .product-arrow { opacity: 1; transform: translateX(0); }
+
+        /* Compare */
+        .compare-bar {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: var(--primary); color: white;
+            padding: 16px 24px;
+            transform: translateY(100%); transition: transform 0.3s ease;
+            z-index: 90; box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+        }
+
+        .compare-bar.active { transform: translateY(0); }
+        .compare-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .compare-swatches { display: flex; gap: 8px; align-items: center; }
+
+        .compare-swatch {
+            width: 40px; height: 40px; border-radius: 10px;
+            border: 2px solid rgba(255,255,255,0.3); position: relative;
+        }
+
+        .compare-swatch .remove {
+            position: absolute; top: -6px; right: -6px;
+            width: 18px; height: 18px; border-radius: 50%;
+            background: #e74c3c; border: none; color: white;
+            font-size: 10px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .compare-text { font-size: 14px; font-weight: 500; }
+        .compare-actions { display: flex; gap: 10px; }
+
+        .btn-compare {
+            padding: 10px 24px; border-radius: 10px; border: none;
+            font-family: inherit; font-size: 14px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s;
+        }
+
+        .btn-compare-primary { background: var(--accent); color: white; }
+        .btn-compare-secondary { background: rgba(255,255,255,0.15); color: white; }
+
+        .compare-modal { max-width: 700px; }
+        .compare-grid { display: flex; }
+        .compare-col { flex: 1; text-align: center; }
+        .compare-col + .compare-col { border-left: 1px solid var(--border); }
+        .compare-col-swatch { height: 120px; }
+        .compare-col-body { padding: 20px 16px; }
+        .compare-col-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .compare-col-cat { font-size: 12px; color: var(--accent); margin-bottom: 16px; }
+        .compare-row { padding: 10px 0; border-top: 1px solid var(--border); }
+        .compare-row-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); margin-bottom: 2px; }
+        .compare-row-value { font-size: 13px; font-weight: 500; }
+
+        .no-results { grid-column: 1 / -1; text-align: center; padding: 60px 20px; }
+        .no-results-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
+        .no-results h3 { font-size: 18px; margin-bottom: 8px; }
+        .no-results p { color: var(--text-light); font-size: 14px; }
+
+        .card-compare {
+            position: absolute; top: 12px; left: 12px;
+            width: 28px; height: 28px; border-radius: 8px;
+            background: rgba(255,255,255,0.85);
+            border: 2px solid rgba(0,0,0,0.15);
+            cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 14px; color: transparent;
+            transition: all 0.2s; backdrop-filter: blur(4px);
+        }
+
+        .card-compare:hover { border-color: var(--accent); }
+        .card-compare.checked { background: var(--accent); border-color: var(--accent); color: white; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes cardIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 640px) {
+            .header-badges { display: none; }
+            .hero { padding: 36px 20px 44px; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .card-swatch { height: 80px; }
+            .card-body { padding: 10px; }
+            .card-name { font-size: 13px; }
+            .card-category { font-size: 11px; margin-bottom: 6px; }
+            .card-tags { display: none; }
+            .card-desc { display: none; }
+            .card-product-count { font-size: 11px; margin-top: 8px; padding-top: 8px; }
+            .filter-inner {
+                padding: 12px 16px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .filter-inner::-webkit-scrollbar { display: none; }
+            .filter-label { display: none; }
+            .filter-btn { padding: 7px 14px; font-size: 12px; flex-shrink: 0; }
+            .compare-inner { flex-direction: column; text-align: center; }
+            .compare-modal .compare-grid { flex-direction: column; }
+            .compare-col + .compare-col { border-left: none; border-top: 1px solid var(--border); }
+            .modal-details { grid-template-columns: 1fr; }
+        }
+    </style>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://app.duschop.de/farbenfinder/">
+<meta property="og:title" content="Farbenfinder | Duschop Tools">
+<meta property="og:description" content="Finde die perfekte Farbe fuer dein Duschzubehoer. Alle verfuegbaren Farben auf einen Blick.">
+<meta property="og:site_name" content="Duschop Tools">
+</head>
+<body>
+<div style="background:#1a1a2e;padding:10px 20px;text-align:left;position:sticky;top:0;z-index:9999;">
+    <a href="/" style="color:#c8956c;text-decoration:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        Alle Tools
+    </a>
+</div>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="13.5" cy="6.5" r="2.5"/>
+                    <circle cx="6" cy="12" r="2.5"/>
+                    <circle cx="18" cy="12" r="2.5"/>
+                    <circle cx="13.5" cy="17.5" r="2.5"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <h1>Farbenfinder</h1>
+                <span>duschop.de</span>
+            </div>
+        </div>
+        <div class="header-badges">
+            <div class="header-badge">13 Oberfl&auml;chen</div>
+            <div class="header-badge loading" id="productBadge">Produkte werden geladen...</div>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <h2>Finden Sie Ihre perfekte Oberfl&auml;che</h2>
+    <p>Entdecken Sie unsere hochwertigen Oberfl&auml;chen und sehen Sie sofort, welche Produkte in Ihrer Wunschfarbe verf&uuml;gbar sind</p>
+</section>
+
+<div class="filter-bar">
+    <div class="filter-inner">
+        <span class="filter-label">Filter:</span>
+        <button class="filter-btn active" data-filter="all">Alle</button>
+        <button class="filter-btn" data-filter="chrom">Chrom</button>
+        <button class="filter-btn" data-filter="edelstahl">Edelstahl</button>
+        <button class="filter-btn" data-filter="schwarz">Schwarz</button>
+        <button class="filter-btn" data-filter="gold">Gold & Messing</button>
+        <button class="filter-btn" data-filter="bronze">Bronze</button>
+        <button class="filter-btn" data-filter="graphit">Graphit</button>
+        <button class="filter-btn" data-filter="kupfer">Kupfer</button>
+        <button class="filter-btn" data-filter="weiss">Wei&szlig;</button>
+    </div>
+</div>
+
+
+<div class="results-info" id="resultsInfo"></div>
+<div class="grid" id="colorGrid"></div>
+
+<!-- Detail Modal -->
+<div class="modal-overlay" id="detailModal">
+    <div class="modal">
+        <div class="modal-swatch" id="modalSwatch">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-name" id="modalName"></div>
+            <div class="modal-category" id="modalCategory"></div>
+            <div class="modal-desc" id="modalDesc"></div>
+            <div class="modal-details" id="modalDetails"></div>
+            <div class="modal-tags" id="modalTags"></div>
+            <div class="products-section" id="productsSection"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Compare Modal -->
+<div class="modal-overlay" id="compareModal">
+    <div class="modal compare-modal">
+        <div style="padding: 24px 24px 0; display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-size: 18px; font-weight: 700;">Vergleich</h3>
+            <button class="modal-close" style="position:static; background: var(--bg); color: var(--text);" onclick="closeCompare()">&times;</button>
+        </div>
+        <div class="compare-grid" id="compareGrid" style="padding: 20px;"></div>
+    </div>
+</div>
+
+<!-- Compare Bar -->
+<div class="compare-bar" id="compareBar">
+    <div class="compare-inner">
+        <div style="display:flex; align-items:center; gap:14px;">
+            <div class="compare-swatches" id="compareSwatches"></div>
+            <span class="compare-text" id="compareText">0 ausgew&auml;hlt</span>
+        </div>
+        <div class="compare-actions">
+            <button class="btn-compare btn-compare-secondary" onclick="clearCompare()">Zur&uuml;cksetzen</button>
+            <button class="btn-compare btn-compare-primary" onclick="showCompare()">Vergleichen</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// Farb-Definitionen
+// ============================================================
+const colors = [
+    {
+        id: 'bronze-matt', name: 'Bronze matt geb\u00fcrstet', category: 'Bronze', filter: 'bronze',
+        finish: 'Matt', surface: 'Geb\u00fcrstet',
+        gradient: 'linear-gradient(135deg, #8B6914 0%, #6d5010 25%, #9a7520 50%, #5c430d 75%, #7d5e12 100%)',
+        desc: 'Warmes Bronze mit geb\u00fcrsteter Oberfl\u00e4che verleiht dem Badezimmer Eleganz und eine stilvolle Note. Perfekt f\u00fcr gehobene und klassische Einrichtungen.',
+        care: 'Weiches Tuch, spezielle Bronzepflege', style: 'Edel, klassisch-warm',
+        tags: ['Edel', 'Warm', 'Exklusiv'],
+        matchTerms: ['bronze matt', 'bronze geb\u00fcrstet', 'bronze']
+    },
+    {
+        id: 'chrom-poliert', name: 'Chrom poliert gl\u00e4nzend', category: 'Chrom', filter: 'chrom',
+        finish: 'Gl\u00e4nzend', surface: 'Poliert',
+        gradient: 'linear-gradient(135deg, #e8e8e8 0%, #c0c0c0 25%, #f5f5f5 50%, #a8a8a8 75%, #d4d4d4 100%)',
+        desc: 'Der Klassiker unter den Badezimmer-Oberfl\u00e4chen. Chrom poliert gl\u00e4nzend bietet einen brillanten Spiegeleffekt und passt zu nahezu jedem Badezimmer-Stil.',
+        care: 'Weiches Tuch, keine Scheuermittel', style: 'Klassisch, zeitlos',
+        tags: ['Bestseller', 'Klassisch', 'Pflegeleicht'],
+        matchTerms: ['chrom poliert', 'chrom glanz', 'chrom gl\u00e4nzend']
+    },
+    {
+        id: 'edelstahl-gebuerstet', name: 'Edelstahl geb\u00fcrstet matt', category: 'Edelstahl', filter: 'edelstahl',
+        finish: 'Matt', surface: 'Geb\u00fcrstet',
+        gradient: 'linear-gradient(135deg, #c8c4be 0%, #b5b0a8 25%, #d0ccc5 50%, #a8a39a 75%, #bfbab2 100%)',
+        desc: 'Warmer, geb\u00fcrsteter Edelstahl mit einer dezenten Struktur. Ideal f\u00fcr moderne Badezimmer mit nat\u00fcrlichem, zur\u00fcckhaltenden Design.',
+        care: 'Mikrofasertuch, in B\u00fcrstrichtung reinigen', style: 'Modern, nat\u00fcrlich',
+        tags: ['Robust', 'Modern', 'Pflegeleicht'],
+        matchTerms: ['edelstahl geb\u00fcrstet', 'edelstahl matt', 'edelstahloptik']
+    },
+    {
+        id: 'edelstahl-poliert', name: 'Edelstahl poliert', category: 'Edelstahl', filter: 'edelstahl',
+        finish: 'Gl\u00e4nzend', surface: 'Poliert',
+        gradient: 'linear-gradient(135deg, #d6d2cc 0%, #bfbab3 25%, #e0dcd6 50%, #b0aaa2 75%, #ccc7c0 100%)',
+        desc: 'Hochglanzpolierter Edelstahl mit edlem Glanz. Vereint die W\u00e4rme von Edelstahl mit einer spiegelnden, eleganten Oberfl\u00e4che.',
+        care: 'Weiches Tuch, Edelstahlpflege', style: 'Edel, gl\u00e4nzend',
+        tags: ['Edel', 'Gl\u00e4nzend', 'Hochwertig'],
+        matchTerms: ['edelstahl poliert', 'edelstahl gl\u00e4nzend']
+    },
+    {
+        id: 'graphit-matt', name: 'Graphit matt geb\u00fcrstet', category: 'Graphit', filter: 'graphit',
+        finish: 'Matt', surface: 'Geb\u00fcrstet',
+        gradient: 'linear-gradient(135deg, #686868 0%, #555555 25%, #737373 50%, #484848 75%, #606060 100%)',
+        desc: 'Dezentes Graphit mit geb\u00fcrsteter Oberfl\u00e4che. Vereint die Modernit\u00e4t von Dunkelgrau mit der W\u00e4rme einer geb\u00fcrsteten Struktur.',
+        care: 'Mikrofasertuch, in B\u00fcrstrichtung', style: 'Modern, dezent-dunkel',
+        tags: ['Modern', 'Dezent', 'Geb\u00fcrstet'],
+        matchTerms: ['graphit matt', 'graphit geb\u00fcrstet']
+    },
+    {
+        id: 'graphit-poliert', name: 'Graphit poliert gl\u00e4nzend', category: 'Graphit', filter: 'graphit',
+        finish: 'Gl\u00e4nzend', surface: 'Poliert',
+        gradient: 'linear-gradient(135deg, #5a5a5a 0%, #454545 25%, #666666 50%, #3a3a3a 75%, #525252 100%)',
+        desc: 'Dunkles, tiefes Graphit mit gl\u00e4nzender Politur. Eine raffinierte Alternative zu Schwarz mit edlem Schimmer.',
+        care: 'Mikrofasertuch, Glasreiniger', style: 'Raffiniert, dunkel',
+        tags: ['Raffiniert', 'Dunkel', 'Edel'],
+        matchTerms: ['graphit poliert', 'graphit gl\u00e4nzend']
+    },
+    {
+        id: 'kupfer-matt', name: 'Kupfer matt geb\u00fcrstet', category: 'Kupfer', filter: 'kupfer',
+        finish: 'Matt', surface: 'Geb\u00fcrstet',
+        gradient: 'linear-gradient(135deg, #b8805a 0%, #a06840 25%, #c49068 50%, #905a32 75%, #af7850 100%)',
+        desc: 'Warmer Kupferton mit geb\u00fcrsteter, matter Oberfl\u00e4che. Dezenter als poliertes Kupfer, aber genauso eindrucksvoll.',
+        care: 'Mikrofasertuch, in B\u00fcrstrichtung', style: 'Warm, nat\u00fcrlich-edel',
+        tags: ['Warm', 'Nat\u00fcrlich', 'Kupfer'],
+        matchTerms: ['kupfer matt', 'kupfer geb\u00fcrstet', 'kupferfarbig matt']
+    },
+    {
+        id: 'kupfer-poliert', name: 'Kupfer poliert (Rose-Gold)', category: 'Kupfer', filter: 'kupfer',
+        finish: 'Gl\u00e4nzend', surface: 'Poliert',
+        gradient: 'linear-gradient(135deg, #d4956a 0%, #c07d50 25%, #e0a57a 50%, #b07040 75%, #cc8d60 100%)',
+        desc: 'Wundersch\u00f6nes Rose-Gold mit poliertem Glanz. Die Trendfarbe bringt feminine Eleganz und W\u00e4rme ins Badezimmer.',
+        care: 'Weiches Tuch, Kupferpflege', style: 'Trendig, elegant-warm',
+        tags: ['Rose-Gold', 'Trend', 'Elegant'],
+        matchTerms: ['kupfer poliert', 'kupfer gl\u00e4nzend', 'rose-gold', 'rose gold', 'kupferfarbig poliert']
+    },
+    {
+        id: 'messing-matt', name: 'Messing matt (goldfarbig)', category: 'Gold & Messing', filter: 'gold',
+        finish: 'Matt', surface: 'Satiniert',
+        gradient: 'linear-gradient(135deg, #c8a84e 0%, #b08f30 25%, #d4b55a 50%, #a08228 75%, #bfa042 100%)',
+        desc: 'Warmes, goldenes Messing mit matter Oberfl\u00e4che. Diese Farbe bringt nat\u00fcrliche W\u00e4rme und luxuri\u00f6ses Flair in jedes Badezimmer.',
+        care: 'Weiches Tuch, pH-neutrale Reiniger', style: 'Luxuri\u00f6s, warm',
+        tags: ['Luxuri\u00f6s', 'Warm', 'Gold'],
+        matchTerms: ['messing matt', 'messing gold', 'goldfarbig matt', 'gold matt']
+    },
+    {
+        id: 'messing-poliert', name: 'Messing poliert (goldfarbig)', category: 'Gold & Messing', filter: 'gold',
+        finish: 'Gl\u00e4nzend', surface: 'Poliert',
+        gradient: 'linear-gradient(135deg, #dcc260 0%, #c4a840 25%, #e8d070 50%, #b89a30 75%, #d0b850 100%)',
+        desc: 'Strahlend poliertes Messing mit brillantem Goldglanz. Ein echter Hingucker f\u00fcr luxuri\u00f6se Badezimmer-Konzepte.',
+        care: 'Weiches Tuch, Messingpflege', style: 'Glamour\u00f6s, Luxus',
+        tags: ['Glamour\u00f6s', 'Gold', 'Gl\u00e4nzend'],
+        matchTerms: ['messing poliert', 'messing gl\u00e4nzend', 'gold poliert', 'goldfarbig poliert', 'goldfarbig gl\u00e4nzend']
+    },
+    {
+        id: 'schwarz-matt', name: 'Schwarz matt', category: 'Schwarz', filter: 'schwarz',
+        finish: 'Matt', surface: 'Pulverbeschichtet',
+        gradient: 'linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 25%, #333333 50%, #111111 75%, #262626 100%)',
+        desc: 'Die angesagte schwarze Oberfl\u00e4che setzt kraftvolle Akzente im Bad. Schwarz matt ist der Trend f\u00fcr moderne und minimalistische Badezimmer.',
+        care: 'Mikrofasertuch, kalkfreies Wasser', style: 'Minimalistisch, Trend',
+        tags: ['Trend', 'Minimalistisch', 'Statement'],
+        matchTerms: ['schwarz matt', 'schwarz']
+    },
+    {
+        id: 'silber-matt', name: 'Silber matt', category: 'Silber', filter: 'chrom',
+        finish: 'Matt', surface: 'Satiniert',
+        gradient: 'linear-gradient(135deg, #c5c5c5 0%, #b0b0b0 25%, #cbcbcb 50%, #a0a0a0 75%, #bdbdbd 100%)',
+        desc: 'Dezenter als poliertes Chrom, bietet die matte Silber-Variante eine elegante, fingerabdruckresistente Oberfl\u00e4che mit einem sanft schimmernden Effekt.',
+        care: 'Weiches Tuch, milde Reiniger', style: 'Modern, dezent',
+        tags: ['Fingerabdruckresistent', 'Modern'],
+        matchTerms: ['silber matt', 'silber satiniert', 'silber']
+    },
+    {
+        id: 'weiss-matt', name: 'Wei\u00df matt', category: 'Wei\u00df', filter: 'weiss',
+        finish: 'Matt', surface: 'Pulverbeschichtet',
+        gradient: 'linear-gradient(135deg, #f5f2ef 0%, #e8e4e0 25%, #faf8f6 50%, #e0dcd8 75%, #f0ece8 100%)',
+        desc: 'Reines, mattes Wei\u00df f\u00fcr ein cleanes, skandinavisches Baddesign. Passt perfekt zu hellen Fliesen und nat\u00fcrlichen Materialien.',
+        care: 'Weiches Tuch, milde Reiniger', style: 'Skandinavisch, clean',
+        tags: ['Clean', 'Skandinavisch', 'Hell'],
+        matchTerms: ['wei\u00df matt', 'weiss matt', 'wei\u00df']
+    }
+];
+
+// ============================================================
+// Produkt-API: Alle Produkte aus duschop.de laden
+// ============================================================
+let allProducts = [];
+let productsLoaded = false;
+let productsByColor = {}; // colorId -> [products]
+
+async function fetchAllProducts() {
+    let page = 1;
+    let allFetched = [];
+
+    try {
+        while (true) {
+            const res = await fetch(`https://duschop.de/collections/all/products.json?sort_by=best-selling&limit=250&page=${page}`);
+            if (!res.ok) break;
+            const data = await res.json();
+            if (!data.products || data.products.length === 0) break;
+            allFetched = allFetched.concat(data.products);
+            page++;
+            if (data.products.length < 250) break;
+        }
+    } catch (e) {
+        console.warn('Produkte konnten nicht geladen werden:', e);
+    }
+
+    allProducts = allFetched;
+    mapProductsToColors();
+    productsLoaded = true;
+
+    const badge = document.getElementById('productBadge');
+    badge.textContent = `${allProducts.length} Produkte`;
+    badge.classList.remove('loading');
+
+    renderGrid();
+}
+
+function normalizeText(str) {
+    return str.toLowerCase()
+        .replace(/[()]/g, '')
+        .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+        .replace(/\s+/g, ' ').trim();
+}
+
+function matchVariantToColor(variantTitle) {
+    const norm = normalizeText(variantTitle);
+
+    for (const color of colors) {
+        for (const term of color.matchTerms) {
+            const normTerm = normalizeText(term);
+            if (norm.includes(normTerm)) {
+                return color.id;
+            }
+        }
+    }
+
+    // Fallback: einfache Keyword-Erkennung
+    const keywords = {
+        'chrom-poliert': ['chrom poliert', 'chrom glaenzend'],
+        'silber-matt': ['silber matt', 'silber'],
+        'edelstahl-gebuerstet': ['edelstahl gebuerstet', 'edelstahl matt', 'edelstahloptik gebuerstet'],
+        'edelstahl-poliert': ['edelstahl poliert'],
+        'schwarz-matt': ['schwarz matt', 'schwarz'],
+        'bronze-matt': ['bronze'],
+        'messing-matt': ['messing matt', 'gold matt'],
+        'messing-poliert': ['messing poliert', 'gold poliert', 'gold glaenzend'],
+        'weiss-matt': ['weiss matt', 'weiss'],
+        'graphit-poliert': ['graphit poliert', 'graphit glaenzend'],
+        'graphit-matt': ['graphit matt', 'graphit gebuerstet'],
+        'kupfer-poliert': ['kupfer poliert', 'kupfer glaenzend', 'rose-gold', 'rosegold'],
+        'kupfer-matt': ['kupfer matt', 'kupfer gebuerstet']
+    };
+
+    for (const [colorId, terms] of Object.entries(keywords)) {
+        for (const term of terms) {
+            if (norm.includes(term)) return colorId;
+        }
+    }
+
+    return null;
+}
+
+function mapProductsToColors() {
+    productsByColor = {};
+    colors.forEach(c => { productsByColor[c.id] = []; });
+
+    for (const product of allProducts) {
+        const matchedColors = new Set();
+
+        // Varianten durchgehen und Farben zuordnen
+        if (product.variants) {
+            for (const variant of product.variants) {
+                // option1 ist meistens die Farbe
+                const optionValues = [variant.option1, variant.option2, variant.option3].filter(Boolean);
+                for (const opt of optionValues) {
+                    const colorId = matchVariantToColor(opt);
+                    if (colorId) matchedColors.add(colorId);
+                }
+                // Auch den Varianten-Titel prüfen
+                if (variant.title) {
+                    const colorId = matchVariantToColor(variant.title);
+                    if (colorId) matchedColors.add(colorId);
+                }
+            }
+        }
+
+        // Auch den Produkttitel prüfen (manche Produkte haben die Farbe im Titel)
+        if (product.title) {
+            const colorId = matchVariantToColor(product.title);
+            if (colorId) matchedColors.add(colorId);
+        }
+
+        // Produkt den Farben zuordnen
+        for (const colorId of matchedColors) {
+            const img = product.images && product.images.length > 0
+                ? product.images[0].src
+                : null;
+
+            // Passende Variante finden für den Preis
+            let price = null;
+            if (product.variants) {
+                for (const v of product.variants) {
+                    const opts = [v.option1, v.option2, v.option3, v.title].filter(Boolean);
+                    for (const opt of opts) {
+                        if (matchVariantToColor(opt) === colorId) {
+                            price = v.price;
+                            break;
+                        }
+                    }
+                    if (price) break;
+                }
+                if (!price && product.variants[0]) {
+                    price = product.variants[0].price;
+                }
+            }
+
+            productsByColor[colorId].push({
+                title: product.title,
+                handle: product.handle,
+                image: img,
+                price: price,
+                variantCount: product.variants ? product.variants.length : 0
+            });
+        }
+    }
+
+    // Duplikate entfernen (gleicher handle)
+    for (const colorId of Object.keys(productsByColor)) {
+        const seen = new Set();
+        productsByColor[colorId] = productsByColor[colorId].filter(p => {
+            if (seen.has(p.handle)) return false;
+            seen.add(p.handle);
+            return true;
+        });
+    }
+}
+
+// ============================================================
+// UI
+// ============================================================
+let activeFilter = 'all';
+let searchTerm = '';
+let compareList = [];
+
+function getFilteredColors() {
+    return colors.filter(c => {
+        const matchFilter = activeFilter === 'all' || c.filter === activeFilter;
+        const matchSearch = !searchTerm ||
+            c.name.toLowerCase().includes(searchTerm) ||
+            c.category.toLowerCase().includes(searchTerm) ||
+            c.finish.toLowerCase().includes(searchTerm) ||
+            c.surface.toLowerCase().includes(searchTerm) ||
+            c.desc.toLowerCase().includes(searchTerm) ||
+            c.tags.some(t => t.toLowerCase().includes(searchTerm));
+        return matchFilter && matchSearch;
+    });
+}
+
+function getProductCount(colorId) {
+    return productsByColor[colorId] ? productsByColor[colorId].length : 0;
+}
+
+function renderGrid() {
+    const filtered = getFilteredColors();
+    const grid = document.getElementById('colorGrid');
+    const info = document.getElementById('resultsInfo');
+
+    info.innerHTML = `<strong>${filtered.length}</strong> von ${colors.length} Oberfl\u00e4chen`;
+
+    if (filtered.length === 0) {
+        grid.innerHTML = `
+            <div class="no-results">
+                <div class="no-results-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        <line x1="8" y1="11" x2="14" y2="11"/>
+                    </svg>
+                </div>
+                <h3>Keine Oberfl\u00e4chen gefunden</h3>
+                <p>Versuchen Sie einen anderen Suchbegriff oder Filter.</p>
+            </div>`;
+        return;
+    }
+
+    grid.innerHTML = filtered.map((c, i) => {
+        const count = getProductCount(c.id);
+        return `
+        <div class="card" style="animation-delay: ${i * 0.05}s" onclick="openDetail('${c.id}')">
+            <div class="card-swatch">
+                <div class="card-swatch-color" style="background: ${c.gradient}"></div>
+                <span class="card-finish-badge">${c.finish}</span>
+                <div class="card-compare ${compareList.includes(c.id) ? 'checked' : ''}"
+                     onclick="event.stopPropagation(); toggleCompare('${c.id}')"
+                     title="Zum Vergleich hinzuf\u00fcgen">
+                    &#10003;
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-name">${c.name}</div>
+                <div class="card-category">${c.category} &middot; ${c.surface}</div>
+                <div class="card-desc">${c.desc.substring(0, 100)}...</div>
+                <div class="card-tags">
+                    ${c.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+                </div>
+                <div class="card-product-count">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                        <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                    ${productsLoaded ? `${count} Produkt${count !== 1 ? 'e' : ''} verf\u00fcgbar` : 'Lade Produkte...'}
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function formatPrice(price) {
+    if (!price) return '';
+    const num = parseFloat(price);
+    return num.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+}
+
+function openDetail(id) {
+    const c = colors.find(x => x.id === id);
+    if (!c) return;
+
+    document.getElementById('modalSwatch').style.background = c.gradient;
+    document.getElementById('modalName').textContent = c.name;
+    document.getElementById('modalCategory').textContent = `${c.category} \u00B7 ${c.surface}`;
+    document.getElementById('modalDesc').textContent = c.desc;
+
+    document.getElementById('modalDetails').innerHTML = `
+        <div class="detail-item">
+            <div class="detail-label">Oberfl\u00e4che</div>
+            <div class="detail-value">${c.surface}</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Finish</div>
+            <div class="detail-value">${c.finish}</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Pflege</div>
+            <div class="detail-value">${c.care}</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Stil</div>
+            <div class="detail-value">${c.style}</div>
+        </div>`;
+
+    document.getElementById('modalTags').innerHTML = c.tags.map(t =>
+        `<span class="modal-tag">${t}</span>`
+    ).join('');
+
+    // Produkte anzeigen
+    const products = productsByColor[id] || [];
+    const section = document.getElementById('productsSection');
+
+    if (!productsLoaded) {
+        section.innerHTML = `
+            <div class="products-header">
+                <div class="products-title">Verf\u00fcgbare Produkte</div>
+            </div>
+            <div class="products-loading">
+                <div class="spinner"></div>
+                <div>Produkte werden geladen...</div>
+            </div>`;
+    } else if (products.length === 0) {
+        section.innerHTML = `
+            <div class="products-header">
+                <div class="products-title">Verf\u00fcgbare Produkte <span class="products-count-badge">0</span></div>
+            </div>
+            <div style="text-align:center; padding:20px; color:var(--text-light); font-size:13px;">
+                Derzeit keine Produkte in dieser Oberfl\u00e4che im Shop verf\u00fcgbar.
+            </div>`;
+    } else {
+        section.innerHTML = `
+            <div class="products-header">
+                <div class="products-title">
+                    Verf\u00fcgbare Produkte
+                    <span class="products-count-badge">${products.length}</span>
+                </div>
+            </div>
+            <div class="product-list">
+                ${products.map(p => `
+                    <a class="product-item" href="https://duschop.de/products/${p.handle}" target="_blank" rel="noopener">
+                        ${p.image
+                            ? `<img class="product-thumb" src="${p.image.replace(/\.([a-z]+)$/, '_small.$1')}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'">`
+                            : `<div class="product-thumb-placeholder" style="background: ${c.gradient}">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                               </div>`
+                        }
+                        <div class="product-info">
+                            <div class="product-name">${p.title}</div>
+                            ${p.price ? `<div class="product-price">ab ${formatPrice(p.price)}</div>` : ''}
+                        </div>
+                        <div class="product-arrow">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"/>
+                            </svg>
+                        </div>
+                    </a>
+                `).join('')}
+            </div>`;
+    }
+
+    document.getElementById('detailModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('detailModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function toggleCompare(id) {
+    const idx = compareList.indexOf(id);
+    if (idx > -1) compareList.splice(idx, 1);
+    else if (compareList.length < 3) compareList.push(id);
+    updateCompareBar();
+    renderGrid();
+}
+
+function updateCompareBar() {
+    const bar = document.getElementById('compareBar');
+    const swatches = document.getElementById('compareSwatches');
+    const text = document.getElementById('compareText');
+
+    bar.classList.toggle('active', compareList.length > 0);
+    text.textContent = `${compareList.length} von 3 ausgew\u00e4hlt`;
+
+    swatches.innerHTML = compareList.map(id => {
+        const c = colors.find(x => x.id === id);
+        return `<div class="compare-swatch" style="background: ${c.gradient}">
+            <button class="remove" onclick="toggleCompare('${id}')">&times;</button>
+        </div>`;
+    }).join('');
+}
+
+function clearCompare() {
+    compareList = [];
+    updateCompareBar();
+    renderGrid();
+}
+
+function showCompare() {
+    if (compareList.length < 2) return;
+    const selected = compareList.map(id => colors.find(x => x.id === id));
+
+    document.getElementById('compareGrid').innerHTML = selected.map(c => `
+        <div class="compare-col">
+            <div class="compare-col-swatch" style="background: ${c.gradient}"></div>
+            <div class="compare-col-body">
+                <div class="compare-col-name">${c.name}</div>
+                <div class="compare-col-cat">${c.category}</div>
+                <div class="compare-row"><div class="compare-row-label">Oberfl\u00e4che</div><div class="compare-row-value">${c.surface}</div></div>
+                <div class="compare-row"><div class="compare-row-label">Finish</div><div class="compare-row-value">${c.finish}</div></div>
+                <div class="compare-row"><div class="compare-row-label">Stil</div><div class="compare-row-value">${c.style}</div></div>
+                <div class="compare-row"><div class="compare-row-label">Pflege</div><div class="compare-row-value">${c.care}</div></div>
+                <div class="compare-row"><div class="compare-row-label">Produkte</div><div class="compare-row-value">${getProductCount(c.id)} verf\u00fcgbar</div></div>
+            </div>
+        </div>
+    `).join('');
+
+    document.getElementById('compareModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCompare() {
+    document.getElementById('compareModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Event-Listener
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        renderGrid();
+    });
+});
+
+
+document.getElementById('detailModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeModal();
+});
+document.getElementById('compareModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeCompare();
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { closeModal(); closeCompare(); }
+});
+
+// Initial render + Produkte laden
+renderGrid();
+fetchAllProducts();
+</script>
+
+</body>
+</html>

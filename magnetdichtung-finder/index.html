@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magnetdichtung finden | duschop.de</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --gold: #FFBA00;
+      --gold-hover: #e6a800;
+      --gold-light: #fff8e6;
+      --gray-50: #fafafa;
+      --gray-100: #f5f5f5;
+      --gray-200: #e8e8e8;
+      --gray-300: #d1d1d1;
+      --gray-400: #aaaaaa;
+      --gray-500: #888888;
+      --gray-600: #666666;
+      --gray-700: #444444;
+      --gray-900: #1a1a1a;
+      --green: #22c55e;
+      --green-bg: #f0fdf4;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+      --transition: 0.2s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--white);
+      color: var(--gray-900);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .finder {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    /* ===== HEADER ===== */
+    .finder-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .finder-header .badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .finder-header h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 30px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--black);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .finder-header p {
+      font-size: 15px;
+      color: var(--gray-500);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* ===== PROGRESS ===== */
+    .progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 32px;
+      padding: 0 24px;
+    }
+
+    .progress-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .progress-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      border: 2px solid var(--gray-300);
+      color: var(--gray-400);
+      background: var(--white);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress-dot.active {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: var(--black);
+      box-shadow: 0 0 0 4px rgba(255,186,0,0.15);
+    }
+
+    .progress-dot.done {
+      border-color: var(--black);
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .progress-dot.done svg { width: 16px; height: 16px; }
+
+    .progress-label {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .progress-label.active { color: var(--gold-hover); }
+    .progress-label.done { color: var(--black); }
+
+    .progress-line {
+      width: 48px;
+      height: 2px;
+      background: var(--gray-200);
+      margin: 0 -2px;
+      margin-bottom: 20px;
+      transition: background 0.3s;
+    }
+
+    .progress-line.done { background: var(--black); }
+
+    /* ===== STEPS ===== */
+    .step { display: none; animation: fadeSlideIn 0.35s ease; }
+    .step.active { display: block; }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-question {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .step-hint {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* ===== OPTION CARDS ===== */
+    .options {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .opt {
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: center;
+      background: var(--white);
+      position: relative;
+      user-select: none;
+    }
+
+    .opt:hover {
+      border-color: var(--gray-300);
+      box-shadow: var(--shadow);
+      transform: translateY(-1px);
+    }
+
+    .opt.selected {
+      border-color: var(--gold);
+      background: var(--gold-light);
+      box-shadow: 0 0 0 1px var(--gold), var(--shadow);
+    }
+
+    .opt.selected::after {
+      content: '\2713';
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      background: var(--gold);
+      color: var(--black);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .opt-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+      display: block;
+      line-height: 1;
+    }
+
+    .opt-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--black);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .opt-desc {
+      font-size: 12px;
+      color: var(--gray-500);
+      line-height: 1.4;
+    }
+
+    /* Winkel Grid */
+    .angle-grid {
+      max-width: 640px;
+      margin: 0 auto 16px;
+    }
+
+    .angle-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .angle-extra {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .opt.opt-lg {
+      padding: 24px 18px;
+      border-width: 2px;
+    }
+
+    .opt.opt-lg .opt-icon { font-size: 36px; margin-bottom: 10px; }
+    .opt.opt-lg .opt-label { font-size: 20px; }
+    .opt.opt-lg .opt-desc { font-size: 13px; }
+
+    .opt.opt-sm {
+      padding: 14px 14px;
+      border-width: 1.5px;
+      border-color: var(--gray-200);
+      opacity: 0.8;
+      transition: all var(--transition);
+    }
+
+    .opt.opt-sm:hover { opacity: 1; }
+    .opt.opt-sm.selected { opacity: 1; }
+    .opt.opt-sm .opt-icon { font-size: 22px; margin-bottom: 6px; }
+    .opt.opt-sm .opt-label { font-size: 16px; }
+    .opt.opt-sm .opt-desc { font-size: 12px; color: var(--gray-400); }
+
+    .opt-popular {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 2px 10px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    /* Glasdicke Grid */
+    .glass-grid {
+      max-width: 560px;
+      margin: 0 auto 16px;
+    }
+
+    .glass-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .glass-rare {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+
+    /* ===== SPALTMASS SLIDER ===== */
+    .slider-box {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      margin-bottom: 16px;
+    }
+
+    .slider-display {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .slider-value {
+      font-family: 'Oswald', sans-serif;
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .slider-value span {
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--gray-500);
+      margin-left: 2px;
+    }
+
+    .slider-label {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    .slider-track {
+      position: relative;
+      padding: 0 4px;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: linear-gradient(to right, var(--gold) 0%, var(--gold) var(--fill, 50%), var(--gray-200) var(--fill, 50%), var(--gray-200) 100%);
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--white);
+      cursor: pointer;
+      border: 3px solid var(--gold);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: box-shadow 0.2s;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--white);
+      cursor: pointer;
+      border: 3px solid var(--gold);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .slider-minmax {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    .slider-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .pill {
+      padding: 6px 16px;
+      border: 1px solid var(--gray-300);
+      border-radius: 20px;
+      background: var(--white);
+      font-family: 'Roboto', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+      color: var(--gray-700);
+    }
+
+    .pill:hover { border-color: var(--gold); color: var(--black); }
+
+    .pill.on {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+
+    /* ===== MATCH INDICATOR ===== */
+    .match-bar {
+      background: var(--gray-100);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--gray-600);
+    }
+
+    .match-bar strong {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      color: var(--gold-hover);
+    }
+
+    .match-bar.good { background: var(--green-bg); }
+    .match-bar.good strong { color: var(--green); }
+
+    /* ===== TIP ===== */
+    .tip {
+      background: var(--gold-light);
+      border: 1px solid #ffe49a;
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--gray-700);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+
+    .tip-icon { flex-shrink: 0; font-size: 16px; }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      font-family: 'Oswald', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 13px 30px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-back {
+      background: none;
+      color: var(--gray-500);
+      padding: 13px 16px;
+    }
+    .nav-back:hover { color: var(--black); }
+
+    .nav-next {
+      background: var(--black);
+      color: var(--white);
+      margin-left: auto;
+    }
+    .nav-next:hover { background: var(--gray-700); }
+    .nav-next:disabled { background: var(--gray-300); color: var(--gray-400); cursor: not-allowed; }
+
+    .nav-results {
+      background: var(--gold);
+      color: var(--black);
+      margin-left: auto;
+      font-weight: 600;
+    }
+    .nav-results:hover { background: var(--gold-hover); }
+
+    /* ===== RESULTS PAGE ===== */
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .results-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .results-title em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .results-edit {
+      font-size: 13px;
+      color: var(--gray-500);
+      cursor: pointer;
+      text-decoration: underline;
+      background: none;
+      border: none;
+      font-family: 'Roboto', sans-serif;
+    }
+    .results-edit:hover { color: var(--black); }
+
+    .filter-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .filter-chip {
+      background: var(--gray-100);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: var(--gray-700);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-chip strong { font-weight: 600; color: var(--black); }
+
+    .filter-chip .chip-edit {
+      cursor: pointer;
+      color: var(--gray-400);
+      font-size: 14px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .filter-chip .chip-edit:hover { color: var(--black); }
+
+    /* ===== PRODUCT CARDS ===== */
+    .products { display: flex; flex-direction: column; gap: 14px; }
+
+    .product {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 0;
+      display: flex;
+      transition: all var(--transition);
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    .product:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--gray-300);
+    }
+
+    .product.highlight {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px var(--gold), var(--shadow);
+    }
+
+    .product-image {
+      width: 130px;
+      min-height: 130px;
+      background: var(--gray-50);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .product-body {
+      flex: 1;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .product-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--black);
+      line-height: 1.3;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 1.4;
+    }
+
+    .product-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .spec {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      background: var(--gray-100);
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+
+    .spec.match {
+      background: #fff3d0;
+      color: #7a6000;
+    }
+
+    .spec.perfect {
+      background: var(--green-bg);
+      color: #166534;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    .product-price {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .product-price small {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    .product-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--radius);
+      letter-spacing: 0.5px;
+      transition: all var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .product-cta:hover { background: var(--gold-hover); }
+
+    .product-cta svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .length-info {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    /* ===== NO RESULTS ===== */
+    .no-results {
+      text-align: center;
+      padding: 48px 24px;
+      background: var(--gray-50);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-200);
+    }
+
+    .no-results .nr-icon { font-size: 48px; margin-bottom: 12px; }
+    .no-results h3 { font-family: 'Oswald', sans-serif; font-size: 18px; margin-bottom: 8px; text-transform: uppercase; }
+    .no-results p { font-size: 14px; color: var(--gray-500); margin-bottom: 16px; max-width: 400px; margin-left: auto; margin-right: auto; }
+    .no-results a { color: var(--gold-hover); text-decoration: underline; font-weight: 500; }
+
+    .restart-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 24px;
+      background: none;
+      border: 2px solid var(--gray-300);
+      border-radius: var(--radius);
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: var(--gray-700);
+      transition: all var(--transition);
+    }
+
+    .restart-btn:hover {
+      border-color: var(--black);
+      color: var(--black);
+    }
+
+    /* ===== ANGLE DIAGRAM ===== */
+    .angle-diagram {
+      display: block;
+      margin: 0 auto 6px;
+      max-width: 80px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .finder { padding: 16px 12px 48px; }
+      .finder-header h1 { font-size: 24px; }
+      .finder-header p { font-size: 14px; }
+      .options { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .angle-main { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .opt.opt-lg .opt-label { font-size: 18px; }
+      .opt.opt-lg { padding: 18px 14px; }
+      .glass-rare { max-width: 100%; }
+      .opt { padding: 14px 10px; }
+      .opt-icon { font-size: 22px; }
+      .opt-label { font-size: 14px; }
+      .progress-line { width: 24px; }
+      .progress-dot { width: 34px; height: 34px; font-size: 13px; }
+      .progress-label { font-size: 10px; }
+      .slider-value { font-size: 44px; }
+      .slider-box { padding: 20px 16px; }
+      .product { flex-direction: column; }
+      .product-image { width: 100%; height: auto; min-height: 120px; }
+      .product-body { padding: 14px 16px; }
+      .product-footer { flex-direction: column; align-items: flex-start; }
+      .product-cta { width: 100%; justify-content: center; }
+      .product-price { font-size: 20px; }
+      .results-header { flex-direction: column; }
+    }
+
+    @media (max-width: 380px) {
+      .angle-main { grid-template-columns: 1fr; }
+      .slider-pills { gap: 6px; }
+      .pill { padding: 5px 12px; font-size: 12px; }
+    }
+  </style>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://app.duschop.de/magnetdichtung-finder/">
+<meta property="og:title" content="Magnetdichtung Finder | Duschop Tools">
+<meta property="og:description" content="Finde das passende Magnetdichtungs-Set fuer deine Duschkabine.">
+<meta property="og:site_name" content="Duschop Tools">
+</head>
+<body>
+<div style="background:#1a1a2e;padding:10px 20px;text-align:left;position:sticky;top:0;z-index:9999;">
+    <a href="/" style="color:#c8956c;text-decoration:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        Alle Tools
+    </a>
+</div>
+
+<div class="finder" id="app">
+
+  <!-- HEADER -->
+  <div class="finder-header">
+    <div class="badge">Magnetdichtungs-Berater</div>
+    <h1>Magnetdichtung finden</h1>
+    <p>In 3 einfachen Schritten zur passenden Magnetdichtung für Ihre Dusche. Die Winkel-Anordnung ist entscheidend für die richtige Wahl.</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress" id="progress"></div>
+
+  <!-- STEP 1: Winkel-Anordnung -->
+  <div class="step" id="step-0">
+    <div class="step-question">Wie stehen Ihre Glasscheiben zueinander?</div>
+    <div class="step-hint">Die Winkel-Anordnung bestimmt, welches Magnetprofil-Paar Sie benötigen.</div>
+    <div class="angle-grid">
+      <div class="angle-main">
+        <div class="opt opt-lg" data-step="0" data-val="90" onclick="pick(this)">
+          <span class="opt-popular">Sehr häufig</span>
+          <svg class="angle-diagram" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+            <line x1="10" y1="70" x2="10" y2="10"/>
+            <line x1="10" y1="70" x2="70" y2="70"/>
+            <rect x="10" y="58" width="12" height="12" fill="none" stroke-width="2"/>
+          </svg>
+          <span class="opt-label">90&deg; Ecke</span>
+          <span class="opt-desc">Standard-Eckduschen, Glas trifft rechtwinklig auf Glas oder Wand</span>
+        </div>
+        <div class="opt opt-lg" data-step="0" data-val="180" onclick="pick(this)">
+          <span class="opt-popular">Sehr häufig</span>
+          <svg class="angle-diagram" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+            <line x1="5" y1="40" x2="35" y2="40"/>
+            <line x1="45" y1="40" x2="75" y2="40"/>
+            <circle cx="40" cy="40" r="3" fill="currentColor"/>
+          </svg>
+          <span class="opt-label">180&deg; Fluchtend</span>
+          <span class="opt-desc">Zwei Glasscheiben in einer Linie, z.B. Tür an Festteil</span>
+        </div>
+        <div class="opt opt-lg" data-step="0" data-val="135" onclick="pick(this)">
+          <svg class="angle-diagram" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+            <line x1="5" y1="55" x2="35" y2="40"/>
+            <line x1="35" y1="40" x2="75" y2="40"/>
+          </svg>
+          <span class="opt-label">135&deg; Fünfeck</span>
+          <span class="opt-desc">Typisch bei Fünfeckduschen, Glas steht schräg</span>
+        </div>
+      </div>
+      <div class="angle-extra" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:480px;">
+        <div class="opt opt-lg" data-step="0" data-val="90-pendel" onclick="pick(this)">
+          <svg class="angle-diagram" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+            <line x1="10" y1="70" x2="10" y2="10"/>
+            <line x1="10" y1="70" x2="70" y2="70"/>
+            <path d="M30 50 Q10 70 30 70" fill="none" stroke-width="2"/>
+            <path d="M10 50 Q10 70 30 50" fill="none" stroke-width="2"/>
+          </svg>
+          <span class="opt-label">90&deg; Pendeltür</span>
+          <span class="opt-desc">Tür öffnet nach innen UND außen</span>
+        </div>
+        <div class="opt opt-lg" data-step="0" data-val="flexibel" onclick="pick(this)">
+          <span class="opt-icon" style="font-size:36px;">🔄</span>
+          <span class="opt-label">Flexibel</span>
+          <span class="opt-desc">Winkel unbekannt oder variabel (90°–180°)</span>
+        </div>
+      </div>
+    </div>
+    <div class="tip">
+      <span class="tip-icon">💡</span>
+      <span><strong>Tipp:</strong> Der häufigste Winkel ist <strong>90°</strong> (Eckduschen) und <strong>180°</strong> (Tür neben Festteil in einer Flucht). <strong>135°</strong> kommt bei Fünfeckduschen vor. <strong>Pendeltüren</strong> (öffnen nach innen UND außen) benötigen eine spezielle Magnetdichtung mit asymmetrischem Profil. Wenn Sie unsicher sind, wählen Sie „Flexibel".</span>
+    </div>
+  </div>
+
+  <!-- STEP 2: Glasdicke -->
+  <div class="step" id="step-1">
+    <div class="step-question">Welche Glasdicke hat Ihre Dusche?</div>
+    <div class="step-hint">Messen Sie die Dicke des Glases. Der Wert steht oft klein aufgedruckt in einer Ecke der Scheibe.</div>
+    <div class="glass-grid">
+      <div class="glass-main">
+        <div class="opt opt-lg" data-step="1" data-val="6" onclick="pick(this)">
+          <span class="opt-popular">Standard</span>
+          <svg style="display:block;margin:0 auto 8px;width:32px;height:40px;" viewBox="0 0 32 40" fill="none" stroke="#888" stroke-width="1.5"><rect x="10" y="2" width="12" height="36" rx="1" fill="#e0e7ef" stroke="#888"/><text x="16" y="24" text-anchor="middle" font-size="10" fill="#444" stroke="none" font-family="Oswald">6</text></svg>
+          <span class="opt-label">6 mm</span>
+          <span class="opt-desc">Häufig bei Duschen aller Art</span>
+        </div>
+        <div class="opt opt-lg" data-step="1" data-val="8" onclick="pick(this)">
+          <span class="opt-popular">Standard</span>
+          <svg style="display:block;margin:0 auto 8px;width:36px;height:40px;" viewBox="0 0 36 40" fill="none" stroke="#888" stroke-width="1.5"><rect x="8" y="2" width="20" height="36" rx="1" fill="#e0e7ef" stroke="#888"/><text x="18" y="24" text-anchor="middle" font-size="10" fill="#444" stroke="none" font-family="Oswald">8</text></svg>
+          <span class="opt-label">8 mm</span>
+          <span class="opt-desc">Häufig bei Duschen aller Art</span>
+        </div>
+      </div>
+      <div class="glass-rare">
+        <div class="opt opt-sm" data-step="1" data-val="10" onclick="pick(this)">
+          <svg style="display:block;margin:0 auto 6px;width:36px;height:32px;" viewBox="0 0 40 32" fill="none" stroke="#aaa" stroke-width="1.5"><rect x="6" y="2" width="28" height="28" rx="1" fill="#e0e7ef" stroke="#aaa"/><text x="20" y="20" text-anchor="middle" font-size="10" fill="#666" stroke="none" font-family="Oswald">10</text></svg>
+          <span class="opt-label">10 mm</span>
+          <span class="opt-desc">Selten, nur bei wenigen Modellen verfügbar</span>
+        </div>
+      </div>
+    </div>
+    <div class="tip">
+      <span class="tip-icon">💡</span>
+      <span><strong>Tipp:</strong> Die gängigsten Glasdicken bei Duschen sind <strong>6 mm</strong> und <strong>8 mm</strong>. 10 mm kommt selten vor und ist nur bei bestimmten Magnetdichtungen verfügbar. Messen Sie die Glasdicke exakt mit einem Messschieber oder Lineal.</span>
+    </div>
+  </div>
+
+  <!-- STEP 3: Spaltmaß -->
+  <div class="step" id="step-2">
+    <div class="step-question">Wie groß ist der Spalt zwischen den Glasscheiben?</div>
+    <div class="step-hint">Messen Sie den Abstand zwischen den beiden Glaskanten, die durch die Magnetdichtung verbunden werden sollen.</div>
+    <div class="slider-box">
+      <div class="slider-display">
+        <div class="slider-value" id="sliderVal">18<span>mm</span></div>
+        <div class="slider-label">Spaltmaß zwischen den Glasscheiben</div>
+      </div>
+      <div class="slider-track">
+        <input type="range" id="gapSlider" min="5" max="35" value="18" oninput="onSlider(this.value)">
+      </div>
+      <div class="slider-minmax">
+        <span>5 mm</span>
+        <span>35 mm</span>
+      </div>
+      <div class="slider-pills" id="pills"></div>
+    </div>
+    <div class="match-bar" id="matchBar">
+      <strong id="matchCount">&ndash;</strong>
+      <span id="matchText">Passende Magnetdichtungen für Ihre Auswahl</span>
+    </div>
+    <div class="tip">
+      <span class="tip-icon">📏</span>
+      <span><strong>Wichtig:</strong> Messen Sie den Spalt zwischen den beiden Glaskanten im <em>geschlossenen</em> Zustand der Tür. Magnetdichtungen werden als Paar geliefert – je eine Dichtung pro Glasscheibe.</span>
+    </div>
+    <div class="tip" style="margin-top: 6px;">
+      <span class="tip-icon">💡</span>
+      <span><strong>Hinweis:</strong> Das Spaltmaß variiert je nach Glasdicke. Bei <strong>8 mm Glas</strong> ist der Spalt oft etwas größer als bei <strong>6 mm Glas</strong>, da die Dichtungsprofile auf der Glaskante sitzen und sich der Abstand dadurch verändert.</span>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="step" id="step-results">
+    <div class="results-header">
+      <div class="results-title" id="resultsTitle"></div>
+      <button class="results-edit" onclick="reset()">&#9998; Neue Suche</button>
+    </div>
+    <div class="filter-summary" id="filterSummary"></div>
+    <div class="products" id="productList"></div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; gap: 12px;">
+      <button class="nav-btn nav-back" onclick="back()" style="visibility: visible">&larr; Zurück</button>
+      <button class="restart-btn" onclick="reset()">&#8635; Neue Suche starten</button>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="nav" id="nav">
+    <button class="nav-btn nav-back" id="btnBack" onclick="back()" style="visibility:hidden">&larr; Zurück</button>
+    <button class="nav-btn nav-next" id="btnNext" onclick="next()" disabled>Weiter &rarr;</button>
+  </div>
+</div>
+
+<script>
+// ==================================================================
+// PRODUCT DATABASE – Magnetdichtungen von duschop.de
+// ==================================================================
+const PRODUCTS = [
+  {
+    id: '2x008A1W',
+    name: 'Magnetdichtung 90° mit breitem Magnetstreifen',
+    artNr: '2x008A1W',
+    handle: '90-duschdichtung-2-er-set-mit-magnetleiste-dichtungspaar-mit-magnetstreifen-2-er-set-aus-2x-45-magnetdichtung-art-nr-2x008a1w',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/2578FEDB-AE0F-417C-9BCA-5CF25EDEA21E.png',
+    glass: [6, 8],
+    angle: [90],
+    gapByGlass: { '6': [16, 16], '8': [18, 18] },
+    priceFrom: 39.90,
+    bestseller: false,
+    desc: 'Breiter Magnetstreifen für starken Halt. Anti-UV und Anti-Schimmel. Made in Germany.',
+    lengths: ['200 cm'],
+    variants: {
+      '6': { '200 cm': 52830788026691 },
+      '8': { '200 cm': 52830788059459 }
+    }
+  },
+  {
+    id: '6072/6082-90',
+    name: 'Magnetdichtung 90° (2x 45°)',
+    artNr: '6072/6082',
+    handle: 'magnetdichtung-90-2-er-set-fur-6-und-8-mm-glasdicke-art-nr-6072-6082',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/CA905A83-A179-47ED-A466-2CB2573064C3.png',
+    glass: [6, 8, 10],
+    angle: [90],
+    gapByGlass: { '6': [15, 15], '8': [17, 18], '10': [16, 16] },
+    priceFrom: 39.90,
+    bestseller: true,
+    desc: 'Unser Bestseller für 90°-Ecken. Schmaler Magnetstreifen, auch für 10 mm Glas verfügbar. In 200 cm und 250 cm.',
+    lengths: ['200 cm', '250 cm'],
+    variants: {
+      '6': { '200 cm': 52830809391427, '250 cm': 52830809456963 },
+      '8': { '200 cm': 52830809424195, '250 cm': 52830809489731 },
+      '10': { '200 cm': 52830809522499, '250 cm': 52830809555267 }
+    }
+  },
+  {
+    id: '6072-B/6082-B',
+    name: 'Schwarze Magnetdichtung 90° (2x 45°)',
+    artNr: '6072-B/6082-B',
+    handle: 'schwarze-tur-magnetdichtung-90-1-paar-fur-6-und-8-mm-universal-art-nr-6072-b-6082-b',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/607282B.jpg',
+    glass: [6, 8],
+    angle: [90],
+    gapByGlass: { '6': [15, 15], '8': [18, 18] },
+    priceFrom: 39.90,
+    bestseller: false,
+    desc: 'Schwarze Ausführung für moderne Duschen mit schwarzen Beschlägen. Gleiche Technik wie die transparente Variante.',
+    lengths: ['200 cm', '225 cm'],
+    variants: {
+      '6': { '200 cm': 52830766203203, '225 cm': 52830766268739 },
+      '8': { '200 cm': 52830766235971, '225 cm': 52830766301507 }
+    }
+  },
+  {
+    id: '6042',
+    name: 'Magnetdichtung 90° für Pendeltüren',
+    artNr: '6042',
+    handle: 'magnetische-dichtung-fur-pendelturen-in-90-position-zu-festem-glasteil-einzeln-oder-als-2-er-set-art-nr-6042',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8106.png',
+    glass: [6, 8],
+    angle: [90],
+    pendel: true,
+    gapByGlass: { '6': [18, 26], '8': [20, 28] },
+    priceFrom: 39.90,
+    bestseller: true,
+    desc: 'Speziell für Pendeltüren die nach innen UND außen öffnen. Asymmetrisches Profil (6042 + 6092) – die Tür schließt in beide Richtungen magnetisch.',
+    lengths: ['200 cm', '250 cm'],
+    variants: {
+      '6': { '200 cm': 52830803034435, '250 cm': 52830803132739 },
+      '8': { '200 cm': 52830803067203, '250 cm': 52830803165507 }
+    }
+  },
+  {
+    id: '2x008BW',
+    name: 'Magnetdichtung 180° mit breitem Magnetstreifen',
+    artNr: '2x008BW',
+    handle: '180-duschdichtung-2-er-set-mit-magnetleiste-art-nr-008bw',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8126.png',
+    glass: [6, 8],
+    angle: [180],
+    gapByGlass: { '6': [17, 19], '8': [21, 23] },
+    priceFrom: 39.90,
+    bestseller: false,
+    desc: 'Breiter Magnetstreifen für 180° fluchtende Anordnung. Anti-UV und Anti-Schimmel. Made in Germany.',
+    lengths: ['200 cm'],
+    variants: {
+      '6': { '200 cm': 52830787961155 },
+      '8': { '200 cm': 52830787993923 }
+    }
+  },
+  {
+    id: '6092',
+    name: 'Magnetdichtung 180° fluchtend (schmaler Streifen)',
+    artNr: '6092',
+    handle: 'magnetdichtung-180-2-er-set-fur-6-und-8-mm-glasdicke-art-nr-6092',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8085.png',
+    glass: [6, 8, 10],
+    angle: [180],
+    gapByGlass: { '6': [17, 19], '8': [21, 23], '10': [21, 23] },
+    priceFrom: 39.90,
+    bestseller: true,
+    desc: 'Schmaler Magnetstreifen für 180° fluchtende Glasscheiben. Auch für 10 mm Glas verfügbar. In 200 cm und 250 cm.',
+    lengths: ['200 cm', '250 cm'],
+    variants: {
+      '6': { '200 cm': 52830806704451, '250 cm': 52830806769987 },
+      '8': { '200 cm': 52830806737219, '250 cm': 52830806802755 },
+      '10': { '200 cm': 52830806835523, '250 cm': 52830806868291 }
+    }
+  },
+  {
+    id: '6072/6082-180',
+    name: 'Magnetdichtung 180° fluchtend (2x 45°)',
+    artNr: '6072/6082',
+    handle: 'magnetdichtung-180-2-er-set-aus-2x-45-magnetdichtung-fur-6-und-8-mm-glasdicke-art-nr-6072-6082',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/45CD5853-44FD-456E-B1FA-8259E7F176DA.png',
+    glass: [6, 8, 10],
+    angle: [180],
+    gapByGlass: { '6': [21, 23], '8': [25, 27], '10': [25, 27] },
+    priceFrom: 39.90,
+    bestseller: false,
+    desc: '45°-Profile als 180°-Paar montiert – für größere Spaltmaße bei fluchtender Anordnung. Spaltmaß 22–26 mm.',
+    lengths: ['200 cm', '250 cm'],
+    variants: {
+      '6': { '200 cm': 52830803657027, '250 cm': 52830803722563 },
+      '8': { '200 cm': 52830803689795, '250 cm': 52830803755331 },
+      '10': { '250 cm': 52830803788099 }
+    }
+  },
+  {
+    id: '6052/6062-180',
+    name: 'Magnetdichtung 180° fluchtend (2x 67,5°)',
+    artNr: '6052/6062',
+    handle: 'magnetdichtung-180-2-er-set-aus-2x-67-5-magnetdichtung-fur-6-und-8-mm-glasdicke-art-nr-6052-6062',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/A82A2D96-FC23-4867-9A79-E673AAF55E48.png',
+    glass: [6, 8],
+    angle: [180],
+    gapByGlass: { '6': [19, 21], '8': [23, 25] },
+    priceFrom: 39.90,
+    bestseller: true,
+    desc: 'Bestseller für 180°: 67,5°-Profile als fluchtende Anordnung. Optimal für mittlere Spaltmaße (20–24 mm).',
+    lengths: ['200 cm', '250 cm'],
+    variants: {
+      '6': { '200 cm': 52830806475075, '250 cm': 52830806540611 },
+      '8': { '200 cm': 52830806507843, '250 cm': 52830806573379 }
+    }
+  },
+  {
+    id: '6052/6062-135',
+    name: 'Magnetdichtung 135° für Fünfeckduschen (2x 67,5°)',
+    artNr: '6052/6062',
+    handle: 'magnetdichtung-135-2-er-set-fur-funfeckduschen-fur-6-und-8-mm-glasdicke-art-nr-6052-6062',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8128.png',
+    glass: [6, 8],
+    angle: [135],
+    gapByGlass: { '6': [9, 19], '8': [12, 24] },
+    priceFrom: 39.90,
+    bestseller: true,
+    desc: 'Speziell für Fünfeckduschen mit 135°-Winkel. Zwei 67,5°-Profile ergeben zusammen den passenden Winkel.',
+    lengths: ['200 cm', '250 cm'],
+    variants: {
+      '6': { '200 cm': 52830803427651, '250 cm': 52830803493187 },
+      '8': { '200 cm': 52830803460419, '250 cm': 52830803525955 }
+    }
+  },
+  {
+    id: '6092/6082-135',
+    name: 'Magnetdichtung 135° (1x 45° + 1x 90°)',
+    artNr: '6092/6082',
+    handle: 'magnetdichtungspaar-135-1x90-1-x45-funfeckduschen',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/6092-6082_3.png',
+    glass: [6, 8],
+    angle: [135],
+    gapByGlass: { '6': [15, 20], '8': [18, 24] },
+    priceFrom: 39.90,
+    bestseller: false,
+    desc: 'Asymmetrische Kombination (45° + 90°) für Fünfeckduschen. Alternative zum symmetrischen 2x 67,5°-Paar.',
+    lengths: ['200 cm', '250 cm'],
+    variants: {
+      '6': { '200 cm': 54165040464195, '250 cm': 54165040529731 },
+      '8': { '200 cm': 54165040496963, '250 cm': 54165040562499 }
+    }
+  },
+  {
+    id: '8874',
+    name: 'Flexible Magnetdichtung 90°–180°',
+    artNr: '8874',
+    handle: 'magnetleiste-fur-flexible-anpassung-an-samtliche-situationen-2-er-set-art-nr-8874',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/531C2DBC-1308-430F-8DCD-235C415B049B.png',
+    glass: [6, 8],
+    angle: [90, 135, 180],
+    fallback: true,
+    gapByGlass: { '6': [16, 31], '8': [18, 31] },
+    priceFrom: 43.90,
+    bestseller: false,
+    desc: 'Universell einsetzbar: Stufenlos verstellbar von 90° bis 180°. Die Lösung wenn der Winkel unklar ist oder ein Sonderwinkel vorliegt.',
+    lengths: ['200 cm', '250 cm'],
+    variants: {
+      '6': { '200 cm': 52830787764547, '250 cm': 52830787830083 },
+      '8': { '200 cm': 52830787797315, '250 cm': 52830787862851 }
+    }
+  }
+];
+
+// ==================================================================
+// STATE
+// ==================================================================
+const STEP_COUNT = 3;
+const STEP_LABELS = ['Winkel', 'Glasdicke', 'Spaltmaß'];
+
+let cur = 0;
+let sel = { angle: null, glass: null, gap: 18 };
+
+// ==================================================================
+// RENDERING
+// ==================================================================
+function renderProgress() {
+  const el = document.getElementById('progress');
+  el.innerHTML = '';
+  for (let i = 0; i < STEP_COUNT; i++) {
+    const step = document.createElement('div');
+    step.className = 'progress-step';
+
+    const dot = document.createElement('div');
+    dot.className = 'progress-dot' + (i < cur ? ' done' : i === cur ? ' active' : '');
+    dot.innerHTML = i < cur
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>'
+      : (i + 1);
+    step.appendChild(dot);
+
+    const label = document.createElement('div');
+    label.className = 'progress-label' + (i < cur ? ' done' : i === cur ? ' active' : '');
+    label.textContent = STEP_LABELS[i];
+    step.appendChild(label);
+
+    el.appendChild(step);
+
+    if (i < STEP_COUNT - 1) {
+      const line = document.createElement('div');
+      line.className = 'progress-line' + (i < cur ? ' done' : '');
+      el.appendChild(line);
+    }
+  }
+}
+
+function show() {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+
+  if (cur === 'results') {
+    document.getElementById('step-results').classList.add('active');
+    document.getElementById('nav').style.display = 'none';
+    renderResults();
+    cur = STEP_COUNT; renderProgress(); cur = 'results';
+    return;
+  }
+
+  document.getElementById('step-' + cur).classList.add('active');
+  document.getElementById('nav').style.display = 'flex';
+  document.getElementById('btnBack').style.visibility = cur > 0 ? 'visible' : 'hidden';
+
+  const btnNext = document.getElementById('btnNext');
+  if (cur === STEP_COUNT - 1) {
+    btnNext.className = 'nav-btn nav-results';
+    btnNext.innerHTML = 'Ergebnisse anzeigen &rarr;';
+  } else {
+    btnNext.className = 'nav-btn nav-next';
+    btnNext.innerHTML = 'Weiter &rarr;';
+  }
+
+  syncSelected();
+  updateNav();
+  renderProgress();
+
+  if (cur === 2) {
+    updateMatchBar();
+    updateSliderFill();
+    buildPills();
+  }
+}
+
+function syncSelected() {
+  const stepEl = document.getElementById('step-' + cur);
+  stepEl.querySelectorAll('.opt').forEach(o => {
+    o.classList.remove('selected');
+    const val = o.dataset.val;
+    if (cur === 0 && sel.angle !== null && val === String(sel.angle)) o.classList.add('selected');
+    if (cur === 1 && sel.glass !== null && val == sel.glass) o.classList.add('selected');
+  });
+}
+
+function updateNav() {
+  const btn = document.getElementById('btnNext');
+  if (cur === 0) btn.disabled = sel.angle === null;
+  else if (cur === 1) btn.disabled = sel.glass === null;
+  else if (cur === 2) btn.disabled = false;
+}
+
+// ==================================================================
+// INTERACTIONS
+// ==================================================================
+function pick(el) {
+  const card = el.closest ? el.closest('.opt') : el;
+  if (!card) return;
+
+  const step = parseInt(card.dataset.step);
+  const val = card.dataset.val;
+
+  if (step === 0) sel.angle = (val === 'flexibel' || val === '90-pendel') ? val : parseInt(val);
+  if (step === 1) sel.glass = parseInt(val);
+
+  const container = card.closest('.options') || card.closest('.angle-grid') || card.closest('.glass-grid');
+  if (container) container.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+  card.classList.add('selected');
+  updateNav();
+
+  setTimeout(() => next(), 280);
+}
+
+function onSlider(v) {
+  sel.gap = parseInt(v);
+  document.getElementById('sliderVal').innerHTML = v + '<span>mm</span>';
+  updateSliderFill();
+  updateMatchBar();
+  syncPills();
+}
+
+function updateSliderFill() {
+  const slider = document.getElementById('gapSlider');
+  const pct = ((sel.gap - 5) / (35 - 5)) * 100;
+  slider.style.setProperty('--fill', pct + '%');
+}
+
+function setGap(v) {
+  sel.gap = v;
+  document.getElementById('gapSlider').value = v;
+  onSlider(v);
+}
+
+function buildPills() {
+  const vals = [8, 12, 15, 18, 20, 22, 25, 28, 31];
+  const el = document.getElementById('pills');
+  el.innerHTML = vals.map(v =>
+    '<button class="pill' + (v === sel.gap ? ' on' : '') + '" onclick="setGap(' + v + ')">' + v + ' mm</button>'
+  ).join('');
+}
+
+function syncPills() {
+  document.querySelectorAll('.pill').forEach(p => {
+    p.classList.toggle('on', parseInt(p.textContent) === sel.gap);
+  });
+}
+
+function productMatchesGap(p) {
+  const g = String(sel.glass);
+  if (!p.gapByGlass[g]) return false;
+  const [min, max] = p.gapByGlass[g];
+  return sel.gap >= min && sel.gap <= max;
+}
+
+function updateMatchBar() {
+  const count = countMatches();
+  const bar = document.getElementById('matchBar');
+  const countEl = document.getElementById('matchCount');
+  const textEl = document.getElementById('matchText');
+
+  countEl.textContent = count;
+  if (count === 0) {
+    bar.className = 'match-bar';
+    textEl.textContent = 'Keine passende Magnetdichtung \u2013 versuchen Sie ein anderes Spaltmaß.';
+  } else if (count <= 2) {
+    bar.className = 'match-bar good';
+    textEl.textContent = count === 1
+      ? 'passende Magnetdichtung für Ihre Auswahl \u2013 perfekt!'
+      : 'passende Magnetdichtungen für Ihre Auswahl';
+  } else {
+    bar.className = 'match-bar good';
+    textEl.textContent = 'passende Magnetdichtungen gefunden';
+  }
+}
+
+function matchesAngle(p) {
+  if (sel.angle === null) return true;
+  if (sel.angle === 'flexibel') return true;
+  if (sel.angle === '90-pendel') return p.pendel === true;
+  // Regular angle: match angle but exclude pendel-only products
+  if (!p.angle.includes(sel.angle)) return false;
+  if (p.pendel) return false;
+  return true;
+}
+
+function filterProducts(includeFallback) {
+  return PRODUCTS.filter(p => {
+    if (!includeFallback && p.fallback) return false;
+    if (!matchesAngle(p)) return false;
+    if (sel.glass !== null && !p.glass.includes(sel.glass)) return false;
+    if (sel.glass !== null) {
+      if (!productMatchesGap(p)) return false;
+    }
+    return true;
+  });
+}
+
+function countMatches() {
+  var results = filterProducts(false);
+  return results.length > 0 ? results.length : filterProducts(true).length;
+}
+
+function next() {
+  if (cur < STEP_COUNT - 1) { cur++; show(); }
+  else { cur = 'results'; show(); }
+}
+
+function back() {
+  if (cur === 'results') { cur = STEP_COUNT - 1; show(); return; }
+  if (cur > 0) { cur--; show(); }
+}
+
+function goToStep(s) {
+  cur = s;
+  show();
+}
+
+function reset() {
+  sel = { angle: null, glass: null, gap: 18 };
+  cur = 0;
+  document.getElementById('gapSlider').value = 18;
+  document.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+  show();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ==================================================================
+// RESULTS
+// ==================================================================
+function getResults() {
+  // First try without fallback products (8874)
+  var results = filterProducts(false);
+  // Only include fallback (flexible 8874) if no other products match
+  if (results.length === 0) {
+    results = filterProducts(true);
+  }
+  return results.sort((a, b) => {
+    // Bestseller first
+    if (a.bestseller && !b.bestseller) return -1;
+    if (!a.bestseller && b.bestseller) return 1;
+    // Then by how centered the gap is in the product's range (better fit first)
+    const g = String(sel.glass);
+    const [minA, maxA] = a.gapByGlass[g] || [0, 0];
+    const [minB, maxB] = b.gapByGlass[g] || [0, 0];
+    const fitA = Math.abs(((minA + maxA) / 2) - sel.gap);
+    const fitB = Math.abs(((minB + maxB) / 2) - sel.gap);
+    return fitA - fitB;
+  });
+}
+
+function renderResults() {
+  const results = getResults();
+  const angleLabels = { 90: '90° Ecke', '90-pendel': '90° Pendeltür', 135: '135° Fünfeck', 180: '180° Fluchtend', 'flexibel': 'Flexibel (alle Winkel)' };
+
+  document.getElementById('resultsTitle').innerHTML =
+    '<em>' + results.length + '</em> passende Magnetdichtung' + (results.length !== 1 ? 'en' : '');
+
+  document.getElementById('filterSummary').innerHTML =
+    '<div class="filter-chip">Winkel: <strong>' + (angleLabels[sel.angle] || sel.angle + '\u00b0') + '</strong>' +
+    '<span class="chip-edit" onclick="goToStep(0)">\u270e</span></div>' +
+    '<div class="filter-chip">Glasdicke: <strong>' + sel.glass + ' mm</strong>' +
+    '<span class="chip-edit" onclick="goToStep(1)">\u270e</span></div>' +
+    '<div class="filter-chip">Spaltmaß: <strong>' + sel.gap + ' mm</strong>' +
+    '<span class="chip-edit" onclick="goToStep(2)">\u270e</span></div>';
+
+  const list = document.getElementById('productList');
+
+  if (results.length === 0) {
+    list.innerHTML =
+      '<div class="no-results">' +
+      '<div class="nr-icon">\uD83D\uDD0D</div>' +
+      '<h3>Keine passende Magnetdichtung gefunden</h3>' +
+      '<p>Für Ihre Kombination (' + (angleLabels[sel.angle] || sel.angle + '\u00b0') + ', ' + sel.glass + ' mm Glas, ' + sel.gap + ' mm Spalt) haben wir leider kein Produkt. Versuchen Sie es mit anderen Werten oder kontaktieren Sie uns direkt.</p>' +
+      '<p><a href="https://duschop.de/pages/kontakt" target="_blank">\uD83D\uDCE7 Persönliche Beratung anfragen</a></p>' +
+      '</div>';
+    return;
+  }
+
+  list.innerHTML = results.map(function(p, i) {
+    var g = String(sel.glass);
+    var url = 'https://duschop.de/products/' + p.handle;
+    if (p.variants[g]) {
+      var firstLen = Object.keys(p.variants[g])[0];
+      if (p.variants[g][firstLen]) {
+        url += '?variant=' + p.variants[g][firstLen];
+      }
+    }
+
+    var gapRange = p.gapByGlass[g] || [0, 0];
+    var gapCenter = (gapRange[0] + gapRange[1]) / 2;
+    var fitDist = Math.abs(gapCenter - sel.gap);
+    var isPerfect = fitDist <= 2;
+
+    var availLengths = p.variants[g] ? Object.keys(p.variants[g]) : p.lengths;
+
+    var angleInfo = p.angle.length > 1
+      ? p.angle.map(function(a) { return a + '\u00b0'; }).join(', ')
+      : p.angle[0] + '\u00b0';
+
+    return '<div class="product ' + (i === 0 ? 'highlight' : '') + '">' +
+      '<div class="product-image">' +
+      '<img src="' + p.image + '" alt="' + p.name + '" onerror="this.style.display=\'none\'">' +
+      (p.bestseller ? '<div class="product-badge">\u2B50 Bestseller</div>' : '') +
+      (i === 0 && !p.bestseller ? '<div class="product-badge" style="background:var(--green);color:#fff">Beste Wahl</div>' : '') +
+      '</div>' +
+      '<div class="product-body">' +
+      '<div class="product-name">' + p.name + '</div>' +
+      '<div class="product-desc">' + p.desc + '</div>' +
+      '<div class="product-specs">' +
+      '<span class="spec">Art.Nr. ' + p.artNr + '</span>' +
+      '<span class="spec match">' + angleInfo + '</span>' +
+      '<span class="spec ' + (isPerfect ? 'perfect' : 'match') + '">' +
+      (isPerfect ? '\u2713 ' : '') + 'Spalt: ' + gapRange[0] + (gapRange[0] !== gapRange[1] ? '\u2013' + gapRange[1] : '') + ' mm (' + sel.glass + ' mm Glas)</span>' +
+      '<span class="spec">Glas: ' + p.glass.join(', ') + ' mm</span>' +
+      '</div>' +
+      '<div class="length-info">Verfügbare Längen: ' + availLengths.join(' \u00b7 ') + '</div>' +
+      '<div class="product-footer">' +
+      '<div class="product-price">' +
+      'ab ' + p.priceFrom.toFixed(2).replace('.', ',') + ' \u20ac' +
+      '<small>inkl. MwSt., zzgl. Versand \u00b7 1 Paar</small>' +
+      '</div>' +
+      '<a href="' + url + '" target="_blank" class="product-cta">' +
+      'Zum Produkt' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>' +
+      '</a>' +
+      '</div>' +
+      '</div>' +
+      '</div>';
+  }).join('');
+}
+
+// ==================================================================
+// INIT
+// ==================================================================
+show();
+</script>
+
+</body>
+</html>

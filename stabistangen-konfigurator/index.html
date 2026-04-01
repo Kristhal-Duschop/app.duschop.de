@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stabilisierungsstangen-Konfigurator | duschop.de</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #c8956c;
+            --accent-light: #e8c4a8;
+            --bg: #f8f6f3;
+            --card-bg: #ffffff;
+            --text: #2d2d2d;
+            --text-light: #6b6b6b;
+            --border: #e8e4df;
+            --shadow: 0 2px 20px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --success: #27ae60;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 14px; }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+        .logo-text span { font-size: 12px; opacity: 0.65; font-weight: 400; }
+
+        .header-badges { display: flex; gap: 8px; }
+
+        .header-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: white;
+            padding: 48px 24px 56px;
+            text-align: center;
+        }
+
+        .hero h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .hero p { font-size: 16px; opacity: 0.75; max-width: 620px; margin: 0 auto; }
+
+        /* Progress Bar */
+        .progress-bar {
+            max-width: 800px;
+            margin: -28px auto 0;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .progress-inner {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            right: 24px;
+            height: 3px;
+            background: var(--border);
+            z-index: 0;
+        }
+
+        .progress-steps::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            height: 3px;
+            background: var(--accent);
+            z-index: 1;
+            transition: width 0.4s ease;
+            width: var(--progress, 0%);
+        }
+
+        .step-dot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .step-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 3px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active .step-circle {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: white;
+        }
+
+        .step-dot.done .step-circle {
+            border-color: var(--success);
+            background: var(--success);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-light);
+            text-align: center;
+            max-width: 80px;
+            transition: color 0.3s;
+        }
+
+        .step-dot.active .step-label { color: var(--accent); }
+        .step-dot.done .step-label { color: var(--success); }
+
+        /* Configurator Container */
+        .configurator {
+            max-width: 800px;
+            margin: 28px auto 60px;
+            padding: 0 24px;
+        }
+
+        .step-panel {
+            display: none;
+            animation: fadeSlideIn 0.4s ease;
+        }
+
+        .step-panel.active { display: block; }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .step-subtitle {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        /* Option Cards */
+        .options-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .options-grid.cols-2 { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+        .options-grid.cols-3 { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+
+        .option-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .option-card.selected {
+            border-color: var(--accent);
+            background: #fdf8f4;
+            box-shadow: 0 0 0 3px rgba(200,149,108,0.15);
+        }
+
+        .option-card.selected::after {
+            content: '\2713';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .option-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+        }
+
+        .option-card.selected .option-icon { background: rgba(200,149,108,0.15); }
+
+        .option-name {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .option-desc {
+            font-size: 12px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .option-meta {
+            margin-top: 10px;
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Color Swatches */
+        .color-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            border: 2px solid rgba(0,0,0,0.08);
+        }
+
+        .color-info { flex: 1; }
+        .color-name { font-size: 14px; font-weight: 600; }
+        .color-finish { font-size: 12px; color: var(--text-light); }
+
+        /* Results */
+        .results-panel {
+            display: none;
+            animation: fadeSlideIn 0.4s ease;
+        }
+
+        .results-panel.active { display: block; }
+
+        .result-summary {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: white;
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .result-summary h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .result-choices {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .result-choice {
+            background: rgba(255,255,255,0.12);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+        }
+
+        .result-products { display: flex; flex-direction: column; gap: 12px; }
+
+        .result-product-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .result-product-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+            border-color: var(--accent-light);
+        }
+
+        .result-product-inner {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 18px 20px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .result-product-img {
+            width: 72px;
+            height: 72px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: var(--bg);
+        }
+
+        .result-product-info { flex: 1; min-width: 0; }
+        .result-product-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+        .result-product-desc { font-size: 12px; color: var(--text-light); margin-bottom: 6px; }
+        .result-product-price { font-size: 15px; font-weight: 700; color: var(--accent); }
+
+        .result-product-arrow {
+            color: var(--accent);
+            flex-shrink: 0;
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: all 0.2s;
+        }
+
+        .result-product-card:hover .result-product-arrow { opacity: 1; transform: translateX(0); }
+
+        .result-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-badge {
+            background: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .result-section { margin-bottom: 28px; }
+
+        .result-hint {
+            background: #fef9f0;
+            border: 1px solid var(--accent-light);
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .result-hint strong { color: var(--accent); }
+
+        /* Navigation */
+        .step-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 32px;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 12px;
+            border: none;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { background: #b8845c; transform: translateY(-1px); }
+        .btn-primary:disabled { background: var(--border); color: var(--text-light); cursor: not-allowed; transform: none; }
+
+        .btn-secondary { background: var(--bg); color: var(--text); border: 2px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--accent-light); }
+
+        .btn-restart { background: transparent; color: var(--text-light); text-decoration: underline; border: none; padding: 12px 0; }
+        .btn-restart:hover { color: var(--accent); }
+
+        /* No match */
+        .no-match {
+            text-align: center;
+            padding: 48px 24px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .no-match-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.4; }
+        .no-match h3 { font-size: 18px; margin-bottom: 8px; }
+        .no-match p { color: var(--text-light); font-size: 14px; max-width: 400px; margin: 0 auto; }
+
+        @media (max-width: 640px) {
+            .header-badges { display: none; }
+            .hero { padding: 36px 20px 44px; }
+            .step-label { display: none; }
+            .step-circle { width: 32px; height: 32px; font-size: 12px; }
+            .options-grid.cols-2, .options-grid.cols-3 { grid-template-columns: 1fr; }
+            .result-product-inner { flex-wrap: wrap; }
+        }
+    </style>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://app.duschop.de/stabistangen-konfigurator/">
+<meta property="og:title" content="Stabistangen-Konfigurator | Duschop Tools">
+<meta property="og:description" content="Konfiguriere deine Stabilisationsstange fuer die Glasdusche.">
+<meta property="og:site_name" content="Duschop Tools">
+</head>
+<body>
+<div style="background:#1a1a2e;padding:10px 20px;text-align:left;position:sticky;top:0;z-index:9999;">
+    <a href="/" style="color:#c8956c;text-decoration:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        Alle Tools
+    </a>
+</div>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="2" x2="12" y2="22"/>
+                    <line x1="2" y1="12" x2="12" y2="12"/>
+                    <circle cx="12" cy="2" r="1.5" fill="white"/>
+                    <circle cx="2" cy="12" r="1.5" fill="white"/>
+                    <circle cx="12" cy="22" r="1.5" fill="white"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <h1>Stabilisierungsstangen</h1>
+                <span>Konfigurator &middot; duschop.de</span>
+            </div>
+        </div>
+        <div class="header-badges">
+            <div class="header-badge">Schritt-f&uuml;r-Schritt</div>
+            <div class="header-badge">20+ Produkte</div>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <h2>Finden Sie die passende Stabilisierung</h2>
+    <p>In wenigen Schritten zur richtigen Stabilisierungsstange f&uuml;r Ihre Glasdusche &ndash; einfach Montagetyp, Form, Oberfl&auml;che und L&auml;nge w&auml;hlen.</p>
+</section>
+
+<div class="progress-bar">
+    <div class="progress-inner">
+        <div class="progress-steps" id="progressSteps" style="--progress: 0%">
+            <div class="step-dot active" data-step="0">
+                <div class="step-circle">1</div>
+                <div class="step-label">Montage</div>
+            </div>
+            <div class="step-dot" data-step="1">
+                <div class="step-circle">2</div>
+                <div class="step-label">Form</div>
+            </div>
+            <div class="step-dot" data-step="2">
+                <div class="step-circle">3</div>
+                <div class="step-label">Oberfl&auml;che</div>
+            </div>
+            <div class="step-dot" data-step="3">
+                <div class="step-circle">4</div>
+                <div class="step-label">Ergebnis</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="configurator">
+
+    <!-- STEP 0: Montagetyp -->
+    <div class="step-panel active" id="step0">
+        <h3 class="step-title">Wie soll die Stange montiert werden?</h3>
+        <p class="step-subtitle">W&auml;hlen Sie, zwischen welchen Punkten die Stabilisierungsstange befestigt wird.</p>
+
+        <div class="options-grid cols-2">
+            <div class="option-card" data-value="wand-glas" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5">
+                        <rect x="2" y="4" width="6" height="32" rx="1" fill="#e8e4df" stroke="#999"/>
+                        <rect x="28" y="4" width="6" height="32" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-dasharray="4 2"/>
+                        <line x1="8" y1="20" x2="28" y2="20" stroke="#c8956c" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="8" cy="20" r="3" fill="#c8956c"/>
+                        <circle cx="28" cy="20" r="3" fill="#c8956c"/>
+                    </svg>
+                </div>
+                <div class="option-name">Wand &ndash; Glas</div>
+                <div class="option-desc">Die Stange verbindet eine feste Wand mit der Glasscheibe. Die h&auml;ufigste Montageart.</div>
+                <div class="option-meta">Beliebteste Option</div>
+            </div>
+
+            <div class="option-card" data-value="glas-glas" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+                        <rect x="2" y="4" width="6" height="32" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-width="2" stroke-dasharray="4 2"/>
+                        <rect x="28" y="4" width="6" height="32" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-width="2" stroke-dasharray="4 2"/>
+                        <line x1="8" y1="20" x2="28" y2="20" stroke="#c8956c" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="8" cy="20" r="3" fill="#c8956c"/>
+                        <circle cx="28" cy="20" r="3" fill="#c8956c"/>
+                    </svg>
+                </div>
+                <div class="option-name">Glas &ndash; Glas</div>
+                <div class="option-desc">Die Stange verbindet zwei Glasscheiben miteinander, z.B. bei Eckduschen.</div>
+                <div class="option-meta">F&uuml;r Eckduschen</div>
+            </div>
+
+            <div class="option-card" data-value="glas-decke" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+                        <line x1="4" y1="4" x2="36" y2="4" stroke="#999" stroke-width="3" stroke-linecap="round"/>
+                        <rect x="14" y="22" width="6" height="18" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-width="2" stroke-dasharray="4 2"/>
+                        <line x1="17" y1="4" x2="17" y2="22" stroke="#c8956c" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="17" cy="4" r="3" fill="#c8956c"/>
+                        <circle cx="17" cy="22" r="3" fill="#c8956c"/>
+                    </svg>
+                </div>
+                <div class="option-name">Glas &ndash; Decke</div>
+                <div class="option-desc">Die Stange geht senkrecht von der Glasscheibe zur Decke. Ideal bei hohen R&auml;umen.</div>
+                <div class="option-meta">Vertikale Montage</div>
+            </div>
+        </div>
+
+        <div class="step-nav">
+            <div></div>
+            <button class="btn btn-primary" id="nextBtn0" disabled onclick="nextStep(0)">
+                Weiter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 1: Profil/Form -->
+    <div class="step-panel" id="step1">
+        <h3 class="step-title">Welche Stangenform bevorzugen Sie?</h3>
+        <p class="step-subtitle">W&auml;hlen Sie zwischen rundem und eckigem Profil in verschiedenen Gr&ouml;&szlig;en.</p>
+
+        <div class="options-grid cols-2" id="formOptions"></div>
+
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(1)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-primary" id="nextBtn1" disabled onclick="nextStep(1)">
+                Weiter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 2: Oberflaeche -->
+    <div class="step-panel" id="step2">
+        <h3 class="step-title">Welche Oberfl&auml;che soll es sein?</h3>
+        <p class="step-subtitle">Verf&uuml;gbare Oberfl&auml;chen f&uuml;r Ihre Auswahl. Nicht jede Kombination ist in allen Farben lieferbar.</p>
+
+        <div class="options-grid cols-2" id="colorOptions"></div>
+
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(2)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-primary" id="nextBtn2" disabled onclick="nextStep(2)">
+                Ergebnis anzeigen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 3: Ergebnis -->
+    <div class="step-panel" id="step3">
+        <div id="resultsContent"></div>
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(3)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-restart" onclick="restart()">Neue Konfiguration starten</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// Product Database
+// ============================================================
+const products = [
+    // === SETS (Complete Solutions) ===
+    {
+        id: 'set-rund-12-wg',
+        title: 'Rundes Stabistangen-Set Glas-Wand \u00d8 12 mm',
+        handle: 'stabistangen-set-rund-glas-wand-flexibel-einstellbar-12-mm',
+        type: 'set',
+        montage: ['wand-glas'],
+        form: 'rund-12',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'schwarz-matt', 'graphit-matt', 'graphit-poliert', 'messing-poliert', 'messing-matt', 'weiss-matt', 'bronze-matt', 'kupfer-poliert', 'kupfer-matt'],
+        price: '60,90',
+        priceMax: '124,90',
+        desc: 'Komplett-Set mit Stange, Wandhalter und Glashalter. Winkel flexibel einstellbar.',
+        isSet: true
+    },
+    {
+        id: 'set-eckig-12-wg',
+        title: 'Stabistangen-Set quadratisch 12\u00d712 mm Glas-Wand',
+        handle: 'stabistangen-set-eckig-fur-glasdusche-glas-wand',
+        type: 'set',
+        montage: ['wand-glas'],
+        form: 'eckig-12',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'schwarz-matt', 'messing-matt', 'messing-poliert', 'graphit-poliert', 'graphit-matt', 'bronze-matt', 'kupfer-poliert', 'kupfer-matt', 'weiss-matt'],
+        price: '64,90',
+        priceMax: '114,20',
+        desc: 'Eckiges Komplett-Set mit moderner Optik. Flexibel einstellbar f\u00fcr 8\u201310 mm Glas.',
+        isSet: true
+    },
+    {
+        id: 'set-rund-19-wg-edelstahl',
+        title: 'Edelstahl Stabistangen-Set Glas-Wand \u00d8 19 mm',
+        handle: 'edelstahl-stabistangen-set-glas-wand-90',
+        type: 'set',
+        montage: ['wand-glas'],
+        form: 'rund-19',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'schwarz-matt'],
+        price: '59,90',
+        desc: 'Massives Edelstahl-Set, 90\u00b0, inkl. Wandhalter und Glashalter.',
+        isSet: true
+    },
+    {
+        id: 'set-rund-19-wg-edelstahl-2',
+        title: 'Edelstahl Stabistangen-Set Glas-Wand \u00d8 19 mm (1000/1250 mm)',
+        handle: 'glas-wand-90-edelstahl-stabistangen-set-19-mm',
+        type: 'set',
+        montage: ['wand-glas'],
+        form: 'rund-19',
+        colors: ['edelstahl-gebuerstet', 'edelstahl-poliert'],
+        price: '59,90',
+        priceMax: '65,90',
+        desc: 'V2A Edelstahl-Set, 1000 oder 1250 mm L\u00e4nge w\u00e4hlbar.',
+        isSet: true
+    },
+    {
+        id: 'set-eckig-20-wg',
+        title: 'Stabistangen-Set eckig 20\u00d720 mm Edelstahl',
+        handle: 'stabistange-set-fur-glasdusche-eckig-20x20-mm-edelstahl-art-nr-418020',
+        type: 'set',
+        montage: ['wand-glas'],
+        form: 'eckig-20',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet'],
+        price: '73,90',
+        priceMax: '93,90',
+        desc: 'Gro\u00dfes eckiges Profil, 20\u00d720 mm, aus Edelstahl. Premium-Optik.',
+        isSet: true
+    },
+    {
+        id: 'set-rund-19-wg-messing',
+        title: 'Stabistangen-Set Glas-Wand 90\u00b0 \u00d8 19 mm (Messing verchromt)',
+        handle: 'stabilisierungsstangen-set',
+        type: 'set',
+        montage: ['wand-glas'],
+        form: 'rund-19',
+        colors: ['chrom-poliert'],
+        price: '59,90',
+        priceMax: '69,90',
+        desc: 'Messing verchromt, 1000 oder 1300 mm L\u00e4nge w\u00e4hlbar.',
+        isSet: true
+    },
+    {
+        id: 'set-rund-19-wg-45',
+        title: 'Stabistangen-Set Glas-Wand 45\u00b0 Edelstahl \u00d8 19 mm',
+        handle: 'glas-wand-45-edelstahl-stabistangen-set-19-mm-rohr-art-nr-6017-6019',
+        type: 'set',
+        montage: ['wand-glas'],
+        form: 'rund-19',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet'],
+        price: '49,90',
+        priceMax: '59,90',
+        desc: 'Edelstahl-Set mit 45\u00b0-Wandhalter, 250 oder 1000 mm Rohr.',
+        isSet: true
+    },
+    {
+        id: 'set-glas-glas-19',
+        title: 'Stabistangen-Set Glas-Glas \u00d8 19 mm',
+        handle: 'stabilisierungsstangen-set-glas-glas-o-19-mm-1-m-lange-inkl-2-glashalter-fur-8-10-mm',
+        type: 'set',
+        montage: ['glas-glas'],
+        form: 'rund-19',
+        colors: ['chrom-poliert'],
+        price: '67,90',
+        desc: 'Komplett-Set f\u00fcr Glas-Glas-Verbindung, 1000 mm, inkl. 2 Glashalter.',
+        isSet: true
+    },
+    {
+        id: 'set-decke-19',
+        title: 'Decken Stabistangen-Set vertikal \u00d8 19 mm',
+        handle: 'stabilisierungsstangen-set-vertikal-o-19-mm-500-mm-lange-fur-glas-decken-montage',
+        type: 'set',
+        montage: ['glas-decke'],
+        form: 'rund-19',
+        colors: ['chrom-poliert'],
+        price: '49,90',
+        priceMax: '62,90',
+        desc: 'Vertikales Set f\u00fcr Glas-Decken-Montage. 500 oder 1000 mm L\u00e4nge.',
+        isSet: true
+    },
+
+    {
+        id: 'winkel-90-eckig',
+        title: '90\u00b0 Stabilisierungswinkel 220 mm \u2013 ohne Glasbohrung',
+        handle: '90-stabilisierungswinkel-220-mm-fur-freistehende-glaswande-ohne-glasbohrung',
+        type: 'set',
+        montage: ['wand-glas'],
+        form: 'eckig-12',
+        colors: ['edelstahl-gebuerstet', 'schwarz-matt', 'messing-matt', 'messing-poliert', 'kupfer-matt', 'kupfer-poliert', 'bronze-matt', 'chrom-poliert', 'weiss-matt', 'graphit-matt', 'graphit-poliert'],
+        price: '94,90',
+        priceMax: '99,90',
+        desc: 'Kompakter Winkelstabilisator f\u00fcr freistehende Walk-in-Glasw\u00e4nde. Kein Bohren ins Glas n\u00f6tig. 8 oder 10 mm Glas.',
+        isSet: true
+    },
+    {
+        id: 'pfosten-vigo',
+        title: 'Walk-in Pfosten-Set Typ Vigo \u2013 \u00d8 30 mm',
+        handle: 'walk-in-pfosten-set-typ-vigo-vertikale-stabilisierung-fur-freistehende-glaswande',
+        type: 'set',
+        montage: ['glas-decke'],
+        form: 'rund-19',
+        colors: ['edelstahl-gebuerstet', 'chrom-poliert'],
+        price: '319,00',
+        priceMax: '359,00',
+        desc: 'Premium Pfosten-Set f\u00fcr freistehende Glasscheiben. Rund oder eckig, Boden-Decke-Montage.',
+        isSet: true
+    },
+
+    // === INDIVIDUAL COMPONENTS ===
+    // Rohre / Stangen
+    {
+        id: 'rohr-19',
+        title: 'Stabistange-Rohr \u00d8 19 mm aus Messing',
+        handle: 'stabilisierungsrohr_19mm',
+        type: 'rohr',
+        montage: ['wand-glas', 'glas-glas', 'glas-decke'],
+        form: 'rund-19',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'silber-matt', 'messing-poliert', 'messing-matt', 'schwarz-matt'],
+        price: '39,90',
+        priceMax: '129,00',
+        desc: 'Messing-Rohr in 1000, 1300 oder 2030 mm. K\u00fcrzbar. Passend zu allen 19-mm-Haltern.',
+        isSet: false
+    },
+
+    // Wandhalter
+    {
+        id: 'wandhalter-90',
+        title: 'Wand-/Deckenhalter \u00d8 19 mm \u2013 90\u00b0',
+        handle: 'wandhalter_deckenhalter_stabilisierungsstange-19-mm',
+        type: 'wandhalter',
+        montage: ['wand-glas', 'glas-decke'],
+        form: 'rund-19',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'silber-matt', 'schwarz-matt', 'messing-poliert', 'messing-matt'],
+        price: '14,90',
+        priceMax: '16,90',
+        desc: 'Zylindrischer 90\u00b0-Wandhalter aus massivem Messing.',
+        isSet: false
+    },
+    {
+        id: 'wandhalter-45',
+        title: 'Wandhalter \u00d8 19 mm \u2013 45\u00b0',
+        handle: 'wandhalter-fur-stabilisierungsstange-o-19-mm-45-ausfuhrung',
+        type: 'wandhalter',
+        montage: ['wand-glas'],
+        form: 'rund-19',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'schwarz-matt', 'messing-poliert', 'messing-matt'],
+        price: '24,90',
+        priceMax: '28,90',
+        desc: '45\u00b0-Wandhalter f\u00fcr schr\u00e4ge Montage der Stabilisierungsstange.',
+        isSet: false
+    },
+    {
+        id: 'wandhalter-22',
+        title: 'Wandhalter \u00d8 19 mm \u2013 22,5\u00b0',
+        handle: 'wandhalter-fur-stabilisierungsstange-o-19-mm-22-5-fur-dezente-losungen',
+        type: 'wandhalter',
+        montage: ['wand-glas'],
+        form: 'rund-19',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet'],
+        price: '24,90',
+        priceMax: '26,90',
+        desc: 'Dezenter 22,5\u00b0-Wandhalter f\u00fcr eine besonders flache Optik.',
+        isSet: false
+    },
+    {
+        id: 'wandflansch-45-v2a',
+        title: 'V2A Wandflansch 45\u00b0 \u00d8 19 mm',
+        handle: 'v2a-wandflansch-45-o-19-mm-stabistange-art-nr-626',
+        type: 'wandhalter',
+        montage: ['wand-glas'],
+        form: 'rund-19',
+        colors: ['edelstahl-gebuerstet', 'edelstahl-poliert'],
+        price: '23,90',
+        desc: 'V2A Edelstahl-Wandflansch f\u00fcr 45\u00b0-Montage.',
+        isSet: false
+    },
+
+    // Glashalter
+    {
+        id: 'glashalter-drehbar-12',
+        title: 'Drehbarer Glashalter \u00d8 12 mm',
+        handle: 'drehbarer_glashalter_stabistange_12mm',
+        type: 'glashalter',
+        montage: ['wand-glas', 'glas-glas'],
+        form: 'rund-12',
+        colors: ['bronze-matt', 'schwarz-matt', 'edelstahl-gebuerstet', 'chrom-poliert', 'messing-poliert', 'messing-matt', 'graphit-poliert', 'graphit-matt', 'weiss-matt', 'kupfer-poliert', 'kupfer-matt'],
+        price: '34,90',
+        priceMax: '44,90',
+        desc: 'Drehbarer Glashalter f\u00fcr 12-mm-Stangen, flexibel einstellbar.',
+        isSet: false
+    },
+    {
+        id: 'glashalter-drehbar-19',
+        title: 'Drehbarer Glashalter \u00d8 19 mm (Endst\u00fcck)',
+        handle: 'drehbarer-glashalter-fur-stabilisierungsstange-o-19-mm-einseitig-geschlossen-endstuck',
+        type: 'glashalter',
+        montage: ['wand-glas', 'glas-glas'],
+        form: 'rund-19',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'silber-matt'],
+        price: '19,90',
+        priceMax: '22,90',
+        desc: 'Einseitig geschlossener Glashalter (Endst\u00fcck) f\u00fcr 19-mm-Stange.',
+        isSet: false
+    },
+    {
+        id: 'glashalter-senkrecht-19',
+        title: 'Senkrechter Glashalter \u00d8 19 mm',
+        handle: 'senkrechter-glashalter-stabilisierungsstange-19-mm',
+        type: 'glashalter',
+        montage: ['glas-decke'],
+        form: 'rund-19',
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'schwarz-matt', 'silber-matt', 'messing-poliert', 'messing-matt'],
+        price: '22,90',
+        priceMax: '38,90',
+        desc: 'F\u00fcr vertikale Deckenmontage. 6\u20138 mm oder 10\u201312 mm Glas.',
+        isSet: false
+    },
+    {
+        id: 'glashalter-offen-19',
+        title: 'Glashalter offen \u00d8 19 mm drehbar',
+        handle: 'glashalter_offen_19-mm',
+        type: 'glashalter',
+        montage: ['wand-glas', 'glas-glas'],
+        form: 'rund-19',
+        colors: ['edelstahl-gebuerstet', 'edelstahl-poliert'],
+        price: '13,90',
+        desc: 'Offener, drehbarer Glashalter aus V2A Edelstahl.',
+        isSet: false
+    },
+
+    // T-Verbinder
+    {
+        id: 't-verbinder-12',
+        title: 'T-Verbinder \u00d8 12 mm',
+        handle: 't-verbinder_12mm',
+        type: 't-verbinder',
+        montage: ['glas-glas'],
+        form: 'rund-12',
+        colors: ['bronze-matt', 'schwarz-matt', 'edelstahl-gebuerstet', 'chrom-poliert', 'messing-poliert', 'messing-matt', 'graphit-poliert', 'graphit-matt', 'weiss-matt', 'kupfer-poliert', 'kupfer-matt'],
+        price: '24,90',
+        priceMax: '34,90',
+        desc: 'T-Verbinder f\u00fcr 12-mm-Stangen, ideal f\u00fcr Glas-Glas-Verbindungen.',
+        isSet: false
+    },
+    {
+        id: 't-verbinder-19',
+        title: 'T-Verbinder kurz \u00d8 19 mm',
+        handle: 't-verbinder-kurz-fur-stabilisierungsstange-19-mm',
+        type: 't-verbinder',
+        montage: ['glas-glas'],
+        form: 'rund-19',
+        colors: ['chrom-poliert', 'schwarz-matt', 'edelstahl-gebuerstet'],
+        price: '22,90',
+        priceMax: '26,90',
+        desc: 'Kurzer T-Verbinder f\u00fcr 19-mm-Stangen, 90\u00b0-Glasverbindung.',
+        isSet: false
+    }
+];
+
+// Product images from Shopify CDN
+const productImages = {
+    'stabistangen-set-rund-glas-wand-flexibel-einstellbar-12-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/SQ1212_641ab0ab-b3a7-4c9c-b60d-d7e6180136a4.jpg?v=1773305017',
+    'stabistangen-set-eckig-fur-glasdusche-glas-wand': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/sq1212setch-01.jpg?v=1773305047',
+    'edelstahl-stabistangen-set-glas-wand-90': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/SE1912SET.png?v=1773305306',
+    'glas-wand-90-edelstahl-stabistangen-set-19-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/601820_2.png?v=1773306523',
+    'stabistange-set-fur-glasdusche-eckig-20x20-mm-edelstahl-art-nr-418020': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/GF_20x20_90__Stabistange1k_91096f51-c18c-46d9-90f8-577036e0d390.jpg?v=1742635465',
+    'stabilisierungsstangen-set-glas-glas-o-19-mm-1-m-lange-inkl-2-glashalter-fur-8-10-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Glas_Glas.png?v=1768321308',
+    'stabilisierungsstangen-set-vertikal-o-19-mm-500-mm-lange-fur-glas-decken-montage': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/s1905setv_1__1.png?v=1749831011',
+    'stabilisierungsrohr_19mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Stabirohr_S1.00.jpg?v=1753253014',
+    'wandhalter_deckenhalter_stabilisierungsstange-19-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/S12_chromglanz.jpg?v=1773394543',
+    'wandhalter-fur-stabilisierungsstange-o-19-mm-45-ausfuhrung': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/SBB45_Chromglanz.jpg?v=1753275908',
+    'wandhalter-fur-stabilisierungsstange-o-19-mm-22-5-fur-dezente-losungen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/SBB22.png?v=1773403760',
+    'v2a-wandflansch-45-o-19-mm-stabistange-art-nr-626': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Wandhalter_45_geb.jpg?v=1772811265',
+    'drehbarer_glashalter_stabistange_12mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/s1204-bbrz-01.jpg?v=1768831949',
+    'drehbarer-glashalter-fur-stabilisierungsstange-o-19-mm-einseitig-geschlossen-endstuck': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/S4V_Chromglanz.jpg?v=1773394603',
+    'senkrechter-glashalter-stabilisierungsstange-19-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/S9_Chormglanz.jpg?v=1773394629',
+    'glashalter_offen_19-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Glashalter_Loch_gebuerstet.jpg?v=1772802441',
+    't-verbinder_12mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/s1250-bbrz-02.jpg?v=1768843581',
+    't-verbinder-kurz-fur-stabilisierungsstange-19-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/freepik__das-bild-img1-zeigt-einen-thalter-einer-stabistang__52097.jpg?v=1757595331',
+    'stabilisierungsstangen-set': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Stabi_3.2.jpg?v=1751384854',
+    'glas-wand-45-edelstahl-stabistangen-set-19-mm-rohr-art-nr-6017-6019': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/6019_6017_2.png?v=1773307663',
+    '90-stabilisierungswinkel-220-mm-fur-freistehende-glaswande-ohne-glasbohrung': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Winkelstabilisator_gebuerstet_2.jpg?v=1753357997',
+    'walk-in-pfosten-set-typ-vigo-vertikale-stabilisierung-fur-freistehende-glaswande': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BO521543.rund.jpg?v=1753432428'
+};
+
+// Color definitions (same as Farbenfinder)
+const colorDefs = {
+    'chrom-poliert': { name: 'Chrom poliert gl\u00e4nzend', gradient: 'linear-gradient(135deg, #e8e8e8 0%, #c0c0c0 25%, #f5f5f5 50%, #a8a8a8 75%, #d4d4d4 100%)', finish: 'Gl\u00e4nzend' },
+    'edelstahl-gebuerstet': { name: 'Edelstahl geb\u00fcrstet matt', gradient: 'linear-gradient(135deg, #c8c4be 0%, #b5b0a8 25%, #d0ccc5 50%, #a8a39a 75%, #bfbab2 100%)', finish: 'Matt' },
+    'edelstahl-poliert': { name: 'Edelstahl poliert', gradient: 'linear-gradient(135deg, #d6d2cc 0%, #bfbab3 25%, #e0dcd6 50%, #b0aaa2 75%, #ccc7c0 100%)', finish: 'Gl\u00e4nzend' },
+    'silber-matt': { name: 'Silber matt', gradient: 'linear-gradient(135deg, #c5c5c5 0%, #b0b0b0 25%, #cbcbcb 50%, #a0a0a0 75%, #bdbdbd 100%)', finish: 'Matt' },
+    'schwarz-matt': { name: 'Schwarz matt', gradient: 'linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 25%, #333333 50%, #111111 75%, #262626 100%)', finish: 'Matt' },
+    'messing-poliert': { name: 'Messing poliert (goldfarbig)', gradient: 'linear-gradient(135deg, #dcc260 0%, #c4a840 25%, #e8d070 50%, #b89a30 75%, #d0b850 100%)', finish: 'Gl\u00e4nzend' },
+    'messing-matt': { name: 'Messing matt (goldfarbig)', gradient: 'linear-gradient(135deg, #c8a84e 0%, #b08f30 25%, #d4b55a 50%, #a08228 75%, #bfa042 100%)', finish: 'Matt' },
+    'bronze-matt': { name: 'Bronze matt geb\u00fcrstet', gradient: 'linear-gradient(135deg, #8B6914 0%, #6d5010 25%, #9a7520 50%, #5c430d 75%, #7d5e12 100%)', finish: 'Matt' },
+    'graphit-poliert': { name: 'Graphit poliert gl\u00e4nzend', gradient: 'linear-gradient(135deg, #5a5a5a 0%, #454545 25%, #666666 50%, #3a3a3a 75%, #525252 100%)', finish: 'Gl\u00e4nzend' },
+    'graphit-matt': { name: 'Graphit matt geb\u00fcrstet', gradient: 'linear-gradient(135deg, #686868 0%, #555555 25%, #737373 50%, #484848 75%, #606060 100%)', finish: 'Matt' },
+    'kupfer-poliert': { name: 'Kupfer poliert (Rose-Gold)', gradient: 'linear-gradient(135deg, #d4956a 0%, #c07d50 25%, #e0a57a 50%, #b07040 75%, #cc8d60 100%)', finish: 'Gl\u00e4nzend' },
+    'kupfer-matt': { name: 'Kupfer matt geb\u00fcrstet', gradient: 'linear-gradient(135deg, #b8805a 0%, #a06840 25%, #c49068 50%, #905a32 75%, #af7850 100%)', finish: 'Matt' },
+    'weiss-matt': { name: 'Wei\u00df matt', gradient: 'linear-gradient(135deg, #f5f2ef 0%, #e8e4e0 25%, #faf8f6 50%, #e0dcd8 75%, #f0ece8 100%)', finish: 'Matt' }
+};
+
+const formDefs = {
+    'rund-12': { name: 'Rund \u00d8 12 mm', desc: 'Schlankes, dezentes Profil. Gro\u00dfe Farbauswahl.', icon: 'circle' },
+    'rund-19': { name: 'Rund \u00d8 19 mm', desc: 'Klassisches Profil, robuste Optik. Aus Messing oder Edelstahl.', icon: 'circle-big' },
+    'eckig-12': { name: 'Eckig 12\u00d712 mm', desc: 'Modernes, kantiges Design. Gro\u00dfe Farbauswahl.', icon: 'square' },
+    'eckig-20': { name: 'Eckig 20\u00d720 mm', desc: 'Premium-Profil, kr\u00e4ftig und markant. Edelstahl.', icon: 'square-big' }
+};
+
+// ============================================================
+// State
+// ============================================================
+let currentStep = 0;
+const selections = {
+    montage: null,
+    form: null,
+    color: null
+};
+
+// ============================================================
+// Step Logic
+// ============================================================
+function selectOption(step, el) {
+    const parent = el.closest('.options-grid') || el.closest('.step-panel');
+    parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+
+    const value = el.dataset.value;
+
+    if (step === 0) selections.montage = value;
+    else if (step === 1) selections.form = value;
+    else if (step === 2) selections.color = value;
+
+    document.getElementById('nextBtn' + step).disabled = false;
+}
+
+function nextStep(from) {
+    const panels = document.querySelectorAll('.step-panel');
+    panels[from].classList.remove('active');
+
+    currentStep = from + 1;
+
+    // Build dynamic step content
+    if (currentStep === 1) buildFormOptions();
+    else if (currentStep === 2) buildColorOptions();
+    else if (currentStep === 3) buildResults();
+
+    panels[currentStep].classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevStep(to) {
+    const panels = document.querySelectorAll('.step-panel');
+    panels[currentStep].classList.remove('active');
+    currentStep = to - 1;
+    panels[currentStep].classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+    selections.montage = null;
+    selections.form = null;
+    selections.color = null;
+    currentStep = 0;
+
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('step0').classList.add('active');
+    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('[id^="nextBtn"]').forEach(b => b.disabled = true);
+
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+    const dots = document.querySelectorAll('.step-dot');
+    const progressPercent = currentStep === 0 ? 0 : currentStep === 1 ? 33 : currentStep === 2 ? 66 : 100;
+
+    document.getElementById('progressSteps').style.setProperty('--progress', progressPercent + '%');
+
+    dots.forEach((dot, i) => {
+        dot.classList.remove('active', 'done');
+        if (i < currentStep) dot.classList.add('done');
+        else if (i === currentStep) dot.classList.add('active');
+    });
+
+    // Allow clicking completed steps
+    dots.forEach(dot => {
+        dot.onclick = () => {
+            const stepIdx = parseInt(dot.dataset.step);
+            if (stepIdx < currentStep) {
+                document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+                currentStep = stepIdx;
+                document.getElementById('step' + stepIdx).classList.add('active');
+                updateProgress();
+            }
+        };
+    });
+}
+
+// ============================================================
+// Dynamic Content Builders
+// ============================================================
+function getAvailableForms() {
+    const montage = selections.montage;
+    const forms = new Set();
+    products.forEach(p => {
+        if (p.montage.includes(montage)) forms.add(p.form);
+    });
+    return [...forms];
+}
+
+function buildFormOptions() {
+    const available = getAvailableForms();
+    const container = document.getElementById('formOptions');
+
+    const svgIcons = {
+        'circle': '<svg width="28" height="28" viewBox="0 0 40 40"><circle cx="20" cy="20" r="8" fill="none" stroke="#c8956c" stroke-width="2.5"/><text x="20" y="24" text-anchor="middle" font-size="8" fill="#c8956c" font-weight="600">12</text></svg>',
+        'circle-big': '<svg width="28" height="28" viewBox="0 0 40 40"><circle cx="20" cy="20" r="12" fill="none" stroke="#c8956c" stroke-width="2.5"/><text x="20" y="24" text-anchor="middle" font-size="8" fill="#c8956c" font-weight="600">19</text></svg>',
+        'square': '<svg width="28" height="28" viewBox="0 0 40 40"><rect x="12" y="12" width="16" height="16" rx="2" fill="none" stroke="#c8956c" stroke-width="2.5"/><text x="20" y="24" text-anchor="middle" font-size="7" fill="#c8956c" font-weight="600">12</text></svg>',
+        'square-big': '<svg width="28" height="28" viewBox="0 0 40 40"><rect x="8" y="8" width="24" height="24" rx="2" fill="none" stroke="#c8956c" stroke-width="2.5"/><text x="20" y="24" text-anchor="middle" font-size="7" fill="#c8956c" font-weight="600">20</text></svg>'
+    };
+
+    container.innerHTML = available.map(formId => {
+        const f = formDefs[formId];
+        const productCount = products.filter(p => p.montage.includes(selections.montage) && p.form === formId).length;
+        return `
+        <div class="option-card" data-value="${formId}" onclick="selectOption(1, this)">
+            <div class="option-icon">${svgIcons[f.icon]}</div>
+            <div class="option-name">${f.name}</div>
+            <div class="option-desc">${f.desc}</div>
+            <div class="option-meta">${productCount} Produkt${productCount !== 1 ? 'e' : ''}</div>
+        </div>`;
+    }).join('');
+}
+
+function getAvailableColors() {
+    const { montage, form } = selections;
+    const colorSet = new Set();
+    products.forEach(p => {
+        if (p.montage.includes(montage) && p.form === form) {
+            p.colors.forEach(c => colorSet.add(c));
+        }
+    });
+    return [...colorSet];
+}
+
+function buildColorOptions() {
+    const available = getAvailableColors();
+    const container = document.getElementById('colorOptions');
+
+    container.innerHTML = available.map(colorId => {
+        const c = colorDefs[colorId];
+        if (!c) return '';
+        return `
+        <div class="option-card color-option" data-value="${colorId}" onclick="selectOption(2, this)">
+            <div class="color-swatch" style="background: ${c.gradient}"></div>
+            <div class="color-info">
+                <div class="color-name">${c.name}</div>
+                <div class="color-finish">${c.finish}</div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function buildResults() {
+    const { montage, form, color } = selections;
+    const container = document.getElementById('resultsContent');
+
+    const montageLabels = { 'wand-glas': 'Wand \u2013 Glas', 'glas-glas': 'Glas \u2013 Glas', 'glas-decke': 'Glas \u2013 Decke' };
+    const colorName = colorDefs[color] ? colorDefs[color].name : color;
+    const formName = formDefs[form] ? formDefs[form].name : form;
+
+    // 1) Passende Sets (exakte \u00dcbereinstimmung: Montage + Form + Farbe)
+    const matchingSets = products.filter(p =>
+        p.isSet && p.montage.includes(montage) && p.form === form && p.colors.includes(color)
+    );
+
+    // 2) Weitere Sets (gleiche Montage + Form, aber NICHT die gew\u00e4hlte Farbe)
+    const otherSets = products.filter(p =>
+        p.isSet && p.montage.includes(montage) && p.form === form && !p.colors.includes(color)
+    );
+
+    // 3) Zubeh\u00f6r: Einzelteile passend zu Montage + Form, gruppiert nach Typ
+    const zubehoerTypes = [
+        { key: 'rohr', label: 'Stangen & Rohre', icon: '\u2502' },
+        { key: 'wandhalter', label: 'Wandhalter', icon: '\u2518' },
+        { key: 'glashalter', label: 'Glashalter', icon: '\u25a1' },
+        { key: 't-verbinder', label: 'T-Verbinder', icon: '\u252c' }
+    ];
+
+    const zubehoerGroups = {};
+    for (const zt of zubehoerTypes) {
+        const items = products.filter(p =>
+            !p.isSet && p.type === zt.key && p.montage.includes(montage) && p.form === form
+        );
+        if (items.length > 0) zubehoerGroups[zt.key] = items;
+    }
+
+    const totalZubehoer = Object.values(zubehoerGroups).reduce((s, arr) => s + arr.length, 0);
+
+    // Build HTML
+    let html = `
+    <div class="result-summary">
+        <h3>Ihre Konfiguration</h3>
+        <div class="result-choices">
+            <span class="result-choice">${montageLabels[montage]}</span>
+            <span class="result-choice">${formName}</span>
+            <span class="result-choice">${colorName}</span>
+        </div>
+    </div>`;
+
+    // Hint
+    html += `
+    <div class="result-hint">
+        <strong>Empfehlung:</strong> Ein Komplett-Set enth\u00e4lt bereits alle n\u00f6tigen Teile (Stange + Halter). Einzelnes Zubeh\u00f6r nur n\u00f6tig, wenn Sie individuelle Winkel, L\u00e4ngen oder Ersatzteile ben\u00f6tigen.
+    </div>`;
+
+    // Section 1: Passende Komplett-Sets
+    if (matchingSets.length > 0) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Passende Komplett-Sets <span class="result-badge">${matchingSets.length}</span>
+            </div>
+            <div class="result-products">
+                ${matchingSets.map(p => productCard(p, true)).join('')}
+            </div>
+        </div>`;
+    }
+
+    // Section 2: Weitere Sets (andere Farben)
+    if (otherSets.length > 0) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">
+                Weitere Sets in anderen Oberfl\u00e4chen <span class="result-badge" style="background: var(--text-light)">${otherSets.length}</span>
+            </div>
+            <div class="result-products">
+                ${otherSets.map(p => productCard(p, false, true)).join('')}
+            </div>
+        </div>`;
+    }
+
+    // No sets at all?
+    if (matchingSets.length === 0 && otherSets.length === 0) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">Komplett-Sets</div>
+            <div style="text-align:center; padding:24px; color:var(--text-light); font-size:13px; background:var(--card-bg); border-radius:var(--radius);">
+                F\u00fcr diese Kombination ist kein Komplett-Set verf\u00fcgbar. Sie k\u00f6nnen die Teile einzeln aus dem Zubeh\u00f6r zusammenstellen.
+            </div>
+        </div>`;
+    }
+
+    // Section 3: Zubeh\u00f6r nach Kategorie
+    if (totalZubehoer > 0) {
+        html += `
+        <div class="result-section" style="margin-top: 8px;">
+            <div class="result-section-title" style="font-size: 18px; margin-bottom: 4px;">
+                Zubeh\u00f6r & Einzelteile <span class="result-badge" style="background: var(--primary)">${totalZubehoer}</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-light); margin-bottom: 20px;">Einzelne Komponenten zum Zusammenstellen oder als Ersatz.</p>`;
+
+        for (const zt of zubehoerTypes) {
+            const items = zubehoerGroups[zt.key];
+            if (!items) continue;
+
+            html += `
+            <div style="margin-bottom: 20px;">
+                <div style="font-size: 14px; font-weight: 600; margin-bottom: 10px; color: var(--text); display:flex; align-items:center; gap:8px;">
+                    <span style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:8px; background:var(--bg); font-size:12px; color:var(--accent); font-weight:700;">${items.length}</span>
+                    ${zt.label}
+                </div>
+                <div class="result-products">
+                    ${items.map(p => productCard(p, p.colors.includes(color), false)).join('')}
+                </div>
+            </div>`;
+        }
+
+        html += `</div>`;
+    }
+
+    container.innerHTML = html;
+}
+
+function productCard(p, colorMatch, showAvailableColors) {
+    const priceStr = p.priceMax ? `ab ${p.price} \u20ac` : `${p.price} \u20ac`;
+    const typeLabels = {
+        'set': 'Komplett-Set',
+        'rohr': 'Stange / Rohr',
+        'wandhalter': 'Wandhalter',
+        'glashalter': 'Glashalter',
+        't-verbinder': 'T-Verbinder'
+    };
+
+    const imgUrl = productImages[p.handle];
+    const imgHtml = imgUrl
+        ? `<img class="result-product-img" src="${imgUrl}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+           <div class="result-product-img result-product-img-fallback" style="display:none; align-items:center; justify-content:center;">
+               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c8956c" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+           </div>`
+        : `<div class="result-product-img" style="display:flex; align-items:center; justify-content:center;">
+               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c8956c" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+           </div>`;
+
+    // Color match indicator
+    let colorIndicator = '';
+    if (colorMatch === false && !showAvailableColors) {
+        colorIndicator = `<div style="font-size:11px; color:var(--text-light); margin-top:4px;">Nicht in der gew\u00e4hlten Oberfl\u00e4che</div>`;
+    }
+
+    // Show available color swatches for "other sets"
+    let colorSwatches = '';
+    if (showAvailableColors && p.colors) {
+        const swatches = p.colors.map(cId => {
+            const cd = colorDefs[cId];
+            if (!cd) return '';
+            return `<span title="${cd.name}" style="display:inline-block; width:18px; height:18px; border-radius:5px; background:${cd.gradient}; border:1.5px solid rgba(0,0,0,0.1);"></span>`;
+        }).join('');
+        colorSwatches = `<div style="display:flex; flex-wrap:wrap; gap:4px; margin-top:6px;">${swatches}</div>`;
+    }
+
+    // Match badge
+    const matchBadge = colorMatch
+        ? `<span style="display:inline-block; background:#e8f5e9; color:#27ae60; font-size:10px; font-weight:600; padding:2px 8px; border-radius:6px; margin-left:6px;">Passend</span>`
+        : '';
+
+    return `
+    <div class="result-product-card" style="${colorMatch === false ? 'opacity:0.85;' : ''}">
+        <a class="result-product-inner" href="https://duschop.de/products/${p.handle}" target="_blank" rel="noopener">
+            ${imgHtml}
+            <div class="result-product-info">
+                <div class="result-product-title">${p.title}${matchBadge}</div>
+                <div class="result-product-desc">${typeLabels[p.type] || p.type} &middot; ${p.desc}</div>
+                ${colorIndicator}
+                ${colorSwatches}
+                <div class="result-product-price">${priceStr}</div>
+            </div>
+            <div class="result-product-arrow">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </div>
+        </a>
+    </div>`;
+}
+
+// Init
+updateProgress();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duschdichtung finden | duschop.de</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --gold: #FFBA00;
+      --gold-hover: #e6a800;
+      --gold-light: #fff8e6;
+      --gray-50: #fafafa;
+      --gray-100: #f5f5f5;
+      --gray-200: #e8e8e8;
+      --gray-300: #d1d1d1;
+      --gray-400: #aaaaaa;
+      --gray-500: #888888;
+      --gray-600: #666666;
+      --gray-700: #444444;
+      --gray-900: #1a1a1a;
+      --green: #22c55e;
+      --green-bg: #f0fdf4;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+      --transition: 0.2s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--white);
+      color: var(--gray-900);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .finder {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    /* ===== HEADER ===== */
+    .finder-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .finder-header .badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .finder-header h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 30px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--black);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .finder-header p {
+      font-size: 15px;
+      color: var(--gray-500);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* ===== PROGRESS ===== */
+    .progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 32px;
+      padding: 0 24px;
+    }
+
+    .progress-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .progress-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      border: 2px solid var(--gray-300);
+      color: var(--gray-400);
+      background: var(--white);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress-dot.active {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: var(--black);
+      box-shadow: 0 0 0 4px rgba(255,186,0,0.15);
+    }
+
+    .progress-dot.done {
+      border-color: var(--black);
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .progress-dot.done svg { width: 16px; height: 16px; }
+
+    .progress-label {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .progress-label.active { color: var(--gold-hover); }
+    .progress-label.done { color: var(--black); }
+
+    .progress-line {
+      width: 48px;
+      height: 2px;
+      background: var(--gray-200);
+      margin: 0 -2px;
+      margin-bottom: 20px;
+      transition: background 0.3s;
+    }
+
+    .progress-line.done { background: var(--black); }
+
+    /* ===== STEPS ===== */
+    .step { display: none; animation: fadeSlideIn 0.35s ease; }
+    .step.active { display: block; }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-question {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .step-hint {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* ===== OPTION CARDS ===== */
+    .options {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .opt {
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: center;
+      background: var(--white);
+      position: relative;
+      user-select: none;
+    }
+
+    .opt:hover {
+      border-color: var(--gray-300);
+      box-shadow: var(--shadow);
+      transform: translateY(-1px);
+    }
+
+    .opt.selected {
+      border-color: var(--gold);
+      background: var(--gold-light);
+      box-shadow: 0 0 0 1px var(--gold), var(--shadow);
+    }
+
+    .opt.selected::after {
+      content: '\2713';
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      background: var(--gold);
+      color: var(--black);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .opt-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+      display: block;
+      line-height: 1;
+    }
+
+    .opt-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--black);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .opt-desc {
+      font-size: 12px;
+      color: var(--gray-500);
+      line-height: 1.4;
+    }
+
+    .opt.opt-lg {
+      padding: 24px 18px;
+      border-width: 2px;
+    }
+
+    .opt.opt-lg .opt-icon { font-size: 36px; margin-bottom: 10px; }
+    .opt.opt-lg .opt-label { font-size: 22px; }
+    .opt.opt-lg .opt-desc { font-size: 13px; }
+
+    .opt.opt-sm {
+      padding: 14px 14px;
+      border-width: 1.5px;
+      border-color: var(--gray-200);
+      opacity: 0.8;
+      transition: all var(--transition);
+    }
+
+    .opt.opt-sm:hover { opacity: 1; }
+    .opt.opt-sm.selected { opacity: 1; }
+    .opt.opt-sm .opt-icon { font-size: 22px; margin-bottom: 6px; }
+    .opt.opt-sm .opt-label { font-size: 16px; }
+    .opt.opt-sm .opt-desc { font-size: 12px; color: var(--gray-400); }
+
+    .opt-popular {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 2px 10px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    /* Type Selection Grid */
+    .type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      max-width: 700px;
+      margin: 0 auto 16px;
+    }
+
+    .type-grid .opt { padding: 28px 18px; }
+    .type-grid .opt-label { font-size: 18px; margin-bottom: 6px; }
+    .type-grid .opt-desc { font-size: 13px; line-height: 1.5; }
+    .type-grid .opt-icon { font-size: 48px; margin-bottom: 12px; }
+
+    /* Glasdicke Grid */
+    .glass-grid {
+      max-width: 560px;
+      margin: 0 auto 16px;
+    }
+
+    .glass-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .glass-rare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .glass-rare-single {
+      grid-template-columns: 1fr;
+      max-width: 200px;
+    }
+
+    /* Anwendung Grid */
+    .anwendung-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      max-width: 560px;
+      margin: 0 auto 16px;
+    }
+
+    /* Türtyp Grid */
+    .door-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      max-width: 640px;
+      margin: 0 auto 16px;
+    }
+
+    /* Door Grid for Unten (flex layout) */
+    .door-grid-flex {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+      align-items: stretch;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .door-main {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1.2;
+    }
+
+    .door-side {
+      display: flex;
+      align-items: stretch;
+      flex: 0.8;
+    }
+
+    .door-side .opt {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px 16px;
+      border-width: 2px;
+    }
+
+    /* Anordnung Grid */
+    .arrangement-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      max-width: 560px;
+      margin: 0 auto 16px;
+    }
+
+    /* Winkel Grid */
+    .angle-grid {
+      max-width: 640px;
+      margin: 0 auto 16px;
+    }
+
+    .angle-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .angle-extra {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .angle-diagram {
+      display: block;
+      margin: 0 auto 6px;
+      max-width: 80px;
+    }
+
+    /* ===== SPALTMASS SLIDER ===== */
+    .slider-box {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      margin-bottom: 16px;
+    }
+
+    .slider-display {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .slider-value {
+      font-family: 'Oswald', sans-serif;
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .slider-value span {
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--gray-500);
+      margin-left: 2px;
+    }
+
+    .slider-label {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    .slider-track {
+      position: relative;
+      padding: 0 4px;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: linear-gradient(to right, var(--gold) 0%, var(--gold) var(--fill, 34%), var(--gray-200) var(--fill, 34%), var(--gray-200) 100%);
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--white);
+      cursor: pointer;
+      border: 3px solid var(--gold);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: box-shadow 0.2s;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--white);
+      cursor: pointer;
+      border: 3px solid var(--gold);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .slider-minmax {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    .slider-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .pill {
+      padding: 6px 16px;
+      border: 1px solid var(--gray-300);
+      border-radius: 20px;
+      background: var(--white);
+      font-family: 'Roboto', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+      color: var(--gray-700);
+    }
+
+    .pill:hover { border-color: var(--gold); color: var(--black); }
+
+    .pill.on {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+
+    /* ===== MATCH INDICATOR ===== */
+    .match-bar {
+      background: var(--gray-100);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--gray-600);
+    }
+
+    .match-bar strong {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      color: var(--gold-hover);
+    }
+
+    .match-bar.good { background: var(--green-bg); }
+    .match-bar.good strong { color: var(--green); }
+
+    /* ===== TIP ===== */
+    .tip {
+      background: var(--gold-light);
+      border: 1px solid #ffe49a;
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--gray-700);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+
+    .tip-icon { flex-shrink: 0; font-size: 16px; }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      font-family: 'Oswald', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 13px 30px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-back {
+      background: none;
+      color: var(--gray-500);
+      padding: 13px 16px;
+    }
+    .nav-back:hover { color: var(--black); }
+
+    .nav-next {
+      background: var(--black);
+      color: var(--white);
+      margin-left: auto;
+    }
+    .nav-next:hover { background: var(--gray-700); }
+    .nav-next:disabled { background: var(--gray-300); color: var(--gray-400); cursor: not-allowed; }
+
+    .nav-results {
+      background: var(--gold);
+      color: var(--black);
+      margin-left: auto;
+      font-weight: 600;
+    }
+    .nav-results:hover { background: var(--gold-hover); }
+
+    /* ===== RESULTS PAGE ===== */
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .results-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .results-title em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .results-edit {
+      font-size: 13px;
+      color: var(--gray-500);
+      cursor: pointer;
+      text-decoration: underline;
+      background: none;
+      border: none;
+      font-family: 'Roboto', sans-serif;
+    }
+    .results-edit:hover { color: var(--black); }
+
+    .filter-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .filter-chip {
+      background: var(--gray-100);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: var(--gray-700);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-chip strong { font-weight: 600; color: var(--black); }
+
+    .filter-chip .chip-edit {
+      cursor: pointer;
+      color: var(--gray-400);
+      font-size: 14px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .filter-chip .chip-edit:hover { color: var(--black); }
+
+    /* ===== PRODUCT CARDS ===== */
+    .products { display: flex; flex-direction: column; gap: 14px; }
+
+    .product {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 0;
+      display: flex;
+      transition: all var(--transition);
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    .product:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--gray-300);
+    }
+
+    .product.highlight {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px var(--gold), var(--shadow);
+    }
+
+    .product-image {
+      width: 130px;
+      min-height: 130px;
+      background: var(--gray-50);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .product-body {
+      flex: 1;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .product-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--black);
+      line-height: 1.3;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 1.4;
+    }
+
+    .product-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .spec {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      background: var(--gray-100);
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+
+    .spec.match {
+      background: #fff3d0;
+      color: #7a6000;
+    }
+
+    .spec.perfect {
+      background: var(--green-bg);
+      color: #166534;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    .product-price {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .product-price small {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    .product-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--radius);
+      letter-spacing: 0.5px;
+      transition: all var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .product-cta:hover { background: var(--gold-hover); }
+
+    .product-cta svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .length-info {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    /* ===== NO RESULTS ===== */
+    .no-results {
+      text-align: center;
+      padding: 48px 24px;
+      background: var(--gray-50);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-200);
+    }
+
+    .no-results .nr-icon { font-size: 48px; margin-bottom: 12px; }
+    .no-results h3 { font-family: 'Oswald', sans-serif; font-size: 18px; margin-bottom: 8px; text-transform: uppercase; }
+    .no-results p { font-size: 14px; color: var(--gray-500); margin-bottom: 16px; max-width: 400px; margin-left: auto; margin-right: auto; }
+    .no-results a { color: var(--gold-hover); text-decoration: underline; font-weight: 500; }
+
+    .restart-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 24px;
+      background: none;
+      border: 2px solid var(--gray-300);
+      border-radius: var(--radius);
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: var(--gray-700);
+      transition: all var(--transition);
+    }
+
+    .restart-btn:hover {
+      border-color: var(--black);
+      color: var(--black);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .finder { padding: 16px 12px 48px; }
+      .finder-header h1 { font-size: 24px; }
+      .finder-header p { font-size: 14px; }
+      .options { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .type-grid { grid-template-columns: 1fr; gap: 10px; }
+      .type-grid .opt { padding: 20px 16px; }
+      .type-grid .opt-icon { font-size: 36px; margin-bottom: 8px; }
+      .type-grid .opt-label { font-size: 16px; }
+      .opt.opt-lg .opt-label { font-size: 18px; }
+      .opt.opt-lg { padding: 18px 14px; }
+      .glass-rare { max-width: 100%; }
+      .anwendung-grid { grid-template-columns: 1fr; }
+      .door-grid { grid-template-columns: 1fr; gap: 10px; }
+      .door-grid-flex { flex-direction: column; max-width: 100%; }
+      .door-main { flex-direction: row; }
+      .door-side { flex: unset; width: 100%; }
+      .door-side .opt { flex-direction: row; gap: 10px; padding: 14px 16px; }
+      .arrangement-grid { grid-template-columns: 1fr; }
+      .angle-main { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .opt { padding: 14px 10px; }
+      .opt-icon { font-size: 22px; }
+      .opt-label { font-size: 14px; }
+      .progress-line { width: 24px; }
+      .progress-dot { width: 34px; height: 34px; font-size: 13px; }
+      .progress-label { font-size: 10px; }
+      .slider-value { font-size: 44px; }
+      .slider-box { padding: 20px 16px; }
+      .product { flex-direction: column; }
+      .product-image { width: 100%; height: auto; min-height: 120px; }
+      .product-body { padding: 14px 16px; }
+      .product-footer { flex-direction: column; align-items: flex-start; }
+      .product-cta { width: 100%; justify-content: center; }
+      .product-price { font-size: 20px; }
+      .results-header { flex-direction: column; }
+    }
+
+    @media (max-width: 380px) {
+      .glass-main { gap: 8px; }
+      .angle-main { grid-template-columns: 1fr; }
+      .slider-pills { gap: 6px; }
+      .pill { padding: 5px 12px; font-size: 12px; }
+    }
+  </style>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://app.duschop.de/dichtungs-konfigurator/">
+<meta property="og:title" content="Dichtungs-Konfigurator | Duschop Tools">
+<meta property="og:description" content="Konfiguriere deine individuelle Duschdichtung nach Mass.">
+<meta property="og:site_name" content="Duschop Tools">
+</head>
+<body>
+<div style="background:#1a1a2e;padding:10px 20px;text-align:left;position:sticky;top:0;z-index:9999;">
+    <a href="/" style="color:#c8956c;text-decoration:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        Alle Tools
+    </a>
+</div>
+
+<div class="finder" id="app">
+
+  <!-- HEADER -->
+  <div class="finder-header">
+    <div class="badge">Dichtungs-Berater</div>
+    <h1>Passende Duschdichtung finden</h1>
+    <p>W&auml;hlen Sie den Dichtungstyp und beantworten Sie wenige Fragen &ndash; wir zeigen Ihnen die passenden Produkte.</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress" id="progress"></div>
+
+  <!-- STEP CONTAINER (dynamically rendered) -->
+  <div id="stepContainer"></div>
+
+  <!-- RESULTS -->
+  <div class="step" id="step-results">
+    <div class="results-header">
+      <div class="results-title" id="resultsTitle"></div>
+      <button class="results-edit" onclick="reset()">&#9998; Neue Suche</button>
+    </div>
+    <div class="filter-summary" id="filterSummary"></div>
+    <div class="products" id="productList"></div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; gap: 12px;">
+      <button class="nav-btn nav-back" onclick="back()" style="visibility: visible">&larr; Zur&uuml;ck</button>
+      <button class="restart-btn" onclick="reset()">&#8635; Neue Suche starten</button>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="nav" id="nav">
+    <button class="nav-btn nav-back" id="btnBack" onclick="back()" style="visibility:hidden">&larr; Zur&uuml;ck</button>
+    <button class="nav-btn nav-next" id="btnNext" onclick="next()" disabled>Weiter &rarr;</button>
+  </div>
+</div>
+
+<script>
+// ==================================================================
+// PRODUCT DATABASES
+// ==================================================================
+
+var PRODUCTS_UNTEN = [
+  { id:'424', name:'Schleiflippendichtung mit Wasserabweiser f\u00fcr 5 u. 6 mm', artNr:'424', handle:'neu-schleiflippendichtung-fur-duschtur-mit-wasserabweiser-u-schleiflippe-unten-fur-5-u-6-mm-glas', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/1402_1.jpg?v=1751992503', glass:[5,6], gapMin:10, gapMax:13, form:'gerade', doorType:['dreh'], priceFrom:15.90, bestseller:false, desc:'Speziell f\u00fcr d\u00fcnnes 5 mm und 6 mm Glas entwickelt. Mit Wasserabweiser und Schleiflippe.', lengths:['100 cm'], variants:{'5':{'100 cm':53613129597251},'6':{'100 cm':53418232578371}} },
+  { id:'5102', name:'Schleiflippendichtung mit Abtropfleiste', artNr:'5102', handle:'schleiflippendichtung-fur-duschtur-mit-abtropfleiste-u-schleiflippe-unten', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/3EE7C201-ABAF-4351-AEDA-EE783C16D06F.png?v=1772736005', glass:[6,8,10], gapMin:11, gapMax:14, form:'gerade', doorType:['dreh'], priceFrom:9.90, bestseller:true, desc:'Unser Bestseller: Universelle Bodendichtung mit flexibler Schleiflippe und integrierter Abtropfleiste.', lengths:['49 cm','65 cm','75 cm','100 cm','120 cm','200 cm'], variants:{'6':{'49 cm':52830813028675,'65 cm':52830812963139,'75 cm':52830812897603,'100 cm':52830812799299,'120 cm':53792631619907,'200 cm':52830813094211},'8':{'49 cm':52830813061443,'65 cm':52830812995907,'75 cm':52830812930371,'100 cm':52830812832067,'120 cm':53792631652675,'200 cm':52830813126979},'10':{'100 cm':52830812864835,'200 cm':52830813159747}} },
+  { id:'5141', name:'Schleifdichtung mit Schlauch und Abtropfleiste', artNr:'5141', handle:'schleifdichtung-unten-fur-duschtur-mit-schlauch-und-abtropfleiste', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/C34DE836-C4AE-47CF-B3FF-0E54659AD3D2.png?v=1772735996', glass:[6,8], gapMin:12, gapMax:15, form:'gerade', doorType:['dreh'], priceFrom:11.90, bestseller:true, desc:'Premium-Dichtung mit Schlauchprofil f\u00fcr besonders gute Abdichtung am Boden.', lengths:['49 cm','65 cm','75 cm','100 cm','200 cm'], variants:{'6':{'49 cm':52830812668227,'65 cm':52830812602691,'75 cm':52830812537155,'100 cm':52830812471619,'200 cm':52830812733763},'8':{'49 cm':52830812700995,'65 cm':52830812635459,'75 cm':52830812569923,'100 cm':52830812504387,'200 cm':52830812766531}} },
+  { id:'1402', name:'Schleiflippendichtung mit kurzer Lippe', artNr:'1402', handle:'neu-schleiflippendichtung-fur-duschtur-mit-kurzer-unterer-schleiflippe-u-mit-abtropfleiste-fur-6-und-8-mm-art-nr-1402', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-4800.jpg?v=1755708261', glass:[6,8], gapMin:7, gapMax:11, form:'gerade', doorType:['dreh'], priceFrom:15.90, bestseller:true, desc:'Kurze Dichtlippe f\u00fcr kleine bis mittlere Spalte (7\u201311 mm).', lengths:['100 cm'], variants:{'6':{'100 cm':53418115563843},'8':{'100 cm':53418115596611}} },
+  { id:'009B1', name:'Duschdichtung mit doppelter Dichtlippe & Wasserabweiser', artNr:'009B1', handle:'duschdichtung-mit-doppelten-dichtgummi-unten-art-nr-009b1', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/28C5F6C7-C162-40F2-8E6D-4AE50AFDF16D.png?v=1742636936', glass:[6,8], gapMin:6, gapMax:9, form:'gerade', doorType:['dreh'], priceFrom:11.90, bestseller:false, desc:'Doppelte Dichtlippe f\u00fcr zuverl\u00e4ssige Abdichtung bei kleinen Spalten.', lengths:['65 cm','100 cm'], variants:{'6':{'65 cm':52830793761091,'100 cm':52830793793859},'8':{'65 cm':52830793826627,'100 cm':52830793859395}} },
+  { id:'009A2', name:'Schleiflippendichtung mit Wasserabweiser', artNr:'009A2', handle:'schleiflippendichtung-mit-wasserabweiser-u-schleiflippe-unten-art-nr-009a2', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8118.png?v=1766945491', glass:[6,8], gapMin:12, gapMax:24, form:'gerade', doorType:['dreh'], priceFrom:10.90, bestseller:false, desc:'Vielseitige Dichtung mit Wasserabweiser \u2013 in 3 Lippenl\u00e4ngen bestellbar.', lengths:['65 cm','100 cm','200 cm'], variants:{'6':{'65 cm':52830797857091,'100 cm':52830797889859,'200 cm':52830797922627},'8':{'65 cm':52830798086467,'100 cm':52830798119235,'200 cm':52830798152003}} },
+  { id:'5101', name:'Streiflippendichtung mit verst\u00e4rkter Lippe', artNr:'5101', handle:'streiflippendichtung-mit-abtropfleiste-und-verstarkung-unten-fur-6-und-8-mm-universal-art-nr-5101', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/5EDB6458-1C45-4D76-B0B8-A96875193985.png?v=1755709213', glass:[6,8], gapMin:14, gapMax:17, form:'gerade', doorType:['dreh'], priceFrom:9.30, bestseller:false, desc:'Verst\u00e4rkte Dichtlippe f\u00fcr zuverl\u00e4ssigen Halt bei mittleren bis gr\u00f6\u00dferen Spalten.', lengths:['65 cm','100 cm','200 cm'], variants:{'6':{'65 cm':52830793892163,'100 cm':52830793957699,'200 cm':52830794023235},'8':{'65 cm':52830793924931,'100 cm':52830793990467,'200 cm':52830794056003}} },
+  { id:'5104', name:'Duschdichtung mit k\u00fcrzbarer 20 mm Lippe', artNr:'5104', handle:'duschdichtlippe-mit-20-mm-lippe-fur-6-und-8-mm-universal-art-nr-5104', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8120.png?v=1766946871', glass:[6,8], gapMin:18, gapMax:22, form:'gerade', doorType:['dreh'], priceFrom:15.90, bestseller:false, desc:'Lange Dichtlippe (20 mm), individuell k\u00fcrzbar.', lengths:['100 cm','200 cm'], variants:{'6':{'100 cm':52830797627715,'200 cm':52830797660483},'8':{'100 cm':52830797693251,'200 cm':52830797726019}} },
+  { id:'5160', name:'Bodendichtung mit anpassbarer 30 mm Lippe', artNr:'5160', handle:'universaldichtung-mit-anpassbarer-langer-lippe-und-abtropfleiste-fur-6-und-8-mm-universal-art-nr-5160', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/EB24EE0F-784C-4F3B-AEF8-8F574F13EDD4.png?v=1772735898', glass:[6,8], gapMin:19, gapMax:30, form:'gerade', doorType:['dreh'], priceFrom:15.90, bestseller:false, desc:'Extra lange 30 mm Dichtlippe f\u00fcr sehr gro\u00dfe Spalte. Individuell k\u00fcrzbar.', lengths:['100 cm','200 cm'], variants:{'6':{'100 cm':52830735139139,'200 cm':52830735171907},'8':{'100 cm':52830735204675,'200 cm':52830735237443}} },
+  { id:'009D1', name:'Schiebet\u00fcrdichtung mit 22 mm D\u00e4chlein', artNr:'009D1', handle:'schiebeturdichtung-waagrecht-mit-ca-22-mm-dachlein-art-nr-009d1', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8122.png?v=1766947842', glass:[6,8], gapMin:2, gapMax:7, form:'gerade', doorType:['schiebe'], priceFrom:16.90, bestseller:true, desc:'Speziell f\u00fcr Schiebet\u00fcren: Das 22 mm D\u00e4chlein leitet Wasser zuverl\u00e4ssig ab.', lengths:['100 cm','200 cm'], variants:{'6':{'100 cm':52830798381379,'200 cm':52830798414147},'8':{'100 cm':52830798446915,'200 cm':52830798479683}} },
+  { id:'5329', name:'Schiebet\u00fcrdichtung mit 25 mm D\u00e4chlein', artNr:'5329', handle:'duschturdichtung-mit-ca-25-mm-dachlein-als-abtropfleiste-fur-6-und-8-mm-universal-art-nr-5329', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/5329_2.jpg?v=1772736108', glass:[6,8], gapMin:2, gapMax:5, form:'gerade', doorType:['schiebe'], priceFrom:15.90, bestseller:false, desc:'Gro\u00dfe 25 mm Abtropfleiste als D\u00e4chlein bei Schiebet\u00fcren.', lengths:['100 cm','200 cm'], variants:{'6':{'100 cm':52830792253763,'200 cm':52830792319299},'8':{'100 cm':52830792286531,'200 cm':52830792352067}} },
+  { id:'5325', name:'Duschdichtung mit 25 mm D\u00e4chlein & Schleiflippe', artNr:'5325', handle:'duschturdichtung-mit-ca-25-mm-dachlein-fur-6-und-8-mm-universal-art-nr-5325', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/C0A8E6C9-B086-4B4D-8218-D652028D0583.png?v=1742636893', glass:[6,8], gapMin:14, gapMax:17, form:'gerade', doorType:['schiebe','dreh'], priceFrom:16.90, bestseller:false, desc:'D\u00e4chlein-Abtropfleiste plus Schleiflippe f\u00fcr doppelten Schutz.', lengths:['100 cm','200 cm'], variants:{'6':{'100 cm':52830792417603,'200 cm':52830792483139},'8':{'100 cm':52830792450371,'200 cm':52830792515907}} },
+  { id:'5102.550', name:'Gebogene Duschdichtung Viertelkreis & Halbkreis', artNr:'5102.550', handle:'gebogene-dusch-turdichtung-fur-viertelkreis-und-halbkreisduschen-mit-dichtlippe-und-kurzer-abtropfleiste-fur-6-und-8-mm-glasdicke-art-nr-5102-550', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/51C3ED51-9A09-4B09-82FF-3565FEE34487.png', glass:[6,8], gapMin:11, gapMax:14, form:'gebogen', doorType:['dreh'], priceFrom:37.00, bestseller:true, desc:'Vorgebogene Schleiflippendichtung mit Abtropfleiste f\u00fcr Viertelkreis- und Halbkreisduschen.', lengths:['ca. 126 cm (vorgebogen)'], variants:{'6':{'ca. 126 cm (vorgebogen)':52830790844739},'8':{'ca. 126 cm (vorgebogen)':52830790877507}} },
+  { id:'5141.550', name:'Gebogene Duschdichtung mit Schlauch | Viertelkreis', artNr:'5141.550', handle:'gebogene-dusch-turdichtung-fur-viertelkreis-und-halbkreisduschen-mit-schlauch-und-kurzer-abtropfleiste-fur-6-und-8-mm-glasdicke-art-nr-5141-550', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/5141_550_png.png', glass:[6,8], gapMin:13, gapMax:16, form:'gebogen', doorType:['dreh'], priceFrom:37.00, bestseller:false, desc:'Vorgebogene Dichtung mit Schlauchprofil f\u00fcr Viertelkreisduschen.', lengths:['ca. 126 cm (vorgebogen)'], variants:{'6':{'ca. 126 cm (vorgebogen)':52830790648131},'8':{'ca. 126 cm (vorgebogen)':52830790680899}} },
+  { id:'009A2.550', name:'Gebogene Duschdichtung mit Wasserabweiser | 3 Lippen', artNr:'009A2.550', handle:'gebogene-dusch-turdichtung-fur-viertelkreis-duschen-mit-dichtlippe-unten-inkl-wasserabweislippe-dichtung-009a2-550', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/5E86E727-034C-4875-9DE0-1F084325E3FC.png', glass:[6,8], gapMin:12, gapMax:24, form:'gebogen', doorType:['dreh'], priceFrom:30.50, bestseller:false, desc:'Vielseitige vorgebogene Dichtung mit Wasserabweiser in 3 Lippenl\u00e4ngen.', lengths:['ca. 110 cm (vorgebogen)'], variants:{'6':{'ca. 110 cm (vorgebogen)':52830788256067},'8':{'ca. 110 cm (vorgebogen)':52830788354371}} },
+  { id:'5101.550', name:'Gebogene Bodendichtung Viertelkreis verst\u00e4rkte Lippe', artNr:'5101.550', handle:'gebogene-dusch-turdichtung-fur-viertelkreis-und-halbkreisduschen-mit-verstarkter-dichtlippe-und-kurzer-abtropfleiste-fur-6-und-8-mm-glasdicke-art-nr-5101-550', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/5101_90_png_59930fb5-d167-4e70-bc3b-64ca853c2c37.png', glass:[6,8], gapMin:15, gapMax:17, form:'gebogen', doorType:['dreh'], priceFrom:37.00, bestseller:false, desc:'Vorgebogene Dichtung mit verst\u00e4rkter Lippe f\u00fcr gr\u00f6\u00dfere Spalte.', lengths:['ca. 126 cm (vorgebogen)'], variants:{'6':{'ca. 126 cm (vorgebogen)':54122289267011},'8':{'ca. 126 cm (vorgebogen)':54122289299779}} },
+  { id:'011B2.550', name:'Gebogene Bodendichtung Viertelkreis mit 20 mm D\u00e4chlein', artNr:'011B2.550', handle:'gebogene-dusch-turdichtung-fur-viertelkreis-duschen-als-schiebeturen-oder-drehturen-unten-inkl-wasserabweisendem-dachlein-art-nr-011b2-550', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/35EACC05-EA0F-4574-9244-8CAA5D4EB48E.png', glass:[6,8], gapMin:2, gapMax:5, form:'gebogen', doorType:['schiebe','dreh'], priceFrom:31.50, bestseller:false, desc:'Vorgebogene Dichtung mit 20 mm D\u00e4chlein f\u00fcr Schiebe- und Dreht\u00fcren in Viertelkreisduschen.', lengths:['ca. 110 cm (vorgebogen)'], variants:{'6':{'ca. 110 cm (vorgebogen)':52830792057155},'8':{'ca. 110 cm (vorgebogen)':52830792089923}} },
+  { id:'3249G', name:'Gebogene Duschdichtung Rinnenform k\u00fcrzbare Lippe', artNr:'3249G', handle:'gebogene-dusch-turdichtung-fur-6-u-8-mm-glas-mit-abtropfleiste-in-rinnenform-und-doppelter-lippe-nach-unten-kurz-u-lang-98-5-cm-fur-6-und-8-mm-universal-art-nr-3249g', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/3249geb2.jpg', glass:[6,8], gapMin:8, gapMax:15, form:'gebogen', doorType:['dreh'], priceFrom:49.90, bestseller:false, desc:'Abtropfleiste in Rinnenform mit doppelter Lippe (kurz & lang).', lengths:['98,5 cm (vorgebogen)'], variants:{'6':{'98,5 cm (vorgebogen)':52830788190531},'8':{'98,5 cm (vorgebogen)':52830788223299}} },
+  { id:'4269-G86', name:'Gebogene Dichtung Viertelkreis 5/6 mm kurze Lippe', artNr:'4269-G86', handle:'dusch-turdichtung-gebogen-fur-viertelkreisdusche-fur-5-u-6-mm-glasstarke-mit-kurzer-abtropfleiste-und-kurzer-lippe-nach-unten-4269-g86', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/4269neu.jpg', glass:[4,5], gapMin:6, gapMax:9, form:'gebogen', doorType:['dreh'], priceFrom:45.90, bestseller:false, desc:'Speziell f\u00fcr d\u00fcnnes 4/5 mm Glas bei Viertelkreisduschen.', lengths:['86 cm (vorgebogen)'], variants:{'4':{'86 cm (vorgebogen)':52830762467651},'5':{'86 cm (vorgebogen)':52830762434883}} },
+  { id:'4269G', name:'Gebogene Bodendichtung 2-flg. Viertelkreis 4/5 mm | 1 Paar', artNr:'4269G', handle:'gebogene-dusch-turdichtung-fur-2-flg-viertelkreisduschen-mit-4-u-5-mm-glasdicke-mit-sehr-kurzer-abtropfleiste-1-paar-2-tlg-4269g', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/E2268312-7733-4651-BADD-1140EB2283A2.png', glass:[4,5], gapMin:3, gapMax:5, form:'gebogen', doorType:['dreh'], priceFrom:59.10, bestseller:false, desc:'1 Paar (2 St\u00fcck) f\u00fcr zweifl\u00fcgelige Viertelkreisduschen mit d\u00fcnnem 4/5 mm Glas.', lengths:['1 Paar (vorgebogen)'], variants:{'4':{'1 Paar (vorgebogen)':52830788124995},'5':{'1 Paar (vorgebogen)':52830788092227}} }
+];
+
+var PRODUCTS_SEITLICH = [
+  { id:'5042', name:'Ballondichtung mit schmalem Ballon', artNr:'5042', sortType:'ballon', handle:'streifdichtung-mit-schmalem-ballon-fur-6-und-8-mm-universal-art-nr-5042', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/EE8C565C-AE97-40F0-B4FA-0DA70E0EF510.png', glass:[6,8,10], application:['glas-glas','glas-wand'], doorType:['dreh','pendel'], arrangement:['fluchtend'], gapMin:8, gapMax:10, priceFrom:24.90, bestseller:true, desc:'Vielseitige Ballondichtung mit schmalem 8 mm Ballon. Passt sich flexibel an.', lengths:['200 cm','220 cm','250 cm'], variants:{'6':{'200 cm':52830802510147},'8':{'200 cm':52830802542915},'10':{'200 cm':52830802706755}} },
+  { id:'5021', name:'Ballondichtung mit breitem Ballon', artNr:'5021', sortType:'ballon', handle:'streifdichtung-mit-breitem-ballon-fur-6-und-8-mm-universal-art-nr-5021', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BB7A41C4-BBB5-4894-9B9C-B54742CFE2C8.png', glass:[6,8], application:['glas-glas','glas-wand'], doorType:['dreh','pendel'], arrangement:['fluchtend'], gapMin:13, gapMax:15, priceFrom:24.90, bestseller:true, desc:'Breiter Ballon (13\u201315 mm) f\u00fcr gr\u00f6\u00dfere Spalte.', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830802346307},'8':{'200 cm':52830802379075}} },
+  { id:'5120', name:'Spaltdichtung mit offenem Ballon', artNr:'5120', sortType:'ballon', handle:'spaltdichtung-mit-offener-ballondichtung-bzw-lippe-zwischen-den-glaskanten-fur-6-mm-glasdicke-mit-kurzem-glaseinstand-ca-5-mm-art-nr-5120', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/5120_5130_f_2.jpg', glass:[6,8], application:['glas-glas','glas-wand'], doorType:['dreh','pendel'], arrangement:['fluchtend'], gapMin:2, gapMax:6, priceFrom:24.90, bestseller:false, desc:'Offener Ballon mit kurzem Glaseinstand (5 mm).', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830802051395},'8':{'200 cm':52830802084163}} },
+  { id:'007', name:'Balgdichtung mit 7\u20138 mm Ballon', artNr:'007', sortType:'ballon', handle:'balgdichtung-ballondichtung-fur-duschtur-mit-7-8-mm-ballon-kleiner-spalt-art-nr-007', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/70D196E5-99B5-4CBD-95C4-7AF0832879F5.png', glass:[6,8], application:['glas-glas','glas-wand'], doorType:['dreh','pendel'], arrangement:['fluchtend'], gapMin:7, gapMax:9, priceFrom:24.90, bestseller:false, desc:'Anti-UV Balgdichtung mit kleinem 7\u20138 mm Ballon.', lengths:['200 cm'], variants:{'6':{'200 cm':52830761058627},'8':{'200 cm':52830761091395}} },
+  { id:'007A1', name:'Balgdichtung mit 12 mm Ballon', artNr:'007A1', sortType:'ballon', handle:'balgdichtung-ballondichtung-fur-duschtur-mit-12-mm-ballon-grosser-spalt-art-nr-007a1', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/0FFFA8DD-3DB3-4A2E-B0D5-75B86467F0E0.png', glass:[6,8], application:['glas-glas','glas-wand'], doorType:['dreh','pendel'], arrangement:['fluchtend'], gapMin:12, gapMax:14, priceFrom:24.90, bestseller:false, desc:'Anti-UV Balgdichtung mit gro\u00dfem 12 mm Ballon.', lengths:['200 cm'], variants:{'6':{'200 cm':52830760206659},'8':{'200 cm':52830760239427}} },
+  { id:'PCR8S', name:'Ballondichtung kurzer Glaseinstand 5 mm', artNr:'PCR8S', sortType:'ballon', handle:'streifdichtung-ballondichtung-schmaler-ballon-mit-kurzem-glaseinstand-ca-5-mm-art-nr-pcr8s', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/D4FAAAAE-F927-4873-9691-5F5816EB534D.png', glass:[8], application:['glas-glas','glas-wand'], doorType:['dreh','pendel'], arrangement:['fluchtend'], gapMin:7, gapMax:9, priceFrom:22.90, bestseller:false, desc:'Schmaler Ballon mit nur 5 mm Glaseinstand \u2013 speziell f\u00fcr 8 mm Glas.', lengths:['200 cm','250 cm'], variants:{'8':{'200 cm':52830756897091}} },
+  { id:'PCR8L', name:'Ballondichtung breiter Ballon kurzer Glaseinstand 5 mm', artNr:'PCR8L', sortType:'ballon', handle:'ballondichtung-breiter-ballon-mit-kurzem-glaseinstand-ca-5-mm-fur-8-mm-art-nr-pcr8l', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/D4FAAAAE-F927-4873-9691-5F5816EB534D.png', glass:[8], application:['glas-glas','glas-wand'], doorType:['dreh','pendel'], arrangement:['fluchtend'], gapMin:12, gapMax:15, priceFrom:24.90, bestseller:false, desc:'Breiter Ballon mit kurzem Glaseinstand (5 mm) \u2013 speziell f\u00fcr 8 mm Glas.', lengths:['200 cm','250 cm'], variants:{'8':{'200 cm':0}} },
+  { id:'003', name:'Lippendichtung 180\u00b0 gerade weiche Lippe', artNr:'003', sortType:'lippe', handle:'duschlippendichtung-mit-gerader-und-weicher-lippe-dichtung-zwischen-drehtur-und-seitenscheibe-fluchtend-180-fur-6-oder-8-mm-glasdicke-art-nr-003', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/0C33632E-24B7-48AA-BEB5-FD2471CE81B2.png', glass:[6,8], application:['glas-glas','glas-wand'], doorType:['dreh'], arrangement:['fluchtend'], gapMin:7, gapMax:25, priceFrom:24.90, bestseller:true, desc:'Klassische Lippendichtung mit gerader, weicher Lippe f\u00fcr 180\u00b0 fluchtende Anordnung.', lengths:['200 cm'], variants:{'6':{'200 cm':52830756634947},'8':{'200 cm':52830756700483}} },
+  { id:'5001', name:'Lippendichtung 180\u00b0 fluchtend mit gew\u00f6lbter Lippe', artNr:'5001', sortType:'lippe', handle:'lippendichtung-180-fur-lucken-glas-glas-fluchtend-180-tur-an-glasteil-mit-leicht-gewolbter-lippe-art-nr-5001', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/5001_f_9.jpg', glass:[6,8], application:['glas-glas'], doorType:['dreh'], arrangement:['fluchtend'], gapMin:5, gapMax:11, priceFrom:24.90, bestseller:true, desc:'Gew\u00f6lbte Lippe f\u00fcr bessere Abdichtung bei fluchtender 180\u00b0-Anordnung.', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830800085315},'8':{'200 cm':52830800118083}} },
+  { id:'5112', name:'Lippendichtung 180\u00b0 gerade weiche Lippe | Glas-Glas & Glas-Wand', artNr:'5112', sortType:'lippe', handle:'lippendichtung-mit-gerader-und-weicher-dichtfahne-180-fur-6-und-8-mm-art-nr-5112', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/0C33632E-24B7-48AA-BEB5-FD2471CE81B2.png', glass:[6,8], application:['glas-glas','glas-wand'], doorType:['dreh'], arrangement:['fluchtend'], gapMin:4, gapMax:12, priceFrom:24.90, bestseller:false, desc:'Universelle Lippendichtung f\u00fcr Glas-Glas und Glas-Wand Anwendung.', lengths:['200 cm'], variants:{'6':{'200 cm':0},'8':{'200 cm':0}} },
+  { id:'5091', name:'Lippendichtung 180\u00b0 mit langer Dichtfahne', artNr:'5091', sortType:'lippe', handle:'lippendichtung-180-fur-lucken-mit-langer-dichtfahne-und-leicht-gewolbter-lippe-art-nr-5091', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/6E74FD41-DF6D-41E2-B2BE-1A10474A546F.png', glass:[6,8,10], application:['glas-glas'], doorType:['dreh'], arrangement:['fluchtend'], gapMin:13, gapMax:26, priceFrom:26.60, bestseller:false, desc:'Lange Dichtfahne (23\u201326 mm) f\u00fcr gr\u00f6\u00dfere Spalte bei fluchtender Anordnung.', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830798512451},'8':{'200 cm':52830798577987},'10':{'200 cm':52830798643523}} },
+  { id:'5011', name:'Spaltdichtung mit schr\u00e4ger Lippe 18 mm', artNr:'5011', sortType:'spalt', handle:'streifdichtung-mit-langer-schrager-dichtfahne-fur-6-und-8-mm-glas-art-nr-5011', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/88F2F08E-3207-4185-95A0-7541342E29DF.png', glass:[6,8], application:['glas-glas','glas-wand'], doorType:['dreh'], arrangement:['ueberlappend'], gapMin:10, gapMax:13, priceFrom:15.90, bestseller:false, desc:'Schr\u00e4ge 18 mm Dichtfahne f\u00fcr zuverl\u00e4ssige Abdichtung.', lengths:['100 cm','200 cm','250 cm'], variants:{'6':{'200 cm':52830753390915},'8':{'200 cm':52830753489219}} },
+  { id:'5119', name:'Streifdichtung kurze schr\u00e4ge Dichtfahne | Glas-Wand', artNr:'5119', sortType:'spalt', handle:'streifdichtung-kurze-schrage-dichtfahne-glas-wand-fur-6-und-8-mm-art-nr-5119', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/88F2F08E-3207-4185-95A0-7541342E29DF.png', glass:[6,8], application:['glas-wand'], doorType:['dreh','pendel'], arrangement:['fluchtend'], gapMin:5, gapMax:8, priceFrom:21.80, bestseller:false, desc:'Kurze schr\u00e4ge Dichtfahne speziell f\u00fcr den Wandanschluss.', lengths:['200 cm'], variants:{'6':{'200 cm':0},'8':{'200 cm':0}} },
+  { id:'004', name:'\u00dcberlappungsdichtung 90\u00b0 Lippe', artNr:'004', sortType:'ueberlappung', handle:'schiebeturdichtung-uberlappungsdichtung-senkrecht-mit-dichtlippe-im-90-winkel-art-nr-004', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/D919BC0B-0486-4ED5-B279-D3E853D07843.png', glass:[6,8], application:['glas-glas'], doorType:['dreh','schiebe'], arrangement:['ueberlappend'], gapMin:15, gapMax:27, priceFrom:24.90, bestseller:true, desc:'Standard-\u00dcberlappungsdichtung mit 90\u00b0-Lippe. F\u00fcr Dreh- und Schiebet\u00fcren.', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830791860547},'8':{'200 cm':52830791926083}} },
+  { id:'S004', name:'Polycarbonat-\u00dcberlappungsdichtung 90\u00b0 Lippe', artNr:'S004', sortType:'ueberlappung', handle:'schiebeturdichtung-uberlappungsdichtung-aus-polycarbonat-senkrecht-mit-90-lippe-hochtransparent-art-nr-s004-1', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/D929273D-313A-4758-9264-E5FEB1362C0C.png', glass:[6,8,10], application:['glas-glas'], doorType:['dreh','schiebe'], arrangement:['ueberlappend'], gapMin:6, gapMax:22, priceFrom:23.90, bestseller:false, desc:'Hochtransparente Polycarbonat-\u00dcberlappungsdichtung. Auch f\u00fcr 10 mm.', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830748016963},'8':{'200 cm':52830748082499},'10':{'200 cm':52830748213571}} },
+  { id:'5211', name:'\u00dcberlappungsdichtung f\u00fcr Schiebet\u00fcren', artNr:'5211', sortType:'ueberlappung', handle:'schiebeturdichtung-uberlappungsdichtung-fur-6-und-8-mm-universal-art-nr-5211', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/CDDF7199-31AA-4734-B023-4E900073F3AE.png', glass:[6,8], application:['glas-glas'], doorType:['schiebe'], arrangement:['ueberlappend'], gapMin:8, gapMax:20, priceFrom:24.90, bestseller:false, desc:'\u00dcberlappungsdichtung speziell f\u00fcr Schiebet\u00fcren.', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830790910275},'8':{'200 cm':52830790943043}} },
+  { id:'0890', name:'Polycarbonat-\u00dcberlappungsdichtung 90\u00b0 Vinyl-Lippe', artNr:'0890/1090', sortType:'ueberlappung', handle:'schiebeturdichtung-uberlappungsdichtung', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/polycarbonat_dichtung_1.png', glass:[8,10], application:['glas-glas'], doorType:['dreh','schiebe'], arrangement:['ueberlappend'], gapMin:14, gapMax:24, priceFrom:23.90, bestseller:false, desc:'Polycarbonat-Profil mit weicher Vinyl-Lippe f\u00fcr 8 und 10 mm Glas.', lengths:['200 cm','240 cm'], variants:{'8':{'200 cm':52830791139651},'10':{'200 cm':52830791205187}} },
+  { id:'1290', name:'Polycarbonat-\u00dcberlappungsdichtung 90\u00b0 | 12 mm Glas', artNr:'1290', sortType:'ueberlappung', handle:'schiebeturdichtung-uberlappungsdichtung-senkrecht-mit-langer-lippe-1290', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BD45B063-BB78-4AE1-9FE2-FF4E2EB965DB.png', glass:[12], application:['glas-glas'], doorType:['dreh','schiebe'], arrangement:['ueberlappend'], gapMin:17, gapMax:22, priceFrom:25.90, bestseller:false, desc:'Speziell f\u00fcr 12 mm Glas.', lengths:['200 cm','240 cm'], variants:{'12':{'200 cm':52830791041347}} },
+  { id:'5240', name:'\u00dcberlappungsdichtung lange 90\u00b0 Lippe | Schiebet\u00fcr', artNr:'5240', sortType:'ueberlappung', handle:'uberlappungsdichtung-schiebeturdichtung-mit-langer-lippe-fur-6-und-8-mm-universal-art-nr-5240', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/B3AB5006-9F46-417A-875F-150B86C02334.png', glass:[6,8], application:['glas-glas'], doorType:['schiebe'], arrangement:['ueberlappend'], gapMin:19, gapMax:22, priceFrom:32.90, bestseller:false, desc:'Lange 90\u00b0-Lippe (19\u201322 mm) f\u00fcr Schiebet\u00fcren.', lengths:['200 cm'], variants:{'6':{'200 cm':52830791303491},'8':{'200 cm':52830791336259}} },
+  { id:'S007', name:'Polycarbonat-Ballondichtung hochtransparent', artNr:'S007', sortType:'ueberlappung', handle:'polycarbonat-ballondichtung-hochtransparent-8-9-mm-fur-6-8-10-mm-art-nr-s007', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/D929273D-313A-4758-9264-E5FEB1362C0C.png', glass:[6,8,10], application:['glas-glas','glas-wand'], doorType:['dreh','schiebe'], arrangement:['ueberlappend'], gapMin:8, gapMax:10, priceFrom:23.90, bestseller:false, desc:'Hochtransparente Ballondichtung aus Polycarbonat.', lengths:['200 cm'], variants:{'6':{'200 cm':0},'8':{'200 cm':0},'10':{'200 cm':0}} },
+  { id:'PHJ', name:'Wintergarten-Fugendichtung 180\u00b0 harte Anschlagschiene', artNr:'PHJ', sortType:'sonstige', handle:'wintergarten-fugendichtung-180-harte-anschlagschiene-fur-8-und-12-mm-art-nr-phj', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/0C33632E-24B7-48AA-BEB5-FD2471CE81B2.png', glass:[8,12], application:['glas-glas'], doorType:['dreh'], arrangement:['fluchtend'], gapMin:0, gapMax:5, priceFrom:24.90, bestseller:false, desc:'Robuste Fugendichtung mit harter Anschlagschiene \u2013 auch f\u00fcr Winterg\u00e4rten.', lengths:['200 cm'], variants:{'8':{'200 cm':0},'12':{'200 cm':0}} }
+];
+
+var PRODUCTS_MAGNET = [
+  { id:'2x008A1W', name:'Magnetdichtung 90\u00b0 mit breitem Magnetstreifen', artNr:'2x008A1W', handle:'90-duschdichtung-2-er-set-mit-magnetleiste-dichtungspaar-mit-magnetstreifen-2-er-set-aus-2x-45-magnetdichtung-art-nr-2x008a1w', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/2578FEDB-AE0F-417C-9BCA-5CF25EDEA21E.png', glass:[6,8], angle:[90], gapByGlass:{'6':[16,16],'8':[18,18]}, priceFrom:39.90, bestseller:false, desc:'Breiter Magnetstreifen f\u00fcr starken Halt. Anti-UV und Anti-Schimmel.', lengths:['200 cm'], variants:{'6':{'200 cm':52830788026691},'8':{'200 cm':52830788059459}} },
+  { id:'6072/6082-90', name:'Magnetdichtung 90\u00b0 (2x 45\u00b0)', artNr:'6072/6082', handle:'magnetdichtung-90-2-er-set-fur-6-und-8-mm-glasdicke-art-nr-6072-6082', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/CA905A83-A179-47ED-A466-2CB2573064C3.png', glass:[6,8,10], angle:[90], gapByGlass:{'6':[15,15],'8':[17,18],'10':[16,16]}, priceFrom:39.90, bestseller:true, desc:'Unser Bestseller f\u00fcr 90\u00b0-Ecken. Auch f\u00fcr 10 mm Glas verf\u00fcgbar.', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830809391427,'250 cm':52830809456963},'8':{'200 cm':52830809424195,'250 cm':52830809489731},'10':{'200 cm':52830809522499,'250 cm':52830809555267}} },
+  { id:'6072-B/6082-B', name:'Schwarze Magnetdichtung 90\u00b0 (2x 45\u00b0)', artNr:'6072-B/6082-B', handle:'schwarze-tur-magnetdichtung-90-1-paar-fur-6-und-8-mm-universal-art-nr-6072-b-6082-b', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/607282B.jpg', glass:[6,8], angle:[90], gapByGlass:{'6':[15,15],'8':[18,18]}, priceFrom:39.90, bestseller:false, desc:'Schwarze Ausf\u00fchrung f\u00fcr moderne Duschen mit schwarzen Beschl\u00e4gen.', lengths:['200 cm','225 cm'], variants:{'6':{'200 cm':52830766203203,'225 cm':52830766268739},'8':{'200 cm':52830766235971,'225 cm':52830766301507}} },
+  { id:'6042', name:'Magnetdichtung 90\u00b0 f\u00fcr Pendelt\u00fcren', artNr:'6042', handle:'magnetische-dichtung-fur-pendelturen-in-90-position-zu-festem-glasteil-einzeln-oder-als-2-er-set-art-nr-6042', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8106.png', glass:[6,8], angle:[90], pendel:true, gapByGlass:{'6':[18,26],'8':[20,28]}, priceFrom:39.90, bestseller:true, desc:'Speziell f\u00fcr Pendelt\u00fcren. Asymmetrisches Profil (6042 + 6092).', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830803034435,'250 cm':52830803132739},'8':{'200 cm':52830803067203,'250 cm':52830803165507}} },
+  { id:'2x008BW', name:'Magnetdichtung 180\u00b0 mit breitem Magnetstreifen', artNr:'2x008BW', handle:'180-duschdichtung-2-er-set-mit-magnetleiste-art-nr-008bw', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8126.png', glass:[6,8], angle:[180], gapByGlass:{'6':[17,19],'8':[21,23]}, priceFrom:39.90, bestseller:false, desc:'Breiter Magnetstreifen f\u00fcr 180\u00b0 fluchtende Anordnung.', lengths:['200 cm'], variants:{'6':{'200 cm':52830787961155},'8':{'200 cm':52830787993923}} },
+  { id:'6092', name:'Magnetdichtung 180\u00b0 fluchtend (schmaler Streifen)', artNr:'6092', handle:'magnetdichtung-180-2-er-set-fur-6-und-8-mm-glasdicke-art-nr-6092', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8085.png', glass:[6,8,10], angle:[180], gapByGlass:{'6':[17,19],'8':[21,23],'10':[21,23]}, priceFrom:39.90, bestseller:true, desc:'Schmaler Magnetstreifen f\u00fcr 180\u00b0 fluchtende Glasscheiben. Auch f\u00fcr 10 mm Glas.', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830806704451,'250 cm':52830806769987},'8':{'200 cm':52830806737219,'250 cm':52830806802755},'10':{'200 cm':52830806835523,'250 cm':52830806868291}} },
+  { id:'6072/6082-180', name:'Magnetdichtung 180\u00b0 fluchtend (2x 45\u00b0)', artNr:'6072/6082', handle:'magnetdichtung-180-2-er-set-aus-2x-45-magnetdichtung-fur-6-und-8-mm-glasdicke-art-nr-6072-6082', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/45CD5853-44FD-456E-B1FA-8259E7F176DA.png', glass:[6,8,10], angle:[180], gapByGlass:{'6':[21,23],'8':[25,27],'10':[25,27]}, priceFrom:39.90, bestseller:false, desc:'45\u00b0-Profile als 180\u00b0-Paar montiert \u2013 f\u00fcr gr\u00f6\u00dfere Spaltma\u00dfe.', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830803657027,'250 cm':52830803722563},'8':{'200 cm':52830803689795,'250 cm':52830803755331},'10':{'250 cm':52830803788099}} },
+  { id:'6052/6062-180', name:'Magnetdichtung 180\u00b0 fluchtend (2x 67,5\u00b0)', artNr:'6052/6062', handle:'magnetdichtung-180-2-er-set-aus-2x-67-5-magnetdichtung-fur-6-und-8-mm-glasdicke-art-nr-6052-6062', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/A82A2D96-FC23-4867-9A79-E673AAF55E48.png', glass:[6,8], angle:[180], gapByGlass:{'6':[19,21],'8':[23,25]}, priceFrom:39.90, bestseller:true, desc:'Bestseller f\u00fcr 180\u00b0: 67,5\u00b0-Profile als fluchtende Anordnung.', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830806475075,'250 cm':52830806540611},'8':{'200 cm':52830806507843,'250 cm':52830806573379}} },
+  { id:'6052/6062-135', name:'Magnetdichtung 135\u00b0 f\u00fcr F\u00fcnfeckduschen (2x 67,5\u00b0)', artNr:'6052/6062', handle:'magnetdichtung-135-2-er-set-fur-funfeckduschen-fur-6-und-8-mm-glasdicke-art-nr-6052-6062', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8128.png', glass:[6,8], angle:[135], gapByGlass:{'6':[9,19],'8':[12,24]}, priceFrom:39.90, bestseller:true, desc:'Speziell f\u00fcr F\u00fcnfeckduschen mit 135\u00b0-Winkel.', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830803427651,'250 cm':52830803493187},'8':{'200 cm':52830803460419,'250 cm':52830803525955}} },
+  { id:'6092/6082-135', name:'Magnetdichtung 135\u00b0 (1x 45\u00b0 + 1x 90\u00b0)', artNr:'6092/6082', handle:'magnetdichtungspaar-135-1x90-1-x45-funfeckduschen', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/6092-6082_3.png', glass:[6,8], angle:[135], gapByGlass:{'6':[15,20],'8':[18,24]}, priceFrom:39.90, bestseller:false, desc:'Asymmetrische Kombination (45\u00b0 + 90\u00b0) f\u00fcr F\u00fcnfeckduschen.', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':54165040464195,'250 cm':54165040529731},'8':{'200 cm':54165040496963,'250 cm':54165040562499}} },
+  { id:'8874', name:'Flexible Magnetdichtung 90\u00b0\u2013180\u00b0', artNr:'8874', handle:'magnetleiste-fur-flexible-anpassung-an-samtliche-situationen-2-er-set-art-nr-8874', image:'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/531C2DBC-1308-430F-8DCD-235C415B049B.png', glass:[6,8], angle:[90,135,180], fallback:true, gapByGlass:{'6':[16,31],'8':[18,31]}, priceFrom:43.90, bestseller:false, desc:'Universell einsetzbar: Stufenlos verstellbar von 90\u00b0 bis 180\u00b0.', lengths:['200 cm','250 cm'], variants:{'6':{'200 cm':52830787764547,'250 cm':52830787830083},'8':{'200 cm':52830787797315,'250 cm':52830787862851}} }
+];
+
+// ==================================================================
+// FLOW DEFINITIONS
+// ==================================================================
+var FLOWS = {
+  unten:    { labels: ['Typ','Glasdicke','Glasform','Spaltma\u00df','T\u00fcrtyp'], fields: ['type','glass','form','gap','door'] },
+  seitlich: { labels: ['Typ','Glasdicke','Anwendung','T\u00fcrtyp','Anordnung','Spaltma\u00df'], fields: ['type','glass','application','door','arrangement','gap'] },
+  magnet:   { labels: ['Typ','Winkel','Glasdicke','Spaltma\u00df'], fields: ['type','angle','glass','gap'] }
+};
+
+// ==================================================================
+// STATE
+// ==================================================================
+var cur = 0;
+var sel = { type: null, glass: null, form: null, application: null, door: null, arrangement: null, angle: null, gap: 12 };
+
+function getFlow() { return sel.type ? FLOWS[sel.type] : { labels: ['Typ','Glasdicke','...','...','...','...'], fields: ['type','_','_','_','_','_'] }; }
+function getStepCount() { return getFlow().labels.length; }
+function getStepField() { return getFlow().fields[cur]; }
+
+// ==================================================================
+// STEP RENDERING
+// ==================================================================
+function renderStep() {
+  var container = document.getElementById('stepContainer');
+  var field = getStepField();
+  var html = '';
+
+  if (field === 'type') {
+    html = '<div class="step active" id="step-current">' +
+      '<div class="step-question">Welche Dichtung suchen Sie?</div>' +
+      '<div class="step-hint">W\u00e4hlen Sie die Position der Dichtung an Ihrer Dusche.</div>' +
+      '<div class="type-grid">' +
+        '<div class="opt opt-lg" data-val="unten" onclick="pickType(this)">' +
+          '<svg style="display:block;margin:0 auto 8px;width:64px;height:64px;" viewBox="0 0 64 64" fill="none" stroke="#888" stroke-width="2"><rect x="16" y="8" width="8" height="44" rx="1" fill="#e0e7ef"/><line x1="12" y1="52" x2="52" y2="52" stroke="#888" stroke-width="3"/><path d="M16 52 L24 52" stroke="#FFBA00" stroke-width="4"/><text x="32" y="62" text-anchor="middle" font-size="7" fill="#888" stroke="none" font-family="Roboto">Boden</text></svg>' +
+          '<span class="opt-label">Untere Dichtung</span>' +
+          '<span class="opt-desc">Bodendichtung unter der Glast\u00fcr &ndash; dichtet den Spalt zum Boden / zur Duschwanne ab</span>' +
+        '</div>' +
+        '<div class="opt opt-lg" data-val="seitlich" onclick="pickType(this)">' +
+          '<svg style="display:block;margin:0 auto 8px;width:64px;height:64px;" viewBox="0 0 64 64" fill="none" stroke="#888" stroke-width="2"><rect x="12" y="8" width="8" height="48" rx="1" fill="#e0e7ef"/><rect x="44" y="8" width="8" height="48" rx="1" fill="#e0e7ef"/><path d="M20 32 L44 32" stroke="#FFBA00" stroke-width="4" stroke-dasharray="4 3"/><text x="32" y="62" text-anchor="middle" font-size="7" fill="#888" stroke="none" font-family="Roboto">Seitlich</text></svg>' +
+          '<span class="opt-label">Seitliche Dichtung</span>' +
+          '<span class="opt-desc">Zwischen T\u00fcr und Festteil oder T\u00fcr und Wand &ndash; Mitteldichtung, Ballon- oder Lippendichtung</span>' +
+        '</div>' +
+        '<div class="opt opt-lg" data-val="magnet" onclick="pickType(this)">' +
+          '<svg style="display:block;margin:0 auto 8px;width:64px;height:64px;" viewBox="0 0 64 64" fill="none" stroke="#888" stroke-width="2"><rect x="12" y="8" width="8" height="48" rx="1" fill="#e0e7ef"/><rect x="44" y="8" width="8" height="48" rx="1" fill="#e0e7ef"/><path d="M20 24 L44 24" stroke="#FFBA00" stroke-width="3"/><path d="M20 32 L44 32" stroke="#FFBA00" stroke-width="3"/><path d="M20 40 L44 40" stroke="#FFBA00" stroke-width="3"/><text x="32" y="62" text-anchor="middle" font-size="7" fill="#888" stroke="none" font-family="Roboto">Magnet</text></svg>' +
+          '<span class="opt-label">Magnetdichtung</span>' +
+          '<span class="opt-desc">Magnetischer T\u00fcrverschluss &ndash; die T\u00fcr schlie\u00dft durch Magnetkraft an Festteil oder gegen\u00fcber</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="tip"><span class="tip-icon">&#128161;</span><span><strong>Tipp:</strong> Die meisten Duschen ben\u00f6tigen eine <strong>untere Dichtung</strong> (Bodendichtung). <strong>Seitliche Dichtungen</strong> sitzen zwischen den Glasscheiben. <strong>Magnetdichtungen</strong> werden paarweise verwendet und halten die T\u00fcr magnetisch geschlossen.</span></div>' +
+    '</div>';
+  }
+  else if (field === 'glass') {
+    var glassOptions = sel.type === 'unten'
+      ? { main: [6,8], rare: [5,10] }
+      : sel.type === 'seitlich'
+      ? { main: [6,8], rare: [10,12] }
+      : { main: [6,8], rare: [10] };
+
+    html = '<div class="step active" id="step-current">' +
+      '<div class="step-question">Welche Glasdicke hat Ihre Dusche?</div>' +
+      '<div class="step-hint">Messen Sie die Dicke des Glases. Der Wert steht oft klein aufgedruckt in einer Ecke der Scheibe.</div>' +
+      '<div class="glass-grid"><div class="glass-main">';
+    glassOptions.main.forEach(function(g) {
+      html += '<div class="opt opt-lg" data-val="' + g + '" onclick="pickOpt(this,\'glass\')">' +
+        '<span class="opt-popular">Standard</span>' +
+        '<span class="opt-icon">' + (g === 6 ? '\u25FB\uFE0F' : '\u2B1C') + '</span>' +
+        '<span class="opt-label">' + g + ' mm</span>' +
+        '<span class="opt-desc">H\u00e4ufig bei Duschen aller Art</span></div>';
+    });
+    html += '</div><div class="glass-rare' + (glassOptions.rare.length === 1 ? ' glass-rare-single' : '') + '">';
+    glassOptions.rare.forEach(function(g) {
+      html += '<div class="opt opt-sm" data-val="' + g + '" onclick="pickOpt(this,\'glass\')">' +
+        '<span class="opt-icon">' + (g <= 5 ? '\u25AB\uFE0F' : '\uD83D\uDD32') + '</span>' +
+        '<span class="opt-label">' + g + ' mm</span>' +
+        '<span class="opt-desc">Selten</span></div>';
+    });
+    html += '</div></div>' +
+      '<div class="tip"><span class="tip-icon">&#128161;</span><span><strong>Tipp:</strong> Die g\u00e4ngigsten Glasdicken sind <strong>6 mm</strong> und <strong>8 mm</strong>. Messen Sie die Glasdicke exakt mit einem Messschieber oder Lineal.</span></div></div>';
+  }
+  else if (field === 'form') {
+    html = '<div class="step active" id="step-current">' +
+      '<div class="step-question">Ist Ihr Duschglas gerade oder gebogen?</div>' +
+      '<div class="step-hint">Die meisten Duschen haben gerade Glasscheiben. Viertelkreis- und Halbkreisduschen haben gebogenes Glas.</div>' +
+      '<div class="door-grid-flex"><div class="door-main">' +
+        '<div class="opt opt-lg" data-val="gerade" onclick="pickOpt(this,\'form\')"><span class="opt-popular">Am h\u00e4ufigsten</span><span class="opt-icon">\u25AC</span><span class="opt-label">Gerade</span><span class="opt-desc">Flache, gerade Glasscheibe \u2013 Standardduschen</span></div>' +
+      '</div><div class="door-side">' +
+        '<div class="opt" data-val="gebogen" onclick="pickOpt(this,\'form\')"><span class="opt-icon">\u25E0</span><span class="opt-label">Gebogen</span><span class="opt-desc">Viertelkreis- oder Halbkreisdusche</span></div>' +
+      '</div></div></div>';
+  }
+  else if (field === 'application') {
+    html = '<div class="step active" id="step-current">' +
+      '<div class="step-question">Wo wird die Dichtung eingesetzt?</div>' +
+      '<div class="step-hint">Wird die Dichtung zwischen zwei Glasscheiben oder zwischen Glas und Wand montiert?</div>' +
+      '<div class="anwendung-grid">' +
+        '<div class="opt opt-lg" data-val="glas-glas" onclick="pickOpt(this,\'application\')">' +
+          '<svg style="display:block;margin:0 auto 8px;width:80px;height:60px;" viewBox="0 0 80 60" fill="none" stroke="#888" stroke-width="2"><rect x="8" y="5" width="6" height="50" rx="1" fill="#e0e7ef" stroke="#888"/><rect x="66" y="5" width="6" height="50" rx="1" fill="#e0e7ef" stroke="#888"/><path d="M17 30 L63 30" stroke="#FFBA00" stroke-width="3" stroke-dasharray="4 3"/><text x="40" y="48" text-anchor="middle" font-size="8" fill="#888" stroke="none" font-family="Roboto">Dichtung</text></svg>' +
+          '<span class="opt-label">Glas-Glas</span><span class="opt-desc">Mitteldichtung zwischen zwei Glasscheiben (z.B. T\u00fcr an Festteil)</span></div>' +
+        '<div class="opt opt-lg" data-val="glas-wand" onclick="pickOpt(this,\'application\')">' +
+          '<svg style="display:block;margin:0 auto 8px;width:80px;height:60px;" viewBox="0 0 80 60" fill="none" stroke="#888" stroke-width="2"><rect x="8" y="5" width="6" height="50" rx="1" fill="#e0e7ef" stroke="#888"/><rect x="62" y="2" width="12" height="56" rx="0" fill="#d1d1d1" stroke="#aaa"/><path d="M17 30 L59 30" stroke="#FFBA00" stroke-width="3" stroke-dasharray="4 3"/><text x="40" y="48" text-anchor="middle" font-size="8" fill="#888" stroke="none" font-family="Roboto">Dichtung</text></svg>' +
+          '<span class="opt-label">Glas-Wand</span><span class="opt-desc">Wandanschlussdichtung zwischen Glasscheibe und Wand</span></div>' +
+      '</div></div>';
+  }
+  else if (field === 'door') {
+    if (sel.type === 'unten') {
+      html = '<div class="step active" id="step-current">' +
+        '<div class="step-question">Welchen T\u00fcrtyp haben Sie?</div>' +
+        '<div class="step-hint">Wie \u00f6ffnet sich Ihre Duscht\u00fcr?</div>' +
+        '<div class="door-grid-flex"><div class="door-main">' +
+          '<div class="opt opt-lg" data-val="dreh" onclick="pickOpt(this,\'door\')"><span class="opt-popular">H\u00e4ufig</span><span class="opt-icon">\uD83D\uDEBF</span><span class="opt-label">Dreh- / Pendelt\u00fcr</span><span class="opt-desc">T\u00fcr schwingt auf \u2013 in eine oder beide Richtungen</span></div>' +
+        '</div><div class="door-side">' +
+          '<div class="opt" data-val="schiebe" onclick="pickOpt(this,\'door\')"><span class="opt-icon">\u2194\uFE0F</span><span class="opt-label">Schiebet\u00fcr</span><span class="opt-desc">T\u00fcr gleitet seitlich auf</span></div>' +
+        '</div></div></div>';
+    } else {
+      html = '<div class="step active" id="step-current">' +
+        '<div class="step-question">Welchen T\u00fcrtyp haben Sie?</div>' +
+        '<div class="step-hint">Wie \u00f6ffnet sich Ihre Duscht\u00fcr?</div>' +
+        '<div class="door-grid">' +
+          '<div class="opt opt-lg" data-val="dreh" onclick="pickOpt(this,\'door\')"><span class="opt-icon">&#128682;</span><span class="opt-label">Dreht\u00fcr</span><span class="opt-desc">T\u00fcr schwingt in <strong>eine</strong> Richtung auf</span></div>' +
+          '<div class="opt opt-lg" data-val="pendel" onclick="pickOpt(this,\'door\')"><span class="opt-icon">&#8596;</span><span class="opt-label">Pendelt\u00fcr</span><span class="opt-desc">T\u00fcr schwingt nach innen <strong>und</strong> au\u00dfen</span></div>' +
+          '<div class="opt opt-lg" data-val="schiebe" onclick="pickOpt(this,\'door\')"><span class="opt-icon">&#8660;</span><span class="opt-label">Schiebet\u00fcr</span><span class="opt-desc">T\u00fcr gleitet seitlich auf einer Schiene</span></div>' +
+        '</div>' +
+        '<div class="match-bar" id="matchBar"><strong id="matchCount">&ndash;</strong><span id="matchText">Passende Dichtungen</span></div></div>';
+    }
+  }
+  else if (field === 'arrangement') {
+    html = '<div class="step active" id="step-current">' +
+      '<div class="step-question">Wie stehen die Glasscheiben zueinander?</div>' +
+      '<div class="step-hint">Sind die Scheiben in einer Linie oder im Winkel?</div>' +
+      '<div class="arrangement-grid">' +
+        '<div class="opt opt-lg" data-val="fluchtend" onclick="pickOpt(this,\'arrangement\')">' +
+          '<svg style="display:block;margin:0 auto 8px;width:80px;height:50px;" viewBox="0 0 80 50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="5" y1="25" x2="35" y2="25"/><line x1="45" y1="25" x2="75" y2="25"/><circle cx="40" cy="25" r="3" fill="currentColor"/></svg>' +
+          '<span class="opt-label">Fluchtend (180\u00b0)</span><span class="opt-desc">Glasscheiben in einer Linie</span></div>' +
+        '<div class="opt opt-lg" data-val="ueberlappend" onclick="pickOpt(this,\'arrangement\')">' +
+          '<svg style="display:block;margin:0 auto 8px;width:80px;height:50px;" viewBox="0 0 80 50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="5" y1="20" x2="45" y2="20"/><line x1="35" y1="30" x2="75" y2="30"/></svg>' +
+          '<span class="opt-label">\u00dcberlappend (180\u00b0)</span><span class="opt-desc">Glasscheiben versetzt \u2013 T\u00fcr \u00fcberlappt Festteil</span></div>' +
+      '</div></div>';
+  }
+  else if (field === 'angle') {
+    html = '<div class="step active" id="step-current">' +
+      '<div class="step-question">Wie stehen Ihre Glasscheiben zueinander?</div>' +
+      '<div class="step-hint">Die Winkel-Anordnung bestimmt, welches Magnetprofil-Paar Sie ben\u00f6tigen.</div>' +
+      '<div class="angle-grid"><div class="angle-main">' +
+        '<div class="opt opt-lg" data-val="90" onclick="pickOpt(this,\'angle\')"><span class="opt-popular">Sehr h\u00e4ufig</span>' +
+          '<svg class="angle-diagram" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="10" y1="70" x2="10" y2="10"/><line x1="10" y1="70" x2="70" y2="70"/><rect x="10" y="58" width="12" height="12" fill="none" stroke-width="2"/></svg>' +
+          '<span class="opt-label">90\u00b0 Ecke</span><span class="opt-desc">Standard-Eckduschen</span></div>' +
+        '<div class="opt opt-lg" data-val="180" onclick="pickOpt(this,\'angle\')"><span class="opt-popular">Sehr h\u00e4ufig</span>' +
+          '<svg class="angle-diagram" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="5" y1="40" x2="35" y2="40"/><line x1="45" y1="40" x2="75" y2="40"/><circle cx="40" cy="40" r="3" fill="currentColor"/></svg>' +
+          '<span class="opt-label">180\u00b0 Fluchtend</span><span class="opt-desc">Glasscheiben in einer Linie</span></div>' +
+        '<div class="opt opt-lg" data-val="135" onclick="pickOpt(this,\'angle\')">' +
+          '<svg class="angle-diagram" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="5" y1="55" x2="35" y2="40"/><line x1="35" y1="40" x2="75" y2="40"/></svg>' +
+          '<span class="opt-label">135\u00b0 F\u00fcnfeck</span><span class="opt-desc">F\u00fcnfeckduschen</span></div>' +
+      '</div><div class="angle-extra">' +
+        '<div class="opt opt-lg" data-val="90-pendel" onclick="pickOpt(this,\'angle\')">' +
+          '<svg class="angle-diagram" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="10" y1="70" x2="10" y2="10"/><line x1="10" y1="70" x2="70" y2="70"/><path d="M30 50 Q10 70 30 70" fill="none" stroke-width="2"/><path d="M10 50 Q10 70 30 50" fill="none" stroke-width="2"/></svg>' +
+          '<span class="opt-label">90\u00b0 Pendelt\u00fcr</span><span class="opt-desc">T\u00fcr \u00f6ffnet nach innen UND au\u00dfen</span></div>' +
+      '</div></div>' +
+      '<div class="tip"><span class="tip-icon">&#128161;</span><span><strong>Tipp:</strong> Der h\u00e4ufigste Winkel ist <strong>90\u00b0</strong> (Eckduschen) und <strong>180\u00b0</strong> (T\u00fcr neben Festteil in einer Flucht).</span></div></div>';
+  }
+  else if (field === 'gap') {
+    var sliderMin = sel.type === 'seitlich' ? 0 : sel.type === 'magnet' ? 5 : 2;
+    var sliderMax = sel.type === 'magnet' ? 35 : 30;
+    var defaultGap = sel.type === 'magnet' ? 18 : sel.type === 'seitlich' ? 10 : 12;
+    if (sel.gap < sliderMin || sel.gap > sliderMax) sel.gap = defaultGap;
+
+    var sliderLabel = sel.type === 'magnet' ? 'Spaltma\u00df zwischen den Glasscheiben' : sel.type === 'unten' ? 'Spaltma\u00df zwischen Glas und Boden' : 'Spaltma\u00df zwischen den Kanten';
+
+    html = '<div class="step active" id="step-current">' +
+      '<div class="step-question">Wie gro\u00df ist der Spalt?</div>' +
+      '<div class="step-hint">Messen Sie den Abstand mit einem Lineal oder Messschieber.</div>' +
+      '<div class="slider-box">' +
+        '<div class="slider-display"><div class="slider-value" id="sliderVal">' + sel.gap + '<span>mm</span></div>' +
+        '<div class="slider-label">' + sliderLabel + '</div></div>' +
+        '<div class="slider-track"><input type="range" id="gapSlider" min="' + sliderMin + '" max="' + sliderMax + '" value="' + sel.gap + '" oninput="onSlider(this.value)"></div>' +
+        '<div class="slider-minmax"><span>' + sliderMin + ' mm</span><span>' + sliderMax + ' mm</span></div>' +
+        '<div class="slider-pills" id="pills"></div>' +
+      '</div>' +
+      '<div class="match-bar" id="matchBar"><strong id="matchCount">&ndash;</strong><span id="matchText">Passende Dichtungen</span></div>' +
+      '<div class="tip"><span class="tip-icon">&#128161;</span><span><strong>Tipp:</strong> Messen Sie den Spalt m\u00f6glichst exakt. Der Spalt kann sich \u00fcber die L\u00e4nge leicht ver\u00e4ndern \u2013 messen Sie an der breitesten Stelle.</span></div></div>';
+  }
+
+  container.innerHTML = html;
+
+  // Post-render setup
+  if (field === 'gap') {
+    updateSliderFill();
+    buildPills();
+    updateMatchBar();
+  }
+  if (field === 'door' && sel.type === 'seitlich') {
+    updateMatchBar();
+  }
+  if (field === 'arrangement') {
+    checkArrangementAutoSkip();
+  }
+
+  // Sync selected state
+  syncCurrentSelected();
+}
+
+function syncCurrentSelected() {
+  var field = getStepField();
+  var val = sel[field];
+  if (val === null || val === undefined) return;
+  var container = document.getElementById('step-current');
+  if (!container) return;
+  container.querySelectorAll('.opt').forEach(function(o) {
+    o.classList.remove('selected');
+    if (o.dataset.val == val) o.classList.add('selected');
+  });
+}
+
+function checkArrangementAutoSkip() {
+  var avail = getAvailableArrangements();
+  if (avail.length <= 1 && avail.length > 0) {
+    sel.arrangement = avail[0];
+    cur++;
+    show();
+  }
+}
+
+function getAvailableArrangements() {
+  var avail = [];
+  ['fluchtend', 'ueberlappend'].forEach(function(arrVal) {
+    var has = PRODUCTS_SEITLICH.some(function(p) {
+      if (sel.glass !== null && p.glass.indexOf(sel.glass) === -1) return false;
+      if (sel.application && p.application.indexOf(sel.application) === -1) return false;
+      if (sel.door && p.doorType.indexOf(sel.door) === -1) return false;
+      return p.arrangement.indexOf(arrVal) !== -1;
+    });
+    if (has) avail.push(arrVal);
+  });
+  return avail;
+}
+
+// ==================================================================
+// PROGRESS
+// ==================================================================
+function renderProgress() {
+  var el = document.getElementById('progress');
+  var flow = getFlow();
+  var count = flow.labels.length;
+  el.innerHTML = '';
+  for (var i = 0; i < count; i++) {
+    var step = document.createElement('div');
+    step.className = 'progress-step';
+    var dot = document.createElement('div');
+    var curIdx = (cur === 'results') ? count : cur;
+    dot.className = 'progress-dot' + (i < curIdx ? ' done' : i === curIdx ? ' active' : '');
+    dot.innerHTML = i < curIdx
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>'
+      : (i + 1);
+    step.appendChild(dot);
+    var label = document.createElement('div');
+    label.className = 'progress-label' + (i < curIdx ? ' done' : i === curIdx ? ' active' : '');
+    label.textContent = flow.labels[i];
+    step.appendChild(label);
+    el.appendChild(step);
+    if (i < count - 1) {
+      var line = document.createElement('div');
+      line.className = 'progress-line' + (i < curIdx ? ' done' : '');
+      el.appendChild(line);
+    }
+  }
+}
+
+// ==================================================================
+// MAIN SHOW
+// ==================================================================
+function show() {
+  if (cur === 'results') {
+    document.getElementById('stepContainer').innerHTML = '';
+    document.getElementById('step-results').classList.add('active');
+    document.getElementById('step-results').style.display = 'block';
+    document.getElementById('nav').style.display = 'none';
+    renderResults();
+    renderProgress();
+    return;
+  }
+
+  document.getElementById('step-results').style.display = 'none';
+  document.getElementById('step-results').classList.remove('active');
+  document.getElementById('nav').style.display = 'flex';
+  document.getElementById('btnBack').style.visibility = cur > 0 ? 'visible' : 'hidden';
+
+  var stepCount = getStepCount();
+  var btnNext = document.getElementById('btnNext');
+  if (cur === stepCount - 1) {
+    btnNext.className = 'nav-btn nav-results';
+    btnNext.innerHTML = 'Ergebnisse anzeigen &rarr;';
+  } else {
+    btnNext.className = 'nav-btn nav-next';
+    btnNext.innerHTML = 'Weiter &rarr;';
+  }
+
+  renderStep();
+  updateNav();
+  renderProgress();
+}
+
+function updateNav() {
+  var btn = document.getElementById('btnNext');
+  var field = getStepField();
+  if (field === 'gap') btn.disabled = false;
+  else btn.disabled = sel[field] === null || sel[field] === undefined;
+}
+
+// ==================================================================
+// INTERACTIONS
+// ==================================================================
+function pickType(el) {
+  var card = el.closest('.opt');
+  sel.type = card.dataset.val;
+  // Set default gap for type
+  if (sel.type === 'magnet') sel.gap = 18;
+  else if (sel.type === 'seitlich') sel.gap = 10;
+  else sel.gap = 12;
+  // Clear type-specific fields
+  sel.glass = null; sel.form = null; sel.application = null; sel.door = null; sel.arrangement = null; sel.angle = null;
+  card.closest('.type-grid').querySelectorAll('.opt').forEach(function(o) { o.classList.remove('selected'); });
+  card.classList.add('selected');
+  setTimeout(function() { next(); }, 280);
+}
+
+function pickOpt(el, field) {
+  var card = el.closest('.opt');
+  var val = card.dataset.val;
+
+  if (field === 'glass') sel.glass = parseInt(val);
+  else if (field === 'angle') sel.angle = (val === '90-pendel') ? val : parseInt(val);
+  else sel[field] = val;
+
+  var parent = card.closest('.type-grid') || card.closest('.glass-grid') || card.closest('.anwendung-grid') || card.closest('.door-grid') || card.closest('.door-grid-flex') || card.closest('.arrangement-grid') || card.closest('.angle-grid');
+  if (parent) parent.querySelectorAll('.opt').forEach(function(o) { o.classList.remove('selected'); });
+  card.classList.add('selected');
+  updateNav();
+  setTimeout(function() { next(); }, 280);
+}
+
+function next() {
+  var stepCount = getStepCount();
+  if (cur < stepCount - 1) { cur++; show(); }
+  else { cur = 'results'; show(); }
+}
+
+function back() {
+  if (cur === 'results') { cur = getStepCount() - 1; show(); return; }
+  if (cur > 0) {
+    // If going back from gap step in seitlich and arrangement was auto-skipped
+    if (sel.type === 'seitlich' && getStepField() === 'gap') {
+      var arrIdx = getFlow().fields.indexOf('arrangement');
+      var avail = getAvailableArrangements();
+      if (avail.length <= 1) {
+        sel.arrangement = null;
+        cur = arrIdx - 1; // skip back over arrangement to door
+        show(); return;
+      }
+    }
+    cur--;
+    show();
+  }
+}
+
+function goToStep(s) {
+  cur = s;
+  show();
+}
+
+function reset() {
+  sel = { type: null, glass: null, form: null, application: null, door: null, arrangement: null, angle: null, gap: 12 };
+  cur = 0;
+  show();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ==================================================================
+// GAP SLIDER
+// ==================================================================
+function onSlider(v) {
+  sel.gap = parseInt(v);
+  document.getElementById('sliderVal').innerHTML = v + '<span>mm</span>';
+  updateSliderFill();
+  updateMatchBar();
+  syncPills();
+}
+
+function updateSliderFill() {
+  var slider = document.getElementById('gapSlider');
+  if (!slider) return;
+  var min = parseInt(slider.min);
+  var max = parseInt(slider.max);
+  var pct = ((sel.gap - min) / (max - min)) * 100;
+  slider.style.setProperty('--fill', pct + '%');
+}
+
+function setGap(v) {
+  sel.gap = v;
+  var slider = document.getElementById('gapSlider');
+  if (slider) slider.value = v;
+  onSlider(v);
+}
+
+function buildPills() {
+  var vals = sel.type === 'magnet' ? [8,12,15,18,20,22,25,28,31]
+    : sel.type === 'seitlich' ? [0,3,5,8,10,12,15,18,22,25,30]
+    : [3,5,8,10,12,15,18,22,25,30];
+  var el = document.getElementById('pills');
+  if (!el) return;
+  el.innerHTML = vals.map(function(v) {
+    return '<button class="pill' + (v === sel.gap ? ' on' : '') + '" onclick="setGap(' + v + ')">' + v + ' mm</button>';
+  }).join('');
+}
+
+function syncPills() {
+  document.querySelectorAll('.pill').forEach(function(p) {
+    p.classList.toggle('on', parseInt(p.textContent) === sel.gap);
+  });
+}
+
+// ==================================================================
+// MATCH INDICATOR
+// ==================================================================
+function updateMatchBar() {
+  var bar = document.getElementById('matchBar');
+  var countEl = document.getElementById('matchCount');
+  var textEl = document.getElementById('matchText');
+  if (!bar) return;
+
+  var count = countMatches();
+  countEl.textContent = count;
+  if (count === 0) {
+    bar.className = 'match-bar';
+    textEl.textContent = 'Keine passende Dichtung \u2013 versuchen Sie andere Werte.';
+  } else if (count <= 3) {
+    bar.className = 'match-bar good';
+    textEl.textContent = count === 1 ? 'passende Dichtung \u2013 perfekt!' : 'passende Dichtungen f\u00fcr Ihre Auswahl';
+  } else {
+    bar.className = 'match-bar good';
+    textEl.textContent = 'passende Dichtungen gefunden';
+  }
+}
+
+function countMatches() {
+  return getFilteredProducts().length;
+}
+
+// ==================================================================
+// FILTERING
+// ==================================================================
+function getFilteredProducts() {
+  if (sel.type === 'unten') return filterUnten();
+  if (sel.type === 'seitlich') return filterSeitlich();
+  if (sel.type === 'magnet') return filterMagnet(false);
+  return [];
+}
+
+function filterUnten() {
+  return PRODUCTS_UNTEN.filter(function(p) {
+    if (sel.glass !== null && p.glass.indexOf(sel.glass) === -1) return false;
+    if (sel.form && p.form !== sel.form) return false;
+    if (sel.gap !== null && (sel.gap < p.gapMin || sel.gap > p.gapMax)) return false;
+    if (sel.door && p.doorType.indexOf(sel.door) === -1) return false;
+    return true;
+  });
+}
+
+function filterSeitlich(skipGap) {
+  return PRODUCTS_SEITLICH.filter(function(p) {
+    if (sel.glass !== null && p.glass.indexOf(sel.glass) === -1) return false;
+    if (sel.application && p.application.indexOf(sel.application) === -1) return false;
+    if (sel.door && p.doorType.indexOf(sel.door) === -1) return false;
+    if (sel.arrangement && p.arrangement.indexOf(sel.arrangement) === -1) return false;
+    if (!skipGap && sel.gap !== null) {
+      if (sel.gap < p.gapMin || sel.gap > p.gapMax) return false;
+    }
+    return true;
+  });
+}
+
+function filterMagnet(includeFallback) {
+  return PRODUCTS_MAGNET.filter(function(p) {
+    if (!includeFallback && p.fallback) return false;
+    if (sel.angle !== null) {
+      if (sel.angle === '90-pendel') { if (!p.pendel) return false; }
+      else { if (!p.angle || p.angle.indexOf(sel.angle) === -1) return false; if (p.pendel) return false; }
+    }
+    if (sel.glass !== null && p.glass.indexOf(sel.glass) === -1) return false;
+    if (sel.glass !== null && p.gapByGlass) {
+      var g = String(sel.glass);
+      if (!p.gapByGlass[g]) return false;
+      var range = p.gapByGlass[g];
+      if (sel.gap < range[0] || sel.gap > range[1]) return false;
+    }
+    return true;
+  });
+}
+
+// ==================================================================
+// RESULTS
+// ==================================================================
+function getResults() {
+  if (sel.type === 'unten') {
+    return filterUnten().sort(function(a, b) {
+      if (a.bestseller && !b.bestseller) return -1;
+      if (!a.bestseller && b.bestseller) return 1;
+      var fitA = Math.abs(((a.gapMin + a.gapMax) / 2) - sel.gap);
+      var fitB = Math.abs(((b.gapMin + b.gapMax) / 2) - sel.gap);
+      return fitA - fitB;
+    });
+  }
+  if (sel.type === 'seitlich') {
+    var sortOrder = { lippe: 1, ballon: 2, spalt: 3, ueberlappung: 1, sonstige: 5 };
+    return filterSeitlich().sort(function(a, b) {
+      if (a.bestseller && !b.bestseller) return -1;
+      if (!a.bestseller && b.bestseller) return 1;
+      var prioA = sortOrder[a.sortType] || 5;
+      var prioB = sortOrder[b.sortType] || 5;
+      if (prioA !== prioB) return prioA - prioB;
+      var fitA = Math.abs(((a.gapMin + a.gapMax) / 2) - sel.gap);
+      var fitB = Math.abs(((b.gapMin + b.gapMax) / 2) - sel.gap);
+      if (fitA !== fitB) return fitA - fitB;
+      return a.priceFrom - b.priceFrom;
+    });
+  }
+  if (sel.type === 'magnet') {
+    var results = filterMagnet(false);
+    if (results.length === 0) results = filterMagnet(true);
+    return results.sort(function(a, b) {
+      if (a.bestseller && !b.bestseller) return -1;
+      if (!a.bestseller && b.bestseller) return 1;
+      var g = String(sel.glass);
+      var rangeA = a.gapByGlass[g] || [0,0];
+      var rangeB = b.gapByGlass[g] || [0,0];
+      var fitA = Math.abs(((rangeA[0] + rangeA[1]) / 2) - sel.gap);
+      var fitB = Math.abs(((rangeB[0] + rangeB[1]) / 2) - sel.gap);
+      return fitA - fitB;
+    });
+  }
+  return [];
+}
+
+function renderResults() {
+  var results = getResults();
+  var flow = getFlow();
+
+  // Title
+  document.getElementById('resultsTitle').innerHTML =
+    '<em>' + results.length + '</em> passende Dichtung' + (results.length !== 1 ? 'en' : '');
+
+  // Filter chips
+  var typeLabels = { unten: 'Untere Dichtung', seitlich: 'Seitliche Dichtung', magnet: 'Magnetdichtung' };
+  var doorLabels = { dreh: 'Dreht\u00fcr', pendel: 'Pendelt\u00fcr', schiebe: 'Schiebet\u00fcr' };
+  var doorLabelsUnten = { dreh: 'Dreh- / Pendelt\u00fcr', schiebe: 'Schiebet\u00fcr' };
+  var appLabels = { 'glas-glas': 'Glas-Glas', 'glas-wand': 'Glas-Wand' };
+  var arrLabels = { fluchtend: 'Fluchtend (180\u00b0)', ueberlappend: '\u00dcberlappend (180\u00b0)' };
+  var formLabels = { gerade: 'Gerade', gebogen: 'Gebogen' };
+  var angleLabels = { 90: '90\u00b0 Ecke', '90-pendel': '90\u00b0 Pendelt\u00fcr', 135: '135\u00b0 F\u00fcnfeck', 180: '180\u00b0 Fluchtend' };
+
+  var chips = '<div class="filter-chip">Typ: <strong>' + typeLabels[sel.type] + '</strong><span class="chip-edit" onclick="goToStep(0)">\u270e</span></div>';
+
+  flow.fields.forEach(function(f, i) {
+    if (f === 'type') return;
+    var label = '', value = '';
+    if (f === 'glass') { label = 'Glasdicke'; value = sel.glass + ' mm'; }
+    else if (f === 'form') { label = 'Glasform'; value = formLabels[sel.form] || '\u2013'; }
+    else if (f === 'application') { label = 'Anwendung'; value = appLabels[sel.application] || '\u2013'; }
+    else if (f === 'door') { label = 'T\u00fcrtyp'; value = (sel.type === 'unten' ? doorLabelsUnten : doorLabels)[sel.door] || '\u2013'; }
+    else if (f === 'arrangement') { label = 'Anordnung'; value = arrLabels[sel.arrangement] || '\u2013'; }
+    else if (f === 'angle') { label = 'Winkel'; value = angleLabels[sel.angle] || '\u2013'; }
+    else if (f === 'gap') { label = 'Spaltma\u00df'; value = sel.gap + ' mm'; }
+    chips += '<div class="filter-chip">' + label + ': <strong>' + value + '</strong><span class="chip-edit" onclick="goToStep(' + i + ')">\u270e</span></div>';
+  });
+
+  document.getElementById('filterSummary').innerHTML = chips;
+
+  // Product list
+  var list = document.getElementById('productList');
+
+  if (results.length === 0) {
+    list.innerHTML = '<div class="no-results"><div class="nr-icon">\uD83D\uDD0D</div><h3>Keine passende Dichtung gefunden</h3>' +
+      '<p>Versuchen Sie es mit anderen Werten oder kontaktieren Sie uns direkt.</p>' +
+      '<p><a href="https://duschop.de/pages/kontakt" target="_blank">\uD83D\uDCE7 Pers\u00f6nliche Beratung anfragen</a></p></div>';
+    return;
+  }
+
+  list.innerHTML = results.map(function(p, i) {
+    var g = String(sel.glass);
+    var url = 'https://duschop.de/products/' + p.handle;
+    if (p.variants && p.variants[g]) {
+      var firstLen = Object.keys(p.variants[g])[0];
+      var variantId = p.variants[g][firstLen];
+      if (variantId && variantId !== 0) url += '?variant=' + variantId;
+    }
+
+    var availLengths = (p.variants && p.variants[g]) ? Object.keys(p.variants[g]) : p.lengths;
+
+    // Gap info
+    var gapInfo = '';
+    if (sel.type === 'magnet' && p.gapByGlass) {
+      var range = p.gapByGlass[g] || [0,0];
+      var fitDist = Math.abs(((range[0] + range[1]) / 2) - sel.gap);
+      var isPerfect = fitDist <= 2;
+      gapInfo = '<span class="spec ' + (isPerfect ? 'perfect' : 'match') + '">' +
+        (isPerfect ? '\u2713 ' : '') + 'Spalt: ' + range[0] + (range[0] !== range[1] ? '\u2013' + range[1] : '') + ' mm (' + sel.glass + ' mm Glas)</span>';
+    } else if (p.gapMin !== undefined) {
+      var fitDist2 = Math.abs(((p.gapMin + p.gapMax) / 2) - sel.gap);
+      var isPerfect2 = fitDist2 <= 2;
+      gapInfo = '<span class="spec ' + (isPerfect2 ? 'perfect' : 'match') + '">' +
+        (isPerfect2 ? '\u2713 ' : '') + 'Spalt: ' + p.gapMin + '\u2013' + p.gapMax + ' mm</span>';
+    }
+
+    // Extra specs
+    var extraSpecs = '';
+    if (sel.type === 'seitlich') {
+      var appInfo = p.application.map(function(a) { return a === 'glas-glas' ? 'Glas-Glas' : 'Glas-Wand'; }).join(', ');
+      var arrInfo = p.arrangement.map(function(a) { return a === 'fluchtend' ? '180\u00b0' : '90\u00b0'; }).join(', ');
+      extraSpecs = '<span class="spec match">' + arrInfo + '</span><span class="spec match">' + appInfo + '</span>';
+    }
+    if (sel.type === 'magnet' && p.angle) {
+      var angleInfo = p.angle.map(function(a) { return a + '\u00b0'; }).join(', ');
+      extraSpecs = '<span class="spec match">' + angleInfo + '</span>';
+    }
+
+    var lengthPrefix = (sel.type === 'unten' && p.form === 'gebogen') ? 'Gesamtl\u00e4nge: ' : 'Verf\u00fcgbare L\u00e4ngen: ';
+    var priceSmall = sel.type === 'magnet' ? 'inkl. MwSt., zzgl. Versand \u00b7 1 Paar' : 'inkl. MwSt., zzgl. Versand';
+
+    return '<div class="product ' + (i === 0 ? 'highlight' : '') + '">' +
+      '<div class="product-image">' +
+      '<img src="' + p.image + '" alt="' + p.name + '" onerror="this.style.display=\'none\'">' +
+      (p.bestseller ? '<div class="product-badge">\u2B50 Bestseller</div>' : '') +
+      (i === 0 && !p.bestseller ? '<div class="product-badge" style="background:var(--green);color:#fff">Beste Wahl</div>' : '') +
+      '</div>' +
+      '<div class="product-body">' +
+      '<div class="product-name">' + p.name + '</div>' +
+      '<div class="product-desc">' + p.desc + '</div>' +
+      '<div class="product-specs">' +
+      '<span class="spec">Art.Nr. ' + p.artNr + '</span>' +
+      extraSpecs +
+      gapInfo +
+      '<span class="spec">Glas: ' + p.glass.join(', ') + ' mm</span>' +
+      '</div>' +
+      '<div class="length-info">' + lengthPrefix + availLengths.join(' \u00b7 ') + '</div>' +
+      '<div class="product-footer">' +
+      '<div class="product-price">ab ' + p.priceFrom.toFixed(2).replace('.', ',') + ' \u20ac<small>' + priceSmall + '</small></div>' +
+      '<a href="' + url + '" target="_blank" class="product-cta">Zum Produkt' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>' +
+      '</div></div></div>';
+  }).join('');
+}
+
+// ==================================================================
+// INIT
+// ==================================================================
+show();
+</script>
+
+</body>
+</html>
