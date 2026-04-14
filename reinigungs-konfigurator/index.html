@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reinigungs-Konfigurator | duschop.de</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #c8956c;
+            --accent-light: #e8c4a8;
+            --bg: #f8f6f3;
+            --card-bg: #ffffff;
+            --text: #2d2d2d;
+            --text-light: #6b6b6b;
+            --border: #e8e4df;
+            --shadow: 0 2px 20px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --success: #27ae60;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 14px; }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+        .logo-text span { font-size: 12px; opacity: 0.65; font-weight: 400; }
+
+        .header-badges { display: flex; gap: 8px; }
+
+        .header-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: white;
+            padding: 48px 24px 56px;
+            text-align: center;
+        }
+
+        .hero h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .hero p { font-size: 16px; opacity: 0.75; max-width: 620px; margin: 0 auto; }
+
+        /* Progress Bar */
+        .progress-bar {
+            max-width: 800px;
+            margin: -28px auto 0;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .progress-inner {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            right: 24px;
+            height: 3px;
+            background: var(--border);
+            z-index: 0;
+        }
+
+        .progress-steps::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            height: 3px;
+            background: var(--accent);
+            z-index: 1;
+            transition: width 0.4s ease;
+            width: var(--progress, 0%);
+        }
+
+        .step-dot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .step-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 3px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active .step-circle {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            box-shadow: 0 4px 12px rgba(200,149,108,0.4);
+        }
+
+        .step-dot.done .step-circle {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+
+        .step-dot.active .step-label { color: var(--accent); font-weight: 600; }
+        .step-dot.done .step-label { color: var(--success); }
+
+        /* Main Configurator */
+        .configurator {
+            max-width: 900px;
+            margin: 32px auto;
+            padding: 0 24px;
+        }
+
+        .step-panel {
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .step-panel.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        .step-subtitle {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 28px;
+        }
+
+        /* Option Cards */
+        .options-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .options-grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+        .options-grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+        .option-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .option-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .option-card.selected {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(200,149,108,0.06) 0%, rgba(200,149,108,0.02) 100%);
+            box-shadow: 0 4px 20px rgba(200,149,108,0.15);
+        }
+
+        .option-card.selected::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 50%;
+            background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 14px;
+        }
+
+        .option-icon { margin-bottom: 12px; }
+        .option-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .option-desc { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+        .option-meta {
+            margin-top: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #fff8f0;
+            border: 1px solid var(--accent-light);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .info-box strong { color: var(--accent); }
+
+        /* Navigation */
+        .step-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) { background: #b8855c; transform: translateY(-1px); }
+        .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .btn-secondary {
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover { background: #eee9e3; }
+
+        .btn-restart {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-restart:hover { background: #2a2a4e; }
+
+        /* Result Styles */
+        .result-summary {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .result-summary h3 { font-size: 18px; margin-bottom: 12px; }
+
+        .result-choices {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .result-choice {
+            background: linear-gradient(135deg, rgba(200,149,108,0.12) 0%, rgba(200,149,108,0.06) 100%);
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(200,149,108,0.2);
+        }
+
+        .result-hint {
+            background: #fff8f0;
+            border: 1px solid var(--accent-light);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .result-hint strong { color: var(--accent); }
+
+        .result-section {
+            margin-bottom: 28px;
+        }
+
+        .result-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .result-badge {
+            background: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .result-products {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .result-product-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1.5px solid var(--border);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .result-product-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow);
+        }
+
+        .result-product-inner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .result-product-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: var(--bg);
+            flex-shrink: 0;
+        }
+
+        .result-product-info { flex: 1; min-width: 0; }
+
+        .result-product-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .result-product-desc {
+            font-size: 12px;
+            color: var(--text-light);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .result-product-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-top: 6px;
+        }
+
+        .result-product-arrow {
+            flex-shrink: 0;
+            color: var(--text-light);
+            transition: color 0.2s;
+        }
+
+        .result-product-card:hover .result-product-arrow { color: var(--accent); }
+
+        .result-product-img-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header-badges { display: none; }
+            .header-inner { padding: 16px; }
+            .hero { padding: 32px 16px 44px; }
+            .hero h2 { font-size: 22px; }
+            .progress-bar { padding: 0 16px; }
+            .progress-inner { padding: 16px 20px; }
+            .step-label { font-size: 10px; }
+            .step-circle { width: 30px; height: 30px; font-size: 12px; }
+            .configurator { padding: 0 16px; margin-top: 24px; }
+            .step-title { font-size: 18px; }
+            .options-grid.cols-2,
+            .options-grid.cols-3 { grid-template-columns: 1fr; }
+            .option-card { padding: 18px; }
+            .result-product-inner { padding: 12px; gap: 12px; }
+            .result-product-img { width: 64px; height: 64px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L12 6"/>
+                    <path d="M8 4L16 4"/>
+                    <path d="M6 6C6 6 4 10 4 14C4 18 8 22 12 22C16 22 20 18 20 14C20 10 18 6 18 6"/>
+                    <path d="M6 6L18 6"/>
+                    <path d="M9 12L9 16"/>
+                    <path d="M15 12L15 16"/>
+                    <path d="M12 10L12 18"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <h1>Glasreinigung &amp; Schutz</h1>
+                <span>Konfigurator &middot; duschop.de</span>
+            </div>
+        </div>
+        <div class="header-badges">
+            <div class="header-badge">Individuelle Empfehlung</div>
+            <div class="header-badge">15+ Produkte</div>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <h2>Das richtige Reinigungs- &amp; Pflegeprodukt finden</h2>
+    <p>In wenigen Schritten zur passenden Reinigungsl&ouml;sung f&uuml;r Ihr Duschglas &ndash; ob Pflegereiniger, Intensivreinigung oder langfristiger Glasschutz.</p>
+</section>
+
+<div class="progress-bar">
+    <div class="progress-inner">
+        <div class="progress-steps" id="progressSteps" style="--progress: 0%">
+            <div class="step-dot active" data-step="0">
+                <div class="step-circle">1</div>
+                <div class="step-label">Ziel</div>
+            </div>
+            <div class="step-dot" data-step="1">
+                <div class="step-circle">2</div>
+                <div class="step-label">Verschmutzung</div>
+            </div>
+            <div class="step-dot" data-step="2">
+                <div class="step-circle">3</div>
+                <div class="step-label">Glastyp</div>
+            </div>
+            <div class="step-dot" data-step="3">
+                <div class="step-circle">4</div>
+                <div class="step-label">Ergebnis</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="configurator">
+
+    <!-- STEP 0: Ziel -->
+    <div class="step-panel active" id="step0">
+        <h3 class="step-title">Was m&ouml;chten Sie erreichen?</h3>
+        <p class="step-subtitle">W&auml;hlen Sie, ob Sie Ihr Duschglas reinigen, sch&uuml;tzen oder beides m&ouml;chten.</p>
+
+        <div class="options-grid cols-3">
+            <div class="option-card" data-value="reinigung" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round">
+                        <path d="M10 30L10 14C10 12 12 10 14 10L26 10C28 10 30 12 30 14L30 30"/>
+                        <path d="M8 30L32 30"/>
+                        <path d="M16 16L16 24"/>
+                        <path d="M20 14L20 24"/>
+                        <path d="M24 16L24 24"/>
+                    </svg>
+                </div>
+                <div class="option-name">Reinigung</div>
+                <div class="option-desc">Kalk, Wasserflecken und Seifenreste von Ihrem Duschglas entfernen.</div>
+                <div class="option-meta">Reiniger &amp; Zubeh&ouml;r</div>
+            </div>
+
+            <div class="option-card" data-value="schutz" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 4L6 10V20C6 28 12 34 20 36C28 34 34 28 34 20V10L20 4Z"/>
+                        <polyline points="14 20 18 24 26 16"/>
+                    </svg>
+                </div>
+                <div class="option-name">Glasschutz</div>
+                <div class="option-desc">Glas dauerhaft versiegeln, damit Kalk und Schmutz gar nicht erst haften.</div>
+                <div class="option-meta">Nano &amp; Versiegelung</div>
+            </div>
+
+            <div class="option-card" data-value="beides" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round">
+                        <path d="M8 28L8 16C8 14 10 12 12 12L22 12C24 12 26 14 26 16L26 28"/>
+                        <path d="M6 28L28 28"/>
+                        <path d="M30 8L28 14V22C28 26 32 30 34 30"/>
+                        <path d="M30 8L34 8"/>
+                        <polyline points="30 18 32 20 36 16"/>
+                    </svg>
+                </div>
+                <div class="option-name">Reinigung &amp; Schutz</div>
+                <div class="option-desc">Erst gr&uuml;ndlich reinigen, dann Glas mit Beschichtung sch&uuml;tzen. Die Komplett-L&ouml;sung.</div>
+                <div class="option-meta">Beste Empfehlung</div>
+            </div>
+        </div>
+
+        <div class="step-nav">
+            <div></div>
+            <button class="btn btn-primary" id="nextBtn0" disabled onclick="nextStep(0)">
+                Weiter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 1: Verschmutzungsgrad -->
+    <div class="step-panel" id="step1">
+        <h3 class="step-title">Wie verschmutzt ist Ihr Duschglas?</h3>
+        <p class="step-subtitle">Der Verschmutzungsgrad bestimmt, welche Reinigungsprodukte wir empfehlen.</p>
+
+        <div class="options-grid cols-3">
+            <div class="option-card" data-value="leicht" onclick="selectOption(1, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5">
+                        <rect x="8" y="4" width="24" height="32" rx="2" fill="none"/>
+                        <circle cx="16" cy="14" r="1.5" fill="#c8956c" opacity="0.3"/>
+                        <circle cx="24" cy="20" r="1" fill="#c8956c" opacity="0.3"/>
+                        <circle cx="20" cy="28" r="1.5" fill="#c8956c" opacity="0.2"/>
+                    </svg>
+                </div>
+                <div class="option-name">Leicht</div>
+                <div class="option-desc">Vereinzelte Wasserflecken und leichter Kalkschleier. Glas ist noch weitgehend durchsichtig.</div>
+                <div class="option-meta">Regelm&auml;&szlig;ige Pflege</div>
+            </div>
+
+            <div class="option-card" data-value="mittel" onclick="selectOption(1, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5">
+                        <rect x="8" y="4" width="24" height="32" rx="2" fill="none"/>
+                        <circle cx="14" cy="12" r="2" fill="#c8956c" opacity="0.4"/>
+                        <circle cx="24" cy="16" r="2.5" fill="#c8956c" opacity="0.4"/>
+                        <circle cx="18" cy="24" r="2" fill="#c8956c" opacity="0.35"/>
+                        <circle cx="26" cy="28" r="1.5" fill="#c8956c" opacity="0.3"/>
+                        <circle cx="12" cy="30" r="2" fill="#c8956c" opacity="0.35"/>
+                    </svg>
+                </div>
+                <div class="option-name">Mittel</div>
+                <div class="option-desc">Deutlich sichtbare Kalkablagerungen und Seifenreste. Glas wirkt tr&uuml;b in manchen Bereichen.</div>
+                <div class="option-meta">Intensivreinigung</div>
+            </div>
+
+            <div class="option-card" data-value="stark" onclick="selectOption(1, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5">
+                        <rect x="8" y="4" width="24" height="32" rx="2" fill="none"/>
+                        <rect x="10" y="6" width="20" height="28" rx="1" fill="#c8956c" opacity="0.15"/>
+                        <circle cx="14" cy="12" r="3" fill="#c8956c" opacity="0.5"/>
+                        <circle cx="24" cy="14" r="3.5" fill="#c8956c" opacity="0.45"/>
+                        <circle cx="18" cy="22" r="3" fill="#c8956c" opacity="0.5"/>
+                        <circle cx="26" cy="26" r="2.5" fill="#c8956c" opacity="0.45"/>
+                        <circle cx="12" cy="28" r="3" fill="#c8956c" opacity="0.5"/>
+                    </svg>
+                </div>
+                <div class="option-name">Stark</div>
+                <div class="option-desc">Hartn&auml;ckige, verh&auml;rtete Ablagerungen. Glas f&uuml;hlt sich rau an und ist stellenweise undurchsichtig.</div>
+                <div class="option-meta">Profi-Reinigung</div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>Tipp:</strong> Auch stark verkalktes Glas l&auml;sst sich mit den richtigen Produkten wieder wie neu aussehen lassen. Die Kombination aus chemischer Reinigung (Kalklöser) und mechanischer Reinigung (Stahlwolle Typ 0000) erzielt die besten Ergebnisse.
+        </div>
+
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(1)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-primary" id="nextBtn1" disabled onclick="nextStep(1)">
+                Weiter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 2: Glasoberflaeche -->
+    <div class="step-panel" id="step2">
+        <h3 class="step-title">Ist Ihr Duschglas bereits beschichtet?</h3>
+        <p class="step-subtitle">Manche Reinigungsprodukte sind nicht f&uuml;r nanobeschichtetes Glas geeignet. Falls unsicher, w&auml;hlen Sie &bdquo;Wei&szlig; ich nicht&ldquo;.</p>
+
+        <div class="options-grid cols-3">
+            <div class="option-card" data-value="unbeschichtet" onclick="selectOption(2, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5">
+                        <rect x="8" y="4" width="24" height="32" rx="2"/>
+                    </svg>
+                </div>
+                <div class="option-name">Unbeschichtet</div>
+                <div class="option-desc">Standard-Glas ohne besondere Oberfl&auml;chenbeschichtung. Alle Reinigungsprodukte verwendbar.</div>
+                <div class="option-meta">Standard-Glas</div>
+            </div>
+
+            <div class="option-card" data-value="beschichtet" onclick="selectOption(2, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5">
+                        <rect x="8" y="4" width="24" height="32" rx="2"/>
+                        <path d="M8 6L32 6" stroke="#27ae60" stroke-width="3"/>
+                        <path d="M8 4L32 4" stroke="#27ae60" stroke-width="1" opacity="0.4"/>
+                        <circle cx="16" cy="18" r="3" fill="none" stroke="#27ae60" stroke-width="1.5" opacity="0.5"/>
+                        <path d="M16 18L14 22" stroke="#27ae60" stroke-width="1" opacity="0.5"/>
+                        <path d="M16 18L18 22" stroke="#27ae60" stroke-width="1" opacity="0.5"/>
+                    </svg>
+                </div>
+                <div class="option-name">Nanobeschichtet</div>
+                <div class="option-desc">Glas hat eine Lotus-Effekt-Beschichtung (z.B. EasyClean, Nano). Nur schonende Reiniger verwenden.</div>
+                <div class="option-meta">Beschichtetes Glas</div>
+            </div>
+
+            <div class="option-card" data-value="unbekannt" onclick="selectOption(2, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5">
+                        <rect x="8" y="4" width="24" height="32" rx="2"/>
+                        <text x="20" y="26" text-anchor="middle" font-size="18" fill="#c8956c" font-weight="700" stroke="none">?</text>
+                    </svg>
+                </div>
+                <div class="option-name">Wei&szlig; ich nicht</div>
+                <div class="option-desc">Nicht sicher, ob eine Beschichtung vorhanden ist. Wir empfehlen dann beschichtungsfreundliche Produkte.</div>
+                <div class="option-meta">Sichere Wahl</div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>Wie erkennt man eine Beschichtung?</strong> Gie&szlig;en Sie etwas Wasser auf das trockene Glas. Perlt das Wasser deutlich ab und bildet Tropfen, ist wahrscheinlich eine Beschichtung vorhanden. Flie&szlig;t es gleichm&auml;&szlig;ig als Film ab, ist das Glas eher unbeschichtet.
+        </div>
+
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(2)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-primary" id="nextBtn2" disabled onclick="nextStep(2)">
+                Ergebnis anzeigen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 3: Ergebnis -->
+    <div class="step-panel" id="step3">
+        <div id="resultsContent"></div>
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(3)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-restart" onclick="restart()">Neue Konfiguration starten</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// Product Database
+// ============================================================
+const products = [
+    // === SETS ===
+    {
+        id: 'glanz-paket',
+        title: 'Glanz-Paket: Komplett-Set f\u00fcr Reinigung & Schutz',
+        handle: 'duschglas-versiegelung_reiniger-set',
+        type: 'set',
+        ziel: ['reinigung', 'beides'],
+        verschmutzung: ['mittel', 'stark'],
+        oberflaeche: ['unbeschichtet'],
+        price: '59,90',
+        desc: '2\u00d7 DuschBlitz (750 ml), Invisible Shield Versiegelung, 5 m Stahlwolle, 2\u00d7 Poliertuch. Die Rundum-L\u00f6sung f\u00fcr Reinigung und langfristigen Schutz.',
+        isSet: true,
+        highlight: true
+    },
+    {
+        id: 'profi-plus-set',
+        title: 'Profi-Plus-Set f\u00fcr einwandfreie Reinigung',
+        handle: 'duschglas-top-reinigungs-set-art-nr-951809',
+        type: 'set',
+        ziel: ['reinigung', 'beides'],
+        verschmutzung: ['mittel', 'stark'],
+        oberflaeche: ['unbeschichtet', 'unbekannt'],
+        price: '44,90',
+        desc: '2\u00d7 DuschBlitz (750 ml), 3 m Stahlwolle Typ 0000, 2 Pflegeschw\u00e4mme, 2 High-Performance Reinigungst\u00fccher. Bestseller.',
+        isSet: true,
+        highlight: false
+    },
+    {
+        id: 'top-reinigungs-schutz-set',
+        title: 'Top Reinigungs- und Schutz-Set',
+        handle: 'kristhal-top-reinigungs-u-schutz-set-fur-verhartete-verschmutzungen-der-oberflachen-von-duschglasern-inkl-oberflachen-versiegeler-art-nr-101123',
+        type: 'set',
+        ziel: ['beides'],
+        verschmutzung: ['mittel', 'stark'],
+        oberflaeche: ['unbeschichtet'],
+        price: '37,90',
+        desc: 'Intensivreiniger, feine Stahlwolle, Schwamm, Mikrofasert\u00fccher und Oberfl\u00e4chenversiegler. Alles in einem Set.',
+        isSet: true,
+        highlight: false
+    },
+    {
+        id: 'duschblitz-bundle',
+        title: 'DuschBlitz Bundle \u2013 doppelter Glanz',
+        handle: 'duschblitz-bundle-doppelter-glanz-fur-streifenfreie-duschen-2x-duschblitz-3m-stahlwolle-0000-fur-sauberes-duschglas',
+        type: 'set',
+        ziel: ['reinigung'],
+        verschmutzung: ['mittel', 'stark'],
+        oberflaeche: ['unbeschichtet', 'unbekannt'],
+        price: '35,90',
+        desc: '2\u00d7 DuschBlitz Pflegereiniger (750 ml) plus 3 m Stahlwolle Typ 0000. F\u00fcr streifenfreie Duschen.',
+        isSet: true,
+        highlight: false
+    },
+    {
+        id: 'top-reinigungs-set',
+        title: 'Top-Reinigungs-Set f\u00fcr Intensivreinigung',
+        handle: 'kristhal-top-reinigungs-set-fur-verhartete-verschmutzungen-der-oberflachen-von-duschglasern-art-nr-061022',
+        type: 'set',
+        ziel: ['reinigung'],
+        verschmutzung: ['mittel', 'stark'],
+        oberflaeche: ['unbeschichtet', 'unbekannt'],
+        price: '19,90',
+        desc: 'Starter-Set mit Reiniger, Stahlwolle, Schwamm und Poliertuch. Ideal f\u00fcr die erste Intensivreinigung.',
+        isSet: true,
+        highlight: false
+    },
+    {
+        id: 'kleines-reinigungs-set',
+        title: 'Kleines Reinigungs-Set f\u00fcr leichte Verschmutzungen',
+        handle: 'kristhal-top-reinigungs-set-fur-leicht-verschmutzte-oberflachen-von-duschglasern-art-nr-0307',
+        type: 'set',
+        ziel: ['reinigung'],
+        verschmutzung: ['leicht'],
+        oberflaeche: ['unbeschichtet', 'beschichtet', 'unbekannt'],
+        price: '19,30',
+        desc: 'Pflegereiniger, Schwamm und 2 Premium-Mikrofasert\u00fccher. F\u00fcr regelm\u00e4\u00dfige, schonende Pflege.',
+        isSet: true,
+        highlight: false
+    },
+
+    // === REINIGER (Einzelprodukte) ===
+    {
+        id: 'duschblitz-2000',
+        title: 'DuschBlitz 2000 Pflegereiniger 750 ml',
+        handle: 'duschblitz-2000-flasche-a-750-ml-art-nr-di6903015',
+        type: 'reiniger',
+        ziel: ['reinigung', 'beides'],
+        verschmutzung: ['leicht', 'mittel', 'stark'],
+        oberflaeche: ['unbeschichtet', 'beschichtet', 'unbekannt'],
+        price: '12,90',
+        priceMax: '32,90',
+        desc: 'Stark gegen Kalk und Wasserflecken, schonend zu allen Oberfl\u00e4chen. Der meistverkaufte Duschglas-Reiniger.',
+        isSet: false
+    },
+    {
+        id: 'sanitaerreiniger',
+        title: 'Stark saures Sanit\u00e4r Reinigungs-Konzentrat 1 L',
+        handle: 'kalkreiniger_sanitaerreiniger',
+        type: 'reiniger',
+        ziel: ['reinigung'],
+        verschmutzung: ['stark'],
+        oberflaeche: ['unbeschichtet'],
+        price: '12,90',
+        desc: 'Hochkonzentrierter Kalkreiniger f\u00fcr extrem hartn\u00e4ckige Ablagerungen auf Glas, Fliesen und Keramik. Nicht f\u00fcr beschichtetes Glas!',
+        isSet: false
+    },
+
+    // === BESCHICHTUNGEN / VERSIEGELUNGEN ===
+    {
+        id: 'invisible-shield',
+        title: 'Invisible Shield Nanobeschichtung 300 ml',
+        handle: 'invisible-shield-nanobeschichtung-mit-lotuseffekt',
+        type: 'beschichtung',
+        ziel: ['schutz', 'beides'],
+        verschmutzung: ['leicht', 'mittel', 'stark'],
+        oberflaeche: ['unbeschichtet', 'unbekannt'],
+        price: '19,60',
+        desc: 'Transparente Polymer-Beschichtung mit Lotuseffekt. F\u00fcllt mikroskopische Poren und verhindert, dass Kalk und Seife haften. Einfache DIY-Anwendung.',
+        isSet: false
+    },
+    {
+        id: 'briteguard-pro',
+        title: 'BriteGuard\u00ae Pro Glasversiegelung 500 ml',
+        handle: 'briteguard\u00ae-pro-500-ml-fur-glatte-und-leicht-zu-reinigende-glasoberflachen-wie-z-b-duschtrennwande-aus-glas-mit-spruhkopf',
+        type: 'beschichtung',
+        ziel: ['schutz', 'beides'],
+        verschmutzung: ['leicht', 'mittel', 'stark'],
+        oberflaeche: ['unbeschichtet'],
+        price: '58,95',
+        desc: 'Premium-Glasversiegelung mit Lotuseffekt. Monatelanger Schutz vor Kalkablagerungen. Spr\u00fchkopf f\u00fcr einfache Anwendung.',
+        isSet: false
+    },
+    {
+        id: 'nano-sio2',
+        title: 'Nano-Oberfl\u00e4chenschutz SiO\u2082 125 ml',
+        handle: 'nano-sio2-oberflachenschutz-fur-glas-u-keramik-oberflachenschutz-125-ml',
+        type: 'beschichtung',
+        ziel: ['schutz', 'beides'],
+        verschmutzung: ['leicht', 'mittel', 'stark'],
+        oberflaeche: ['unbeschichtet'],
+        price: '69,90',
+        desc: 'Professioneller SiO\u2082-basierter Nanoschutz f\u00fcr Glas und Keramik. Wasser und Schmutz perlen einfach ab. Langanhaltend.',
+        isSet: false
+    },
+    {
+        id: 'easyclean',
+        title: 'EasyClean Nanobeschichtung f\u00fcr Duschglas',
+        handle: 'easyclean-glasbeschichtung',
+        type: 'beschichtung',
+        ziel: ['schutz'],
+        verschmutzung: ['leicht', 'mittel', 'stark'],
+        oberflaeche: ['unbeschichtet'],
+        price: '39,00',
+        priceMax: '59,00',
+        desc: 'Werksseitig aufgetragene Nano-Beschichtung. Wird vor dem Versand auf das Duschglas aufgebracht \u2013 ideal bei Neukauf einer Glasdusche.',
+        isSet: false
+    },
+
+    // === ZUBEHOER ===
+    {
+        id: 'stahlwolle',
+        title: 'Superfeine Stahlwolle Typ 0000',
+        handle: 'kristhal-superfeine-stahlwolle-typ-0000-fur-reinigung-und-politur-von-glas-speziell-zum-saubern-von-hartnackigen-ablagerungen',
+        type: 'zubehoer',
+        ziel: ['reinigung', 'beides'],
+        verschmutzung: ['mittel', 'stark'],
+        oberflaeche: ['unbeschichtet'],
+        price: '5,90',
+        priceMax: '20,90',
+        desc: 'L\u00f6st mechanisch, was chemisch allein nicht zu schaffen ist \u2013 ohne das Glas zu zerkratzen. Typ 0000 ist feiner als jedes Schleifpapier.',
+        isSet: false
+    },
+    {
+        id: 'reinigungstuch',
+        title: 'Kristhal Reinigungstuch BavariaClean 40\u00d740 cm',
+        handle: 'kristhal-duschglas-reinigungstuch-der-extraklasse-high-performance-tuch-40x40-cm-typ-bavariaclean',
+        type: 'zubehoer',
+        ziel: ['reinigung', 'schutz', 'beides'],
+        verschmutzung: ['leicht', 'mittel', 'stark'],
+        oberflaeche: ['unbeschichtet', 'beschichtet', 'unbekannt'],
+        price: '2,90',
+        desc: 'High-Performance Mikrofasertuch mit Fischschuppen-Struktur. Absorbiert das 7-fache seines Eigengewichts. Streifenfreies Trocknen.',
+        isSet: false
+    }
+];
+
+// Product images from Shopify CDN
+const productImages = {
+    'duschglas-versiegelung_reiniger-set': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/produkt_set_3x2_36544c3b-a072-4c99-9c73-152670719a99.png',
+    'duschglas-top-reinigungs-set-art-nr-951809': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Reinigungs-Set_queer.jpg',
+    'kristhal-top-reinigungs-u-schutz-set-fur-verhartete-verschmutzungen-der-oberflachen-von-duschglasern-inkl-oberflachen-versiegeler-art-nr-101123': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/101123_99076cee-ded0-4aeb-a7d7-44f0f8744bad.png',
+    'duschblitz-bundle-doppelter-glanz-fur-streifenfreie-duschen-2x-duschblitz-3m-stahlwolle-0000-fur-sauberes-duschglas': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Reinigungs-Set_queer_Bundle.jpg',
+    'kristhal-top-reinigungs-set-fur-verhartete-verschmutzungen-der-oberflachen-von-duschglasern-art-nr-061022': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/061022.png',
+    'kristhal-top-reinigungs-set-fur-leicht-verschmutzte-oberflachen-von-duschglasern-art-nr-0307': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/0307.jpg',
+    'duschblitz-2000-flasche-a-750-ml-art-nr-di6903015': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschblitz_Format.jpg',
+    'kalkreiniger_sanitaerreiniger': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Foerch_Sanitaerreiniger11.jpg',
+    'invisible-shield-nanobeschichtung-mit-lotuseffekt': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Inivisible_Shield_1.png',
+    'briteguard\u00ae-pro-500-ml-fur-glatte-und-leicht-zu-reinigende-glasoberflachen-wie-z-b-duschtrennwande-aus-glas-mit-spruhkopf': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BriteGuardExpress2.jpg',
+    'nano-sio2-oberflachenschutz-fur-glas-u-keramik-oberflachenschutz-125-ml': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/nano_SIO2_2.jpg',
+    'easyclean-glasbeschichtung': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Easy-Clean_2_8c1f39d4-2998-4cd0-b66d-1c6b5b148088.png',
+    'kristhal-superfeine-stahlwolle-typ-0000-fur-reinigung-und-politur-von-glas-speziell-zum-saubern-von-hartnackigen-ablagerungen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Stahlwolle_3.jpg',
+    'kristhal-duschglas-reinigungstuch-der-extraklasse-high-performance-tuch-40x40-cm-typ-bavariaclean': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Bavariaclean3-01.jpg'
+};
+
+// ============================================================
+// State
+// ============================================================
+let currentStep = 0;
+const selections = {
+    ziel: null,
+    verschmutzung: null,
+    oberflaeche: null
+};
+
+// ============================================================
+// Step Logic
+// ============================================================
+function selectOption(step, el) {
+    const parent = el.closest('.options-grid');
+    parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+
+    const value = el.dataset.value;
+
+    if (step === 0) selections.ziel = value;
+    else if (step === 1) selections.verschmutzung = value;
+    else if (step === 2) selections.oberflaeche = value;
+
+    document.getElementById('nextBtn' + step).disabled = false;
+}
+
+function getVisualStep() {
+    // Maps actual panel index to visual step for progress bar
+    if (selections.ziel === 'schutz') {
+        // Skip verschmutzung step: panels 0 -> 2 -> 3
+        if (currentStep === 0) return 0;
+        if (currentStep === 2) return 1;
+        if (currentStep === 3) return 2;
+    }
+    return currentStep;
+}
+
+function nextStep(from) {
+    const panels = document.querySelectorAll('.step-panel');
+    panels[from].classList.remove('active');
+
+    let nextPanel = from + 1;
+
+    // Skip verschmutzung step if ziel is 'schutz'
+    if (from === 0 && selections.ziel === 'schutz') {
+        nextPanel = 2; // Jump to Glasoberflaeche
+        selections.verschmutzung = null;
+    }
+
+    currentStep = nextPanel;
+
+    if (currentStep === 3) buildResults();
+
+    panels[currentStep].classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevStep(to) {
+    const panels = document.querySelectorAll('.step-panel');
+    panels[currentStep].classList.remove('active');
+
+    let prevPanel = to - 1;
+
+    // Skip verschmutzung step going back if ziel is 'schutz'
+    if (to === 2 && selections.ziel === 'schutz') {
+        prevPanel = 0;
+    }
+    // Going back from results
+    if (to === 3) {
+        prevPanel = 2;
+    }
+
+    currentStep = prevPanel;
+    panels[currentStep].classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+    selections.ziel = null;
+    selections.verschmutzung = null;
+    selections.oberflaeche = null;
+    currentStep = 0;
+
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('step0').classList.add('active');
+    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('[id^="nextBtn"]').forEach(b => b.disabled = true);
+
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+    const dots = document.querySelectorAll('.step-dot');
+    const isSchutzOnly = selections.ziel === 'schutz';
+
+    let progressPercent;
+    if (isSchutzOnly) {
+        // 3 effective steps: Ziel(0) -> Glastyp(2) -> Ergebnis(3)
+        if (currentStep === 0) progressPercent = 0;
+        else if (currentStep === 2) progressPercent = 50;
+        else if (currentStep === 3) progressPercent = 100;
+    } else {
+        // 4 steps: 0%, 33%, 66%, 100%
+        progressPercent = currentStep === 0 ? 0 : currentStep === 1 ? 33 : currentStep === 2 ? 66 : 100;
+    }
+
+    document.getElementById('progressSteps').style.setProperty('--progress', progressPercent + '%');
+
+    dots.forEach((dot, i) => {
+        dot.classList.remove('active', 'done', 'skipped');
+
+        if (isSchutzOnly && i === 1) {
+            // Step 1 (Verschmutzung) is skipped
+            if (currentStep > 1) dot.classList.add('done');
+            else if (currentStep === 0) { /* default styling */ }
+        } else {
+            if (i < currentStep) dot.classList.add('done');
+            else if (i === currentStep) dot.classList.add('active');
+        }
+    });
+
+    // Allow clicking completed steps
+    dots.forEach(dot => {
+        dot.onclick = () => {
+            const stepIdx = parseInt(dot.dataset.step);
+            if (stepIdx < currentStep) {
+                // Don't allow clicking step 1 if schutz only
+                if (isSchutzOnly && stepIdx === 1) return;
+                document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+                currentStep = stepIdx;
+                document.getElementById('step' + stepIdx).classList.add('active');
+                updateProgress();
+            }
+        };
+    });
+}
+
+// ============================================================
+// Results Builder
+// ============================================================
+function buildResults() {
+    const { ziel, verschmutzung, oberflaeche } = selections;
+    const container = document.getElementById('resultsContent');
+
+    const zielLabels = {
+        'reinigung': 'Reinigung',
+        'schutz': 'Glasschutz',
+        'beides': 'Reinigung & Schutz'
+    };
+
+    const verschmutzungLabels = {
+        'leicht': 'Leichte Verschmutzung',
+        'mittel': 'Mittlere Verschmutzung',
+        'stark': 'Starke Verschmutzung'
+    };
+
+    const oberflaecheLabels = {
+        'unbeschichtet': 'Unbeschichtetes Glas',
+        'beschichtet': 'Nanobeschichtetes Glas',
+        'unbekannt': 'Beschichtung unbekannt'
+    };
+
+    // Filter products
+    function matchesProduct(p) {
+        if (!p.ziel.includes(ziel) && !p.ziel.includes('beides') && ziel !== 'beides') {
+            // Special: if user wants "beides", show reinigung AND schutz products
+            if (ziel === 'beides') {
+                // OK, accept all
+            } else {
+                return false;
+            }
+        }
+
+        // For "beides": accept products that serve either reinigung or schutz
+        if (ziel === 'beides' && !p.ziel.includes('reinigung') && !p.ziel.includes('schutz') && !p.ziel.includes('beides')) {
+            return false;
+        }
+
+        // Check verschmutzung (only relevant for reinigung/beides)
+        if (verschmutzung && p.verschmutzung && !p.verschmutzung.includes(verschmutzung)) {
+            return false;
+        }
+
+        // Check oberflaeche
+        if (!p.oberflaeche.includes(oberflaeche)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Separate by type
+    const matchingSets = products.filter(p => p.isSet && matchesProduct(p));
+    const matchingReiniger = products.filter(p => p.type === 'reiniger' && matchesProduct(p));
+    const matchingBeschichtung = products.filter(p => p.type === 'beschichtung' && matchesProduct(p));
+    const matchingZubehoer = products.filter(p => p.type === 'zubehoer' && matchesProduct(p));
+
+    // Sort sets: highlighted first, then by price descending (bigger sets first)
+    matchingSets.sort((a, b) => {
+        if (a.highlight && !b.highlight) return -1;
+        if (!a.highlight && b.highlight) return 1;
+        return parseFloat(b.price.replace(',', '.')) - parseFloat(a.price.replace(',', '.'));
+    });
+
+    // Build HTML
+    let html = `
+    <div class="result-summary">
+        <h3>Ihre Konfiguration</h3>
+        <div class="result-choices">
+            <span class="result-choice">${zielLabels[ziel]}</span>
+            ${verschmutzung ? `<span class="result-choice">${verschmutzungLabels[verschmutzung]}</span>` : ''}
+            <span class="result-choice">${oberflaecheLabels[oberflaeche]}</span>
+        </div>
+    </div>`;
+
+    // Hints based on selection
+    if (oberflaeche === 'beschichtet') {
+        html += `
+        <div class="result-hint">
+            <strong>Hinweis f\u00fcr beschichtetes Glas:</strong> Verwenden Sie keine stark sauren Reiniger und keine Stahlwolle auf nanobeschichtetem Glas, da die Beschichtung besch\u00e4digt werden kann. Die empfohlenen Produkte sind beschichtungsfreundlich.
+        </div>`;
+    } else if (verschmutzung === 'stark' && oberflaeche === 'unbeschichtet') {
+        html += `
+        <div class="result-hint">
+            <strong>Profi-Tipp:</strong> Bei stark verkalktem Glas empfehlen wir die Kombination aus DuschBlitz Pflegereiniger und Stahlwolle Typ 0000. Zuerst Reiniger aufspr\u00fchen, kurz einwirken lassen, dann mit feuchter Stahlwolle in kreisenden Bewegungen reinigen. Anschlie\u00dfend mit Wasser absp\u00fclen und mit dem BavariaClean-Tuch streifenfrei trocknen.
+        </div>`;
+    } else if (ziel === 'beides') {
+        html += `
+        <div class="result-hint">
+            <strong>Empfehlung:</strong> F\u00fcr das beste Ergebnis zuerst gr\u00fcndlich reinigen und dann die Glasversiegelung auftragen. Die Beschichtung haftet nur auf sauberem Glas optimal.
+        </div>`;
+    }
+
+    // Section 1: Sets
+    if (matchingSets.length > 0) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Empfohlene Komplett-Sets <span class="result-badge">${matchingSets.length}</span>
+            </div>
+            <div class="result-products">
+                ${matchingSets.map(p => productCard(p, true)).join('')}
+            </div>
+        </div>`;
+    }
+
+    // Section 2: Reiniger
+    if (matchingReiniger.length > 0 && (ziel === 'reinigung' || ziel === 'beides')) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">
+                Reinigungsprodukte <span class="result-badge" style="background: var(--primary)">${matchingReiniger.length}</span>
+            </div>
+            <div class="result-products">
+                ${matchingReiniger.map(p => productCard(p)).join('')}
+            </div>
+        </div>`;
+    }
+
+    // Section 3: Beschichtungen
+    if (matchingBeschichtung.length > 0 && (ziel === 'schutz' || ziel === 'beides')) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">
+                Glasversiegelungen & Nanobeschichtungen <span class="result-badge" style="background: var(--primary)">${matchingBeschichtung.length}</span>
+            </div>
+            <div class="result-products">
+                ${matchingBeschichtung.map(p => productCard(p)).join('')}
+            </div>
+        </div>`;
+    }
+
+    // Section 4: Zubehoer
+    if (matchingZubehoer.length > 0) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">
+                Zubeh\u00f6r <span class="result-badge" style="background: var(--text-light)">${matchingZubehoer.length}</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-light); margin-bottom: 12px;">Einzelne Komponenten zum Erg\u00e4nzen oder Nachkaufen.</p>
+            <div class="result-products">
+                ${matchingZubehoer.map(p => productCard(p)).join('')}
+            </div>
+        </div>`;
+    }
+
+    // No results at all?
+    const totalResults = matchingSets.length + matchingReiniger.length + matchingBeschichtung.length + matchingZubehoer.length;
+    if (totalResults === 0) {
+        html += `
+        <div class="result-section">
+            <div style="text-align:center; padding:40px 24px; color:var(--text-light); font-size:14px; background:var(--card-bg); border-radius:var(--radius); box-shadow:var(--shadow);">
+                <p style="font-size:18px; margin-bottom:8px;">Keine exakte \u00dcbereinstimmung</p>
+                <p>F\u00fcr Ihre Kombination haben wir keine perfekt passenden Produkte. Bitte passen Sie Ihre Auswahl an oder kontaktieren Sie uns f\u00fcr eine pers\u00f6nliche Beratung.</p>
+            </div>
+        </div>`;
+    }
+
+    container.innerHTML = html;
+}
+
+function productCard(p, isTopPick) {
+    const priceStr = p.priceMax ? `ab ${p.price} \u20ac` : `${p.price} \u20ac`;
+    const typeLabels = {
+        'set': 'Komplett-Set',
+        'reiniger': 'Reiniger',
+        'beschichtung': 'Glasschutz',
+        'zubehoer': 'Zubeh\u00f6r'
+    };
+
+    const imgUrl = productImages[p.handle];
+    const imgHtml = imgUrl
+        ? `<img class="result-product-img" src="${imgUrl}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+           <div class="result-product-img result-product-img-fallback" style="display:none; align-items:center; justify-content:center;">
+               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c8956c" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+           </div>`
+        : `<div class="result-product-img" style="display:flex; align-items:center; justify-content:center;">
+               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c8956c" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+           </div>`;
+
+    const highlightBadge = p.highlight
+        ? `<span style="display:inline-block; background:#e8f5e9; color:#27ae60; font-size:10px; font-weight:600; padding:2px 8px; border-radius:6px; margin-left:6px;">Top-Empfehlung</span>`
+        : isTopPick
+            ? `<span style="display:inline-block; background:#e8f5e9; color:#27ae60; font-size:10px; font-weight:600; padding:2px 8px; border-radius:6px; margin-left:6px;">Passend</span>`
+            : '';
+
+    return `
+    <div class="result-product-card">
+        <a class="result-product-inner" href="https://duschop.de/products/${p.handle}" target="_blank" rel="noopener">
+            ${imgHtml}
+            <div class="result-product-info">
+                <div class="result-product-title">${p.title}${highlightBadge}</div>
+                <div class="result-product-desc">${typeLabels[p.type]} &middot; ${p.desc}</div>
+                <div class="result-product-price">${priceStr}</div>
+            </div>
+            <div class="result-product-arrow">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </div>
+        </a>
+    </div>`;
+}
+
+// Init
+updateProgress();
+</script>
+
+</body>
+</html>
