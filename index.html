@@ -31,7 +31,7 @@
             --accent: #c8956c;
             --accent-light: #e8c4a8;
             --accent-glow: rgba(200, 149, 108, 0.15);
-            --bg: #f8f6f3;
+            --bg: #f5f0eb;
             --card-bg: #ffffff;
             --text: #2d2d2d;
             --text-light: #6b6b6b;
@@ -51,18 +51,20 @@
 
         /* Header */
         .header {
-            background: var(--primary);
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             color: white;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         .header-inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 16px 24px;
+            padding: 12px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -72,20 +74,15 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 14px;
             text-decoration: none;
             color: white;
         }
 
-        .logo-left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
         .logo-img {
-            height: 38px;
-            filter: brightness(0) invert(1) brightness(2) sepia(1) hue-rotate(170deg) saturate(3);
+            height: 36px;
+            filter: brightness(0) invert(1);
+            opacity: 0.92;
         }
 
         .logo-divider {
@@ -123,88 +120,149 @@
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: color 0.2s;
+            padding: 8px 18px;
+            border: 1px solid rgba(200, 149, 108, 0.3);
+            border-radius: 8px;
+            transition: all 0.2s;
         }
 
         .header-link:hover {
+            background: var(--accent);
             color: white;
+            border-color: var(--accent);
         }
 
-        /* Hero */
+        /* Hero with shower background */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            background: var(--primary);
             color: white;
-            padding: 60px 24px 80px;
-            text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 340px;
+            display: flex;
+            align-items: center;
         }
 
-        .hero::before {
-            content: '';
+        .hero-bg {
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            border-radius: 50%;
+            inset: 0;
+            background:
+                url('https://images.unsplash.com/photo-1620626011761-996317b8d101?w=1400&q=80&auto=format') center/cover no-repeat;
+            opacity: 0.25;
         }
 
-        .hero::after {
-            content: '';
+        .hero-overlay {
             position: absolute;
-            bottom: -30%;
-            left: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(200, 149, 108, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26,26,46,0.92) 0%, rgba(37,37,66,0.85) 50%, rgba(26,26,46,0.92) 100%);
         }
 
         .hero-content {
-            max-width: 700px;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 60px 24px 70px;
             position: relative;
             z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero-tagline {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-tagline::before {
+            content: '';
+            width: 30px;
+            height: 2px;
+            background: var(--accent);
         }
 
         .hero h1 {
-            font-size: clamp(32px, 5vw, 48px);
+            font-size: clamp(28px, 4vw, 42px);
             font-weight: 800;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
             margin-bottom: 16px;
-            line-height: 1.1;
+            line-height: 1.15;
         }
 
         .hero h1 span {
             color: var(--accent);
         }
 
-        .hero p {
-            font-size: clamp(16px, 2.5vw, 20px);
-            color: rgba(255,255,255,0.75);
+        .hero-desc {
+            font-size: clamp(15px, 2vw, 18px);
+            color: rgba(255,255,255,0.65);
             font-weight: 300;
-            max-width: 550px;
-            margin: 0 auto;
-            line-height: 1.6;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+        }
+
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-stat-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Decorative shower SVG */
+        .hero-visual {
+            flex-shrink: 0;
+            width: 200px;
+            opacity: 0.15;
+        }
+
+        .hero-visual svg {
+            width: 100%;
+            height: auto;
         }
 
         /* Tools Grid */
         .tools-section {
             max-width: 1200px;
-            margin: -40px auto 0;
-            padding: 0 24px 80px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
             position: relative;
-            z-index: 2;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
         .section-label {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .section-label span {
             display: inline-block;
             background: var(--accent);
             color: white;
@@ -214,6 +272,14 @@
             letter-spacing: 1.5px;
             padding: 6px 16px;
             border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.3px;
         }
 
         .tools-grid {
@@ -336,39 +402,70 @@
         /* Footer */
         .footer {
             background: var(--primary);
-            color: rgba(255,255,255,0.6);
-            text-align: center;
-            padding: 40px 24px;
+            color: rgba(255,255,255,0.5);
+            padding: 48px 24px;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logo {
+            height: 24px;
+            filter: brightness(0) invert(1);
+            opacity: 0.4;
         }
 
         .footer a {
-            color: var(--accent);
+            color: var(--accent-light);
             text-decoration: none;
             font-weight: 500;
         }
 
         .footer a:hover {
-            color: var(--accent-light);
-        }
-
-        .footer-inner {
-            max-width: 600px;
-            margin: 0 auto;
+            color: white;
         }
 
         .footer-brand {
             font-size: 14px;
-            margin-bottom: 8px;
         }
 
         .footer-links {
             font-size: 13px;
+            display: flex;
+            gap: 20px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero {
-                padding: 40px 20px 60px;
+            .hero-content {
+                flex-direction: column;
+                padding: 40px 20px 50px;
+                text-align: center;
+            }
+
+            .hero-tagline {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                display: none;
             }
 
             .tools-grid {
@@ -382,12 +479,20 @@
 
             .header-link {
                 font-size: 13px;
+                padding: 6px 12px;
             }
-        }
 
-        @media (max-width: 400px) {
-            .tools-grid {
-                grid-template-columns: 1fr;
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo-title {
+                font-size: 14px;
+            }
+
+            .logo-img {
+                height: 28px;
             }
         }
     </style>
@@ -397,13 +502,11 @@
     <header class="header">
         <div class="header-inner">
             <a href="/" class="logo">
-                <div class="logo-left">
-                    <img src="/Kristhal_Logo_Marke_trans.png" alt="Kristhal" class="logo-img">
-                    <div class="logo-divider"></div>
-                    <div class="logo-text-group">
-                        <div class="logo-title">DUSCHOP <span>TOOLS</span></div>
-                        <div class="logo-subtitle">Online-Shop der Marke Kristhal</div>
-                    </div>
+                <img src="/Kristhal_Logo_Marke_trans.png" alt="Kristhal" class="logo-img">
+                <div class="logo-divider"></div>
+                <div class="logo-text-group">
+                    <div class="logo-title">DUSCHOP <span>TOOLS</span></div>
+                    <div class="logo-subtitle">Online-Shop der Marke Kristhal</div>
                 </div>
             </a>
             <a href="https://duschop.de" class="header-link">&rarr; zum Shop</a>
@@ -411,15 +514,55 @@
     </header>
 
     <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1>Finden & konfigurieren Sie Ihr <span>Duschzubehör</span></h1>
-            <p>Interaktive Tools, die Ihnen helfen, genau das richtige Produkt für Ihre Glasdusche zu finden &ndash; schnell, einfach und kostenlos.</p>
+            <div class="hero-text">
+                <div class="hero-tagline">So machen Sie Ihre Dusche sch&ouml;n</div>
+                <h1>Finden Sie das richtige <span>Duschzubeh&ouml;r</span></h1>
+                <p class="hero-desc">Unsere interaktiven Produktfinder und Konfiguratoren helfen Ihnen, genau das passende Zubeh&ouml;r f&uuml;r Ihre Glasdusche zu finden &ndash; schnell, einfach und kostenlos.</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">8</div>
+                        <div class="hero-stat-label">Tools</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">20+</div>
+                        <div class="hero-stat-label">Jahre Erfahrung</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">100%</div>
+                        <div class="hero-stat-label">Kostenlos</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <svg viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="30" y="40" width="140" height="230" rx="4" stroke="white" stroke-width="2" opacity="0.6"/>
+                    <rect x="40" y="50" width="120" height="210" rx="2" stroke="white" stroke-width="1" opacity="0.3"/>
+                    <circle cx="100" cy="20" r="15" stroke="white" stroke-width="2" opacity="0.6"/>
+                    <line x1="100" y1="35" x2="100" y2="50" stroke="white" stroke-width="2" opacity="0.4"/>
+                    <circle cx="80" cy="100" r="2" fill="white" opacity="0.3"/>
+                    <circle cx="95" cy="120" r="2" fill="white" opacity="0.2"/>
+                    <circle cx="110" cy="105" r="2" fill="white" opacity="0.25"/>
+                    <circle cx="90" cy="140" r="1.5" fill="white" opacity="0.2"/>
+                    <circle cx="105" cy="155" r="1.5" fill="white" opacity="0.15"/>
+                    <circle cx="85" cy="170" r="2" fill="white" opacity="0.2"/>
+                    <circle cx="115" cy="135" r="1.5" fill="white" opacity="0.2"/>
+                    <circle cx="100" cy="180" r="2" fill="white" opacity="0.15"/>
+                    <circle cx="75" cy="150" r="1.5" fill="white" opacity="0.15"/>
+                    <circle cx="120" cy="165" r="1.5" fill="white" opacity="0.18"/>
+                    <line x1="155" y1="50" x2="155" y2="260" stroke="white" stroke-width="3" opacity="0.4"/>
+                    <circle cx="155" cy="150" r="6" stroke="white" stroke-width="2" fill="none" opacity="0.3"/>
+                </svg>
+            </div>
         </div>
     </section>
 
     <main class="tools-section">
-        <div class="section-label">
-            <span>8 Tools verfügbar</span>
+        <div class="section-header">
+            <div class="section-label">8 Tools verf&uuml;gbar</div>
+            <h2 class="section-title">W&auml;hlen Sie Ihren Produktfinder</h2>
         </div>
 
         <div class="tools-grid">
@@ -429,7 +572,7 @@
                 <div class="card-badge">Konfigurator</div>
                 <div class="card-icon">&#x2699;&#xFE0F;</div>
                 <h2 class="card-title">Dichtungs-Konfigurator</h2>
-                <p class="card-description">Konfigurieren Sie Ihre individuelle Duschdichtung nach Maß. Typ, Länge und Profil frei wählbar.</p>
+                <p class="card-description">Konfigurieren Sie Ihre individuelle Duschdichtung nach Ma&szlig;. Typ, L&auml;nge und Profil frei w&auml;hlbar.</p>
                 <div class="card-cta">
                     Jetzt konfigurieren
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -441,7 +584,7 @@
                 <div class="card-badge">Finder</div>
                 <div class="card-icon">&#x1F50D;</div>
                 <h2 class="card-title">Dichtungsfinder Seitlich</h2>
-                <p class="card-description">Finden Sie die passende Seitendichtung für Ihre Glasdusche. Schritt für Schritt zum richtigen Produkt.</p>
+                <p class="card-description">Finden Sie die passende Seitendichtung f&uuml;r Ihre Glasdusche. Schritt f&uuml;r Schritt zum richtigen Produkt.</p>
                 <div class="card-cta">
                     Jetzt starten
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -453,7 +596,7 @@
                 <div class="card-badge">Finder</div>
                 <div class="card-icon">&#x1F50D;</div>
                 <h2 class="card-title">Dichtungsfinder Unten</h2>
-                <p class="card-description">Finden Sie die richtige Unterdichtung für Ihre Duschtür. Wasserablauf perfekt abgedichtet.</p>
+                <p class="card-description">Finden Sie die richtige Unterdichtung f&uuml;r Ihre Duscht&uuml;r. Wasserablauf perfekt abgedichtet.</p>
                 <div class="card-cta">
                     Jetzt starten
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -465,7 +608,7 @@
                 <div class="card-badge">Finder</div>
                 <div class="card-icon">&#x1F9F2;</div>
                 <h2 class="card-title">Magnetdichtung Finder</h2>
-                <p class="card-description">Finden Sie das passende Magnetdichtungs-Set für Ihre Duschkabine. Exakter Halt, perfekte Abdichtung.</p>
+                <p class="card-description">Finden Sie das passende Magnetdichtungs-Set f&uuml;r Ihre Duschkabine. Exakter Halt, perfekte Abdichtung.</p>
                 <div class="card-cta">
                     Jetzt starten
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -477,7 +620,7 @@
                 <div class="card-badge">Finder</div>
                 <div class="card-icon">&#x1F3A8;</div>
                 <h2 class="card-title">Farbenfinder</h2>
-                <p class="card-description">Finden Sie die perfekte Farbe für Ihr Duschzubehör. Alle verfügbaren Farben auf einen Blick.</p>
+                <p class="card-description">Finden Sie die perfekte Farbe f&uuml;r Ihr Duschzubeh&ouml;r. Alle verf&uuml;gbaren Farben auf einen Blick.</p>
                 <div class="card-cta">
                     Farben entdecken
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -489,7 +632,7 @@
                 <div class="card-badge">Konfigurator</div>
                 <div class="card-icon">&#x1F527;</div>
                 <h2 class="card-title">Metallprofile-Konfigurator</h2>
-                <p class="card-description">Konfigurieren Sie Ihr Metallprofil für die Glasdusche. Profil, Länge und Oberfläche individuell wählen.</p>
+                <p class="card-description">Konfigurieren Sie Ihr Metallprofil f&uuml;r die Glasdusche. Profil, L&auml;nge und Oberfl&auml;che individuell w&auml;hlen.</p>
                 <div class="card-cta">
                     Jetzt konfigurieren
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -501,7 +644,7 @@
                 <div class="card-badge">Konfigurator</div>
                 <div class="card-icon">&#x1F4CF;</div>
                 <h2 class="card-title">Stabistangen-Konfigurator</h2>
-                <p class="card-description">Konfigurieren Sie Ihre Stabilisationsstange. Material, Länge und Befestigung nach Ihren Wünschen.</p>
+                <p class="card-description">Konfigurieren Sie Ihre Stabilisationsstange. Material, L&auml;nge und Befestigung nach Ihren W&uuml;nschen.</p>
                 <div class="card-cta">
                     Jetzt konfigurieren
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -513,7 +656,7 @@
                 <div class="card-badge">Konfigurator</div>
                 <div class="card-icon">&#x1F3E0;</div>
                 <h2 class="card-title">Wintergarten-Konfigurator</h2>
-                <p class="card-description">Konfigurieren Sie Ihre Wintergarten-Verglasung. Maße, Glasart und Zubehör individuell zusammenstellen.</p>
+                <p class="card-description">Konfigurieren Sie Ihre Wintergarten-Verglasung. Ma&szlig;e, Glasart und Zubeh&ouml;r individuell zusammenstellen.</p>
                 <div class="card-cta">
                     Jetzt konfigurieren
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -525,8 +668,14 @@
 
     <footer class="footer">
         <div class="footer-inner">
-            <p class="footer-brand">Ein Service von <a href="https://duschop.de">duschop.de</a> &ndash; Kristhal Duschshop</p>
-            <p class="footer-links"><a href="https://duschop.de/policies/legal-notice">Impressum</a> &middot; <a href="https://duschop.de/policies/privacy-policy">Datenschutz</a></p>
+            <div class="footer-left">
+                <img src="/Kristhal_Logo_Marke_trans.png" alt="Kristhal" class="footer-logo">
+                <span class="footer-brand">Ein Service von <a href="https://duschop.de">duschop.de</a></span>
+            </div>
+            <div class="footer-links">
+                <a href="https://duschop.de/policies/legal-notice">Impressum</a>
+                <a href="https://duschop.de/policies/privacy-policy">Datenschutz</a>
+            </div>
         </div>
     </footer>
 
