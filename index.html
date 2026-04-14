@@ -143,19 +143,6 @@
             align-items: center;
         }
 
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background:
-                url('https://images.unsplash.com/photo-1620626011761-996317b8d101?w=1400&q=80&auto=format') center/cover no-repeat;
-            opacity: 0.25;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(26,26,46,0.92) 0%, rgba(37,37,66,0.85) 50%, rgba(26,26,46,0.92) 100%);
-        }
 
         .hero-content {
             max-width: 1200px;
@@ -163,14 +150,10 @@
             padding: 60px 24px 70px;
             position: relative;
             z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
         }
 
         .hero-text {
-            max-width: 600px;
+            max-width: 800px;
         }
 
         .hero-tagline {
@@ -237,17 +220,6 @@
             margin-top: 4px;
         }
 
-        /* Decorative shower SVG */
-        .hero-visual {
-            flex-shrink: 0;
-            width: 200px;
-            opacity: 0.15;
-        }
-
-        .hero-visual svg {
-            width: 100%;
-            height: auto;
-        }
 
         /* Tools Grid */
         .tools-section {
@@ -514,8 +486,6 @@
     </header>
 
     <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="hero-text">
                 <div class="hero-tagline">So machen Sie Ihre Dusche sch&ouml;n</div>
@@ -535,26 +505,6 @@
                         <div class="hero-stat-label">Kostenlos</div>
                     </div>
                 </div>
-            </div>
-            <div class="hero-visual">
-                <svg viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="30" y="40" width="140" height="230" rx="4" stroke="white" stroke-width="2" opacity="0.6"/>
-                    <rect x="40" y="50" width="120" height="210" rx="2" stroke="white" stroke-width="1" opacity="0.3"/>
-                    <circle cx="100" cy="20" r="15" stroke="white" stroke-width="2" opacity="0.6"/>
-                    <line x1="100" y1="35" x2="100" y2="50" stroke="white" stroke-width="2" opacity="0.4"/>
-                    <circle cx="80" cy="100" r="2" fill="white" opacity="0.3"/>
-                    <circle cx="95" cy="120" r="2" fill="white" opacity="0.2"/>
-                    <circle cx="110" cy="105" r="2" fill="white" opacity="0.25"/>
-                    <circle cx="90" cy="140" r="1.5" fill="white" opacity="0.2"/>
-                    <circle cx="105" cy="155" r="1.5" fill="white" opacity="0.15"/>
-                    <circle cx="85" cy="170" r="2" fill="white" opacity="0.2"/>
-                    <circle cx="115" cy="135" r="1.5" fill="white" opacity="0.2"/>
-                    <circle cx="100" cy="180" r="2" fill="white" opacity="0.15"/>
-                    <circle cx="75" cy="150" r="1.5" fill="white" opacity="0.15"/>
-                    <circle cx="120" cy="165" r="1.5" fill="white" opacity="0.18"/>
-                    <line x1="155" y1="50" x2="155" y2="260" stroke="white" stroke-width="3" opacity="0.4"/>
-                    <circle cx="155" cy="150" r="6" stroke="white" stroke-width="2" fill="none" opacity="0.3"/>
-                </svg>
             </div>
         </div>
     </section>
