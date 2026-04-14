@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montagebedarf-Konfigurator | duschop.de</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #c8956c;
+            --accent-light: #e8c4a8;
+            --bg: #f8f6f3;
+            --card-bg: #ffffff;
+            --text: #2d2d2d;
+            --text-light: #6b6b6b;
+            --border: #e8e4df;
+            --shadow: 0 2px 20px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --success: #27ae60;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 14px; }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+        .logo-text span { font-size: 12px; opacity: 0.65; font-weight: 400; }
+
+        .header-badges { display: flex; gap: 8px; }
+
+        .header-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: white;
+            padding: 48px 24px 56px;
+            text-align: center;
+        }
+
+        .hero h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .hero p { font-size: 16px; opacity: 0.75; max-width: 620px; margin: 0 auto; }
+
+        /* Progress Bar */
+        .progress-bar {
+            max-width: 800px;
+            margin: -28px auto 0;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .progress-inner {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            right: 24px;
+            height: 3px;
+            background: var(--border);
+            z-index: 0;
+        }
+
+        .progress-steps::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            height: 3px;
+            background: var(--accent);
+            z-index: 1;
+            transition: width 0.4s ease;
+            width: var(--progress, 0%);
+        }
+
+        .step-dot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .step-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 3px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active .step-circle {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            box-shadow: 0 4px 12px rgba(200,149,108,0.4);
+        }
+
+        .step-dot.done .step-circle {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+
+        .step-dot.active .step-label { color: var(--accent); font-weight: 600; }
+        .step-dot.done .step-label { color: var(--success); }
+
+        /* Main Configurator */
+        .configurator {
+            max-width: 900px;
+            margin: 32px auto;
+            padding: 0 24px;
+        }
+
+        .step-panel {
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .step-panel.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        .step-subtitle {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 28px;
+        }
+
+        /* Option Cards */
+        .options-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .options-grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+        .options-grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+        .options-grid.cols-4 { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+
+        .option-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .option-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .option-card.selected {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(200,149,108,0.06) 0%, rgba(200,149,108,0.02) 100%);
+            box-shadow: 0 4px 20px rgba(200,149,108,0.15);
+        }
+
+        .option-card.selected::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 50%;
+            background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 14px;
+        }
+
+        .option-icon { margin-bottom: 12px; }
+        .option-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .option-desc { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+        .option-meta {
+            margin-top: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #fff8f0;
+            border: 1px solid var(--accent-light);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .info-box strong { color: var(--accent); }
+
+        /* Navigation */
+        .step-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) { background: #b8855c; transform: translateY(-1px); }
+        .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .btn-secondary {
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover { background: #eee9e3; }
+
+        .btn-restart {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-restart:hover { background: #2a2a4e; }
+
+        /* Result Styles */
+        .result-summary {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .result-summary h3 { font-size: 18px; margin-bottom: 12px; }
+
+        .result-choices {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .result-choice {
+            background: linear-gradient(135deg, rgba(200,149,108,0.12) 0%, rgba(200,149,108,0.06) 100%);
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(200,149,108,0.2);
+        }
+
+        .result-hint {
+            background: #fff8f0;
+            border: 1px solid var(--accent-light);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .result-hint strong { color: var(--accent); }
+
+        .result-section {
+            margin-bottom: 28px;
+        }
+
+        .result-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .result-badge {
+            background: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .result-products {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .result-product-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1.5px solid var(--border);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .result-product-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow);
+        }
+
+        .result-product-inner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .result-product-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: var(--bg);
+            flex-shrink: 0;
+        }
+
+        .result-product-info { flex: 1; min-width: 0; }
+
+        .result-product-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .result-product-desc {
+            font-size: 12px;
+            color: var(--text-light);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .result-product-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-top: 6px;
+        }
+
+        .result-product-arrow {
+            flex-shrink: 0;
+            color: var(--text-light);
+            transition: color 0.2s;
+        }
+
+        .result-product-card:hover .result-product-arrow { color: var(--accent); }
+
+        .result-product-img-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header-badges { display: none; }
+            .header-inner { padding: 16px; }
+            .hero { padding: 32px 16px 44px; }
+            .hero h2 { font-size: 22px; }
+            .progress-bar { padding: 0 16px; }
+            .progress-inner { padding: 16px 20px; }
+            .step-label { font-size: 10px; }
+            .step-circle { width: 30px; height: 30px; font-size: 12px; }
+            .configurator { padding: 0 16px; margin-top: 24px; }
+            .step-title { font-size: 18px; }
+            .options-grid.cols-2,
+            .options-grid.cols-3,
+            .options-grid.cols-4 { grid-template-columns: 1fr; }
+            .option-card { padding: 18px; }
+            .result-product-inner { padding: 12px; gap: 12px; }
+            .result-product-img { width: 64px; height: 64px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <path d="M12 12L12 18"/>
+                    <path d="M9 15L15 15"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <h1>Montagebedarf-Finder</h1>
+                <span>Konfigurator &middot; duschop.de</span>
+            </div>
+        </div>
+        <div class="header-badges">
+            <div class="header-badge">Individuelle Empfehlung</div>
+            <div class="header-badge">30+ Produkte</div>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <h2>Das richtige Montagematerial f&uuml;r Ihre Dusche</h2>
+    <p>In wenigen Schritten zum passenden Montagezubeh&ouml;r &ndash; ob D&uuml;bel, Silikon, Abdichtung oder Kleber f&uuml;r Ihre Duschkabine.</p>
+</section>
+
+<div class="progress-bar">
+    <div class="progress-inner">
+        <div class="progress-steps" id="progressSteps" style="--progress: 0%">
+            <div class="step-dot active" data-step="0">
+                <div class="step-circle">1</div>
+                <div class="step-label">Vorhaben</div>
+            </div>
+            <div class="step-dot" data-step="1">
+                <div class="step-circle">2</div>
+                <div class="step-label">Befestigung</div>
+            </div>
+            <div class="step-dot" data-step="2">
+                <div class="step-circle">3</div>
+                <div class="step-label">Ergebnis</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="configurator">
+
+    <!-- STEP 0: Vorhaben -->
+    <div class="step-panel active" id="step0">
+        <h3 class="step-title">Was steht bei Ihnen an?</h3>
+        <p class="step-subtitle">W&auml;hlen Sie Ihr Projekt &ndash; wir empfehlen das passende Montagematerial.</p>
+
+        <div class="options-grid cols-2">
+            <div class="option-card" data-value="glasdusche" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="6" y="4" width="18" height="32" rx="1" fill="none"/>
+                        <path d="M24 12L34 12L34 36L6 36"/>
+                        <circle cx="22" cy="20" r="1.5" fill="#c8956c"/>
+                        <path d="M10 8L10 32" opacity="0.3"/>
+                        <path d="M14 8L14 32" opacity="0.3"/>
+                        <path d="M18 8L18 32" opacity="0.3"/>
+                    </svg>
+                </div>
+                <div class="option-name">Glasdusche montieren</div>
+                <div class="option-desc">Duschabtrennung, Duschkabine oder Glaswand befestigen. D&uuml;bel, Schrauben, Unterlagen und Dichtmaterial.</div>
+                <div class="option-meta">Befestigung &amp; Montage</div>
+            </div>
+
+            <div class="option-card" data-value="duschwanne" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 28L36 28"/>
+                        <path d="M6 28L6 32C6 34 8 36 10 36L30 36C32 36 34 34 34 32L34 28"/>
+                        <path d="M8 28L8 20C8 18 10 16 12 16L28 16C30 16 32 18 32 20L32 28"/>
+                        <path d="M4 28L4 24" opacity="0.5"/>
+                        <path d="M36 28L36 24" opacity="0.5"/>
+                        <circle cx="20" cy="32" r="1.5" fill="#c8956c"/>
+                    </svg>
+                </div>
+                <div class="option-name">Duschwanne abdichten</div>
+                <div class="option-desc">Duschwanne oder Duschrinne fachgerecht einbauen und den Wandanschluss normgerecht abdichten.</div>
+                <div class="option-meta">Wannendichtband &amp; Silikon</div>
+            </div>
+
+            <div class="option-card" data-value="nassbereich" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="6" y="6" width="28" height="28" rx="2" fill="none"/>
+                        <path d="M6 14L34 14" opacity="0.3"/>
+                        <path d="M6 22L34 22" opacity="0.3"/>
+                        <path d="M6 30L34 30" opacity="0.3"/>
+                        <path d="M14 6L14 34" opacity="0.3"/>
+                        <path d="M22 6L22 34" opacity="0.3"/>
+                        <path d="M30 6L30 34" opacity="0.3"/>
+                        <path d="M16 10L20 6L24 10" stroke="#c8956c" stroke-width="2" fill="none"/>
+                        <path d="M20 6L20 20"/>
+                        <circle cx="20" cy="24" r="2" fill="#c8956c" opacity="0.4"/>
+                        <circle cx="20" cy="30" r="1.5" fill="#c8956c" opacity="0.3"/>
+                    </svg>
+                </div>
+                <div class="option-name">Nassbereich abdichten</div>
+                <div class="option-desc">Wand und Boden unter Fliesen wasserdicht machen. Abdichtungsbahn, Dichtband, Ecken und Manschetten nach DIN 18534.</div>
+                <div class="option-meta">Abdichtung unter Fliesen</div>
+            </div>
+
+            <div class="option-card" data-value="fugen" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="4" width="14" height="32" rx="1" fill="none"/>
+                        <rect x="22" y="4" width="14" height="32" rx="1" fill="none"/>
+                        <path d="M18 8L22 8" opacity="0.4"/>
+                        <path d="M18 14L22 14" opacity="0.4"/>
+                        <path d="M18 20L22 20" opacity="0.4"/>
+                        <path d="M18 26L22 26" opacity="0.4"/>
+                        <path d="M18 32L22 32" opacity="0.4"/>
+                        <path d="M19 6L21 6L21 34L19 34Z" fill="#c8956c" opacity="0.15"/>
+                    </svg>
+                </div>
+                <div class="option-name">Silikonfugen erneuern</div>
+                <div class="option-desc">Alte Silikonfugen ersetzen, Anschlussprofile anbringen oder Fugen zwischen Wand und Duschwanne neu verfugen.</div>
+                <div class="option-meta">Silikon &amp; Fugenprofile</div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>Tipp:</strong> F&uuml;r eine komplette Duschmontage ben&ouml;tigen Sie oft Material aus mehreren Bereichen. Starten Sie einfach mehrere Durchl&auml;ufe, um alle Materialien zusammenzustellen.
+        </div>
+
+        <div class="step-nav">
+            <div></div>
+            <button class="btn btn-primary" id="nextBtn0" disabled onclick="nextStep(0)">
+                Weiter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 1: Befestigungsart (nur bei Glasdusche) -->
+    <div class="step-panel" id="step1">
+        <h3 class="step-title">Wie m&ouml;chten Sie befestigen?</h3>
+        <p class="step-subtitle">Die Befestigungsart bestimmt, welches Montagematerial Sie ben&ouml;tigen.</p>
+
+        <div class="options-grid cols-3">
+            <div class="option-card" data-value="bohren" onclick="selectOption(1, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 32L18 22"/>
+                        <path d="M18 22L28 12"/>
+                        <path d="M28 12L32 8"/>
+                        <circle cx="32" cy="8" r="3" fill="none"/>
+                        <path d="M14 26L10 30"/>
+                        <path d="M20 14L22 12" opacity="0.4"/>
+                        <path d="M24 10L26 8" opacity="0.4"/>
+                    </svg>
+                </div>
+                <div class="option-name">Bohren</div>
+                <div class="option-desc">Klassische Montage mit D&uuml;bel und Schraube. Maximaler Halt, ideal f&uuml;r schwere Glaselemente.</div>
+                <div class="option-meta">D&uuml;bel &amp; Schrauben</div>
+            </div>
+
+            <div class="option-card" data-value="kleben" onclick="selectOption(1, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 8L12 26C12 28 14 30 16 30L24 30C26 30 28 28 28 26L28 8"/>
+                        <path d="M12 8L28 8"/>
+                        <path d="M18 30L18 36"/>
+                        <path d="M22 30L22 36"/>
+                        <path d="M16 36L24 36"/>
+                        <path d="M12 14L28 14" opacity="0.3"/>
+                    </svg>
+                </div>
+                <div class="option-name">Kleben</div>
+                <div class="option-desc">Bohrfreie Montage mit MS-Polymer Kleber oder Hochleistungs-Klebeband. Keine L&ouml;cher in den Fliesen.</div>
+                <div class="option-meta">Kleber &amp; Klebeband</div>
+            </div>
+
+            <div class="option-card" data-value="beides" onclick="selectOption(1, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 32L14 24"/>
+                        <path d="M14 24L20 18"/>
+                        <circle cx="22" cy="16" r="2" fill="none"/>
+                        <path d="M26 12L26 28C26 29 27 30 28 30L34 30"/>
+                        <path d="M30 30L30 34"/>
+                        <path d="M28 34L32 34"/>
+                        <path d="M26 18L34 18" opacity="0.3"/>
+                    </svg>
+                </div>
+                <div class="option-name">Bohren &amp; Kleben</div>
+                <div class="option-desc">Kombination beider Methoden. H&auml;ufig bei Duschkabinen: Wandprofile verschraubt, Glasklemmen verklebt.</div>
+                <div class="option-meta">Komplett-L&ouml;sung</div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>Hinweis:</strong> Im Nassbereich empfehlen wir grunds&auml;tzlich abdichtende D&uuml;bel (z.B. TOX Aqua Stop Pro), damit kein Wasser hinter die Fliese gelangt. Bei bohrfreier Montage ist ein hochwertiger MS-Polymer Kleber die beste Wahl &ndash; er haftet auch auf feuchten Untergr&uuml;nden.
+        </div>
+
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(1)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-primary" id="nextBtn1" disabled onclick="nextStep(1)">
+                Ergebnis anzeigen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 2: Ergebnis -->
+    <div class="step-panel" id="step2">
+        <div id="resultsContent"></div>
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(2)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-restart" onclick="restart()">Neue Konfiguration starten</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// Product Database
+// ============================================================
+const products = [
+    // === BEFESTIGUNG (Duebel & Schrauben) ===
+    {
+        id: 'aqua-stop-pro',
+        title: 'TOX Aqua Stop Pro \u2013 Abdichtender Allzweckd\u00fcbel',
+        handle: 'allzweckdubel-mit-schraube-fur-dusche-u-bad-aqua-stop-pro',
+        type: 'duebel',
+        vorhaben: ['glasdusche'],
+        befestigung: ['bohren', 'beides'],
+        price: '0,79',
+        priceMax: '19,99',
+        desc: 'D\u00fcbel mit integrierter Dichtscheibe. Verhindert Wassereintritt ins Bohrloch \u2013 speziell f\u00fcr Nassbereich und Dusche.',
+        isMain: true,
+        highlight: true
+    },
+    {
+        id: 'allzweckduebel',
+        title: 'Allzweckd\u00fcbel f\u00fcr Dusche und Bad \u2013 6x36, 6x51, 8x51 mm',
+        handle: 'allzweckdubel-fur-dusche-u-bad-6x36-6x51-oder-8x51-mm',
+        type: 'duebel',
+        vorhaben: ['glasdusche'],
+        befestigung: ['bohren', 'beides'],
+        price: '7,95',
+        priceMax: '11,65',
+        desc: 'Standard-Allzweckd\u00fcbel in verschiedenen Gr\u00f6\u00dfen. Zuverl\u00e4ssiger Halt in Beton, Vollstein und Lochstein.',
+        isMain: false
+    },
+    {
+        id: 'tox-tri',
+        title: 'TOX Allzweckd\u00fcbel TRI f\u00fcr Dusche und Bad',
+        handle: 'tox-allzweckduebel-tri',
+        type: 'duebel',
+        vorhaben: ['glasdusche'],
+        befestigung: ['bohren', 'beides'],
+        price: '0,15',
+        priceMax: '11,65',
+        desc: 'Dreifach-Spreizd\u00fcbel mit optimaler Verankerung in Voll- und Hohlbaustoffen. F\u00fcr leichte bis mittlere Befestigungen.',
+        isMain: false
+    },
+    {
+        id: 'blechschrauben',
+        title: 'Blechschrauben A2 TX 3,9x16 mm inkl. Abdeckkappen',
+        handle: 'schrauben-zum-verbinden-von-duschprofilen-aus-aluminium-art-nr-59881650',
+        type: 'schrauben',
+        vorhaben: ['glasdusche'],
+        befestigung: ['bohren', 'beides'],
+        price: '0,50',
+        priceMax: '3,50',
+        desc: 'Edelstahl-Schrauben (A2) mit Torx-Antrieb zum Befestigen von Duschprofilen. Inkl. Abdeckkappen f\u00fcr saubere Optik.',
+        isMain: false
+    },
+    {
+        id: 'unterlagen',
+        title: 'Transparente Unterlagen f\u00fcr rahmenlose Glasduschen',
+        handle: 'transparente-unterlagen-fur-rahmenlose-glasduschen',
+        type: 'zubehoer-montage',
+        vorhaben: ['glasdusche'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '0,25',
+        priceMax: '39,00',
+        desc: 'Distanzunterlagen aus transparentem Kunststoff (6\u00d751 mm). Gleichen Unebenheiten aus und sch\u00fctzen Glas vor direktem Metallkontakt.',
+        isMain: false
+    },
+    {
+        id: 'trenneinlagen',
+        title: 'Trenneinlagen transparent 30x50 mm',
+        handle: 'einlagen-zur-trennung-von-glas-und-metall',
+        type: 'zubehoer-montage',
+        vorhaben: ['glasdusche'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '0,75',
+        priceMax: '0,95',
+        desc: 'Trenneinlagen verhindern direkten Kontakt zwischen Glas und Metall. Wichtig f\u00fcr spannungsfreie Montage und Glasschutz.',
+        isMain: false
+    },
+
+    // === KLEBER & KLEBEBAND ===
+    {
+        id: 'ms80',
+        title: 'Zettex MS 80 Strongbond \u2013 Premium MS-Polymer Kleber',
+        handle: 'zettex-ms-polymerkleber-strongbond-ms-80-maximale-klebkraft-fur-hoch-beanspruchte-flachen',
+        type: 'kleber',
+        vorhaben: ['glasdusche'],
+        befestigung: ['kleben', 'beides'],
+        price: '14,90',
+        desc: 'Maximale Klebkraft f\u00fcr hochbeanspruchte Fl\u00e4chen. Haftet auf Glas, Metall, Fliesen, Holz und Kunststoff. \u00dcberstreichbar, silikonfrei.',
+        isMain: true,
+        highlight: true
+    },
+    {
+        id: 'ms70',
+        title: 'Zettex MS 70 High Tack \u2013 MS-Polymer Kleber',
+        handle: 'zettex-ms-70',
+        type: 'kleber',
+        vorhaben: ['glasdusche'],
+        befestigung: ['kleben', 'beides'],
+        price: '12,90',
+        desc: 'Sofortige Anfangshaftung \u2013 ideal wenn Fixierung ohne Hilfsmittel n\u00f6tig ist. Universeller MS-Polymer Montage-Kleber.',
+        isMain: false
+    },
+    {
+        id: 'ms60',
+        title: 'Zettex MS 60 Polymer \u2013 Professioneller Universalkleber',
+        handle: 'zettex-ms-polymerkleber-ms-60-der-flexible-universalkleber',
+        type: 'kleber',
+        vorhaben: ['glasdusche'],
+        befestigung: ['kleben', 'beides'],
+        price: '10,90',
+        desc: 'Flexibler Universalkleber mit guter Haftung auf vielen Untergr\u00fcnden. Ideal f\u00fcr dauerelastische Verklebungen.',
+        isMain: false
+    },
+    {
+        id: 'klebeband',
+        title: 'Acrylat Hochleistungs-Klebeband transparent doppelseitig',
+        handle: 'acrylat-hochleistungsklebeband-transparent-doppelseitig-klebend-art-nr-2800',
+        type: 'kleber',
+        vorhaben: ['glasdusche'],
+        befestigung: ['kleben', 'beides'],
+        price: '14,90',
+        desc: 'Doppelseitiges Acrylat-Klebeband f\u00fcr dauerhafte Verklebungen. Transparent und extrem haltbar \u2013 auch auf glatten Oberfl\u00e4chen.',
+        isMain: false
+    },
+
+    // === SILIKON ===
+    {
+        id: 'otto-s100',
+        title: 'OTTO S100 Premium Sanit\u00e4r-Silikon 300 ml transparent',
+        handle: 'sanitaer-silikon-otto-s100-premium-qualitat-300-ml',
+        type: 'silikon',
+        vorhaben: ['glasdusche', 'duschwanne', 'fugen'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '10,90',
+        desc: 'Premium Sanit\u00e4r-Silikon mit Fungizid-Ausr\u00fcstung gegen Schimmel. Pilzhemmend, hochelastisch, essigs\u00e4urefrei. Der Profi-Standard.',
+        isMain: true,
+        highlight: true
+    },
+    {
+        id: 'fertigfuge',
+        title: 'ee-zee Fertigfuge \u2013 Perfekte Silikonfuge ohne Werkzeug',
+        handle: 'fertigfuge_silikonfuge',
+        type: 'silikon',
+        vorhaben: ['duschwanne', 'fugen'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '19,90',
+        priceMax: '69,90',
+        desc: 'Selbstklebendes Fugenband als Silikonersatz. Saubere, gleichm\u00e4\u00dfige Fuge ohne Kartuschenpistole \u2013 einfach aufkleben, fertig.',
+        isMain: false
+    },
+    {
+        id: 'silikonspray',
+        title: 'Silikonspray farblos',
+        handle: 'care-silikonspray',
+        type: 'silikon',
+        vorhaben: ['glasdusche', 'fugen'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '9,50',
+        desc: 'Schmiert, sch\u00fctzt und pflegt Gummidichtungen, Scharniere und Laufschienen. H\u00e4lt Dusch-Beschl\u00e4ge g\u00e4ngig.',
+        isMain: false
+    },
+
+    // === FUGENPROFILE ===
+    {
+        id: 'fugenprofil',
+        title: 'Fugenabdeckprofil PVC Wei\u00df BP/25 \u2013 Duschwanne zu Wand',
+        handle: 'fugenabdeckprofil-pvc-weiss-bp25-ubergang-duschwanne-zu-fliesenwand',
+        type: 'fugenprofil',
+        vorhaben: ['duschwanne', 'fugen'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '8,90',
+        priceMax: '21,90',
+        desc: 'Flexibles PVC-Profil zum Abdecken der Fuge zwischen Duschwanne und Fliesenwand. Verhindert Wassereintritt und sieht sauber aus.',
+        isMain: false
+    },
+    {
+        id: 'fugenprofil-zubehoer',
+        title: 'Zubeh\u00f6r-Set f\u00fcr Fugenabdeckprofil BPT/25',
+        handle: 'zubehor-set-fur-fugenabdeckprofil-bpt-25-innenecke-endkappen-weiss',
+        type: 'fugenprofil',
+        vorhaben: ['duschwanne', 'fugen'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '7,90',
+        desc: 'Innenecke und Endkappen in Wei\u00df f\u00fcr das Fugenabdeckprofil BPT/25. F\u00fcr einen sauberen Abschluss an Ecken und Enden.',
+        isMain: false
+    },
+
+    // === ABDICHTUNG (Mapei Nassbereich unter Fliesen) ===
+    {
+        id: 'mapei-abdichtungsbahn',
+        title: 'Mapei Mapeguard WP 200 \u2013 Abdichtungsbahn f\u00fcr Dusche & Bad',
+        handle: 'mapei_abdichtungsbahn',
+        type: 'abdichtung',
+        vorhaben: ['nassbereich'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '39,90',
+        priceMax: '349,00',
+        desc: 'Hochflexible Verbund-Abdichtungsbahn f\u00fcr Wand und Boden. DIN 18534 konform. Direkt unter Fliesen verlegbar \u2013 ohne Trocknungszeit.',
+        isMain: true,
+        highlight: true
+    },
+    {
+        id: 'mapei-dichtband',
+        title: 'Mapei Mapeguard ST \u2013 Dichtband f\u00fcr Ecken & Fugen',
+        handle: 'mapei_dichtband_dusche',
+        type: 'abdichtung',
+        vorhaben: ['nassbereich'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '5,90',
+        priceMax: '54,90',
+        desc: 'Elastisches Dichtband zum Abdichten von Boden-Wand-Anschl\u00fcssen und Bewegungsfugen. Wasserdicht nach DIN 18534.',
+        isMain: true
+    },
+    {
+        id: 'mapei-dichtecke-innen',
+        title: 'Mapei Dichtecke Innen \u2013 12x12 cm, 90\u00b0',
+        handle: 'mapeguard-ic-dichtecke-innen',
+        type: 'abdichtung',
+        vorhaben: ['nassbereich'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '6,90',
+        desc: 'Vorgefertigte Dichtecke f\u00fcr 90\u00b0-Innenecken. Passt sich flexibel an und gew\u00e4hrleistet wasserdichte Eckabdichtung.',
+        isMain: false
+    },
+    {
+        id: 'mapei-dichtecke-aussen',
+        title: 'Mapei Mapeguard EC \u2013 Dichtecke Au\u00dfen 270\u00b0',
+        handle: 'mapeguard-ec-dichtecke-aussen-art-nr-2853025',
+        type: 'abdichtung',
+        vorhaben: ['nassbereich'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '6,90',
+        desc: 'Vorgefertigte Dichtecke f\u00fcr Au\u00dfenecken. Einfach einbauen f\u00fcr l\u00fcckenlose Abdichtung an vorspringenden Ecken.',
+        isMain: false
+    },
+    {
+        id: 'mapei-manschette',
+        title: 'Mapei Mapeguard PC \u2013 Dichtmanschette Rohr 15\u201338 mm',
+        handle: 'mapeguard-pc',
+        type: 'abdichtung',
+        vorhaben: ['nassbereich'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '6,95',
+        desc: 'Rohrdurchf\u00fchrungsmanschette f\u00fcr Leitungen mit 15\u201338 mm Durchmesser. Abdichtung an Rohrdurchf\u00fchrungen in Wand und Boden.',
+        isMain: false
+    },
+    {
+        id: 'mapeflex',
+        title: 'Mapei Mapeflex MS45 \u2013 Hybrid-Dichtstoff f\u00fcr Dusche & Bad',
+        handle: 'mapeflex-ms45-ms-dicht-und-klebstoff',
+        type: 'abdichtung',
+        vorhaben: ['nassbereich'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '11,50',
+        desc: 'MS-Polymer Dicht- und Klebstoff. Dauerhaft elastisch, schimmelhemmend, \u00fcberstreichbar. Zum Verkleben der Abdichtungsbahn.',
+        isMain: false
+    },
+
+    // === WANNENDICHTBAND ===
+    {
+        id: 'densaband-basis',
+        title: 'DENSABAND BASIS \u2013 Wannendichtband DIN 18534',
+        handle: 'densaband_basis',
+        type: 'wannendichtband',
+        vorhaben: ['duschwanne'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '49,90',
+        priceMax: '59,90',
+        desc: 'Selbstklebendes Dichtband f\u00fcr Wannenrand-Abdichtung. DIN 18534 konform \u2013 einfach auf den Wannenrand kleben und verfliesen.',
+        isMain: true,
+        highlight: true
+    },
+    {
+        id: 'densaband-schallschutz',
+        title: 'DENSABAND SCHALLSCHUTZ \u2013 Wannendichtband DIN 18534 + DIN 4109',
+        handle: 'densaband_schallschutz-dichtband',
+        type: 'wannendichtband',
+        vorhaben: ['duschwanne'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '98,90',
+        desc: 'Premium-Wannendichtband mit zus\u00e4tzlichem Schallschutz nach DIN 4109. Verhindert K\u00f6rperschall\u00fcbertragung in angrenzende R\u00e4ume.',
+        isMain: true
+    },
+    {
+        id: 'densaband-bohrlochset',
+        title: 'DENSABAND Bohrlochset \u2013 Wasserdicht nach DIN 18534',
+        handle: 'densaband-bohrlochset',
+        type: 'abdichtung',
+        vorhaben: ['glasdusche', 'nassbereich'],
+        befestigung: ['bohren', 'beides'],
+        price: '19,95',
+        desc: 'Abdichtungsset f\u00fcr Bohrl\u00f6cher im Nassbereich. Dichtmanschetten + Kleber f\u00fcr wasserdichte Befestigungspunkte nach DIN 18534.',
+        isMain: true
+    },
+
+    // === WERKZEUG & ZUBEHOER ===
+    {
+        id: 'buegelsaege',
+        title: 'B\u00fcgels\u00e4ge 150 mm vernickelt',
+        handle: 'handsage-vernickelt-fur-den-zuschnitt-von-duschdichtungsprofilen-art-nr-671146',
+        type: 'werkzeug',
+        vorhaben: ['glasdusche', 'duschwanne', 'fugen'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '2,90',
+        desc: 'Kleine Hands\u00e4ge zum pr\u00e4zisen Zuschneiden von Dichtungsprofilen, Fugenabdeckprofilen und Kunststoffleisten.',
+        isMain: false
+    },
+    {
+        id: 'cutter',
+        title: 'UNIVERSAL-CUTTER mit 18 mm Abbrechklinge',
+        handle: 'cuttermesser-fur-den-zuschnitt-von-duschdichtungsprofilen-art-nr-745118',
+        type: 'werkzeug',
+        vorhaben: ['glasdusche', 'duschwanne', 'nassbereich', 'fugen'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '2,90',
+        desc: 'Robustes Cuttermesser f\u00fcr saubere Schnitte in Dichtungsprofilen, Abdichtungsbahnen und Silikon.',
+        isMain: false
+    },
+    {
+        id: 'klotzhebel',
+        title: 'Klotzhebel aus Holz',
+        handle: 'unbenannt-28-mai_21-47',
+        type: 'werkzeug',
+        vorhaben: ['glasdusche'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '5,90',
+        desc: 'Praktischer Holz-Klotzhebel zum Anheben und Positionieren von schweren Glasscheiben bei der Montage.',
+        isMain: false
+    },
+    {
+        id: 'handschuhe',
+        title: 'Arbeitshandschuh Flex Fit \u2013 Nylonfeinstrick',
+        handle: 'arbeitshandschuh-fur-montagen-transport-u-handwerkliche-tatigkeiten-typ-flex-fit-nylonfeinstrick-grau-schwarz-abriebfest-und-vielseitig-einsetzbar-art-nr-00690010x',
+        type: 'werkzeug',
+        vorhaben: ['glasdusche', 'duschwanne', 'nassbereich', 'fugen'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '4,90',
+        desc: 'Griffige Montagehandschuhe aus Nylonfeinstrick. Sch\u00fctzen die H\u00e4nde beim Arbeiten mit Glas, Metall und scharfkantigen Profilen.',
+        isMain: false
+    }
+];
+
+// Product images from Shopify CDN
+const productImages = {
+    'allzweckdubel-mit-schraube-fur-dusche-u-bad-aqua-stop-pro': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duebelschraube.png?v=1768235881',
+    'allzweckdubel-fur-dusche-u-bad-6x36-6x51-oder-8x51-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/PT1_Tri.jpg?v=1746179320',
+    'tox-allzweckduebel-tri': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/0101000XX.1.jpg?v=1775896654',
+    'schrauben-zum-verbinden-von-duschprofilen-aus-aluminium-art-nr-59881650': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Marketing_240.jpg?v=1757693678',
+    'transparente-unterlagen-fur-rahmenlose-glasduschen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_8afe7acc-8818-46bf-ad58-e05d0f0569b9.jpg?v=1757793855',
+    'einlagen-zur-trennung-von-glas-und-metall': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_1bdf4675-c497-4c4f-bbb7-d95a4abe05fc.jpg?v=1766952891',
+    'zettex-ms-polymerkleber-strongbond-ms-80-maximale-klebkraft-fur-hoch-beanspruchte-flachen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/MS80_2.jpg?v=1770917009',
+    'zettex-ms-70': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/MS70.png?v=1770916801',
+    'zettex-ms-polymerkleber-ms-60-der-flexible-universalkleber': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/MS60_1.jpg?v=1758175014',
+    'acrylat-hochleistungsklebeband-transparent-doppelseitig-klebend-art-nr-2800': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Hochleistungsklebeband.jpg?v=1748959089',
+    'sanitaer-silikon-otto-s100-premium-qualitat-300-ml': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/S100.png?v=1770918900',
+    'fertigfuge_silikonfuge': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/ee_zee_2.jpg?v=1772132626',
+    'care-silikonspray': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Silikonspray.jpg?v=1753604050',
+    'fugenabdeckprofil-pvc-weiss-bp25-ubergang-duschwanne-zu-fliesenwand': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Fugenprofil_PP_9_efe00c7a-6557-4d14-abdc-295a5d614b95.png?v=1773215506',
+    'zubehor-set-fur-fugenabdeckprofil-bpt-25-innenecke-endkappen-weiss': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BPT25_7b86427c-99e0-4663-acb2-886450f4550e.png?v=1776160821',
+    'mapei_abdichtungsbahn': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Abdichtung_unter_Fliese_1.png?v=1767877044',
+    'mapei_dichtband_dusche': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Abdichtung_unter_Fliese_9.png?v=1767877096',
+    'mapeguard-ic-dichtecke-innen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Abdichtung_unter_Fliese_6.png?v=1767877140',
+    'mapeguard-ec-dichtecke-aussen-art-nr-2853025': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Abdichtung_unter_Fliese_2.png?v=1767877178',
+    'mapeguard-pc': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Manschette_1.png?v=1767878275',
+    'mapeflex-ms45-ms-dicht-und-klebstoff': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Polymerkleber.png?v=1767878721',
+    'densaband_basis': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Densaband_Basic3_18d751b6-32ec-444a-9543-98ba098c5d79.jpg?v=1770049307',
+    'densaband_schallschutz-dichtband': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Densaband_Schallschutz_3.jpg?v=1770048794',
+    'densaband-bohrlochset': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Bohrlochset1.jpg?v=1746171064',
+    'handsage-vernickelt-fur-den-zuschnitt-von-duschdichtungsprofilen-art-nr-671146': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Saege_e338ee08-400f-4e58-b378-200566d23095.jpg?v=1744804681',
+    'cuttermesser-fur-den-zuschnitt-von-duschdichtungsprofilen-art-nr-745118': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Cuttermesser9mm.jpg?v=1744804760',
+    'unbenannt-28-mai_21-47': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_5ee63f2c-6557-4cbf-b88c-2db05616f616.jpg?v=1748464730',
+    'arbeitshandschuh-fur-montagen-transport-u-handwerkliche-tatigkeiten-typ-flex-fit-nylonfeinstrick-grau-schwarz-abriebfest-und-vielseitig-einsetzbar-art-nr-00690010x': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/HandschuheTox.jpg?v=1749129735'
+};
+
+// ============================================================
+// State
+// ============================================================
+let currentStep = 0;
+const selections = {
+    vorhaben: null,
+    befestigung: null
+};
+
+// ============================================================
+// Step Logic
+// ============================================================
+function selectOption(step, el) {
+    const parent = el.closest('.options-grid');
+    parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+
+    const value = el.dataset.value;
+
+    if (step === 0) selections.vorhaben = value;
+    else if (step === 1) selections.befestigung = value;
+
+    document.getElementById('nextBtn' + step).disabled = false;
+}
+
+function nextStep(from) {
+    const panels = document.querySelectorAll('.step-panel');
+    panels[from].classList.remove('active');
+
+    let nextPanel = from + 1;
+
+    // Skip befestigung step if vorhaben is NOT glasdusche
+    if (from === 0 && selections.vorhaben !== 'glasdusche') {
+        nextPanel = 2; // Jump to results
+        selections.befestigung = null;
+    }
+
+    currentStep = nextPanel;
+
+    if (currentStep === 2) buildResults();
+
+    panels[currentStep].classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevStep(to) {
+    const panels = document.querySelectorAll('.step-panel');
+    panels[currentStep].classList.remove('active');
+
+    let prevPanel = to - 1;
+
+    // Skip befestigung step going back if vorhaben is NOT glasdusche
+    if (to === 1 && selections.vorhaben !== 'glasdusche') {
+        prevPanel = 0;
+    }
+    // Going back from results
+    if (to === 2) {
+        if (selections.vorhaben !== 'glasdusche') {
+            prevPanel = 0;
+        } else {
+            prevPanel = 1;
+        }
+    }
+
+    currentStep = prevPanel;
+    panels[currentStep].classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+    selections.vorhaben = null;
+    selections.befestigung = null;
+    currentStep = 0;
+
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('step0').classList.add('active');
+    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('[id^="nextBtn"]').forEach(b => b.disabled = true);
+
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+    const dots = document.querySelectorAll('.step-dot');
+    const skipBefestigung = selections.vorhaben !== 'glasdusche' && selections.vorhaben !== null;
+
+    let progressPercent;
+    if (skipBefestigung) {
+        // 2 effective steps: Vorhaben(0) -> Ergebnis(2)
+        if (currentStep === 0) progressPercent = 0;
+        else if (currentStep === 2) progressPercent = 100;
+    } else {
+        // 3 steps: 0%, 50%, 100%
+        progressPercent = currentStep === 0 ? 0 : currentStep === 1 ? 50 : 100;
+    }
+
+    document.getElementById('progressSteps').style.setProperty('--progress', progressPercent + '%');
+
+    dots.forEach((dot, i) => {
+        dot.classList.remove('active', 'done');
+
+        if (skipBefestigung && i === 1) {
+            // Step 1 (Befestigung) is skipped
+            if (currentStep > 1) dot.classList.add('done');
+        } else {
+            if (i < currentStep) dot.classList.add('done');
+            else if (i === currentStep) dot.classList.add('active');
+        }
+    });
+
+    // Allow clicking completed steps
+    dots.forEach(dot => {
+        dot.onclick = () => {
+            const stepIdx = parseInt(dot.dataset.step);
+            if (stepIdx < currentStep) {
+                if (skipBefestigung && stepIdx === 1) return;
+                document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+                currentStep = stepIdx;
+                document.getElementById('step' + stepIdx).classList.add('active');
+                updateProgress();
+            }
+        };
+    });
+}
+
+// ============================================================
+// Results Builder
+// ============================================================
+function buildResults() {
+    const { vorhaben, befestigung } = selections;
+    const container = document.getElementById('resultsContent');
+
+    const vorhabenLabels = {
+        'glasdusche': 'Glasdusche montieren',
+        'duschwanne': 'Duschwanne abdichten',
+        'nassbereich': 'Nassbereich abdichten',
+        'fugen': 'Silikonfugen erneuern'
+    };
+
+    const befestigungLabels = {
+        'bohren': 'Bohren (D\u00fcbel & Schrauben)',
+        'kleben': 'Kleben (bohrfrei)',
+        'beides': 'Bohren & Kleben'
+    };
+
+    // Filter products
+    function matchesProduct(p) {
+        if (!p.vorhaben.includes(vorhaben)) return false;
+        if (befestigung && !p.befestigung.includes(befestigung)) return false;
+        return true;
+    }
+
+    // Separate by category
+    const allMatching = products.filter(matchesProduct);
+
+    const mainProducts = allMatching.filter(p => p.isMain);
+    const duebel = allMatching.filter(p => p.type === 'duebel' && !p.isMain);
+    const schrauben = allMatching.filter(p => p.type === 'schrauben');
+    const kleber = allMatching.filter(p => p.type === 'kleber' && !p.isMain);
+    const silikon = allMatching.filter(p => p.type === 'silikon' && !p.isMain);
+    const fugenprofil = allMatching.filter(p => p.type === 'fugenprofil');
+    const abdichtung = allMatching.filter(p => p.type === 'abdichtung' && !p.isMain);
+    const wannendichtband = allMatching.filter(p => p.type === 'wannendichtband' && !p.isMain);
+    const zubehoerMontage = allMatching.filter(p => p.type === 'zubehoer-montage');
+    const werkzeug = allMatching.filter(p => p.type === 'werkzeug');
+
+    // Sort main products: highlighted first
+    mainProducts.sort((a, b) => {
+        if (a.highlight && !b.highlight) return -1;
+        if (!a.highlight && b.highlight) return 1;
+        return parseFloat(b.price.replace(',', '.')) - parseFloat(a.price.replace(',', '.'));
+    });
+
+    // Build HTML
+    let html = `
+    <div class="result-summary">
+        <h3>Ihre Konfiguration</h3>
+        <div class="result-choices">
+            <span class="result-choice">${vorhabenLabels[vorhaben]}</span>
+            ${befestigung ? `<span class="result-choice">${befestigungLabels[befestigung]}</span>` : ''}
+        </div>
+    </div>`;
+
+    // Context-sensitive hints
+    if (vorhaben === 'glasdusche' && befestigung === 'bohren') {
+        html += `
+        <div class="result-hint">
+            <strong>Profi-Tipp:</strong> Verwenden Sie im Nassbereich immer abdichtende D\u00fcbel wie den TOX Aqua Stop Pro. Zus\u00e4tzlich empfehlen wir das DENSABAND Bohrlochset f\u00fcr normgerechte Abdichtung der Befestigungspunkte nach DIN 18534.
+        </div>`;
+    } else if (vorhaben === 'glasdusche' && befestigung === 'kleben') {
+        html += `
+        <div class="result-hint">
+            <strong>Profi-Tipp:</strong> MS-Polymer Kleber (nicht Silikon!) sind die beste Wahl f\u00fcr bohrfreie Montage. Sie haften auf nahezu allen Untergr\u00fcnden, bleiben dauerhaft elastisch und sind \u00fcberstreichbar. Der MS 80 Strongbond bietet die h\u00f6chste Klebkraft.
+        </div>`;
+    } else if (vorhaben === 'duschwanne') {
+        html += `
+        <div class="result-hint">
+            <strong>Profi-Tipp:</strong> Der Wannenrand muss nach DIN 18534 abgedichtet werden, bevor die Fliesen gesetzt werden. Das DENSABAND wird direkt auf den Wannenrand geklebt und in den Fliesenkleber eingebettet. Die Silikonfuge am \u00dcbergang Wanne/Wand versiegelt den sichtbaren Abschluss.
+        </div>`;
+    } else if (vorhaben === 'nassbereich') {
+        html += `
+        <div class="result-hint">
+            <strong>Profi-Tipp:</strong> Die Mapei Mapeguard WP 200 Abdichtungsbahn wird fugenlos unter den Fliesen verlegt. An Ecken, St\u00f6\u00dfen und Rohrdurchf\u00fchrungen kommen die passenden Formteile (Dichtband, Dichtecken, Manschetten) zum Einsatz \u2013 so entsteht eine l\u00fcckenlose Abdichtung nach DIN 18534.
+        </div>`;
+    } else if (vorhaben === 'fugen') {
+        html += `
+        <div class="result-hint">
+            <strong>Profi-Tipp:</strong> Alte Silikonfugen komplett entfernen, Fugenfl\u00e4nken reinigen und trocknen lassen. F\u00fcr gleichm\u00e4\u00dfige Fugen die Abklebe-Methode verwenden. Alternativ: Die ee-zee Fertigfuge ergibt perfekte Fugen ganz ohne Kartusche und Werkzeug.
+        </div>`;
+    }
+
+    // Section: Empfohlene Hauptprodukte
+    if (mainProducts.length > 0) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Empfohlene Produkte <span class="result-badge">${mainProducts.length}</span>
+            </div>
+            <div class="result-products">
+                ${mainProducts.map(p => productCard(p, true)).join('')}
+            </div>
+        </div>`;
+    }
+
+    // Group remaining products by category
+    const sections = [
+        { items: duebel, title: 'D\u00fcbel', icon: 'primary' },
+        { items: schrauben, title: 'Schrauben & Verbinder', icon: 'primary' },
+        { items: kleber, title: 'Kleber & Klebeband', icon: 'primary' },
+        { items: silikon, title: 'Silikon & Dichtmittel', icon: 'primary' },
+        { items: fugenprofil, title: 'Fugenprofile', icon: 'primary' },
+        { items: abdichtung, title: 'Abdichtung & Dichtband', icon: 'primary' },
+        { items: wannendichtband, title: 'Wannendichtband', icon: 'primary' },
+        { items: zubehoerMontage, title: 'Montage-Zubeh\u00f6r', icon: 'text-light' },
+        { items: werkzeug, title: 'Werkzeug', icon: 'text-light' }
+    ];
+
+    sections.forEach(section => {
+        if (section.items.length > 0) {
+            const badgeStyle = section.icon === 'text-light' ? 'background: var(--text-light)' : 'background: var(--primary)';
+            html += `
+            <div class="result-section">
+                <div class="result-section-title">
+                    ${section.title} <span class="result-badge" style="${badgeStyle}">${section.items.length}</span>
+                </div>
+                <div class="result-products">
+                    ${section.items.map(p => productCard(p)).join('')}
+                </div>
+            </div>`;
+        }
+    });
+
+    // No results?
+    if (allMatching.length === 0) {
+        html += `
+        <div class="result-section">
+            <div style="text-align:center; padding:40px 24px; color:var(--text-light); font-size:14px; background:var(--card-bg); border-radius:var(--radius); box-shadow:var(--shadow);">
+                <p style="font-size:18px; margin-bottom:8px;">Keine exakte \u00dcbereinstimmung</p>
+                <p>F\u00fcr Ihre Kombination haben wir keine passenden Produkte gefunden. Bitte passen Sie Ihre Auswahl an oder kontaktieren Sie uns f\u00fcr eine pers\u00f6nliche Beratung.</p>
+            </div>
+        </div>`;
+    }
+
+    container.innerHTML = html;
+}
+
+function productCard(p, isTopPick) {
+    const priceStr = p.priceMax ? `ab ${p.price} \u20ac` : `${p.price} \u20ac`;
+    const typeLabels = {
+        'duebel': 'D\u00fcbel',
+        'schrauben': 'Schrauben',
+        'kleber': 'Kleber',
+        'silikon': 'Silikon',
+        'fugenprofil': 'Fugenprofil',
+        'abdichtung': 'Abdichtung',
+        'wannendichtband': 'Wannendichtband',
+        'zubehoer-montage': 'Montage-Zubeh\u00f6r',
+        'werkzeug': 'Werkzeug'
+    };
+
+    const imgUrl = productImages[p.handle];
+    const imgHtml = imgUrl
+        ? `<img class="result-product-img" src="${imgUrl}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+           <div class="result-product-img result-product-img-fallback" style="display:none; align-items:center; justify-content:center;">
+               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c8956c" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+           </div>`
+        : `<div class="result-product-img" style="display:flex; align-items:center; justify-content:center;">
+               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c8956c" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+           </div>`;
+
+    const highlightBadge = p.highlight
+        ? `<span style="display:inline-block; background:#e8f5e9; color:#27ae60; font-size:10px; font-weight:600; padding:2px 8px; border-radius:6px; margin-left:6px;">Top-Empfehlung</span>`
+        : isTopPick
+            ? `<span style="display:inline-block; background:#e8f5e9; color:#27ae60; font-size:10px; font-weight:600; padding:2px 8px; border-radius:6px; margin-left:6px;">Empfohlen</span>`
+            : '';
+
+    return `
+    <div class="result-product-card">
+        <a class="result-product-inner" href="https://duschop.de/products/${p.handle}" target="_blank" rel="noopener">
+            ${imgHtml}
+            <div class="result-product-info">
+                <div class="result-product-title">${p.title}${highlightBadge}</div>
+                <div class="result-product-desc">${typeLabels[p.type] || ''} &middot; ${p.desc}</div>
+                <div class="result-product-price">${priceStr}</div>
+            </div>
+            <div class="result-product-arrow">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </div>
+        </a>
+    </div>`;
+}
+
+// Init
+updateProgress();
+</script>
+
+</body>
+</html>
