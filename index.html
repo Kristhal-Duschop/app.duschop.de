@@ -154,6 +154,8 @@
 
         .hero-text {
             max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         .hero-tagline {
@@ -163,16 +165,6 @@
             letter-spacing: 2px;
             color: var(--accent);
             margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .hero-tagline::before {
-            content: '';
-            width: 30px;
-            height: 2px;
-            background: var(--accent);
         }
 
         .hero h1 {
@@ -199,6 +191,7 @@
             display: flex;
             gap: 28px;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .hero-stat {
@@ -499,7 +492,7 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <div class="hero-tagline">So machen Sie Ihre Dusche sch&ouml;n</div>
+                <div class="hero-tagline">&mdash; So machen Sie Ihre Dusche sch&ouml;n &mdash;</div>
                 <h1>Finden Sie das richtige <span>Duschzubeh&ouml;r</span></h1>
                 <p class="hero-desc">Unsere interaktiven Produktfinder und Konfiguratoren helfen Ihnen, genau das passende Zubeh&ouml;r f&uuml;r Ihre Glasdusche zu finden &ndash; schnell, einfach und kostenlos.</p>
                 <div class="hero-stats">
