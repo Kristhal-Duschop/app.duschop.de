@@ -268,12 +268,8 @@
     'use strict';
 
     // ---- KONFIGURATION ----
-    // Google Sheet als CSV veröffentlichen:
-    // Datei > Freigeben > Im Web veröffentlichen > CSV
-    // Die Sheet-ID steht in der Sheet-URL: docs.google.com/spreadsheets/d/SHEET_ID/...
-    var SHEET_ID = '1N94mxIQmyhHQ5Qa0Sn3PftL64Us3DQF8fA6l5iuUAFM';
-    var PAGEVIEWS_GID = '0';
-    var CLICKS_GID = '752460415';
+    // Apps Script URL (gleiche URL wie der Tracker — GET liefert JSON-Daten)
+    var API_URL = 'https://script.google.com/macros/s/AKfycbxOw6BDI6kCd6TfZ-owHmlJyyFpfJyhUi-pl17LSHsYFueYPBek1sBcJZQXEAFilO8/exec';
 
     // Passwort (einfacher Schutz — kein echtes Auth-System)
     var PASSWORD_HASH = 'e5d139fe6f57e44a9013ec030de9460280b193867ed67b1bf1a851cd6b8a80cf'; // "duschop2026"
@@ -311,9 +307,9 @@
 
     // ---- DATEN LADEN ----
     window.loadData = async function () {
-        if (SHEET_ID.indexOf('HIER_') === 0) {
+        if (API_URL.indexOf('HIER_') === 0) {
             document.getElementById('configBanner').classList.remove('hidden');
-            document.getElementById('statusBar').textContent = 'Sheet-ID noch nicht konfiguriert. Verwende Demo-Daten.';
+            document.getElementById('statusBar').textContent = 'API-URL noch nicht konfiguriert. Verwende Demo-Daten.';
             generateDemoData();
             render();
             return;
@@ -322,12 +318,27 @@
         document.getElementById('statusBar').textContent = 'Daten werden geladen...';
 
         try {
-            var pvUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&gid=' + PAGEVIEWS_GID;
-            var clUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&gid=' + CLICKS_GID;
-
-            var [pvRes, clRes] = await Promise.all([fetch(pvUrl), fetch(clUrl)]);
-            pageviews = parseCSV(await pvRes.text());
-            clicks = parseCSV(await clRes.text());
+            var res = await fetch(API_URL);
+            var data = await res.json();
+            pageviews = (data.pageviews || []).map(function (r) {
+                return {
+                    timestamp: String(r.timestamp || ''),
+                    page: r.page || '',
+                    referrer: r.referrer || '',
+                    screen: r.screen || '',
+                    language: r.language || '',
+                    device: r.device || ''
+                };
+            });
+            clicks = (data.clicks || []).map(function (r) {
+                return {
+                    timestamp: String(r.timestamp || ''),
+                    page: r.page || '',
+                    element_text: r.element_text || '',
+                    element_type: r.element_type || '',
+                    target_url: r.target_url || ''
+                };
+            });
 
             document.getElementById('statusBar').textContent =
                 'Zuletzt aktualisiert: ' + new Date().toLocaleString('de-DE') +
