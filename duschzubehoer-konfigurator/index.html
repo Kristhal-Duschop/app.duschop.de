@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duschzubeh&ouml;r-Finder | duschop.de</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #c8956c;
+            --accent-light: #e8c4a8;
+            --bg: #f8f6f3;
+            --card-bg: #ffffff;
+            --text: #2d2d2d;
+            --text-light: #6b6b6b;
+            --border: #e8e4df;
+            --shadow: 0 2px 20px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --success: #27ae60;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 14px; }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+        .logo-text span { font-size: 12px; opacity: 0.65; font-weight: 400; }
+
+        .header-badges { display: flex; gap: 8px; }
+
+        .header-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: white;
+            padding: 48px 24px 56px;
+            text-align: center;
+        }
+
+        .hero h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .hero p { font-size: 16px; opacity: 0.75; max-width: 620px; margin: 0 auto; }
+
+        /* Progress Bar */
+        .progress-bar {
+            max-width: 800px;
+            margin: -28px auto 0;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .progress-inner {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            right: 24px;
+            height: 3px;
+            background: var(--border);
+            z-index: 0;
+        }
+
+        .progress-steps::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            height: 3px;
+            background: var(--accent);
+            z-index: 1;
+            transition: width 0.4s ease;
+            width: var(--progress, 0%);
+        }
+
+        .step-dot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .step-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 3px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active .step-circle {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            box-shadow: 0 4px 12px rgba(200,149,108,0.4);
+        }
+
+        .step-dot.done .step-circle {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+
+        .step-dot.active .step-label { color: var(--accent); font-weight: 600; }
+        .step-dot.done .step-label { color: var(--success); }
+
+        /* Main Configurator */
+        .configurator {
+            max-width: 900px;
+            margin: 32px auto;
+            padding: 0 24px;
+        }
+
+        .step-panel {
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .step-panel.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        .step-subtitle {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 28px;
+        }
+
+        /* Option Cards */
+        .options-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .options-grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+        .options-grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+        .options-grid.cols-4 { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+
+        .option-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .option-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .option-card.selected {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(200,149,108,0.06) 0%, rgba(200,149,108,0.02) 100%);
+            box-shadow: 0 4px 20px rgba(200,149,108,0.15);
+        }
+
+        .option-card.selected::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 50%;
+            background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 14px;
+        }
+
+        .option-icon { margin-bottom: 12px; }
+        .option-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .option-desc { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+        .option-meta {
+            margin-top: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #fff8f0;
+            border: 1px solid var(--accent-light);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .info-box strong { color: var(--accent); }
+
+        /* Navigation */
+        .step-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) { background: #b8855c; transform: translateY(-1px); }
+        .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .btn-secondary {
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover { background: #eee9e3; }
+
+        .btn-restart {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-restart:hover { background: #2a2a4e; }
+
+        /* Result Styles */
+        .result-summary {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .result-summary h3 { font-size: 18px; margin-bottom: 12px; }
+
+        .result-choices {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .result-choice {
+            background: linear-gradient(135deg, rgba(200,149,108,0.12) 0%, rgba(200,149,108,0.06) 100%);
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(200,149,108,0.2);
+        }
+
+        .result-hint {
+            background: #fff8f0;
+            border: 1px solid var(--accent-light);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .result-hint strong { color: var(--accent); }
+
+        .result-section {
+            margin-bottom: 28px;
+        }
+
+        .result-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .result-badge {
+            background: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .result-products {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .result-product-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1.5px solid var(--border);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .result-product-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow);
+        }
+
+        .result-product-inner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .result-product-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: var(--bg);
+            flex-shrink: 0;
+        }
+
+        .result-product-info { flex: 1; min-width: 0; }
+
+        .result-product-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .result-product-desc {
+            font-size: 12px;
+            color: var(--text-light);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .result-product-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-top: 6px;
+        }
+
+        .result-product-arrow {
+            flex-shrink: 0;
+            color: var(--text-light);
+            transition: color 0.2s;
+        }
+
+        .result-product-card:hover .result-product-arrow { color: var(--accent); }
+
+        .result-product-img-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header-badges { display: none; }
+            .header-inner { padding: 16px; }
+            .hero { padding: 32px 16px 44px; }
+            .hero h2 { font-size: 22px; }
+            .progress-bar { padding: 0 16px; }
+            .progress-inner { padding: 16px 20px; }
+            .step-label { font-size: 10px; }
+            .step-circle { width: 30px; height: 30px; font-size: 12px; }
+            .configurator { padding: 0 16px; margin-top: 24px; }
+            .step-title { font-size: 18px; }
+            .options-grid.cols-2,
+            .options-grid.cols-3,
+            .options-grid.cols-4 { grid-template-columns: 1fr; }
+            .option-card { padding: 18px; }
+            .result-product-inner { padding: 12px; gap: 12px; }
+            .result-product-img { width: 64px; height: 64px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <h1>Duschzubeh&ouml;r-Finder</h1>
+                <span>Konfigurator &middot; duschop.de</span>
+            </div>
+        </div>
+        <div class="header-badges">
+            <div class="header-badge">Individuelle Empfehlung</div>
+            <div class="header-badge">100+ Produkte</div>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <h2>Das passende Zubeh&ouml;r f&uuml;r Ihre Dusche</h2>
+    <p>In wenigen Schritten zum richtigen Duschzubeh&ouml;r &ndash; ob K&ouml;rbe, Ablagen, Handtuchhalter, Brausen oder Duschvorhangstangen.</p>
+</section>
+
+<div class="progress-bar">
+    <div class="progress-inner">
+        <div class="progress-steps" id="progressSteps" style="--progress: 0%">
+            <div class="step-dot active" data-step="0">
+                <div class="step-circle">1</div>
+                <div class="step-label">Kategorie</div>
+            </div>
+            <div class="step-dot" data-step="1">
+                <div class="step-circle">2</div>
+                <div class="step-label">Montage</div>
+            </div>
+            <div class="step-dot" data-step="2">
+                <div class="step-circle">3</div>
+                <div class="step-label">Ergebnis</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="configurator">
+
+    <!-- STEP 0: Kategorie -->
+    <div class="step-panel active" id="step0">
+        <h3 class="step-title">Was suchen Sie f&uuml;r Ihre Dusche?</h3>
+        <p class="step-subtitle">W&auml;hlen Sie die Produktkategorie &ndash; wir zeigen Ihnen die passenden Produkte.</p>
+
+        <div class="options-grid cols-2">
+            <div class="option-card" data-value="koerbe" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 14L32 14L30 34L10 34Z"/>
+                        <path d="M12 14L12 10C12 7 15 4 20 4C25 4 28 7 28 10L28 14"/>
+                        <path d="M12 20L28 20" opacity="0.3"/>
+                        <path d="M12 26L28 26" opacity="0.3"/>
+                    </svg>
+                </div>
+                <div class="option-name">Duschk&ouml;rbe &amp; Ablagen</div>
+                <div class="option-desc">Seifenk&ouml;rbe, Schwammk&ouml;rbe, Eckk&ouml;rbe und Duschregale f&uuml;r Ordnung in der Dusche.</div>
+                <div class="option-meta">20+ Produkte</div>
+            </div>
+
+            <div class="option-card" data-value="halter" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 8L10 16"/>
+                        <path d="M10 16C10 20 14 22 20 22C26 22 30 20 30 16"/>
+                        <path d="M30 8L30 16"/>
+                        <circle cx="10" cy="8" r="2" fill="#c8956c"/>
+                        <circle cx="30" cy="8" r="2" fill="#c8956c"/>
+                        <path d="M14 28L26 28" opacity="0.4"/>
+                        <path d="M20 22L20 28"/>
+                        <path d="M12 34L28 34"/>
+                        <path d="M14 28L14 34" opacity="0.4"/>
+                        <path d="M26 28L26 34" opacity="0.4"/>
+                    </svg>
+                </div>
+                <div class="option-name">Handtuchhalter</div>
+                <div class="option-desc">Handtuchhalter, Handtuchstangen und Handtuchringe f&uuml;r Glasdusche, Wand und Heizk&ouml;rper.</div>
+                <div class="option-meta">10+ Produkte</div>
+            </div>
+
+            <div class="option-card" data-value="haken" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 6L16 18C16 24 20 28 26 28"/>
+                        <path d="M12 6L20 6"/>
+                        <circle cx="26" cy="28" r="2" fill="#c8956c"/>
+                        <path d="M8 6L8 12" opacity="0.4"/>
+                        <path d="M8 6L12 6" opacity="0.4"/>
+                    </svg>
+                </div>
+                <div class="option-name">Haken &amp; Halter</div>
+                <div class="option-desc">Duschhaken, Hakenleisten und Halter zum Einh&auml;ngen an der Glasduschwand &ndash; f&uuml;r Handt&uuml;cher, Waschlappen und Abzieher.</div>
+                <div class="option-meta">15+ Produkte</div>
+            </div>
+
+            <div class="option-card" data-value="brausen" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="20" cy="12" r="8" fill="none"/>
+                        <path d="M20 20L20 36"/>
+                        <path d="M14 36L26 36"/>
+                        <circle cx="16" cy="10" r="1" fill="#c8956c" opacity="0.4"/>
+                        <circle cx="20" cy="10" r="1" fill="#c8956c" opacity="0.4"/>
+                        <circle cx="24" cy="10" r="1" fill="#c8956c" opacity="0.4"/>
+                        <circle cx="18" cy="14" r="1" fill="#c8956c" opacity="0.4"/>
+                        <circle cx="22" cy="14" r="1" fill="#c8956c" opacity="0.4"/>
+                    </svg>
+                </div>
+                <div class="option-name">Brausen &amp; Armaturen</div>
+                <div class="option-desc">Kopfbrausen, Handbrausen, Brausestangen, Thermostate, Brausesets und Brauseschl&auml;uche.</div>
+                <div class="option-meta">20+ Produkte</div>
+            </div>
+
+            <div class="option-card" data-value="hocker" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="8" y="8" width="24" height="6" rx="2" fill="none"/>
+                        <path d="M10 14L10 32"/>
+                        <path d="M30 14L30 32"/>
+                        <path d="M10 32L14 32"/>
+                        <path d="M26 32L30 32"/>
+                        <path d="M14 14L14 26" opacity="0.3"/>
+                        <path d="M26 14L26 26" opacity="0.3"/>
+                    </svg>
+                </div>
+                <div class="option-name">Duschhocker</div>
+                <div class="option-desc">Komfortable und sichere Duschhocker aus Aluminium oder Plexiglas &ndash; rutschfest und stilvoll.</div>
+                <div class="option-meta">Design &amp; Komfort</div>
+            </div>
+
+            <div class="option-card" data-value="vorhang" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 6L34 6"/>
+                        <path d="M10 6L10 34" opacity="0.5"/>
+                        <path d="M16 6L14 14L18 22L14 30L16 34" opacity="0.3"/>
+                        <path d="M22 6L20 14L24 22L20 30L22 34" opacity="0.3"/>
+                        <path d="M28 6L28 34" opacity="0.5"/>
+                        <circle cx="10" cy="6" r="1.5" fill="#c8956c"/>
+                        <circle cx="16" cy="6" r="1.5" fill="#c8956c"/>
+                        <circle cx="22" cy="6" r="1.5" fill="#c8956c"/>
+                        <circle cx="28" cy="6" r="1.5" fill="#c8956c"/>
+                    </svg>
+                </div>
+                <div class="option-name">Duschvorh&auml;nge &amp; Stangen</div>
+                <div class="option-desc">Duschvorhangstangen aus Edelstahl und Aluminium, Textil-Duschvorh&auml;nge und passendes Zubeh&ouml;r.</div>
+                <div class="option-meta">Edelstahl &amp; Aluminium</div>
+            </div>
+
+            <div class="option-card" data-value="wannen" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 24L36 24"/>
+                        <path d="M6 24L6 28C6 30 8 32 10 32L30 32C32 32 34 30 34 28L34 24"/>
+                        <path d="M8 24L8 18C8 16 10 14 12 14L28 14C30 14 32 16 32 18L32 24"/>
+                        <circle cx="20" cy="28" r="1.5" fill="#c8956c"/>
+                    </svg>
+                </div>
+                <div class="option-name">Duschwannen &amp; Abl&auml;ufe</div>
+                <div class="option-desc">Acryl-Duschwannen in verschiedenen Gr&ouml;&szlig;en und flache Duschwannen-Abl&auml;ufe f&uuml;r Ihren Duschbereich.</div>
+                <div class="option-meta">Markenqualit&auml;t</div>
+            </div>
+
+            <div class="option-card" data-value="badzubehoer" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="14" y="6" width="12" height="20" rx="4" fill="none"/>
+                        <path d="M20 26L20 34"/>
+                        <path d="M16 34L24 34"/>
+                        <path d="M18 12L22 12" opacity="0.3"/>
+                        <path d="M18 16L22 16" opacity="0.3"/>
+                        <circle cx="20" cy="8" r="1" fill="#c8956c"/>
+                    </svg>
+                </div>
+                <div class="option-name">Bad- &amp; WC-Zubeh&ouml;r</div>
+                <div class="option-desc">Seifenspender, Kosmetikspiegel, Zahnputzbecher, WC-B&uuml;rsten und Duschabzieher f&uuml;r Ihr Badezimmer.</div>
+                <div class="option-meta">Design-Accessoires</div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>Tipp:</strong> Alle Produkte k&ouml;nnen Sie direkt im duschop.de Online-Shop bestellen &ndash; mit kostenloser Beratung und schnellem Versand.
+        </div>
+
+        <div class="step-nav">
+            <div></div>
+            <button class="btn btn-primary" id="nextBtn0" disabled onclick="nextStep(0)">
+                Weiter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 1: Montage-Art -->
+    <div class="step-panel" id="step1">
+        <h3 class="step-title" id="step1Title">Wie soll das Zubeh&ouml;r befestigt werden?</h3>
+        <p class="step-subtitle" id="step1Subtitle">Die Befestigungsart bestimmt, welche Produkte f&uuml;r Sie in Frage kommen.</p>
+
+        <div class="options-grid cols-3" id="step1Options">
+            <!-- Dynamisch bef&uuml;llt -->
+        </div>
+
+        <div class="info-box" id="step1Info"></div>
+
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(1)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-primary" id="nextBtn1" disabled onclick="nextStep(1)">
+                Ergebnis anzeigen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 2: Ergebnis -->
+    <div class="step-panel" id="step2">
+        <div id="resultsContent"></div>
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(2)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-restart" onclick="restart()">Neue Suche starten</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// Product Database
+// ============================================================
+const products = [
+    // === DUSCHKOERBE & ABLAGEN ===
+    // -- Wandmontage (Bohren) --
+    { id: 'eck-schwammkorb', title: 'Eck-Schwammkorb verchromt 250x172x61 mm VIGOUR one', handle: 'eck-schwammkorb-verchromt-250x172x61-mm-vigour-one-wandmontage', kategorie: 'koerbe', montage: ['wand'], price: '33,90', desc: 'Verchromter Eck-Schwammkorb f\u00fcr die Wandmontage. Kompaktes Eckformat, ideal f\u00fcr kleine Duschen.', isMain: false },
+    { id: 'schwammkorb-recht', title: 'Schwammkorb verchromt rechteckig 205x104x60 mm VIGOUR one', handle: 'schwammkorb-verchromt-rechteckig-205x104x60-mm-vigour-one-wandmontage', kategorie: 'koerbe', montage: ['wand'], price: '31,90', desc: 'Rechteckiger Schwammkorb f\u00fcr die Wandmontage. Verchromt, robust und pflegeleicht.', isMain: false },
+    { id: 'seifenkorb-trinnity', title: 'Seifenkorb Chrom geschlossen 130x100 mm \u2013 TRINNITY', handle: 'seifenkorb-chrom-geschlossen-130x100-mm-trinnity', kategorie: 'koerbe', montage: ['wand'], price: '18,90', desc: 'Geschlossener Seifenkorb aus verchromtem Messing. Kompakt und ideal f\u00fcr Seifenst\u00fccke.', isMain: false },
+    // -- Brausestange --
+    { id: 'schwammkorb-brause', title: 'Schwammkorb f\u00fcr Brausestangen \u2013 Praktisch & hochwertig', handle: 'schwammkorb-fur-brausestangen-praktisch-hochwertig', kategorie: 'koerbe', montage: ['brausestange'], price: '89,90', desc: 'Hochwertiger Schwammkorb zur Montage an der Brausestange. Kein Bohren n\u00f6tig.', isMain: true },
+    { id: 'brausestangenkorb', title: 'Brausestangenkorb \u2013 Universell und hochwertig', handle: 'brausestangenkorb-universell-und-hochwertig', kategorie: 'koerbe', montage: ['brausestange'], price: '159,90', desc: 'Universeller Brausestangenkorb mit gro\u00dfz\u00fcgigem Platzangebot. Passt an alle g\u00e4ngigen Brausestangen.', isMain: true, highlight: true },
+    { id: 'sideline-brausestange', title: 'SIDELINE Korb f\u00fcr die Brausestange 200x110 mm DK3008', handle: 'sideline-korb-fur-die-brausestange-200-110-mm-dk3008', kategorie: 'koerbe', montage: ['brausestange'], price: '112,45', priceMax: '121,95', desc: 'Smedbo SIDELINE Korb f\u00fcr Brausestangen. Chrom oder Schwarz matt, 200x110 mm.', isMain: false },
+    { id: 'sideline-brausestange2', title: 'Smedbo DK3008 SIDELINE Duschkorb Brausestange Chrom/Schwarz', handle: 'sideline-korb-fur-die-brausestange-korb', kategorie: 'koerbe', montage: ['brausestange'], price: '109,90', priceMax: '99,90', desc: 'SIDELINE Duschkorb f\u00fcr die Brausestange. Chrom oder schwarz matt, hochwertige Verarbeitung.', isMain: false },
+    { id: 'smedbo-dk3006', title: 'Smedbo DK3006 Duschkorb Brausestange \u00d8 18\u201325 mm Chrom Messing', handle: 'smedbo-duschkorb-fur-montage-an-brausestange-mit-18-22-oder-25-mm-durchmesser-art-nr-dk3006', kategorie: 'koerbe', montage: ['brausestange'], price: '98,90', desc: 'Duschkorb f\u00fcr Brausestangen mit 18\u201325 mm Durchmesser. Massives verchromtes Messing.', isMain: false },
+    { id: 'smedbo-gitterkorb', title: 'Gitterkorb f\u00fcr die Montage an der Brausestange DK1106', handle: 'smedbo-gitterkorb-fur-die-montage-an-der-brausestange-art-nr-dk1106', kategorie: 'koerbe', montage: ['brausestange'], price: '69,90', desc: 'Offener Gitterkorb f\u00fcr Brausestangen. Gute Bel\u00fcftung, kein stehendes Wasser.', isMain: false },
+    // -- Glaswand (Einhaengen) --
+    { id: 'giese-bodyguard', title: 'Giese Bodyguard Duschkorb \u2013 Stilvolles Platzwunder zum Einh\u00e4ngen', handle: 'giese-bodyguard-30210', kategorie: 'koerbe', montage: ['glas'], price: '148,90', priceMax: '154,90', desc: 'Premium-Duschkorb zum Einh\u00e4ngen an die Glasduschwand. Ohne Bohren, stilvolles Design.', isMain: true, highlight: true },
+    { id: 'giese-duschkorb-stange', title: 'Duschkorb f\u00fcr Duschstange mit gerader Grundplatte', handle: 'duschkorb-fur-duschstange', kategorie: 'koerbe', montage: ['brausestange', 'glas'], price: '177,50', priceMax: '205,50', desc: 'Hochwertiger Duschkorb f\u00fcr Duschstange, wahlweise mit oder ohne Wischer. Gerade Grundplatte.', isMain: false },
+    { id: 'smedbo-dk3041', title: 'SMEDBO DK3041 SIDELINE Duschkorb Doppelt', handle: 'smedbo-dk3041', kategorie: 'koerbe', montage: ['glas', 'wand'], price: '189,90', priceMax: '199,90', desc: 'Doppelter SIDELINE Duschkorb. Stilvoll, funktional und hochwertig. F\u00fcr Glaswand oder Wandmontage.', isMain: true },
+    { id: 'sideline-armatur', title: 'SIDELINE Duschkorb an Aufputz-Armatur 250x100 mm', handle: 'sideline-duschkorb-250-100-mm-chrom-poliert', kategorie: 'koerbe', montage: ['armatur'], price: '136,95', priceMax: '157,45', desc: 'Duschkorb zur Montage an der Aufputz-Armatur. Kein Bohren, kein Kleben n\u00f6tig. Chrom oder Schwarz.', isMain: true },
+    { id: 'bugelduschkorb', title: 'B\u00fcgelduschkorb HPL \u2013 innovatives Design, Brausestange', handle: 'bugelduschkorb-duschablage-mit-innovativem-design-hpl-brausestange-10013', kategorie: 'koerbe', montage: ['brausestange'], price: '101,50', priceMax: '96,75', desc: 'Duschablage mit innovativem B\u00fcgel-Design aus HPL. Montage an der Brausestange.', isMain: false },
+    // -- Selbstklebend --
+    { id: 'sideline-eck-klebe', title: 'SIDELINE Eckduschregal selbstklebend \u2013 Chrom oder Schwarz', handle: 'sideline-eckduschregal-selbstklebend-an-fliesenwand-chrom-glanz-oder-schwarz-matt-art-nr-4111', kategorie: 'koerbe', montage: ['kleben'], price: '49,90', desc: 'Selbstklebendes Eckduschregal f\u00fcr Fliesenwand. Kein Bohren n\u00f6tig. Chrom glanz oder Schwarz matt.', isMain: true },
+    { id: 'sideline-regal-klebe', title: 'SIDELINE Duschregal selbstklebend \u2013 Chrom oder Schwarz', handle: 'sideline-duschregal-selbstklebend-an-fliesenwand-chrom-glanz-oder-schwarz-matt', kategorie: 'koerbe', montage: ['kleben'], price: '59,90', desc: 'Selbstklebendes Duschregal f\u00fcr Fliesenwand. Gerade Form, kein Bohren n\u00f6tig.', isMain: true },
+    // -- Weitere Koerbe --
+    { id: 'sideline-design', title: 'SIDELINE Design Duschkorb 250x110 mm Chrom DK2001', handle: 'sideline-design-seifenkorb-250-110-mm-chrom-poliert', kategorie: 'koerbe', montage: ['wand'], price: '50,90', priceMax: '57,90', desc: 'Eleganter Design-Duschkorb mit Bodenplatte. Chrom poliert, 250x110 mm. Wandmontage.', isMain: false },
+    { id: 'sideline-basic', title: 'SIDELINE Duschkorb Basic 215x117 mm Chrom DK1001', handle: 'duschkorb-chrom-glanz-art-nr-dk1001', kategorie: 'koerbe', montage: ['wand'], price: '37,90', desc: 'Basis-Duschkorb in Chrom glanz. Kompakt, zeitlos und funktional. Wandmontage.', isMain: false },
+    { id: 'design-seifenkorb-250', title: 'Design Seifenkorb mit Bodenplatte \u2013 250 mm', handle: 'design-seifenkorb-mit-bodenplatte-250-mm-breite', kategorie: 'koerbe', montage: ['wand'], price: '119,95', priceMax: '89,90', desc: 'Eleganter Seifenkorb mit Bodenplatte. 250 mm breit, Chrom oder Schwarz.', isMain: false },
+    { id: 'design-seifenkorb-400', title: 'Design Seifenkorb mit Bodenplatte \u2013 400 mm Chrom', handle: 'design-seifenkorb-mit-bodenplatte-400-mm', kategorie: 'koerbe', montage: ['wand'], price: '119,95', desc: 'Gro\u00dfer Seifenkorb mit Bodenplatte. 400 mm breit, Chrom poliert.', isMain: false },
+    { id: 'doppelter-duschkorb', title: 'Doppelter Duschkorb 250 mm \u2013 zwei Ebenen', handle: 'doppelter-duschkorb-250-mm-mit-zwei-ebenen', kategorie: 'koerbe', montage: ['wand'], price: '134,95', desc: 'Duschkorb mit zwei Ebenen aus verchromtem Messing. Doppeltes Platzangebot.', isMain: false },
+    { id: 'sideline-gold', title: 'Sideline Design Duschkorb Messing geb\u00fcrstet (Goldfarbig)', handle: 'sideline-design-duschkorb-messing-geburstet', kategorie: 'koerbe', montage: ['wand'], price: '82,90', desc: 'Design-Duschkorb in edlem Messing geb\u00fcrstet (Goldoptik). Wandmontage.', isMain: false },
+    // -- Duschablagen & Regale --
+    { id: 'duschablage-deluxe', title: 'Duschablage Typ Deluxe 280x165 mm \u2013 Einarbeitung in Fliesenfugen', handle: 'duschablage-typ-deluxe-fur-die-einarbeitung-in-fliesenfugen', kategorie: 'koerbe', montage: ['einfliesen'], price: '79,90', desc: 'Edelstahl-Duschablage zum Einfliesen. Wird in die Fliesenfuge eingearbeitet \u2013 b\u00fcndiger, eleganter Einbau.', isMain: true },
+    { id: 'vipa-duschablage', title: 'Vipa Duschablage HPL \u2013 Glaswandmontage', handle: 'vipa-duschablage-mit-innovativem-design-hpl-glaswandmontage-30950', kategorie: 'koerbe', montage: ['glas'], price: '156,90', priceMax: '169,90', desc: 'Innovative Duschablage aus HPL zur Montage an der Glaswand. Ohne Bohren.', isMain: false },
+    { id: 'smedbo-eckablage', title: 'Smedbo Ablage f\u00fcr Duschecke Edelstahl \u2013 dreieckig, Einfliesen', handle: 'smedbo-ablage-fur-duschecke-aus-edelstahl-dreieckige-form-fur-einbau-in-fliesenfugen-chrom-glanz-oder-schwarz-matt-art-nr-3060', kategorie: 'koerbe', montage: ['einfliesen'], price: '48,90', desc: 'Dreieckige Eck-Ablage aus Edelstahl zum Einbau in Fliesenfugen. Chrom glanz oder Schwarz matt.', isMain: false },
+    { id: 'duschregal-einfliesen', title: 'Duschregal zum Einfliesen 100x250 mm', handle: 'duschregal-zum-einfliesen-100-250-mm', kategorie: 'koerbe', montage: ['einfliesen'], price: '65,95', priceMax: '69,95', desc: 'Wandnische f\u00fcr Shampoo und Duschgel. Wird beim Fliesen eingebaut \u2013 nahtloses Design.', isMain: true },
+    { id: 'duschregal-einfliesen-gelocht', title: 'Duschregal zum Einfliesen gelocht 100x250 mm', handle: 'duschregal-zum-einfliesen-gelocht-100-250-mm', kategorie: 'koerbe', montage: ['einfliesen'], price: '65,90', priceMax: '69,95', desc: 'Gelochtes Duschregal zum Einfliesen. Gute Wasserabf\u00fchrung durch Lochung.', isMain: false },
+    { id: 'duschregal-alu-250', title: 'Duschregal Aluminium Schwarz 250x250 mm', handle: 'duschregal-aluminium-off-schwarz', kategorie: 'koerbe', montage: ['wand'], price: '89,95', desc: 'Stilvolles Duschregal aus Aluminium in Schwarz. 250x250 mm, Wandmontage.', isMain: false },
+    { id: 'duschregal-alu-klein', title: 'Duschregal Aluminium Schwarz \u2013 modernes Design', handle: 'duschregal-aluminium-schwarz', kategorie: 'koerbe', montage: ['wand'], price: '79,90', desc: 'Modernes Duschregal aus eloxiertem Aluminium in Schwarz. Wandmontage.', isMain: false },
+
+    // === HANDTUCHHALTER ===
+    { id: 'smedbo-handtuch-2', title: 'Smedbo Handtuchhalter 2-reihig f\u00fcr Glasduschwand', handle: 'smedbo-handtuchhalter-2-reihig-fur-glasduschwand-zur-befestigung-an-glaskante-art-nr-dk3102', kategorie: 'halter', montage: ['glas'], price: '168,90', desc: 'Doppelreihiger Handtuchhalter zur Befestigung an der Glaskante. Kein Bohren n\u00f6tig.', isMain: true, highlight: true },
+    { id: 'smedbo-handtuch-1', title: 'Smedbo Handtuchhalter 1-reihig f\u00fcr Glasduschwand', handle: 'smedbo-handtuchhalter-1-reihig-fur-glasduschwand-zur-befestigung-an-glaskante-art-nr-dk3101', kategorie: 'halter', montage: ['glas'], price: '99,95', desc: 'Einreihiger Handtuchhalter f\u00fcr die Glaskante. Einfache Montage ohne Bohren.', isMain: true },
+    { id: 'giese-universal', title: 'Giese Manufaktur Handtuchhalter \u201eUniversal\u201c', handle: 'giese-universal-31050', kategorie: 'halter', montage: ['wand', 'glas'], price: '129,90', priceMax: '135,90', desc: 'Zeitloser Handtuchhalter von Giese. F\u00fcr Wandmontage oder Glasmontage geeignet.', isMain: true },
+    { id: 'giese-server', title: 'Giese Server Badetuchhalter \u2013 ohne Bohren', handle: 'giese-server-badetuchhalter-stilvoller-komfort-ohne-bohren', kategorie: 'halter', montage: ['glas', 'kleben'], price: '214,90', priceMax: '239,90', desc: 'Stilvoller Badetuchhalter f\u00fcr Glasduschen. Montage ohne Bohren, Premium-Qualit\u00e4t.', isMain: true, highlight: true },
+    { id: 'giese-badmoebel', title: 'Giese Handtuchhalter f\u00fcr Waschtisch- oder Schrankmontage', handle: 'giese-badmoebel-91756', kategorie: 'halter', montage: ['moebel'], price: '109,00', priceMax: '79,90', desc: 'Handtuchhalter zur Montage am Waschtisch oder Schrank. Ohne Wandbohren.', isMain: false },
+    { id: 'handtuchring', title: 'Handtuchring HOME \u2013 geb\u00fcrstetes Messing', handle: 'handtuchring', kategorie: 'halter', montage: ['wand'], price: '58,90', desc: 'Eleganter Handtuchring aus geb\u00fcrstetem Messing. Wandmontage mit verdeckter Befestigung.', isMain: false },
+    { id: 'vigour-haken-one', title: 'Vigour Handtuchhaken one V1 verchromt \u2013 50 mm', handle: 'handtuchhaken-verchromt-50-mm-vigour-one-wandmontage-verdeckte-befestigung', kategorie: 'halter', montage: ['wand'], price: '6,90', desc: 'Verchromter Handtuchhaken mit verdeckter Wandmontage. Kompakt und zeitlos.', isMain: false },
+    { id: 'vigour-haken-magnet', title: 'Vigour Handtuchhaken V3 verchromt \u2013 Magnetbefestigung', handle: 'handtuchhaken-indiv-3-0-einteilig-chrom-magnet-vigour', kategorie: 'halter', montage: ['magnet'], price: '59,90', desc: 'Handtuchhaken mit Magnetbefestigung f\u00fcr Heizk\u00f6rper. Einfach aufsetzen, kein Bohren.', isMain: false },
+    { id: 'vigour-haken-clivia', title: 'Vigour Handtuchhaken clivia V2 verchromt \u2013 \u00d8 30 mm', handle: 'handtuchhaken-clivia-30-mm-verchromt-vigour', kategorie: 'halter', montage: ['wand'], price: '8,90', desc: 'Runder Handtuchhaken \u00d8 30 mm. Verchromt, verdeckte Wandmontage.', isMain: false },
+    { id: 'vigour-haken-derby', title: 'Vigour Handtuchhaken derby verchromt \u2013 35 mm', handle: 'handtuchhaken-derby-35-mm-verchromt-vigour', kategorie: 'halter', montage: ['wand'], price: '12,90', desc: 'Handtuchhaken derby-Serie. 35 mm, verchromt, verdeckte Wandmontage.', isMain: false },
+    { id: 'silikon-halter', title: 'Halter/Haken f\u00fcr Handt\u00fccher oder Duschabzieher aus Silikon', handle: 'halter-bzw-haken-fur-handtucher-oder-duschabzieher-aus-silikon', kategorie: 'halter', montage: ['kleben'], price: '12,50', desc: 'Flexibler Silikon-Halter zum Aufkleben. F\u00fcr Handt\u00fccher oder Duschabzieher.', isMain: false },
+
+    // === HAKEN & HALTER (Glasduschwand) ===
+    { id: 'hakenleiste-2fach', title: 'Hakenleiste 2-fach f\u00fcr Duschabtrennung \u2013 bis 8 mm', handle: 'hakenleiste-2-fach-fur-duschabtrennung-bis-8-mm-glasstarke', kategorie: 'haken', montage: ['glas'], price: '69,90', desc: 'Doppelte Hakenleiste zum Einh\u00e4ngen an der Glasduschwand. F\u00fcr Glas bis 8 mm.', isMain: true, highlight: true },
+    { id: 'halter-4haken', title: 'Halter f\u00fcr Duschabtrennung mit 4 Haken \u2013 6, 8, 10 mm', handle: 'halter-fur-duschabtrennung-mit-4-haken-passend-fur-6-8-und-10-mm-glas', kategorie: 'haken', montage: ['glas'], price: '48,90', desc: 'Praktischer Halter mit 4 Haken zum \u00dcberh\u00e4ngen an die Glasduschwand. F\u00fcr 6\u201310 mm Glas.', isMain: true },
+    { id: 'halter-2haken', title: 'Halter f\u00fcr Duschabtrennung mit 2 Haken \u2013 6, 8, 10 mm', handle: 'halter-fur-duschabtrennung-mit-2-haken', kategorie: 'haken', montage: ['glas'], price: '32,90', desc: 'Kompakter Halter mit 2 Haken f\u00fcr die Glasduschwand. Passend f\u00fcr 6\u201310 mm Glas.', isMain: false },
+    { id: 'halter-2haken-10', title: 'Halter f\u00fcr Duschabtrennung mit 2 Haken \u2013 bis 10 mm', handle: 'halter-duschabtrennung-mit-2-haken-fur-glas-bis-10-mm', kategorie: 'haken', montage: ['glas'], price: '20,90', desc: 'G\u00fcnstiger Doppelhaken zum Einh\u00e4ngen. F\u00fcr Glasduschwand bis 10 mm.', isMain: false },
+    { id: 'smedbo-haken-95', title: 'Smedbo Haken f\u00fcr rahmenlose Duschtrennw\u00e4nde \u2013 95 mm Chrom', handle: 'smedbo-haken-fur-rahmenlose-duschtrennwande-hohe-95-mm-chrom-glanz-dk2111', kategorie: 'haken', montage: ['glas'], price: '24,90', desc: 'Smedbo Premium-Haken f\u00fcr rahmenlose Glasduschen. H\u00f6he 95 mm, Chrom glanz.', isMain: false },
+    { id: 'smedbo-haken-dk3111', title: 'Smedbo Haken f\u00fcr Duschtrennwand 5\u201310 mm Chrom DK3111', handle: 'smedbo-haken-fur-duschtrennwand-aus-glas-chrom-glanz-fur-5-10-mm-glasdicke-dk3111', kategorie: 'haken', montage: ['glas'], price: '27,90', desc: 'Haken f\u00fcr Glasduschen mit 5\u201310 mm Glasst\u00e4rke. Chrom glanz, Smedbo-Qualit\u00e4t.', isMain: false },
+    { id: 'smedbo-haken-dk2111', title: 'Smedbo Haken f\u00fcr rahmenlose Duschtrennw\u00e4nde DK2111', handle: 'smedbo-haken-fur-rahmenlose-duschtrennwande-dk2111', kategorie: 'haken', montage: ['glas'], price: '24,90', desc: 'Kompakter Haken f\u00fcr rahmenlose Glasduschen. Smedbo-Qualit\u00e4t.', isMain: false },
+    { id: 'schwenkbarer-dreierhaken', title: 'Schwenkbarer Dreierhaken \u2013 elegant und platzsparend', handle: 'schwenkbarer-dreierhaken-praktisch-elegant-und-platzsparend', kategorie: 'haken', montage: ['wand'], price: '65,90', desc: 'Dreierhaken mit schwenkbaren Armen. Wandmontage, platzsparend.', isMain: false },
+    { id: 'relinghaken', title: 'Relinghaken \u00d8 19 mm \u2013 V2A Edelstahl poliert oder geb\u00fcrstet', handle: 'relinghaken-o-19-mm-bad-dusche-edelstahl-poliert-oder-geburstet', kategorie: 'haken', montage: ['reling'], price: '5,90', desc: 'Haken f\u00fcr 19 mm Relingstangen. V2A Edelstahl, poliert oder geb\u00fcrstet.', isMain: false },
+    { id: 'doppelhaken-kleben', title: 'Doppel Haken selbstklebend 90 mm Edelstahl \u2013 Schwarz oder Chrom', handle: 'edelstahl-doppel-wandhaken-905-selbstklebend-90-mm-schwarz-matt-oder-chrom', kategorie: 'haken', montage: ['kleben'], price: '10,95', priceMax: '18,95', desc: 'Selbstklebender Doppelhaken aus Edelstahl. Kein Bohren n\u00f6tig. Schwarz matt oder Chrom.', isMain: true },
+    // -- Duschabzieher --
+    { id: 'abzieher-riva', title: 'Duschabzieher Typ Riva mit weicher Abziehlippe \u2013 Made in Germany', handle: 'duschabzieher-duschwischer-mit-weicher-abziehlippe', kategorie: 'haken', montage: ['glas', 'kleben', 'wand'], price: '5,90', priceMax: '6,50', desc: 'Duschabzieher mit weicher Lippe f\u00fcr streifenfreie Ergebnisse. Made in Germany.', isMain: false },
+    { id: 'abzieher-eckig', title: 'Duschabzieher mit Wandhalter Edelstahl eckig \u2013 Chrom glanz', handle: 'duschabzieher-mit-wandhalter-eckiges-design-240-210-mm', kategorie: 'haken', montage: ['wand'], price: '39,90', desc: 'Premium-Duschabzieher mit eckigem Design inkl. Wandhalter. Chrom glanz, 240x210 mm.', isMain: false },
+    { id: 'abzieher-rund', title: 'Duschabzieher mit Wandhalter Edelstahl \u2013 Chrom oder Schwarz', handle: 'duschabzieher-mit-wandhalter', kategorie: 'haken', montage: ['wand'], price: '37,90', priceMax: '39,90', desc: 'Duschabzieher mit Wandhalter. Edelstahl, Chrom oder Schwarz matt.', isMain: false },
+
+    // === BRAUSEN & ARMATUREN ===
+    { id: 'brauseset-chrom', title: 'Brause-Set Chrom mit Thermostat \u2013 XXL-Regenbrause \u00d8 250 mm', handle: 'brause-set-mit-thermostat-mischbatterie-modernes-design-und-hochster-komfort', kategorie: 'brausen', montage: ['wand'], price: '489,00', desc: 'Komplettes Brause-Set mit Thermostat, XXL-Regenbrause \u00d8 250 mm, 3-fach Handbrause und Brausestange. Chrom.', isMain: true, highlight: true },
+    { id: 'brauseset-schwarz', title: 'Brause-Set Schwarz matt mit Thermostat \u2013 XXL-Regenbrause \u00d8 250 mm', handle: 'brause-set-mit-thermostat-mischbatterie-modernes-design', kategorie: 'brausen', montage: ['wand'], price: '599,00', desc: 'Premium Brause-Set in Schwarz matt mit Thermostat, XXL-Regenbrause und 3-fach Handbrause.', isMain: true },
+    { id: 'duschsystem-clivia', title: 'Clivia Safe-Tec Duschsystem mit Thermostat und 250 mm Kopfbrause', handle: 'duschsystem-mit-thermostat-250-mm-kopfbrause-5-fach-handbrause-verchromt', kategorie: 'brausen', montage: ['wand'], price: '389,00', desc: 'Komplettes Duschsystem mit Thermostat, 250 mm Kopfbrause und 5-fach Handbrause. Chrom.', isMain: true },
+    { id: 'hansgrohe-brauseset', title: 'Hansgrohe Brauseset Pulsify 105 3jet mit Brausestange 90 cm', handle: 'hansgrohe-pulsify-select-brauseset-105-3jet', kategorie: 'brausen', montage: ['wand'], price: '119,90', desc: 'Hansgrohe Pulsify Brauseset mit 3 Strahlarten und 90 cm Brausestange. Relaxation-Modus.', isMain: true },
+    { id: 'regenwerk-stange', title: 'REGENWERK Vario-Tast Brausestange rund | 950 mm | Messing verchromt', handle: 'regenwerk_brausestange_massiv', kategorie: 'brausen', montage: ['wand'], price: '179,90', desc: 'Massive Brausestange aus Messing. 950 mm, \u00d8 20 mm, stufenlose H\u00f6henverstellung.', isMain: false },
+    { id: 'vigour-brausestange', title: 'VIGOUR Brausestange V3 mit massivem Brausehalter | 95 cm', handle: 'vigour-brausegarnitur-v3', kategorie: 'brausen', montage: ['wand'], price: '179,90', desc: 'Premium-Brausestange mit massivem verstellbarem Brausehalter. 95 cm, Chrom.', isMain: false },
+    { id: 'kopfbrause-v2-250', title: 'Vigour Kopfbrause V2 250 mm rund verchromt', handle: 'vigour-individual-2-0-kopfbrause-250-mm-rund-chrom-weiss', kategorie: 'brausen', montage: ['wand'], price: '125,90', desc: 'Runde Kopfbrause 250 mm mit wei\u00dfer Brausefl\u00e4che. 1/2 Zoll Anschluss.', isMain: false },
+    { id: 'kopfbrause-edge', title: 'VIGOUR Kopfbrause edge quadratisch 250x250 / 300x300 mm', handle: 'vigour-individual-1-0-kopfbrause-250-x-250-mm-quadratisch-chrom', kategorie: 'brausen', montage: ['wand'], price: '134,90', priceMax: '189,90', desc: 'Quadratische Kopfbrause im modernen Design. 250x250 oder 300x300 mm. Chrom/Wei\u00df.', isMain: false },
+    { id: 'kopfbrause-v1-200', title: 'Vigour Kopfbrause V1 200 mm rund verchromt', handle: 'vigour-individual-1-0-kopfbrause-200-mm-rund-chrom', kategorie: 'brausen', montage: ['wand'], price: '96,90', desc: 'Runde Kopfbrause 200 mm. Verchromt, Regendusche-Erlebnis.', isMain: false },
+    { id: 'hansgrohe-handbrause', title: 'Hansgrohe Pulsify 105 3jet Handbrause', handle: 'hansgrohe-pulsify-select-s-handbrause', kategorie: 'brausen', montage: ['wand'], price: '39,50', desc: 'Hansgrohe Handbrause mit 3 Strahlarten \u2013 Relaxation oder Activation. Per Knopfdruck umschalten.', isMain: false },
+    { id: 'thermostat-derby', title: 'VIGOUR Brausethermostat derby Safe-Tec | 38\u00b0C Verbr\u00fchschutz', handle: 'vigour-derby-safe-tec-brausethermostat-chrom-aufputz', kategorie: 'brausen', montage: ['wand'], price: '198,90', desc: 'Thermostat mit 38\u00b0C Verbr\u00fchschutz. Safe-Tec-Technologie, Aufputz, Chrom.', isMain: false },
+    { id: 'brausebatterie', title: 'Einhand-Brausebatterie Chrom Aufputz \u2013 Duscharmatur', handle: 'vigour-derby-einhand-brausebatterie-chrom-aufputz', kategorie: 'brausen', montage: ['wand'], price: '139,90', desc: 'Moderne Einhand-Brausebatterie mit Keramikkartusche. Aufputz, Chrom.', isMain: false },
+    { id: 'thermostat-clivia', title: 'Vigour Clivia Safe-Tec Brausethermostat Chrom Aufputz', handle: 'vigour-clivia-safe-tec-brausethermostat-chrom-aufputz', kategorie: 'brausen', montage: ['wand'], price: '159,90', desc: 'Clivia Brausethermostat mit 38\u00b0C Verbr\u00fchschutz. Aufputz, Chrom.', isMain: false },
+    { id: 'brausegarnitur-v1', title: 'Vigour Brausegarnitur V1 verchromt \u2013 90 cm Wandstange', handle: 'brausenarmatur-vigour-individual', kategorie: 'brausen', montage: ['wand'], price: '53,90', desc: 'Brausegarnitur mit 90 cm Wandstange, Metallschlauch und Handbrause. Verchromt.', isMain: false },
+    // Brauseschlauche
+    { id: 'schlauch-chrom', title: 'Brauseschlauch Chrom 1250/1600/2000 mm \u2013 1/2 Zoll', handle: 'brauseschlauch-chrom-1250-1600-2000-mm-1-2-zoll-art-nr-2485', kategorie: 'brausen', montage: ['wand'], price: '10,90', priceMax: '14,90', desc: 'Verchromter Brauseschlauch in 125, 160 oder 200 cm L\u00e4nge. 1/2 Zoll Anschluss.', isMain: false },
+    { id: 'schlauch-schwarz', title: 'Vigour Design-Brauseschlauch V3 schwarz matt \u2013 125/160 cm', handle: 'brauseschlauch-schwarz-1250-1600-mm-hochflexibel-verdrehsicher', kategorie: 'brausen', montage: ['wand'], price: '35,90', priceMax: '39,90', desc: 'Hochflexibler Brauseschlauch in Schwarz matt. Verdrehsicher, 125 oder 160 cm.', isMain: false },
+    { id: 'schlauch-silber', title: 'VIGOUR Design-Brauseschlauch V3 | 125, 160 oder 200 cm', handle: 'brauseschlauch-hochflexibel-verdrehsicher_silber', kategorie: 'brausen', montage: ['wand'], price: '26,90', priceMax: '29,90', desc: 'Verdrehsicherer Design-Brauseschlauch in Chrom. Hochflexibel, verschiedene L\u00e4ngen.', isMain: false },
+    { id: 'schlauch-bronze', title: 'Hansgrohe Brausenschlauch Isiflex B Bronze geb\u00fcrstet', handle: 'brauseschlauch-bronzeoptik', kategorie: 'brausen', montage: ['wand'], price: '45,90', priceMax: '49,90', desc: 'Premium-Brauseschlauch in Bronze geb\u00fcrstet. 125 oder 160 cm, Hansgrohe-Qualit\u00e4t.', isMain: false },
+    { id: 'schlauch-gessi', title: 'Gessi Brauseschlauch Warm Bronze Brushed PVD \u2013 2000 mm', handle: 'brauseschlauch-schwarz-1250-oder-1600-mm-hochflexibel-verdrehsicher-und-mit-metalloptik-kopie', kategorie: 'brausen', montage: ['wand'], price: '129,90', desc: 'Designer-Brauseschlauch in Warm Bronze Brushed PVD. 2000 mm, langleibig.', isMain: false },
+
+    // === DUSCHHOCKER ===
+    { id: 'hocker-plexi', title: 'Smedbo LIVING Duschhocker 407 \u2013 Plexiglas, rutschsicher', handle: 'duschhocker-modernes-design-in-weiss-und-schwarz-plexi', kategorie: 'hocker', montage: ['freistehend'], price: '164,90', desc: 'Moderner Duschhocker aus Plexiglas. Rutschsicher, 44 cm Sitzh\u00f6he. In Wei\u00df und Schwarz.', isMain: true, highlight: true },
+    { id: 'hocker-alu', title: 'Smedbo LIVING Duschhocker FK406/FK416 \u2013 Aluminium verchromt', handle: 'duschhocker-modernes-design-fur-hochsten-komfort', kategorie: 'hocker', montage: ['freistehend'], price: '399,00', desc: 'Premium-Duschhocker aus Aluminium verchromt. 48 cm Sitzh\u00f6he, h\u00f6chster Komfort.', isMain: true },
+
+    // === DUSCHVORHANG & STANGEN ===
+    { id: 'vorhang-sunset', title: 'Textil Duschvorhang \u201eSunset\u201c Wollwei\u00df \u2013 schwer entflammbar', handle: 'sunset-duschvorhang-premium-textil-fur-hochste-anspruche', kategorie: 'vorhang', montage: ['vorhangstange'], price: '149,00', priceMax: '229,00', desc: 'Premium Textil-Duschvorhang in Wollwei\u00df. Schwer entflammbar, antibakteriell, wasserabweisend.', isMain: true, highlight: true },
+    { id: 'vorhang-blanco', title: 'Textil Duschvorhang \u201eBlanco\u201c \u2013 Anti-Schimmel, wasserabweisend', handle: 'textil-duschvorhang_satin', kategorie: 'vorhang', montage: ['vorhangstange'], price: '49,95', priceMax: '69,90', desc: 'Hochwertiger Textil-Duschvorhang mit Magnet-Saum. Anti-Schimmel, wasserabweisend.', isMain: true },
+    { id: 'stange-alu', title: 'Gerade Duschvorhangstange Komplett-Set Aluminium', handle: 'gerade-duschvorhangstange-fur-duschnischen-aus-aluminium', kategorie: 'vorhang', montage: ['vorhangstange'], price: '109,00', priceMax: '99,00', desc: 'Komplett-Set: Gerade Duschvorhangstange aus Aluminium f\u00fcr Duschnischen. Inkl. Wandhalter.', isMain: true },
+    { id: 'stange-edelstahl', title: 'Duschvorhangstange \u2013 Gerade Edelstahlstange mit Innengewinde', handle: 'duschvorhangstangen-gerade-edelstahlstange-mit-innengewinde', kategorie: 'vorhang', montage: ['vorhangstange'], price: '39,00', priceMax: '75,00', desc: 'Gerade Edelstahlstange mit Innengewinde. Verschiedene L\u00e4ngen f\u00fcr individuelle L\u00f6sungen.', isMain: false },
+    { id: 'u-form', title: 'Verbindungsst\u00fcck f\u00fcr freitragende U-Form Duschvorhangstangen', handle: 'u-form-bauteil', kategorie: 'vorhang', montage: ['vorhangstange'], price: '120,00', priceMax: '159,00', desc: 'Spezial-Verbindungsst\u00fcck f\u00fcr freitragende U-Form-Stangen. Edelstahl.', isMain: false },
+    { id: 'bogenstueck', title: 'Bogenst\u00fcck 90\u00b0 Edelstahl \u2013 Verbindungselement', handle: 'bogenstuck-90-aus-edelstahl-verbindungselement-fur-duschvorhangstangen', kategorie: 'vorhang', montage: ['vorhangstange'], price: '43,00', desc: '90\u00b0 Bogenst\u00fcck aus Edelstahl. Verbindungselement f\u00fcr Eck- und U-Form-Stangen.', isMain: false },
+    { id: 'deckenabhaenger', title: 'Deckenabh\u00e4nger f\u00fcr Duschvorhangstangen Edelstahl', handle: 'deckenabhanger-fur-duschvorhangstangen-aus-edelstahl', kategorie: 'vorhang', montage: ['vorhangstange'], price: '15,00', priceMax: '25,00', desc: 'Deckenabh\u00e4nger aus Edelstahl. Verschiedene L\u00e4ngen f\u00fcr die Deckenmontage.', isMain: false },
+    { id: 'deckenhuelse', title: 'Deckenh\u00fclse Edelstahl \u2013 f\u00fcr Deckenabh\u00e4nger', handle: 'deckenhulse-aus-edelstahl-befestigung-fur-deckenstutzen-von-duschvorhangstangen', kategorie: 'vorhang', montage: ['vorhangstange'], price: '11,00', desc: 'Deckenh\u00fclse f\u00fcr sauberen Abschluss des Deckenabh\u00e4ngers. Edelstahl.', isMain: false },
+    { id: 'vorhang-haken', title: 'Duschvorhanghaken aus Edelstahl', handle: 'duschvorhanghaken-aus-edelstahl-zubehor-fur-duschstangen', kategorie: 'vorhang', montage: ['vorhangstange'], price: '3,00', desc: 'Duschvorhanghaken aus Edelstahl. Passt an alle g\u00e4ngigen Stangen.', isMain: false },
+    { id: 'wandhalter-zweiteilig', title: 'Zweiteiliger Wandhalter Edelstahl \u2013 Duschvorhangstangen', handle: 'zweiteiliger-wandhalter-aus-edelstahl-duschvorhangstangen-zubehor-fur-nischenmontage', kategorie: 'vorhang', montage: ['vorhangstange'], price: '12,90', desc: 'Zweiteiliger Wandhalter f\u00fcr Nischenmontage. Edelstahl.', isMain: false },
+
+    // === DUSCHWANNEN & ABLAEUFE ===
+    { id: 'wanne-120-90', title: 'VIGOUR Acryl-Duschwanne \u201eone\u201c 120x90x2,5 cm', handle: 'acryl-duschwanne-120-90', kategorie: 'wannen', montage: ['freistehend'], price: '339,00', desc: 'Gro\u00dfz\u00fcgige Acryl-Duschwanne 120x90 cm. Nur 2,5 cm flach, Markenqualit\u00e4t von VIGOUR.', isMain: true, highlight: true },
+    { id: 'wanne-140-90', title: 'VIGOUR Acryl-Duschwanne \u201eone\u201c 140x90x3,5 cm', handle: 'rechteckige-acryl-duschwanne-140-90', kategorie: 'wannen', montage: ['freistehend'], price: '399,00', desc: 'XL-Duschwanne 140x90 cm. Premium Acryl, 3,5 cm flach, VIGOUR-Qualit\u00e4t.', isMain: true },
+    { id: 'wanne-100-100', title: 'VIGOUR Acryl-Duschwanne \u201eone\u201c 100x100x2,5 cm', handle: 'acryl-duschwanne-100-100-cm-flach', kategorie: 'wannen', montage: ['freistehend'], price: '289,00', desc: 'Quadratische Duschwanne 100x100 cm. Flach und gro\u00dfz\u00fcgig.', isMain: true },
+    { id: 'wanne-90-90', title: 'VIGOUR Acryl-Duschwanne \u201eone\u201c 90x90x2,5 cm', handle: 'acryl-duschwanne-90-90-2-5', kategorie: 'wannen', montage: ['freistehend'], price: '259,00', desc: 'Kompakte Duschwanne 90x90 cm. 2,5 cm flach, Markenqualit\u00e4t.', isMain: false },
+    { id: 'ablauf-flach', title: 'Flacher Duschwannenablauf DN40/DN50', handle: 'flacher-duschwannenablauf', kategorie: 'wannen', montage: ['freistehend'], price: '39,90', desc: 'Flache Ablaufgarnitur f\u00fcr 90 mm Duschwannen. DN40/DN50 Anschluss.', isMain: false },
+    { id: 'ablauf-abdeckung', title: 'Abdeckhaube f\u00fcr Duschwannenablauf 90 mm \u2013 \u00d8 115 mm verchromt', handle: 'abdeckhaube-fur-duschwannenablauf-90-mm-o-115-mm-verchromt', kategorie: 'wannen', montage: ['freistehend'], price: '27,90', desc: 'Verchromte Abdeckhaube f\u00fcr den Duschwannenablauf. \u00d8 115 mm, optischer Upgrade.', isMain: false },
+
+    // === BAD- & WC-ZUBEHOER ===
+    { id: 'seifenspender-satin', title: 'SATIN SQUARE Seifenspender \u2013 modern und leicht zu reinigen', handle: 'seifenspender-satin-square', kategorie: 'badzubehoer', montage: ['freistehend'], price: '11,95', desc: 'Formsch\u00f6ner Seifenspender im SATIN SQUARE Design. Leicht zu reinigen.', isMain: false },
+    { id: 'seifenspender-gold', title: 'Seifenspender Wandmodell Gold geb\u00fcrstet & Porzellan 200 ml', handle: 'seifenspender-wandmodell-gold-geburstet-porzellan-200-m', kategorie: 'badzubehoer', montage: ['wand'], price: '104,90', desc: 'Edler Wand-Seifenspender in Gold geb\u00fcrstet mit Porzellan-Beh\u00e4lter. 200 ml.', isMain: true },
+    { id: 'seifenspender-messing', title: 'Seifenspender Wandmodell geb\u00fcrstetes Messing', handle: 'seifenspender-wandmodell-geburstetes-messing-fur-stilvolle-bader', kategorie: 'badzubehoer', montage: ['wand'], price: '115,90', desc: 'Wand-Seifenspender in geb\u00fcrstetem Messing. Stilvolle Optik f\u00fcr das Badezimmer.', isMain: true, highlight: true },
+    { id: 'wc-buerste', title: 'SATIN SQUARE WC B\u00fcrste mit Beh\u00e4lter', handle: 'satin-square-wc-burste-mit-behalter', kategorie: 'badzubehoer', montage: ['freistehend'], price: '22,95', desc: 'Schlichte WC-B\u00fcrste im SATIN SQUARE Design. Hygienisch und hochwertig.', isMain: false },
+    { id: 'zahnputzbecher', title: 'SATIN SQUARE Zahnputzbecher', handle: 'satin-square-zahnputzbecher', kategorie: 'badzubehoer', montage: ['freistehend'], price: '8,95', desc: 'Minimalistischer Zahnputzbecher im SATIN SQUARE Design.', isMain: false },
+    { id: 'tischspiegel', title: 'Tischspiegel Satin Square mit Schmuckablage', handle: 'satin-square-tischspiegel-mit-schmuckablage', kategorie: 'badzubehoer', montage: ['freistehend'], price: '38,95', desc: 'Moderner Tischspiegel mit integrierter Schmuckablage. Klares Design.', isMain: false },
+    { id: 'kosmetikspiegel', title: 'Kosmetikspiegel geb\u00fcrstetes Messing \u2013 7-fache Vergr\u00f6\u00dferung', handle: 'kosmetikspiegel-aus-geburstetem-messing-mit-7-facher-vergrosserung', kategorie: 'badzubehoer', montage: ['wand'], price: '184,90', desc: 'Wandspiegel mit 7-facher Vergr\u00f6\u00dferung. Geb\u00fcrstetes Messing, ausziehbar.', isMain: true }
+];
+
+// Product images from Shopify CDN
+const productImages = {
+    'eck-schwammkorb-verchromt-250x172x61-mm-vigour-one-wandmontage': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/ONESWK_2.jpg?v=1758363288',
+    'schwammkorb-verchromt-rechteckig-205x104x60-mm-vigour-one-wandmontage': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/ONSWK_2.jpg?v=1758362848',
+    'seifenkorb-chrom-geschlossen-130x100-mm-trinnity': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Seifenkorbchromgeschlossen130x100mmTRINNITY_3.jpg?v=1758362439',
+    'schwammkorb-fur-brausestangen-praktisch-hochwertig': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/9014015010_5.jpg?v=1758270028',
+    'brausestangenkorb-universell-und-hochwertig': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/9014020010_7.jpg?v=1758269367',
+    'sideline-korb-fur-die-brausestange-200-110-mm-dk3008': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DB3008.jpg?v=1748355819',
+    'sideline-korb-fur-die-brausestange-korb': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8141.png?v=1766956388',
+    'smedbo-duschkorb-fur-montage-an-brausestange-mit-18-22-oder-25-mm-durchmesser-art-nr-dk3006': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8140.png?v=1766955929',
+    'smedbo-gitterkorb-fur-die-montage-an-der-brausestange-art-nr-dk1106': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschop_150.png?v=1767081964',
+    'giese-bodyguard-30210': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/30210_schwarz1_1.png?v=1770385257',
+    'duschkorb-fur-duschstange': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Giese_Korb_1_d0d2a457-c430-4c7f-b538-0cd3c0c084e3.png?v=1768393310',
+    'smedbo-dk3041': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DK3041_2.jpg?v=1764160104',
+    'sideline-duschkorb-250-100-mm-chrom-poliert': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/SIDELINE_Duschkorb_an_Aufputz-Armatur_1.jpg?v=1764170546',
+    'bugelduschkorb-duschablage-mit-innovativem-design-hpl-brausestange-10013': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/10013_kulisse.png?v=1747398819',
+    'sideline-eckduschregal-selbstklebend-an-fliesenwand-chrom-glanz-oder-schwarz-matt-art-nr-4111': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DK4111.jpg?v=1763055031',
+    'sideline-duschregal-selbstklebend-an-fliesenwand-chrom-glanz-oder-schwarz-matt': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DB4100.jpg?v=1763054930',
+    'sideline-design-seifenkorb-250-110-mm-chrom-poliert': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DK2001.jpg?v=1748159661',
+    'duschkorb-chrom-glanz-art-nr-dk1001': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschkorb_1001.png?v=1767351634',
+    'design-seifenkorb-mit-bodenplatte-250-mm-breite': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DK3001_3.jpg?v=1753947810',
+    'design-seifenkorb-mit-bodenplatte-400-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DK3005.3.jpg?v=1753943972',
+    'doppelter-duschkorb-250-mm-mit-zwei-ebenen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DK3012.3.jpg?v=1753945012',
+    'sideline-design-duschkorb-messing-geburstet': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_bcfb7306-351a-430a-89ac-b0b7db084c45.jpg?v=1751017',
+    'duschablage-typ-deluxe-fur-die-einarbeitung-in-fliesenfugen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Fliesenablage_ST_1.png?v=1752760136',
+    'vipa-duschablage-mit-innovativem-design-hpl-glaswandmontage-30950': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Vipa_2.jpg?v=1757839085',
+    'smedbo-ablage-fur-duschecke-aus-edelstahl-dreieckige-form-fur-einbau-in-fliesenfugen-chrom-glanz-oder-schwarz-matt-art-nr-3060': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschop.png?v=1767082440',
+    'duschregal-zum-einfliesen-100-250-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DB3062.11.jpg?v=1753952833',
+    'duschregal-zum-einfliesen-gelocht-100-250-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DK3061.jpg?v=1766956749',
+    'duschregal-aluminium-off-schwarz': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DB5021.2.jpg?v=1753888957',
+    'duschregal-aluminium-schwarz': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DB5020.2.jpg?v=1753887750',
+    'smedbo-handtuchhalter-2-reihig-fur-glasduschwand-zur-befestigung-an-glaskante-art-nr-dk3102': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Handtuchhalter_2-reihig_3.jpg?v=1763036552',
+    'smedbo-handtuchhalter-1-reihig-fur-glasduschwand-zur-befestigung-an-glaskante-art-nr-dk3101': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Handtuchhalter_1-reihig_4.jpg?v=1763037637',
+    'giese-universal-31050': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/31050.png?v=1770390207',
+    'giese-server-badetuchhalter-stilvoller-komfort-ohne-bohren': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/11858_6.png?v=1770315394',
+    'giese-badmoebel-91756': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/91754_1.png?v=1770394786',
+    'handtuchring': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_bafe677c-44b6-4bdc-825d-9877c15aee71.jpg?v=1751029',
+    'handtuchhaken-verchromt-50-mm-vigour-one-wandmontage-verdeckte-befestigung': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/ONHA_9.jpg?v=1758364352',
+    'handtuchhaken-indiv-3-0-einteilig-chrom-magnet-vigour': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/freepik__bitte-erstelle-von-dem-produkt-ein-professionelles__9709',
+    'handtuchhaken-clivia-30-mm-verchromt-vigour': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/freepik__bitte-erstelle-von-dem-produkt-ein-professionnelle__7463',
+    'handtuchhaken-derby-35-mm-verchromt-vigour': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/freepik__bitte-erstelle-von-dem-produkt-ein-professionnelle__2419',
+    'halter-bzw-haken-fur-handtucher-oder-duschabzieher-aus-silikon': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/1600163.jpg?v=1742635246',
+    'hakenleiste-2-fach-fur-duschabtrennung-bis-8-mm-glasstarke': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/freepik__du-bist-ein-profi-in-bildbearbeitung-bitte-erstell__6470',
+    'halter-fur-duschabtrennung-mit-4-haken-passend-fur-6-8-und-10-mm-glas': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/9004597010_3.jpg?v=1758203535',
+    'halter-fur-duschabtrennung-mit-2-haken': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/9004596010_2.jpg?v=1758202219',
+    'halter-duschabtrennung-mit-2-haken-fur-glas-bis-10-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/900_4590_010_4.jpg?v=1758201469',
+    'smedbo-haken-fur-rahmenlose-duschtrennwande-hohe-95-mm-chrom-glanz-dk2111': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/freepik__bitte-erstelle-von-dem-produkt-ein-professionelles__9709',
+    'smedbo-haken-fur-duschtrennwand-aus-glas-chrom-glanz-fur-5-10-mm-glasdicke-dk3111': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-6256.png?v=1757796583',
+    'smedbo-haken-fur-rahmenlose-duschtrennwande-dk2111': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Haken_Sm_8.jpg?v=1763052238',
+    'schwenkbarer-dreierhaken-praktisch-elegant-und-platzsparend': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/ZK327_3.jpg?v=1758284529',
+    'relinghaken-o-19-mm-bad-dusche-edelstahl-poliert-oder-geburstet': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Haken_gebuerstet.jpg?v=1772815419',
+    'edelstahl-doppel-wandhaken-905-selbstklebend-90-mm-schwarz-matt-oder-chrom': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Doppelhaken_3.jpg?v=1765387422',
+    'duschabzieher-duschwischer-mit-weicher-abziehlippe': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-6175.jpg?v=1763036611',
+    'duschabzieher-mit-wandhalter-eckiges-design-240-210-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DK2150.1.jpg?v=1753973265',
+    'duschabzieher-mit-wandhalter': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DB2140.11.jpg?v=1753972801',
+    'brause-set-mit-thermostat-mischbatterie-modernes-design-und-hochster-komfort': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/900_6630_010.png?v=1773387517',
+    'brause-set-mit-thermostat-mischbatterie-modernes-design': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/900_6630_040.png?v=1773386636',
+    'duschsystem-mit-thermostat-250-mm-kopfbrause-5-fach-handbrause-verchromt': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V1DS250R.png?v=1773387777',
+    'hansgrohe-pulsify-select-brauseset-105-3jet': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/PBG1053R90.png?v=1773389753',
+    'regenwerk_brausestange_massiv': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Regenwerk.png?v=1773390266',
+    'vigour-brausegarnitur-v3': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Brausestange_V3_2.png?v=1772096122',
+    'vigour-individual-2-0-kopfbrause-250-mm-rund-chrom-weiss': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V22KB25R_10.jpg?v=1758359517',
+    'vigour-individual-1-0-kopfbrause-250-x-250-mm-quadratisch-chrom': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/250x250.2.jpg?v=1770226646',
+    'vigour-individual-1-0-kopfbrause-200-mm-rund-chrom': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V12KB20R_9.jpg?v=1758357968',
+    'hansgrohe-pulsify-select-s-handbrause': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/PHB1053R.png?v=1773389342',
+    'vigour-derby-safe-tec-brausethermostat-chrom-aufputz': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DETB_6.jpg?v=1773387087',
+    'vigour-derby-einhand-brausebatterie-chrom-aufputz': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DEB_9.jpg?v=1773387845',
+    'vigour-clivia-safe-tec-brausethermostat-chrom-aufputz': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/CLTB_1.jpg?v=1773387591',
+    'brausenarmatur-vigour-individual': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V1BG901_2.png?v=1773392967',
+    'brauseschlauch-chrom-1250-1600-2000-mm-1-2-zoll-art-nr-2485': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Brauseschlauch.png?v=1768839085',
+    'brauseschlauch-schwarz-1250-1600-mm-hochflexibel-verdrehsicher': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Brauseschlauch_schwarz1_1c73ef87-ba46-4f0e-ab31-a17faccdd9f2.jpg',
+    'brauseschlauch-hochflexibel-verdrehsicher_silber': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Brauseschlauch_glatt11.jpg?v=1765018509',
+    'brauseschlauch-bronzeoptik': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Brauseschlauch_bronze0.jpg?v=1753606482',
+    'brauseschlauch-schwarz-1250-oder-1600-mm-hochflexibel-verdrehsicher-und-mit-metalloptik-kopie': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Brauseschlauch_bronze.jpg?v=1753605374',
+    'duschhocker-modernes-design-in-weiss-und-schwarz-plexi': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Smedbo_Duschhocker_Schwarz_KS_2.png?v=1757841205',
+    'duschhocker-modernes-design-fur-hochsten-komfort': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschhocker_15.jpg?v=1757842143',
+    'sunset-duschvorhang-premium-textil-fur-hochste-anspruche': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/sunsetwollw-scaled_d078a2dc-a0e2-42c0-8072-2e66593a9cab.jpg',
+    'textil-duschvorhang_satin': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Blanco-scaled.jpg?v=1772198930',
+    'gerade-duschvorhangstange-fur-duschnischen-aus-aluminium': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschvorhangstange-Aluminium_BB-SG_02.jpg?v=1748613590',
+    'duschvorhangstangen-gerade-edelstahlstange-mit-innengewinde': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BB-SIG-01-gerade-stange.jpg?v=1765018251',
+    'u-form-bauteil': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/bauteile_edelstahl-U-Form_0008_10_002.png?v=1753791521',
+    'bogenstuck-90-aus-edelstahl-verbindungselement-fur-duschvorhangstangen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BB-BS-10-01-bogenstueck_1.jpg?v=1748615056',
+    'deckenabhanger-fur-duschvorhangstangen-aus-edelstahl': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BB-DTD-01-durchschleuder-deckenhaenger_1.jpg?v=1748615056',
+    'deckenhulse-aus-edelstahl-befestigung-fur-deckenstutzen-von-duschvorhangstangen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BB-DL-01-deckenlager.jpg?v=1748615056',
+    'duschvorhanghaken-aus-edelstahl-zubehor-fur-duschstangen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BB-DH-01-edelstahl-haken_1.jpg?v=1764785170',
+    'zweiteiliger-wandhalter-aus-edelstahl-duschvorhangstangen-zubehor-fur-nischenmontage': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BB-WLZT-01-zweiteiliges-wandlager_1.jpg?v=1764785133',
+    'acryl-duschwanne-120-90': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschwanne_Vigour_120x90x3.000.jpg?v=1753547298',
+    'rechteckige-acryl-duschwanne-140-90': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschwanne_Vigour_140x90x3.00.jpg?v=1753546389',
+    'acryl-duschwanne-100-100-cm-flach': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschwanne_Vigour_90x90x2_5.0_6ea17da0-ef87-4e0a-9495-5a4060eea96',
+    'acryl-duschwanne-90-90-2-5': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschwanne_Vigour_90x90x2_5.0.jpg?v=1753530451',
+    'flacher-duschwannenablauf': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/AblaufFunktionseinheitTempoplex90mm.1.jpg?v=1753548218',
+    'abdeckhaube-fur-duschwannenablauf-90-mm-o-115-mm-verchromt': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Ablaufabdeckung_10.jpg?v=1764233172',
+    'seifenspender-satin-square': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Seifenspender_BB_11_452acafb-fef0-48e4-8149-28357f840abf.jpg',
+    'seifenspender-wandmodell-gold-geburstet-porzellan-200-m': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_550f2a36-de51-48ea-a8f0-48f3e293b88f.jpg?v=1751007',
+    'seifenspender-wandmodell-geburstetes-messing-fur-stilvolle-bader': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_1809848a-e5d0-458c-a33b-37e8826aa8cd.jpg?v=1750969',
+    'satin-square-wc-burste-mit-behalter': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/WC-Buerste_BB_5_3fdd0463-86dd-4b52-a682-be5bcb12b577.jpg',
+    'satin-square-zahnputzbecher': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Zahnputzbecher_BB_16.jpg?v=1764248389',
+    'satin-square-tischspiegel-mit-schmuckablage': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/freepik__mache-daraus-ein-professionelles-foto-zu-werbezwec__5577',
+    'kosmetikspiegel-aus-geburstetem-messing-mit-7-facher-vergrosserung': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_b2e9f166-7820-4b84-9bb9-e7c96e819082.jpg?v=1751017'
+};
+
+// Montage options per category
+const montageConfig = {
+    koerbe: {
+        title: 'Wie soll der Korb / die Ablage befestigt werden?',
+        subtitle: 'Die Befestigungsart bestimmt, welche Produkte f\u00fcr Sie in Frage kommen.',
+        info: '<strong>Tipp:</strong> K\u00f6rbe f\u00fcr die Brausestange und zum Einh\u00e4ngen an der Glaswand sind besonders praktisch \u2013 kein Bohren, kein Kleben und jederzeit neu positionierbar.',
+        options: [
+            { value: 'wand', name: 'Wandmontage (Bohren)', desc: 'Klassische Befestigung mit Schrauben und D\u00fcbeln. Maximaler Halt, dauerhaft.', meta: 'Bohren & Schrauben', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><path d="M8 32L18 22"/><path d="M18 22L28 12"/><circle cx="30" cy="10" r="3" fill="none"/></svg>' },
+            { value: 'glas', name: 'An Glaswand einh\u00e4ngen', desc: 'Einfach \u00fcber die Glaskante h\u00e4ngen. Kein Bohren, kein Kleben. Flexibel repositionierbar.', meta: 'Ohne Bohren', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="16" y="4" width="3" height="32" fill="none"/><path d="M19 12L30 12L30 28L19 28"/><path d="M22 16L26 16" opacity="0.4"/><path d="M22 20L26 20" opacity="0.4"/><path d="M22 24L26 24" opacity="0.4"/></svg>' },
+            { value: 'brausestange', name: 'An Brausestange', desc: 'Montage an der bestehenden Brausestange. Kein Bohren, sofort einsatzbereit.', meta: 'Ohne Bohren', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><path d="M20 4L20 36"/><path d="M14 14L26 14L26 28L14 28Z" fill="none"/><path d="M16 18L24 18" opacity="0.4"/><path d="M16 22L24 22" opacity="0.4"/></svg>' },
+            { value: 'kleben', name: 'Selbstklebend', desc: 'Einfach auf die Fliesenwand kleben. Kein Werkzeug n\u00f6tig.', meta: 'Ohne Bohren', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="10" y="10" width="20" height="20" rx="2" fill="none"/><path d="M15 20L25 20" opacity="0.4"/><path d="M20 15L20 25" opacity="0.4"/></svg>' }
+        ]
+    },
+    halter: {
+        title: 'Wo soll der Handtuchhalter montiert werden?',
+        subtitle: 'Handtuchhalter gibt es f\u00fcr verschiedene Montagepunkte.',
+        info: '<strong>Tipp:</strong> F\u00fcr Glasduschen sind Handtuchhalter besonders praktisch, die direkt an der Glaskante befestigt werden \u2013 ohne Bohren und ohne Kleben.',
+        options: [
+            { value: 'glas', name: 'An Glasduschwand', desc: 'Befestigung direkt an der Glaskante. Kein Bohren in die Fliese, kein Kleben.', meta: 'Glasmontage', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="16" y="4" width="3" height="32" fill="none"/><path d="M19 14L32 14"/><path d="M19 22L32 22"/></svg>' },
+            { value: 'wand', name: 'Wandmontage (Bohren)', desc: 'Klassische Wandbefestigung mit Schrauben und D\u00fcbeln. Maximaler Halt.', meta: 'Bohren & Schrauben', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><path d="M8 32L18 22"/><path d="M18 22L28 12"/><circle cx="30" cy="10" r="3" fill="none"/></svg>' },
+            { value: 'kleben', name: 'Kleben / Silikon', desc: 'Befestigung mit Kleber oder Silikon-Pads. Bohrfrei, schonend f\u00fcr Fliesen.', meta: 'Ohne Bohren', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="10" y="10" width="20" height="20" rx="2" fill="none"/><path d="M15 20L25 20" opacity="0.4"/><path d="M20 15L20 25" opacity="0.4"/></svg>' }
+        ]
+    },
+    haken: {
+        title: 'Wo soll der Haken befestigt werden?',
+        subtitle: 'Die meisten Duschhaken werden einfach an der Glaswand eingeh\u00e4ngt.',
+        info: '<strong>Tipp:</strong> Haken zum Einh\u00e4ngen an der Glasduschwand sind der einfachste Weg, Handt\u00fccher und Waschlappen in Reichweite zu haben.',
+        options: [
+            { value: 'glas', name: 'An Glasduschwand', desc: 'Einfach \u00fcber die Glaskante h\u00e4ngen. Sofort einsatzbereit, flexibel repositionierbar.', meta: 'Einh\u00e4ngen', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="16" y="4" width="3" height="32" fill="none"/><path d="M19 12L28 12L28 22"/><circle cx="28" cy="24" r="2" fill="#c8956c"/></svg>' },
+            { value: 'wand', name: 'Wandmontage (Bohren)', desc: 'Haken f\u00fcr Wandbefestigung mit Schrauben und D\u00fcbeln.', meta: 'Bohren & Schrauben', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><path d="M8 32L18 22"/><path d="M18 22L28 12"/><circle cx="30" cy="10" r="3" fill="none"/></svg>' },
+            { value: 'kleben', name: 'Selbstklebend', desc: 'Selbstklebende Haken ohne Bohren. Einfach auf die Fliesenwand kleben.', meta: 'Ohne Bohren', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="10" y="10" width="20" height="20" rx="2" fill="none"/><path d="M15 20L25 20" opacity="0.4"/><path d="M20 15L20 25" opacity="0.4"/></svg>' }
+        ]
+    }
+};
+
+// Categories that skip step 1 (show all products directly)
+const skipMontageCategories = ['brausen', 'hocker', 'vorhang', 'wannen', 'badzubehoer'];
+
+// ============================================================
+// State
+// ============================================================
+let currentStep = 0;
+const selections = {
+    kategorie: null,
+    montage: null
+};
+
+// ============================================================
+// Step Logic
+// ============================================================
+function selectOption(step, el) {
+    const parent = el.closest('.options-grid');
+    parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+
+    const value = el.dataset.value;
+
+    if (step === 0) {
+        selections.kategorie = value;
+        selections.montage = null;
+    } else if (step === 1) {
+        selections.montage = value;
+    }
+
+    document.getElementById('nextBtn' + step).disabled = false;
+}
+
+function buildStep1() {
+    const kat = selections.kategorie;
+    const config = montageConfig[kat];
+    if (!config) return;
+
+    document.getElementById('step1Title').textContent = config.title;
+    document.getElementById('step1Subtitle').textContent = config.subtitle;
+    document.getElementById('step1Info').innerHTML = config.info;
+
+    const grid = document.getElementById('step1Options');
+    grid.innerHTML = config.options.map(opt => `
+        <div class="option-card" data-value="${opt.value}" onclick="selectOption(1, this)">
+            <div class="option-icon">${opt.icon}</div>
+            <div class="option-name">${opt.name}</div>
+            <div class="option-desc">${opt.desc}</div>
+            <div class="option-meta">${opt.meta}</div>
+        </div>
+    `).join('');
+
+    document.getElementById('nextBtn1').disabled = true;
+}
+
+function nextStep(from) {
+    const panels = document.querySelectorAll('.step-panel');
+    panels[from].classList.remove('active');
+
+    let nextPanel = from + 1;
+
+    // Skip montage step for categories without montage choices
+    if (from === 0 && skipMontageCategories.includes(selections.kategorie)) {
+        nextPanel = 2;
+        selections.montage = null;
+    }
+
+    if (from === 0 && !skipMontageCategories.includes(selections.kategorie)) {
+        buildStep1();
+    }
+
+    currentStep = nextPanel;
+
+    if (currentStep === 2) buildResults();
+
+    panels[currentStep].classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevStep(to) {
+    const panels = document.querySelectorAll('.step-panel');
+    panels[currentStep].classList.remove('active');
+
+    let prevPanel;
+
+    if (to === 2) {
+        if (skipMontageCategories.includes(selections.kategorie)) {
+            prevPanel = 0;
+        } else {
+            prevPanel = 1;
+        }
+    } else {
+        prevPanel = to - 1;
+    }
+
+    currentStep = prevPanel;
+    panels[currentStep].classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+    selections.kategorie = null;
+    selections.montage = null;
+    currentStep = 0;
+
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('step0').classList.add('active');
+    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('[id^="nextBtn"]').forEach(b => b.disabled = true);
+
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+    const dots = document.querySelectorAll('.step-dot');
+    const skipMontage = skipMontageCategories.includes(selections.kategorie);
+
+    let progressPercent;
+    if (skipMontage) {
+        if (currentStep === 0) progressPercent = 0;
+        else progressPercent = 100;
+    } else {
+        progressPercent = currentStep === 0 ? 0 : currentStep === 1 ? 50 : 100;
+    }
+
+    document.getElementById('progressSteps').style.setProperty('--progress', progressPercent + '%');
+
+    dots.forEach((dot, i) => {
+        dot.classList.remove('active', 'done');
+
+        if (skipMontage && i === 1) {
+            if (currentStep > 1) dot.classList.add('done');
+        } else {
+            if (i < currentStep) dot.classList.add('done');
+            else if (i === currentStep) dot.classList.add('active');
+        }
+    });
+
+    dots.forEach(dot => {
+        dot.onclick = () => {
+            const stepIdx = parseInt(dot.dataset.step);
+            if (stepIdx < currentStep) {
+                if (skipMontage && stepIdx === 1) return;
+                document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+                currentStep = stepIdx;
+                document.getElementById('step' + stepIdx).classList.add('active');
+                updateProgress();
+            }
+        };
+    });
+}
+
+// ============================================================
+// Results Builder
+// ============================================================
+function buildResults() {
+    const { kategorie, montage } = selections;
+    const container = document.getElementById('resultsContent');
+
+    const kategorieLabels = {
+        'koerbe': 'Duschk\u00f6rbe & Ablagen',
+        'halter': 'Handtuchhalter',
+        'haken': 'Haken & Halter',
+        'brausen': 'Brausen & Armaturen',
+        'hocker': 'Duschhocker',
+        'vorhang': 'Duschvorh\u00e4nge & Stangen',
+        'wannen': 'Duschwannen & Abl\u00e4ufe',
+        'badzubehoer': 'Bad- & WC-Zubeh\u00f6r'
+    };
+
+    const montageLabels = {
+        'wand': 'Wandmontage (Bohren)',
+        'glas': 'Glaswand (Einh\u00e4ngen)',
+        'brausestange': 'Brausestange',
+        'kleben': 'Selbstklebend',
+        'einfliesen': 'Einfliesen',
+        'armatur': 'An Armatur',
+        'reling': 'An Relingstange',
+        'magnet': 'Magnetbefestigung',
+        'moebel': 'M\u00f6belmontage',
+        'freistehend': 'Freistehend',
+        'vorhangstange': 'Duschvorhangstange'
+    };
+
+    // Filter products
+    const allMatching = products.filter(p => {
+        if (p.kategorie !== kategorie) return false;
+        if (montage && !p.montage.includes(montage)) return false;
+        return true;
+    });
+
+    const mainProducts = allMatching.filter(p => p.isMain);
+    const otherProducts = allMatching.filter(p => !p.isMain);
+
+    mainProducts.sort((a, b) => {
+        if (a.highlight && !b.highlight) return -1;
+        if (!a.highlight && b.highlight) return 1;
+        return 0;
+    });
+
+    // Build HTML
+    let html = `
+    <div class="result-summary">
+        <h3>Ihre Auswahl</h3>
+        <div class="result-choices">
+            <span class="result-choice">${kategorieLabels[kategorie]}</span>
+            ${montage ? `<span class="result-choice">${montageLabels[montage]}</span>` : ''}
+        </div>
+    </div>`;
+
+    // Context-sensitive hints
+    const hints = {
+        'koerbe-glas': '<strong>Tipp:</strong> K\u00f6rbe zum Einh\u00e4ngen an der Glasduschwand sind besonders praktisch: Einfach \u00fcberh\u00e4ngen, kein Werkzeug n\u00f6tig, und jederzeit repositionierbar. Achten Sie auf die passende Glasst\u00e4rke (6, 8 oder 10 mm).',
+        'koerbe-brausestange': '<strong>Tipp:</strong> Brausestangenk\u00f6rbe werden einfach an die bestehende Brausestange geh\u00e4ngt \u2013 kein Bohren, kein Kleben. Achten Sie auf den Durchmesser Ihrer Brausestange (meist 18\u201325 mm).',
+        'koerbe-wand': '<strong>Tipp:</strong> F\u00fcr die Wandmontage im Nassbereich empfehlen wir abdichtende D\u00fcbel wie den TOX Aqua Stop Pro, damit kein Wasser hinter die Fliese gelangt. Passendes Montagematerial finden Sie in unserem Montagebedarf-Konfigurator.',
+        'koerbe-kleben': '<strong>Tipp:</strong> Selbstklebende Regale halten am besten auf glatten, sauberen Fliesen. Reinigen Sie die Klebefl\u00e4che vorher gr\u00fcndlich mit Alkohol und lassen Sie den Kleber 24 Stunden aush\u00e4rten, bevor Sie das Regal belasten.',
+        'halter-glas': '<strong>Tipp:</strong> Handtuchhalter f\u00fcr Glasduschen werden direkt an der Glaskante befestigt. Kein Bohren n\u00f6tig \u2013 die Halter klemmen sicher an der Glasscheibe.',
+        'halter-wand': '<strong>Tipp:</strong> Wandmontierte Handtuchhalter bieten den stabilsten Halt. Viele Modelle haben eine verdeckte Befestigung f\u00fcr eine saubere Optik.',
+        'haken-glas': '<strong>Tipp:</strong> Haken f\u00fcr Glasduschen sind in Sekundenschnelle montiert: Einfach \u00fcber die Oberkante der Glasscheibe h\u00e4ngen. Ideal f\u00fcr Handt\u00fccher, Waschlappen und Duschabzieher.',
+        'brausen': '<strong>Tipp:</strong> Komplette Brause-Sets beinhalten alles, was Sie brauchen: Thermostat, Kopfbrause, Handbrause und Brausestange. F\u00fcr Einzelteile wie Schl\u00e4uche oder Kopfbrausen scrollen Sie weiter nach unten.',
+        'hocker': '<strong>Tipp:</strong> Duschhocker bieten Komfort und Sicherheit. Beide Modelle sind rutschfest und f\u00fcr den dauerhaften Einsatz im Nassbereich konzipiert.',
+        'vorhang': '<strong>Tipp:</strong> Duschvorhangstangen aus Edelstahl k\u00f6nnen individuell konfiguriert werden: W\u00e4hlen Sie gerade Stangen f\u00fcr Nischen, oder kombinieren Sie Bogenst\u00fccke und Verbinder f\u00fcr L- und U-Formen.',
+        'wannen': '<strong>Tipp:</strong> Alle Duschwannen von VIGOUR sind besonders flach (2,5\u20133,5 cm) und erleichtern den Einstieg. F\u00fcr die fachgerechte Abdichtung finden Sie passendes Material in unserem Montagebedarf-Konfigurator.',
+        'badzubehoer': '<strong>Tipp:</strong> Die SATIN SQUARE Serie bietet formsch\u00f6ne Accessoires zu einem attraktiven Preis-Leistungs-Verh\u00e4ltnis. F\u00fcr Premium-Optik empfehlen wir die Modelle in geb\u00fcrstetem Messing.'
+    };
+
+    const hintKey = montage ? `${kategorie}-${montage}` : kategorie;
+    if (hints[hintKey]) {
+        html += `<div class="result-hint">${hints[hintKey]}</div>`;
+    }
+
+    // Main products
+    if (mainProducts.length > 0) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Empfohlene Produkte <span class="result-badge">${mainProducts.length}</span>
+            </div>
+            <div class="result-products">
+                ${mainProducts.map(p => productCard(p, true)).join('')}
+            </div>
+        </div>`;
+    }
+
+    // Other products
+    if (otherProducts.length > 0) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">
+                Weitere passende Produkte <span class="result-badge" style="background: var(--primary)">${otherProducts.length}</span>
+            </div>
+            <div class="result-products">
+                ${otherProducts.map(p => productCard(p)).join('')}
+            </div>
+        </div>`;
+    }
+
+    if (allMatching.length === 0) {
+        html += `
+        <div class="result-section">
+            <div style="text-align:center; padding:40px 24px; color:var(--text-light); font-size:14px; background:var(--card-bg); border-radius:var(--radius); box-shadow:var(--shadow);">
+                <p style="font-size:18px; margin-bottom:8px;">Keine passenden Produkte gefunden</p>
+                <p>F\u00fcr Ihre Kombination haben wir aktuell keine Produkte. Bitte passen Sie Ihre Auswahl an oder kontaktieren Sie uns f\u00fcr eine pers\u00f6nliche Beratung.</p>
+            </div>
+        </div>`;
+    }
+
+    container.innerHTML = html;
+}
+
+function productCard(p, isTopPick) {
+    const priceStr = p.priceMax ? `ab ${p.price} \u20ac` : `${p.price} \u20ac`;
+
+    const imgUrl = productImages[p.handle];
+    const imgHtml = imgUrl
+        ? `<img class="result-product-img" src="${imgUrl}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+           <div class="result-product-img result-product-img-fallback" style="display:none;">
+               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c8956c" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+           </div>`
+        : `<div class="result-product-img" style="display:flex; align-items:center; justify-content:center;">
+               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c8956c" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+           </div>`;
+
+    const highlightBadge = p.highlight
+        ? `<span style="display:inline-block; background:#e8f5e9; color:#27ae60; font-size:10px; font-weight:600; padding:2px 8px; border-radius:6px; margin-left:6px;">Top-Empfehlung</span>`
+        : isTopPick
+            ? `<span style="display:inline-block; background:#e8f5e9; color:#27ae60; font-size:10px; font-weight:600; padding:2px 8px; border-radius:6px; margin-left:6px;">Empfohlen</span>`
+            : '';
+
+    return `
+    <div class="result-product-card">
+        <a class="result-product-inner" href="https://duschop.de/products/${p.handle}" target="_blank" rel="noopener">
+            ${imgHtml}
+            <div class="result-product-info">
+                <div class="result-product-title">${p.title}${highlightBadge}</div>
+                <div class="result-product-desc">${p.desc}</div>
+                <div class="result-product-price">${priceStr}</div>
+            </div>
+            <div class="result-product-arrow">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </div>
+        </a>
+    </div>`;
+}
+
+// Init
+updateProgress();
+</script>
+
+</body>
+</html>
