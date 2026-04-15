@@ -258,6 +258,44 @@
             letter-spacing: -0.3px;
         }
 
+        .quick-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .quick-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text);
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        }
+
+        .quick-chip:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 4px 16px rgba(200, 149, 108, 0.18);
+            transform: translateY(-1px);
+        }
+
+        .quick-chip span {
+            font-size: 15px;
+            line-height: 1;
+        }
+
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -542,6 +580,22 @@
             <div class="section-label">13 Tools verf&uuml;gbar</div>
             <h2 class="section-title">W&auml;hlen Sie Ihren Produktfinder</h2>
         </div>
+
+        <nav class="quick-nav">
+            <a href="/dichtungs-konfigurator/" class="quick-chip"><span>&#x2699;&#xFE0F;</span> Dichtungs-Konfigurator</a>
+            <a href="/dichtung-seitlich-finder/" class="quick-chip"><span>&#x1F50D;</span> Dichtung Seitlich</a>
+            <a href="/dichtung-unten-finder/" class="quick-chip"><span>&#x1F50D;</span> Dichtung Unten</a>
+            <a href="/magnetdichtung-finder/" class="quick-chip"><span>&#x1F9F2;</span> Magnetdichtung</a>
+            <a href="/farbenfinder/" class="quick-chip"><span>&#x1F3A8;</span> Farbenfinder</a>
+            <a href="/beschlaege-konfigurator/" class="quick-chip"><span>&#x1F6AA;</span> Beschl&auml;ge</a>
+            <a href="/duschglas-konfigurator/" class="quick-chip"><span>&#x1FA9F;</span> Duschglas</a>
+            <a href="/metallprofile-konfigurator/" class="quick-chip"><span>&#x1F527;</span> Metallprofile</a>
+            <a href="/stabistangen-konfigurator/" class="quick-chip"><span>&#x1F4CF;</span> Stabistangen</a>
+            <a href="/reinigungs-konfigurator/" class="quick-chip"><span>&#x1F9F4;</span> Reinigung</a>
+            <a href="/montagebedarf-konfigurator/" class="quick-chip"><span>&#x1F527;</span> Montagebedarf</a>
+            <a href="/duschzubehoer-konfigurator/" class="quick-chip"><span>&#x1F6BF;</span> Duschzubeh&ouml;r</a>
+            <a href="/wintergarten-konfigurator/" class="quick-chip"><span>&#x1F3E0;</span> Wintergarten</a>
+        </nav>
 
         <div class="tools-grid">
 
