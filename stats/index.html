@@ -322,8 +322,8 @@
         document.getElementById('statusBar').textContent = 'Daten werden geladen...';
 
         try {
-            var pvUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/pub?output=csv&gid=' + PAGEVIEWS_GID;
-            var clUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/pub?output=csv&gid=' + CLICKS_GID;
+            var pvUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&gid=' + PAGEVIEWS_GID;
+            var clUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&gid=' + CLICKS_GID;
 
             var [pvRes, clRes] = await Promise.all([fetch(pvUrl), fetch(clUrl)]);
             pageviews = parseCSV(await pvRes.text());
