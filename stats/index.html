@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duschop Tools — Analytics</title>
+    <meta name="robots" content="noindex, nofollow">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1a1a2e;
+            --accent: #c8956c;
+            --accent-light: #e8c4a8;
+            --bg: #f5f0eb;
+            --card-bg: #ffffff;
+            --text: #2d2d2d;
+            --text-light: #6b6b6b;
+            --border: #e8e4df;
+            --green: #22c55e;
+            --blue: #3b82f6;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        /* Login Overlay */
+        .login-overlay {
+            position: fixed; inset: 0; z-index: 1000;
+            background: var(--primary);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .login-overlay.hidden { display: none; }
+        .login-box {
+            background: white; border-radius: 16px; padding: 40px;
+            text-align: center; max-width: 360px; width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .login-box h2 { font-size: 20px; margin-bottom: 8px; color: var(--primary); }
+        .login-box p { font-size: 14px; color: var(--text-light); margin-bottom: 24px; }
+        .login-box input {
+            width: 100%; padding: 12px 16px; border: 1px solid var(--border);
+            border-radius: 8px; font-size: 15px; font-family: inherit;
+            outline: none; transition: border-color 0.2s;
+        }
+        .login-box input:focus { border-color: var(--accent); }
+        .login-box button {
+            width: 100%; margin-top: 12px; padding: 12px; border: none;
+            background: var(--accent); color: white; font-size: 15px;
+            font-weight: 600; border-radius: 8px; cursor: pointer;
+            font-family: inherit; transition: background 0.2s;
+        }
+        .login-box button:hover { background: #b88460; }
+        .login-error { color: #ef4444; font-size: 13px; margin-top: 8px; display: none; }
+
+        /* Header */
+        .header {
+            background: rgba(26,26,46,0.95); color: white;
+            backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .header-inner {
+            max-width: 1200px; margin: 0 auto; padding: 14px 24px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .header-title { font-size: 16px; font-weight: 700; }
+        .header-title span { color: var(--accent); }
+        .header-right { display: flex; align-items: center; gap: 16px; }
+        .header-link {
+            color: var(--accent-light); text-decoration: none; font-size: 13px;
+            font-weight: 500; padding: 6px 14px; border: 1px solid rgba(200,149,108,0.3);
+            border-radius: 8px; transition: all 0.2s;
+        }
+        .header-link:hover { background: var(--accent); color: white; border-color: var(--accent); }
+        .refresh-btn {
+            background: none; border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.6); padding: 6px 14px; border-radius: 8px;
+            font-size: 13px; font-family: inherit; cursor: pointer; transition: all 0.2s;
+        }
+        .refresh-btn:hover { border-color: rgba(255,255,255,0.5); color: white; }
+
+        /* Main Layout */
+        .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 60px; }
+
+        /* Config Banner */
+        .config-banner {
+            background: #fef3c7; border: 1px solid #f59e0b; border-radius: 12px;
+            padding: 16px 20px; margin-bottom: 24px; font-size: 14px; color: #92400e;
+        }
+        .config-banner code {
+            background: rgba(0,0,0,0.08); padding: 2px 6px; border-radius: 4px;
+            font-size: 13px;
+        }
+        .config-banner.hidden { display: none; }
+
+        /* KPI Cards */
+        .kpi-row {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px; margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--card-bg); border-radius: 14px; padding: 24px;
+            border: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .kpi-label { font-size: 13px; color: var(--text-light); font-weight: 500; margin-bottom: 4px; }
+        .kpi-value { font-size: 32px; font-weight: 800; color: var(--primary); line-height: 1.2; }
+        .kpi-sub { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+
+        /* Chart Panels */
+        .charts-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;
+        }
+        .chart-panel {
+            background: var(--card-bg); border-radius: 14px; padding: 24px;
+            border: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .chart-panel.full { grid-column: 1 / -1; }
+        .chart-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: var(--primary); }
+
+        /* Table */
+        .data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .data-table th {
+            text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--border);
+            font-weight: 600; color: var(--text-light); font-size: 12px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .data-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table .count {
+            font-weight: 700; color: var(--accent); text-align: right; white-space: nowrap;
+        }
+        .bar-cell { display: flex; align-items: center; gap: 10px; }
+        .bar-visual {
+            height: 8px; background: var(--accent); border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        /* Status */
+        .status-bar {
+            text-align: center; padding: 12px; font-size: 13px; color: var(--text-light);
+        }
+        .loading { text-align: center; padding: 60px; color: var(--text-light); }
+
+        /* Date Filter */
+        .filter-row {
+            display: flex; align-items: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 16px; border: 1px solid var(--border); background: var(--card-bg);
+            border-radius: 8px; font-size: 13px; font-family: inherit; font-weight: 500;
+            cursor: pointer; transition: all 0.2s; color: var(--text);
+        }
+        .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .filter-btn:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .charts-grid { grid-template-columns: 1fr; }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .kpi-value { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Login -->
+<div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+        <h2>Duschop Analytics</h2>
+        <p>Bitte Passwort eingeben</p>
+        <input type="password" id="loginPassword" placeholder="Passwort" autofocus>
+        <button onclick="checkLogin()">Anmelden</button>
+        <div class="login-error" id="loginError">Falsches Passwort</div>
+    </div>
+</div>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="header-title">DUSCHOP <span>ANALYTICS</span></div>
+        <div class="header-right">
+            <button class="refresh-btn" onclick="loadData()">Aktualisieren</button>
+            <a href="/" class="header-link">Zur Startseite</a>
+        </div>
+    </div>
+</header>
+
+<main class="main" id="mainContent" style="display:none;">
+
+    <div class="config-banner" id="configBanner">
+        <strong>Konfiguration erforderlich:</strong> Bitte trage die Google Sheet IDs in den
+        <code>SHEET_ID</code>-Variablen oben im Script ein.
+        Siehe <code>SETUP.md</code> f&uuml;r die Anleitung.
+    </div>
+
+    <!-- Date Filter -->
+    <div class="filter-row">
+        <button class="filter-btn active" data-range="7">7 Tage</button>
+        <button class="filter-btn" data-range="30">30 Tage</button>
+        <button class="filter-btn" data-range="90">90 Tage</button>
+        <button class="filter-btn" data-range="all">Gesamt</button>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-row">
+        <div class="kpi-card">
+            <div class="kpi-label">Seitenaufrufe (Zeitraum)</div>
+            <div class="kpi-value" id="kpiViews">—</div>
+            <div class="kpi-sub" id="kpiViewsSub"></div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Klicks auf Tools</div>
+            <div class="kpi-value" id="kpiClicks">—</div>
+            <div class="kpi-sub" id="kpiClicksSub"></div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Klickrate</div>
+            <div class="kpi-value" id="kpiCtr">—</div>
+            <div class="kpi-sub">Klicks / Seitenaufrufe</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Top-Ger&auml;t</div>
+            <div class="kpi-value" id="kpiDevice">—</div>
+            <div class="kpi-sub" id="kpiDeviceSub"></div>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-grid">
+        <div class="chart-panel full">
+            <div class="chart-title">Seitenaufrufe pro Tag</div>
+            <canvas id="chartViews" height="80"></canvas>
+        </div>
+        <div class="chart-panel">
+            <div class="chart-title">Top-Tools (Klicks)</div>
+            <canvas id="chartTools" height="200"></canvas>
+        </div>
+        <div class="chart-panel">
+            <div class="chart-title">Ger&auml;te-Verteilung</div>
+            <canvas id="chartDevices" height="200"></canvas>
+        </div>
+    </div>
+
+    <!-- Referrer Table -->
+    <div class="chart-panel" style="margin-bottom:24px;">
+        <div class="chart-title">Top-Referrer</div>
+        <table class="data-table" id="referrerTable">
+            <thead><tr><th>Quelle</th><th style="text-align:right">Aufrufe</th><th style="width:40%"></th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Clicks Detail Table -->
+    <div class="chart-panel">
+        <div class="chart-title">Alle Tool-Klicks</div>
+        <table class="data-table" id="clicksTable">
+            <thead><tr><th>Tool</th><th>Typ</th><th style="text-align:right">Klicks</th><th style="width:30%"></th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="status-bar" id="statusBar"></div>
+</main>
+
+<script>
+(function () {
+    'use strict';
+
+    // ---- KONFIGURATION ----
+    // Google Sheet als CSV veröffentlichen:
+    // Datei > Freigeben > Im Web veröffentlichen > CSV
+    // Die Sheet-ID steht in der Sheet-URL: docs.google.com/spreadsheets/d/SHEET_ID/...
+    var SHEET_ID = '1N94mxIQmyhHQ5Qa0Sn3PftL64Us3DQF8fA6l5iuUAFM';
+    var PAGEVIEWS_GID = '0';
+    var CLICKS_GID = '752460415';
+
+    // Passwort (einfacher Schutz — kein echtes Auth-System)
+    var PASSWORD_HASH = 'e5d139fe6f57e44a9013ec030de9460280b193867ed67b1bf1a851cd6b8a80cf'; // "duschop2026"
+
+    // ---- STATE ----
+    var pageviews = [];
+    var clicks = [];
+    var currentRange = 7;
+    var chartViews = null;
+    var chartTools = null;
+    var chartDevices = null;
+
+    // ---- LOGIN ----
+    window.checkLogin = async function () {
+        var pw = document.getElementById('loginPassword').value;
+        var hash = await sha256(pw);
+        if (hash === PASSWORD_HASH) {
+            document.getElementById('loginOverlay').classList.add('hidden');
+            document.getElementById('mainContent').style.display = '';
+            sessionStorage.setItem('duschop_auth', '1');
+            loadData();
+        } else {
+            document.getElementById('loginError').style.display = 'block';
+        }
+    };
+
+    document.getElementById('loginPassword').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') window.checkLogin();
+    });
+
+    if (sessionStorage.getItem('duschop_auth') === '1') {
+        document.getElementById('loginOverlay').classList.add('hidden');
+        document.getElementById('mainContent').style.display = '';
+        loadData();
+    }
+
+    async function sha256(str) {
+        var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+        return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+    }
+
+    // ---- DATEN LADEN ----
+    window.loadData = async function () {
+        if (SHEET_ID.indexOf('HIER_') === 0) {
+            document.getElementById('configBanner').classList.remove('hidden');
+            document.getElementById('statusBar').textContent = 'Sheet-ID noch nicht konfiguriert. Verwende Demo-Daten.';
+            generateDemoData();
+            render();
+            return;
+        }
+        document.getElementById('configBanner').classList.add('hidden');
+        document.getElementById('statusBar').textContent = 'Daten werden geladen...';
+
+        try {
+            var pvUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv&gid=' + PAGEVIEWS_GID;
+            var clUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv&gid=' + CLICKS_GID;
+
+            var [pvRes, clRes] = await Promise.all([fetch(pvUrl), fetch(clUrl)]);
+            pageviews = parseCSV(await pvRes.text());
+            clicks = parseCSV(await clRes.text());
+
+            document.getElementById('statusBar').textContent =
+                'Zuletzt aktualisiert: ' + new Date().toLocaleString('de-DE') +
+                ' | ' + pageviews.length + ' Pageviews, ' + clicks.length + ' Clicks geladen';
+            render();
+        } catch (err) {
+            document.getElementById('statusBar').textContent = 'Fehler beim Laden: ' + err.message;
+        }
+    };
+
+    function parseCSV(text) {
+        var lines = text.trim().split('\n');
+        if (lines.length < 2) return [];
+        var headers = parseCSVLine(lines[0]);
+        var data = [];
+        for (var i = 1; i < lines.length; i++) {
+            var vals = parseCSVLine(lines[i]);
+            var row = {};
+            for (var j = 0; j < headers.length; j++) {
+                row[headers[j].trim().toLowerCase()] = (vals[j] || '').trim();
+            }
+            data.push(row);
+        }
+        return data;
+    }
+
+    function parseCSVLine(line) {
+        var result = [];
+        var current = '';
+        var inQuotes = false;
+        for (var i = 0; i < line.length; i++) {
+            var ch = line[i];
+            if (inQuotes) {
+                if (ch === '"' && line[i + 1] === '"') { current += '"'; i++; }
+                else if (ch === '"') { inQuotes = false; }
+                else { current += ch; }
+            } else {
+                if (ch === '"') { inQuotes = true; }
+                else if (ch === ',') { result.push(current); current = ''; }
+                else { current += ch; }
+            }
+        }
+        result.push(current);
+        return result;
+    }
+
+    // ---- DEMO-DATEN ----
+    function generateDemoData() {
+        pageviews = [];
+        clicks = [];
+        var tools = [
+            'Dichtungs-Konfigurator', 'Dichtungsfinder Seitlich', 'Dichtungsfinder Unten',
+            'Magnetdichtung Finder', 'Farbenfinder', 'Beschlaege-Finder',
+            'Duschglas-Konfigurator', 'Metallprofile-Konfigurator', 'Stabistangen-Konfigurator',
+            'Reinigungs-Konfigurator', 'Montagebedarf-Finder', 'Duschzubehoer-Finder',
+            'Wintergarten-Konfigurator'
+        ];
+        var referrers = ['https://duschop.de', 'https://www.google.de', '', 'https://www.google.com',
+            'https://www.bing.com', 'https://duschop.de/dichtungen', 'https://duschop.de/glasdusche'];
+        var devices = ['desktop', 'mobile', 'mobile', 'desktop', 'tablet', 'mobile', 'desktop'];
+
+        for (var d = 90; d >= 0; d--) {
+            var date = new Date();
+            date.setDate(date.getDate() - d);
+            var count = Math.floor(Math.random() * 40) + 10;
+            for (var j = 0; j < count; j++) {
+                var h = Math.floor(Math.random() * 14) + 8;
+                var m = Math.floor(Math.random() * 60);
+                var ts = new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m);
+                pageviews.push({
+                    timestamp: ts.toISOString(),
+                    page: '/',
+                    referrer: referrers[Math.floor(Math.random() * referrers.length)],
+                    screen: devices[Math.floor(Math.random() * devices.length)] === 'mobile' ? '375x812' : '1920x1080',
+                    language: 'de-DE',
+                    device: devices[Math.floor(Math.random() * devices.length)]
+                });
+                if (Math.random() < 0.6) {
+                    var tool = tools[Math.floor(Math.random() * tools.length)];
+                    clicks.push({
+                        timestamp: ts.toISOString(),
+                        page: '/',
+                        element_text: tool,
+                        element_type: Math.random() < 0.7 ? 'tool-card' : 'quick-chip',
+                        target_url: '/' + tool.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '/'
+                    });
+                }
+            }
+        }
+    }
+
+    // ---- FILTER ----
+    document.querySelectorAll('.filter-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            currentRange = btn.dataset.range === 'all' ? 9999 : parseInt(btn.dataset.range);
+            render();
+        });
+    });
+
+    function filterByRange(data) {
+        if (currentRange >= 9999) return data;
+        var cutoff = new Date();
+        cutoff.setDate(cutoff.getDate() - currentRange);
+        return data.filter(function (r) {
+            return new Date(r.timestamp) >= cutoff;
+        });
+    }
+
+    // ---- RENDER ----
+    function render() {
+        var fPV = filterByRange(pageviews);
+        var fCL = filterByRange(clicks);
+
+        // KPIs
+        document.getElementById('kpiViews').textContent = fPV.length.toLocaleString('de-DE');
+        document.getElementById('kpiViewsSub').textContent =
+            currentRange < 9999 ? 'Letzte ' + currentRange + ' Tage' : 'Gesamtzeitraum';
+
+        document.getElementById('kpiClicks').textContent = fCL.length.toLocaleString('de-DE');
+        document.getElementById('kpiClicksSub').textContent =
+            'davon ' + fCL.filter(function (c) { return c.element_type === 'tool-card'; }).length + ' auf Cards';
+
+        var ctr = fPV.length > 0 ? ((fCL.length / fPV.length) * 100).toFixed(1) : '0';
+        document.getElementById('kpiCtr').textContent = ctr + '%';
+
+        // Device KPI
+        var deviceCounts = countBy(fPV, 'device');
+        var topDevice = Object.keys(deviceCounts).sort(function (a, b) { return deviceCounts[b] - deviceCounts[a]; })[0] || '—';
+        var deviceLabels = { desktop: 'Desktop', mobile: 'Mobile', tablet: 'Tablet' };
+        document.getElementById('kpiDevice').textContent = deviceLabels[topDevice] || topDevice;
+        document.getElementById('kpiDeviceSub').textContent =
+            deviceCounts[topDevice] ? Math.round((deviceCounts[topDevice] / fPV.length) * 100) + '% der Aufrufe' : '';
+
+        renderViewsChart(fPV);
+        renderToolsChart(fCL);
+        renderDevicesChart(fPV);
+        renderReferrerTable(fPV);
+        renderClicksTable(fCL);
+    }
+
+    function countBy(arr, key) {
+        var counts = {};
+        arr.forEach(function (r) {
+            var v = r[key] || '(unbekannt)';
+            counts[v] = (counts[v] || 0) + 1;
+        });
+        return counts;
+    }
+
+    // ---- CHARTS ----
+
+    function renderViewsChart(data) {
+        var daily = {};
+        data.forEach(function (r) {
+            var day = r.timestamp.substring(0, 10);
+            daily[day] = (daily[day] || 0) + 1;
+        });
+        var labels = Object.keys(daily).sort();
+        var values = labels.map(function (d) { return daily[d]; });
+
+        if (chartViews) chartViews.destroy();
+        chartViews = new Chart(document.getElementById('chartViews'), {
+            type: 'line',
+            data: {
+                labels: labels.map(function (d) {
+                    return new Date(d).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' });
+                }),
+                datasets: [{
+                    label: 'Seitenaufrufe',
+                    data: values,
+                    borderColor: '#c8956c',
+                    backgroundColor: 'rgba(200,149,108,0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: labels.length > 30 ? 0 : 3,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, ticks: { precision: 0 } },
+                    x: { ticks: { maxTicksLimit: 12 } }
+                }
+            }
+        });
+    }
+
+    function renderToolsChart(data) {
+        var toolCounts = {};
+        data.forEach(function (r) {
+            if (r.element_text) {
+                toolCounts[r.element_text] = (toolCounts[r.element_text] || 0) + 1;
+            }
+        });
+        var sorted = Object.entries(toolCounts).sort(function (a, b) { return b[1] - a[1]; }).slice(0, 10);
+        var labels = sorted.map(function (e) { return e[0]; });
+        var values = sorted.map(function (e) { return e[1]; });
+
+        if (chartTools) chartTools.destroy();
+        chartTools = new Chart(document.getElementById('chartTools'), {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: 'rgba(200,149,108,0.7)',
+                    borderColor: '#c8956c',
+                    borderWidth: 1,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: { x: { beginAtZero: true, ticks: { precision: 0 } } }
+            }
+        });
+    }
+
+    function renderDevicesChart(data) {
+        var deviceCounts = countBy(data, 'device');
+        var colors = { desktop: '#c8956c', mobile: '#3b82f6', tablet: '#22c55e' };
+        var labels = Object.keys(deviceCounts);
+        var values = labels.map(function (d) { return deviceCounts[d]; });
+        var bgColors = labels.map(function (d) { return colors[d] || '#999'; });
+
+        if (chartDevices) chartDevices.destroy();
+        chartDevices = new Chart(document.getElementById('chartDevices'), {
+            type: 'doughnut',
+            data: {
+                labels: labels.map(function (l) {
+                    return { desktop: 'Desktop', mobile: 'Mobile', tablet: 'Tablet' }[l] || l;
+                }),
+                datasets: [{
+                    data: values,
+                    backgroundColor: bgColors,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    }
+
+    function renderReferrerTable(data) {
+        var refCounts = {};
+        data.forEach(function (r) {
+            var ref = r.referrer || '';
+            if (!ref) ref = '(Direkt)';
+            else {
+                try { ref = new URL(ref).hostname; } catch (e) {}
+            }
+            refCounts[ref] = (refCounts[ref] || 0) + 1;
+        });
+        var sorted = Object.entries(refCounts).sort(function (a, b) { return b[1] - a[1]; }).slice(0, 10);
+        var max = sorted.length > 0 ? sorted[0][1] : 1;
+        var tbody = document.querySelector('#referrerTable tbody');
+        tbody.innerHTML = sorted.map(function (e) {
+            var pct = Math.round((e[1] / max) * 100);
+            return '<tr><td>' + escHtml(e[0]) + '</td><td class="count">' + e[1] + '</td>' +
+                '<td><div class="bar-cell"><div class="bar-visual" style="width:' + pct + '%"></div></div></td></tr>';
+        }).join('');
+    }
+
+    function renderClicksTable(data) {
+        var grouped = {};
+        data.forEach(function (r) {
+            var key = r.element_text + '|' + r.element_type;
+            if (!grouped[key]) grouped[key] = { text: r.element_text, type: r.element_type, count: 0 };
+            grouped[key].count++;
+        });
+        var sorted = Object.values(grouped).sort(function (a, b) { return b.count - a.count; });
+        var max = sorted.length > 0 ? sorted[0].count : 1;
+        var typeLabels = { 'tool-card': 'Card', 'quick-chip': 'Chip', 'header-link': 'Header', 'footer-link': 'Footer', 'custom': 'Custom' };
+        var tbody = document.querySelector('#clicksTable tbody');
+        tbody.innerHTML = sorted.map(function (e) {
+            var pct = Math.round((e.count / max) * 100);
+            return '<tr><td>' + escHtml(e.text) + '</td><td>' + (typeLabels[e.type] || e.type) +
+                '</td><td class="count">' + e.count + '</td>' +
+                '<td><div class="bar-cell"><div class="bar-visual" style="width:' + pct + '%"></div></div></td></tr>';
+        }).join('');
+    }
+
+    function escHtml(s) {
+        var d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+    }
+
+})();
+</script>
+</body>
+</html>
