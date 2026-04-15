@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beschl&auml;ge-Konfigurator | duschop.de</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #c8956c;
+            --accent-light: #e8c4a8;
+            --bg: #f8f6f3;
+            --card-bg: #ffffff;
+            --text: #2d2d2d;
+            --text-light: #6b6b6b;
+            --border: #e8e4df;
+            --shadow: 0 2px 20px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --success: #27ae60;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 14px; }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+        .logo-text span { font-size: 12px; opacity: 0.65; font-weight: 400; }
+
+        .header-badges { display: flex; gap: 8px; }
+
+        .header-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: white;
+            padding: 48px 24px 56px;
+            text-align: center;
+        }
+
+        .hero h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .hero p { font-size: 16px; opacity: 0.75; max-width: 620px; margin: 0 auto; }
+
+        /* Progress Bar */
+        .progress-bar {
+            max-width: 800px;
+            margin: -28px auto 0;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .progress-inner {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            right: 24px;
+            height: 3px;
+            background: var(--border);
+            z-index: 0;
+        }
+
+        .progress-steps::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            height: 3px;
+            background: var(--accent);
+            z-index: 1;
+            transition: width 0.4s ease;
+            width: var(--progress, 0%);
+        }
+
+        .step-dot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .step-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 3px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active .step-circle {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: white;
+        }
+
+        .step-dot.done .step-circle {
+            border-color: var(--success);
+            background: var(--success);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-light);
+            text-align: center;
+            max-width: 80px;
+            transition: color 0.3s;
+        }
+
+        .step-dot.active .step-label { color: var(--accent); }
+        .step-dot.done .step-label { color: var(--success); }
+
+        /* Configurator Container */
+        .configurator {
+            max-width: 800px;
+            margin: 28px auto 60px;
+            padding: 0 24px;
+        }
+
+        .step-panel {
+            display: none;
+            animation: fadeSlideIn 0.4s ease;
+        }
+
+        .step-panel.active { display: block; }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+            text-align: center;
+        }
+
+        .step-subtitle {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Option Cards */
+        .options-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .options-grid.cols-2 > .option-card { flex: 0 1 320px; max-width: 360px; }
+        .options-grid.cols-3 > .option-card { flex: 0 1 240px; max-width: 280px; }
+        .options-grid.cols-4 > .option-card { flex: 0 1 180px; max-width: 220px; }
+
+        .option-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .option-card.selected {
+            border-color: var(--accent);
+            background: #fdf8f4;
+            box-shadow: 0 0 0 3px rgba(200,149,108,0.15);
+        }
+
+        .option-card.selected::after {
+            content: '\2713';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .option-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+        }
+
+        .option-card.selected .option-icon { background: rgba(200,149,108,0.15); }
+
+        .option-name {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .option-desc {
+            font-size: 12px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .option-meta {
+            margin-top: 10px;
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Color Swatches */
+        .color-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            border: 2px solid rgba(0,0,0,0.08);
+        }
+
+        .color-info { flex: 1; }
+        .color-name { font-size: 14px; font-weight: 600; }
+        .color-finish { font-size: 12px; color: var(--text-light); }
+
+        /* Results */
+        .results-panel {
+            display: none;
+            animation: fadeSlideIn 0.4s ease;
+        }
+
+        .results-panel.active { display: block; }
+
+        .result-summary {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: white;
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .result-summary h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #ffffff;
+        }
+
+        .result-choices {
+            justify-content: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .result-choice {
+            background: rgba(255,255,255,0.12);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+        }
+
+        .result-products { display: flex; flex-direction: column; gap: 12px; }
+
+        .result-product-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .result-product-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+            border-color: var(--accent-light);
+        }
+
+        .result-product-inner {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 18px 20px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .result-product-img {
+            width: 72px;
+            height: 72px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: var(--bg);
+        }
+
+        .result-product-info { flex: 1; min-width: 0; }
+        .result-product-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+        .result-product-desc { font-size: 12px; color: var(--text-light); margin-bottom: 6px; }
+        .result-product-price { font-size: 15px; font-weight: 700; color: var(--accent); }
+
+        .result-product-arrow {
+            color: var(--accent);
+            flex-shrink: 0;
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: all 0.2s;
+        }
+
+        .result-product-card:hover .result-product-arrow { opacity: 1; transform: translateX(0); }
+
+        .result-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-badge {
+            background: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .result-section { margin-bottom: 28px; }
+
+        .result-hint {
+            background: #fef9f0;
+            border: 1px solid var(--accent-light);
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .result-hint strong { color: var(--accent); }
+
+        /* Navigation */
+        .step-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 32px;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 12px;
+            border: none;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { background: #b8845c; transform: translateY(-1px); }
+        .btn-primary:disabled { background: var(--border); color: var(--text-light); cursor: not-allowed; transform: none; }
+
+        .btn-secondary { background: var(--bg); color: var(--text); border: 2px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--accent-light); }
+
+        .btn-restart { background: transparent; color: var(--text-light); text-decoration: underline; border: none; padding: 12px 0; }
+        .btn-restart:hover { color: var(--accent); }
+
+        /* No match */
+        .no-match {
+            text-align: center;
+            padding: 48px 24px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .no-match-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.4; }
+        .no-match h3 { font-size: 18px; margin-bottom: 8px; }
+        .no-match p { color: var(--text-light); font-size: 14px; max-width: 400px; margin: 0 auto; }
+
+        /* Info Box */
+        .info-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .info-box strong { color: var(--text); }
+
+        @media (max-width: 640px) {
+            .header-badges { display: none; }
+            .hero { padding: 36px 20px 44px; }
+            .step-label { display: none; }
+            .step-circle { width: 32px; height: 32px; font-size: 12px; }
+            .options-grid.cols-2, .options-grid.cols-3, .options-grid.cols-4 { grid-template-columns: 1fr; }
+            .options-grid.cols-2 > .option-card,
+            .options-grid.cols-3 > .option-card,
+            .options-grid.cols-4 > .option-card { flex: 1 1 100%; max-width: 100%; }
+            .result-product-inner { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="8" height="18" rx="1"/>
+                    <rect x="13" y="3" width="8" height="18" rx="1"/>
+                    <circle cx="11" cy="8" r="1.5" fill="white"/>
+                    <circle cx="11" cy="16" r="1.5" fill="white"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <h1>Beschl&auml;ge-Finder</h1>
+                <span>Konfigurator &middot; duschop.de</span>
+            </div>
+        </div>
+        <div class="header-badges">
+            <div class="header-badge">Schritt-f&uuml;r-Schritt</div>
+            <div class="header-badge">Scharniere &amp; Griffe</div>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <h2>Finden Sie den passenden Beschlag</h2>
+    <p>In wenigen Schritten zum richtigen Scharnier, Haltewinkel, T&uuml;rgriff oder zur passenden Griffmuschel f&uuml;r Ihre Glasdusche.</p>
+</section>
+
+<div class="progress-bar">
+    <div class="progress-inner">
+        <div class="progress-steps" id="progressSteps" style="--progress: 0%">
+            <div class="step-dot active" data-step="0">
+                <div class="step-circle">1</div>
+                <div class="step-label">Produktart</div>
+            </div>
+            <div class="step-dot" data-step="1">
+                <div class="step-circle">2</div>
+                <div class="step-label">Montage</div>
+            </div>
+            <div class="step-dot" data-step="2">
+                <div class="step-circle">3</div>
+                <div class="step-label">Oberfl&auml;che</div>
+            </div>
+            <div class="step-dot" data-step="3">
+                <div class="step-circle">4</div>
+                <div class="step-label">Ergebnis</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="configurator">
+
+    <!-- STEP 0: Produktart -->
+    <div class="step-panel active" id="step0">
+        <h3 class="step-title">Was f&uuml;r einen Beschlag suchen Sie?</h3>
+        <p class="step-subtitle">W&auml;hlen Sie die Kategorie, die am besten zu Ihrem Vorhaben passt.</p>
+
+        <div class="options-grid cols-2">
+            <div class="option-card" data-value="scharnier" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5">
+                        <rect x="4" y="6" width="12" height="28" rx="2"/>
+                        <rect x="24" y="6" width="12" height="28" rx="2" stroke-dasharray="4 2"/>
+                        <circle cx="20" cy="14" r="3" fill="#c8956c"/>
+                        <circle cx="20" cy="26" r="3" fill="#c8956c"/>
+                    </svg>
+                </div>
+                <div class="option-name">Scharnier / Duschband</div>
+                <div class="option-desc">Pendelt&uuml;rb&auml;nder und Anschlagb&auml;nder f&uuml;r Dusch-Drehtueren. Mit oder ohne Hebe-Senk-Funktion.</div>
+                <div class="option-meta">11 Produkte</div>
+            </div>
+
+            <div class="option-card" data-value="haltewinkel" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5">
+                        <path d="M8 8 L8 32 L32 32"/>
+                        <rect x="4" y="4" width="8" height="8" rx="1" fill="rgba(200,149,108,0.2)"/>
+                        <rect x="28" y="28" width="8" height="8" rx="1" fill="rgba(200,149,108,0.2)" stroke-dasharray="4 2"/>
+                    </svg>
+                </div>
+                <div class="option-name">Haltewinkel</div>
+                <div class="option-desc">90&deg;-Winkelverbinder f&uuml;r feste Glasscheiben. Verbindet Glas mit Wand oder Glas mit Glas.</div>
+                <div class="option-meta">3 Produkte</div>
+            </div>
+
+            <div class="option-card" data-value="griff" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5">
+                        <rect x="16" y="4" width="8" height="32" rx="4"/>
+                        <line x1="12" y1="12" x2="28" y2="12" stroke-width="2"/>
+                        <line x1="12" y1="28" x2="28" y2="28" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="option-name">T&uuml;rgriff / Knopf</div>
+                <div class="option-desc">Griffe, Kn&ouml;pfe und Stangengriffe f&uuml;r Glasduscht&uuml;ren. Rund, eckig oder als Stangengriff.</div>
+                <div class="option-meta">14 Produkte</div>
+            </div>
+
+            <div class="option-card" data-value="griffmuschel" onclick="selectOption(0, this)">
+                <div class="option-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5">
+                        <ellipse cx="20" cy="20" rx="12" ry="8"/>
+                        <path d="M12 20 Q20 28 28 20" fill="rgba(200,149,108,0.15)"/>
+                    </svg>
+                </div>
+                <div class="option-name">Griffmuschel</div>
+                <div class="option-desc">Flache Muschelgriffe zum Verschrauben oder Aufkleben &ndash; ideal f&uuml;r Schiebet&uuml;ren und Festteile.</div>
+                <div class="option-meta">5 Produkte</div>
+            </div>
+        </div>
+
+        <div class="step-nav">
+            <div></div>
+            <button class="btn btn-primary" id="nextBtn0" disabled onclick="nextStep(0)">
+                Weiter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 1: Montage / Untertyp -->
+    <div class="step-panel" id="step1">
+        <h3 class="step-title" id="step1Title">W&auml;hlen Sie den Montagetyp</h3>
+        <p class="step-subtitle" id="step1Subtitle"></p>
+
+        <div class="options-grid cols-2" id="step1Options"></div>
+
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(1)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-primary" id="nextBtn1" disabled onclick="nextStep(1)">
+                Weiter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 2: Oberflaeche -->
+    <div class="step-panel" id="step2">
+        <h3 class="step-title">Welche Oberfl&auml;che bevorzugen Sie?</h3>
+        <p class="step-subtitle">Verf&uuml;gbare Oberfl&auml;chen f&uuml;r Ihre Auswahl. Nicht jede Kombination ist in allen Farben lieferbar.</p>
+
+        <div class="options-grid cols-2" id="colorOptions"></div>
+
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(2)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-primary" id="nextBtn2" disabled onclick="nextStep(2)">
+                Ergebnis anzeigen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 3: Ergebnis -->
+    <div class="step-panel" id="step3">
+        <div id="resultsContent"></div>
+        <div class="step-nav">
+            <button class="btn btn-secondary" onclick="prevStep(3)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Zur&uuml;ck
+            </button>
+            <button class="btn btn-restart" onclick="restart()">Neue Suche starten</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// Product Database
+// ============================================================
+const products = [
+
+    // ===================== SCHARNIERE =====================
+
+    // --- Pendeltuerband Glas-Wand ---
+    {
+        id: 'bellagio-gw-90',
+        title: 'Bellagio Pendelt\u00fcrband 90\u00b0 Glas-Wand BEL344',
+        handle: 'bellagio-pendelturband-90-glas-wand-anschraubplatte-einseitig-inkl-abdeckplatten-bel344',
+        kategorie: 'scharnier',
+        montage: 'glas-wand',
+        typ: 'pendel',
+        winkel: 90,
+        hebeSenk: false,
+        glasdicken: '8/10 mm',
+        tragkraft: '50 kg',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','weiss-matt','graphit-poliert','graphit-matt','messing-poliert','messing-matt','bronze-matt','kupfer-poliert','kupfer-matt'],
+        price: '78,15',
+        priceMax: '139,90',
+        desc: 'Eckiges Pendelt\u00fcrband, 50 kg Tragkraft, 8 oder 10 mm ESG. 11 Oberfl\u00e4chen.',
+        serie: 'Bellagio'
+    },
+    {
+        id: 'lugano-gw-90',
+        title: 'Lugano Scharnier 90\u00b0 Glas-Wand Hebe-Senk LUG044',
+        handle: 'lugano-duschband-90-glas-wand-mit-hebe-senk-funktion',
+        kategorie: 'scharnier',
+        montage: 'glas-wand',
+        typ: 'pendel',
+        winkel: 90,
+        hebeSenk: true,
+        glasdicken: '8/10 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','messing-matt','bronze-matt'],
+        price: '59,90',
+        priceMax: '98,90',
+        desc: 'Fl\u00e4chenb\u00fcndiges Pendelt\u00fcrband mit Hebe-Senk-Funktion. Rundes Design.',
+        serie: 'Lugano'
+    },
+    {
+        id: 'nobiallo-gw-90',
+        title: 'Nobiallo Pendelt\u00fcrband 90\u00b0 Glas-Wand Hebe-Senk',
+        handle: 'pendelturband-mit-hebe-senk-wandscharnier',
+        kategorie: 'scharnier',
+        montage: 'glas-wand',
+        typ: 'pendel',
+        winkel: 90,
+        hebeSenk: true,
+        glasdicken: '8/10 mm',
+        tragkraft: '50 kg',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '109,90',
+        priceMax: '119,90',
+        desc: 'Premium Pendelt\u00fcrband mit Hebe-Senk, 50 kg Tragkraft. Rundes Design.',
+        serie: 'Nobiallo'
+    },
+    {
+        id: 'como-gw-90',
+        title: 'COMO Anschlagband 90\u00b0 Glas-Wand',
+        handle: 'como-anschlagband-180-glas-glas-messing-massiv-8-10-mm-esg-verdeckte-verschraubung-eckiges-design-kopie',
+        kategorie: 'scharnier',
+        montage: 'glas-wand',
+        typ: 'anschlag',
+        winkel: 90,
+        hebeSenk: false,
+        glasdicken: '8/10 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '75,90',
+        priceMax: '79,90',
+        desc: 'Anschlagband (nur in eine Richtung \u00f6ffnend). Eckiges Messing-Design, verdeckte Verschraubung.',
+        serie: 'COMO'
+    },
+    {
+        id: 'emily-gw-180',
+        title: 'Drehbares Wandprofil Emily Hebe-Senk 180\u00b0',
+        handle: 'drehbares-duschtur-wandprofil-typ-emily',
+        kategorie: 'scharnier',
+        montage: 'glas-wand',
+        typ: 'drehprofil',
+        winkel: 180,
+        hebeSenk: true,
+        glasdicken: '6 mm',
+        colors: ['chrom-poliert','schwarz-matt','messing-matt','silber-matt'],
+        price: '179,90',
+        priceMax: '199,90',
+        desc: 'Drehbares Wandprofil f\u00fcr 6 mm ESG. 180\u00b0 Pendelt\u00fcr, Hebe-Senk. L\u00e4nge 1900 mm.',
+        serie: 'Emily'
+    },
+    {
+        id: 'nlo60-gw',
+        title: 'Drehbares Wandprofil NLO60 eckig 8 mm',
+        handle: 'drehbares-duschtuerwandprofil-nlo60-eckig-8mm',
+        kategorie: 'scharnier',
+        montage: 'glas-wand',
+        typ: 'drehprofil',
+        winkel: 180,
+        hebeSenk: false,
+        glasdicken: '8 mm',
+        colors: ['chrom-poliert'],
+        price: '179,00',
+        desc: 'Eckiges Drehprofil f\u00fcr 8 mm Glas, L\u00e4nge 1900 mm. Pendelt\u00fcr-Funktion.',
+        serie: 'NLO60'
+    },
+
+    // --- Pendeltuerband Glas-Glas ---
+    {
+        id: 'bellagio-gg-180',
+        title: 'Bellagio Pendelt\u00fcrband 180\u00b0 Glas-Glas BEL380',
+        handle: 'bellagio-pendelturband-180-glas-glas-farbe-bronze-geburstet-anschraubplatte-einseitig-inkl-abdeckplatten-bel380',
+        kategorie: 'scharnier',
+        montage: 'glas-glas',
+        typ: 'pendel',
+        winkel: 180,
+        hebeSenk: false,
+        glasdicken: '8/10 mm',
+        tragkraft: '50 kg',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','weiss-matt','graphit-poliert','graphit-matt','messing-poliert','messing-matt','bronze-matt','kupfer-poliert','kupfer-matt'],
+        price: '84,50',
+        priceMax: '159,90',
+        desc: 'Eckiges Pendelt\u00fcrband 180\u00b0, 50 kg Tragkraft. 11 Oberfl\u00e4chen.',
+        serie: 'Bellagio'
+    },
+    {
+        id: 'bellagio-gg-90',
+        title: 'Bellagio Pendelt\u00fcrband 90\u00b0 Glas-Glas BEL392',
+        handle: 'bellagio-pendelturband-90-glas-glas-anschraubplatte-einseitig-inkl-abdeckplatten-einstellbar-art-nr-bel392',
+        kategorie: 'scharnier',
+        montage: 'glas-glas',
+        typ: 'pendel',
+        winkel: 90,
+        hebeSenk: false,
+        glasdicken: '8/10 mm',
+        tragkraft: '50 kg',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','weiss-matt'],
+        price: '84,50',
+        priceMax: '129,90',
+        desc: 'Eckiges Pendelt\u00fcrband 90\u00b0, 50 kg. F\u00fcr Eck-Duschkabinen mit Glas-Glas-Verbindung.',
+        serie: 'Bellagio'
+    },
+    {
+        id: 'lugano-gg-180',
+        title: 'Lugano Scharnier 180\u00b0 Glas-Glas Hebe-Senk LUG180',
+        handle: 'lugano-duschband-180-glas-glas-mit-hebe-senk-funktion',
+        kategorie: 'scharnier',
+        montage: 'glas-glas',
+        typ: 'pendel',
+        winkel: 180,
+        hebeSenk: true,
+        glasdicken: '8/10 mm',
+        colors: ['chrom-poliert','messing-matt','schwarz-matt','edelstahl-gebuerstet','bronze-matt'],
+        price: '56,90',
+        priceMax: '89,90',
+        desc: 'Fl\u00e4chenb\u00fcndiges Pendelt\u00fcrband 180\u00b0 mit Hebe-Senk. Rundes Design.',
+        serie: 'Lugano'
+    },
+    {
+        id: 'nobiallo-gg-180',
+        title: 'Nobiallo Pendelt\u00fcrband 180\u00b0 Glas-Glas Hebe-Senk',
+        handle: 'pendelturband-mit-hebe-senk-funktion-glas-glas',
+        kategorie: 'scharnier',
+        montage: 'glas-glas',
+        typ: 'pendel',
+        winkel: 180,
+        hebeSenk: true,
+        glasdicken: '8/10 mm',
+        tragkraft: '50 kg',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '119,90',
+        priceMax: '129,90',
+        desc: 'Premium Pendelt\u00fcrband mit Hebe-Senk, 50 kg. Glas-Glas 180\u00b0.',
+        serie: 'Nobiallo'
+    },
+    {
+        id: 'como-gg-180',
+        title: 'COMO Anschlagband 180\u00b0 Glas-Glas',
+        handle: 'bellagio-pendelturband-180-glas-glas-bel380-50-kg-8-10-mm-esg-kopie',
+        kategorie: 'scharnier',
+        montage: 'glas-glas',
+        typ: 'anschlag',
+        winkel: 180,
+        hebeSenk: false,
+        glasdicken: '8/10 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '79,90',
+        priceMax: '89,90',
+        desc: 'Anschlagband 180\u00b0 Glas-Glas. Eckiges Messing-Design, verdeckte Verschraubung.',
+        serie: 'COMO'
+    },
+
+    // ===================== HALTEWINKEL =====================
+    {
+        id: 'bellagio-winkel-gw',
+        title: 'Bellagio Winkelverbinder 90\u00b0 Glas-Wand BEL90S',
+        handle: 'bellagio-winkelverbinder-glas-wand-90-bel90s',
+        kategorie: 'haltewinkel',
+        montage: 'glas-wand',
+        glasdicken: '8/10 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','weiss-matt','graphit-poliert','graphit-matt','messing-poliert','messing-matt','bronze-matt','kupfer-poliert','kupfer-matt'],
+        price: '47,20',
+        priceMax: '71,90',
+        desc: 'Massiver Messing-Winkelverbinder. 11 Oberfl\u00e4chen. Glasbohrung 16 mm erforderlich.',
+        serie: 'Bellagio'
+    },
+    {
+        id: 'lugano-winkel-gw',
+        title: 'Lugano Winkelhalter 90\u00b0 Glas-Wand fl\u00e4chenb\u00fcndig LU90S',
+        handle: 'lugano_wandwinkel',
+        kategorie: 'haltewinkel',
+        montage: 'glas-wand',
+        glasdicken: '8/10 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '49,90',
+        priceMax: '59,90',
+        desc: 'Fl\u00e4chenb\u00fcndiger Winkelhalter, rundes Design. Wandschenkel innen- oder au\u00dfenseitig w\u00e4hlbar.',
+        serie: 'Lugano'
+    },
+    {
+        id: 'bellagio-winkel-gg',
+        title: 'Bellagio Winkelverbinder 90\u00b0 Glas-Glas BEL090',
+        handle: 'bellagio-winkelverbinder-90-glas-glas',
+        kategorie: 'haltewinkel',
+        montage: 'glas-glas',
+        glasdicken: '8/10 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','weiss-matt','schwarz-matt','bronze-matt'],
+        price: '59,90',
+        priceMax: '79,90',
+        desc: 'Massiver Glas-Glas-Winkelverbinder 90\u00b0. 70\u00d770\u00d774 mm, Glasbohrung 16 mm.',
+        serie: 'Bellagio'
+    },
+
+    // ===================== TUERGRIFFE =====================
+
+    // Rundgriffe
+    {
+        id: 'griff-rund-30',
+        title: 'Duscht\u00fcrgriff rund \u00d8 30 mm \u2013 Messing, 11 Farben',
+        handle: 'duschtuergriff-rund',
+        kategorie: 'griff',
+        grifftyp: 'rundgriff',
+        glasdicken: '6\u201312 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','weiss-matt','graphit-poliert','graphit-matt','messing-poliert','messing-matt','bronze-matt','kupfer-poliert','kupfer-matt'],
+        price: '22,50',
+        priceMax: '39,90',
+        desc: 'Runder Zylindergriff \u00d8 30 mm, Messing massiv. Alle 11 Bellagio-Oberfl\u00e4chen.',
+        serie: 'Bellagio'
+    },
+    {
+        id: 'griff-rund-35',
+        title: 'Duscht\u00fcrgriff zylindrisch \u00d8 35 mm mit Rille',
+        handle: 'dusch-tuergriff',
+        kategorie: 'griff',
+        grifftyp: 'rundgriff',
+        glasdicken: '6\u201310 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '26,50',
+        priceMax: '36,50',
+        desc: 'Messing verchromt, zylindrisch mit dekorativer Rille. Klassisches Design.',
+        serie: ''
+    },
+    {
+        id: 'griff-fluegel',
+        title: 'Duscht\u00fcrgriff Fl\u00fcgelform',
+        handle: 'dusch-turgriff-flugelform-art-nr-8297',
+        kategorie: 'griff',
+        grifftyp: 'rundgriff',
+        glasdicken: '6\u201310 mm',
+        colors: ['chrom-poliert'],
+        price: '52,90',
+        desc: 'Eleganter Griff in Fl\u00fcgelform. Chrom poliert, Messing.',
+        serie: ''
+    },
+    {
+        id: 'griff-kegel',
+        title: 'Duscht\u00fcrgriff Kegelform',
+        handle: 'dusch-tuergriff-kegelform',
+        kategorie: 'griff',
+        grifftyp: 'rundgriff',
+        glasdicken: '6\u20138 mm',
+        colors: ['chrom-poliert'],
+        price: '36,50',
+        desc: 'Konischer Griff in Kegelform. Messing verchromt.',
+        serie: ''
+    },
+
+    // Eckige Griffe
+    {
+        id: 'griff-eckig-sdk300',
+        title: 'Duscht\u00fcrgriff eckig SDK300 Style Premium 32\u00d732 mm',
+        handle: 'duschturgriff-eckig-art-nr-sdk300',
+        kategorie: 'griff',
+        grifftyp: 'eckig',
+        glasdicken: '6\u201310 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','weiss-matt','graphit-poliert','graphit-matt','messing-poliert','messing-matt','bronze-matt','kupfer-poliert','kupfer-matt'],
+        price: '30,90',
+        priceMax: '49,90',
+        desc: 'Moderner eckiger Griff 32\u00d732 mm, Messing massiv. Alle 11 Bellagio-Oberfl\u00e4chen.',
+        serie: 'Bellagio'
+    },
+    {
+        id: 'griff-quader',
+        title: 'Duscht\u00fcrgriff Quader',
+        handle: 'dusch-turgriff-quader-art-nr-0517',
+        kategorie: 'griff',
+        grifftyp: 'eckig',
+        glasdicken: '6\u201310 mm',
+        colors: ['chrom-poliert'],
+        price: '42,50',
+        desc: 'Quaderf\u00f6rmiger Griff mit markanter Optik. Messing verchromt.',
+        serie: ''
+    },
+    {
+        id: 'griff-eckig-40-beidseitig',
+        title: 'Duschgriff eckig 40\u00d740 mm beidseitig',
+        handle: 'duschgriff-eckig-40x40mm-beidseitig-glasdusche',
+        kategorie: 'griff',
+        grifftyp: 'eckig',
+        glasdicken: '6\u201313,52 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','messing-poliert','messing-matt','bronze-matt','kupfer-poliert','kupfer-matt'],
+        price: '49,90',
+        priceMax: '79,90',
+        desc: 'Beidseitiger eckiger Griff 40\u00d740 mm. Durchgehend durch das Glas montiert.',
+        serie: ''
+    },
+
+    // Knopfgriffe
+    {
+        id: 'knopf-alu-30',
+        title: 'Duscht\u00fcrknopf Aluminium \u00d8 30 mm',
+        handle: 'duschturknopf-aluminium-30mm',
+        kategorie: 'griff',
+        grifftyp: 'knopf',
+        glasdicken: '6\u201312 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '14,90',
+        priceMax: '19,90',
+        desc: 'Kompakter Aluminium-Knopf \u00d8 30 mm. G\u00fcnstiger Einstieg.',
+        serie: ''
+    },
+    {
+        id: 'knopf-v2a-102',
+        title: 'Duscht\u00fcrknopf V2A Edelstahl \u00d8 26 mm',
+        handle: 'dusch-turknopf-v2a-in-schwarz-fur-8-12-mm-glasstarke',
+        kategorie: 'griff',
+        grifftyp: 'knopf',
+        glasdicken: '8\u201312 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '19,50',
+        priceMax: '29,50',
+        desc: 'V2A Edelstahl-Knopf, massiv. In Schwarz, Chrom oder Edelstahl.',
+        serie: ''
+    },
+    {
+        id: 'knopf-4106',
+        title: 'Duscht\u00fcrknopf \u00d8 25 mm Art. 4106',
+        handle: 'dusch-tuerknopf-4106',
+        kategorie: 'griff',
+        grifftyp: 'knopf',
+        glasdicken: '6\u201310 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '23,50',
+        priceMax: '35,90',
+        desc: 'Kompakter Messing-Knopf \u00d8 25 mm. Klassisches Design.',
+        serie: ''
+    },
+    {
+        id: 'knopf-107',
+        title: 'Duscht\u00fcrknopf \u00d8 35 mm Art. 107',
+        handle: 'dusch-tuerknopf-107',
+        kategorie: 'griff',
+        grifftyp: 'knopf',
+        glasdicken: '6\u201310 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '23,50',
+        priceMax: '35,90',
+        desc: 'Gr\u00f6\u00dferer Messing-Knopf \u00d8 35 mm. Angenehme Haptik.',
+        serie: ''
+    },
+    {
+        id: 'knopf-v2a-101',
+        title: 'Duscht\u00fcrknopf V2A \u00d8 40 mm Art. 101',
+        handle: 'dusch-tuerknopf-v2a-101',
+        kategorie: 'griff',
+        grifftyp: 'knopf',
+        glasdicken: '6\u201310 mm',
+        colors: ['edelstahl-poliert','edelstahl-gebuerstet'],
+        price: '19,50',
+        desc: 'Gro\u00dfer V2A Edelstahl-Knopf \u00d8 40 mm. Poliert oder geb\u00fcrstet.',
+        serie: ''
+    },
+    {
+        id: 'knopf-rund-40-beidseitig',
+        title: 'Knopfgriff rund \u00d8 40 mm beidseitig',
+        handle: 'knopfgriff-rund-40mm-beidseitig-glasdusche',
+        kategorie: 'griff',
+        grifftyp: 'knopf',
+        glasdicken: '6\u201313,52 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','messing-poliert','messing-matt','bronze-matt','kupfer-poliert','kupfer-matt'],
+        price: '32,90',
+        priceMax: '59,90',
+        desc: 'Beidseitiger Knopfgriff \u00d8 40 mm. Durchgehend durch das Glas.',
+        serie: ''
+    },
+
+    // Stangengriffe
+    {
+        id: 'stangengriff-19',
+        title: 'Duschgriff Stangengriff 19\u00d719 mm',
+        handle: 'duschgriff-stangengriff',
+        kategorie: 'griff',
+        grifftyp: 'stangengriff',
+        glasdicken: '6\u201310 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','weiss-matt','graphit-poliert','graphit-matt','messing-poliert','messing-matt','bronze-matt','kupfer-poliert','kupfer-matt'],
+        price: '69,90',
+        priceMax: '84,90',
+        desc: 'Eckiger Stangengriff 19\u00d719 mm, Lochabstand 203 mm. 11 Oberfl\u00e4chen.',
+        serie: 'Bellagio'
+    },
+    {
+        id: 'griffstange-19-v2a',
+        title: 'Edelstahl Griffstange \u00d8 19 mm beidseitig',
+        handle: 'edelstahl-griffstange_19mm',
+        kategorie: 'griff',
+        grifftyp: 'stangengriff',
+        glasdicken: '6\u201312 mm',
+        colors: ['schwarz-matt','edelstahl-gebuerstet','edelstahl-poliert'],
+        price: '39,90',
+        priceMax: '149,90',
+        desc: 'Beidseitige V2A Edelstahl-Griffstange \u00d8 19 mm. L\u00e4ngen 200\u20131000 mm.',
+        serie: ''
+    },
+
+    // ===================== GRIFFMUSCHELN =====================
+    {
+        id: 'muschel-rund-verschraubt',
+        title: 'Griffmuschel rund \u00d8 60 mm verschraubt',
+        handle: 'griffmuschel-aus-edelstahl-fur-glasturen-o-60-mm-38-mm-mit-bohrung-verschraubt',
+        kategorie: 'griffmuschel',
+        befestigung: 'verschraubt',
+        form: 'rund',
+        glasdicken: '6\u201312 mm',
+        colors: ['chrom-poliert','schwarz-matt','edelstahl-gebuerstet'],
+        price: '25,90',
+        priceMax: '39,90',
+        desc: 'Runde Edelstahl-Griffmuschel zum Verschrauben. Glasbohrung erforderlich.',
+        serie: ''
+    },
+    {
+        id: 'muschel-rund-offen',
+        title: 'Griffmuschel offen rund Edelstahl verschraubt',
+        handle: 'griffmuschel-offen-rund-aus-edelstahl-zum-verschrauben',
+        kategorie: 'griffmuschel',
+        befestigung: 'verschraubt',
+        form: 'rund',
+        glasdicken: '6\u201312 mm',
+        colors: ['schwarz-matt','chrom-poliert','edelstahl-gebuerstet'],
+        price: '27,90',
+        priceMax: '42,90',
+        desc: 'Offene runde Griffmuschel aus V2A. Griffmulde oben offen.',
+        serie: ''
+    },
+    {
+        id: 'muschel-rund-klebend',
+        title: 'Griffmuschel rund \u00d8 65 mm selbstklebend',
+        handle: 'griffmuschel-aus-edelstahl-fur-glasturen-selbstklebend-o-65-mm-55-mm',
+        kategorie: 'griffmuschel',
+        befestigung: 'selbstklebend',
+        form: 'rund',
+        glasdicken: '6\u201312 mm',
+        colors: ['schwarz-matt','chrom-poliert','edelstahl-gebuerstet'],
+        price: '23,90',
+        priceMax: '35,50',
+        desc: 'Selbstklebende runde Griffmuschel. Keine Glasbohrung n\u00f6tig!',
+        serie: ''
+    },
+    {
+        id: 'muschel-eckig-verschraubt',
+        title: 'Griffmuschel quadratisch 65 mm verschraubt',
+        handle: 'griffmuschel-quadratisch-edelstahl-zum-verschrauben-o-65-45-mm',
+        kategorie: 'griffmuschel',
+        befestigung: 'verschraubt',
+        form: 'eckig',
+        glasdicken: '6\u201312 mm',
+        colors: ['schwarz-matt','edelstahl-gebuerstet'],
+        price: '36,90',
+        priceMax: '68,90',
+        desc: 'Quadratische Edelstahl-Griffmuschel zum Verschrauben. Beidseitig oder einseitig.',
+        serie: ''
+    },
+    {
+        id: 'muschel-eckig-klebend',
+        title: 'Griffmuschel quadratisch selbstklebend V2A',
+        handle: 'griffmuschel-quadratisch-selbstklebend-aus-v2a-edelstahl-fur-glasturen',
+        kategorie: 'griffmuschel',
+        befestigung: 'selbstklebend',
+        form: 'eckig',
+        glasdicken: '6\u201312 mm',
+        colors: ['schwarz-matt','chrom-poliert','edelstahl-gebuerstet'],
+        price: '29,90',
+        priceMax: '36,90',
+        desc: 'Selbstklebende quadratische Griffmuschel. Keine Glasbohrung n\u00f6tig!',
+        serie: ''
+    }
+];
+
+// Product images from Shopify CDN
+const productImages = {
+    // Scharniere
+    'bellagio-pendelturband-90-glas-wand-anschraubplatte-einseitig-inkl-abdeckplatten-bel344': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/bel344-ch-1.jpg?v=1773413917',
+    'lugano-duschband-90-glas-wand-mit-hebe-senk-funktion': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/lug044l_-_ch_-12_d4e82fdb-3fb3-4411-9024-430843eba5c9.jpg?v=1773418375',
+    'pendelturband-mit-hebe-senk-wandscharnier': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/N0B044RCH.png?v=1773417835',
+    'como-anschlagband-180-glas-glas-messing-massiv-8-10-mm-esg-verdeckte-verschraubung-eckiges-design-kopie': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Como_Wand_1.png?v=1774027644',
+    'drehbares-duschtur-wandprofil-typ-emily': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/emily_2.png?v=1773932672',
+    'drehbares-duschtuerwandprofil-nlo60-eckig-8mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Gemini_Generated_Image_8dwtdp8dwtdp8dwt_5da10c55-43fe-4d10-86d4-c8e6e8aa9b7a.png?v=1776165503',
+    'bellagio-pendelturband-180-glas-glas-farbe-bronze-geburstet-anschraubplatte-einseitig-inkl-abdeckplatten-bel380': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BEL_Glas-Glas_6.png?v=1774028817',
+    'bellagio-pendelturband-90-glas-glas-anschraubplatte-einseitig-inkl-abdeckplatten-einstellbar-art-nr-bel392': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BEL392CH_f112a662-5c46-4907-894c-c2f89d2110e1.png?v=1773418312',
+    'lugano-duschband-180-glas-glas-mit-hebe-senk-funktion': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/lug180l_-_ch_-12_66d6c33b-e3ad-4f4e-9f46-766ee510fb70.jpg?v=1773417291',
+    'pendelturband-mit-hebe-senk-funktion-glas-glas': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/N0B044RCH.png?v=1773417835',
+    'bellagio-pendelturband-180-glas-glas-bel380-50-kg-8-10-mm-esg-kopie': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Como_Glas_1.png?v=1774028226',
+
+    // Haltewinkel
+    'bellagio-winkelverbinder-glas-wand-90-bel90s': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/bel90s-ch-1_69a2c54a-6e0c-4352-bb05-d48d2612174d.jpg?v=1773414789',
+    'lugano_wandwinkel': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/lug90sa-ch-2_4fd78b66-e8f9-49aa-ad99-df7ab0c1508b.jpg?v=1773416819',
+    'bellagio-winkelverbinder-90-glas-glas': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/bel090-ch-2.jpg?v=1773415342',
+
+    // Tuergriffe
+    'duschtuergriff-rund': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/EUSDK1-CH.jpg?v=1773413148',
+    'dusch-tuergriff': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/6702_1.jpg?v=1768301345',
+    'dusch-turgriff-flugelform-art-nr-8297': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/8297.jpg?v=1768299553',
+    'dusch-tuergriff-kegelform': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/0510.jpg?v=1768301576',
+    'duschturgriff-eckig-art-nr-sdk300': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/SDK300CH.jpg?v=1773413198',
+    'dusch-turgriff-quader-art-nr-0517': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/0517.jpg?v=1768301825',
+    'duschgriff-eckig-40x40mm-beidseitig-glasdusche': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/eckig_40_ch_1.jpg?v=1773413264',
+    'duschturknopf-aluminium-30mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/EUSDK2-CH.jpg?v=1773413322',
+    'dusch-turknopf-v2a-in-schwarz-fur-8-12-mm-glasstarke': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/v2a_102_ch.jpg?v=1773413370',
+    'dusch-tuerknopf-4106': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/4106.jpg?v=1768302053',
+    'dusch-tuerknopf-107': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/107.jpg?v=1768302230',
+    'dusch-tuerknopf-v2a-101': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/101.jpg?v=1768302419',
+    'knopfgriff-rund-40mm-beidseitig-glasdusche': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/knopf_40_ch_1.jpg?v=1773413416',
+    'duschgriff-stangengriff': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Stangengriff_CH_1.jpg?v=1773413460',
+    'edelstahl-griffstange_19mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/53_1.jpg?v=1768302676',
+
+    // Griffmuscheln
+    'griffmuschel-aus-edelstahl-fur-glasturen-o-60-mm-38-mm-mit-bohrung-verschraubt': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Griffmuschel_rund-2_3.jpg',
+    'griffmuschel-offen-rund-aus-edelstahl-zum-verschrauben': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Griffmuschel_ofen_1.jpg',
+    'griffmuschel-aus-edelstahl-fur-glasturen-selbstklebend-o-65-mm-55-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Griffmuschel_einseitig_3.jpg',
+    'griffmuschel-quadratisch-edelstahl-zum-verschrauben-o-65-45-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Griffmuschel_beidseitig_eckig_6.jpg',
+    'griffmuschel-quadratisch-selbstklebend-aus-v2a-edelstahl-fur-glasturen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Griffmuschel_einseitig_eckig_7.jpg'
+};
+
+// Color definitions
+const colorDefs = {
+    'chrom-poliert': { name: 'Chrom poliert gl\u00e4nzend', gradient: 'linear-gradient(135deg, #e8e8e8 0%, #c0c0c0 25%, #f5f5f5 50%, #a8a8a8 75%, #d4d4d4 100%)', finish: 'Gl\u00e4nzend' },
+    'edelstahl-gebuerstet': { name: 'Edelstahl geb\u00fcrstet matt', gradient: 'linear-gradient(135deg, #c8c4be 0%, #b5b0a8 25%, #d0ccc5 50%, #a8a39a 75%, #bfbab2 100%)', finish: 'Matt' },
+    'edelstahl-poliert': { name: 'Edelstahl poliert', gradient: 'linear-gradient(135deg, #d6d2cc 0%, #bfbab3 25%, #e0dcd6 50%, #b0aaa2 75%, #ccc7c0 100%)', finish: 'Gl\u00e4nzend' },
+    'silber-matt': { name: 'Silber matt', gradient: 'linear-gradient(135deg, #c5c5c5 0%, #b0b0b0 25%, #cbcbcb 50%, #a0a0a0 75%, #bdbdbd 100%)', finish: 'Matt' },
+    'schwarz-matt': { name: 'Schwarz matt', gradient: 'linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 25%, #333333 50%, #111111 75%, #262626 100%)', finish: 'Matt' },
+    'messing-poliert': { name: 'Messing poliert (goldfarbig)', gradient: 'linear-gradient(135deg, #dcc260 0%, #c4a840 25%, #e8d070 50%, #b89a30 75%, #d0b850 100%)', finish: 'Gl\u00e4nzend' },
+    'messing-matt': { name: 'Messing matt (goldfarbig)', gradient: 'linear-gradient(135deg, #c8a84e 0%, #b08f30 25%, #d4b55a 50%, #a08228 75%, #bfa042 100%)', finish: 'Matt' },
+    'bronze-matt': { name: 'Bronze matt geb\u00fcrstet', gradient: 'linear-gradient(135deg, #8B6914 0%, #6d5010 25%, #9a7520 50%, #5c430d 75%, #7d5e12 100%)', finish: 'Matt' },
+    'graphit-poliert': { name: 'Graphit poliert gl\u00e4nzend', gradient: 'linear-gradient(135deg, #5a5a5a 0%, #454545 25%, #666666 50%, #3a3a3a 75%, #525252 100%)', finish: 'Gl\u00e4nzend' },
+    'graphit-matt': { name: 'Graphit matt geb\u00fcrstet', gradient: 'linear-gradient(135deg, #686868 0%, #555555 25%, #737373 50%, #484848 75%, #606060 100%)', finish: 'Matt' },
+    'kupfer-poliert': { name: 'Kupfer poliert (Rose-Gold)', gradient: 'linear-gradient(135deg, #d4956a 0%, #c07d50 25%, #e0a57a 50%, #b07040 75%, #cc8d60 100%)', finish: 'Gl\u00e4nzend' },
+    'kupfer-matt': { name: 'Kupfer matt geb\u00fcrstet', gradient: 'linear-gradient(135deg, #b8805a 0%, #a06840 25%, #c49068 50%, #905a32 75%, #af7850 100%)', finish: 'Matt' },
+    'weiss-matt': { name: 'Wei\u00df matt', gradient: 'linear-gradient(135deg, #f5f2ef 0%, #e8e4e0 25%, #faf8f6 50%, #e0dcd8 75%, #f0ece8 100%)', finish: 'Matt' }
+};
+
+// Step 2 option definitions per category
+const step1Defs = {
+    scharnier: {
+        title: 'Wie wird das Scharnier montiert?',
+        subtitle: 'W\u00e4hlen Sie, ob die T\u00fcr an einer Wand oder an einer Glasscheibe befestigt wird.',
+        options: [
+            {
+                value: 'glas-wand',
+                name: 'Glas \u2013 Wand',
+                desc: 'Das Scharnier verbindet die Glast\u00fcr mit einer festen Wand oder Nische. Die h\u00e4ufigste Variante.',
+                meta: 'H\u00e4ufigste Montage',
+                icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="2" y="4" width="8" height="32" rx="1" fill="#e8e4df" stroke="#999"/><rect x="24" y="4" width="8" height="32" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-dasharray="4 2"/><circle cx="18" cy="14" r="3" fill="#c8956c"/><circle cx="18" cy="26" r="3" fill="#c8956c"/></svg>'
+            },
+            {
+                value: 'glas-glas',
+                name: 'Glas \u2013 Glas',
+                desc: 'Das Scharnier verbindet die Glast\u00fcr mit einer festen Glasscheibe. F\u00fcr freistehende Duschen.',
+                meta: 'F\u00fcr freistehende Duschen',
+                icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none"><rect x="2" y="4" width="8" height="32" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-width="2" stroke-dasharray="4 2"/><rect x="24" y="4" width="8" height="32" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-width="2" stroke-dasharray="4 2"/><circle cx="18" cy="14" r="3" fill="#c8956c"/><circle cx="18" cy="26" r="3" fill="#c8956c"/></svg>'
+            }
+        ]
+    },
+    haltewinkel: {
+        title: 'Wie wird der Winkel montiert?',
+        subtitle: 'W\u00e4hlen Sie, ob der Winkel Glas mit Wand oder Glas mit Glas verbindet.',
+        options: [
+            {
+                value: 'glas-wand',
+                name: 'Glas \u2013 Wand',
+                desc: 'Festglas wird \u00fcber den Winkel an einer Wand oder Nische gehalten.',
+                meta: 'Nischenmontage',
+                icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="2" y="4" width="8" height="32" rx="1" fill="#e8e4df" stroke="#999"/><rect x="24" y="24" width="8" height="12" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-dasharray="4 2"/><path d="M10 28 L24 28" stroke="#c8956c" stroke-width="3"/><path d="M10 28 L10 12" stroke="#c8956c" stroke-width="3"/></svg>'
+            },
+            {
+                value: 'glas-glas',
+                name: 'Glas \u2013 Glas',
+                desc: 'Zwei Glasscheiben werden \u00fcber den Winkel im 90\u00b0-Winkel verbunden.',
+                meta: 'Eckmontage',
+                icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none"><rect x="2" y="24" width="8" height="12" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-width="2" stroke-dasharray="4 2"/><rect x="24" y="24" width="8" height="12" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-width="2" stroke-dasharray="4 2"/><path d="M10 28 L24 28" stroke="#c8956c" stroke-width="3"/><path d="M10 28 L10 12" stroke="#c8956c" stroke-width="3"/></svg>'
+            }
+        ]
+    },
+    griff: {
+        title: 'Welcher Grifftyp passt zu Ihnen?',
+        subtitle: 'W\u00e4hlen Sie zwischen verschiedenen Griffformen f\u00fcr Ihre Duschglast\u00fcr.',
+        options: [
+            {
+                value: 'rundgriff',
+                name: 'Rundgriff',
+                desc: 'Zylindrischer Griff in runder Form. Klassisch und zeitlos.',
+                meta: 'Klassiker',
+                icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="14" y="6" width="12" height="28" rx="6"/></svg>'
+            },
+            {
+                value: 'eckig',
+                name: 'Eckiger Griff',
+                desc: 'Griff mit eckigem/quadratischem Querschnitt. Modern und markant.',
+                meta: 'Modern',
+                icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="12" y="6" width="16" height="28" rx="2"/></svg>'
+            },
+            {
+                value: 'knopf',
+                name: 'T\u00fcrknopf',
+                desc: 'Kompakter Drehknopf. Platzsparend und dezent.',
+                meta: 'Dezent & kompakt',
+                icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><circle cx="20" cy="20" r="10"/><circle cx="20" cy="20" r="4" fill="rgba(200,149,108,0.3)"/></svg>'
+            },
+            {
+                value: 'stangengriff',
+                name: 'Stangengriff',
+                desc: 'L\u00e4ngerer Griff mit zwei Befestigungspunkten. Komfortabel und stabil.',
+                meta: 'Premium',
+                icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="16" y="4" width="8" height="32" rx="4"/><line x1="12" y1="10" x2="28" y2="10" stroke-width="2"/><line x1="12" y1="30" x2="28" y2="30" stroke-width="2"/></svg>'
+            }
+        ]
+    },
+    griffmuschel: {
+        title: 'Wie soll die Griffmuschel befestigt werden?',
+        subtitle: 'Selbstklebend ist einfacher zu montieren, verschraubt ist stabiler.',
+        options: [
+            {
+                value: 'verschraubt',
+                name: 'Verschraubt',
+                desc: 'Feste Montage mit Glasbohrung. Stabil und dauerhaft.',
+                meta: 'Stabiler Halt',
+                icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><ellipse cx="20" cy="20" rx="12" ry="8"/><circle cx="14" cy="20" r="2" fill="#c8956c"/><circle cx="26" cy="20" r="2" fill="#c8956c"/></svg>'
+            },
+            {
+                value: 'selbstklebend',
+                name: 'Selbstklebend',
+                desc: 'Ohne Bohren! Einfach aufkleben. Ideal f\u00fcr nachtr\u00e4gliche Montage.',
+                meta: 'Ohne Bohren',
+                icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><ellipse cx="20" cy="20" rx="12" ry="8"/><path d="M14 16 L26 16" stroke-width="1.5" stroke-dasharray="3 2"/></svg>'
+            }
+        ]
+    }
+};
+
+// ============================================================
+// State
+// ============================================================
+let currentStep = 0;
+const selections = {
+    kategorie: null,
+    subtyp: null,   // montage for scharnier/haltewinkel, grifftyp for griff, befestigung for griffmuschel
+    color: null
+};
+
+// ============================================================
+// Step Logic
+// ============================================================
+function selectOption(step, el) {
+    const parent = el.closest('.options-grid');
+    parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+
+    const value = el.dataset.value;
+
+    if (step === 0) selections.kategorie = value;
+    else if (step === 1) selections.subtyp = value;
+    else if (step === 2) selections.color = value;
+
+    document.getElementById('nextBtn' + step).disabled = false;
+}
+
+function nextStep(from) {
+    const panels = document.querySelectorAll('.step-panel');
+    panels[from].classList.remove('active');
+
+    currentStep = from + 1;
+
+    if (currentStep === 1) buildStep1Options();
+    else if (currentStep === 2) buildColorOptions();
+    else if (currentStep === 3) buildResults();
+
+    panels[currentStep].classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevStep(to) {
+    const panels = document.querySelectorAll('.step-panel');
+    panels[currentStep].classList.remove('active');
+    currentStep = to - 1;
+    panels[currentStep].classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+    selections.kategorie = null;
+    selections.subtyp = null;
+    selections.color = null;
+    currentStep = 0;
+
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('step0').classList.add('active');
+    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('[id^="nextBtn"]').forEach(b => b.disabled = true);
+
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+    const dots = document.querySelectorAll('.step-dot');
+    const progressPercent = currentStep === 0 ? 0 : currentStep === 1 ? 33 : currentStep === 2 ? 66 : 100;
+
+    document.getElementById('progressSteps').style.setProperty('--progress', progressPercent + '%');
+
+    dots.forEach((dot, i) => {
+        dot.classList.remove('active', 'done');
+        if (i < currentStep) dot.classList.add('done');
+        else if (i === currentStep) dot.classList.add('active');
+    });
+
+    dots.forEach(dot => {
+        dot.onclick = () => {
+            const stepIdx = parseInt(dot.dataset.step);
+            if (stepIdx < currentStep) {
+                document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+                currentStep = stepIdx;
+                document.getElementById('step' + stepIdx).classList.add('active');
+                updateProgress();
+            }
+        };
+    });
+}
+
+// ============================================================
+// Dynamic Content Builders
+// ============================================================
+function buildStep1Options() {
+    const kat = selections.kategorie;
+    const def = step1Defs[kat];
+
+    document.getElementById('step1Title').innerHTML = def.title;
+    document.getElementById('step1Subtitle').innerHTML = def.subtitle;
+
+    const container = document.getElementById('step1Options');
+    container.className = 'options-grid ' + (def.options.length <= 2 ? 'cols-2' : def.options.length === 3 ? 'cols-3' : 'cols-2');
+
+    container.innerHTML = def.options.map(opt => {
+        const count = getFilteredProducts(kat, opt.value).length;
+        return `
+        <div class="option-card" data-value="${opt.value}" onclick="selectOption(1, this)">
+            <div class="option-icon">${opt.icon}</div>
+            <div class="option-name">${opt.name}</div>
+            <div class="option-desc">${opt.desc}</div>
+            <div class="option-meta">${opt.meta} \u00b7 ${count} Produkt${count !== 1 ? 'e' : ''}</div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('nextBtn1').disabled = true;
+}
+
+function getFilteredProducts(kat, subtyp) {
+    return products.filter(p => {
+        if (p.kategorie !== kat) return false;
+        if (kat === 'scharnier' || kat === 'haltewinkel') return p.montage === subtyp;
+        if (kat === 'griff') return p.grifftyp === subtyp;
+        if (kat === 'griffmuschel') return p.befestigung === subtyp;
+        return false;
+    });
+}
+
+function getAvailableColors() {
+    const filtered = getFilteredProducts(selections.kategorie, selections.subtyp);
+    const colorSet = new Set();
+    filtered.forEach(p => p.colors.forEach(c => colorSet.add(c)));
+    return [...colorSet];
+}
+
+function buildColorOptions() {
+    const available = getAvailableColors();
+    const container = document.getElementById('colorOptions');
+
+    container.innerHTML = available.map(colorId => {
+        const c = colorDefs[colorId];
+        if (!c) return '';
+        return `
+        <div class="option-card color-option" data-value="${colorId}" onclick="selectOption(2, this)">
+            <div class="color-swatch" style="background: ${c.gradient}"></div>
+            <div class="color-info">
+                <div class="color-name">${c.name}</div>
+                <div class="color-finish">${c.finish}</div>
+            </div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('nextBtn2').disabled = true;
+}
+
+function buildResults() {
+    const { kategorie, subtyp, color } = selections;
+    const container = document.getElementById('resultsContent');
+
+    const katLabels = { 'scharnier': 'Scharnier', 'haltewinkel': 'Haltewinkel', 'griff': 'T\u00fcrgriff', 'griffmuschel': 'Griffmuschel' };
+    const subtypLabels = {
+        'glas-wand': 'Glas \u2013 Wand', 'glas-glas': 'Glas \u2013 Glas',
+        'rundgriff': 'Rundgriff', 'eckig': 'Eckiger Griff', 'knopf': 'T\u00fcrknopf', 'stangengriff': 'Stangengriff',
+        'verschraubt': 'Verschraubt', 'selbstklebend': 'Selbstklebend'
+    };
+    const colorName = colorDefs[color] ? colorDefs[color].name : color;
+
+    // Exact matches (category + subtype + color)
+    const exactMatches = getFilteredProducts(kategorie, subtyp).filter(p => p.colors.includes(color));
+
+    // Other color matches (category + subtype, but different color)
+    const otherColors = getFilteredProducts(kategorie, subtyp).filter(p => !p.colors.includes(color));
+
+    let html = `
+    <div class="result-summary">
+        <h3>Ihre Konfiguration</h3>
+        <div class="result-choices">
+            <span class="result-choice">${katLabels[kategorie]}</span>
+            <span class="result-choice">${subtypLabels[subtyp]}</span>
+            <span class="result-choice">${colorName}</span>
+        </div>
+    </div>`;
+
+    // Hints based on category
+    if (kategorie === 'scharnier') {
+        html += `
+        <div class="result-hint">
+            <strong>Hinweis:</strong> Pro Duschglast\u00fcr werden in der Regel 2 Scharniere ben\u00f6tigt. Bei schweren T\u00fcren ab 30 kg empfehlen wir Pendelt\u00fcrb\u00e4nder mit mindestens 50 kg Tragkraft.
+        </div>`;
+    } else if (kategorie === 'griffmuschel') {
+        html += `
+        <div class="result-hint">
+            <strong>Tipp:</strong> ${subtyp === 'selbstklebend' ? 'Selbstklebende Griffmuscheln k\u00f6nnen ohne Glasbohrung montiert werden \u2013 ideal f\u00fcr nachtr\u00e4gliche Ausr\u00fcstung!' : 'Verschraubte Griffmuscheln bieten maximalen Halt. Glasbohrung muss VOR dem Einbau der Scheibe erfolgen.'}
+        </div>`;
+    }
+
+    // Section 1: Exact matches
+    if (exactMatches.length > 0) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Passende Produkte in ${colorName} <span class="result-badge">${exactMatches.length}</span>
+            </div>
+            <div class="result-products">
+                ${exactMatches.map(p => productCard(p, true)).join('')}
+            </div>
+        </div>`;
+    }
+
+    // Section 2: Other colors
+    if (otherColors.length > 0) {
+        html += `
+        <div class="result-section">
+            <div class="result-section-title">
+                Weitere Produkte in anderen Oberfl\u00e4chen <span class="result-badge" style="background: var(--text-light)">${otherColors.length}</span>
+            </div>
+            <div class="result-products">
+                ${otherColors.map(p => productCard(p, false, true)).join('')}
+            </div>
+        </div>`;
+    }
+
+    // No matches at all
+    if (exactMatches.length === 0 && otherColors.length === 0) {
+        html += `
+        <div class="no-match">
+            <div class="no-match-icon">\ud83d\udd0d</div>
+            <h3>Keine Produkte gefunden</h3>
+            <p>F\u00fcr diese Kombination ist leider kein Produkt verf\u00fcgbar. Bitte versuchen Sie eine andere Konfiguration.</p>
+        </div>`;
+    }
+
+    container.innerHTML = html;
+}
+
+function productCard(p, colorMatch, showAvailableColors) {
+    const priceStr = p.priceMax ? `ab ${p.price} \u20ac` : `${p.price} \u20ac`;
+
+    const imgUrl = productImages[p.handle];
+    const imgHtml = imgUrl
+        ? `<img class="result-product-img" src="${imgUrl}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+           <div class="result-product-img" style="display:none; align-items:center; justify-content:center;">
+               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c8956c" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+           </div>`
+        : `<div class="result-product-img" style="display:flex; align-items:center; justify-content:center;">
+               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c8956c" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+           </div>`;
+
+    // Extra details
+    let details = [];
+    if (p.glasdicken) details.push(p.glasdicken + ' Glas');
+    if (p.tragkraft) details.push(p.tragkraft);
+    if (p.hebeSenk) details.push('Hebe-Senk');
+    if (p.serie) details.push('Serie ' + p.serie);
+    if (p.winkel) details.push(p.winkel + '\u00b0');
+    const detailStr = details.length > 0 ? details.join(' \u00b7 ') : '';
+
+    // Color match indicator
+    let colorIndicator = '';
+    if (colorMatch === false && !showAvailableColors) {
+        colorIndicator = `<div style="font-size:11px; color:var(--text-light); margin-top:4px;">Nicht in der gew\u00e4hlten Oberfl\u00e4che</div>`;
+    }
+
+    // Show available color swatches for non-matching products
+    let colorSwatches = '';
+    if (showAvailableColors && p.colors) {
+        const swatches = p.colors.map(cId => {
+            const cd = colorDefs[cId];
+            if (!cd) return '';
+            return `<span title="${cd.name}" style="display:inline-block; width:18px; height:18px; border-radius:5px; background:${cd.gradient}; border:1.5px solid rgba(0,0,0,0.1);"></span>`;
+        }).join('');
+        colorSwatches = `<div style="display:flex; flex-wrap:wrap; gap:4px; margin-top:6px;">${swatches}</div>`;
+    }
+
+    // Match badge
+    const matchBadge = colorMatch
+        ? `<span style="display:inline-block; background:#e8f5e9; color:#27ae60; font-size:10px; font-weight:600; padding:2px 8px; border-radius:6px; margin-left:6px;">Passend</span>`
+        : '';
+
+    return `
+    <div class="result-product-card" style="${colorMatch === false ? 'opacity:0.85;' : ''}">
+        <a class="result-product-inner" href="https://duschop.de/products/${p.handle}" target="_blank" rel="noopener">
+            ${imgHtml}
+            <div class="result-product-info">
+                <div class="result-product-title">${p.title}${matchBadge}</div>
+                <div class="result-product-desc">${p.desc}</div>
+                ${detailStr ? `<div style="font-size:11px; color:var(--accent); font-weight:500; margin-top:4px;">${detailStr}</div>` : ''}
+                ${colorIndicator}
+                ${colorSwatches}
+                <div class="result-product-price">${priceStr}</div>
+            </div>
+            <div class="result-product-arrow">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </div>
+        </a>
+    </div>`;
+}
+
+// Init
+updateProgress();
+</script>
+
+</body>
+</html>
