@@ -304,12 +304,6 @@
         if (e.key === 'Enter') window.checkLogin();
     });
 
-    if (sessionStorage.getItem('duschop_auth') === '1') {
-        document.getElementById('loginOverlay').classList.add('hidden');
-        document.getElementById('mainContent').style.display = '';
-        loadData();
-    }
-
     async function sha256(str) {
         var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
         return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
@@ -328,8 +322,8 @@
         document.getElementById('statusBar').textContent = 'Daten werden geladen...';
 
         try {
-            var pvUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv&gid=' + PAGEVIEWS_GID;
-            var clUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv&gid=' + CLICKS_GID;
+            var pvUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/pub?output=csv&gid=' + PAGEVIEWS_GID;
+            var clUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/pub?output=csv&gid=' + CLICKS_GID;
 
             var [pvRes, clRes] = await Promise.all([fetch(pvUrl), fetch(clUrl)]);
             pageviews = parseCSV(await pvRes.text());
@@ -630,6 +624,13 @@
         var d = document.createElement('div');
         d.textContent = s;
         return d.innerHTML;
+    }
+
+    // ---- AUTO-LOGIN (nach allen Definitionen) ----
+    if (sessionStorage.getItem('duschop_auth') === '1') {
+        document.getElementById('loginOverlay').classList.add('hidden');
+        document.getElementById('mainContent').style.display = '';
+        loadData();
     }
 
 })();
