@@ -490,19 +490,8 @@
             .result-product-inner { flex-wrap: wrap; }
         }
     </style>
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://app.duschop.de/stabistangen-konfigurator/">
-<meta property="og:title" content="Stabistangen-Konfigurator | Duschop Tools">
-<meta property="og:description" content="Konfigurieren Sie Ihre Stabilisationsstange für die Glasdusche.">
-<meta property="og:site_name" content="Duschop Tools">
 </head>
 <body>
-<div style="background:#1a1a2e;padding:10px 20px;text-align:left;position:sticky;top:0;z-index:9999;">
-    <a href="/" style="color:#c8956c;text-decoration:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        Alle Tools
-    </a>
-</div>
 
 <header class="header">
     <div class="header-inner">
@@ -666,9 +655,24 @@
 
 <script>
 // ============================================================
-// Product Database
+// DYNAMISCHES LADEN aus 3 bestehenden Shopify-Collections.
+// Keine Tags, keine extra Collection erforderlich.
+//   - Form, Typ und Montage werden automatisch aus dem Produkttitel abgeleitet
+//   - Farben aus den Produktvarianten (Option "Farbe" oder kombinierte Variante)
+//   - Bei Fehler/Offline: untere Fallback-Liste wird genutzt.
 // ============================================================
-const products = [
+const SHOP_BASE = 'https://duschop.de';
+const COLL_HANDLES = ['19-mm-stabistangen', '12-mm-stabistangen', 'eckige-stabistangen'];
+const CACHE_KEY = 'stabi_konfig_v3';
+const CACHE_TTL = 30 * 60 * 1000; // 30 min
+
+// Hard-Override fÃ¼r Produkte, bei denen die Titel-Heuristik versagt (Handle -> {form,typ,montage})
+const TITLE_OVERRIDES = {};
+
+// ============================================================
+// Product Database (Fallback)
+// ============================================================
+let products = [
     // === SETS (Complete Solutions) ===
     {
         id: 'set-rund-12-wg',
@@ -810,6 +814,30 @@ const products = [
         price: '319,00',
         priceMax: '359,00',
         desc: 'Premium Pfosten-Set f\u00fcr freistehende Glasscheiben. Rund oder eckig, Boden-Decke-Montage.',
+        isSet: true
+    },
+    {
+        id: 'set-decke-rund-19-6015',
+        title: 'Edelstahl Stabistange-Set rund \u00d8 19 mm Glas-Decke vertikal',
+        handle: 'stabistange-set-rund-19mm-glas-decke-6015',
+        type: 'set',
+        montage: ['glas-decke'],
+        form: 'rund-19',
+        colors: ['edelstahl-poliert', 'edelstahl-gebuerstet'],
+        price: '40,90',
+        desc: 'Edelstahl-Set rund \u00d8 19 mm, 250 mm L\u00e4nge, poliert oder geb\u00fcrstet.',
+        isSet: true
+    },
+    {
+        id: 'set-decke-eckig-20-6415',
+        title: 'Edelstahl Stabistange-Set Vierkant 20\u00d720 mm Glas-Decke vertikal',
+        handle: 'stabistange-set-vierkant-20x20mm-glas-decke-6415',
+        type: 'set',
+        montage: ['glas-decke'],
+        form: 'eckig-20',
+        colors: ['edelstahl-poliert', 'edelstahl-gebuerstet'],
+        price: '56,20',
+        desc: 'Edelstahl-Set eckig 20\u00d720 mm, 250 mm L\u00e4nge, poliert oder geb\u00fcrstet.',
         isSet: true
     },
 
@@ -965,7 +993,7 @@ const products = [
 ];
 
 // Product images from Shopify CDN
-const productImages = {
+let productImages = {
     'stabistangen-set-rund-glas-wand-flexibel-einstellbar-12-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/SQ1212_641ab0ab-b3a7-4c9c-b60d-d7e6180136a4.jpg?v=1773305017',
     'stabistangen-set-eckig-fur-glasdusche-glas-wand': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/sq1212setch-01.jpg?v=1773305047',
     'edelstahl-stabistangen-set-glas-wand-90': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/SE1912SET.png?v=1773305306',
@@ -987,7 +1015,9 @@ const productImages = {
     'stabilisierungsstangen-set': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Stabi_3.2.jpg?v=1751384854',
     'glas-wand-45-edelstahl-stabistangen-set-19-mm-rohr-art-nr-6017-6019': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/6019_6017_2.png?v=1773307663',
     '90-stabilisierungswinkel-220-mm-fur-freistehende-glaswande-ohne-glasbohrung': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Winkelstabilisator_gebuerstet_2.jpg?v=1753357997',
-    'walk-in-pfosten-set-typ-vigo-vertikale-stabilisierung-fur-freistehende-glaswande': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BO521543.rund.jpg?v=1753432428'
+    'walk-in-pfosten-set-typ-vigo-vertikale-stabilisierung-fur-freistehende-glaswande': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BO521543.rund.jpg?v=1753432428',
+    'stabistange-set-rund-19mm-glas-decke-6015': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/6015.1.jpg?v=1776411759',
+    'stabistange-set-vierkant-20x20mm-glas-decke-6415': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/6415.1.jpg?v=1776412109'
 };
 
 // Color definitions (same as Farbenfinder)
@@ -1356,11 +1386,185 @@ function productCard(p, colorMatch, showAvailableColors) {
     </div>`;
 }
 
+// ============================================================
+// Shopify-Sync
+// ============================================================
+function mapColor(name) {
+    if (!name) return null;
+    const s = String(name).toLowerCase();
+    if (s.includes('chrom')) return 'chrom-poliert';
+    if (s.includes('edelstahl')) {
+        if (s.includes('gebÃ¼rst') || s.includes('matt')) return 'edelstahl-gebuerstet';
+        return 'edelstahl-poliert';
+    }
+    if (s.includes('silber')) return 'silber-matt';
+    if (s.includes('schwarz')) return 'schwarz-matt';
+    if (s.includes('messing')) return s.includes('matt') ? 'messing-matt' : 'messing-poliert';
+    if (s.includes('bronze')) return 'bronze-matt';
+    if (s.includes('graphit')) return s.includes('matt') ? 'graphit-matt' : 'graphit-poliert';
+    if (s.includes('kupfer')) return s.includes('matt') ? 'kupfer-matt' : 'kupfer-poliert';
+    if (s.includes('weiÃŸ') || s.includes('weiss')) return 'weiss-matt';
+    return null;
+}
+
+function parseTitle(title) {
+    const t = String(title || '').toLowerCase();
+    const r = { form: null, typ: null, montage: [] };
+
+    // Ausschluss: Handtuchhalter/Relings sind keine Stabistangen (trotz 19 mm in der Collection)
+    if (t.includes('reling') || t.includes('badreling')) return r;
+
+    // FORM
+    if (t.includes('vierkant 20') || t.includes('20x20') || t.includes('20Ã—20')) r.form = 'eckig-20';
+    else if (t.includes('vierkant 12') || t.includes('12x12') || t.includes('12Ã—12') || t.includes('quadratisch 12') || (t.includes('quadratisch') && /12/.test(t))) r.form = 'eckig-12';
+    else if (t.includes('stabilisierungswinkel')) r.form = 'eckig-12';
+    else if (t.includes('pfosten') || /Ã¸\s*30/.test(t)) r.form = 'rund-19';
+    else if (/Ã¸\s*19/.test(t) || /\b19\s*mm/.test(t)) r.form = 'rund-19';
+    else if (/Ã¸\s*12/.test(t) || /\b12\s*mm/.test(t)) r.form = 'rund-12';
+
+    // TYP (Set-Keywords haben Vorrang, auch wenn Titel andere Begriffe erwÃ¤hnt wie "inkl. 2 Glashalter")
+    // Achtung: "winkel" ist kein Set-Indikator (Wandhalter haben Winkelangaben wie "45Â° Winkel").
+    if (t.includes('set') || t.includes('stabilisierungswinkel') || t.includes('pfosten')) r.typ = 'set';
+    else if (t.includes('t-verbinder') || t.includes('t verbinder')) r.typ = 't-verbinder';
+    else if (t.includes('glashalter')) r.typ = 'glashalter';
+    else if (t.includes('wandhalter') || t.includes('deckenhalter') || t.includes('wandflansch')) r.typ = 'wandhalter';
+    else if (t.includes('rohr') || /\bstange\b/.test(t)) r.typ = 'rohr';
+
+    // MONTAGE
+    if (t.includes('glas-decke') || t.includes('glas decke') || t.includes('pfosten') || t.includes('vertikal') || t.includes('glas-decken')) r.montage.push('glas-decke');
+    if (t.includes('glas-glas') || t.includes('glas glas')) r.montage.push('glas-glas');
+    if ((t.includes('glas-wand') || t.includes('glas wand')) || (t.includes('walk-in') && !t.includes('pfosten'))) r.montage.push('wand-glas');
+
+    // Fallback
+    if (!r.montage.length) {
+        if (r.typ === 'rohr') r.montage = ['wand-glas', 'glas-glas', 'glas-decke'];
+        else if (r.typ === 't-verbinder') r.montage = ['glas-glas'];
+        else if (r.typ === 'glashalter') r.montage = t.includes('senkrecht') ? ['glas-decke'] : ['wand-glas', 'glas-glas'];
+        else if (r.typ === 'wandhalter') r.montage = t.includes('decken') ? ['wand-glas', 'glas-decke'] : ['wand-glas'];
+        else if (r.typ === 'set') r.montage = ['wand-glas'];
+    }
+    return r;
+}
+
+function normalizeProduct(sp) {
+    const p = parseTitle(sp.title);
+    const ov = TITLE_OVERRIDES[sp.handle];
+    if (ov) { if (ov.form) p.form = ov.form; if (ov.typ) p.typ = ov.typ; if (ov.montage) p.montage = ov.montage; }
+    if (!p.form || !p.typ || !p.montage.length) return null;
+    const montage = p.montage, form = p.form, typ = p.typ;
+
+    // Farben aus Varianten
+    let colorIdx = -1;
+    (sp.options || []).forEach((o, i) => {
+        if (o && o.name && String(o.name).toLowerCase().includes('farbe')) colorIdx = i;
+    });
+    const colors = [];
+    const seen = {};
+    if (colorIdx >= 0) {
+        const key = 'option' + (colorIdx + 1);
+        (sp.variants || []).forEach(v => {
+            const c = mapColor(v[key]);
+            if (c && !seen[c]) { seen[c] = 1; colors.push(c); }
+        });
+    }
+    // Fallback: keine "Farbe"-Option oder keine Treffer â†’ alle Varianten-Werte scannen
+    // (wichtig z.B. bei kombinierter Option "Variante: Edelstahl poliert, 250 mm")
+    if (!colors.length) {
+        (sp.variants || []).forEach(v => {
+            ['option1', 'option2', 'option3'].forEach(k => {
+                const c = mapColor(v[k]);
+                if (c && !seen[c]) { seen[c] = 1; colors.push(c); }
+            });
+        });
+    }
+    if (!colors.length) colors.push('chrom-poliert');
+
+    // Preisspanne
+    let prices = (sp.variants || []).map(v => parseFloat(v.price)).filter(x => !isNaN(x));
+    if (!prices.length) prices = [0];
+    const pMin = Math.min(...prices), pMax = Math.max(...prices);
+    const price = pMin.toFixed(2).replace('.', ',');
+    const priceMax = pMax > pMin ? pMax.toFixed(2).replace('.', ',') : undefined;
+
+    // Kurzbeschreibung
+    let desc = (sp.body_html || '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+    if (desc.length > 140) desc = desc.substring(0, 137) + 'â€¦';
+    if (!desc) desc = sp.product_type || 'ZubehÃ¶r';
+
+    return {
+        id: sp.handle,
+        title: sp.title,
+        handle: sp.handle,
+        type: typ,
+        montage: montage,
+        form: form,
+        colors: colors,
+        price: price,
+        priceMax: priceMax,
+        desc: desc,
+        isSet: typ === 'set'
+    };
+}
+
+function loadCache() {
+    try {
+        const raw = localStorage.getItem(CACHE_KEY);
+        if (!raw) return null;
+        const d = JSON.parse(raw);
+        if (!d || !d.ts || Date.now() - d.ts > CACHE_TTL) return null;
+        return d;
+    } catch (e) { return null; }
+}
+function saveCache(p, img) {
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), products: p, images: img })); } catch (e) {}
+}
+
+function fetchShopify(cb) {
+    if (typeof fetch === 'undefined' || typeof Promise === 'undefined') { cb(null); return; }
+    Promise.all(COLL_HANDLES.map(c =>
+        fetch(SHOP_BASE + '/collections/' + c + '/products.json?limit=250', { credentials: 'omit' })
+            .then(r => r.ok ? r.json() : null)
+            .catch(() => null)
+    )).then(results => {
+        const seenH = {}, nP = [], nIMG = {};
+        results.forEach(d => {
+            if (!d || !d.products) return;
+            d.products.forEach(sp => {
+                if (seenH[sp.handle]) return;
+                seenH[sp.handle] = 1;
+                const np = normalizeProduct(sp);
+                if (np) {
+                    nP.push(np);
+                    if (sp.images && sp.images[0]) nIMG[sp.handle] = sp.images[0].src;
+                }
+            });
+        });
+        cb(nP.length ? { products: nP, images: nIMG } : null);
+    }).catch(() => cb(null));
+}
+
+function syncInit() {
+    const c = loadCache();
+    if (c && c.products && c.products.length) {
+        products = c.products;
+        productImages = c.images || {};
+    }
+    fetchShopify(data => {
+        if (!data) return;
+        products = data.products;
+        productImages = data.images;
+        saveCache(products, productImages);
+        // Aktuellen Schritt neu rendern, falls Daten sich geÃ¤ndert haben
+        if (currentStep === 1) buildFormOptions();
+        else if (currentStep === 2) buildColorOptions();
+        else if (currentStep === 3) buildResults();
+    });
+}
+
 // Init
 updateProgress();
+syncInit();
 </script>
 
-    <!-- Duschop Tracker -->
-    <script src="/tracker.js" async></script>
 </body>
 </html>
