@@ -196,7 +196,8 @@
 
     <!-- Date Filter -->
     <div class="filter-row">
-        <button class="filter-btn active" data-range="7">7 Tage</button>
+        <button class="filter-btn active" data-range="1">Heute</button>
+        <button class="filter-btn" data-range="7">7 Tage</button>
         <button class="filter-btn" data-range="30">30 Tage</button>
         <button class="filter-btn" data-range="90">90 Tage</button>
         <button class="filter-btn" data-range="all">Gesamt</button>
@@ -277,7 +278,7 @@
     // ---- STATE ----
     var pageviews = [];
     var clicks = [];
-    var currentRange = 7;
+    var currentRange = 1;
     var chartViews = null;
     var chartTools = null;
     var chartDevices = null;
@@ -443,7 +444,11 @@
     function filterByRange(data) {
         if (currentRange >= 9999) return data;
         var cutoff = new Date();
-        cutoff.setDate(cutoff.getDate() - currentRange);
+        if (currentRange === 1) {
+            cutoff.setHours(0, 0, 0, 0);
+        } else {
+            cutoff.setDate(cutoff.getDate() - currentRange);
+        }
         return data.filter(function (r) {
             return new Date(r.timestamp) >= cutoff;
         });
@@ -457,7 +462,7 @@
         // KPIs
         document.getElementById('kpiViews').textContent = fPV.length.toLocaleString('de-DE');
         document.getElementById('kpiViewsSub').textContent =
-            currentRange < 9999 ? 'Letzte ' + currentRange + ' Tage' : 'Gesamtzeitraum';
+            currentRange === 1 ? 'Heute' : currentRange < 9999 ? 'Letzte ' + currentRange + ' Tage' : 'Gesamtzeitraum';
 
         document.getElementById('kpiClicks').textContent = fCL.length.toLocaleString('de-DE');
         document.getElementById('kpiClicksSub').textContent =
