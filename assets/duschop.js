@@ -852,6 +852,17 @@
                 });
             });
         }.bind(this));
+
+        // Action-Buttons auf der Ergebnisseite (restart aus Conversion-Block + No-Results)
+        var selfRef = this;
+        resultsEl.querySelectorAll('[data-action]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var action = btn.getAttribute('data-action');
+                if (action === 'restart') selfRef._restart();
+                if (action === 'next') selfRef._next();
+                if (action === 'prev') selfRef._prev();
+            });
+        });
     };
 
     DuschopWizard.prototype._renderProductCard = function (item, isBest) {
