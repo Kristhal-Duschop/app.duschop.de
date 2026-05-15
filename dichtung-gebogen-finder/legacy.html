@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gebogene Duschdichtung finden | duschop.de</title>
+    <meta name="description" content="Finden Sie die passende gebogene Bodendichtung fuer Viertelkreis- oder Fuenfeck-Duschen mit Rundglas. Schritt fuer Schritt zum richtigen Profil.">
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+    .gf-finder {
+      --black: #000000;
+      --white: #ffffff;
+      --gold: #FFBA00;
+      --gold-hover: #e6a800;
+      --gold-light: #fff8e6;
+      --gray-50: #fafafa;
+      --gray-100: #f5f5f5;
+      --gray-200: #e8e8e8;
+      --gray-300: #d1d1d1;
+      --gray-400: #aaaaaa;
+      --gray-500: #888888;
+      --gray-600: #666666;
+      --gray-700: #444444;
+      --gray-900: #1a1a1a;
+      --green: #22c55e;
+      --green-bg: #f0fdf4;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+      --transition: 0.2s ease;
+
+      font-family: 'Roboto', sans-serif;
+      color: var(--gray-900);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .gf-finder * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ===== CONTAINER ===== */
+    .gf-finder {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    /* ===== HEADER ===== */
+    .gf-finder-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .gf-finder-header .gf-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .gf-finder-header h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 30px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--black);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .gf-finder-header p {
+      font-size: 15px;
+      color: var(--gray-500);
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ===== PROGRESS ===== */
+    .gf-progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 32px;
+      padding: 0 24px;
+    }
+
+    .gf-progress-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .gf-progress-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      border: 2px solid var(--gray-300);
+      color: var(--gray-400);
+      background: var(--white);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .gf-progress-dot.gf-active {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: var(--black);
+      box-shadow: 0 0 0 4px rgba(255,186,0,0.15);
+    }
+
+    .gf-progress-dot.gf-done {
+      border-color: var(--black);
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .gf-progress-dot.gf-done svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .gf-progress-label {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .gf-progress-label.gf-active { color: var(--gold-hover); }
+    .gf-progress-label.gf-done { color: var(--black); }
+
+    .gf-progress-line {
+      width: 48px;
+      height: 2px;
+      background: var(--gray-200);
+      margin: 0 -2px;
+      margin-bottom: 20px;
+      transition: background 0.3s;
+    }
+
+    .gf-progress-line.gf-done { background: var(--black); }
+
+    /* ===== STEPS ===== */
+    .gf-step { display: none; animation: gfFadeSlideIn 0.35s ease; }
+    .gf-step.gf-active { display: block; }
+
+    @keyframes gfFadeSlideIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .gf-step-question {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .gf-step-hint {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* ===== OPTION CARDS ===== */
+    .gf-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .gf-opt {
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: center;
+      background: var(--white);
+      position: relative;
+      user-select: none;
+    }
+
+    .gf-opt:hover {
+      border-color: var(--gray-300);
+      box-shadow: var(--shadow);
+      transform: translateY(-1px);
+    }
+
+    .gf-opt.gf-selected {
+      border-color: var(--gold);
+      background: var(--gold-light);
+      box-shadow: 0 0 0 1px var(--gold), var(--shadow);
+    }
+
+    .gf-opt.gf-selected::after {
+      content: '\2713';
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      background: var(--gold);
+      color: var(--black);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .gf-opt-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+      display: block;
+      line-height: 1;
+    }
+
+    .gf-opt-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--black);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .gf-opt-desc {
+      font-size: 12px;
+      color: var(--gray-500);
+      line-height: 1.4;
+    }
+
+    /* Glasdicke Grid */
+    .gf-glass-grid {
+      max-width: 560px;
+      margin: 0 auto 16px;
+    }
+
+    .gf-glass-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .gf-glass-rare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .gf-opt.gf-opt-lg {
+      padding: 24px 18px;
+      border-width: 2px;
+    }
+
+    .gf-opt.gf-opt-lg .gf-opt-icon { font-size: 36px; margin-bottom: 10px; }
+    .gf-opt.gf-opt-lg .gf-opt-label { font-size: 22px; }
+    .gf-opt.gf-opt-lg .gf-opt-desc { font-size: 13px; }
+
+    .gf-opt.gf-opt-sm {
+      padding: 14px 14px;
+      border-width: 1.5px;
+      border-color: var(--gray-200);
+      opacity: 0.8;
+      transition: all var(--transition);
+    }
+
+    .gf-opt.gf-opt-sm:hover { opacity: 1; }
+    .gf-opt.gf-opt-sm.gf-selected { opacity: 1; }
+
+    .gf-opt.gf-opt-sm .gf-opt-icon { font-size: 22px; margin-bottom: 6px; }
+    .gf-opt.gf-opt-sm .gf-opt-label { font-size: 16px; }
+    .gf-opt.gf-opt-sm .gf-opt-desc { font-size: 12px; color: var(--gray-400); }
+
+    /* Duschform Grid */
+    .gf-form-grid {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+      align-items: stretch;
+      max-width: 660px;
+      margin-left: auto;
+      margin-right: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .gf-form-main {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1.2;
+      min-width: 200px;
+    }
+
+    .gf-form-side {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 0.8;
+      min-width: 160px;
+    }
+
+    .gf-form-side .gf-opt {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px 16px;
+      border-width: 2px;
+      opacity: 1;
+      flex: 1;
+    }
+
+    .gf-form-side .gf-opt .gf-opt-icon { font-size: 28px; margin-bottom: 8px; }
+    .gf-form-side .gf-opt .gf-opt-label { font-size: 16px; }
+    .gf-form-side .gf-opt .gf-opt-desc { font-size: 12px; }
+
+    .gf-opt-popular {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 2px 10px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    /* ===== SPALTMASS SLIDER ===== */
+    .gf-slider-box {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      margin-bottom: 16px;
+    }
+
+    .gf-slider-display {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .gf-slider-value {
+      font-family: 'Oswald', sans-serif;
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .gf-slider-value span {
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--gray-500);
+      margin-left: 2px;
+    }
+
+    .gf-slider-label {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    .gf-slider-track {
+      position: relative;
+      padding: 0 4px;
+    }
+
+    .gf-finder input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: linear-gradient(to right, var(--gold) 0%, var(--gold) var(--fill, 34%), var(--gray-200) var(--fill, 34%), var(--gray-200) 100%);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .gf-finder input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--white);
+      cursor: pointer;
+      border: 3px solid var(--gold);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: box-shadow 0.2s;
+    }
+
+    .gf-finder input[type="range"]::-webkit-slider-thumb:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+
+    .gf-finder input[type="range"]::-moz-range-thumb {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--white);
+      cursor: pointer;
+      border: 3px solid var(--gold);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .gf-slider-minmax {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    .gf-slider-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .gf-pill {
+      padding: 6px 16px;
+      border: 1px solid var(--gray-300);
+      border-radius: 20px;
+      background: var(--white);
+      font-family: 'Roboto', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+      color: var(--gray-700);
+    }
+
+    .gf-pill:hover { border-color: var(--gold); color: var(--black); }
+
+    .gf-pill.gf-on {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+
+    /* ===== MATCH INDICATOR ===== */
+    .gf-match-bar {
+      background: var(--gray-100);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--gray-600);
+    }
+
+    .gf-match-bar strong {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      color: var(--gold-hover);
+    }
+
+    .gf-match-bar.gf-good { background: var(--green-bg); }
+    .gf-match-bar.gf-good strong { color: var(--green); }
+
+    /* ===== TIP ===== */
+    .gf-tip {
+      background: var(--gold-light);
+      border: 1px solid #ffe49a;
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--gray-700);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+
+    .gf-tip-icon { flex-shrink: 0; font-size: 16px; }
+
+    /* ===== NAVIGATION ===== */
+    .gf-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      gap: 12px;
+    }
+
+    .gf-nav-btn {
+      font-family: 'Oswald', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 13px 30px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .gf-nav-back {
+      background: none;
+      color: var(--gray-500);
+      padding: 13px 16px;
+    }
+    .gf-nav-back:hover { color: var(--black); }
+
+    .gf-nav-next {
+      background: var(--black);
+      color: var(--white);
+      margin-left: auto;
+    }
+    .gf-nav-next:hover { background: var(--gray-700); }
+    .gf-nav-next:disabled { background: var(--gray-300); color: var(--gray-400); cursor: not-allowed; }
+
+    .gf-nav-results {
+      background: var(--gold);
+      color: var(--black);
+      margin-left: auto;
+      font-weight: 600;
+    }
+    .gf-nav-results:hover { background: var(--gold-hover); }
+
+    /* ===== RESULTS PAGE ===== */
+    .gf-results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .gf-results-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .gf-results-title em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .gf-results-edit {
+      font-size: 13px;
+      color: var(--gray-500);
+      cursor: pointer;
+      text-decoration: underline;
+      background: none;
+      border: none;
+      font-family: 'Roboto', sans-serif;
+    }
+    .gf-results-edit:hover { color: var(--black); }
+
+    .gf-filter-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .gf-filter-chip {
+      background: var(--gray-100);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: var(--gray-700);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .gf-filter-chip strong { font-weight: 600; color: var(--black); }
+
+    .gf-filter-chip .gf-chip-edit {
+      cursor: pointer;
+      color: var(--gray-400);
+      font-size: 14px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .gf-filter-chip .gf-chip-edit:hover { color: var(--black); }
+
+    /* ===== PRODUCT CARDS ===== */
+    .gf-products { display: flex; flex-direction: column; gap: 14px; }
+
+    .gf-product {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 0;
+      display: flex;
+      transition: all var(--transition);
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    .gf-product:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--gray-300);
+    }
+
+    .gf-product.gf-highlight {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px var(--gold), var(--shadow);
+    }
+
+    .gf-product-image {
+      width: 130px;
+      min-height: 130px;
+      background: var(--gray-50);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gf-product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
+    }
+
+    .gf-product-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .gf-product-body {
+      flex: 1;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .gf-product-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--black);
+      line-height: 1.3;
+    }
+
+    .gf-product-desc {
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 1.4;
+    }
+
+    .gf-product-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .gf-spec {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      background: var(--gray-100);
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+
+    .gf-spec.gf-match {
+      background: #fff3d0;
+      color: #7a6000;
+    }
+
+    .gf-spec.gf-perfect {
+      background: var(--green-bg);
+      color: #166534;
+    }
+
+    .gf-product-footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    .gf-product-price {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .gf-product-price small {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    .gf-product-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--radius);
+      letter-spacing: 0.5px;
+      transition: all var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .gf-product-cta:hover { background: var(--gold-hover); }
+
+    .gf-product-cta svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ===== NO RESULTS ===== */
+    .gf-no-results {
+      text-align: center;
+      padding: 48px 24px;
+      background: var(--gray-50);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-200);
+    }
+
+    .gf-no-results .gf-nr-icon { font-size: 48px; margin-bottom: 12px; }
+    .gf-no-results h3 { font-family: 'Oswald', sans-serif; font-size: 18px; margin-bottom: 8px; text-transform: uppercase; }
+    .gf-no-results p { font-size: 14px; color: var(--gray-500); margin-bottom: 16px; max-width: 400px; margin-left: auto; margin-right: auto; }
+    .gf-no-results a { color: var(--gold-hover); text-decoration: underline; font-weight: 500; }
+
+    .gf-restart-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 24px;
+      background: none;
+      border: 2px solid var(--gray-300);
+      border-radius: var(--radius);
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: var(--gray-700);
+      transition: all var(--transition);
+    }
+
+    .gf-restart-btn:hover {
+      border-color: var(--black);
+      color: var(--black);
+    }
+
+    /* ===== LENGTH INFO ===== */
+    .gf-length-info {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .gf-finder { padding: 16px 12px 48px; }
+      .gf-finder-header h1 { font-size: 24px; }
+      .gf-finder-header p { font-size: 14px; }
+      .gf-options { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .gf-opt.gf-opt-lg .gf-opt-label { font-size: 18px; }
+      .gf-opt.gf-opt-lg { padding: 18px 14px; }
+      .gf-glass-rare { max-width: 100%; }
+      .gf-form-grid { flex-direction: column; max-width: 100%; }
+      .gf-form-main { flex-direction: row; }
+      .gf-form-side { flex-direction: row; flex: unset; width: 100%; }
+      .gf-form-side .gf-opt { flex-direction: row; gap: 10px; padding: 14px 16px; }
+      .gf-opt { padding: 14px 10px; }
+      .gf-opt-icon { font-size: 22px; }
+      .gf-opt-label { font-size: 14px; }
+      .gf-progress-line { width: 24px; }
+      .gf-progress-dot { width: 34px; height: 34px; font-size: 13px; }
+      .gf-progress-label { font-size: 10px; }
+      .gf-slider-value { font-size: 44px; }
+      .gf-slider-box { padding: 20px 16px; }
+      .gf-product { flex-direction: column; }
+      .gf-product-image { width: 100%; height: auto; min-height: 120px; }
+      .gf-product-body { padding: 14px 16px; }
+      .gf-product-footer { flex-direction: column; align-items: flex-start; }
+      .gf-product-cta { width: 100%; justify-content: center; }
+      .gf-product-price { font-size: 20px; }
+      .gf-results-header { flex-direction: column; }
+    }
+
+    @media (max-width: 380px) {
+      .gf-glass-main { gap: 8px; }
+      .gf-slider-pills { gap: 6px; }
+      .gf-pill { padding: 5px 12px; font-size: 12px; }
+    }
+</style>
+
+<div class="gf-finder" id="gfApp">
+
+  <!-- HEADER -->
+  <div class="gf-finder-header">
+    <div class="gf-badge">Dichtungs-Berater</div>
+    <h1>Gebogene Duschdichtung finden</h1>
+    <p>In 3 einfachen Schritten zur passenden gebogenen Bodendichtung für Ihre Viertelkreis- oder Fünfeckdusche.</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="gf-progress" id="gfProgress"></div>
+
+  <!-- STEP 1: Glasdicke -->
+  <div class="gf-step" id="gfStep-0">
+    <div class="gf-step-question">Welche Glasdicke hat Ihre Dusche?</div>
+    <div class="gf-step-hint">Messen Sie die Dicke des Glases an einer Kante.</div>
+    <div class="gf-glass-grid">
+      <div class="gf-glass-main">
+        <div class="gf-opt gf-opt-lg" data-step="0" data-val="6" onclick="gfPick(this)">
+          <span class="gf-opt-popular">Standard</span>
+          <span class="gf-opt-icon">◻️</span>
+          <span class="gf-opt-label">6 mm</span>
+          <span class="gf-opt-desc">Häufig bei Rundglasduschen</span>
+        </div>
+        <div class="gf-opt gf-opt-lg" data-step="0" data-val="8" onclick="gfPick(this)">
+          <span class="gf-opt-popular">Standard</span>
+          <span class="gf-opt-icon">⬜</span>
+          <span class="gf-opt-label">8 mm</span>
+          <span class="gf-opt-desc">Häufig bei Rundglasduschen</span>
+        </div>
+      </div>
+      <div class="gf-glass-rare">
+        <div class="gf-opt gf-opt-sm" data-step="0" data-val="4" onclick="gfPick(this)">
+          <span class="gf-opt-icon">▫️</span>
+          <span class="gf-opt-label">4 mm</span>
+          <span class="gf-opt-desc">Selten</span>
+        </div>
+        <div class="gf-opt gf-opt-sm" data-step="0" data-val="5" onclick="gfPick(this)">
+          <span class="gf-opt-icon">▫️</span>
+          <span class="gf-opt-label">5 mm</span>
+          <span class="gf-opt-desc">Selten</span>
+        </div>
+      </div>
+    </div>
+    <div class="gf-tip">
+      <span class="gf-tip-icon">💡</span>
+      <span><strong>Tipp:</strong> Die gängigsten Glasdicken bei Rundglasduschen sind <strong>6 mm</strong> und <strong>8 mm</strong>. Es gibt auch einige wenige Dichtungen für 4 und 5 mm Glas. Messen Sie die Glasdicke exakt mit einem Messschieber oder Lineal an einer Glaskante, wo man gut messen kann (z.B. Längskante oder oben).</span>
+    </div>
+  </div>
+
+  <!-- STEP 2: Spaltmass -->
+  <div class="gf-step" id="gfStep-1">
+    <div class="gf-step-question">Wie groß ist der Spalt zum Boden?</div>
+    <div class="gf-step-hint">Messen Sie den Abstand zwischen der Unterkante des gebogenen Glases und dem Boden bzw. der Duschwanne.</div>
+    <div class="gf-slider-box">
+      <div class="gf-slider-display">
+        <div class="gf-slider-value" id="gfSliderVal">12<span>mm</span></div>
+        <div class="gf-slider-label">Spaltmaß zwischen Glas und Boden</div>
+      </div>
+      <div class="gf-slider-track">
+        <input type="range" id="gfGapSlider" min="2" max="25" value="12" oninput="gfOnSlider(this.value)">
+      </div>
+      <div class="gf-slider-minmax">
+        <span>2 mm</span>
+        <span>25 mm</span>
+      </div>
+      <div class="gf-slider-pills" id="gfPills"></div>
+    </div>
+    <div class="gf-match-bar" id="gfMatchBar">
+      <strong id="gfMatchCount">–</strong>
+      <span id="gfMatchText">Passende Dichtungen für Ihre Auswahl</span>
+    </div>
+    <div class="gf-tip">
+      <span class="gf-tip-icon">📏</span>
+      <span><strong>Wichtig:</strong> Messen Sie an der <em>weitesten</em> Stelle des Spalts zwischen der Unterkante des gebogenen Glases und dem Boden/der Duschwanne.</span>
+    </div>
+    <div class="gf-tip" style="margin-top: 6px;">
+      <span class="gf-tip-icon">💡</span>
+      <span><strong>Schwallprofil vorhanden?</strong> Wenn ein Schwallprofil am Boden montiert ist, messen Sie vom <em>höchsten Punkt des Schwallprofils</em> bis zur Unterkante des Glases. Zur reinen Lücke müssen noch 1–2 mm hinzugezählt werden, da die Dichtlippe etwas überlappen sollte.</span>
+    </div>
+  </div>
+
+  <!-- STEP 3: Duschform -->
+  <div class="gf-step" id="gfStep-2">
+    <div class="gf-step-question">Welche Duschform haben Sie?</div>
+    <div class="gf-step-hint">Wählen Sie die Form Ihrer Rundglasdusche.</div>
+    <div class="gf-form-grid">
+      <div class="gf-form-main">
+        <div class="gf-opt gf-opt-lg" data-step="2" data-val="viertelkreis" onclick="gfPick(this)">
+          <span class="gf-opt-popular">Am häufigsten</span>
+          <span class="gf-opt-icon">◠</span>
+          <span class="gf-opt-label">Viertelkreis / Halbkreis</span>
+          <span class="gf-opt-desc">Runde Standarddusche mit gebogenem Glas</span>
+        </div>
+      </div>
+      <div class="gf-form-side">
+        <div class="gf-opt" data-step="2" data-val="fuenfeck" onclick="gfPick(this)">
+          <span class="gf-opt-icon">⬠</span>
+          <span class="gf-opt-label">135° Fünfeckdusche</span>
+          <span class="gf-opt-desc">Dusche mit 135°-Knick im Glas</span>
+        </div>
+        <div class="gf-opt" data-step="2" data-val="zweiflg" onclick="gfPick(this)">
+          <span class="gf-opt-icon">◠◠</span>
+          <span class="gf-opt-label">2-flügelig Viertelkreis</span>
+          <span class="gf-opt-desc">Für 4/5 mm Glas – zweiflügelig</span>
+        </div>
+      </div>
+    </div>
+    <div class="gf-tip">
+      <span class="gf-tip-icon">💡</span>
+      <span><strong>Tipp:</strong> Die meisten runden Duschen sind Viertelkreisduschen. Fünfeckduschen haben einen 135°-Knick im Glas.</span>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="gf-step" id="gfStep-results">
+    <div class="gf-results-header">
+      <div class="gf-results-title" id="gfResultsTitle"></div>
+      <button class="gf-results-edit" onclick="gfReset()">✏️ Neue Suche</button>
+    </div>
+    <div class="gf-filter-summary" id="gfFilterSummary"></div>
+    <div class="gf-products" id="gfProductList"></div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; gap: 12px;">
+      <button class="gf-nav-btn gf-nav-back" onclick="gfBack()" style="visibility: visible">← Zurück</button>
+      <button class="gf-restart-btn" onclick="gfReset()">↻ Neue Suche starten</button>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="gf-nav" id="gfNav">
+    <button class="gf-nav-btn gf-nav-back" id="gfBtnBack" onclick="gfBack()" style="visibility:hidden">← Zurück</button>
+    <button class="gf-nav-btn gf-nav-next" id="gfBtnNext" onclick="gfNext()" disabled>Weiter →</button>
+  </div>
+</div>
+
+<script>
+// ==================================================================
+// PRODUCT DATABASE – Gebogene Duschdichtungen von duschop.de
+// ==================================================================
+const GF_PRODUCTS = [
+  {
+    id: '5102.550',
+    name: 'Gebogene Schleiflippendichtung Viertelkreis & Halbkreis',
+    artNr: '5102.550',
+    handle: 'gebogene-dusch-turdichtung-fur-viertelkreis-und-halbkreisduschen-mit-dichtlippe-und-kurzer-abtropfleiste-fur-6-und-8-mm-glasdicke-art-nr-5102-550',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/51C3ED51-9A09-4B09-82FF-3565FEE34487.png',
+    glass: [6, 8],
+    gapMin: 11, gapMax: 14,
+    form: 'viertelkreis',
+    priceFrom: 36.90,
+    bestseller: true,
+    desc: 'Vorgebogene Schleiflippendichtung mit Abtropfleiste – passgenau für Viertelkreis- und Halbkreisduschen.',
+    lengths: 'ca. 126 cm (vorgebogen)',
+    variants: {
+      '6': 52830790844739,
+      '8': 52830790877507
+    }
+  },
+  {
+    id: '5141.550',
+    name: 'Gebogene Duschdichtung mit Schlauch',
+    artNr: '5141.550',
+    handle: 'gebogene-dusch-turdichtung-fur-viertelkreis-und-halbkreisduschen-mit-schlauch-und-kurzer-abtropfleiste-fur-6-und-8-mm-glasdicke-art-nr-5141-550',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/5141_550_png.png',
+    glass: [6, 8],
+    gapMin: 13, gapMax: 16,
+    form: 'viertelkreis',
+    priceFrom: 37.00,
+    bestseller: false,
+    desc: 'Vorgebogene Dichtung mit Schlauchprofil für optimale Abdichtung am Boden. Passt sich Unebenheiten an.',
+    lengths: 'ca. 126 cm (vorgebogen)',
+    variants: {
+      '6': 52830790648131,
+      '8': 52830790680899
+    }
+  },
+  {
+    id: '5101.550',
+    name: 'Gebogene Bodendichtung Viertelkreis verstärkte Lippe',
+    artNr: '5101.550',
+    handle: 'gebogene-dusch-turdichtung-fur-viertelkreis-und-halbkreisduschen-mit-verstarkter-dichtlippe-und-kurzer-abtropfleiste-fur-6-und-8-mm-glasdicke-art-nr-5101-550',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/5101_90_png_59930fb5-d167-4e70-bc3b-64ca853c2c37.png',
+    glass: [6, 8],
+    gapMin: 15, gapMax: 17,
+    form: 'viertelkreis',
+    priceFrom: 37.00,
+    bestseller: false,
+    desc: 'Verstärkte Dichtlippe für mittlere Spalte. Besonders stabil und langlebig durch die Verstärkung.',
+    lengths: 'ca. 126 cm (vorgebogen)',
+    variants: {
+      '6': 54122289267011,
+      '8': 54122289299779
+    }
+  },
+  {
+    id: '009A2.550',
+    name: 'Gebogene Duschdichtung mit Wasserabweiser',
+    artNr: '009A2.550',
+    handle: 'gebogene-dusch-turdichtung-fur-viertelkreis-duschen-mit-dichtlippe-unten-inkl-wasserabweislippe-dichtung-009a2-550',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/5E86E727-034C-4875-9DE0-1F084325E3FC.png',
+    glass: [6, 8],
+    gapMin: 12, gapMax: 24,
+    form: 'viertelkreis',
+    priceFrom: 36.90,
+    bestseller: false,
+    desc: 'Vielseitige vorgebogene Dichtung mit Wasserabweiser – in 3 Lippenlängen (12, 17, 23 mm) für verschiedene Spaltmaße.',
+    lengths: 'ca. 110 cm (vorgebogen)',
+    variants: {
+      '6': 52830788256067,
+      '8': 52830788354371
+    }
+  },
+  {
+    id: '011B2.550',
+    name: 'Gebogene Bodendichtung Viertelkreis mit 20 mm Dächlein',
+    artNr: '011B2.550',
+    handle: 'gebogene-dusch-turdichtung-fur-viertelkreis-duschen-als-schiebeturen-oder-drehturen-unten-inkl-wasserabweisendem-dachlein-art-nr-011b2-550',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/35EACC05-EA0F-4574-9244-8CAA5D4EB48E.png',
+    glass: [6, 8],
+    gapMin: 2, gapMax: 5,
+    form: 'viertelkreis',
+    priceFrom: 31.50,
+    bestseller: false,
+    desc: 'Vorgebogene Dichtung mit 20 mm Dächlein als Abtropfleiste – auch für Schiebetüren in Viertelkreisduschen geeignet.',
+    lengths: 'ca. 110 cm (vorgebogen)',
+    variants: {
+      '6': 52830792057155,
+      '8': 52830792089923
+    }
+  },
+  {
+    id: '3249G',
+    name: 'Gebogene Duschdichtung Rinnenform kürzbare Lippe',
+    artNr: '3249G',
+    handle: 'gebogene-dusch-turdichtung-fur-6-u-8-mm-glas-mit-abtropfleiste-in-rinnenform-und-doppelter-lippe-nach-unten-kurz-u-lang-98-5-cm-fur-6-und-8-mm-universal-art-nr-3249g',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/3249geb2.jpg',
+    glass: [6, 8],
+    gapMin: 8, gapMax: 15,
+    form: 'viertelkreis',
+    priceFrom: 49.90,
+    bestseller: false,
+    desc: 'Premium-Dichtung in Rinnenform mit doppelter Lippe (kurz & lang). Individuell kürzbar für verschiedene Spaltmaße.',
+    lengths: 'ca. 98,5 cm (vorgebogen)',
+    variants: {
+      '6': 52830788190531,
+      '8': 52830788223299
+    }
+  },
+  {
+    id: '5051601G',
+    name: 'Dichtungs-Set für Viertelkreisdusche komplett',
+    artNr: '5051601G',
+    handle: 'duschtur-dichtungs-set-fur-viertelkreisdusche-mit-gebogenem-glas-art-nr-5051601g',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Dichtungen-Set180D.5102.550.jpg',
+    glass: [6, 8],
+    gapMin: 11, gapMax: 14,
+    form: 'viertelkreis',
+    priceFrom: 81.90,
+    bestseller: false,
+    desc: 'Komplettset mit allen Dichtungen für eine Viertelkreisdusche (Bodendichtung + seitliche Dichtungen + Magnetdichtungen). Türen nach außen öffnend.',
+    lengths: 'Komplettset',
+    variants: {
+      '6': 52830718067011,
+      '8': 52830718099779
+    }
+  },
+  {
+    id: '5101.135',
+    name: 'Gebogene Duschdichtung 135° für Fünfeckduschen',
+    artNr: '5101.135',
+    handle: 'gebogene-dusch-turdichtung-135-fur-funfeckduschen-art-nr-5101-135',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/7DDDB6C2-7CF7-4982-87CA-DC9D744FC845.png',
+    glass: [6, 8],
+    gapMin: 14, gapMax: 16,
+    form: 'fuenfeck',
+    priceFrom: 33.50,
+    bestseller: false,
+    desc: 'Vorgebogene Dichtung für den 135°-Knick bei Fünfeckduschen. Als Einzelstück oder Paar erhältlich.',
+    lengths: 'ca. 25 cm (135° gebogen)',
+    variants: {
+      '6': 52830716068163,
+      '8': 52830716068163
+    }
+  },
+  {
+    id: '5102.135',
+    name: 'Gebogene Schleiflippendichtung 135° Fünfeckdusche',
+    artNr: '5102.135',
+    handle: 'gebogene-dusch-turdichtung-135-fur-funfeckduschen-art-nr-5102-135',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/9C4E7DB6-675C-4B1F-A286-46C227FB2D3A.png',
+    glass: [6, 8],
+    gapMin: 12, gapMax: 13,
+    form: 'fuenfeck',
+    priceFrom: 33.50,
+    bestseller: false,
+    desc: 'Schleiflippendichtung für den 135°-Bereich bei Fünfeckduschen. Als Einzelstück oder Paar bestellbar.',
+    lengths: 'ca. 25 cm (135° gebogen)',
+    variants: {
+      '6': 52830716920131,
+      '8': 52830716920131
+    }
+  },
+  {
+    id: '4269G',
+    name: 'Gebogene Bodendichtung 2-flg. Viertelkreis',
+    artNr: '4269G',
+    handle: 'gebogene-dusch-turdichtung-fur-2-flg-viertelkreisduschen-mit-4-u-5-mm-glasdicke-mit-sehr-kurzer-abtropfleiste-1-paar-2-tlg-4269g',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/E2268312-7733-4651-BADD-1140EB2283A2.png',
+    glass: [4, 5],
+    gapMin: 4, gapMax: 6,
+    form: 'zweiflg',
+    priceFrom: 59.10,
+    bestseller: false,
+    desc: 'Speziell für 2-flügelige Viertelkreisduschen mit dünnem 4 oder 5 mm Glas. 1 Paar (2 Stück).',
+    lengths: 'ca. 55 cm pro Stück (1 Paar)',
+    variants: {
+      '4': 52830788092227,
+      '5': 52830788124995
+    }
+  },
+  {
+    id: '4269-G86',
+    name: 'Gebogene Dichtung Viertelkreis kurze Lippe',
+    artNr: '4269-G86',
+    handle: 'dusch-turdichtung-gebogen-fur-viertelkreisdusche-fur-5-u-6-mm-glasstarke-mit-kurzer-abtropfleiste-und-kurzer-lippe-nach-unten-4269-g86',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/4269neu.jpg',
+    glass: [4, 5],
+    gapMin: 6, gapMax: 9,
+    form: 'viertelkreis',
+    priceFrom: 45.90,
+    bestseller: false,
+    desc: 'Für Viertelkreisduschen mit dünnem 4–5 mm Glas. Kurze Abtropfleiste und kurze Dichtlippe nach unten.',
+    lengths: 'ca. 86 cm (vorgebogen)',
+    variants: {
+      '4': 52830762467651,
+      '5': 52830762434883
+    }
+  }
+];
+
+// ==================================================================
+// STATE
+// ==================================================================
+const GF_STEP_COUNT = 3;
+const GF_STEP_LABELS = ['Glasdicke', 'Spaltmaß', 'Duschform'];
+
+let gfCur = 0;
+let gfSel = { glass: null, gap: 12, form: null };
+
+// ==================================================================
+// RENDERING
+// ==================================================================
+function gfRenderProgress() {
+  const el = document.getElementById('gfProgress');
+  el.innerHTML = '';
+  for (let i = 0; i < GF_STEP_COUNT; i++) {
+    const step = document.createElement('div');
+    step.className = 'gf-progress-step';
+
+    const dot = document.createElement('div');
+    dot.className = 'gf-progress-dot' + (i < gfCur ? ' gf-done' : i === gfCur ? ' gf-active' : '');
+    dot.innerHTML = i < gfCur
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>'
+      : (i + 1);
+    step.appendChild(dot);
+
+    const label = document.createElement('div');
+    label.className = 'gf-progress-label' + (i < gfCur ? ' gf-done' : i === gfCur ? ' gf-active' : '');
+    label.textContent = GF_STEP_LABELS[i];
+    step.appendChild(label);
+
+    el.appendChild(step);
+
+    if (i < GF_STEP_COUNT - 1) {
+      const line = document.createElement('div');
+      line.className = 'gf-progress-line' + (i < gfCur ? ' gf-done' : '');
+      el.appendChild(line);
+    }
+  }
+}
+
+function gfShow() {
+  document.querySelectorAll('#gfApp .gf-step').forEach(s => s.classList.remove('gf-active'));
+
+  if (gfCur === 'results') {
+    document.getElementById('gfStep-results').classList.add('gf-active');
+    document.getElementById('gfNav').style.display = 'none';
+    gfRenderResults();
+    // progress shows all done
+    gfCur = GF_STEP_COUNT; gfRenderProgress(); gfCur = 'results';
+    return;
+  }
+
+  document.getElementById('gfStep-' + gfCur).classList.add('gf-active');
+  document.getElementById('gfNav').style.display = 'flex';
+  document.getElementById('gfBtnBack').style.visibility = gfCur > 0 ? 'visible' : 'hidden';
+
+  // Show "Ergebnisse anzeigen" on last step
+  const btnNext = document.getElementById('gfBtnNext');
+  if (gfCur === GF_STEP_COUNT - 1) {
+    btnNext.className = 'gf-nav-btn gf-nav-results';
+    btnNext.innerHTML = 'Ergebnisse anzeigen →';
+  } else {
+    btnNext.className = 'gf-nav-btn gf-nav-next';
+    btnNext.innerHTML = 'Weiter →';
+  }
+
+  gfSyncSelected();
+  gfUpdateNav();
+  gfRenderProgress();
+
+  // Update live match count on spalt step
+  if (gfCur === 1) {
+    gfUpdateMatchBar();
+    gfUpdateSliderFill();
+    gfBuildPills();
+  }
+}
+
+function gfSyncSelected() {
+  const stepEl = document.getElementById('gfStep-' + gfCur);
+  stepEl.querySelectorAll('.gf-opt').forEach(o => {
+    o.classList.remove('gf-selected');
+    const val = o.dataset.val;
+    if (gfCur === 0 && gfSel.glass !== null && val == gfSel.glass) o.classList.add('gf-selected');
+    if (gfCur === 2 && gfSel.form && val === gfSel.form) o.classList.add('gf-selected');
+  });
+}
+
+function gfUpdateNav() {
+  const btn = document.getElementById('gfBtnNext');
+  if (gfCur === 0) btn.disabled = gfSel.glass === null;
+  else if (gfCur === 1) btn.disabled = false; // slider always has value
+  else if (gfCur === 2) btn.disabled = gfSel.form === null;
+}
+
+// ==================================================================
+// INTERACTIONS
+// ==================================================================
+function gfPick(el) {
+  // Ensure we have the .gf-opt element, not a child span
+  const card = el.closest ? el.closest('.gf-opt') : el;
+  if (!card) return;
+
+  const step = parseInt(card.dataset.step);
+  const val = card.dataset.val;
+
+  if (step === 0) gfSel.glass = parseInt(val);
+  if (step === 2) gfSel.form = val;
+
+  // Visual feedback – remove selection from all opts in parent grid
+  const container = card.closest('.gf-options') || card.closest('.gf-glass-grid') || card.closest('.gf-form-grid');
+  if (container) container.querySelectorAll('.gf-opt').forEach(o => o.classList.remove('gf-selected'));
+  card.classList.add('gf-selected');
+  gfUpdateNav();
+
+  // Auto-advance
+  setTimeout(() => gfNext(), 280);
+}
+
+function gfOnSlider(v) {
+  gfSel.gap = parseInt(v);
+  document.getElementById('gfSliderVal').innerHTML = v + '<span>mm</span>';
+  gfUpdateSliderFill();
+  gfUpdateMatchBar();
+  gfSyncPills();
+}
+
+function gfUpdateSliderFill() {
+  const slider = document.getElementById('gfGapSlider');
+  const pct = ((gfSel.gap - 2) / (25 - 2)) * 100;
+  slider.style.setProperty('--fill', pct + '%');
+}
+
+function gfSetGap(v) {
+  gfSel.gap = v;
+  document.getElementById('gfGapSlider').value = v;
+  gfOnSlider(v);
+}
+
+function gfBuildPills() {
+  // Common gap values
+  const vals = [3, 5, 8, 12, 15, 18, 22];
+  const el = document.getElementById('gfPills');
+  el.innerHTML = vals.map(v =>
+    `<button class="gf-pill${v === gfSel.gap ? ' gf-on' : ''}" onclick="gfSetGap(${v})">${v} mm</button>`
+  ).join('');
+}
+
+function gfSyncPills() {
+  document.querySelectorAll('#gfApp .gf-pill').forEach(p => {
+    p.classList.toggle('gf-on', parseInt(p.textContent) === gfSel.gap);
+  });
+}
+
+function gfUpdateMatchBar() {
+  const count = gfCountMatches();
+  const bar = document.getElementById('gfMatchBar');
+  const countEl = document.getElementById('gfMatchCount');
+  const textEl = document.getElementById('gfMatchText');
+
+  countEl.textContent = count;
+  if (count === 0) {
+    bar.className = 'gf-match-bar';
+    textEl.textContent = 'Keine passende Dichtung – versuchen Sie ein anderes Spaltmaß.';
+  } else if (count <= 2) {
+    bar.className = 'gf-match-bar gf-good';
+    textEl.textContent = count === 1
+      ? 'passende Dichtung für Ihre Auswahl – perfekt!'
+      : 'passende Dichtungen für Ihre Auswahl';
+  } else {
+    bar.className = 'gf-match-bar gf-good';
+    textEl.textContent = 'passende Dichtungen gefunden';
+  }
+}
+
+function gfCountMatches() {
+  return GF_PRODUCTS.filter(p => {
+    if (gfSel.glass !== null && !p.glass.includes(gfSel.glass)) return false;
+    if (gfSel.gap < p.gapMin || gfSel.gap > p.gapMax) return false;
+    return true;
+  }).length;
+}
+
+function gfNext() {
+  if (gfCur < GF_STEP_COUNT - 1) { gfCur++; gfShow(); }
+  else { gfCur = 'results'; gfShow(); }
+}
+
+function gfBack() {
+  if (gfCur === 'results') { gfCur = GF_STEP_COUNT - 1; gfShow(); return; }
+  if (gfCur > 0) { gfCur--; gfShow(); }
+}
+
+function gfGoToStep(s) {
+  gfCur = s;
+  gfShow();
+}
+
+function gfReset() {
+  gfSel = { glass: null, gap: 12, form: null };
+  gfCur = 0;
+  document.getElementById('gfGapSlider').value = 12;
+  document.querySelectorAll('#gfApp .gf-opt').forEach(o => o.classList.remove('gf-selected'));
+  gfShow();
+  document.getElementById('gfApp').scrollIntoView({behavior: 'smooth'});
+}
+
+// ==================================================================
+// RESULTS
+// ==================================================================
+function gfGetResults() {
+  return GF_PRODUCTS.filter(p => {
+    if (gfSel.glass !== null && !p.glass.includes(gfSel.glass)) return false;
+    if (gfSel.gap < p.gapMin || gfSel.gap > p.gapMax) return false;
+    if (gfSel.form && p.form !== gfSel.form) return false;
+    return true;
+  }).sort((a, b) => {
+    // Bestseller first
+    if (a.bestseller && !b.bestseller) return -1;
+    if (!a.bestseller && b.bestseller) return 1;
+    // Then by how centered the gap is in the product's range (better fit first)
+    const fitA = Math.abs(((a.gapMin + a.gapMax) / 2) - gfSel.gap);
+    const fitB = Math.abs(((b.gapMin + b.gapMax) / 2) - gfSel.gap);
+    return fitA - fitB;
+  });
+}
+
+function gfRenderResults() {
+  const results = gfGetResults();
+  const formLabels = { viertelkreis: 'Viertelkreis / Halbkreis', fuenfeck: '135° Fünfeckdusche', zweiflg: '2-flügelig Viertelkreis' };
+
+  // Title
+  document.getElementById('gfResultsTitle').innerHTML =
+    `<em>${results.length}</em> passende Dichtung${results.length !== 1 ? 'en' : ''}`;
+
+  // Filter chips
+  document.getElementById('gfFilterSummary').innerHTML = `
+    <div class="gf-filter-chip">
+      Glasdicke: <strong>${gfSel.glass} mm</strong>
+      <span class="gf-chip-edit" onclick="gfGoToStep(0)">✎</span>
+    </div>
+    <div class="gf-filter-chip">
+      Spaltmaß: <strong>${gfSel.gap} mm</strong>
+      <span class="gf-chip-edit" onclick="gfGoToStep(1)">✎</span>
+    </div>
+    <div class="gf-filter-chip">
+      Duschform: <strong>${formLabels[gfSel.form] || '–'}</strong>
+      <span class="gf-chip-edit" onclick="gfGoToStep(2)">✎</span>
+    </div>
+  `;
+
+  // Products
+  const list = document.getElementById('gfProductList');
+
+  if (results.length === 0) {
+    list.innerHTML = `
+      <div class="gf-no-results">
+        <div class="gf-nr-icon">🔍</div>
+        <h3>Keine passende Dichtung gefunden</h3>
+        <p>Für Ihre Kombination (${gfSel.glass} mm Glas, ${gfSel.gap} mm Spalt, ${formLabels[gfSel.form] || 'unbekannt'}) haben wir leider kein Produkt. Versuchen Sie es mit anderen Werten oder kontaktieren Sie uns direkt.</p>
+        <p><a href="https://duschop.de/pages/kontakt" target="_blank">📧 Persönliche Beratung anfragen</a></p>
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = results.map((p, i) => {
+    // Build product URL with correct variant pre-selected
+    const g = String(gfSel.glass);
+    let url = `https://duschop.de/products/${p.handle}`;
+    if (p.variants[g]) {
+      url += `?variant=${p.variants[g]}`;
+    }
+
+    // Gap fit indicator
+    const gapCenter = (p.gapMin + p.gapMax) / 2;
+    const fitDist = Math.abs(gapCenter - gfSel.gap);
+    const isPerfect = fitDist <= 2;
+
+    return `
+      <div class="gf-product ${i === 0 ? 'gf-highlight' : ''}">
+        <div class="gf-product-image">
+          <img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">
+          ${p.bestseller ? '<div class="gf-product-badge">⭐ Bestseller</div>' : ''}
+          ${i === 0 && !p.bestseller ? '<div class="gf-product-badge" style="background:var(--green);color:#fff">Beste Wahl</div>' : ''}
+        </div>
+        <div class="gf-product-body">
+          <div class="gf-product-name">${p.name}</div>
+          <div class="gf-product-desc">${p.desc}</div>
+          <div class="gf-product-specs">
+            <span class="gf-spec">Art.Nr. ${p.artNr}</span>
+            <span class="gf-spec ${isPerfect ? 'gf-perfect' : 'gf-match'}">
+              ${isPerfect ? '✓ ' : ''}Spalt: ${p.gapMin}–${p.gapMax} mm
+            </span>
+            <span class="gf-spec">Glas: ${p.glass.join(', ')} mm</span>
+          </div>
+          <div class="gf-length-info">Gesamtlänge: ${p.lengths}</div>
+          <div class="gf-product-footer">
+            <div class="gf-product-price">
+              ab ${p.priceFrom.toFixed(2).replace('.', ',')} €
+              <small>inkl. MwSt., zzgl. Versand</small>
+            </div>
+            <a href="${url}" target="_blank" class="gf-product-cta">
+              Zum Produkt
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ==================================================================
+// INIT
+// ==================================================================
+gfShow();
+</script>
+
+
+    <!-- WhatsApp-Beratungs-Banner (sticky) -->
+    <style>
+        .wa-banner {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            padding: 12px 18px 12px 14px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+            transition: all 0.2s ease;
+            z-index: 50;
+            line-height: 1;
+        }
+        .wa-banner:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+        .wa-banner svg { width: 22px; height: 22px; flex-shrink: 0; }
+        .wa-banner .wa-text { white-space: nowrap; }
+        @media (max-width: 640px) {
+            .wa-banner { padding: 14px; bottom: 16px; right: 16px; }
+            .wa-banner .wa-text { display: none; }
+        }
+    </style>
+    <a href="https://wa.me/4917654505183?text=Hallo%2C%20ich%20brauche%20eine%20kurze%20Beratung%20zu%20einer%20gebogenen%20Duschdichtung." class="wa-banner" target="_blank" rel="noopener" data-track="whatsapp-dichtung-gebogen">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="wa-text">Beratung per WhatsApp</span>
+    </a>
+
+    <!-- Duschop Tracker -->
+    <script src="../tracker.js" async></script>
+</body>
+</html>

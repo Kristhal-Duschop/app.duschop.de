@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duschop Tools | Interaktive Finder & Konfiguratoren</title>
-    <meta name="description" content="Finden Sie die passende Duschdichtung, konfigurieren Sie Metallprofile, Stabistangen und mehr. Interaktive Tools von duschop.de.">
+    <title>Duschop Tools | Online-Berater f&uuml;r Glasduschen-Zubeh&ouml;r</title>
+    <meta name="description" content="Schritt-f&uuml;r-Schritt-Berater f&uuml;r Duschdichtungen, Beschl&auml;ge, Profile, Glas und Zubeh&ouml;r. Online-Tools von duschop.de, der Marke Kristhal aus &uuml;ber 25 Jahren Praxis.">
 
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://app.duschop.de/">
-    <meta property="og:title" content="Duschop Tools | Interaktive Finder & Konfiguratoren">
-    <meta property="og:description" content="Finden Sie die passende Duschdichtung, konfigurieren Sie Metallprofile, Stabistangen und mehr. Interaktive Tools von duschop.de.">
+    <meta property="og:title" content="Duschop Tools | Online-Berater f&uuml;r Glasduschen-Zubeh&ouml;r">
+    <meta property="og:description" content="Schritt-f&uuml;r-Schritt-Berater f&uuml;r Duschdichtungen, Beschl&auml;ge, Profile, Glas und Zubeh&ouml;r &mdash; aus 25 Jahren Praxis.">
     <meta property="og:site_name" content="Duschop Tools">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Duschop Tools | Interaktive Finder & Konfiguratoren">
-    <meta name="twitter:description" content="Finden Sie die passende Duschdichtung, konfigurieren Sie Metallprofile, Stabistangen und mehr.">
+    <meta name="twitter:title" content="Duschop Tools | Online-Berater f&uuml;r Glasduschen-Zubeh&ouml;r">
+    <meta name="twitter:description" content="Schritt-f&uuml;r-Schritt-Berater f&uuml;r Duschdichtungen, Beschl&auml;ge, Profile, Glas und Zubeh&ouml;r.">
 
     <link rel="canonical" href="https://app.duschop.de/">
 
@@ -39,6 +39,7 @@
             --shadow: 0 2px 20px rgba(0,0,0,0.06);
             --shadow-hover: 0 12px 40px rgba(0,0,0,0.12);
             --radius: 20px;
+            --radius-sm: 8px;
         }
 
         body {
@@ -49,7 +50,9 @@
             min-height: 100vh;
         }
 
-        /* Header */
+        /* ============================================
+           Header
+           ============================================ */
         .header {
             background: rgba(26, 26, 46, 0.95);
             backdrop-filter: blur(12px);
@@ -132,7 +135,9 @@
             border-color: var(--accent);
         }
 
-        /* Hero with shower background */
+        /* ============================================
+           Hero
+           ============================================ */
         .hero {
             background: var(--primary);
             color: white;
@@ -143,17 +148,27 @@
             align-items: center;
         }
 
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -120px;
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
 
         .hero-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 24px 70px;
+            padding: 64px 24px 72px;
             position: relative;
             z-index: 1;
         }
 
         .hero-text {
-            max-width: 800px;
+            max-width: 760px;
             margin: 0 auto;
             text-align: center;
         }
@@ -162,16 +177,16 @@
             font-size: 13px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             color: var(--accent);
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .hero h1 {
-            font-size: clamp(28px, 4vw, 42px);
+            font-size: clamp(28px, 4vw, 44px);
             font-weight: 800;
             letter-spacing: -0.5px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             line-height: 1.15;
         }
 
@@ -181,10 +196,13 @@
 
         .hero-desc {
             font-size: clamp(15px, 2vw, 18px);
-            color: rgba(255,255,255,0.65);
+            color: rgba(255,255,255,0.7);
             font-weight: 300;
             line-height: 1.7;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-stats {
@@ -224,89 +242,82 @@
             line-height: 1.2;
         }
 
-
-        /* Tools Grid */
-        .tools-section {
+        /* ============================================
+           Cluster-Sections
+           ============================================ */
+        .cluster {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 24px 80px;
-            position: relative;
+            padding: 64px 24px 0;
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
+        .cluster:last-of-type {
+            padding-bottom: 64px;
         }
 
-        .section-label {
+        .cluster-header {
+            margin-bottom: 32px;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .cluster-title-group {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .cluster-num {
             display: inline-block;
-            background: var(--accent);
-            color: white;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--accent);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding: 6px 16px;
-            border-radius: 20px;
-            margin-bottom: 12px;
+            margin-bottom: 6px;
         }
 
-        .section-title {
-            font-size: 24px;
+        .cluster-title {
+            font-size: clamp(22px, 3vw, 30px);
             font-weight: 700;
             color: var(--primary);
-            letter-spacing: -0.3px;
+            letter-spacing: -0.4px;
+            margin-bottom: 6px;
+            line-height: 1.2;
         }
 
-        .quick-nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 40px;
-        }
-
-        .quick-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text);
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            text-decoration: none;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-        }
-
-        .quick-chip:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            box-shadow: 0 4px 16px rgba(200, 149, 108, 0.18);
-            transform: translateY(-1px);
-        }
-
-        .quick-chip span {
+        .cluster-desc {
             font-size: 15px;
-            line-height: 1;
+            color: var(--text-light);
+            line-height: 1.6;
+            max-width: 620px;
         }
 
+        .cluster-count {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            background: var(--accent-glow);
+            padding: 6px 14px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        /* ============================================
+           Tools Grid
+           ============================================ */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
 
-        /* Tool Card */
         .tool-card {
             background: var(--card-bg);
             border-radius: var(--radius);
-            padding: 32px 28px;
+            padding: 28px 26px;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
             transition: all 0.3s ease;
@@ -334,7 +345,7 @@
 
         .tool-card:hover {
             box-shadow: var(--shadow-hover);
-            transform: translateY(-4px);
+            transform: translateY(-3px);
             border-color: var(--accent-light);
         }
 
@@ -343,26 +354,26 @@
         }
 
         .card-icon {
-            width: 56px;
-            height: 56px;
+            width: 52px;
+            height: 52px;
             background: var(--accent-glow);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            margin-bottom: 20px;
+            font-size: 26px;
+            margin-bottom: 18px;
             transition: transform 0.3s ease;
         }
 
         .tool-card:hover .card-icon {
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
 
         .card-badge {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 18px;
+            right: 18px;
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
@@ -374,26 +385,27 @@
         }
 
         .card-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             letter-spacing: -0.3px;
             color: var(--primary);
+            line-height: 1.3;
         }
 
         .card-description {
-            font-size: 15px;
+            font-size: 14px;
             color: var(--text-light);
             line-height: 1.6;
             flex: 1;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .card-cta {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: var(--accent);
             transition: gap 0.2s ease;
@@ -404,8 +416,8 @@
         }
 
         .card-cta svg {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             transition: transform 0.2s ease;
         }
 
@@ -413,11 +425,144 @@
             transform: translateX(2px);
         }
 
-        /* Footer */
-        .footer {
+        /* ============================================
+           WhatsApp-Beratungs-Banner (sticky)
+           ============================================ */
+        .wa-banner {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            padding: 12px 18px 12px 14px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+            transition: all 0.2s ease;
+            z-index: 50;
+        }
+
+        .wa-banner:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        .wa-banner svg {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        .wa-banner span.wa-text {
+            white-space: nowrap;
+        }
+
+        /* ============================================
+           Ratgeber-Section
+           ============================================ */
+        .ratgeber-section {
             background: var(--primary);
+            color: white;
+            padding: 64px 24px;
+            margin-top: 32px;
+        }
+
+        .ratgeber-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ratgeber-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .ratgeber-label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .ratgeber-title {
+            font-size: clamp(22px, 3vw, 28px);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .ratgeber-desc {
+            font-size: 15px;
+            color: rgba(255,255,255,0.65);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .ratgeber-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .ratgeber-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius);
+            padding: 24px 22px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ratgeber-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .ratgeber-card .card-icon {
+            background: rgba(200, 149, 108, 0.2);
+            width: 44px;
+            height: 44px;
+            margin-bottom: 14px;
+            font-size: 22px;
+        }
+
+        .ratgeber-card .card-title {
+            color: white;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .ratgeber-card .card-description {
+            color: rgba(255,255,255,0.6);
+            font-size: 13px;
+            margin-bottom: 14px;
+        }
+
+        .ratgeber-card .card-cta {
+            color: var(--accent-light);
+            font-size: 12px;
+        }
+
+        /* ============================================
+           Footer
+           ============================================ */
+        .footer {
+            background: #14142a;
             color: rgba(255,255,255,0.5);
-            padding: 48px 24px;
+            padding: 36px 24px;
         }
 
         .footer-inner {
@@ -437,7 +582,7 @@
         }
 
         .footer-logo {
-            height: 24px;
+            height: 22px;
             filter: brightness(0) invert(1);
             opacity: 0.4;
         }
@@ -452,43 +597,58 @@
             color: white;
         }
 
-        .footer-brand {
-            font-size: 14px;
-        }
-
+        .footer-brand { font-size: 13px; }
         .footer-links {
             font-size: 13px;
             display: flex;
-            gap: 20px;
+            gap: 18px;
         }
 
-        /* Responsive */
+        /* ============================================
+           Responsive
+           ============================================ */
         @media (max-width: 768px) {
             .hero-content {
-                flex-direction: column;
                 padding: 40px 20px 50px;
-                text-align: center;
-            }
-
-            .hero-tagline {
-                justify-content: center;
             }
 
             .hero-stats {
-                justify-content: center;
+                gap: 18px;
             }
 
-            .hero-visual {
-                display: none;
+            .cluster {
+                padding: 48px 20px 0;
+            }
+
+            .cluster:last-of-type {
+                padding-bottom: 48px;
+            }
+
+            .cluster-header {
+                margin-bottom: 24px;
             }
 
             .tools-grid {
                 grid-template-columns: 1fr;
-                gap: 16px;
+                gap: 14px;
             }
 
             .tool-card {
-                padding: 24px 20px;
+                padding: 22px 20px;
+            }
+
+            .wa-banner span.wa-text {
+                display: none;
+            }
+
+            .wa-banner {
+                padding: 14px;
+                bottom: 16px;
+                right: 16px;
+            }
+
+            .ratgeber-section {
+                padding: 48px 20px;
             }
 
             .header-link {
@@ -515,7 +675,7 @@
 
     <header class="header">
         <div class="header-inner">
-            <a href="/" class="logo">
+            <a href="./" class="logo">
                 <img src="Kristhal_Logo_Marke_trans.png" alt="Kristhal" class="logo-img">
                 <div class="logo-divider"></div>
                 <div class="logo-text-group">
@@ -530,9 +690,9 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <div class="hero-tagline">&mdash; So machen Sie Ihre Dusche sch&ouml;n &mdash;</div>
-                <h1>Finden Sie das richtige <span>Duschzubeh&ouml;r</span></h1>
-                <p class="hero-desc">Unsere interaktiven Produktfinder und Konfiguratoren helfen Ihnen, genau das passende Zubeh&ouml;r f&uuml;r Ihre Glasdusche zu finden &ndash; schnell, einfach und kostenlos.</p>
+                <div class="hero-tagline">&mdash; Beratung vom Praktiker &mdash;</div>
+                <h1>Die richtige L&ouml;sung f&uuml;r <span>Ihre Glasdusche</span> finden</h1>
+                <p class="hero-desc">Unsere Online-Berater f&uuml;hren Sie Schritt f&uuml;r Schritt zum passenden Produkt &mdash; aus &uuml;ber 25 Jahren Erfahrung im Glasduschen-Gesch&auml;ft.</p>
                 <div class="hero-stats">
                     <div class="hero-stat">
                         <div class="hero-stat-icon">
@@ -575,256 +735,270 @@
         </div>
     </section>
 
-    <main class="tools-section">
-        <div class="section-header">
-            <div class="section-label">13 Tools verf&uuml;gbar</div>
-            <h2 class="section-title">W&auml;hlen Sie Ihren Produktfinder</h2>
-        </div>
+    <main id="produktfinder" style="scroll-margin-top:80px;">
 
-        <nav class="quick-nav">
-            <a href="dichtungs-konfigurator/index.html" class="quick-chip"><span>&#x2699;&#xFE0F;</span> Dichtungs-Konfigurator</a>
-            <a href="dichtung-seitlich-finder/index.html" class="quick-chip"><span>&#x1F50D;</span> Dichtung Seitlich</a>
-            <a href="dichtung-unten-finder/index.html" class="quick-chip"><span>&#x1F50D;</span> Dichtung Unten</a>
-            <a href="magnetdichtung-finder/index.html" class="quick-chip"><span>&#x1F9F2;</span> Magnetdichtung</a>
-            <a href="farbenfinder/index.html" class="quick-chip"><span>&#x1F3A8;</span> Farbenfinder</a>
-            <a href="beschlaege-konfigurator/index.html" class="quick-chip"><span>&#x1F6AA;</span> Beschl&auml;ge</a>
-            <a href="duschglas-konfigurator/index.html" class="quick-chip"><span>&#x1FA9F;</span> Duschglas</a>
-            <a href="metallprofile-konfigurator/index.html" class="quick-chip"><span>&#x1F527;</span> Metallprofile</a>
-            <a href="stabistangen-konfigurator/index.html" class="quick-chip"><span>&#x1F4CF;</span> Stabistangen</a>
-            <a href="reinigungs-konfigurator/index.html" class="quick-chip"><span>&#x1F9F4;</span> Reinigung</a>
-            <a href="montagebedarf-konfigurator/index.html" class="quick-chip"><span>&#x1F527;</span> Montagebedarf</a>
-            <a href="duschzubehoer-konfigurator/index.html" class="quick-chip"><span>&#x1F6BF;</span> Duschzubeh&ouml;r</a>
-            <a href="wintergarten-konfigurator/index.html" class="quick-chip"><span>&#x1F3E0;</span> Wintergarten</a>
-        </nav>
-
-        <div style="text-align: center; margin-top: 32px; margin-bottom: 16px;">
-            <span class="section-label">Ratgeber</span>
-        </div>
-        <nav class="quick-nav" style="margin-bottom: 40px;">
-            <a href="dichtungen/index.html" class="quick-chip" style="border-color: var(--accent-light); background: var(--accent-glow);"><span>&#x1F4D6;</span> Dichtungs-Ratgeber</a>
-            <a href="wintergarten-dichtungen/index.html" class="quick-chip" style="border-color: var(--accent-light); background: var(--accent-glow);"><span>&#x1F4D6;</span> Wintergarten-Ratgeber</a>
-            <a href="montagebedarf/index.html" class="quick-chip" style="border-color: var(--accent-light); background: var(--accent-glow);"><span>&#x1F4D6;</span> Montage-Ratgeber</a>
-            <a href="reinigung/index.html" class="quick-chip" style="border-color: var(--accent-light); background: var(--accent-glow);"><span>&#x1F4D6;</span> Reinigungs-Ratgeber</a>
-        </nav>
-
-        <div class="tools-grid">
-
-            <!-- Dichtungs-Konfigurator -->
-            <a href="dichtungs-konfigurator/index.html" class="tool-card">
-                <div class="card-badge">Konfigurator</div>
-                <div class="card-icon">&#x2699;&#xFE0F;</div>
-                <h2 class="card-title">Dichtungs-Konfigurator</h2>
-                <p class="card-description">Konfigurieren Sie Ihre individuelle Duschdichtung nach Ma&szlig;. Typ, L&auml;nge und Profil frei w&auml;hlbar.</p>
-                <div class="card-cta">
-                    Jetzt konfigurieren
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        <!-- ============================================
+             Cluster 1: Dichtungen
+             ============================================ -->
+        <section class="cluster">
+            <div class="cluster-header">
+                <div class="cluster-title-group">
+                    <div class="cluster-num">01 &middot; Dichtungen</div>
+                    <h2 class="cluster-title">Dichtungen finden</h2>
+                    <p class="cluster-desc">Die richtige Dichtung f&uuml;r Glasdusche, Duscht&uuml;r oder Wintergarten &mdash; mit Glasdicke, Spaltma&szlig; und Form zum passenden Profil.</p>
                 </div>
-            </a>
+                <span class="cluster-count">6 Berater</span>
+            </div>
+            <div class="tools-grid">
 
-            <!-- Dichtungsfinder Seitlich -->
-            <a href="dichtung-seitlich-finder/index.html" class="tool-card">
-                <div class="card-badge">Finder</div>
-                <div class="card-icon">&#x1F50D;</div>
-                <h2 class="card-title">Dichtungsfinder Seitlich</h2>
-                <p class="card-description">Finden Sie die passende Seitendichtung f&uuml;r Ihre Glasdusche. Schritt f&uuml;r Schritt zum richtigen Produkt.</p>
-                <div class="card-cta">
-                    Jetzt starten
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                <a href="dichtungs-konfigurator/index.html" class="tool-card">
+                    <div class="card-badge">Konfigurator</div>
+                    <div class="card-icon">&#x2699;&#xFE0F;</div>
+                    <h2 class="card-title">Dichtungs-Konfigurator</h2>
+                    <p class="card-description">Ihre individuelle Duschdichtung nach Ma&szlig;: Typ, L&auml;nge und Profil frei w&auml;hlbar &mdash; auch f&uuml;r Sonderformen.</p>
+                    <div class="card-cta">
+                        Jetzt konfigurieren
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+                <a href="dichtung-seitlich-finder/index.html" class="tool-card">
+                    <div class="card-badge">Finder</div>
+                    <div class="card-icon">&#x1F50D;</div>
+                    <h2 class="card-title">Dichtung Seitlich</h2>
+                    <p class="card-description">Die passende Seitendichtung f&uuml;r Ihre Glasdusche &mdash; mit Glasdicke und Spaltma&szlig; in 3 Schritten zum Treffer.</p>
+                    <div class="card-cta">
+                        Jetzt starten
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+                <a href="dichtung-unten-finder/index.html" class="tool-card">
+                    <div class="card-badge">Finder</div>
+                    <div class="card-icon">&#x1F50D;</div>
+                    <h2 class="card-title">Dichtung Unten</h2>
+                    <p class="card-description">Die richtige Unterdichtung f&uuml;r Ihre Duscht&uuml;r &mdash; mit oder ohne Schwallprofil, gerade oder gebogen.</p>
+                    <div class="card-cta">
+                        Jetzt starten
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+                <a href="dichtung-gebogen-finder/index.html" class="tool-card">
+                    <div class="card-badge">Finder</div>
+                    <div class="card-icon">&#x27FF;</div>
+                    <h2 class="card-title">Dichtung Gebogen</h2>
+                    <p class="card-description">Die passende gebogene Bodendichtung f&uuml;r Viertelkreis- oder F&uuml;nfeck-Duschen mit Rundglas.</p>
+                    <div class="card-cta">
+                        Jetzt starten
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+                <a href="magnetdichtung-finder/index.html" class="tool-card">
+                    <div class="card-badge">Finder</div>
+                    <div class="card-icon">&#x1F9F2;</div>
+                    <h2 class="card-title">Magnetdichtung</h2>
+                    <p class="card-description">Das passende Magnetdichtungs-Set f&uuml;r Ihre Duschkabine &mdash; mit dem richtigen &Ouml;ffnungswinkel.</p>
+                    <div class="card-cta">
+                        Jetzt starten
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+                <a href="wintergarten-konfigurator/index.html" class="tool-card">
+                    <div class="card-badge">Konfigurator</div>
+                    <div class="card-icon">&#x1F3E0;</div>
+                    <h2 class="card-title">Wintergarten-Dichtung</h2>
+                    <p class="card-description">Dichtung f&uuml;r Wintergarten oder Sommergarten &mdash; gegen Zugluft, Regen und Insekten zwischen den Gl&auml;sern.</p>
+                    <div class="card-cta">
+                        Jetzt konfigurieren
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- ============================================
+             Cluster 2: Beschläge, Profile & Farbe
+             ============================================ -->
+        <section class="cluster">
+            <div class="cluster-header">
+                <div class="cluster-title-group">
+                    <div class="cluster-num">02 &middot; Beschl&auml;ge, Profile &amp; Farbe</div>
+                    <h2 class="cluster-title">Beschl&auml;ge und Profile finden</h2>
+                    <p class="cluster-desc">Scharniere, Stabis, Metallprofile in der passenden Oberfl&auml;che &mdash; auch wenn Sie schon eine Farbe vorgegeben haben und etwas dazu suchen.</p>
                 </div>
-            </a>
+                <span class="cluster-count">4 Berater</span>
+            </div>
+            <div class="tools-grid">
 
-            <!-- Dichtungsfinder Unten -->
-            <a href="dichtung-unten-finder/index.html" class="tool-card">
-                <div class="card-badge">Finder</div>
-                <div class="card-icon">&#x1F50D;</div>
-                <h2 class="card-title">Dichtungsfinder Unten</h2>
-                <p class="card-description">Finden Sie die richtige Unterdichtung f&uuml;r Ihre Duscht&uuml;r. Wasserablauf perfekt abgedichtet.</p>
-                <div class="card-cta">
-                    Jetzt starten
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                <a href="beschlaege-konfigurator/index.html" class="tool-card">
+                    <div class="card-badge">Finder</div>
+                    <div class="card-icon">&#x1F6AA;</div>
+                    <h2 class="card-title">Beschl&auml;ge-Finder</h2>
+                    <p class="card-description">Scharnier, Haltewinkel, T&uuml;rgriff oder Griffmuschel f&uuml;r Ihre Glasdusche &mdash; in der gew&uuml;nschten Oberfl&auml;che.</p>
+                    <div class="card-cta">
+                        Jetzt starten
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+                <a href="stabistangen-konfigurator/index.html" class="tool-card">
+                    <div class="card-badge">Konfigurator</div>
+                    <div class="card-icon">&#x1F4CF;</div>
+                    <h2 class="card-title">Stabistangen-Konfigurator</h2>
+                    <p class="card-description">Stabilisierungsstange f&uuml;r Ihre Glasdusche nach Ma&szlig; &mdash; mit Befestigung, L&auml;nge und Oberfl&auml;che frei w&auml;hlbar.</p>
+                    <div class="card-cta">
+                        Jetzt konfigurieren
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+                <a href="metallprofile-konfigurator/index.html" class="tool-card">
+                    <div class="card-badge">Konfigurator</div>
+                    <div class="card-icon">&#x1F527;</div>
+                    <h2 class="card-title">Metallprofile-Konfigurator</h2>
+                    <p class="card-description">Wand- oder Bodenprofil f&uuml;r Ihre Glasdusche nach Ma&szlig; &mdash; mit Profilart, L&auml;nge und Oberfl&auml;che.</p>
+                    <div class="card-cta">
+                        Jetzt konfigurieren
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+                <a href="farbenfinder/index.html" class="tool-card">
+                    <div class="card-badge">Finder</div>
+                    <div class="card-icon">&#x1F3A8;</div>
+                    <h2 class="card-title">Farbenfinder</h2>
+                    <p class="card-description">Sie haben schon eine Oberfl&auml;che im Bad und suchen Passendes dazu? Alle Produkte im gleichen Look &mdash; Chrom, Schwarz, Messing, Bronze und mehr.</p>
+                    <div class="card-cta">
+                        Farbe ausw&auml;hlen
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- ============================================
+             Cluster 3: Glas, Zubehör & Montage
+             ============================================ -->
+        <section class="cluster">
+            <div class="cluster-header">
+                <div class="cluster-title-group">
+                    <div class="cluster-num">03 &middot; Glas, Zubeh&ouml;r &amp; Montage</div>
+                    <h2 class="cluster-title">Glas, Zubeh&ouml;r und Montage</h2>
+                    <p class="cluster-desc">Was Sie rund um die Dusche brauchen &mdash; ESG-Glas nach Ma&szlig;, Zubeh&ouml;r f&uuml;r den Innenraum, Reinigung und Montagematerial.</p>
                 </div>
-            </a>
+                <span class="cluster-count">4 Berater</span>
+            </div>
+            <div class="tools-grid">
 
-            <!-- Magnetdichtung Finder -->
-            <a href="magnetdichtung-finder/index.html" class="tool-card">
-                <div class="card-badge">Finder</div>
-                <div class="card-icon">&#x1F9F2;</div>
-                <h2 class="card-title">Magnetdichtung Finder</h2>
-                <p class="card-description">Finden Sie das passende Magnetdichtungs-Set f&uuml;r Ihre Duschkabine. Exakter Halt, perfekte Abdichtung.</p>
-                <div class="card-cta">
-                    Jetzt starten
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
+                <a href="duschglas-konfigurator/index.html" class="tool-card">
+                    <div class="card-badge">Konfigurator</div>
+                    <div class="card-icon">&#x1FA9F;</div>
+                    <h2 class="card-title">Duschglas-Konfigurator</h2>
+                    <p class="card-description">ESG-Sicherheitsglas nach Ma&szlig; &mdash; Klarglas, Milchglas, Antikorrosion oder Motivglas, mit den passenden Ausschnitten.</p>
+                    <div class="card-cta">
+                        Jetzt konfigurieren
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
 
-            <!-- Farbenfinder -->
-            <a href="farbenfinder/index.html" class="tool-card">
-                <div class="card-badge">Finder</div>
-                <div class="card-icon">&#x1F3A8;</div>
-                <h2 class="card-title">Farbenfinder</h2>
-                <p class="card-description">Finden Sie die perfekte Farbe f&uuml;r Ihr Duschzubeh&ouml;r. Alle verf&uuml;gbaren Farben auf einen Blick.</p>
-                <div class="card-cta">
-                    Farben entdecken
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
+                <a href="duschzubehoer-konfigurator/index.html" class="tool-card">
+                    <div class="card-badge">Finder</div>
+                    <div class="card-icon">&#x1F6BF;</div>
+                    <h2 class="card-title">Duschzubeh&ouml;r-Finder</h2>
+                    <p class="card-description">K&ouml;rbe, Ablagen, Handtuchhalter, Brausen, Haken &mdash; das passende Zubeh&ouml;r f&uuml;r Ihre Dusche in wenigen Schritten.</p>
+                    <div class="card-cta">
+                        Jetzt starten
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
 
-            <!-- Beschl&auml;ge-Finder -->
-            <a href="beschlaege-konfigurator/index.html" class="tool-card">
-                <div class="card-badge">Finder</div>
-                <div class="card-icon">&#x1F6AA;</div>
-                <h2 class="card-title">Beschl&auml;ge-Finder</h2>
-                <p class="card-description">Finden Sie das passende Scharnier, den richtigen Haltewinkel, T&uuml;rgriff oder die ideale Griffmuschel f&uuml;r Ihre Glasdusche.</p>
-                <div class="card-cta">
-                    Jetzt starten
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
+                <a href="reinigungs-konfigurator/index.html" class="tool-card">
+                    <div class="card-badge">Finder</div>
+                    <div class="card-icon">&#x1F9F4;</div>
+                    <h2 class="card-title">Reinigung &amp; Pflege</h2>
+                    <p class="card-description">Das richtige Reinigungs- und Pflegeprodukt f&uuml;r Ihr Duschglas &mdash; Kalk entfernen, versiegeln oder beides in einem.</p>
+                    <div class="card-cta">
+                        Jetzt starten
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
 
-            <!-- Duschglas-Konfigurator -->
-            <a href="duschglas-konfigurator/index.html" class="tool-card">
-                <div class="card-badge">Konfigurator</div>
-                <div class="card-icon">&#x1FA9F;</div>
-                <h2 class="card-title">Duschglas-Konfigurator</h2>
-                <p class="card-description">Finden Sie das passende ESG-Sicherheitsglas f&uuml;r Ihre Dusche. Klarglas, Milchglas, Antikorrosion oder Motivglas &ndash; nach Ma&szlig;.</p>
-                <div class="card-cta">
-                    Jetzt konfigurieren
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
+                <a href="montagebedarf-konfigurator/index.html" class="tool-card">
+                    <div class="card-badge">Finder</div>
+                    <div class="card-icon">&#x1F527;</div>
+                    <h2 class="card-title">Montagebedarf-Finder</h2>
+                    <p class="card-description">Das richtige Montagematerial f&uuml;r Ihre Dusche &mdash; D&uuml;bel, Silikon, Abdichtung oder Kleber, passend zum Projekt.</p>
+                    <div class="card-cta">
+                        Jetzt starten
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
 
-            <!-- Metallprofile-Konfigurator -->
-            <a href="metallprofile-konfigurator/index.html" class="tool-card">
-                <div class="card-badge">Konfigurator</div>
-                <div class="card-icon">&#x1F527;</div>
-                <h2 class="card-title">Metallprofile-Konfigurator</h2>
-                <p class="card-description">Konfigurieren Sie Ihr Metallprofil f&uuml;r die Glasdusche. Profil, L&auml;nge und Oberfl&auml;che individuell w&auml;hlen.</p>
-                <div class="card-cta">
-                    Jetzt konfigurieren
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
-
-            <!-- Stabistangen-Konfigurator -->
-            <a href="stabistangen-konfigurator/index.html" class="tool-card">
-                <div class="card-badge">Konfigurator</div>
-                <div class="card-icon">&#x1F4CF;</div>
-                <h2 class="card-title">Stabistangen-Konfigurator</h2>
-                <p class="card-description">Konfigurieren Sie Ihre Stabilisationsstange. Material, L&auml;nge und Befestigung nach Ihren W&uuml;nschen.</p>
-                <div class="card-cta">
-                    Jetzt konfigurieren
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
-
-            <!-- Reinigungs-Konfigurator -->
-            <a href="reinigungs-konfigurator/index.html" class="tool-card">
-                <div class="card-badge">Konfigurator</div>
-                <div class="card-icon">&#x1F9F4;</div>
-                <h2 class="card-title">Reinigungs-Konfigurator</h2>
-                <p class="card-description">Finden Sie das passende Reinigungs- und Pflegeprodukt f&uuml;r Ihr Duschglas. Reinigung, Versiegelung oder beides.</p>
-                <div class="card-cta">
-                    Jetzt starten
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
-
-            <!-- Montagebedarf-Konfigurator -->
-            <a href="montagebedarf-konfigurator/index.html" class="tool-card">
-                <div class="card-badge">Konfigurator</div>
-                <div class="card-icon">&#x1F527;</div>
-                <h2 class="card-title">Montagebedarf-Finder</h2>
-                <p class="card-description">Das richtige Montagematerial f&uuml;r Ihre Dusche: D&uuml;bel, Silikon, Abdichtung oder Kleber &ndash; passend zu Ihrem Projekt.</p>
-                <div class="card-cta">
-                    Jetzt starten
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
-
-            <!-- Duschzubeh&ouml;r-Finder -->
-            <a href="duschzubehoer-konfigurator/index.html" class="tool-card">
-                <div class="card-badge">Finder</div>
-                <div class="card-icon">&#x1F6BF;</div>
-                <h2 class="card-title">Duschzubeh&ouml;r-Finder</h2>
-                <p class="card-description">Das passende Zubeh&ouml;r f&uuml;r Ihre Dusche: K&ouml;rbe, Ablagen, Handtuchhalter, Brausen, Haken und mehr &ndash; in wenigen Schritten.</p>
-                <div class="card-cta">
-                    Jetzt starten
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
-
-            <!-- Wintergarten-Konfigurator -->
-            <a href="wintergarten-konfigurator/index.html" class="tool-card">
-                <div class="card-badge">Konfigurator</div>
-                <div class="card-icon">&#x1F3E0;</div>
-                <h2 class="card-title">Wintergarten-Konfigurator</h2>
-                <p class="card-description">Finden Sie die passende Dichtung f&uuml;r Ihren Wintergarten. L&uuml;cken zwischen den Gl&auml;sern zuverl&auml;ssig schlie&szlig;en &ndash; gegen Zugluft, Regen und Insekten.</p>
-                <div class="card-cta">
-                    Jetzt konfigurieren
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
-
-
-        </div>
-
-        <!-- Ratgeber Section -->
-        <div class="section-header" style="margin-top: 60px;">
-            <span class="section-label">Ratgeber</span>
-            <h2 class="section-title">Profi-Wissen f&uuml;r Ihr Projekt</h2>
-        </div>
-
-        <div class="tools-grid">
-            <!-- Montage-Ratgeber -->
-            <a href="montagebedarf/index.html" class="tool-card">
-                <div class="card-badge" style="background: var(--accent);">Ratgeber</div>
-                <div class="card-icon">&#x1F4D6;</div>
-                <h2 class="card-title">Montage-Ratgeber</h2>
-                <p class="card-description">Alles f&uuml;r die Glasdusch-Montage: D&uuml;bel, Kleber, Silikon, Abdichtung &amp; Werkzeug. Mit Produktempfehlungen vom Profi.</p>
-                <div class="card-cta">
-                    Ratgeber lesen
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
-
-            <!-- Reinigungs-Ratgeber -->
-            <a href="reinigung/index.html" class="tool-card">
-                <div class="card-badge" style="background: var(--accent);">Ratgeber</div>
-                <div class="card-icon">&#x1F4D6;</div>
-                <h2 class="card-title">Reinigungs-Ratgeber</h2>
-                <p class="card-description">Duschglas reinigen &amp; sch&uuml;tzen: Kalkflecken entfernen, Glasversiegelung, Pflegetipps. Der Komplett-Ratgeber vom Experten.</p>
-                <div class="card-cta">
-                    Ratgeber lesen
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
-
-            <!-- Dichtungs-Ratgeber -->
-            <a href="dichtungen/index.html" class="tool-card">
-                <div class="card-badge" style="background: var(--accent);">Ratgeber</div>
-                <div class="card-icon">&#x1F4D6;</div>
-                <h2 class="card-title">Dichtungs-Ratgeber</h2>
-                <p class="card-description">Die richtige Duschdichtung finden: Glasdicke &amp; Spaltma&szlig; verstehen, Kombi-Profile f&uuml;r 6 &amp; 8 mm, Montage-Anleitung vom Profi.</p>
-                <div class="card-cta">
-                    Ratgeber lesen
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
-
-            <!-- Wintergarten-Ratgeber -->
-            <a href="wintergarten-dichtungen/index.html" class="tool-card">
-                <div class="card-badge" style="background: var(--accent);">Ratgeber</div>
-                <div class="card-icon">&#x1F4D6;</div>
-                <h2 class="card-title">Wintergarten-Ratgeber</h2>
-                <p class="card-description">Dichtungen f&uuml;r Winterg&auml;rten &amp; Sommerg&auml;rten aus Polycarbonat: UV-best&auml;ndig, hochtransparent, 10+ Jahre Au&szlig;enhaltbarkeit.</p>
-                <div class="card-cta">
-                    Ratgeber lesen
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </div>
-            </a>
-        </div>
+            </div>
+        </section>
 
     </main>
+
+    <!-- ============================================
+         Ratgeber-Schiene
+         ============================================ -->
+    <section class="ratgeber-section" id="ratgeber" style="scroll-margin-top:80px;">
+        <div class="ratgeber-inner">
+            <div class="ratgeber-header">
+                <div class="ratgeber-label">&mdash; Wissen vom Praktiker &mdash;</div>
+                <h2 class="ratgeber-title">Ratgeber f&uuml;r Ihre Glasdusche</h2>
+                <p class="ratgeber-desc">Wenn Sie tiefer einsteigen wollen, bevor Sie mit dem Berater anfangen.</p>
+            </div>
+            <div class="ratgeber-grid">
+
+                <a href="dichtungen/index.html" class="ratgeber-card">
+                    <div class="card-icon">&#x1F4D6;</div>
+                    <div class="card-title">Dichtungs-Ratgeber</div>
+                    <div class="card-description">Glasdicke und Spaltma&szlig; verstehen, Kombi-Profile f&uuml;r 6 &amp; 8 mm, Montage-Anleitung.</div>
+                    <div class="card-cta">
+                        Ratgeber lesen
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+                <a href="reinigung/index.html" class="ratgeber-card">
+                    <div class="card-icon">&#x1F4D6;</div>
+                    <div class="card-title">Reinigungs-Ratgeber</div>
+                    <div class="card-description">Duschglas reinigen und sch&uuml;tzen &mdash; Kalkflecken entfernen, Glasversiegelung, Pflegetipps.</div>
+                    <div class="card-cta">
+                        Ratgeber lesen
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+                <a href="montagebedarf/index.html" class="ratgeber-card">
+                    <div class="card-icon">&#x1F4D6;</div>
+                    <div class="card-title">Montage-Ratgeber</div>
+                    <div class="card-description">Alles f&uuml;r die Glasdusch-Montage &mdash; D&uuml;bel, Kleber, Silikon, Abdichtung und Werkzeug.</div>
+                    <div class="card-cta">
+                        Ratgeber lesen
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+                <a href="wintergarten-dichtungen/index.html" class="ratgeber-card">
+                    <div class="card-icon">&#x1F4D6;</div>
+                    <div class="card-title">Wintergarten-Ratgeber</div>
+                    <div class="card-description">Dichtungen f&uuml;r Winterg&auml;rten aus Polycarbonat &mdash; UV-best&auml;ndig, hochtransparent.</div>
+                    <div class="card-cta">
+                        Ratgeber lesen
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="footer-inner">
@@ -838,6 +1012,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp-Beratungs-Banner (sticky, sichtbar auf jedem Scroll-Stand) -->
+    <a href="https://wa.me/4917654505183?text=Hallo%2C%20ich%20brauche%20eine%20kurze%20Beratung%20zu%20meiner%20Glasdusche." class="wa-banner" target="_blank" rel="noopener" data-track="whatsapp-hub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="wa-text">Beratung per WhatsApp</span>
+    </a>
 
     <!-- Duschop Tracker -->
     <script src="tracker.js" async></script>

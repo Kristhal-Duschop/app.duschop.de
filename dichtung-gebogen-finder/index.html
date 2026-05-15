@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untere Duschdichtung finden | duschop.de</title>
-    <meta name="description" content="Die passende untere Duschdichtung finden &mdash; mit Glasdicke, Form, Spaltma&szlig; und T&uuml;rtyp. Schritt-f&uuml;r-Schritt-Berater.">
+    <title>Gebogene Duschdichtung finden | duschop.de</title>
+    <meta name="description" content="Die passende gebogene Bodendichtung f&uuml;r Viertelkreis- oder F&uuml;nfeck-Duschen mit Rundglas finden &mdash; mit Glasdicke, Form und Spaltma&szlig;.">
     <link rel="stylesheet" href="../assets/duschop.css">
     <style>html, body { margin: 0; padding: 0; } body { background: var(--duschop-bg, #f8f6f3); }</style>
 </head>
@@ -17,7 +17,7 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
                     Alle Berater
                 </a>
-                <div class="duschop-tool-title">DUSCHOP <span>DICHTUNG UNTEN</span></div>
+                <div class="duschop-tool-title">DUSCHOP <span>DICHTUNG GEBOGEN</span></div>
                 <a href="https://duschop.de" class="duschop-header-link">&rarr; zum Shop</a>
             </div>
         </header>
@@ -29,17 +29,17 @@
     <script src="../assets/duschop.js"></script>
     <script>
     (function () {
-        var D = window.DichtungUntenData;
+        var D = window.DichtungGebogenData;
 
         new DuschopWizard({
             mount: '#duschop-app',
-            toolSlug: 'dichtung-unten-finder',
-            fetchProducts: function () { return DuschopShopifyClient.fetchCollectionMerged('duschturdichtung_unten', D.products); },
+            toolSlug: 'dichtung-gebogen-finder',
+            fetchProducts: function () { return DuschopShopifyClient.fetchCollectionMerged('runde-gebogene-duschturdichtungen', D.products); },
 
             hero: {
-                badge: 'In 4 Schritten zur passenden Bodendichtung',
-                title: 'Untere Duschdichtung finden',
-                desc: 'Bodendichtung unter der Glastür — wir zeigen Ihnen, welches Profil zu Ihrer Glasdicke, Form und Spaltmaß passt.'
+                badge: 'In 3 Schritten zur passenden Rundglas-Dichtung',
+                title: 'Gebogene Bodendichtung finden',
+                desc: 'Für Viertelkreis- oder Fünfeck-Duschen mit gebogenem Rundglas — spezielle Profile mit passender Krümmung.'
             },
 
             steps: [
@@ -47,24 +47,24 @@
                     key: 'glass',
                     shortLabel: 'Glasdicke',
                     crossTool: true,
-                    question: 'Welche Glasdicke hat Ihre Duschtür?',
-                    hint: 'Messen Sie die Dicke des Glases an einer Kante.',
+                    question: 'Welche Glasdicke hat Ihre Dusche?',
+                    hint: 'Messen Sie die Dicke an einer Glaskante.',
                     options: [
-                        { value: 5,  label: '5 mm', desc: 'Seltener.', icon: '▫️' },
-                        { value: 6,  label: '6 mm', desc: 'Häufig bei Standardduschen.', icon: '◻️', badge: { type: 'standard', text: 'Standard' } },
-                        { value: 8,  label: '8 mm', desc: 'Häufig bei rahmenlosen Duschen.', icon: '⬜', badge: { type: 'standard', text: 'Standard' } },
-                        { value: 10, label: '10 mm', desc: 'Seltener, robuste Modelle.', icon: '🔲' }
+                        { value: 4, label: '4 mm', desc: 'Sehr selten.', icon: '▫️' },
+                        { value: 5, label: '5 mm', desc: 'Selten.', icon: '▫️' },
+                        { value: 6, label: '6 mm', desc: 'Häufig bei Rundglasduschen.', icon: '◻️', badge: { type: 'standard', text: 'Standard' } },
+                        { value: 8, label: '8 mm', desc: 'Häufig bei rahmenlosen Rundglasduschen.', icon: '⬜', badge: { type: 'standard', text: 'Standard' } }
                     ],
-                    tip: { icon: '💡', type: 'info', text: '<strong>Tipp:</strong> Die meisten Duschen haben <strong>6 oder 8 mm</strong> Glas. Messen Sie exakt — die Dichtung muss auf den Zehntelmillimeter passen.' }
+                    tip: { icon: '💡', type: 'info', text: '<strong>Tipp:</strong> Die meisten Rundglasduschen haben <strong>6 mm</strong> oder <strong>8 mm</strong> Glas. Messen Sie exakt mit einem Messschieber.' }
                 },
                 {
                     key: 'form',
-                    shortLabel: 'Form',
-                    question: 'Ist Ihr Duschglas gerade oder gebogen?',
-                    hint: 'Die meisten Duschen haben gerade Glasscheiben. Viertelkreis- und Halbkreisduschen haben gebogenes Glas.',
+                    shortLabel: 'Duschform',
+                    question: 'Welche Duschform haben Sie?',
+                    hint: 'Wählen Sie die Form Ihrer Rundglasdusche.',
                     options: [
-                        { value: 'gerade',  label: 'Gerade',  desc: 'Flache, gerade Glasscheibe — Standardduschen.', icon: '▬', badge: { type: 'standard', text: 'Häufig' } },
-                        { value: 'gebogen', label: 'Gebogen', desc: 'Viertelkreis- oder Halbkreisdusche.', icon: '◠' }
+                        { value: 'viertelkreis', label: 'Viertelkreis / Halbkreis', desc: 'Runde Standarddusche mit gebogenem Glas.', icon: '◠', badge: { type: 'standard', text: 'Am häufigsten' } },
+                        { value: 'fuenfeck',      label: 'Fünfeck',                 desc: 'Fünfeckdusche mit zwei abgewinkelten Glasscheiben.', icon: '⬠' }
                     ]
                 },
                 {
@@ -72,7 +72,7 @@
                     shortLabel: 'Spaltmaß',
                     type: 'slider',
                     question: 'Wie groß ist der Spalt zum Boden?',
-                    hint: 'Messen Sie den Abstand zwischen der Unterkante des Glases und dem Boden bzw. der Duschwanne.',
+                    hint: 'Messen Sie zwischen der Unterkante des gebogenen Glases und dem Boden oder der Duschwanne.',
                     min: 2,
                     max: 25,
                     step: 1,
@@ -80,17 +80,7 @@
                     unit: 'mm',
                     sliderLabel: 'Spaltmaß zwischen Glas und Boden',
                     quickPicks: [6, 8, 10, 12, 15, 18, 20],
-                    tip: { icon: '📏', type: 'warning', text: '<strong>Wichtig:</strong> Messen Sie an der <em>weitesten Stelle</em> des Spalts. Wenn ein <em>Schwallprofil</em> verbaut ist, messen Sie vom <em>höchsten Punkt des Schwallprofils</em>.' }
-                },
-                {
-                    key: 'door',
-                    shortLabel: 'Türtyp',
-                    question: 'Welchen Türtyp haben Sie?',
-                    hint: 'Wie öffnet sich Ihre Duschtür?',
-                    options: [
-                        { value: 'dreh',    label: 'Drehtür / Pendeltür', desc: 'Tür schwingt auf — in eine oder beide Richtungen.', icon: '🚪', badge: { type: 'standard', text: 'Häufig' } },
-                        { value: 'schiebe', label: 'Schiebetür',           desc: 'Tür gleitet seitlich auf.', icon: '⇔' }
-                    ]
+                    tip: { icon: '📏', type: 'warning', text: '<strong>Wichtig:</strong> Messen Sie an der <em>weitesten Stelle</em>. Wenn ein <em>Schwallprofil</em> verbaut ist, messen Sie vom höchsten Punkt — und addieren 1–2 mm zum reinen Spalt (Dichtlippe sollte leicht überlappen).' }
                 }
             ],
 
@@ -122,13 +112,13 @@
             },
 
             conversion: {
-                whatsappText: 'Hallo, ich brauche eine kurze Beratung zu einer unteren Duschdichtung.'
+                whatsappText: 'Hallo, ich brauche eine kurze Beratung zu einer gebogenen Duschdichtung.'
             }
         });
     })();
     </script>
 
-    <a href="https://wa.me/4917654505183?text=Hallo%2C%20ich%20brauche%20eine%20kurze%20Beratung%20zu%20einer%20unteren%20Duschdichtung." class="duschop-wa-sticky" target="_blank" rel="noopener" data-track="whatsapp-dichtung-unten">
+    <a href="https://wa.me/4917654505183?text=Hallo%2C%20ich%20brauche%20eine%20kurze%20Beratung%20zu%20einer%20gebogenen%20Duschdichtung." class="duschop-wa-sticky" target="_blank" rel="noopener" data-track="whatsapp-dichtung-gebogen">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         <span class="duschop-wa-sticky-text">Beratung per WhatsApp</span>
     </a>
