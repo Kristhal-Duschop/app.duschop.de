@@ -87,7 +87,19 @@
         price: '79,00',
         desc: 'Nahezu farbneutrales Glas ohne den typischen Gr\u00fcnstich. Maximale Klarheit und Brillanz f\u00fcr anspruchsvolle Badgestaltung.',
         isMain: false
-    },];
+    },
+    {
+        id: 'antikorrosionsglas-vetroshower',
+        title: 'vetroShower Antikorrosionsglas mit Nano-Veredelung',
+        handle: 'anti-korrosionsglas-vetroshower-mit-nano-veredelung',
+        type: 'glas',
+        glasoptik: 'klar',
+        qualitaet: 'antikorrosion',
+        glasdicken: ['8'],
+        price: '279,00',
+        desc: 'Anti-Korrosions-ESG mit werksseitiger Nano-Veredelung, 10 Jahre Garantie. Breite 200\u20131400 mm, H\u00f6he 2000/2100 mm. 8 mm.',
+        isMain: true
+    }];
 
     const productImages = {
     'sicherheitsglas-esg-fur-duschtrennwande': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/ESG.png?v=1768485378',

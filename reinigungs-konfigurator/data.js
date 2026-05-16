@@ -175,6 +175,18 @@
         price: '2,90',
         desc: 'High-Performance Mikrofasertuch mit Fischschuppen-Struktur. Absorbiert das 7-fache seines Eigengewichts. Streifenfreies Trocknen.',
         isSet: false
+    },
+    {
+        id: 'fugenbuerste',
+        title: 'Fugenb\u00fcrste f\u00fcr Fliesenfugen Art. 77700',
+        handle: 'fugenburste-fur-fliesenfugen-speziell-geformte-burste-fur-bestmogliche-reinigung-der-fugen-zwischen-den-fliesen-art-nr-77700',
+        type: 'zubehoer',
+        ziel: ['reinigung'],
+        verschmutzung: ['leicht', 'mittel'],
+        oberflaeche: ['unbeschichtet', 'beschichtet', 'unbekannt'],
+        price: '4,50',
+        desc: 'Speziell geformte B\u00fcrste f\u00fcr die Reinigung von Fliesenfugen. F\u00fcr regelm\u00e4\u00dfige Pflege zwischen den Fliesen.',
+        isSet: false
     }
 ];
 

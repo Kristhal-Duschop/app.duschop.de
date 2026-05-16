@@ -514,6 +514,22 @@
     }
 ];
 
+    // Handles, die vom Annotation-Sync uebersprungen werden sollen.
+    // Diese 8 Produkte sind Duplikat-Eintraege des Stangengriffs (handle
+    // 'duschgriff-stangengriff'), der schon als Hauptprodukt mit 11 Farben
+    // annotiert ist. Statt 8 nutzlose Annotation-Eintraege anzulegen,
+    // ueberspringt der Sync sie hier.
+    const _syncSkip = [
+        'duschgriff-stangengriff-19-x-19-mm-lochabstand-203-mm-schwarz-matt',
+        'duschgriff-stangengriff-19-x-19-mm-lochabstand-203-mm-bronze-geburstet',
+        'duschgriff-stangengriff-19-x-19-mm-lochabstand-203-mm-graphit',
+        'duschgriff-stangengriff-19-x-19-mm-lochabstand-203-mm-chrom-glanz',
+        'duschgriff-stangengriff-19-x-19-mm-lochabstand-203-mm-weiss',
+        'duschgriff-stangengriff-19-x-19-mm-lochabstand-203-mm-kupfer',
+        'duschgriff-stangengriff-19-x-19-mm-lochabstand-203-mm-goldfarbig',
+        'duschgriff-stangengriff-19-x-19-mm-lochabstand-203-mm-edelstahl-geburstet'
+    ];
+
     const productImages = {
     // Scharniere
     'bellagio-pendelturband-90-glas-wand-anschraubplatte-einseitig-inkl-abdeckplatten-bel344': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/bel344-ch-1.jpg?v=1773413917',
