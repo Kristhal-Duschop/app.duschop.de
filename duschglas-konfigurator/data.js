@@ -1,4 +1,4 @@
-/* DUSCHGLAS-KONFIGURATOR — Daten v1 */
+﻿/* DUSCHGLAS-KONFIGURATOR — Daten v1 */
 (function (global) {
     'use strict';
 
@@ -87,22 +87,7 @@
         price: '79,00',
         desc: 'Nahezu farbneutrales Glas ohne den typischen Gr\u00fcnstich. Maximale Klarheit und Brillanz f\u00fcr anspruchsvolle Badgestaltung.',
         isMain: false
-    },
-    {
-        id: 'restposten-klarglas',
-        title: 'Restposten Kristhal Duschglas 8 mm Klarglas, 1437 \u00d7 2053 mm',
-        handle: 'restposten-kristhal-duschglas-klarglas-durchsichtig-fur-duschtrennwande',
-        type: 'glas',
-        glasoptik: 'klar',
-        qualitaet: 'standard',
-        glasdicken: ['8'],
-        price: '329,00',
-        priceOld: '479,00',
-        desc: 'Sonderpreis: Kristhal Duschglas 8 mm, 1437 \u00d7 2053 mm. Sofort lieferbar, solange Vorrat reicht.',
-        isMain: false,
-        isSale: true
-    }
-];
+    },];
 
     const productImages = {
     'sicherheitsglas-esg-fur-duschtrennwande': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/ESG.png?v=1768485378',

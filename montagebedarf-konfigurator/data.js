@@ -1,4 +1,4 @@
-/* MONTAGEBEDARF-FINDER — Daten v1 */
+﻿/* MONTAGEBEDARF-FINDER — Daten v1 */
 (function (global) {
     'use strict';
 
@@ -16,18 +16,6 @@
         desc: 'D\u00fcbel mit integrierter Dichtscheibe. Verhindert Wassereintritt ins Bohrloch \u2013 speziell f\u00fcr Nassbereich und Dusche.',
         isMain: true,
         highlight: true
-    },
-    {
-        id: 'allzweckduebel',
-        title: 'Allzweckd\u00fcbel f\u00fcr Dusche und Bad \u2013 6x36, 6x51, 8x51 mm',
-        handle: 'allzweckdubel-fur-dusche-u-bad-6x36-6x51-oder-8x51-mm',
-        type: 'duebel',
-        vorhaben: ['glasdusche'],
-        befestigung: ['bohren', 'beides'],
-        price: '7,95',
-        priceMax: '11,65',
-        desc: 'Standard-Allzweckd\u00fcbel in verschiedenen Gr\u00f6\u00dfen. Zuverl\u00e4ssiger Halt in Beton, Vollstein und Lochstein.',
-        isMain: false
     },
     {
         id: 'tox-tri',
@@ -328,19 +316,7 @@
         price: '5,90',
         desc: 'Praktischer Holz-Klotzhebel zum Anheben und Positionieren von schweren Glasscheiben bei der Montage.',
         isMain: false
-    },
-    {
-        id: 'handschuhe',
-        title: 'Arbeitshandschuh Flex Fit \u2013 Nylonfeinstrick',
-        handle: 'arbeitshandschuh-fur-montagen-transport-u-handwerkliche-tatigkeiten-typ-flex-fit-nylonfeinstrick-grau-schwarz-abriebfest-und-vielseitig-einsetzbar-art-nr-00690010x',
-        type: 'werkzeug',
-        vorhaben: ['glasdusche', 'duschwanne', 'nassbereich', 'fugen'],
-        befestigung: ['bohren', 'kleben', 'beides'],
-        price: '4,90',
-        desc: 'Griffige Montagehandschuhe aus Nylonfeinstrick. Sch\u00fctzen die H\u00e4nde beim Arbeiten mit Glas, Metall und scharfkantigen Profilen.',
-        isMain: false
-    }
-];
+    },];
 
     const productImages = {
     'allzweckdubel-mit-schraube-fur-dusche-u-bad-aqua-stop-pro': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duebelschraube.png?v=1768235881',

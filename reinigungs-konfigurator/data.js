@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    REINIGUNGS-KONFIGURATOR — Daten v1
    ============================================================ */
 (function (global) {
@@ -122,18 +122,6 @@
         oberflaeche: ['unbeschichtet', 'unbekannt'],
         price: '19,60',
         desc: 'Transparente Polymer-Beschichtung mit Lotuseffekt. F\u00fcllt mikroskopische Poren und verhindert, dass Kalk und Seife haften. Einfache DIY-Anwendung.',
-        isSet: false
-    },
-    {
-        id: 'briteguard-pro',
-        title: 'BriteGuard\u00ae Pro Glasversiegelung 500 ml',
-        handle: 'briteguard\u00ae-pro-500-ml-fur-glatte-und-leicht-zu-reinigende-glasoberflachen-wie-z-b-duschtrennwande-aus-glas-mit-spruhkopf',
-        type: 'beschichtung',
-        ziel: ['schutz', 'beides'],
-        verschmutzung: ['leicht', 'mittel', 'stark'],
-        oberflaeche: ['unbeschichtet'],
-        price: '58,95',
-        desc: 'Premium-Glasversiegelung mit Lotuseffekt. Monatelanger Schutz vor Kalkablagerungen. Spr\u00fchkopf f\u00fcr einfache Anwendung.',
         isSet: false
     },
     {

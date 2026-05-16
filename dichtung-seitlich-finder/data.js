@@ -1,4 +1,4 @@
-/* DICHTUNG-SEITLICH-FINDER — Daten v1 */
+﻿/* DICHTUNG-SEITLICH-FINDER — Daten v1 */
 (function (global) {
     'use strict';
 
@@ -138,27 +138,6 @@
       '8': { '200 cm': 52830756897091 }
     }
   },
-  {
-    id: 'PCR8L',
-    name: 'Ballondichtung breiter Ballon kurzer Glaseinstand 5 mm',
-    artNr: 'PCR8L',
-    sortType: 'ballon',
-    handle: 'ballondichtung-breiter-ballon-mit-kurzem-glaseinstand-ca-5-mm-fur-8-mm-art-nr-pcr8l',
-    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/D4FAAAAE-F927-4873-9691-5F5816EB534D.png',
-    glass: [8],
-    application: ['glas-glas', 'glas-wand'],
-    doorType: ['dreh', 'pendel'],
-    arrangement: ['fluchtend'],
-    gapMin: 12,
-    gapMax: 15,
-    priceFrom: 24.90,
-    bestseller: false,
-    desc: 'Breiter Ballon mit kurzem Glaseinstand (5 mm) \u2013 speziell f\u00fcr 8 mm Glas bei gr\u00f6\u00dferen Spalten.',
-    lengths: ['200 cm', '250 cm'],
-    variants: {
-      '8': { '200 cm': 0 }
-    }
-  },
 
   // =============================================
   // LIPPENDICHTUNGEN 180\u00b0 FLUCHTEND (NUR Dreht\u00fcr!)
@@ -276,28 +255,6 @@
     variants: {
       '6': { '200 cm': 52830753390915 },
       '8': { '200 cm': 52830753489219 }
-    }
-  },
-  {
-    id: '5119',
-    name: 'Streifdichtung kurze schr\u00e4ge Dichtfahne | Glas-Wand',
-    artNr: '5119',
-    sortType: 'spalt',
-    handle: 'streifdichtung-kurze-schrage-dichtfahne-glas-wand-fur-6-und-8-mm-art-nr-5119',
-    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/88F2F08E-3207-4185-95A0-7541342E29DF.png',
-    glass: [6, 8],
-    application: ['glas-wand'],
-    doorType: ['dreh', 'pendel'],
-    arrangement: ['fluchtend'],
-    gapMin: 5,
-    gapMax: 8,
-    priceFrom: 21.80,
-    bestseller: false,
-    desc: 'Kurze schr\u00e4ge Dichtfahne speziell f\u00fcr den Wandanschluss (Glas-Wand). Spaltbereich 5\u20138 mm.',
-    lengths: ['200 cm'],
-    variants: {
-      '6': { '200 cm': 0 },
-      '8': { '200 cm': 0 }
     }
   },
 
@@ -444,55 +401,10 @@
   // =============================================
   // POLYCARBONAT-DICHTUNGEN f\u00fcr \u00dcBERLAPPEND (Dreh+Schiebe)
   // =============================================
-  {
-    id: 'S007',
-    name: 'Polycarbonat-Ballondichtung hochtransparent',
-    artNr: 'S007',
-    sortType: 'ueberlappung',
-    handle: 'polycarbonat-ballondichtung-hochtransparent-8-9-mm-fur-6-8-10-mm-art-nr-s007',
-    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/D929273D-313A-4758-9264-E5FEB1362C0C.png',
-    glass: [6, 8, 10],
-    application: ['glas-glas', 'glas-wand'],
-    doorType: ['dreh', 'schiebe'],
-    arrangement: ['ueberlappend'],
-    gapMin: 8,
-    gapMax: 10,
-    priceFrom: 23.90,
-    bestseller: false,
-    desc: 'Hochtransparente Ballondichtung aus Polycarbonat. Ballon 8\u20139 mm. F\u00fcr alle Anwendungen.',
-    lengths: ['200 cm'],
-    variants: {
-      '6': { '200 cm': 0 },
-      '8': { '200 cm': 0 },
-      '10': { '200 cm': 0 }
-    }
-  },
 
   // =============================================
   // SONSTIGE (Wintergarten, 135\u00b0)
   // =============================================
-  {
-    id: 'PHJ',
-    name: 'Wintergarten-Fugendichtung 180\u00b0 harte Anschlagschiene',
-    artNr: 'PHJ',
-    sortType: 'sonstige',
-    handle: 'wintergarten-fugendichtung-180-harte-anschlagschiene-fur-8-und-12-mm-art-nr-phj',
-    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/0C33632E-24B7-48AA-BEB5-FD2471CE81B2.png',
-    glass: [8, 12],
-    application: ['glas-glas'],
-    doorType: ['dreh'],
-    arrangement: ['fluchtend'],
-    gapMin: 0,
-    gapMax: 5,
-    priceFrom: 24.90,
-    bestseller: false,
-    desc: 'Robuste Fugendichtung mit harter Anschlagschiene \u2013 auch f\u00fcr Winterg\u00e4rten. F\u00fcr 8 und 12 mm.',
-    lengths: ['200 cm'],
-    variants: {
-      '8': { '200 cm': 0 },
-      '12': { '200 cm': 0 }
-    }
-  }
 ];
 
     function filterProducts(state, includeGap, list) {
@@ -513,3 +425,7 @@
         filterProducts: filterProducts
     };
 })(window);
+
+
+
+
