@@ -1021,5 +1021,34 @@
 
     <!-- Duschop Tracker -->
     <script src="tracker.js" async></script>
+
+    <!-- ============================================================
+         Hub-Prefetch (Phase 4 Performance-Boost)
+         Beim Hub-Pageload werden die groessten Collections leise
+         vorab in den LocalStorage gecachet, damit jeder Tool-Klick
+         mit warmem Cache startet (sofortige Match-Bar statt …).
+         ============================================================ -->
+    <script src="assets/duschop.js"></script>
+    <script>
+    (function () {
+        if (!window.DuschopShopifyClient || !window.DuschopShopifyClient.fetchCollection) return;
+        // Erst nach Idle, damit der eigentliche Hub-Render Prioritaet hat
+        var prefetch = function () {
+            [
+                'beschlagsteile-und-scharniere-fur-duschabtrennungen-aus-glas',
+                'dusche_accessoire',
+                'duschdichtungen_seitlich',
+                'duschturdichtung_unten'
+            ].forEach(function (handle) {
+                window.DuschopShopifyClient.fetchCollection(handle).catch(function () {});
+            });
+        };
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(prefetch, { timeout: 2000 });
+        } else {
+            setTimeout(prefetch, 1500);
+        }
+    })();
+    </script>
 </body>
 </html>

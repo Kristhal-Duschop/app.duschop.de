@@ -45,141 +45,54 @@
         var D = window.BeschlaegeData;
 
         // ========================================================
-        // Annotations-Lookup (handle -> Klassifizierung aus data.js)
+        // Filter-Logik auf merged Produkten (Live + statische Annotations,
+        // vom DuschopShopifyClient.fetchCollectionMerged geliefert).
+        // Annotation-Felder (kategorie, montage, grifftyp etc.) stammen aus
+        // data.js, Live ueberschreibt title/images/variants/price.
         // ========================================================
-        var ANNOTATIONS = {};
-        D.products.forEach(function (p) {
-            ANNOTATIONS[p.handle] = p;
-        });
-
-        // ========================================================
-        // Live-Produkt + Annotation -> arbeitsfähiges Objekt
-        // Live bringt: title, handle, images, variants.
-        // Annotation bringt: kategorie, subtyp-Felder, glasdicken, colors, desc, serie, hebeSenk
-        // ========================================================
-        function annotate(liveProduct) {
-            var ann = ANNOTATIONS[liveProduct.handle];
-            if (!ann) return null; // kein Match in Annotations -> ueberspringen
-            // Live-Preis aus erster Variante (oder priceMin aus presentment)
-            var livePrice = (liveProduct.variants && liveProduct.variants[0])
-                ? liveProduct.variants[0].price
-                : ann.price;
-            return {
-                live: liveProduct,
-                kategorie: ann.kategorie,
-                montage: ann.montage,
-                typ: ann.typ,
-                grifftyp: ann.grifftyp,
-                befestigung: ann.befestigung,
-                form: ann.form,
-                hebeSenk: ann.hebeSenk,
-                glasdicken: ann.glasdicken,
-                tragkraft: ann.tragkraft,
-                colors: ann.colors || [],
-                desc: ann.desc,
-                serie: ann.serie,
-                price: livePrice,
-                priceMax: ann.priceMax
-            };
-        }
-
-        // Live-Fetch + Annotation-Join. Faellt auf statische data.js zurueck,
-        // wenn der Live-Fetch leer ist oder fehlschlaegt.
-        function fetchProductsLive() {
-            return DuschopShopifyClient.fetchCollection('beschlagsteile-und-scharniere-fur-duschabtrennungen-aus-glas')
-                .then(function (live) {
-                    if (!live || live.length === 0) {
-                        // Fallback: statische data.js durchgaengig benutzen
-                        return D.products.map(function (p) {
-                            return annotateFromStatic(p);
-                        });
-                    }
-                    var annotated = [];
-                    live.forEach(function (lp) {
-                        var a = annotate(lp);
-                        if (a) annotated.push(a);
-                    });
-                    // Wenn Live-Bestand kleiner als Annotations-Tabelle ist:
-                    // Annotations ohne Live-Match als Fallback hinzufuegen,
-                    // damit der Wizard nicht "leer" wirkt
-                    var seen = {};
-                    annotated.forEach(function (a) { seen[a.live.handle] = true; });
-                    D.products.forEach(function (p) {
-                        if (!seen[p.handle]) annotated.push(annotateFromStatic(p));
-                    });
-                    return annotated;
-                })
-                .catch(function () {
-                    return D.products.map(function (p) { return annotateFromStatic(p); });
-                });
-        }
-
-        function annotateFromStatic(p) {
-            return {
-                live: {
-                    title: p.title,
-                    handle: p.handle,
-                    images: [],
-                    variants: [{ price: p.price }]
-                },
-                kategorie: p.kategorie,
-                montage: p.montage,
-                typ: p.typ,
-                grifftyp: p.grifftyp,
-                befestigung: p.befestigung,
-                form: p.form,
-                hebeSenk: p.hebeSenk,
-                glasdicken: p.glasdicken,
-                tragkraft: p.tragkraft,
-                colors: p.colors || [],
-                desc: p.desc,
-                serie: p.serie,
-                price: p.price,
-                priceMax: p.priceMax
-            };
-        }
-
-        // ========================================================
-        // Filter-Logik auf annotated objects
-        // ========================================================
-        function filterAnnotated(annotated, state) {
-            return annotated.filter(function (a) {
-                if (state.kategorie && a.kategorie !== state.kategorie) return false;
+        function filterMerged(list, state) {
+            return (list || []).filter(function (p) {
+                if (state.kategorie && p.kategorie !== state.kategorie) return false;
                 if (state.subtyp) {
                     if (state.kategorie === 'scharnier' || state.kategorie === 'haltewinkel') {
-                        if (a.montage !== state.subtyp) return false;
+                        if (p.montage !== state.subtyp) return false;
                     } else if (state.kategorie === 'griff') {
-                        if (a.grifftyp !== state.subtyp) return false;
+                        if (p.grifftyp !== state.subtyp) return false;
                     } else if (state.kategorie === 'griffmuschel') {
-                        if (a.befestigung !== state.subtyp) return false;
+                        if (p.befestigung !== state.subtyp) return false;
                     }
                 }
-                if (state.color && a.colors && a.colors.indexOf(state.color) === -1) return false;
+                if (state.color && p.colors && p.colors.indexOf(state.color) === -1) return false;
                 return true;
             });
         }
 
-        function availableColorsFromList(annotated, state) {
-            var filtered = filterAnnotated(annotated, { kategorie: state.kategorie, subtyp: state.subtyp });
+        function availableColorsFromList(list, state) {
+            var filtered = filterMerged(list || [], { kategorie: state.kategorie, subtyp: state.subtyp });
             var set = {};
-            filtered.forEach(function (a) {
-                (a.colors || []).forEach(function (c) { set[c] = true; });
+            filtered.forEach(function (p) {
+                (p.colors || []).forEach(function (c) { set[c] = true; });
             });
             return Object.keys(set);
         }
 
-        function matchToWizardItems(state, annotated) {
-            var filtered = filterAnnotated(annotated, state);
-            return filtered.map(function (a, idx) {
+        function matchToWizardItems(state, list) {
+            var filtered = filterMerged(list || [], state);
+            return filtered.map(function (p, idx) {
                 var badges = [];
                 if (state.color) badges.push({ type: 'perfect', text: 'Oberfläche lieferbar' });
-                if (a.hebeSenk) badges.push({ type: 'match', text: 'Hebe-Senk-Funktion' });
-                if (a.glasdicken) badges.push({ text: a.glasdicken });
+                if (p.hebeSenk) badges.push({ type: 'match', text: 'Hebe-Senk-Funktion' });
+                if (p.glasdicken) badges.push({ text: p.glasdicken });
                 return {
-                    product: a.live,
-                    matchReason: a.desc,
+                    product: {
+                        title: p.title,
+                        handle: p.handle,
+                        images: (p.images && p.images.length) ? p.images : [],
+                        variants: p.variants || [{ price: p.price }]
+                    },
+                    matchReason: p.desc,
                     badges: badges,
-                    priceOverride: a.price,
+                    priceOverride: p.price,
                     position: idx
                 };
             });
@@ -193,8 +106,14 @@
             toolSlug: 'beschlaege-finder',
 
             // Live-Shopify-Fetch (Phase 4) mit Annotation-Join + Static-Fallback.
+            // includeStaticOnly: true behaelt veraltete Annotations als Fallback —
+            // damit der Wizard nicht „leer" wirkt, wenn ein Produkt vom Shop fehlt.
             fetchProducts: function () {
-                return fetchProductsLive();
+                return DuschopShopifyClient.fetchCollectionMerged(
+                    'beschlagsteile-und-scharniere-fur-duschabtrennungen-aus-glas',
+                    D.products,
+                    { includeStaticOnly: true }
+                );
             },
 
             hero: {
@@ -257,11 +176,11 @@
                         var def = D.step1Defs[state.kategorie];
                         return def ? def.subtitle : '';
                     },
-                    optionsFn: function (state, annotated) {
+                    optionsFn: function (state, allProducts) {
                         var def = D.step1Defs[state.kategorie];
                         if (!def) return [];
                         return def.options.map(function (opt) {
-                            var count = filterAnnotated(annotated || [], { kategorie: state.kategorie, subtyp: opt.value }).length;
+                            var count = filterMerged(allProducts || [], { kategorie: state.kategorie, subtyp: opt.value }).length;
                             return {
                                 value: opt.value,
                                 label: opt.name,
@@ -280,8 +199,8 @@
                     hint: 'Es werden nur die Oberflächen angezeigt, die für Ihre bisherige Auswahl tatsächlich lieferbar sind.',
                     crossTool: true,
                     optionSize: 'small',
-                    optionsFn: function (state, annotated) {
-                        var avail = availableColorsFromList(annotated || [], state);
+                    optionsFn: function (state, allProducts) {
+                        var avail = availableColorsFromList(allProducts || [], state);
                         return avail.map(function (id) {
                             var def = D.colorDefs[id];
                             if (!def) return null;
@@ -296,8 +215,8 @@
                 }
             ],
 
-            match: function (state, annotated) {
-                return matchToWizardItems(state, annotated || []);
+            match: function (state, allProducts) {
+                return matchToWizardItems(state, allProducts || []);
             },
 
             conversion: {
