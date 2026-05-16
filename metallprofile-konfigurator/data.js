@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    METALLPROFILE-KONFIGURATOR — Daten v1
    Aus metallprofile-konfigurator/legacy.html extrahiert.
    ============================================================ */
@@ -235,7 +235,21 @@
         priceMax: '39,00',
         desc: 'Transparente Abstandhalter zwischen Glas und Bauteil. F\u00fcr 6/8/10 mm Glas. In 1\u201310 mm St\u00e4rke erh\u00e4ltlich.',
         isMain: false
-    }
+    },
+    // === Welle C: 12 Profile-Annotationen ===
+    { id: 'emily-wandprofil', title: 'Drehbares Wandprofil Emily Hebe-Senk 41.0901 (6 mm)', handle: 'drehbares-duschtur-wandprofil-typ-emily', material: 'alu', einbau: 'auf-fliese', colors: ['chrom-poliert','schwarz-matt','messing-matt','silber-matt'], abschluss: ['silikonverklebung'], price: '149,90', desc: 'Drehbares Pendeltürwandprofil 180° mit Hebe-Senk-Funktion, 6 mm ESG, in 4 Oberflächen.' },
+    { id: 'alu-u-677', title: 'Alu U-Profil 677XX, 30 oder 40 mm Höhe, Silber matt', handle: 'u-profil_aluminium', material: 'alu', einbau: 'auf-fliese', colors: ['silber-matt'], abschluss: ['silikonverklebung'], price: '24,90', desc: 'Aluminium U-Profil für 8–12 mm Glas, 30/40 mm Höhe, in 130/200/250 cm, silber matt.' },
+    { id: 'u-wandprofil-32000', title: 'U-Wandprofil 32000 Edelstahl gebürstet mit Vorbohrungen', handle: 'u-wandprofil-auf-fliesenwand-fur-feststehende-glasabtrennung', material: 'edelstahl', einbau: 'auf-fliese', colors: ['edelstahl-gebuerstet'], abschluss: ['silikonverklebung'], price: '39,90', desc: 'Edelstahl-U-Wandprofil mit Vorbohrungen, für 8 oder 10 mm Glas, 100–250 cm.' },
+    { id: 'abdeckkappe-duc', title: 'Abdeckkappe SDCEC12 für U-Profil DUC', handle: 'abdeckkappe-fur-u-profil-typ-duc', material: 'alu', einbau: 'auf-fliese', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'], abschluss: [], price: '2,90', desc: 'Endabdeckkappe für U-Profil Typ DUC in 3 Farben.' },
+    { id: 'alu-eckprofil', title: 'Aluminium-Eckprofil 90° SDCP38, 19×19 mm, 240 cm', handle: 'aluminium-eckprofil', material: 'alu', einbau: 'auf-fliese', colors: ['chrom-poliert','schwarz-matt','messing-poliert','messing-matt','silber-matt'], abschluss: ['silikonverklebung'], price: '59,90', desc: '90°-Eckprofil aus Aluminium, 19×19 mm, 240 cm, für 8 mm Glas, in 5 Oberflächen.' },
+    { id: 'fliesen-gefälleprofil-gpd', title: 'Fliesen-Gefälleprofil GPD mit Keil, Edelstahl K220', handle: 'fliesen-winkelprofil-mit-gefallekeil-typ-slimline-edelstahl-matt-geschliffen', material: 'edelstahl', einbau: 'in-fliesenebene', colors: ['edelstahl-gebuerstet'], abschluss: [], price: '99,90', desc: 'Fliesen-Gefälleprofil mit 2-tlg. Keil für bündigen Bodenabschluss, Edelstahl K220, 116/166/200 cm.' },
+    { id: 'magnetträger-74-109', title: 'Magnetträgerprofil 74.109 Aluminium 28×12 mm', handle: 'magnettragerprofil-fur-nischensituation-zum-aufstecken-einer-magnetdichtung-art-nr-74-109', material: 'alu', einbau: 'auf-fliese', colors: ['chrom-poliert','silber-matt','weiss-matt'], abschluss: [], price: '59,50', desc: 'Magnetträgerprofil für Nischensituation, Aluminium 28×12 mm, 200/220 cm, in 3 Oberflächen.' },
+    { id: 'edelstahl-u-ub15', title: 'Edelstahl-U-Wandprofil UB15 Höhe 15 mm', handle: 'edelstahl-u-wandprofil-zur-innenseitigen-silikonverklebung-hohe-15-mm-art-nr-ub15', material: 'edelstahl', einbau: 'auf-fliese', colors: ['edelstahl-gebuerstet','chrom-poliert'], abschluss: ['silikonverklebung'], price: '49,90', desc: 'Edelstahl-U-Wandprofil 15 mm für innenseitige Silikonverklebung, 250 cm.' },
+    { id: 'magnetträger-52-05-0300', title: 'Magnetträgerprofil 52.05.0300 Aluminium 29×15 mm', handle: 'magnettragerprofil-fur-nischensituation-zum-aufstecken-einer-duschturdichtung-art-nr-52-05-0300', material: 'alu', einbau: 'auf-fliese', colors: ['chrom-poliert'], abschluss: [], price: '79,50', desc: 'Magnetträgerprofil für Nischensituation, Aluminium 29×15 mm, 200/250 cm.' },
+    { id: 'walk-in-pfosten-vigo', title: 'Walk-in-Pfosten Vigo Edelstahl Ø 30 mm', handle: 'walk-in-pfosten-set-typ-vigo-vertikale-stabilisierung-fur-freistehende-glaswande', material: 'edelstahl', einbau: 'auf-fliese', colors: ['edelstahl-gebuerstet','chrom-poliert'], abschluss: ['silikonverklebung'], price: '129,90', desc: 'Vertikale Stabilisierung für freistehende Glaswände, rund oder eckig, 8/10 mm Glas.' },
+    { id: 'fliesen-winkelprofil-edelstahl', title: 'Fliesen-Winkelprofil mit Gefällekeil Edelstahl (Abverkauf)', handle: 'fliesen-winkelprofil-mit-gefallekeil-edelstahl-geburstet-abverkauf', material: 'edelstahl', einbau: 'in-fliesenebene', colors: ['edelstahl-gebuerstet'], abschluss: [], price: '79,90', desc: 'Fliesen-Winkelprofil mit Gefällekeil, Edelstahl gebürstet, 98/120/148 cm. Abverkauf.' },
+    { id: 'u-profil-pvd', title: 'U-Profil 14×13×1 mm Edelstahl PVD-beschichtet 6 Farben', handle: 'u-profil-14x13x1mm-2500mm-pvd', material: 'edelstahl', einbau: 'auf-fliese', colors: ['edelstahl-poliert','edelstahl-gebuerstet','messing-matt','graphit-matt','kupfer-matt'], abschluss: [], price: '49,90', desc: 'Schmales U-Profil 14×13×1 mm, Edelstahl PVD-beschichtet, in 6 Farben, 250 cm.' }
+
 ];
 
     const productImages = {

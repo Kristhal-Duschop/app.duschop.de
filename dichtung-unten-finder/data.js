@@ -1,4 +1,4 @@
-/* DICHTUNG-UNTEN-FINDER — Daten v1 */
+﻿/* DICHTUNG-UNTEN-FINDER — Daten v1 */
 (function (global) {
     'use strict';
 
@@ -387,7 +387,20 @@
       '4': { '1 Paar (vorgebogen)': 52830788124995 },
       '5': { '1 Paar (vorgebogen)': 52830788092227 }
     }
-  }
+  },
+  // === Welle C: 11 Bodendichtungen ===
+  { id: '835', name: 'Schleiflippendichtung 835', artNr: '835', handle: 'schleiflippendichtung-mit-abtropfleiste-fur-lucken-von-10-12-mm-art-nr-835', image: '', glass: [8], form: ['gerade'], doorType: ['dreh','schiebe'], gapMin: 10, gapMax: 12, priceFrom: 13.90, desc: 'Schleiflippe mit Abtropfleiste innen, für 8 mm Glas, Spalt 10–12 mm.' },
+  { id: '5101-135', name: 'Gebogene Bodendichtung 5101.135 (Fünfeck 135°)', artNr: '5101.135', handle: 'gebogene-dusch-turdichtung-135-fur-funfeckduschen-art-nr-5101-135', image: '', glass: [8], form: ['gebogen'], doorType: ['dreh'], gapMin: 14, gapMax: 16, priceFrom: 33.50, desc: 'Gebogen 135° für Fünfeckduschen, verstärkte Lippe, Einzelstück oder Paar.' },
+  { id: 'S009B1', name: 'Polycarbonat-Bodendichtung S009B1', artNr: 'S009B1', handle: 'duschdichtung-mit-doppelten-dichtgummi-unten-hochtransparent-glasklar-art-nr-s009b1', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 7, gapMax: 9, priceFrom: 12.30, desc: 'Polycarbonat hochtransparent, doppelte Lippe, Spalt 7–9 mm, in 65/100 cm.' },
+  { id: '8879', name: 'Duschdichtung 8879 kurze Lippe', artNr: '8879', handle: 'dusch-turdichtung-mit-kurzer-abtropfleiste-und-kurzer-lippe-nach-unten-art-nr-8879', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 3, gapMax: 5, priceFrom: 14.90, desc: 'Kurze Abtropfleiste und kurze Lippe nach unten, Spalt ca. 4 mm.' },
+  { id: '3249', name: 'Duschdichtung 3249 Rinnenform', artNr: '3249', handle: 'dusch-turdichtung-fur-6-u-8-mm-glas-mit-abtropfleiste-in-rinnenform-und-doppelter-lippe-nach-unten-kurz-u-lang-98-5-cm-fur-6-und-8-mm-universal-art-nr-3249', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 5, gapMax: 16, priceFrom: 49.90, desc: 'Abtropfleiste in Rinnenform mit doppelter Lippe nach unten, kurz und lang, 98,5 cm.' },
+  { id: '956-914', name: 'Polycarbonat-Bodendichtung 956/914', artNr: '956/914', handle: 'duschdichtung-mit-doppelten-dichtgummi-unten-und-abtropfleiste-aus-hartem-kunststoff-art-nr-956-914', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 9, gapMax: 10, priceFrom: 15.90, desc: 'Doppelte Lippe mit Abtropfleiste aus hartem Kunststoff, Spalt 9–10 mm.' },
+  { id: '009B3', name: 'Universaldichtung 009B3 (5 mm Raster)', artNr: '009B3', handle: 'universaldichtung-mit-anpassbarer-langer-lippe-5-mm-raster-und-abtropfleiste-oben-art-nr-009b3', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 19, gapMax: 25, priceFrom: 14.90, desc: 'Anpassbare lange Lippe im 5 mm Raster, Abtropfleiste oben, Spalt 19–25 mm.' },
+  { id: '5102-135', name: 'Gebogene Bodendichtung 5102.135 (Fünfeck 135° Schleiflippe)', artNr: '5102.135', handle: 'gebogene-dusch-turdichtung-135-fur-funfeckduschen-art-nr-5102-135', image: '', glass: [8], form: ['gebogen'], doorType: ['dreh'], gapMin: 12, gapMax: 13, priceFrom: 33.50, desc: 'Gebogen 135° für Fünfeckduschen mit Schleiflippe, Einzelstück oder Paar.' },
+  { id: '5141-B', name: 'Schwarze Schlauchdichtung 5141-B', artNr: '5141-B', handle: 'schwarze-dusch-turdichtung-mit-schlauch-und-abtropfleiste-fur-6-und-8-mm-universal-art-nr-5141-b', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 12, gapMax: 15, priceFrom: 16.90, desc: 'Schwarze Schlauchdichtung mit Abtropfleiste, Spalt 12–15 mm.' },
+  { id: '5102-B', name: 'Schwarze Schleiflippendichtung 5102-B', artNr: '5102-B', handle: 'schwarze-dusch-turdichtung-mit-12-mm-lippe-nach-unten-und-kurzer-abtropfleiste-fur-6-und-8-mm-universal-art-nr-5102-b', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 11, gapMax: 14, priceFrom: 16.90, desc: 'Schwarz, 12 mm Lippe nach unten, kurze Abtropfleiste, Spalt 11–14 mm.' },
+  { id: '5103-B', name: 'Schwarze Duschdichtung 5103-B lange Lippe', artNr: '5103-B', handle: 'schwarze-dusch-turdichtung-mit-langer-abtropfleiste-und-langer-dichtlippe-art-nr-5103-b', image: '', glass: [8], form: ['gerade'], doorType: ['dreh'], gapMin: 17, gapMax: 18, priceFrom: 16.90, desc: 'Schwarz, lange Abtropfleiste und lange Dichtlippe, Spalt 17–18 mm.' }
+
 ];
 
     function filterProducts(state, includeGap, list) {

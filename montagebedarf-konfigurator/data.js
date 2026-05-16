@@ -316,7 +316,20 @@
         price: '5,90',
         desc: 'Praktischer Holz-Klotzhebel zum Anheben und Positionieren von schweren Glasscheiben bei der Montage.',
         isMain: false
-    },];
+    },
+    // === Welle C: Klebe-Sets + TOX-Sortimente ===
+    { id: 'giese-gifix-88001', title: 'Giese Gifix Klebe-Set 88001', handle: 'giese-gifix-klebeset-88001', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben', 'beides'], price: '9,90', desc: 'Klebe-Set für Wandbefestigung ohne Bohren. Speziell für leichte Bad-Accessoires.', isMain: false },
+    { id: 'smedbo-icomposite-gluemix', title: 'Smedbo XTRA iComposite GlueMix Montagekleber', handle: 'smedbo-xtra-icomposite-gluemix-6000-10', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben', 'beides'], price: '13,95', desc: 'Bohrerfreier Montagekleber von Smedbo. Für Bad-Accessoires aus der XTRA-Serie.', isMain: false },
+    { id: 'smedbo-xtra-adapter', title: 'Smedbo XTRA Adapter zum Kleben (2er-Set)', handle: 'smedbo-xtra-adapter-kleben', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['kleben', 'beides'], price: '10,90', desc: 'Adapter-Set für Smedbo XTRA-Halter ohne Bohren. Chrom oder Schwarz.', isMain: false },
+    { id: 'tox-duebel-sortiment', title: 'TOX Dübel-Sortiment L-Boxx Micro Allround 140-tlg.', handle: 'tox-duebel-sortiment-l-boxx-micro-allround', type: 'duebel', vorhaben: ['glasdusche'], befestigung: ['bohren', 'beides'], price: '17,90', desc: 'Allround-Dübelsortiment mit 140 Teilen in praktischer L-Boxx.', isMain: false },
+    { id: 'tox-torx-schrauben', title: 'TOX Torx-Schrauben Sortiment L-Boxx 260 Stück', handle: 'tox-torx-schrauben-sortiment-l-boxx', type: 'schrauben', vorhaben: ['glasdusche'], befestigung: ['bohren', 'beides'], price: '31,50', desc: 'Torx-Schrauben in vier Längen, 260 Stück, sortiert in L-Boxx.', isMain: false },
+    { id: 'tox-starter-set', title: 'TOX Starter Set Dübel-Sortiment 264-tlg.', handle: 'tox-starter-set-sortiment', type: 'duebel', vorhaben: ['glasdusche'], befestigung: ['bohren', 'beides'], price: '21,95', desc: 'Komplettes Starter-Set mit 264 Dübeln in verschiedenen Größen.', isMain: false },
+    { id: 'tox-handschuh', title: 'TOX Arbeitshandschuh Flex Fit', handle: 'tox-arbeitshandschuh-flex-fit', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['bohren', 'kleben', 'beides'], price: '4,50', desc: 'Nylonfeinstrick-Handschuh in S bis XL. Gutes Tastgefühl für feine Montagearbeiten.', isMain: false },
+    { id: 'tox-meterstab', title: 'TOX Meterstab farbenfroh 2 m', handle: 'tox-meterstab-farbenfroh', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['bohren', 'kleben', 'beides'], price: '6,95', desc: 'Klassischer 2 m-Meterstab mit Winkelmessfunktion. Farbenfroh.', isMain: false },
+    { id: 'tox-bleistift', title: 'TOX Zimmermanns-Bleistift Neon 250 mm', handle: 'tox-zimmermanns-bleistift-neon', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['bohren', 'kleben', 'beides'], price: '1,50', desc: 'Großer Zimmermanns-Bleistift in Neon, 250 mm, Härtegrad HB.', isMain: false },
+    { id: 'tox-o-ring-box', title: 'TOX Basic Box O-Ring Sortiment 225-tlg.', handle: 'tox-basic-box-o-ring-sortiment', type: 'zubehoer-montage', vorhaben: ['glasdusche', 'duschwanne', 'fugen'], befestigung: ['bohren', 'kleben', 'beides'], price: '17,90', desc: 'O-Ring-Sortiment mit 225 Teilen in 18 verschiedenen Größen.', isMain: false },
+    { id: 'tox-camping-set', title: 'TOX Mini Camping-Set L-BOXX', handle: 'tox-mini-camping-set-l-boxx', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['bohren', 'beides'], price: '36,90', desc: 'Zeltsicherung mit Schraubheringen in L-BOXX. Off-Topic, aber im TOX-Sortiment.', isMain: false }
+,];
 
     const productImages = {
     'allzweckdubel-mit-schraube-fur-dusche-u-bad-aqua-stop-pro': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duebelschraube.png?v=1768235881',

@@ -205,8 +205,67 @@
       '6': { '200 cm': 52830787764547, '250 cm': 52830787830083 },
       '8': { '200 cm': 52830787797315, '250 cm': 52830787862851 }
     }
+  },
+  {
+    id: '6092-B',
+    name: 'Schwarze Magnetdichtung 180° (6092-B)',
+    artNr: '6092-B',
+    handle: 'schwarze-tur-magnetdichtung-180-1-paar-fur-6-und-8-mm-universal-art-nr-6092-b',
+    image: '',
+    glass: [6, 8],
+    angle: [180],
+    gapByGlass: { '6': [18, 18], '8': [22, 22] },
+    gapMin: 18,
+    gapMax: 22,
+    priceFrom: 39.90,
+    bestseller: false,
+    desc: 'Schwarze 180°-Magnetdichtung, schmaler Streifen. Fluchtende Anordnung.',
+    lengths: ['200 cm'],
+    variants: {}
+  },
+  {
+    id: '6072-6082-B',
+    name: 'Schwarze Magnetdichtung 180° (2x 45°) (6072-B/6082-B)',
+    artNr: '6072-B/6082-B',
+    handle: 'schwarze-tur-magnetdichtung-180-anschlag-aus-2x-45-magnetdichtung-1-paar-fur-6-und-8-mm-universal-art-nr-6072-b-6082-b',
+    image: '',
+    glass: [6, 8],
+    angle: [180],
+    gapByGlass: { '6': [22, 22], '8': [26, 26] },
+    gapMin: 22,
+    gapMax: 26,
+    priceFrom: 39.90,
+    bestseller: false,
+    desc: 'Schwarze 180°-Magnetdichtung als 2x 45°-Anschlag. Für versetzte Anordnung.',
+    lengths: ['200 cm'],
+    variants: {}
+  },
+  {
+    id: '6062-6072-112',
+    name: 'Magnetdichtung 112° Sonderwinkel (6062/6072)',
+    artNr: '6062/6072',
+    handle: 'magnetdichtungspaar_112grad_sonderwinkel',
+    image: '',
+    glass: [9, 10, 12, 13],
+    angle: [112],
+    gapByGlass: { '9': [16, 18], '10': [16, 18], '12': [16, 18], '13': [16, 18] },
+    gapMin: 16,
+    gapMax: 18,
+    priceFrom: 39.90,
+    bestseller: false,
+    desc: 'Sonderwinkel 112° asymmetrisch — für Fünfeckduschen mit nicht-Standard-Winkel. Für 9, 10, 12 und 13 mm Glas.',
+    lengths: ['200 cm'],
+    variants: {}
   }
 ];
+
+    // Handles, die vom Sync uebersprungen werden — Magnettraegerprofile
+    // sind technisch keine Magnetdichtungen, sondern Aufnahme-Profile aus Aluminium.
+    // Gehoeren in metallprofile-konfigurator, nicht in magnetdichtung-finder.
+    const _syncSkip = [
+        'magnettragerprofil-fur-nischensituation-zum-aufstecken-einer-magnetdichtung-art-nr-74-109',
+        'magnettragerprofil-fur-nischensituation-zum-aufstecken-einer-duschturdichtung-art-nr-52-05-0300'
+    ];
 
     function filterProducts(state, includeGap, list) {
         return (list || PRODUCTS).filter(function (p) {
