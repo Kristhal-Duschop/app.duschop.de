@@ -555,31 +555,10 @@
     ];
 
     // ============================================================
-    // Bild-Pfad-Konvention (Foto > Gradient-Fallback)
-    //   Probiert das Foto im Hintergrund per Image()-onload.
-    //   Wenn vorhanden -> Klasse .has-photo + background-image
-    //   Wenn nicht -> bleibt der Gradient (kein 404 in der Konsole)
+    // Swatch-Style: nur CSS-Gradient (Material-Fotos zurueckgestellt)
     // ============================================================
-    function ffImageUrl(colorId) {
-        return '../assets/images/oberflaechen/' + colorId + '.jpg';
-    }
-
     function ffSwatchStyle(color) {
-        // Initial nur Gradient — Foto wird nachträglich injiziert, falls vorhanden
         return 'background-image: ' + color.gradient + ';';
-    }
-
-    function ffTryUpgradeWithPhoto(colorId, applyToSelectors) {
-        var img = new Image();
-        img.onload = function () {
-            applyToSelectors.forEach(function (sel) {
-                document.querySelectorAll(sel).forEach(function (el) {
-                    el.style.backgroundImage = 'url(\'' + ffImageUrl(colorId) + '\')';
-                });
-            });
-        };
-        // onerror bleibt absichtlich leer — Gradient bleibt erhalten
-        img.src = ffImageUrl(colorId);
     }
 
     // ============================================================
@@ -609,13 +588,6 @@
                 ffOpenToolModal(id);
             });
         });
-
-        // Foto-Upgrade pro Farbe (asynchron, ohne 404-Lärm bei fehlenden Fotos)
-        FF_COLORS.forEach(function (c) {
-            ffTryUpgradeWithPhoto(c.id, [
-                '.ff-card[data-color="' + c.id + '"] .ff-card-swatch'
-            ]);
-        });
     }
 
     // ============================================================
@@ -641,8 +613,6 @@
 
         var heroEl = document.getElementById('ffModalHero');
         heroEl.setAttribute('style', ffSwatchStyle(color) + ' background-size: cover; background-position: center;');
-        // Foto-Upgrade fürs Modal-Hero
-        ffTryUpgradeWithPhoto(color.id, ['#ffModalHero']);
         document.getElementById('ffModalName').textContent = color.name;
         document.getElementById('ffModalFinish').textContent = color.cat + ' · ' + color.finish;
 
