@@ -534,8 +534,8 @@
         { id: 'edelstahl-poliert',    name: 'Edelstahl poliert',          cat: 'Edelstahl',      finish: 'Glänzend',      gradient: 'linear-gradient(135deg, #d6d2cc 0%, #bfbab3 25%, #e0dcd6 50%, #b0aaa2 75%, #ccc7c0 100%)', matchTerms: ['edelstahl poliert','edelstahl glaenzend'] },
         { id: 'silber-matt',          name: 'Silber matt',                cat: 'Silber',         finish: 'Matt',          gradient: 'linear-gradient(135deg, #c5c5c5 0%, #b0b0b0 25%, #cbcbcb 50%, #a0a0a0 75%, #bdbdbd 100%)', matchTerms: ['silber matt','silber satiniert','silber'] },
         { id: 'schwarz-matt',         name: 'Schwarz matt',               cat: 'Schwarz',        finish: 'Matt',          gradient: 'linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 25%, #333333 50%, #111111 75%, #262626 100%)', matchTerms: ['schwarz matt','schwarz'] },
-        { id: 'messing-matt',         name: 'Messing matt (gold)',        cat: 'Gold & Messing', finish: 'Matt',          gradient: 'linear-gradient(135deg, #c8a84e 0%, #b08f30 25%, #d4b55a 50%, #a08228 75%, #bfa042 100%)', matchTerms: ['messing matt','messing gold','goldfarbig matt','gold matt'] },
-        { id: 'messing-poliert',      name: 'Messing poliert (gold)',     cat: 'Gold & Messing', finish: 'Glänzend',      gradient: 'linear-gradient(135deg, #dcc260 0%, #c4a840 25%, #e8d070 50%, #b89a30 75%, #d0b850 100%)', matchTerms: ['messing poliert','messing glaenzend','gold poliert','goldfarbig poliert','goldfarbig glaenzend'] },
+        { id: 'messing-matt',         name: 'Messing matt',               cat: 'Messing',        finish: 'Matt',          gradient: 'linear-gradient(135deg, #c8a84e 0%, #b08f30 25%, #d4b55a 50%, #a08228 75%, #bfa042 100%)', matchTerms: ['messing matt','messing gold','goldfarbig matt','gold matt'] },
+        { id: 'messing-poliert',      name: 'Messing poliert',            cat: 'Messing',        finish: 'Glänzend',      gradient: 'linear-gradient(135deg, #dcc260 0%, #c4a840 25%, #e8d070 50%, #b89a30 75%, #d0b850 100%)', matchTerms: ['messing poliert','messing glaenzend','gold poliert','goldfarbig poliert','goldfarbig glaenzend'] },
         { id: 'bronze-matt',          name: 'Bronze matt gebürstet',      cat: 'Bronze',         finish: 'Matt',          gradient: 'linear-gradient(135deg, #8B6914 0%, #6d5010 25%, #9a7520 50%, #5c430d 75%, #7d5e12 100%)', matchTerms: ['bronze matt','bronze gebuerstet','bronze'] },
         { id: 'graphit-matt',         name: 'Graphit matt gebürstet',     cat: 'Graphit',        finish: 'Matt',          gradient: 'linear-gradient(135deg, #686868 0%, #555555 25%, #737373 50%, #484848 75%, #606060 100%)', matchTerms: ['graphit matt','graphit gebuerstet'] },
         { id: 'graphit-poliert',      name: 'Graphit poliert',            cat: 'Graphit',        finish: 'Glänzend',      gradient: 'linear-gradient(135deg, #5a5a5a 0%, #454545 25%, #666666 50%, #3a3a3a 75%, #525252 100%)', matchTerms: ['graphit poliert','graphit glaenzend'] },
@@ -567,14 +567,19 @@
     function ffRenderGrid() {
         var grid = document.getElementById('ffGrid');
         grid.innerHTML = FF_COLORS.map(function (c) {
+            // Familie (cat) als Headline, Finish-Detail aus dem Namen abgeleitet —
+            // entdoppelt z.B. „Graphit poliert glänzend" (Name) + „Graphit" (Cat) + „Glänzend" (Badge)
+            var detail = c.name.replace(c.cat, '').replace(/\s+/g, ' ').trim();
+            // Auch redundante Finish-Begriffe rauswerfen, weil das Badge das schon zeigt
+            detail = detail.replace(/\b(glänzend|matt)\b/gi, '').replace(/\s+/g, ' ').trim();
             return '' +
                 '<button class="ff-card" type="button" data-color="' + c.id + '">' +
                     '<div class="ff-card-swatch" style="' + ffSwatchStyle(c) + '">' +
                         '<span class="ff-card-finish">' + c.finish + '</span>' +
                     '</div>' +
                     '<div class="ff-card-body">' +
-                        '<div class="ff-card-name">' + c.name + '</div>' +
-                        '<div class="ff-card-cat">' + c.cat + '</div>' +
+                        '<div class="ff-card-name">' + c.cat + '</div>' +
+                        (detail ? '<div class="ff-card-cat">' + detail + '</div>' : '<div class="ff-card-cat" style="visibility:hidden">·</div>') +
                         '<span class="ff-card-cta">Passendes finden ' +
                             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>' +
                         '</span>' +
@@ -613,8 +618,11 @@
 
         var heroEl = document.getElementById('ffModalHero');
         heroEl.setAttribute('style', ffSwatchStyle(color) + ' background-size: cover; background-position: center;');
-        document.getElementById('ffModalName').textContent = color.name;
-        document.getElementById('ffModalFinish').textContent = color.cat + ' · ' + color.finish;
+        // Headline = Familie, Untertitel = Finish (+ optional Surface-Detail)
+        var detail = color.name.replace(color.cat, '').replace(/\s+/g, ' ').trim();
+        detail = detail.replace(/\b(glänzend|matt)\b/gi, '').replace(/\s+/g, ' ').trim();
+        document.getElementById('ffModalName').textContent = color.cat;
+        document.getElementById('ffModalFinish').textContent = color.finish + (detail ? ' · ' + detail : '');
 
         document.getElementById('ffModalTools').innerHTML = FF_TOOLS.map(function (t) {
             // Mit URL-Param weitergeben — duschop.js liest ?color=... beim Init
