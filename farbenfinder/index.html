@@ -845,6 +845,24 @@
             } else {
                 ffOpenToolModal(surfaceId);
             }
+
+            // Exit-Redirect: schliesst der User das Modal, geht es zurueck zur Home.
+            // (Nur aktiv, wenn der User per Deep-Link eingestiegen ist.)
+            setTimeout(function () {
+                var toolModal = document.getElementById('ffToolModal');
+                var productsModal = document.getElementById('ffProductsModal');
+                if (!toolModal || !productsModal) return;
+                var exitUrl = 'https://duschop.de/';
+                var checkAndExit = function () {
+                    if (!toolModal.classList.contains('is-active') &&
+                        !productsModal.classList.contains('is-active')) {
+                        window.location.href = exitUrl;
+                    }
+                };
+                var obs = new MutationObserver(checkAndExit);
+                obs.observe(toolModal, { attributes: true, attributeFilter: ['class'] });
+                obs.observe(productsModal, { attributes: true, attributeFilter: ['class'] });
+            }, 200);
         } catch (e) { /* still */ }
     })();
     </script>
