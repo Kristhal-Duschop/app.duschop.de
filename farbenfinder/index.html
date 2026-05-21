@@ -808,6 +808,45 @@
     if (window.duschopTrack) {
         window.duschopTrack('pageview_farbenfinder', { tool: 'farbenfinder' });
     }
+
+    // ============================================================
+    // Deep-Link: ?surface=<id>[&mode=products]
+    // Beispiele:
+    //   ?surface=bronze-matt              → Tool-Auswahl-Modal für Bronze
+    //   ?surface=bronze-matt&mode=products → direkt zur Produktliste
+    // ============================================================
+    (function ffApplyDeepLink() {
+        try {
+            var params = new URLSearchParams(window.location.search);
+            var surfaceId = params.get('surface');
+            if (!surfaceId) return;
+
+            var color = FF_COLORS.find(function (c) { return c.id === surfaceId; });
+            if (!color) return;
+
+            try {
+                if (window.DuschopState && typeof window.DuschopState.set === 'function') {
+                    window.DuschopState.set('color', surfaceId);
+                }
+            } catch (e) { /* still */ }
+
+            try {
+                if (window.duschopTrack) {
+                    window.duschopTrack('color_picked', {
+                        tool: 'farbenfinder',
+                        color: surfaceId,
+                        source: 'deeplink'
+                    });
+                }
+            } catch (e) { /* still */ }
+
+            if (params.get('mode') === 'products') {
+                ffOpenProductsModal(color);
+            } else {
+                ffOpenToolModal(surfaceId);
+            }
+        } catch (e) { /* still */ }
+    })();
     </script>
 
     <!-- WhatsApp-Sticky-Banner -->
