@@ -1,0 +1,8 @@
+# Lokale Referenz-Dateien für das Analytics-Tracker-Setup
+# (siehe SETUP.md Zeile 80 + 98-99 — bewusst nicht im Live-Deployment)
+SETUP.md
+google-apps-script.js
+
+# Edit-Tool-Artefakte (z.B. Backup-Dateien von Editoren)
+*.tmp
+*.tmp.*
