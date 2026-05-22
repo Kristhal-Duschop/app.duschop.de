@@ -113,6 +113,23 @@
         desc: 'Eckiges Drehprofil f\u00fcr 8 mm Glas, L\u00e4nge 1900 mm. Pendelt\u00fcr-Funktion.',
         serie: 'NLO60'
     },
+    {
+        id: 'murello-gw-90',
+        title: 'MURELLO Duscht\u00fcrband 90\u00b0 Glas-Wand Hebe-Senk MUR344',
+        handle: 'murello-duschturband-90-glas-wand-pendelnd-mit-hebe-senk-flachenbundig-in-3-oberflachen',
+        kategorie: 'scharnier',
+        montage: 'glas-wand',
+        typ: 'pendel',
+        winkel: 90,
+        hebeSenk: true,
+        glasdicken: '8/10 mm',
+        tragkraft: '45 kg',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '119,90',
+        priceMax: '122,90',
+        desc: 'Fl\u00e4chenb\u00fcndiges Pendelt\u00fcrband mit unsichtbarem Hebe-Senk-Mechanismus. 45 kg Tragkraft, max. 900 mm T\u00fcrbreite. DIN EN 14428 mit \u2265 100.000 Zyklen bestanden. DIN-Links und DIN-Rechts.',
+        serie: 'MURELLO'
+    },
 
     // --- Pendeltuerband Glas-Glas ---
     {
@@ -198,6 +215,23 @@
         desc: 'Anschlagband 180\u00b0 Glas-Glas. Eckiges Messing-Design, verdeckte Verschraubung.',
         serie: 'COMO'
     },
+    {
+        id: 'murello-gg-180',
+        title: 'MURELLO Duscht\u00fcrband 180\u00b0 Glas-Glas Hebe-Senk MUR380',
+        handle: 'murello-duschturband-180-glas-glas-pendelnd-mit-hebe-senk-flachenbundig-in-3-oberflachen',
+        kategorie: 'scharnier',
+        montage: 'glas-glas',
+        typ: 'pendel',
+        winkel: 180,
+        hebeSenk: true,
+        glasdicken: '8/10 mm',
+        tragkraft: '45 kg',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '131,90',
+        priceMax: '143,90',
+        desc: 'Fl\u00e4chenb\u00fcndiges Pendelt\u00fcrband Glas-Glas mit unsichtbarem Hebe-Senk-Mechanismus. 45 kg Tragkraft, max. 900 mm T\u00fcrbreite. DIN EN 14428 mit \u2265 100.000 Zyklen bestanden. DIN-Links und DIN-Rechts.',
+        serie: 'MURELLO'
+    },
 
     // ===================== HALTEWINKEL =====================
     {
@@ -215,15 +249,41 @@
     },
     {
         id: 'lugano-winkel-gw',
-        title: 'Lugano Winkelhalter 90\u00b0 Glas-Wand fl\u00e4chenb\u00fcndig LU90S',
+        title: 'Lugano Winkelhalter 90\u00b0 Glas-Wand innen fl\u00e4chenb\u00fcndig LU90S',
         handle: 'lugano_wandwinkel',
+        kategorie: 'haltewinkel',
+        montage: 'glas-wand',
+        glasdicken: '8/10 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','bronze-gebuerstet','messing-matt'],
+        price: '79,90',
+        priceMax: '79,90',
+        desc: 'Fl\u00e4chenb\u00fcndiger Winkelhalter, rundes Design. Wandschenkel innenseitig (LU90S). F\u00fcnf Oberfl\u00e4chen.',
+        serie: 'Lugano'
+    },
+    {
+        id: 'lugano-winkel-gw-aussen',
+        title: 'Lugano Winkelhalter 90\u00b0 Glas-Wand au\u00dfen fl\u00e4chenb\u00fcndig LU90SA',
+        handle: 'lugano-winkelhalter-glas-wand-90-aussen-lu90sa',
         kategorie: 'haltewinkel',
         montage: 'glas-wand',
         glasdicken: '8/10 mm',
         colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
         price: '49,90',
         priceMax: '59,90',
-        desc: 'Fl\u00e4chenb\u00fcndiger Winkelhalter, rundes Design. Wandschenkel innen- oder au\u00dfenseitig w\u00e4hlbar.',
+        desc: 'Fl\u00e4chenb\u00fcndiger Winkelhalter, rundes Design. Wandschenkel au\u00dfenseitig (LU90SA), Innenseite der Dusche bleibt frei von Beschl\u00e4gen.',
+        serie: 'Lugano'
+    },
+    {
+        id: 'lugano-winkel-gg',
+        title: 'Lugano Winkelhalter 90\u00b0 Glas-Glas fl\u00e4chenb\u00fcndig LU090',
+        handle: 'lugano-winkelhalter-glas-glas-90-lu090',
+        kategorie: 'haltewinkel',
+        montage: 'glas-glas',
+        glasdicken: '8/10 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','bronze-gebuerstet','messing-matt'],
+        price: '59,90',
+        priceMax: '89,90',
+        desc: 'Fl\u00e4chenb\u00fcndiger Winkelverbinder, rundes Design, verbindet zwei Glasscheiben im 90\u00b0-Winkel ohne Wandbefestigung.',
         serie: 'Lugano'
     },
     {
@@ -238,6 +298,47 @@
         priceMax: '79,90',
         desc: 'Massiver Glas-Glas-Winkelverbinder 90\u00b0. 70\u00d770\u00d774 mm, Glasbohrung 16 mm.',
         serie: 'Bellagio'
+    },
+    {
+        id: 'murello-winkel-gw',
+        title: 'MURELLO Wandverbinder 90\u00b0 Glas-Wand MUR90S',
+        handle: 'murello-wandverbinder-90-glas-wand-flachenbundig-in-3-oberflachen',
+        kategorie: 'haltewinkel',
+        montage: 'glas-wand',
+        glasdicken: '8/10 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '45,90',
+        priceMax: '49,90',
+        desc: 'Fl\u00e4chenb\u00fcndiger Wandverbinder aus Messing, verdeckte Schrauben mit Aufsteck-Abdeckung. F\u00fcr 8 oder 10 mm ESG.',
+        serie: 'MURELLO'
+    },
+    {
+        id: 'murello-winkel-gg',
+        title: 'MURELLO Glasverbinder 90\u00b0 Glas-Glas MUR090',
+        handle: 'murello-glasverbinder-90-glas-glas-flachenbundig-in-3-oberflachen',
+        kategorie: 'haltewinkel',
+        montage: 'glas-glas',
+        glasdicken: '8/10 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '54,90',
+        priceMax: '58,90',
+        desc: 'Fl\u00e4chenb\u00fcndiger 90\u00b0-Eck-Verbinder aus Messing f\u00fcr Glas-Glas-Verbindung in Eckduschen. Verdeckte Schrauben mit Aufsteck-Abdeckung.',
+        serie: 'MURELLO'
+    },
+
+    // ===================== ZUBEHOER =====================
+    {
+        id: 'lugano-wandmontageplatte-lug044wmp',
+        title: 'Lugano Wandmontageplatte f\u00fcr LUG044, lang LUG044WMP',
+        handle: 'lugano-wandmontageplatte-lug044wmp',
+        kategorie: 'zubehoer',
+        typ: 'wandmontageplatte',
+        glasdicken: '8/10 mm',
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        price: '24,90',
+        priceMax: '24,90',
+        desc: 'Lange Anschraubplatte als Ersatz f\u00fcr die Standard-Wandplatte des LUG044, bei kritischen Untergr\u00fcnden.',
+        serie: 'Lugano'
     },
 
     // ===================== TUERGRIFFE =====================
@@ -546,7 +647,7 @@
 
     // Haltewinkel
     'bellagio-winkelverbinder-glas-wand-90-bel90s': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/bel90s-ch-1_69a2c54a-6e0c-4352-bb05-d48d2612174d.jpg?v=1773414789',
-    'lugano_wandwinkel': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/lug90sa-ch-2_4fd78b66-e8f9-49aa-ad99-df7ab0c1508b.jpg?v=1773416819',
+    'lugano_wandwinkel': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/lu90sch.jpg?v=1773416819',
     'bellagio-winkelverbinder-90-glas-glas': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/bel090-ch-2.jpg?v=1773415342',
 
     // Tuergriffe
