@@ -113,8 +113,11 @@
         }
 
         .logo-subtitle {
-            font-size: 11px;
-            color: rgba(255,255,255,0.45);
+            font-size: 10px;
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             line-height: 1.2;
         }
 
@@ -133,6 +136,34 @@
             background: var(--accent);
             color: white;
             border-color: var(--accent);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-icon-btn {
+            color: var(--accent-light);
+            text-decoration: none;
+            padding: 7px 10px;
+            border: 1px solid rgba(200, 149, 108, 0.3);
+            border-radius: 8px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-icon-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .header-icon-btn svg {
+            display: block;
         }
 
         /* ============================================
@@ -676,14 +707,35 @@
     <header class="header">
         <div class="header-inner">
             <a href="./" class="logo">
-                <img src="Kristhal_Logo_Marke_trans.png" alt="Kristhal" class="logo-img">
+                <img src="Kristhal_Logo_Symbol_trans.png" alt="Kristhal" class="logo-img">
                 <div class="logo-divider"></div>
                 <div class="logo-text-group">
-                    <div class="logo-title">DUSCHOP <span>TOOLS</span></div>
-                    <div class="logo-subtitle">Online-Shop der Marke Kristhal</div>
+                    <div class="logo-title">Kristhal Duschop</div>
+                    <div class="logo-subtitle">Berater</div>
                 </div>
             </a>
-            <a href="https://duschop.de" class="header-link">&rarr; zum Shop</a>
+            <div class="header-actions">
+                <a href="https://duschop.de/account/login" target="_blank" rel="noopener" class="header-icon-btn" aria-label="Im Shop einloggen">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </a>
+                <a href="https://duschop.de/search" target="_blank" rel="noopener" class="header-icon-btn" aria-label="Im Shop suchen">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                        <circle cx="11" cy="11" r="7"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </a>
+                <a href="https://duschop.de/cart" target="_blank" rel="noopener" class="header-icon-btn" aria-label="Warenkorb im Shop ansehen">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                </a>
+                <a href="https://duschop.de" class="header-link">&rarr; zum Shop</a>
+            </div>
         </div>
     </header>
 
