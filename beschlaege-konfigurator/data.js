@@ -130,6 +130,23 @@
         desc: 'Fl\u00e4chenb\u00fcndiges Pendelt\u00fcrband mit unsichtbarem Hebe-Senk-Mechanismus. 45 kg Tragkraft, max. 900 mm T\u00fcrbreite. DIN EN 14428 mit \u2265 100.000 Zyklen bestanden. DIN-Links und DIN-Rechts.',
         serie: 'MURELLO'
     },
+    {
+        id: 'altea-gw-90',
+        title: 'ALTEA Anschlagband 90\u00b0 Glas-Wand ALT037',
+        handle: 'altea-anschlag-duschtuerband-90-glas-wand-alt037',
+        kategorie: 'scharnier',
+        montage: 'glas-wand',
+        typ: 'anschlag',
+        winkel: 90,
+        hebeSenk: false,
+        glasdicken: '6-10 mm',
+        tragkraft: '36 kg',
+        colors: ['chrom-poliert','schwarz-matt'],
+        price: '59,90',
+        priceMax: '84,90',
+        desc: 'Anschlagband 90\u00b0 Glas-Wand aus Messing mit verdeckter Verschraubung. F\u00fcr 6 bis 10 mm Glas, max. 711 mm T\u00fcrbreite, 36 kg.',
+        serie: 'ALTEA'
+    },
 
     // --- Pendeltuerband Glas-Glas ---
     {
@@ -231,6 +248,40 @@
         priceMax: '143,90',
         desc: 'Fl\u00e4chenb\u00fcndiges Pendelt\u00fcrband Glas-Glas mit unsichtbarem Hebe-Senk-Mechanismus. 45 kg Tragkraft, max. 900 mm T\u00fcrbreite. DIN EN 14428 mit \u2265 100.000 Zyklen bestanden. DIN-Links und DIN-Rechts.',
         serie: 'MURELLO'
+    },
+    {
+        id: 'altea-gg-135',
+        title: 'ALTEA Anschlagband 135\u00b0 Glas-Glas ALT135',
+        handle: 'altea-anschlag-duschtuerband-135-glas-glas-alt135',
+        kategorie: 'scharnier',
+        montage: 'glas-glas',
+        typ: 'anschlag',
+        winkel: 135,
+        hebeSenk: false,
+        glasdicken: '6-10 mm',
+        tragkraft: '36 kg',
+        colors: ['chrom-poliert','schwarz-matt'],
+        price: '89,90',
+        priceMax: '94,90',
+        desc: 'Anschlagband 135\u00b0 Glas-Glas aus Messing mit verdeckter Verschraubung. F\u00fcr 6 bis 10 mm Glas, max. 711 mm T\u00fcrbreite, 36 kg.',
+        serie: 'ALTEA'
+    },
+    {
+        id: 'altea-gg-180',
+        title: 'ALTEA Anschlagband 180\u00b0 Glas-Glas ALT180',
+        handle: 'altea-anschlag-duschtuerband-180-glas-glas-alt180',
+        kategorie: 'scharnier',
+        montage: 'glas-glas',
+        typ: 'anschlag',
+        winkel: 180,
+        hebeSenk: false,
+        glasdicken: '6-10 mm',
+        tragkraft: '36 kg',
+        colors: ['chrom-poliert','schwarz-matt'],
+        price: '64,90',
+        priceMax: '94,90',
+        desc: 'Anschlagband 180\u00b0 Glas-Glas aus Messing mit verdeckter Verschraubung. F\u00fcr 6 bis 10 mm Glas, max. 711 mm T\u00fcrbreite, 36 kg.',
+        serie: 'ALTEA'
     },
 
     // ===================== HALTEWINKEL =====================
