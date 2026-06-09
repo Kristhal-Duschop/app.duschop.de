@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duschglas-Konfigurator | duschop.de</title>
-    <meta name="description" content="ESG-Sicherheitsglas nach Ma&szlig; konfigurieren &mdash; Klarglas, Milchglas, Antikorrosion oder Motivglas, mit optionaler Veredelung.">
+    <meta name="description" content="ESG-Sicherheitsglas nach Ma&szlig; konfigurieren, Klarglas, Milchglas, Antikorrosion oder Motivglas, mit optionaler Veredelung.">
     <link rel="stylesheet" href="../assets/duschop.css">
     <style>html, body { margin: 0; padding: 0; } body { background: var(--duschop-bg, #f8f6f3); }</style>
 </head>
@@ -39,7 +39,7 @@
             hero: {
                 badge: 'In 3 Schritten zum richtigen Glas',
                 title: 'Duschglas-Konfigurator',
-                desc: 'ESG-Sicherheitsglas nach Maß — wir zeigen Ihnen, welche Optik, welche Qualität und welche Veredelung zu Ihrem Bad passt.'
+                desc: 'ESG-Sicherheitsglas nach Maß, wir zeigen Ihnen, welche Optik, welche Qualität und welche Veredelung zu Ihrem Bad passt.'
             },
 
             steps: [
@@ -83,11 +83,11 @@
                     },
                     hintFn: function (state) {
                         if (state.glasoptik === 'motiv') return 'Zwei Serien mit je über 40 Motiven, per Laser dauerhaft ins Glas eingearbeitet.';
-                        if (state.glasoptik === 'klar') return 'Standard-ESG oder Premium-Antikorrosionsglas — für dauerhaft klare Sicht.';
+                        if (state.glasoptik === 'klar') return 'Standard-ESG oder Premium-Antikorrosionsglas, für dauerhaft klare Sicht.';
                         return 'Standard-ESG für die meisten Anwendungen.';
                     },
                     skipFn: function (state) {
-                        // Bei satiniert gibt es nur Standard — Step überspringen, vorbelegen
+                        // Bei satiniert gibt es nur Standard, Step überspringen, vorbelegen
                         return state.glasoptik === 'satiniert';
                     },
                     optionsFn: function (state) {
@@ -117,7 +117,7 @@
                     key: 'veredelung',
                     shortLabel: 'Veredelung',
                     question: 'Möchten Sie eine Veredelung?',
-                    hint: 'Optionale Upgrades für mehr Langlebigkeit. „Keine" ist eine vollwertige Wahl — Sie bekommen trotzdem ein hochwertiges ESG-Glas.',
+                    hint: 'Optionale Upgrades für mehr Langlebigkeit. „Keine" ist eine vollwertige Wahl, Sie bekommen trotzdem ein hochwertiges ESG-Glas.',
                     optionsFn: function (state) {
                         var opts = [
                             { value: 'easyclean', label: D.veredelungDefs.easyclean.name, desc: D.veredelungDefs.easyclean.desc + ' Aufpreis: +' + D.veredelungDefs.easyclean.price + ' € pro Scheibe.' }
@@ -131,7 +131,7 @@
                     tip: {
                         icon: '💧',
                         type: 'info',
-                        text: '<strong>Easyclean</strong> ist werksseitige Nanobeschichtung — deutlich weniger Reinigungsaufwand. <strong>Weißglas</strong> hat keinen Grünstich an den Kanten, wirkt brillanter, aber kostet mehr.'
+                        text: '<strong>Easyclean</strong> ist werksseitige Nanobeschichtung, deutlich weniger Reinigungsaufwand. <strong>Weißglas</strong> hat keinen Grünstich an den Kanten, wirkt brillanter, aber kostet mehr.'
                     }
                 }
             ],
@@ -160,7 +160,7 @@
             },
 
             conversion: {
-                whatsappText: 'Hallo, ich habe den Duschglas-Konfigurator genutzt und bräuchte eine kurze Beratung — ich brauche Maße und Bohrungen.'
+                whatsappText: 'Hallo, ich habe den Duschglas-Konfigurator genutzt und bräuchte eine kurze Beratung, ich brauche Maße und Bohrungen.'
             }
         });
     })();

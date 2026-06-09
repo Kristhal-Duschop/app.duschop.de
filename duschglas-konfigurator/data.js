@@ -1,4 +1,4 @@
-﻿/* DUSCHGLAS-KONFIGURATOR — Daten v1 */
+﻿/* DUSCHGLAS-KONFIGURATOR, Daten v1 */
 (function (global) {
     'use strict';
 

@@ -1,4 +1,4 @@
-﻿/* DICHTUNG-UNTEN-FINDER — Daten v1 */
+﻿/* DICHTUNG-UNTEN-FINDER, Daten v1 */
 (function (global) {
     'use strict';
 
@@ -111,7 +111,7 @@
     doorType: ['dreh'],
     priceFrom: 10.90,
     bestseller: false,
-    desc: 'Vielseitige Dichtung mit Wasserabweiser – in 3 Lippenlängen (12, 17, 23 mm) bestellbar, passend für viele Spaltmaße.',
+    desc: 'Vielseitige Dichtung mit Wasserabweiser, in 3 Lippenlängen (12, 17, 23 mm) bestellbar, passend für viele Spaltmaße.',
     lengths: ['65 cm', '100 cm', '200 cm'],
     variants: {
       '6': { '65 cm': 52830797857091, '100 cm': 52830797889859, '200 cm': 52830797922627 },
@@ -149,7 +149,7 @@
     doorType: ['dreh'],
     priceFrom: 15.90,
     bestseller: false,
-    desc: 'Lange Dichtlippe (20 mm), individuell kürzbar. Für größere Spalte – einfach auf das gewünschte Maß zuschneiden.',
+    desc: 'Lange Dichtlippe (20 mm), individuell kürzbar. Für größere Spalte, einfach auf das gewünschte Maß zuschneiden.',
     lengths: ['100 cm', '200 cm'],
     variants: {
       '6': { '100 cm': 52830797627715, '200 cm': 52830797660483 },
@@ -168,7 +168,7 @@
     doorType: ['dreh'],
     priceFrom: 15.90,
     bestseller: false,
-    desc: 'Extra lange 30 mm Dichtlippe für sehr große Spalte. Individuell kürzbar – die Lösung wenn nichts anderes passt.',
+    desc: 'Extra lange 30 mm Dichtlippe für sehr große Spalte. Individuell kürzbar, die Lösung wenn nichts anderes passt.',
     lengths: ['100 cm', '200 cm'],
     variants: {
       '6': { '100 cm': 52830735139139, '200 cm': 52830735171907 },
@@ -206,7 +206,7 @@
     doorType: ['schiebe'],
     priceFrom: 15.90,
     bestseller: false,
-    desc: 'Große 25 mm Abtropfleiste als Dächlein – schützt effektiv vor Wasseraustritt bei Schiebetüren.',
+    desc: 'Große 25 mm Abtropfleiste als Dächlein, schützt effektiv vor Wasseraustritt bei Schiebetüren.',
     lengths: ['100 cm', '200 cm'],
     variants: {
       '6': { '100 cm': 52830792253763, '200 cm': 52830792319299 },
@@ -248,7 +248,7 @@
     doorType: ['dreh'],
     priceFrom: 37.00,
     bestseller: true,
-    desc: 'Vorgebogene Schleiflippendichtung mit Abtropfleiste – passgenau für Viertelkreis- und Halbkreisduschen.',
+    desc: 'Vorgebogene Schleiflippendichtung mit Abtropfleiste, passgenau für Viertelkreis- und Halbkreisduschen.',
     lengths: ['ca. 126 cm (vorgebogen)'],
     variants: {
       '6': { 'ca. 126 cm (vorgebogen)': 52830790844739 },
@@ -286,7 +286,7 @@
     doorType: ['dreh'],
     priceFrom: 30.50,
     bestseller: false,
-    desc: 'Vielseitige vorgebogene Dichtung mit Wasserabweiser – in 3 Lippenlängen (12, 17, 23 mm) für verschiedene Spaltmaße.',
+    desc: 'Vielseitige vorgebogene Dichtung mit Wasserabweiser, in 3 Lippenlängen (12, 17, 23 mm) für verschiedene Spaltmaße.',
     lengths: ['ca. 110 cm (vorgebogen)'],
     variants: {
       '6': { 'ca. 110 cm (vorgebogen)': 52830788256067 },
@@ -324,7 +324,7 @@
     doorType: ['schiebe', 'dreh'],
     priceFrom: 31.50,
     bestseller: false,
-    desc: 'Vorgebogene Dichtung mit 20 mm Dächlein als Abtropfleiste – für Schiebe- und Drehtüren in Viertelkreisduschen.',
+    desc: 'Vorgebogene Dichtung mit 20 mm Dächlein als Abtropfleiste, für Schiebe- und Drehtüren in Viertelkreisduschen.',
     lengths: ['ca. 110 cm (vorgebogen)'],
     variants: {
       '6': { 'ca. 110 cm (vorgebogen)': 52830792057155 },
@@ -343,7 +343,7 @@
     doorType: ['dreh'],
     priceFrom: 49.90,
     bestseller: false,
-    desc: 'Abtropfleiste in Rinnenform mit doppelter Lippe (kurz & lang) – breiter Spaltbereich von 8 bis 15 mm abdeckbar.',
+    desc: 'Abtropfleiste in Rinnenform mit doppelter Lippe (kurz & lang), breiter Spaltbereich von 8 bis 15 mm abdeckbar.',
     lengths: ['98,5 cm (vorgebogen)'],
     variants: {
       '6': { '98,5 cm (vorgebogen)': 52830788190531 },

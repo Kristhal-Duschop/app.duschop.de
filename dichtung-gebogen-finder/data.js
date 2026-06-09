@@ -1,4 +1,4 @@
-/* DICHTUNG-GEBOGEN-FINDER — Daten v1 */
+/* DICHTUNG-GEBOGEN-FINDER, Daten v1 */
 (function (global) {
     'use strict';
 
@@ -14,7 +14,7 @@
     form: 'viertelkreis',
     priceFrom: 36.90,
     bestseller: true,
-    desc: 'Vorgebogene Schleiflippendichtung mit Abtropfleiste – passgenau für Viertelkreis- und Halbkreisduschen.',
+    desc: 'Vorgebogene Schleiflippendichtung mit Abtropfleiste, passgenau für Viertelkreis- und Halbkreisduschen.',
     lengths: 'ca. 126 cm (vorgebogen)',
     variants: {
       '6': 52830790844739,
@@ -68,7 +68,7 @@
     form: 'viertelkreis',
     priceFrom: 36.90,
     bestseller: false,
-    desc: 'Vielseitige vorgebogene Dichtung mit Wasserabweiser – in 3 Lippenlängen (12, 17, 23 mm) für verschiedene Spaltmaße.',
+    desc: 'Vielseitige vorgebogene Dichtung mit Wasserabweiser, in 3 Lippenlängen (12, 17, 23 mm) für verschiedene Spaltmaße.',
     lengths: 'ca. 110 cm (vorgebogen)',
     variants: {
       '6': 52830788256067,
@@ -86,7 +86,7 @@
     form: 'viertelkreis',
     priceFrom: 31.50,
     bestseller: false,
-    desc: 'Vorgebogene Dichtung mit 20 mm Dächlein als Abtropfleiste – auch für Schiebetüren in Viertelkreisduschen geeignet.',
+    desc: 'Vorgebogene Dichtung mit 20 mm Dächlein als Abtropfleiste, auch für Schiebetüren in Viertelkreisduschen geeignet.',
     lengths: 'ca. 110 cm (vorgebogen)',
     variants: {
       '6': 52830792057155,

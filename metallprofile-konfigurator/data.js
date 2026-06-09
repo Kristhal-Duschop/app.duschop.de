@@ -1,5 +1,5 @@
 ﻿/* ============================================================
-   METALLPROFILE-KONFIGURATOR — Daten v1
+   METALLPROFILE-KONFIGURATOR, Daten v1
    Aus metallprofile-konfigurator/legacy.html extrahiert.
    ============================================================ */
 (function (global) {

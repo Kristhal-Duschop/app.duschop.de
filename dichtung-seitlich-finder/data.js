@@ -1,4 +1,4 @@
-﻿/* DICHTUNG-SEITLICH-FINDER — Daten v1 */
+﻿/* DICHTUNG-SEITLICH-FINDER, Daten v1 */
 (function (global) {
     'use strict';
 
@@ -421,7 +421,7 @@
   { id: '1600635-35mm', name: 'Ziehharmonika-Dichtung 1600635 Glas-Glas 35 mm', artNr: '1600635', handle: 'ziehharmonika-dichtung_35mm', glass: [6,8,10], application: ['glas-glas'], doorType: ['dreh'], arrangement: ['fluchtend','versetzt'], gapMin: 20, gapMax: 35, priceFrom: 29.90, desc: 'Ziehharmonika-Dichtung Glas-Glas, flexibel für 20–35 mm Spaltmaß.' },
   { id: 'PCR8L', name: 'Ballondichtung PCR8L breiter Ballon kurzer Glaseinstand', artNr: 'PCR8L', handle: 'streifdichtung-ballondichtung-breiter-ballon-mit-kurzem-glaseinstand-ca-5-mm-art-nr-pcr8l', glass: [8], application: ['glas-wand'], doorType: ['dreh'], arrangement: ['fluchtend'], gapMin: 12, gapMax: 13, priceFrom: 24.90, desc: 'Ballondichtung breiter Ballon mit kurzem Glaseinstand (ca. 5 mm), für 8 mm Glas.' },
   { id: 'PHJ-8-12', name: 'Wintergarten-Fugendichtung PHJ 8/12 harte Anschlagschiene', artNr: 'PHJ 8/12', handle: 'fugendichtung-180-mit-weicher-lippe-fur-geringes-spaltmass-pcc8-10-12-kopie', glass: [8,12], application: ['glas-glas'], doorType: ['dreh'], arrangement: ['fluchtend'], gapMin: 3, gapMax: 6, priceFrom: 24.90, desc: 'Wintergarten-Fugendichtung 180° mit harter Anschlagschiene, für 8/12 mm Glas.' },
-  { id: '6062-6072-112', name: 'Magnetdichtung 6062/6072 112° Sonderwinkel', artNr: '6062/6072', handle: 'magnetdichtungspaar_112grad_sonderwinkel', glass: [9,10,12,13], application: ['glas-glas'], doorType: ['dreh'], arrangement: ['fluchtend'], gapMin: 16, gapMax: 18, priceFrom: 39.90, desc: 'Magnetdichtung 112° Sonderwinkel asymmetrisch — für Fünfeckduschen mit nicht-Standard-Winkel.' }
+  { id: '6062-6072-112', name: 'Magnetdichtung 6062/6072 112° Sonderwinkel', artNr: '6062/6072', handle: 'magnetdichtungspaar_112grad_sonderwinkel', glass: [9,10,12,13], application: ['glas-glas'], doorType: ['dreh'], arrangement: ['fluchtend'], gapMin: 16, gapMax: 18, priceFrom: 39.90, desc: 'Magnetdichtung 112° Sonderwinkel asymmetrisch, für Fünfeckduschen mit nicht-Standard-Winkel.' }
 ,
 
   // =============================================

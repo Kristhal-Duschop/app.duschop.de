@@ -6,3 +6,6 @@ google-apps-script.js
 # Edit-Tool-Artefakte (z.B. Backup-Dateien von Editoren)
 *.tmp
 *.tmp.*
+
+# Lokale Vorschau-/Vergleichsseiten (nie deployen)
+_*.html

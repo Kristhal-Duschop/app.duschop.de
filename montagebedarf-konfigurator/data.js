@@ -1,4 +1,4 @@
-﻿/* MONTAGEBEDARF-FINDER — Daten v1 */
+﻿/* MONTAGEBEDARF-FINDER, Daten v1 */
 (function (global) {
     'use strict';
 

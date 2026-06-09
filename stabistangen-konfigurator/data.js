@@ -1,5 +1,5 @@
 /* ============================================================
-   STABISTANGEN-KONFIGURATOR — Daten + Shopify-Sync v1
+   STABISTANGEN-KONFIGURATOR, Daten + Shopify-Sync v1
    Konvertiert aus stabistangen-konfigurator/legacy.html.
 
    Architektur:
@@ -44,9 +44,9 @@
 };
 
     var montageDefs = {
-        'wand-glas':  { name: 'Wand – Glas',  desc: 'Stange zwischen Wand und Glasscheibe' },
-        'glas-glas':  { name: 'Glas – Glas',  desc: 'Stange zwischen zwei Glasscheiben' },
-        'glas-decke': { name: 'Glas – Decke', desc: 'Stange zwischen Glasscheibe und Decke (vertikal)' }
+        'wand-glas':  { name: 'Wand zu Glas',  desc: 'Stange zwischen Wand und Glasscheibe' },
+        'glas-glas':  { name: 'Glas zu Glas',  desc: 'Stange zwischen zwei Glasscheiben' },
+        'glas-decke': { name: 'Glas zu Decke', desc: 'Stange zwischen Glasscheibe und Decke (vertikal)' }
     };
 
     // ---- Fallback-Produkte (wenn Shopify-Fetch fehlschlägt) ----

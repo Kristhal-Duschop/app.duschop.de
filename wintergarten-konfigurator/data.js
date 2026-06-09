@@ -1,4 +1,4 @@
-/* WINTERGARTEN-KONFIGURATOR — Daten v1 */
+/* WINTERGARTEN-KONFIGURATOR, Daten v1 */
 (function (global) {
     'use strict';
 

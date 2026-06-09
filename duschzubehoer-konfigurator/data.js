@@ -1,4 +1,4 @@
-﻿/* DUSCHZUBEHOER-FINDER — Daten v1 */
+﻿/* DUSCHZUBEHOER-FINDER, Daten v1 */
 (function (global) {
     'use strict';
 
@@ -253,7 +253,7 @@
     { id: 'vigour-one-glashalter-onghk', title: 'Vigour one V1 Glashalter mit Kunststoff-Becher', handle: 'vigour-one-v1-glashalter-onghk', kategorie: 'badzubehoer', montage: ['wand'], price: '31,90', desc: 'Glashalter mit klarem Kunststoff-Becher, verchromt, Wandmontage.', isMain: false },
     { id: 'vigour-one-buerstengarnitur-onbu', title: 'Vigour one V1 WC-Bürstengarnitur, Kristallglas', handle: 'vigour-one-v1-buerstengarnitur-onbu', kategorie: 'badzubehoer', montage: ['wand'], price: '64,90', desc: 'WC-Bürstengarnitur Wandmontage, Kristallglas, verchromt.', isMain: false },
     { id: 'vigour-one-papierhalter-onph', title: 'Vigour one V1 Papierhalter mit Deckel, Bügelform', handle: 'vigour-one-v1-papierhalter-mit-deckel-onph', kategorie: 'badzubehoer', montage: ['wand'], price: '29,90', desc: 'Papierhalter mit Deckel, verchromt, Bügelform, Wandmontage.', isMain: false },
-    { id: 'smedbo-xtra-ersatz-h234n3', title: 'Smedbo Xtra Ersatzbürstenkopf Set H234N/3 — 3 Stück Weiß', handle: 'xtra-ersatzburstenkopf-set-3-stuck-in-weiss', kategorie: 'badzubehoer', price: '35,90', desc: 'Ersatzbürstenkopf-Set für Smedbo Xtra WC-Bürsten, 3 Stück, weiß.', isMain: false },
+    { id: 'smedbo-xtra-ersatz-h234n3', title: 'Smedbo Xtra Ersatzbürstenkopf Set H234N/3, 3 Stück Weiß', handle: 'xtra-ersatzburstenkopf-set-3-stuck-in-weiss', kategorie: 'badzubehoer', price: '35,90', desc: 'Ersatzbürstenkopf-Set für Smedbo Xtra WC-Bürsten, 3 Stück, weiß.', isMain: false },
     { id: 'vigour-one-handtuchhalter-onhh', title: 'Vigour one V1 Handtuchhalter, 2-teilig schwenkbar, 41 cm', handle: 'vigour-one-v1-handtuchhalter-onhh', kategorie: 'halter', montage: ['wand'], price: '43,90', desc: 'Handtuchhalter 2-teilig schwenkbar, 41 cm, verchromt, Wandmontage.', isMain: false }
 ];
 

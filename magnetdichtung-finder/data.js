@@ -1,4 +1,4 @@
-/* MAGNETDICHTUNG-FINDER — Daten v1 */
+/* MAGNETDICHTUNG-FINDER, Daten v1 */
 (function (global) {
     'use strict';
 
@@ -70,7 +70,7 @@
     gapByGlass: { '6': [18, 26], '8': [20, 28] },
     priceFrom: 39.90,
     bestseller: true,
-    desc: 'Speziell für Pendeltüren die nach innen UND außen öffnen. Asymmetrisches Profil (6042 + 6092) – die Tür schließt in beide Richtungen magnetisch.',
+    desc: 'Speziell für Pendeltüren die nach innen UND außen öffnen. Asymmetrisches Profil (6042 + 6092), die Tür schließt in beide Richtungen magnetisch.',
     lengths: ['200 cm', '250 cm'],
     variants: {
       '6': { '200 cm': 52830803034435, '250 cm': 52830803132739 },
@@ -125,7 +125,7 @@
     gapByGlass: { '6': [21, 23], '8': [25, 27], '10': [25, 27] },
     priceFrom: 39.90,
     bestseller: false,
-    desc: '45°-Profile als 180°-Paar montiert – für größere Spaltmaße bei fluchtender Anordnung. Spaltmaß 22–26 mm.',
+    desc: '45°-Profile als 180°-Paar montiert, für größere Spaltmaße bei fluchtender Anordnung. Spaltmaß 22–26 mm.',
     lengths: ['200 cm', '250 cm'],
     variants: {
       '6': { '200 cm': 52830803657027, '250 cm': 52830803722563 },
@@ -253,13 +253,13 @@
     gapMax: 18,
     priceFrom: 39.90,
     bestseller: false,
-    desc: 'Sonderwinkel 112° asymmetrisch — für Fünfeckduschen mit nicht-Standard-Winkel. Für 9, 10, 12 und 13 mm Glas.',
+    desc: 'Sonderwinkel 112° asymmetrisch, für Fünfeckduschen mit nicht-Standard-Winkel. Für 9, 10, 12 und 13 mm Glas.',
     lengths: ['200 cm'],
     variants: {}
   }
 ];
 
-    // Handles, die vom Sync uebersprungen werden — Magnettraegerprofile
+    // Handles, die vom Sync uebersprungen werden, Magnettraegerprofile
     // sind technisch keine Magnetdichtungen, sondern Aufnahme-Profile aus Aluminium.
     // Gehoeren in metallprofile-konfigurator, nicht in magnetdichtung-finder.
     const _syncSkip = [

@@ -428,6 +428,20 @@
     margin-right: auto;
 }
 
+.duschop-illustration {
+    max-width: 460px;
+    margin: 0 auto 24px;
+    padding: 16px 18px;
+    background: var(--duschop-bg-deep);
+    border: 1px solid var(--duschop-border);
+    border-radius: var(--duschop-radius);
+}
+.duschop-illustration svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 /* ============================================================
    7. Options (Klick-Kacheln für Antworten)
    ============================================================ */
@@ -473,6 +487,12 @@
 .duschop-opt-icon {
     font-size: 28px;
     line-height: 1;
+}
+.duschop-opt-icon svg {
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 2px auto 8px;
 }
 
 .duschop-opt-label {

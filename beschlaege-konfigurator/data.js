@@ -1,5 +1,5 @@
 /* ============================================================
-   BESCHLAEGE-KONFIGURATOR — Daten v2 (Phase 4)
+   BESCHLAEGE-KONFIGURATOR, Daten v2 (Phase 4)
    Hybrid: Live-Shopify-Fetch fuer Bestand/Preis/Bild,
            statische Annotations fuer Klassifizierung
    Wird vom Wizard in index.html geladen.

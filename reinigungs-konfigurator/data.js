@@ -1,5 +1,5 @@
 ﻿/* ============================================================
-   REINIGUNGS-KONFIGURATOR — Daten v1
+   REINIGUNGS-KONFIGURATOR, Daten v1
    ============================================================ */
 (function (global) {
     'use strict';
