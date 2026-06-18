@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aufmaß-Datenblatt · Nische · Kristhal Duschop</title>
+<style>
+  /* ===========================================================
+     Aufmaß-Vorlagenfamilie Kristhal Duschop · Blatt: NISCHE
+     Eine Datei, zwei Wege: am Bildschirm ausfüllen ODER ausdrucken.
+     Druck: A4 hoch, eine Seite. PDF über Edge headless.
+     =========================================================== */
+  :root{
+    --accent:#0F4C5C;        /* Petrol, Leitfarbe der Familie */
+    --accent-soft:#E7EEF0;
+    --measure:#C0392B;       /* Mess-Rot, alle Eintragefelder */
+    --ink:#1A1A1A;
+    --muted:#5F5F5F;
+    --line:#D7D4D0;
+    --light:#F4F1EC;
+    --wall:#D7D4D0;
+    --warn:#B5530A;
+    --warn-soft:#FBF0E4;
+    --ok:#2D6A3E;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Segoe UI",-apple-system,system-ui,sans-serif;
+    color:var(--ink);
+    background:#EDEAE3;
+    line-height:1.4;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  /* ----- Bildschirm-Werkzeugleiste (druckt nicht) ----- */
+  .toolbar{
+    position:sticky;top:0;z-index:20;
+    display:flex;align-items:center;gap:14px;
+    background:var(--accent);color:#fff;
+    padding:10px 18px;font-size:14px;
+  }
+  .toolbar b{font-weight:600;}
+  .toolbar .sp{flex:1;}
+  .toolbar button{
+    font:600 14px/1 "Segoe UI",sans-serif;
+    background:#fff;color:var(--accent);
+    border:0;border-radius:6px;padding:9px 16px;cursor:pointer;
+  }
+  .toolbar button:hover{background:#eaf3f5;}
+  .hint-screen{font-size:12.5px;opacity:.9;}
+
+  /* ----- Das Blatt ----- */
+  .sheet{
+    width:210mm;min-height:297mm;
+    margin:18px auto;
+    background:#fff;
+    padding:7mm 11mm 5mm;
+    box-shadow:0 4px 20px rgba(0,0,0,.16);
+    position:relative;
+  }
+
+  /* ----- Kopf ----- */
+  .head{display:flex;align-items:flex-end;justify-content:space-between;
+    border-bottom:2px solid var(--accent);padding-bottom:7px;}
+  .brand{font-size:21px;font-weight:700;color:var(--accent);letter-spacing:.2px;}
+  .brand small{display:block;font-size:9.5px;font-weight:400;color:var(--muted);
+    letter-spacing:.3px;margin-top:2px;}
+  .doctag{text-align:right;}
+  .doctag .t1{font-size:9.5px;color:var(--muted);}
+  .doctag .t2{font-size:14px;font-weight:700;color:var(--accent);}
+
+  h1.title{font-size:20px;margin:8px 0 1px;}
+  .sub{font-size:11px;color:var(--muted);margin:0 0 7px;}
+
+  /* ----- Eingabe-Grundelemente ----- */
+  .row{display:flex;gap:10px;flex-wrap:wrap;}
+  .fld{flex:1;min-width:120px;}
+  .fld label{display:block;font-size:8.5px;text-transform:uppercase;
+    letter-spacing:.5px;color:var(--muted);margin-bottom:1px;}
+  .fld input{width:100%;border:0;border-bottom:1px solid #444;background:transparent;
+    font:600 12px/1.6 "Segoe UI",sans-serif;color:#111;padding:1px 2px;}
+  .fld input:focus{outline:none;border-bottom:2px solid var(--accent);}
+
+  /* ----- Hinweis-Bänder ----- */
+  .band{border-radius:6px;padding:7px 11px;margin:6px 0;font-size:10.5px;}
+  .band.pre{background:var(--warn-soft);border:1px solid #E7C9A6;}
+  .band.pre b{color:var(--warn);}
+  .band .checks{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px;}
+  .band .checks span{display:flex;align-items:center;gap:5px;color:#3a3a3a;}
+  .band .checks i{width:11px;height:11px;border:1.4px solid var(--warn);
+    border-radius:2px;display:inline-block;flex-shrink:0;}
+  .rule{background:var(--accent-soft);border:1px solid #BBD2D8;}
+  .rule b{color:var(--accent);}
+
+  /* ----- Y-Zeile ----- */
+  .yline{display:flex;align-items:center;gap:8px;margin:5px 0 2px;font-size:11px;color:var(--muted);}
+  .yline .yi{display:inline-flex;align-items:center;gap:6px;color:#111;font-weight:600;}
+  .yline input{width:62px;border:0;border-bottom:1px solid #444;text-align:center;
+    font:600 12px/1 "Segoe UI";padding:2px 0;}
+
+  /* ----- Abschnitts-Überschrift ----- */
+  .sec{font-size:12px;font-weight:700;color:var(--accent);
+    margin:8px 0 3px;padding-left:8px;border-left:4px solid var(--accent);}
+
+  /* ----- Mess-Felder im SVG ----- */
+  .mf{width:100%;height:100%;border:1.3px solid var(--measure);border-radius:3px;
+    background:#fff;text-align:center;font:600 12px/1 "Segoe UI",sans-serif;color:#111;padding:0;}
+  .mf:focus{outline:2px solid var(--accent);}
+
+  /* ----- Neigung / Boden Karten ----- */
+  .grid2{display:flex;gap:10px;}
+  .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:9px 11px;background:#fff;}
+  .card .ct{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:5px;
+    display:flex;align-items:center;gap:7px;}
+  .card .ct .opt{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:#333;font-size:10.5px;}
+  .card .ct .opt i,.dirbox i{width:11px;height:11px;border:1.4px solid var(--accent);
+    border-radius:2px;display:inline-block;}
+  .minirow{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:10.5px;color:#333;}
+  .minirow .lab{min-width:74px;color:var(--muted);}
+  .minirow input.v{width:54px;border:1.3px solid var(--measure);border-radius:3px;
+    text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
+  .dirbox{display:inline-flex;align-items:center;gap:13px;}
+  .dirbox label{display:inline-flex;align-items:center;gap:5px;color:#333;}
+  .unit{color:var(--muted);font-size:10px;}
+
+  /* ----- Legende ----- */
+  .legend{background:var(--light);border:1px solid var(--line);border-radius:7px;
+    padding:7px 10px;margin:7px 0;font-size:10px;color:#333;}
+  .legend b{color:var(--accent);}
+
+  /* ----- Skizzenfeld ----- */
+  .sketch{border:1px solid var(--line);border-radius:7px;height:36px;position:relative;margin-top:4px;}
+  .sketch .lab{position:absolute;top:6px;left:9px;font-size:10px;color:var(--muted);}
+  .sketch textarea{position:absolute;inset:0;border:0;background:transparent;resize:none;
+    padding:22px 10px 8px;font:400 11px/1.5 "Segoe UI";color:#111;width:100%;height:100%;}
+  .sketch textarea:focus{outline:none;}
+
+  /* ----- Verbindlichkeit + Fuß ----- */
+  .commit{font-size:9.5px;font-weight:600;text-align:center;color:#111;margin:7px 0 5px;}
+  .foot{border-top:1px solid var(--line);padding-top:6px;display:flex;
+    justify-content:space-between;font-size:9px;color:var(--muted);}
+
+  /* ----- Druck ----- */
+  @page{size:A4;margin:0;}
+  @media print{
+    body{background:#fff;}
+    .toolbar{display:none;}
+    .sheet{margin:0;box-shadow:none;width:auto;min-height:auto;}
+    .mf,.minirow input.v{outline:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <b>Aufmaß-Datenblatt Nische</b>
+  <span class="hint-screen">Am Bildschirm ausfüllen oder ausdrucken und von Hand eintragen.</span>
+  <span class="sp"></span>
+  <button onclick="window.print()">Drucken / als PDF speichern</button>
+</div>
+
+<div class="sheet">
+
+  <!-- ============ KOPF ============ -->
+  <div class="head">
+    <div class="brand">Kristhal Duschop
+      <small>Glasduschen nach Maß · duschop.de</small>
+    </div>
+    <div class="doctag">
+      <div class="t1">Aufmaß-Datenblatt</div>
+      <div class="t2">Nische</div>
+    </div>
+  </div>
+
+  <h1 class="title">Aufmaß Nische</h1>
+  <p class="sub">Glas zwischen zwei Wänden. Bitte die roten Felder ausfüllen, alle Werte in Millimeter.</p>
+
+  <div class="row">
+    <div class="fld"><label>Kunde / Projekt</label><input type="text"></div>
+    <div class="fld" style="max-width:120px"><label>Datum</label><input type="text"></div>
+    <div class="fld" style="max-width:150px"><label>Telefon</label><input type="text"></div>
+  </div>
+
+  <!-- ============ VORBEDINGUNG ============ -->
+  <div class="band pre">
+    <b>Bitte erst messen, wenn alles fertig ist.</b> Sonst stimmt das Maß später nicht.
+    <span class="checks">
+      <span><i></i> Wände fertig gefliest</span>
+      <span><i></i> Duschwanne oder Boden fertig eingebaut</span>
+      <span><i></i> alte Duschkabine entfernt</span>
+    </span>
+  </div>
+
+  <!-- ============ KERNREGEL ============ -->
+  <div class="band rule">
+    <b>Wichtig:</b> Bitte nur die fertige Öffnung so messen, wie sie ist.
+    <b>Ziehen Sie nichts ab</b> und rechnen Sie kein Spaltmaß ein. Die nötigen Abzüge für ein sauberes Schließen ermitteln wir.
+  </div>
+
+  <!-- ============ WAAGENLÄNGE Y ============ -->
+  <div class="yline">
+    <span class="yi">Länge Ihrer Wasserwaage&nbsp; Y =
+      <input type="text"></span>
+    <span>mm · gilt für die Neigungsangaben weiter unten</span>
+  </div>
+
+  <!-- ============ FRONTANSICHT ============ -->
+  <div class="sec">1 · Breite und Höhe der Öffnung</div>
+
+  <svg viewBox="0 0 760 250" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
+    <defs>
+      <pattern id="wall" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <rect width="7" height="7" fill="#DCD8D2"/>
+        <line x1="0" y1="0" x2="0" y2="7" stroke="#C3BEB6" stroke-width="1"/>
+      </pattern>
+      <marker id="ar" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#1A1A1A"/>
+      </marker>
+    </defs>
+
+    <!-- Wände -->
+    <rect x="60" y="22" width="56" height="200" fill="url(#wall)" stroke="#9E9A93"/>
+    <rect x="644" y="22" width="56" height="200" fill="url(#wall)" stroke="#9E9A93"/>
+    <text x="88" y="122" font-size="11" fill="#6a6a6a" text-anchor="middle" transform="rotate(-90 88 122)">Wand</text>
+    <text x="672" y="122" font-size="11" fill="#6a6a6a" text-anchor="middle" transform="rotate(-90 672 122)">Wand</text>
+
+    <!-- Öffnung -->
+    <rect x="116" y="22" width="528" height="200" fill="#fff" stroke="#C7C2BA" stroke-dasharray="2 3"/>
+    <text x="392" y="160" font-size="11" fill="#9a9a9a" text-anchor="middle" font-style="italic">Öffnung</text>
+    <text x="392" y="174" font-size="8.5" fill="#b3b3b3" text-anchor="middle" font-style="italic">(Skizze nicht maßstäblich)</text>
+
+    <!-- Boden -->
+    <rect x="60" y="222" width="640" height="8" fill="#ECE8E0" stroke="#C7C2BA"/>
+    <text x="392" y="245" font-size="9.5" fill="#9a9a9a" text-anchor="middle" font-style="italic">Boden / Duschwanne</text>
+
+    <!-- Breite oben (Linie am Feld unterbrochen) -->
+    <line x1="116" y1="46" x2="345" y2="46" stroke="#1A1A1A" stroke-width="1" marker-start="url(#ar)"/>
+    <line x1="415" y1="46" x2="644" y2="46" stroke="#1A1A1A" stroke-width="1" marker-end="url(#ar)"/>
+    <text x="250" y="40" font-size="10" fill="#333" text-anchor="middle">Breite oben</text>
+    <foreignObject x="345" y="33" width="70" height="26">
+      <input xmlns="http://www.w3.org/1999/xhtml" class="mf" type="text" aria-label="Breite oben"/>
+    </foreignObject>
+    <text x="420" y="50" font-size="9" fill="#6a6a6a">mm</text>
+
+    <!-- Breite Mitte -->
+    <line x1="116" y1="126" x2="345" y2="126" stroke="#1A1A1A" stroke-width="1" marker-start="url(#ar)"/>
+    <line x1="415" y1="126" x2="644" y2="126" stroke="#1A1A1A" stroke-width="1" marker-end="url(#ar)"/>
+    <text x="250" y="120" font-size="10" fill="#333" text-anchor="middle">Breite Mitte</text>
+    <foreignObject x="345" y="113" width="70" height="26">
+      <input xmlns="http://www.w3.org/1999/xhtml" class="mf" type="text" aria-label="Breite Mitte"/>
+    </foreignObject>
+    <text x="420" y="130" font-size="9" fill="#6a6a6a">mm</text>
+
+    <!-- Breite unten -->
+    <line x1="116" y1="206" x2="345" y2="206" stroke="#1A1A1A" stroke-width="1" marker-start="url(#ar)"/>
+    <line x1="415" y1="206" x2="644" y2="206" stroke="#1A1A1A" stroke-width="1" marker-end="url(#ar)"/>
+    <text x="250" y="200" font-size="10" fill="#333" text-anchor="middle">Breite unten</text>
+    <foreignObject x="345" y="193" width="70" height="26">
+      <input xmlns="http://www.w3.org/1999/xhtml" class="mf" type="text" aria-label="Breite unten"/>
+    </foreignObject>
+    <text x="420" y="210" font-size="9" fill="#6a6a6a">mm</text>
+
+    <!-- Höhe (vertikal, Feld im oberen Drittel, kollisionsfrei) -->
+    <line x1="150" y1="22" x2="150" y2="74" stroke="#1A1A1A" stroke-width="1" marker-start="url(#ar)"/>
+    <line x1="150" y1="98" x2="150" y2="222" stroke="#1A1A1A" stroke-width="1" marker-end="url(#ar)"/>
+    <text x="161" y="62" font-size="10" fill="#333">Höhe</text>
+    <foreignObject x="119" y="74" width="62" height="24">
+      <input xmlns="http://www.w3.org/1999/xhtml" class="mf" type="text" aria-label="Höhe"/>
+    </foreignObject>
+    <text x="151" y="114" font-size="9" fill="#6a6a6a">mm</text>
+  </svg>
+
+  <p class="sub" style="margin:2px 0 0">
+    Die Breite oben, in der Mitte und unten kann sich um einige Millimeter unterscheiden. Genau dafür messen wir an drei Stellen, denn fast keine Wand steht exakt senkrecht.
+  </p>
+
+  <!-- ============ NEIGUNG SEITENWÄNDE ============ -->
+  <div class="sec">2 · Stehen die Seitenwände im Lot?</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ct">Linke Wand</div>
+      <div class="minirow">
+        <span class="lab">Spalt X</span>
+        <input class="v" type="text"><span class="unit">mm</span>
+        <span style="color:var(--muted);font-size:9.5px">(Wasserwaage senkrecht, Spalt am Ende)</span>
+      </div>
+      <div class="minirow">
+        <span class="lab">Wand kippt</span>
+        <span class="dirbox">
+          <label><i></i> zum Raum</label>
+          <label><i></i> zur Wand</label>
+          <label><i></i> steht gerade</label>
+        </span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct">Rechte Wand</div>
+      <div class="minirow">
+        <span class="lab">Spalt X</span>
+        <input class="v" type="text"><span class="unit">mm</span>
+        <span style="color:var(--muted);font-size:9.5px">(Wasserwaage senkrecht, Spalt am Ende)</span>
+      </div>
+      <div class="minirow">
+        <span class="lab">Wand kippt</span>
+        <span class="dirbox">
+          <label><i></i> zum Raum</label>
+          <label><i></i> zur Wand</label>
+          <label><i></i> steht gerade</label>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ BODENSITUATION ============ -->
+  <div class="sec">3 · Wie steht die Dusche unten? Bitte eine Spalte ankreuzen.</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ct"><span class="opt"><i></i> Auf Duschwanne</span></div>
+      <div class="minirow"><span class="lab">Einrückmaß</span><input class="v" type="text"><span class="unit">mm · Außenkante Wanne bis Glas, Standard 25</span></div>
+      <div class="minirow"><span class="lab">Wannenbreite</span>
+        <input class="v" type="text"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Höhe Rand</span>
+        <input class="v" type="text"><span class="unit">mm über Boden</span></div>
+      <div class="minirow"><span class="lab">Rand waagerecht</span>
+        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct"><span class="opt"><i></i> Bodengleich / gefliest</span></div>
+      <div class="minirow"><span class="lab">Gefälle zum Ablauf</span>
+        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span>
+      </div>
+      <div class="minirow"><span class="lab" style="min-width:auto">Glas-Außenkante steht auf:</span></div>
+      <div class="minirow" style="margin-top:0">
+        <span class="dirbox">
+          <label><i></i> Innenkante Fuge</label>
+          <label><i></i> Mitte Fuge</label>
+          <label><i></i> Außenkante Fuge</label>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MESS-LEGENDE ============ -->
+  <div class="legend">
+    <b>So messen Sie die Neigung:</b> Wasserwaage senkrecht an die Wand stellen und ins Lot bringen (Libelle mittig).
+    Am Ende den Spalt zwischen Waage und Wand messen, das ist <b>X</b>. <b>Y</b> ist die Länge Ihrer Wasserwaage.
+    Notieren Sie auch die Richtung. Im Zweifel ein Foto mit angelegter Wasserwaage mitschicken, das hilft uns sofort weiter.
+  </div>
+
+  <!-- ============ ANMERKUNGEN ============ -->
+  <div class="sec" style="margin-bottom:2px">Anmerkungen / eigene Skizze
+    <span style="font-weight:400;color:var(--muted);font-size:10px">&nbsp; z. B. Tür-Anschlag, Fenster, Heizkörper, Lage des Ablaufs</span>
+  </div>
+  <div class="sketch">
+    <span class="lab">Platz für Ihre Skizze oder Notizen</span>
+    <textarea></textarea>
+  </div>
+
+  <!-- ============ VERBINDLICHKEIT ============ -->
+  <div class="commit">
+    Ich habe selbst gemessen und die Maße geprüft. Mir ist bekannt, dass die Fertigung nach diesen Angaben erfolgt und die Verantwortung für die Richtigkeit beim Auftraggeber liegt.
+  </div>
+
+  <!-- ============ FUSS ============ -->
+  <div class="foot">
+    <span>Kristhal Duschop · Tel. 09293 9339580 · info@duschop.de</span>
+    <span>Ausgefüllt zurück: Foto oder Scan per E-Mail</span>
+  </div>
+
+</div>
+</body>
+</html>

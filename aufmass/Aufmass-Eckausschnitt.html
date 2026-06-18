@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aufmaß-Sonderblatt · Eck-Ausschnitt · Kristhal Duschop</title>
+<style>
+  /* Aufmaß-Vorlagenfamilie Kristhal Duschop · ECK-AUSSCHNITT (Sitzbank / Vorwand) · A4 hoch, eine Seite */
+  :root{
+    --accent:#0F4C5C;--accent-soft:#E7EEF0;--measure:#C0392B;--ink:#1A1A1A;
+    --muted:#5F5F5F;--line:#D7D4D0;--light:#F4F1EC;--wall:#D7D4D0;
+    --warn:#B5530A;--warn-soft:#FBF0E4;--ok:#2D6A3E;--level:#E8B600;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:"Segoe UI",-apple-system,system-ui,sans-serif;color:var(--ink);
+    background:#EDEAE3;line-height:1.4;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .toolbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;
+    background:var(--accent);color:#fff;padding:10px 18px;font-size:14px;}
+  .toolbar b{font-weight:600;}.toolbar .sp{flex:1;}
+  .toolbar button{font:600 14px/1 "Segoe UI",sans-serif;background:#fff;color:var(--accent);
+    border:0;border-radius:6px;padding:9px 16px;cursor:pointer;}
+  .toolbar button:hover{background:#eaf3f5;}
+  .hint-screen{font-size:12.5px;opacity:.9;}
+  .sheet{width:210mm;min-height:297mm;margin:18px auto;background:#fff;
+    padding:8mm 11mm 6mm;box-shadow:0 4px 20px rgba(0,0,0,.16);position:relative;}
+  .head{display:flex;align-items:flex-end;justify-content:space-between;
+    border-bottom:2px solid var(--accent);padding-bottom:7px;}
+  .brand{font-size:21px;font-weight:700;color:var(--accent);letter-spacing:.2px;}
+  .brand small{display:block;font-size:9.5px;font-weight:400;color:var(--muted);letter-spacing:.3px;margin-top:2px;}
+  .doctag{text-align:right;}.doctag .t1{font-size:9.5px;color:var(--muted);}
+  .doctag .t2{font-size:14px;font-weight:700;color:var(--accent);}
+  h1.title{font-size:19px;margin:8px 0 1px;}
+  .sub{font-size:11px;color:var(--muted);margin:0 0 7px;}
+  .row{display:flex;gap:10px;flex-wrap:wrap;}
+  .fld{flex:1;min-width:120px;}
+  .fld label{display:block;font-size:8.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:1px;}
+  .fld input{width:100%;border:0;border-bottom:1px solid #444;background:transparent;
+    font:600 12px/1.6 "Segoe UI",sans-serif;color:#111;padding:1px 2px;}
+  .fld input:focus{outline:none;border-bottom:2px solid var(--accent);}
+  .band{border-radius:6px;padding:7px 11px;margin:6px 0;font-size:10.5px;}
+  .band.pre{background:var(--warn-soft);border:1px solid #E7C9A6;}
+  .band.pre b{color:var(--warn);}
+  .band .checks{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px;}
+  .band .checks span{display:flex;align-items:center;gap:5px;color:#3a3a3a;}
+  .band .checks i{width:11px;height:11px;border:1.4px solid var(--warn);border-radius:2px;display:inline-block;flex-shrink:0;}
+  .rule{background:var(--accent-soft);border:1px solid #BBD2D8;}.rule b{color:var(--accent);}
+  .sec{font-size:12px;font-weight:700;color:var(--accent);margin:9px 0 3px;padding-left:8px;border-left:4px solid var(--accent);}
+  .grid2{display:flex;gap:12px;}
+  .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:9px 11px;background:#fff;}
+  .card .ct{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:5px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+  .opt{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:#333;font-size:10.5px;}
+  .opt i,.dirbox i{width:11px;height:11px;border:1.4px solid var(--accent);border-radius:2px;display:inline-block;flex-shrink:0;}
+  .minirow{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:10.5px;color:#333;flex-wrap:wrap;}
+  .minirow .lab{min-width:104px;color:var(--muted);}
+  .minirow input.v{width:56px;border:1.3px solid var(--measure);border-radius:3px;text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
+  .dirbox{display:inline-flex;align-items:center;gap:13px;flex-wrap:wrap;}
+  .dirbox label{display:inline-flex;align-items:center;gap:5px;color:#333;}
+  .unit{color:var(--muted);font-size:10px;}
+  .yline{display:flex;align-items:center;gap:8px;margin:4px 0 2px;font-size:11px;color:var(--muted);flex-wrap:wrap;}
+  .yline .yi{display:inline-flex;align-items:center;gap:6px;color:#111;font-weight:600;}
+  .yline input{width:62px;border:0;border-bottom:1px solid #444;text-align:center;font:600 12px/1 "Segoe UI";padding:2px 0;}
+  .note2{background:var(--accent-soft);border:1px solid #BBD2D8;border-radius:6px;padding:7px 11px;font-size:10px;color:#243b40;margin:6px 0;}
+  .note2 b{color:var(--accent);}
+  .sketch{border:1px solid var(--line);border-radius:7px;height:44px;position:relative;margin-top:5px;}
+  .sketch .lab{position:absolute;top:6px;left:9px;font-size:10px;color:var(--muted);}
+  .sketch textarea{position:absolute;inset:0;border:0;background:transparent;resize:none;padding:21px 10px 6px;
+    font:400 11px/1.5 "Segoe UI";color:#111;width:100%;height:100%;}
+  .sketch textarea:focus{outline:none;}
+  .commit{font-size:9.5px;font-weight:600;text-align:center;color:#111;margin:7px 0 5px;}
+  .foot{border-top:1px solid var(--line);padding-top:6px;display:flex;justify-content:space-between;font-size:9px;color:var(--muted);}
+  @page{size:A4;margin:0;}
+  @media print{body{background:#fff;}.toolbar{display:none;}
+    .sheet{margin:0;box-shadow:none;width:auto;min-height:auto;}.mf,.minirow input.v{outline:none;}}
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <b>Aufmaß-Sonderblatt · Eck-Ausschnitt</b>
+  <span class="hint-screen">Am Bildschirm ausfüllen oder ausdrucken und von Hand eintragen.</span>
+  <span class="sp"></span>
+  <button onclick="window.print()">Drucken / als PDF speichern</button>
+</div>
+
+<div class="sheet">
+
+  <div class="head">
+    <div class="brand">Kristhal Duschop<small>Glasduschen nach Maß · duschop.de</small></div>
+    <div class="doctag"><div class="t1">Aufmaß-Sonderblatt</div><div class="t2">Eck-Ausschnitt</div></div>
+  </div>
+
+  <h1 class="title">Eck-Ausschnitt für Sitzbank oder Vorwand</h1>
+  <p class="sub">Ergänzungsblatt: nur ausfüllen, wenn das Glas um eine gemauerte Sitzbank oder einen Vorwand ausgespart werden muss. Alle Werte in Millimeter.</p>
+
+  <div class="row">
+    <div class="fld"><label>Kunde / Projekt</label><input type="text"></div>
+    <div class="fld" style="max-width:120px"><label>Datum</label><input type="text"></div>
+    <div class="fld" style="max-width:150px"><label>Telefon</label><input type="text"></div>
+  </div>
+
+  <div class="band pre">
+    <b>Erst messen, wenn alles fertig ist.</b> Sitzbank bzw. Vorwand müssen fertig gemauert und gefliest sein.
+    <span class="checks">
+      <span><i></i> Wände fertig gefliest</span>
+      <span><i></i> Sitzbank / Vorwand fertig gefliest</span>
+      <span><i></i> Boden oder Wanne eingebaut</span>
+    </span>
+  </div>
+
+  <div class="band rule">
+    <b>Wichtig:</b> Nur die fertige, geflieste Sitzbank bzw. den Vorwand messen, so wie sie sind.
+    <b>Ziehen Sie nichts ab.</b> Die Luft für den Ausschnitt rechnen wir.
+  </div>
+
+  <div class="minirow" style="margin:6px 0">
+    <span class="lab" style="min-width:auto;font-weight:700;color:var(--accent)">Worum geht es?</span>
+    <span class="dirbox"><label><i></i> Sitzbank</label><label><i></i> Vorwand</label><label><i></i> anderer Vorsprung</label></span>
+  </div>
+
+  <!-- ===================== 1 · LAGE UND GRÖSSE ===================== -->
+  <div class="sec">1 · Lage und Größe des Ausschnitts</div>
+  <div class="grid2">
+
+    <div style="flex:1.2">
+      <svg viewBox="0 0 380 320" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
+        <defs>
+          <pattern id="wallA" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="7" height="7" fill="#DCD8D2"/><line x1="0" y1="0" x2="0" y2="7" stroke="#C3BEB6" stroke-width="1"/>
+          </pattern>
+          <pattern id="benchA" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="8" height="8" fill="#E3EEF0"/><line x1="0" y1="0" x2="0" y2="8" stroke="#A9C2C6" stroke-width="1"/>
+          </pattern>
+          <marker id="arM" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#C0392B"/></marker>
+        </defs>
+
+        <!-- Wand links -->
+        <rect x="22" y="22" width="20" height="250" fill="url(#wallA)" stroke="#9E9A93"/>
+        <text x="32" y="150" font-size="10" fill="#6a6a6a" text-anchor="middle" transform="rotate(-90 32 150)">Wand</text>
+        <!-- Boden -->
+        <rect x="22" y="272" width="338" height="12" fill="#ECE8E0" stroke="#C7C2BA"/>
+        <text x="250" y="296" font-size="9" fill="#9a9a9a" text-anchor="middle" font-style="italic">Boden / Wannenrand</text>
+
+        <!-- Glas mit Ausschnitt unten links -->
+        <polygon points="42,46 322,46 322,272 132,272 132,196 42,196"
+                 fill="#F2F8F9" stroke="#0F4C5C" stroke-width="2" stroke-dasharray="6 3"/>
+        <text x="245" y="120" font-size="11" fill="#7d9aa0" text-anchor="middle" font-style="italic">Glas</text>
+        <text x="245" y="134" font-size="8.5" fill="#9bb0b5" text-anchor="middle" font-style="italic">Ansicht von vorne</text>
+
+        <!-- Sitzbank / Vorwand im Ausschnitt -->
+        <rect x="42" y="196" width="90" height="76" fill="url(#benchA)" stroke="#8FAAAF"/>
+        <line x1="42" y1="196" x2="132" y2="196" stroke="#8FAAAF" stroke-width="1.8"/>
+        <line x1="132" y1="196" x2="132" y2="272" stroke="#8FAAAF" stroke-width="1.8"/>
+        <text x="87" y="236" font-size="9" fill="#4f6c70" text-anchor="middle" font-weight="600">Sitzbank /</text>
+        <text x="87" y="248" font-size="9" fill="#4f6c70" text-anchor="middle" font-weight="600">Vorwand</text>
+
+        <!-- Kanten-Labels (Neigungen) -->
+        <text x="250" y="183" font-size="8.5" fill="#0F4C5C" text-anchor="middle" font-weight="700">obere Kante</text>
+        <line x1="205" y1="186" x2="100" y2="196" stroke="#0F4C5C" stroke-width="0.7" stroke-dasharray="3 2"/>
+        <text x="250" y="252" font-size="8.5" fill="#0F4C5C" text-anchor="middle" font-weight="700">vordere Kante</text>
+        <line x1="205" y1="249" x2="132" y2="240" stroke="#0F4C5C" stroke-width="0.7" stroke-dasharray="3 2"/>
+
+        <!-- Maß a (Tiefe / Ausladung) -->
+        <line x1="42" y1="262" x2="132" y2="262" stroke="#C0392B" stroke-width="1.2" marker-start="url(#arM)" marker-end="url(#arM)"/>
+        <text x="87" y="258" font-size="10" fill="#C0392B" text-anchor="middle" font-weight="700">a</text>
+        <!-- Maß b (Höhe) -->
+        <line x1="146" y1="196" x2="146" y2="272" stroke="#C0392B" stroke-width="1.2" marker-start="url(#arM)" marker-end="url(#arM)"/>
+        <text x="153" y="237" font-size="10" fill="#C0392B" font-weight="700">b</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="ct">Maße eintragen</div>
+      <div class="minirow"><span class="lab">Seite des Ausschnitts</span>
+        <span class="dirbox"><label><i></i> links</label><label><i></i> rechts</label></span></div>
+      <div class="minirow"><span class="lab">a · Tiefe / Ausladung</span><input class="v" type="text"><span class="unit">mm in die Dusche</span></div>
+      <div class="minirow"><span class="lab">b · Höhe</span><input class="v" type="text"><span class="unit">mm über Boden/Rand</span></div>
+      <div class="minirow"><span class="lab">Breite entlang der Wand</span><input class="v" type="text"><span class="unit">mm</span></div>
+      <div class="note2" style="margin:6px 0 0"><b>a</b> ist, wie weit die Bank in die Dusche ragt, <b>b</b> ihre Höhe. Bei einem Vorwand genauso: Tiefe und Höhe des Vorsprungs.</div>
+    </div>
+  </div>
+
+  <!-- ===================== 2 · NEIGUNGEN DES AUSSCHNITTS ===================== -->
+  <div class="sec">2 · Neigungen des Ausschnitts</div>
+  <p class="sub" style="margin:0 0 3px">Sitzt die Bank bzw. der Vorwand nicht genau rechtwinklig, brauchen wir die Schräge der beiden Schnittkanten. So messen Sie X und Y, zeigt das Blatt „Neigungen messen".</p>
+  <div class="yline"><span class="yi">Länge Ihrer Wasserwaage&nbsp; Y = <input type="text"></span><span>mm · gilt für beide Kanten</span></div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ct">Obere Kante <span style="font-weight:400;color:var(--muted);font-size:9.5px">(Auflage auf der Bank)</span></div>
+      <div class="minirow"><span class="lab">waagerecht?</span>
+        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span></div>
+      <div class="minirow"><span class="lab">wenn nein: Spalt X</span><input class="v" type="text"><span class="unit">mm bei Y</span></div>
+      <div class="minirow"><span class="lab">fällt nach</span>
+        <span class="dirbox"><label><i></i> vorn (zum Raum)</label><label><i></i> hinten (zur Wand)</label></span></div>
+    </div>
+    <div class="card">
+      <div class="ct">Vordere Kante <span style="font-weight:400;color:var(--muted);font-size:9.5px">(Front der Bank / Vorwand)</span></div>
+      <div class="minirow"><span class="lab">senkrecht / im Lot?</span>
+        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span></div>
+      <div class="minirow"><span class="lab">wenn nein: Spalt X</span><input class="v" type="text"><span class="unit">mm bei Y</span></div>
+      <div class="minirow"><span class="lab">kippt oben nach</span>
+        <span class="dirbox"><label><i></i> zum Raum</label><label><i></i> zur Wand</label></span></div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-bottom:2px">Skizze und Anmerkungen
+    <span style="font-weight:400;color:var(--muted);font-size:10px">&nbsp; z. B. abgeschrägte Bank, Ablage, Nische in der Bank, Lage zu Tür und Ablauf</span>
+  </div>
+  <div class="sketch"><span class="lab">Platz für Ihre Skizze oder Notizen</span><textarea></textarea></div>
+
+  <div class="commit">
+    Selbst gemessen und die Maße geprüft. Mir ist bekannt, dass die Fertigung nach diesen Angaben erfolgt und die Verantwortung für die Richtigkeit beim Auftraggeber liegt.
+  </div>
+
+  <div class="foot">
+    <span>Kristhal Duschop · Tel. 09293 9339580 · info@duschop.de</span>
+    <span>Ausgefüllt zurück: Foto oder Scan per E-Mail</span>
+  </div>
+</div>
+</body>
+</html>

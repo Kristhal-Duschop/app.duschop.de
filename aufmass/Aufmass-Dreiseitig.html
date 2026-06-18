@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aufmaß-Datenblatt · Dreiseitig / U-Form · Kristhal Duschop</title>
+<style>
+  /* ===========================================================
+     Aufmaß-Vorlagenfamilie Kristhal Duschop · Blatt: DREISEITIG / U-FORM
+     Drei Glasseiten an einer gefliesten Rückwand, frei im Raum.
+     =========================================================== */
+  :root{
+    --accent:#0F4C5C;--accent-soft:#E7EEF0;--measure:#C0392B;--ink:#1A1A1A;
+    --muted:#5F5F5F;--line:#D7D4D0;--light:#F4F1EC;--wall:#D7D4D0;
+    --warn:#B5530A;--warn-soft:#FBF0E4;--ok:#2D6A3E;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:"Segoe UI",-apple-system,system-ui,sans-serif;color:var(--ink);
+    background:#EDEAE3;line-height:1.4;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .toolbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;
+    background:var(--accent);color:#fff;padding:10px 18px;font-size:14px;}
+  .toolbar b{font-weight:600;}.toolbar .sp{flex:1;}
+  .toolbar button{font:600 14px/1 "Segoe UI",sans-serif;background:#fff;color:var(--accent);
+    border:0;border-radius:6px;padding:9px 16px;cursor:pointer;}
+  .toolbar button:hover{background:#eaf3f5;}
+  .hint-screen{font-size:12.5px;opacity:.9;}
+  .sheet{width:210mm;min-height:297mm;margin:18px auto;background:#fff;
+    padding:7mm 11mm 5mm;box-shadow:0 4px 20px rgba(0,0,0,.16);position:relative;}
+  .head{display:flex;align-items:flex-end;justify-content:space-between;
+    border-bottom:2px solid var(--accent);padding-bottom:7px;}
+  .brand{font-size:21px;font-weight:700;color:var(--accent);letter-spacing:.2px;}
+  .brand small{display:block;font-size:9.5px;font-weight:400;color:var(--muted);letter-spacing:.3px;margin-top:2px;}
+  .doctag{text-align:right;}.doctag .t1{font-size:9.5px;color:var(--muted);}
+  .doctag .t2{font-size:14px;font-weight:700;color:var(--accent);}
+  h1.title{font-size:20px;margin:8px 0 1px;}
+  .sub{font-size:11px;color:var(--muted);margin:0 0 7px;}
+  .row{display:flex;gap:10px;flex-wrap:wrap;}
+  .fld{flex:1;min-width:120px;}
+  .fld label{display:block;font-size:8.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:1px;}
+  .fld input{width:100%;border:0;border-bottom:1px solid #444;background:transparent;
+    font:600 12px/1.6 "Segoe UI",sans-serif;color:#111;padding:1px 2px;}
+  .fld input:focus{outline:none;border-bottom:2px solid var(--accent);}
+  .band{border-radius:6px;padding:7px 11px;margin:6px 0;font-size:10.5px;}
+  .band.pre{background:var(--warn-soft);border:1px solid #E7C9A6;}
+  .band.pre b{color:var(--warn);}
+  .band .checks{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px;}
+  .band .checks span{display:flex;align-items:center;gap:5px;color:#3a3a3a;}
+  .band .checks i{width:11px;height:11px;border:1.4px solid var(--warn);border-radius:2px;display:inline-block;flex-shrink:0;}
+  .rule{background:var(--accent-soft);border:1px solid #BBD2D8;}.rule b{color:var(--accent);}
+  .yline{display:flex;align-items:center;gap:8px;margin:5px 0 2px;font-size:11px;color:var(--muted);}
+  .yline .yi{display:inline-flex;align-items:center;gap:6px;color:#111;font-weight:600;}
+  .yline input{width:62px;border:0;border-bottom:1px solid #444;text-align:center;font:600 12px/1 "Segoe UI";padding:2px 0;}
+  .sec{font-size:12px;font-weight:700;color:var(--accent);margin:8px 0 3px;padding-left:8px;border-left:4px solid var(--accent);}
+  .mf{width:100%;height:100%;border:1.3px solid var(--measure);border-radius:3px;background:#fff;
+    text-align:center;font:600 12px/1 "Segoe UI",sans-serif;color:#111;padding:0;}
+  .mf:focus{outline:2px solid var(--accent);}
+  .grid2{display:flex;gap:10px;}
+  .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:9px 11px;background:#fff;}
+  .card .ct{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:5px;display:flex;align-items:center;gap:7px;}
+  .card .ct .opt{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:#333;font-size:10.5px;}
+  .card .ct .opt i,.dirbox i{width:11px;height:11px;border:1.4px solid var(--accent);border-radius:2px;display:inline-block;}
+  .minirow{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:10.5px;color:#333;}
+  .minirow .lab{min-width:74px;color:var(--muted);}
+  .minirow input.v{width:54px;border:1.3px solid var(--measure);border-radius:3px;text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
+  .dirbox{display:inline-flex;align-items:center;gap:13px;flex-wrap:wrap;}
+  .dirbox label{display:inline-flex;align-items:center;gap:5px;color:#333;}
+  .unit{color:var(--muted);font-size:10px;}
+  .colhead{font-size:11px;font-weight:700;color:var(--accent);margin:2px 0 1px;}
+  .legend{background:var(--light);border:1px solid var(--line);border-radius:7px;padding:7px 10px;margin:7px 0;font-size:10px;color:#333;}
+  .legend b{color:var(--accent);}
+  .sketch{border:1px solid var(--line);border-radius:7px;height:36px;position:relative;margin-top:4px;}
+  .sketch .lab{position:absolute;top:6px;left:9px;font-size:10px;color:var(--muted);}
+  .sketch textarea{position:absolute;inset:0;border:0;background:transparent;resize:none;padding:22px 10px 8px;
+    font:400 11px/1.5 "Segoe UI";color:#111;width:100%;height:100%;}
+  .sketch textarea:focus{outline:none;}
+  .commit{font-size:9.5px;font-weight:600;text-align:center;color:#111;margin:7px 0 5px;}
+  .foot{border-top:1px solid var(--line);padding-top:6px;display:flex;justify-content:space-between;font-size:9px;color:var(--muted);}
+  @page{size:A4;margin:0;}
+  @media print{body{background:#fff;}.toolbar{display:none;}
+    .sheet{margin:0;box-shadow:none;width:auto;min-height:auto;}.mf,.minirow input.v{outline:none;}}
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <b>Aufmaß-Datenblatt Dreiseitig / U-Form</b>
+  <span class="hint-screen">Am Bildschirm ausfüllen oder ausdrucken und von Hand eintragen.</span>
+  <span class="sp"></span>
+  <button onclick="window.print()">Drucken / als PDF speichern</button>
+</div>
+
+<div class="sheet">
+
+  <div class="head">
+    <div class="brand">Kristhal Duschop<small>Glasduschen nach Maß · duschop.de</small></div>
+    <div class="doctag"><div class="t1">Aufmaß-Datenblatt</div><div class="t2">Dreiseitig · U-Form</div></div>
+  </div>
+
+  <h1 class="title">Aufmaß Dreiseitig (U-Form)</h1>
+  <p class="sub">Drei Glasseiten an einer gefliesten Rückwand, frei in den Raum. Bitte die roten Felder ausfüllen, alle Werte in Millimeter.</p>
+
+  <div class="row">
+    <div class="fld"><label>Kunde / Projekt</label><input type="text"></div>
+    <div class="fld" style="max-width:120px"><label>Datum</label><input type="text"></div>
+    <div class="fld" style="max-width:150px"><label>Telefon</label><input type="text"></div>
+  </div>
+
+  <div class="band pre">
+    <b>Bitte erst messen, wenn alles fertig ist.</b> Sonst stimmt das Maß später nicht.
+    <span class="checks">
+      <span><i></i> Rückwand fertig gefliest</span>
+      <span><i></i> Duschwanne oder Boden fertig eingebaut</span>
+      <span><i></i> alte Duschkabine entfernt</span>
+    </span>
+  </div>
+
+  <div class="band rule">
+    <b>Wichtig:</b> Bitte nur die fertige Situation so messen, wie sie ist.
+    <b>Ziehen Sie nichts ab</b> und rechnen Sie kein Spaltmaß ein. Die nötigen Abzüge ermitteln wir.
+  </div>
+
+  <div class="yline">
+    <span class="yi">Länge Ihrer Wasserwaage&nbsp; Y = <input type="text"></span>
+    <span>mm · gilt für die Neigungsangaben</span>
+  </div>
+
+  <!-- ============ GRUNDRISS + MASSE + LOT ============ -->
+  <div class="sec">1 · Grundriss, Maße und Lot</div>
+  <div class="grid2">
+
+    <!-- linke Spalte: Draufsicht der U-Form -->
+    <div style="flex:1.5">
+      <svg viewBox="0 0 420 290" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
+        <defs>
+          <pattern id="wall" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="7" height="7" fill="#DCD8D2"/><line x1="0" y1="0" x2="0" y2="7" stroke="#C3BEB6" stroke-width="1"/>
+          </pattern>
+          <marker id="ar" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1A1A1A"/></marker>
+        </defs>
+
+        <!-- Rückwand oben -->
+        <rect x="86" y="26" width="248" height="18" fill="url(#wall)" stroke="#9E9A93"/>
+        <text x="210" y="39" font-size="9.5" fill="#6a6a6a" text-anchor="middle">Wand (Rückwand)</text>
+
+        <!-- Duschfläche -->
+        <rect x="106" y="44" width="208" height="200" fill="#fff" stroke="#C7C2BA" stroke-dasharray="2 3"/>
+        <text x="210" y="150" font-size="10" fill="#9a9a9a" text-anchor="middle" font-style="italic">Duschfläche von oben</text>
+
+        <!-- drei Glasseiten (petrol) -->
+        <line x1="106" y1="44" x2="106" y2="244" stroke="#0F4C5C" stroke-width="2.4" stroke-dasharray="6 3"/>
+        <line x1="314" y1="44" x2="314" y2="244" stroke="#0F4C5C" stroke-width="2.4" stroke-dasharray="6 3"/>
+        <line x1="106" y1="244" x2="314" y2="244" stroke="#0F4C5C" stroke-width="2.4" stroke-dasharray="6 3"/>
+        <text x="210" y="237" font-size="8.5" fill="#0F4C5C" text-anchor="middle" font-style="italic">Glas (3 Seiten)</text>
+
+        <!-- Y-Punkte -->
+        <circle cx="106" cy="44" r="4.5" fill="#0F4C5C"/><text x="92" y="40" font-size="11" font-weight="700" fill="#0F4C5C">Y1</text>
+        <circle cx="314" cy="44" r="4.5" fill="#0F4C5C"/><text x="320" y="40" font-size="11" font-weight="700" fill="#0F4C5C">Y2</text>
+
+        <!-- Breite (vordere Seite) -->
+        <line x1="106" y1="268" x2="180" y2="268" stroke="#1A1A1A" stroke-width="1" marker-start="url(#ar)"/>
+        <line x1="240" y1="268" x2="314" y2="268" stroke="#1A1A1A" stroke-width="1" marker-end="url(#ar)"/>
+        <foreignObject x="180" y="256" width="60" height="24"><input xmlns="http://www.w3.org/1999/xhtml" class="mf" type="text" aria-label="Breite"/></foreignObject>
+        <text x="140" y="264" font-size="9.5" fill="#333" text-anchor="middle">Breite</text>
+        <text x="246" y="272" font-size="9" fill="#6a6a6a">mm</text>
+
+        <!-- Tiefe links -->
+        <line x1="82" y1="44" x2="82" y2="132" stroke="#1A1A1A" stroke-width="1" marker-start="url(#ar)"/>
+        <line x1="82" y1="156" x2="82" y2="244" stroke="#1A1A1A" stroke-width="1" marker-end="url(#ar)"/>
+        <foreignObject x="32" y="132" width="48" height="24"><input xmlns="http://www.w3.org/1999/xhtml" class="mf" type="text" aria-label="Tiefe links"/></foreignObject>
+        <text x="56" y="124" font-size="9" fill="#333" text-anchor="middle">Tiefe li.</text>
+        <text x="56" y="170" font-size="8.5" fill="#6a6a6a" text-anchor="middle">mm</text>
+
+        <!-- Tiefe rechts -->
+        <line x1="338" y1="44" x2="338" y2="132" stroke="#1A1A1A" stroke-width="1" marker-start="url(#ar)"/>
+        <line x1="338" y1="156" x2="338" y2="244" stroke="#1A1A1A" stroke-width="1" marker-end="url(#ar)"/>
+        <foreignObject x="340" y="132" width="48" height="24"><input xmlns="http://www.w3.org/1999/xhtml" class="mf" type="text" aria-label="Tiefe rechts"/></foreignObject>
+        <text x="364" y="124" font-size="9" fill="#333" text-anchor="middle">Tiefe re.</text>
+        <text x="364" y="170" font-size="8.5" fill="#6a6a6a" text-anchor="middle">mm</text>
+      </svg>
+    </div>
+
+    <!-- rechte Spalte: Höhe + Lot der Rückwand -->
+    <div style="flex:1;display:flex;flex-direction:column;gap:7px;">
+      <div class="card">
+        <div class="ct">Gewünschte Glashöhe</div>
+        <div class="minirow"><span class="lab">Höhe</span><input class="v" type="text"><span class="unit">mm</span>
+          <span style="color:var(--muted);font-size:9.5px">z. B. 2000</span></div>
+      </div>
+      <div class="colhead">Steht die Rückwand im Lot?</div>
+      <div class="card">
+        <div class="ct">Anschluss links <span style="font-weight:400;color:var(--muted);font-size:9.5px">(Y1)</span></div>
+        <div class="minirow"><span class="lab">Spalt X</span><input class="v" type="text"><span class="unit">mm</span></div>
+        <div class="minirow"><span class="lab">Wand kippt</span>
+          <span class="dirbox"><label><i></i> zum Raum</label><label><i></i> zur Wand</label><label><i></i> gerade</label></span></div>
+      </div>
+      <div class="card">
+        <div class="ct">Anschluss rechts <span style="font-weight:400;color:var(--muted);font-size:9.5px">(Y2)</span></div>
+        <div class="minirow"><span class="lab">Spalt X</span><input class="v" type="text"><span class="unit">mm</span></div>
+        <div class="minirow"><span class="lab">Wand kippt</span>
+          <span class="dirbox"><label><i></i> zum Raum</label><label><i></i> zur Wand</label><label><i></i> gerade</label></span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="sub" style="margin:3px 0 0">
+    Breite ist die vordere Glasseite, Tiefe links und rechts sind die beiden seitlichen Glasseiten von der Rückwand bis vorne. Sind die Tiefen ungleich, bitte beide genau eintragen.
+  </p>
+
+  <!-- ============ BODENSITUATION ============ -->
+  <div class="sec">2 · Wie steht die Dusche unten? Bitte eine Spalte ankreuzen.</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ct"><span class="opt"><i></i> Auf Duschwanne</span></div>
+      <div class="minirow"><span class="lab">Einrückmaß</span><input class="v" type="text"><span class="unit">mm · Außenkante Wanne bis Glas, Standard 25</span></div>
+      <div class="minirow"><span class="lab">Wanne Breite</span><input class="v" type="text"><span class="unit">mm</span>
+        <span class="lab" style="min-width:auto">Tiefe</span><input class="v" type="text"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Höhe Rand</span><input class="v" type="text"><span class="unit">mm über Boden</span></div>
+      <div class="minirow"><span class="lab">Rand waagerecht</span>
+        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span></div>
+    </div>
+    <div class="card">
+      <div class="ct"><span class="opt"><i></i> Bodengleich / gefliest</span></div>
+      <div class="minirow"><span class="lab">Gefälle zum Ablauf</span>
+        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span></div>
+      <div class="minirow"><span class="lab" style="min-width:auto">Glas-Außenkante steht auf:</span></div>
+      <div class="minirow" style="margin-top:0">
+        <span class="dirbox"><label><i></i> Innenkante Fuge</label><label><i></i> Mitte Fuge</label><label><i></i> Außenkante Fuge</label></span></div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <b>So messen Sie die Neigung:</b> Wasserwaage senkrecht an die Wand stellen und ins Lot bringen (Libelle mittig).
+    Am Ende den Spalt zwischen Waage und Wand messen, das ist <b>X</b>. <b>Y</b> ist die Länge Ihrer Wasserwaage.
+    Notieren Sie auch die Richtung. Im Zweifel ein Foto mit angelegter Wasserwaage mitschicken, das hilft uns sofort weiter.
+  </div>
+
+  <div class="sec" style="margin-bottom:2px">Anmerkungen / eigene Skizze
+    <span style="font-weight:400;color:var(--muted);font-size:10px">&nbsp; z. B. Tür-Anschlag, Fenster, Heizkörper, Lage des Ablaufs</span>
+  </div>
+  <div class="sketch"><span class="lab">Platz für Ihre Skizze oder Notizen</span><textarea></textarea></div>
+
+  <div class="commit">
+    Ich habe selbst gemessen und die Maße geprüft. Mir ist bekannt, dass die Fertigung nach diesen Angaben erfolgt und die Verantwortung für die Richtigkeit beim Auftraggeber liegt.
+  </div>
+
+  <div class="foot">
+    <span>Kristhal Duschop · Tel. 09293 9339580 · info@duschop.de</span>
+    <span>Ausgefüllt zurück: Foto oder Scan per E-Mail</span>
+  </div>
+
+</div>
+</body>
+</html>

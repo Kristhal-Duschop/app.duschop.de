@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aufmaß-Sonderblatt · Dachschräge · Kristhal Duschop</title>
+<style>
+  /* Aufmaß-Vorlagenfamilie Kristhal Duschop · DACHSCHRÄGE · A4 hoch, eine Seite */
+  :root{
+    --accent:#0F4C5C;--accent-soft:#E7EEF0;--measure:#C0392B;--ink:#1A1A1A;
+    --muted:#5F5F5F;--line:#D7D4D0;--light:#F4F1EC;--wall:#D7D4D0;
+    --warn:#B5530A;--warn-soft:#FBF0E4;--ok:#2D6A3E;--level:#E8B600;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:"Segoe UI",-apple-system,system-ui,sans-serif;color:var(--ink);
+    background:#EDEAE3;line-height:1.4;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .toolbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;
+    background:var(--accent);color:#fff;padding:10px 18px;font-size:14px;}
+  .toolbar b{font-weight:600;}.toolbar .sp{flex:1;}
+  .toolbar button{font:600 14px/1 "Segoe UI",sans-serif;background:#fff;color:var(--accent);
+    border:0;border-radius:6px;padding:9px 16px;cursor:pointer;}
+  .toolbar button:hover{background:#eaf3f5;}
+  .hint-screen{font-size:12.5px;opacity:.9;}
+  .sheet{width:210mm;min-height:297mm;margin:18px auto;background:#fff;
+    padding:8mm 11mm 6mm;box-shadow:0 4px 20px rgba(0,0,0,.16);position:relative;}
+  .head{display:flex;align-items:flex-end;justify-content:space-between;
+    border-bottom:2px solid var(--accent);padding-bottom:7px;}
+  .brand{font-size:21px;font-weight:700;color:var(--accent);letter-spacing:.2px;}
+  .brand small{display:block;font-size:9.5px;font-weight:400;color:var(--muted);letter-spacing:.3px;margin-top:2px;}
+  .doctag{text-align:right;}.doctag .t1{font-size:9.5px;color:var(--muted);}
+  .doctag .t2{font-size:14px;font-weight:700;color:var(--accent);}
+  h1.title{font-size:19px;margin:8px 0 1px;}
+  .sub{font-size:11px;color:var(--muted);margin:0 0 7px;}
+  .row{display:flex;gap:10px;flex-wrap:wrap;}
+  .fld{flex:1;min-width:120px;}
+  .fld label{display:block;font-size:8.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:1px;}
+  .fld input{width:100%;border:0;border-bottom:1px solid #444;background:transparent;
+    font:600 12px/1.6 "Segoe UI",sans-serif;color:#111;padding:1px 2px;}
+  .fld input:focus{outline:none;border-bottom:2px solid var(--accent);}
+  .band{border-radius:6px;padding:7px 11px;margin:6px 0;font-size:10.5px;}
+  .band.pre{background:var(--warn-soft);border:1px solid #E7C9A6;}
+  .band.pre b{color:var(--warn);}
+  .band .checks{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px;}
+  .band .checks span{display:flex;align-items:center;gap:5px;color:#3a3a3a;}
+  .band .checks i{width:11px;height:11px;border:1.4px solid var(--warn);border-radius:2px;display:inline-block;flex-shrink:0;}
+  .rule{background:var(--accent-soft);border:1px solid #BBD2D8;}.rule b{color:var(--accent);}
+  .sec{font-size:12px;font-weight:700;color:var(--accent);margin:9px 0 3px;padding-left:8px;border-left:4px solid var(--accent);}
+  .grid2{display:flex;gap:12px;}
+  .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:9px 11px;background:#fff;}
+  .card .ct{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:5px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+  .opt{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:#333;font-size:10.5px;}
+  .opt i,.dirbox i{width:11px;height:11px;border:1.4px solid var(--accent);border-radius:2px;display:inline-block;flex-shrink:0;}
+  .minirow{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:10.5px;color:#333;flex-wrap:wrap;}
+  .minirow .lab{min-width:104px;color:var(--muted);}
+  .minirow input.v{width:56px;border:1.3px solid var(--measure);border-radius:3px;text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
+  .dirbox{display:inline-flex;align-items:center;gap:13px;flex-wrap:wrap;}
+  .dirbox label{display:inline-flex;align-items:center;gap:5px;color:#333;}
+  .unit{color:var(--muted);font-size:10px;}
+  .yline{display:flex;align-items:center;gap:8px;margin:4px 0 2px;font-size:11px;color:var(--muted);flex-wrap:wrap;}
+  .yline .yi{display:inline-flex;align-items:center;gap:6px;color:#111;font-weight:600;}
+  .yline input{width:62px;border:0;border-bottom:1px solid #444;text-align:center;font:600 12px/1 "Segoe UI";padding:2px 0;}
+  .note2{background:var(--accent-soft);border:1px solid #BBD2D8;border-radius:6px;padding:7px 11px;font-size:10px;color:#243b40;margin:6px 0;}
+  .note2 b{color:var(--accent);}
+  .sketch{border:1px solid var(--line);border-radius:7px;height:44px;position:relative;margin-top:5px;}
+  .sketch .lab{position:absolute;top:6px;left:9px;font-size:10px;color:var(--muted);}
+  .sketch textarea{position:absolute;inset:0;border:0;background:transparent;resize:none;padding:21px 10px 6px;
+    font:400 11px/1.5 "Segoe UI";color:#111;width:100%;height:100%;}
+  .sketch textarea:focus{outline:none;}
+  .commit{font-size:9.5px;font-weight:600;text-align:center;color:#111;margin:7px 0 5px;}
+  .foot{border-top:1px solid var(--line);padding-top:6px;display:flex;justify-content:space-between;font-size:9px;color:var(--muted);}
+  @page{size:A4;margin:0;}
+  @media print{body{background:#fff;}.toolbar{display:none;}
+    .sheet{margin:0;box-shadow:none;width:auto;min-height:auto;}.mf,.minirow input.v{outline:none;}}
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <b>Aufmaß-Sonderblatt · Dachschräge</b>
+  <span class="hint-screen">Am Bildschirm ausfüllen oder ausdrucken und von Hand eintragen.</span>
+  <span class="sp"></span>
+  <button onclick="window.print()">Drucken / als PDF speichern</button>
+</div>
+
+<div class="sheet">
+
+  <div class="head">
+    <div class="brand">Kristhal Duschop<small>Glasduschen nach Maß · duschop.de</small></div>
+    <div class="doctag"><div class="t1">Aufmaß-Sonderblatt</div><div class="t2">Dachschräge</div></div>
+  </div>
+
+  <h1 class="title">Aufmaß: Glasdusche unter einer Dachschräge</h1>
+  <p class="sub">Für Glas, das oben der schrägen Decke folgt. Wir brauchen die Breite und die Höhe an beiden Seiten, den Schrägschnitt rechnen wir daraus. Alle Werte in Millimeter.</p>
+
+  <div class="row">
+    <div class="fld"><label>Kunde / Projekt</label><input type="text"></div>
+    <div class="fld" style="max-width:120px"><label>Datum</label><input type="text"></div>
+    <div class="fld" style="max-width:150px"><label>Telefon</label><input type="text"></div>
+  </div>
+
+  <div class="band pre">
+    <b>Erst messen, wenn alles fertig ist.</b> Wände und Schräge fertig verputzt bzw. gefliest, Boden oder Wanne eingebaut.
+    <span class="checks">
+      <span><i></i> Wände und Schräge fertig</span>
+      <span><i></i> Boden / Wanne eingebaut</span>
+      <span><i></i> alte Abtrennung entfernt</span>
+    </span>
+  </div>
+
+  <div class="band rule">
+    <b>Wichtig:</b> Nur die fertige Situation so messen, wie sie ist. <b>Ziehen Sie nichts ab</b> und rechnen Sie keine Schräge selbst um. Den Schnitt entlang der Decke ermitteln wir aus Ihren Höhen.
+  </div>
+
+  <!-- ===================== 1 · FORM UNTER DER DACHSCHRÄGE ===================== -->
+  <div class="sec">1 · Form unter der Dachschräge</div>
+  <div class="grid2">
+
+    <div style="flex:1.15">
+      <svg viewBox="0 0 360 300" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
+        <defs>
+          <pattern id="wallD" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="7" height="7" fill="#DCD8D2"/><line x1="0" y1="0" x2="0" y2="7" stroke="#C3BEB6" stroke-width="1"/>
+          </pattern>
+          <marker id="arMd" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#C0392B"/></marker>
+        </defs>
+
+        <!-- Wand links -->
+        <rect x="22" y="36" width="16" height="219" fill="url(#wallD)" stroke="#9E9A93"/>
+        <!-- Dachschräge (Decke) -->
+        <polygon points="38,66 320,150 320,128 38,44" fill="url(#wallD)" stroke="#9E9A93"/>
+        <text x="150" y="90" font-size="10" fill="#6a6a6a" text-anchor="middle" font-style="italic" transform="rotate(16 150 90)">Dachschräge (Decke)</text>
+        <!-- Boden -->
+        <rect x="22" y="255" width="316" height="12" fill="#ECE8E0" stroke="#C7C2BA"/>
+        <text x="190" y="290" font-size="9" fill="#9a9a9a" text-anchor="middle" font-style="italic">Boden / Wannenrand</text>
+
+        <!-- Glas (Trapez) -->
+        <polygon points="38,66 320,150 320,255 38,255" fill="#F2F8F9" stroke="#0F4C5C" stroke-width="2" stroke-dasharray="6 3"/>
+        <text x="175" y="220" font-size="11" fill="#7d9aa0" text-anchor="middle" font-style="italic">Glas, Ansicht von vorne</text>
+        <text x="70" y="248" font-size="8" fill="#9bb0b5" text-anchor="middle" font-style="italic">hohe Seite</text>
+        <text x="292" y="248" font-size="8" fill="#9bb0b5" text-anchor="middle" font-style="italic">niedrige Seite</text>
+
+        <!-- B (Breite) -->
+        <line x1="38" y1="272" x2="320" y2="272" stroke="#C0392B" stroke-width="1.2" marker-start="url(#arMd)" marker-end="url(#arMd)"/>
+        <text x="179" y="269" font-size="10" fill="#C0392B" text-anchor="middle" font-weight="700">B</text>
+        <!-- H1 (hohe Seite) -->
+        <line x1="50" y1="71" x2="50" y2="253" stroke="#C0392B" stroke-width="1.2" marker-start="url(#arMd)" marker-end="url(#arMd)"/>
+        <text x="57" y="165" font-size="10" fill="#C0392B" font-weight="700">H&#8321;</text>
+        <!-- H2 (niedrige Seite) -->
+        <line x1="320" y1="150" x2="332" y2="150" stroke="#C0392B" stroke-width="0.7"/>
+        <line x1="320" y1="255" x2="332" y2="255" stroke="#C0392B" stroke-width="0.7"/>
+        <line x1="332" y1="152" x2="332" y2="253" stroke="#C0392B" stroke-width="1.2" marker-start="url(#arMd)" marker-end="url(#arMd)"/>
+        <text x="339" y="205" font-size="10" fill="#C0392B" font-weight="700">H&#8322;</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="ct">Maße eintragen</div>
+      <div class="minirow"><span class="lab">hohe Seite</span>
+        <span class="dirbox"><label><i></i> links</label><label><i></i> rechts</label></span></div>
+      <div class="minirow"><span class="lab">Breite B</span><input class="v" type="text"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Höhe hohe Seite</span><input class="v" type="text"><span class="unit">mm (H&#8321;)</span></div>
+      <div class="minirow"><span class="lab">Höhe niedrige Seite</span><input class="v" type="text"><span class="unit">mm (H&#8322;)</span></div>
+      <div class="minirow"><span class="lab">Knick oben (Kniestock)?</span>
+        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span></div>
+      <div class="minirow"><span class="lab">falls ja: Höhe bis Knick</span><input class="v" type="text"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Abstand bis Knick</span><input class="v" type="text"><span class="unit">mm waagerecht</span></div>
+      <div class="note2" style="margin:6px 0 0">Höhe immer senkrecht vom Boden bis zur Decke messen. Ein Knick ist eine zweite Schräge oder ein Übergang von senkrechter Wand zur Decke.</div>
+    </div>
+  </div>
+
+  <!-- ===================== 2 · LOT UND UNTERGRUND ===================== -->
+  <div class="sec">2 · Lot der Wand und Untergrund</div>
+  <div class="yline"><span class="yi">Länge Ihrer Wasserwaage&nbsp; Y = <input type="text"></span><span>mm · für die Neigungsangaben</span></div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ct">Steht die Wand im Lot?</div>
+      <div class="minirow"><span class="lab">Spalt X</span><input class="v" type="text"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Wand kippt</span>
+        <span class="dirbox"><label><i></i> zum Raum</label><label><i></i> zur Wand</label><label><i></i> gerade</label></span></div>
+    </div>
+    <div class="card">
+      <div class="ct">Untergrund</div>
+      <div class="minirow"><span class="opt"><i></i> Auf Duschwanne</span>
+        <span class="lab" style="min-width:auto">Einrückmaß</span><input class="v" type="text"><span class="unit">mm, Standard 25</span></div>
+      <div class="minirow" style="margin-bottom:0"><span class="opt"><i></i> Bodengleich, Glas-Außenkante steht auf:</span></div>
+      <div class="minirow" style="margin-top:2px">
+        <span class="dirbox"><label><i></i> Innenkante Fuge</label><label><i></i> Mitte Fuge</label><label><i></i> Außenkante Fuge</label></span></div>
+    </div>
+  </div>
+
+  <div class="note2">So messen Sie X und Y, zeigt das Blatt „Neigungen messen". Ein Foto mit angelegter Wasserwaage und ein Foto der ganzen Schräge helfen uns sehr.</div>
+
+  <div class="sec" style="margin-bottom:2px">Skizze und Anmerkungen
+    <span style="font-weight:400;color:var(--muted);font-size:10px">&nbsp; z. B. Fenster in der Schräge, zweite Schräge, Tür gewünscht, Lage des Ablaufs</span>
+  </div>
+  <div class="sketch"><span class="lab">Platz für Ihre Skizze oder Notizen</span><textarea></textarea></div>
+
+  <div class="commit">
+    Selbst gemessen und die Maße geprüft. Mir ist bekannt, dass die Fertigung nach diesen Angaben erfolgt und die Verantwortung für die Richtigkeit beim Auftraggeber liegt.
+  </div>
+
+  <div class="foot">
+    <span>Kristhal Duschop · Tel. 09293 9339580 · info@duschop.de</span>
+    <span>Ausgefüllt zurück: Foto oder Scan per E-Mail</span>
+  </div>
+</div>
+</body>
+</html>
