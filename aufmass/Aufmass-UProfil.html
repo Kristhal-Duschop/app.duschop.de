@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aufmaß-Sonderblatt · U-Profil in der Fliesenebene · Kristhal Duschop</title>
+<style>
+  /* ===========================================================
+     Aufmaß-Vorlagenfamilie Kristhal Duschop · Ergänzungsblatt:
+     U-PROFIL IN DER FLIESENEBENE
+     Eine Datei, zwei Wege: am Bildschirm ausfüllen ODER ausdrucken.
+     =========================================================== */
+  :root{
+    --accent:#0F4C5C;--accent-soft:#E7EEF0;--measure:#C0392B;--ink:#1A1A1A;
+    --muted:#5F5F5F;--line:#D7D4D0;--light:#F4F1EC;--wall:#D7D4D0;
+    --warn:#B5530A;--warn-soft:#FBF0E4;--ok:#2D6A3E;--glass:#D8E3EE;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:"Segoe UI",-apple-system,system-ui,sans-serif;color:var(--ink);
+    background:#EDEAE3;line-height:1.4;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .toolbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;
+    background:var(--accent);color:#fff;padding:10px 18px;font-size:14px;}
+  .toolbar b{font-weight:600;}.toolbar .sp{flex:1;}
+  .toolbar button{font:600 14px/1 "Segoe UI",sans-serif;background:#fff;color:var(--accent);
+    border:0;border-radius:6px;padding:9px 16px;cursor:pointer;}
+  .toolbar button:hover{background:#eaf3f5;}
+  .hint-screen{font-size:12.5px;opacity:.9;}
+  .sheet{width:210mm;min-height:297mm;margin:18px auto;background:#fff;
+    padding:7mm 11mm 5mm;box-shadow:0 4px 20px rgba(0,0,0,.16);position:relative;}
+  .head{display:flex;align-items:flex-end;justify-content:space-between;
+    border-bottom:2px solid var(--accent);padding-bottom:7px;}
+  .brand{font-size:21px;font-weight:700;color:var(--accent);letter-spacing:.2px;}
+  .brand small{display:block;font-size:9.5px;font-weight:400;color:var(--muted);letter-spacing:.3px;margin-top:2px;}
+  .doctag{text-align:right;}.doctag .t1{font-size:9.5px;color:var(--muted);}
+  .doctag .t2{font-size:14px;font-weight:700;color:var(--accent);}
+  h1.title{font-size:20px;margin:8px 0 1px;}
+  .sub{font-size:11px;color:var(--muted);margin:0 0 7px;}
+  .row{display:flex;gap:10px;flex-wrap:wrap;}
+  .fld{flex:1;min-width:120px;}
+  .fld label{display:block;font-size:8.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:1px;}
+  .fld input{width:100%;border:0;border-bottom:1px solid #444;background:transparent;
+    font:600 12px/1.6 "Segoe UI",sans-serif;color:#111;padding:1px 2px;}
+  .fld input:focus{outline:none;border-bottom:2px solid var(--accent);}
+  .band{border-radius:6px;padding:7px 11px;margin:6px 0;font-size:10.5px;}
+  .rule{background:var(--accent-soft);border:1px solid #BBD2D8;}.rule b{color:var(--accent);}
+  .keybox{background:var(--warn-soft);border:1px solid #E7C9A6;border-radius:6px;padding:9px 12px;margin:6px 0;font-size:11.5px;}
+  .keybox b{color:var(--warn);}
+  .sec{font-size:12px;font-weight:700;color:var(--accent);margin:9px 0 3px;padding-left:8px;border-left:4px solid var(--accent);}
+  .mf{width:100%;height:100%;border:1.3px solid var(--measure);border-radius:3px;
+    background:#fff;text-align:center;font:600 12px/1 "Segoe UI",sans-serif;color:#111;padding:0;}
+  .mf:focus{outline:2px solid var(--accent);}
+  .grid2{display:flex;gap:12px;align-items:flex-start;}
+  .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:9px 11px;background:#fff;}
+  .card .ct{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:5px;}
+  .rc{appearance:none;-webkit-appearance:none;-moz-appearance:none;width:13px;height:13px;flex-shrink:0;border:1.4px solid var(--accent);border-radius:2px;background:#fff;margin:0;padding:0;cursor:pointer;position:relative;vertical-align:middle;}
+  .rc:checked::after{content:"";position:absolute;left:3.5px;top:0px;width:4px;height:8px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg);}
+  .minirow{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:10.5px;color:#333;flex-wrap:wrap;}
+  .minirow .lab{min-width:96px;color:var(--muted);}
+  .minirow input.v{width:60px;border:1.3px solid var(--measure);border-radius:3px;text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
+  .dirbox{display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .dirbox label{display:inline-flex;align-items:center;gap:5px;color:#333;}
+  .unit{color:var(--muted);font-size:10px;}
+  .legend{background:var(--light);border:1px solid var(--line);border-radius:7px;padding:8px 11px;margin:8px 0;font-size:10.5px;color:#333;}
+  .legend b{color:var(--accent);}
+  .sketch{border:1px solid var(--line);border-radius:7px;height:42px;position:relative;margin-top:6px;}
+  .sketch .lab{position:absolute;top:6px;left:9px;font-size:10px;color:var(--muted);}
+  .sketch textarea{position:absolute;inset:0;border:0;background:transparent;resize:none;padding:22px 10px 8px;font:400 11px/1.5 "Segoe UI";color:#111;width:100%;height:100%;}
+  .sketch textarea:focus{outline:none;}
+  .commit{font-size:9.5px;font-weight:600;text-align:center;color:#111;margin:8px 0 5px;}
+  .foot{border-top:1px solid var(--line);padding-top:6px;display:flex;justify-content:space-between;font-size:9px;color:var(--muted);}
+  @page{size:A4;margin:0;}
+  @media print{body{background:#fff;}.toolbar{display:none;}
+    .sheet{margin:0;box-shadow:none;width:auto;min-height:auto;}.mf,.minirow input.v{outline:none;}}
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <b>Aufmaß-Sonderblatt · U-Profil in der Fliesenebene</b>
+  <span class="hint-screen">Am Bildschirm ausfüllen oder ausdrucken und von Hand eintragen.</span>
+  <span class="sp"></span>
+  <button onclick="window.print()">Drucken / als PDF speichern</button>
+</div>
+
+<div class="sheet">
+
+  <!-- ============ KOPF ============ -->
+  <div class="head">
+    <div class="brand">Kristhal Duschop<small>Glasduschen nach Maß · duschop.de</small></div>
+    <div class="doctag"><div class="t1">Aufmaß-Sonderblatt</div><div class="t2">U-Profil</div></div>
+  </div>
+
+  <h1 class="title">U-Profil in der Fliesenebene</h1>
+  <p class="sub">Ergänzungsblatt: nur ausfüllen, wenn das Glas unten oder seitlich in ein U-Profil läuft, das bündig in die Fliesen eingelassen ist. Alle Werte in Millimeter.</p>
+
+  <div class="row">
+    <div class="fld"><label>Kunde / Projekt</label><input type="text"></div>
+    <div class="fld" style="max-width:120px"><label>Datum</label><input type="text"></div>
+    <div class="fld" style="max-width:150px"><label>Telefon</label><input type="text"></div>
+  </div>
+
+  <!-- ============ KERNAUSSAGE ============ -->
+  <div class="keybox">
+    <b>Worauf es ankommt:</b> Sitzt das U-Profil in der Fliesenebene, taucht das Glas bis auf den <b>Boden des Profils</b> ein.
+    Messen Sie das Glasmaß deshalb <b>bis zum Profilboden</b>, nicht bis zur Fliesenoberkante. Sonst wird das Glas zu kurz.
+  </div>
+
+  <!-- ============ QUERSCHNITT ============ -->
+  <div class="sec">1 · So wird gemessen · U-Profil im Boden und in der Wand</div>
+  <svg viewBox="0 0 760 262" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
+    <defs>
+      <pattern id="tile" width="26" height="13" patternUnits="userSpaceOnUse">
+        <rect width="26" height="13" fill="#ECE8E0"/>
+        <path d="M0 0 H26 M0 0 V13 M13 0 V13" stroke="#D2CCC2" stroke-width="1"/>
+      </pattern>
+      <marker id="ar" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#1A1A1A"/></marker>
+      <marker id="arS" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto">
+        <path d="M0,0 L9,4.5 L0,9 z" fill="#C0392B"/></marker>
+    </defs>
+
+    <!-- Panel-Titel + Blickrichtung -->
+    <text x="20" y="19" font-size="11" font-weight="700" fill="#0F4C5C">A · Boden: U-Profil im Fliesenboden</text>
+    <text x="20" y="31" font-size="8" fill="#9a9a9a" font-style="italic">Schnitt von der Seite gesehen</text>
+    <text x="400" y="19" font-size="11" font-weight="700" fill="#0F4C5C">B · Wand: U-Profil in der Wandfliese</text>
+    <text x="400" y="31" font-size="8" fill="#9a9a9a" font-style="italic">Schnitt von oben gesehen</text>
+    <line x1="380" y1="38" x2="380" y2="240" stroke="#E0DCD5" stroke-width="1"/>
+
+    <!-- ===================== A · BODEN ===================== -->
+    <rect x="72" y="168" width="76" height="40" fill="url(#tile)" stroke="#C7C2BA"/>
+    <rect x="190" y="168" width="120" height="40" fill="url(#tile)" stroke="#C7C2BA"/>
+    <rect x="148" y="168" width="9" height="40" fill="#C9CED3" stroke="#8a929b"/>
+    <rect x="181" y="168" width="9" height="40" fill="#C9CED3" stroke="#8a929b"/>
+    <rect x="148" y="200" width="42" height="8" fill="#C9CED3" stroke="#8a929b"/>
+    <text x="195" y="182" font-size="9" fill="#6b737b">U-Profil</text>
+    <rect x="163" y="52" width="12" height="148" fill="#D8E3EE" stroke="#8ba3bb"/>
+    <line x1="169" y1="56" x2="169" y2="74" stroke="#f2f7fb" stroke-width="2"/>
+    <text x="150" y="48" font-size="9.5" fill="#5e7186">Glas</text>
+    <line x1="148" y1="168" x2="314" y2="168" stroke="#9a9a9a" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="206" y="164" font-size="8.5" fill="#8a8a8a">Fliesenoberkante</text>
+    <line x1="163" y1="200" x2="314" y2="200" stroke="#0F4C5C" stroke-width="1.3" stroke-dasharray="5 3"/>
+    <text x="214" y="213" font-size="9" fill="#0F4C5C" font-weight="600">Profilboden</text>
+    <line x1="128" y1="52" x2="128" y2="200" stroke="#1A1A1A" stroke-width="1" marker-start="url(#ar)" marker-end="url(#ar)"/>
+    <text x="24" y="116" font-size="10" fill="#333" font-weight="600">Glasmaß</text>
+    <text x="24" y="128" font-size="8.5" fill="#6a6a6a">bis Profilboden</text>
+    <foreignObject x="24" y="133" width="58" height="23">
+      <input xmlns="http://www.w3.org/1999/xhtml" class="mf" type="text" aria-label="Glasmass bis Profilboden, Boden"/>
+    </foreignObject>
+    <text x="86" y="149" font-size="9" fill="#a5483a">mm</text>
+    <line x1="312" y1="168" x2="312" y2="200" stroke="#C0392B" stroke-width="1.3" marker-start="url(#arS)" marker-end="url(#arS)"/>
+    <text x="316" y="187" font-size="8" fill="#C0392B" font-weight="600">Eintauchtiefe</text>
+
+    <!-- ===================== B · WAND (um 90 Grad gedreht) ===================== -->
+    <rect x="438" y="66" width="60" height="44" fill="url(#tile)" stroke="#C7C2BA"/>
+    <rect x="438" y="152" width="60" height="52" fill="url(#tile)" stroke="#C7C2BA"/>
+    <rect x="438" y="110" width="20" height="42" fill="#E3DED6" stroke="#C7C2BA"/>
+    <rect x="458" y="110" width="40" height="9" fill="#C9CED3" stroke="#8a929b"/>
+    <rect x="458" y="143" width="40" height="9" fill="#C9CED3" stroke="#8a929b"/>
+    <rect x="458" y="110" width="8" height="42" fill="#C9CED3" stroke="#8a929b"/>
+    <text x="503" y="147" font-size="9" fill="#6b737b">U-Profil</text>
+    <rect x="466" y="125" width="164" height="12" fill="#D8E3EE" stroke="#8ba3bb"/>
+    <line x1="624" y1="131" x2="606" y2="131" stroke="#f2f7fb" stroke-width="2"/>
+    <text x="600" y="121" font-size="9.5" fill="#5e7186">Glas</text>
+    <line x1="466" y1="98" x2="630" y2="98" stroke="#1A1A1A" stroke-width="1" marker-start="url(#ar)" marker-end="url(#ar)"/>
+    <line x1="466" y1="100" x2="466" y2="110" stroke="#bbbbbb" stroke-width="0.8"/>
+    <line x1="630" y1="100" x2="630" y2="125" stroke="#bbbbbb" stroke-width="0.8"/>
+    <text x="470" y="86" font-size="10" fill="#333" font-weight="600">Glasmaß bis Profilboden</text>
+    <foreignObject x="606" y="68" width="56" height="23">
+      <input xmlns="http://www.w3.org/1999/xhtml" class="mf" type="text" aria-label="Glasmass bis Profilboden, Wand"/>
+    </foreignObject>
+    <text x="666" y="84" font-size="9" fill="#a5483a">mm</text>
+    <line x1="466" y1="137" x2="466" y2="206" stroke="#0F4C5C" stroke-width="1.3" stroke-dasharray="5 3"/>
+    <line x1="498" y1="152" x2="498" y2="206" stroke="#9a9a9a" stroke-width="1" stroke-dasharray="4 3"/>
+    <line x1="466" y1="176" x2="498" y2="176" stroke="#C0392B" stroke-width="1.3" marker-start="url(#arS)" marker-end="url(#arS)"/>
+    <text x="468" y="171" font-size="8.5" fill="#C0392B" font-weight="600">Eintauchtiefe</text>
+    <text x="408" y="216" font-size="9" fill="#0F4C5C" font-weight="600">Profilboden</text>
+    <text x="503" y="216" font-size="8.5" fill="#8a8a8a">Fliesenoberkante</text>
+
+    <text x="20" y="256" font-size="9" fill="#9a9a9a" font-style="italic">Querschnitte schematisch, nicht maßstäblich. Das Glas taucht in beiden Fällen bis zum Profilboden ein.</text>
+  </svg>
+
+  <!-- ============ EINGABEN ============ -->
+  <div class="grid2">
+    <div class="card">
+      <div class="ct">Wo läuft das Glas in ein eingelassenes U-Profil?</div>
+      <div class="minirow"><span class="dirbox">
+        <label><input type="radio" class="rc" name="grp_lage"> unten (Boden)</label>
+        <label><input type="radio" class="rc" name="grp_lage"> linke Wand</label>
+        <label><input type="radio" class="rc" name="grp_lage"> rechte Wand</label>
+        <label><input type="radio" class="rc" name="grp_lage"> Rückwand</label>
+      </span></div>
+      <div class="minirow" style="margin-top:8px"><span class="lab">Verglasung</span>
+        <span class="dirbox">
+          <label><input type="radio" class="rc" name="grp_vergl"> nass (Silikon)</label>
+          <label><input type="radio" class="rc" name="grp_vergl"> trocken (Klemmgummi)</label>
+          <label><input type="radio" class="rc" name="grp_vergl"> weiß ich nicht</label>
+        </span></div>
+    </div>
+    <div class="card">
+      <div class="ct">Weitere Maße am Profil</div>
+      <div class="minirow"><span class="lab">Eintauchtiefe</span>
+        <input class="v" type="text"><span class="unit">mm · Fliesenoberkante bis Profilboden</span></div>
+      <div class="minirow"><span class="lab">Profil-Innenbreite</span>
+        <input class="v" type="text"><span class="unit">mm · lichte Weite im Profil</span></div>
+      <div class="minirow" style="margin-top:2px"><span class="lab" style="color:var(--accent)">Glasmaß</span>
+        <span class="unit">Das maßgebliche Glasmaß bis Profilboden tragen Sie oben in der passenden Skizze ein, Boden oder Wand.</span></div>
+    </div>
+  </div>
+
+  <!-- ============ MESS-LEGENDE ============ -->
+  <div class="legend">
+    <b>So messen Sie die Eintauchtiefe:</b> Halten Sie ein Lineal bündig an die Fliesenoberfläche quer über das Profil und messen Sie bis zum
+    Profilboden, beim Bodenprofil nach unten, beim Wandprofil in die Wand hinein. Das ist die Tiefe, um die das Glas tiefer reicht als die Fliese.
+    Im Zweifel ein Foto mit angelegtem Lineal mitschicken, das hilft uns sofort weiter. Sitzt das Profil <b>auf</b> den Fliesen statt eingelassen, brauchen Sie dieses Blatt nicht.
+  </div>
+
+  <!-- ============ ANMERKUNGEN ============ -->
+  <div class="sec" style="margin-bottom:2px">Anmerkungen / eigene Skizze
+    <span style="font-weight:400;color:var(--muted);font-size:10px">&nbsp; z. B. Profiltyp, Farbe, mehrere Profile, Lage zum Ablauf</span>
+  </div>
+  <div class="sketch"><span class="lab">Platz für Ihre Skizze oder Notizen</span><textarea></textarea></div>
+
+  <!-- ============ VERBINDLICHKEIT ============ -->
+  <div class="commit">
+    Ich habe selbst gemessen und die Maße geprüft. Mir ist bekannt, dass die Fertigung nach diesen Angaben erfolgt und die Verantwortung für die Richtigkeit beim Auftraggeber liegt.
+  </div>
+
+  <!-- ============ FUSS ============ -->
+  <div class="foot">
+    <span>Kristhal Duschop · Tel. 09293 9339580 · info@duschop.de</span>
+    <span>Ausgefüllt zurück: Foto oder Scan per E-Mail</span>
+  </div>
+
+</div>
+</body>
+</html>
