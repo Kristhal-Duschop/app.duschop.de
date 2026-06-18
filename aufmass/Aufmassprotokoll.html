@@ -47,7 +47,7 @@
   .band.pre b{color:var(--warn);}
   .band .checks{display:flex;gap:16px;flex-wrap:wrap;margin-top:3px;}
   .band .checks span{display:flex;align-items:center;gap:5px;color:#3a3a3a;}
-  .band .checks i{width:11px;height:11px;border:1.4px solid var(--warn);border-radius:2px;display:inline-block;flex-shrink:0;}
+  .band .checks i{width:5px;height:5px;border-radius:50%;background:var(--warn);display:inline-block;flex-shrink:0;margin-top:1px;}
   .rule{background:var(--accent-soft);border:1px solid #BBD2D8;}.rule b{color:var(--accent);}
   .yline{display:flex;align-items:center;gap:8px;margin:4px 0 2px;font-size:11px;color:var(--muted);}
   .yline .yi{display:inline-flex;align-items:center;gap:6px;color:#111;font-weight:600;}
@@ -57,7 +57,8 @@
   .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:8px 11px;background:#fff;}
   .card .ct{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px;display:flex;align-items:center;gap:7px;}
   .card .ct .opt{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:#333;font-size:10.5px;}
-  .card .ct .opt i,.dirbox i{width:11px;height:11px;border:1.4px solid var(--accent);border-radius:2px;display:inline-block;}
+  .rc{appearance:none;-webkit-appearance:none;-moz-appearance:none;width:13px;height:13px;flex-shrink:0;border:1.4px solid var(--accent);border-radius:2px;background:#fff;margin:0;padding:0;cursor:pointer;position:relative;vertical-align:middle;}
+  .rc:checked::after{content:"";position:absolute;left:3.5px;top:0px;width:4px;height:8px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg);}
   .minirow{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:10.5px;color:#333;flex-wrap:wrap;}
   .minirow .lab{min-width:78px;color:var(--muted);}
   .minirow input.v{width:54px;border:1.3px solid var(--measure);border-radius:3px;text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
@@ -148,45 +149,45 @@
     <div class="card">
       <div class="ct">Ausführung</div>
       <div class="minirow"><span class="lab">Öffnung</span>
-        <span class="dirbox"><label><i></i> DIN links</label><label><i></i> DIN rechts</label><label><i></i> Festteil ohne Tür</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d1"> DIN links</label><label><input type="radio" class="rc" name="grp_d1"> DIN rechts</label><label><input type="radio" class="rc" name="grp_d1"> Festteil ohne Tür</label></span></div>
       <div class="minirow"><span class="lab">Türgriff</span>
-        <span class="dirbox"><label><i></i> einseitig</label><label><i></i> beidseitig</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d2"> einseitig</label><label><input type="radio" class="rc" name="grp_d2"> beidseitig</label></span></div>
       <div class="minirow"><span class="lab">Griffhöhe</span><input class="v" type="text"><span class="unit">mm / Standard</span></div>
       <div class="minirow"><span class="lab">Easy-Clean</span>
-        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d3"> ja</label><label><input type="radio" class="rc" name="grp_d3"> nein</label></span></div>
       <div class="minirow"><span class="lab">Montage Kristhal</span>
-        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d4"> ja</label><label><input type="radio" class="rc" name="grp_d4"> nein</label></span></div>
     </div>
   </div>
 
   <!-- ============ 2 · EINBAUSITUATION & MASSE ============ -->
   <div class="sec">2 · Einbausituation und Maße</div>
   <div class="geo">
-    <label><i></i>
+    <label><input type="radio" class="rc" name="grp_geo">
       <svg width="34" height="30" viewBox="0 0 66 58" xmlns="http://www.w3.org/2000/svg">
         <rect x="6" y="6" width="10" height="46" fill="#D7D4D0" stroke="#9E9A93"/>
         <rect x="50" y="6" width="10" height="46" fill="#D7D4D0" stroke="#9E9A93"/>
         <line x1="16" y1="14" x2="50" y2="14" stroke="#0F4C5C" stroke-width="3"/>
         <line x1="16" y1="52" x2="50" y2="52" stroke="#999" stroke-width="2"/></svg>Nische</label>
-    <label><i></i>
+    <label><input type="radio" class="rc" name="grp_geo">
       <svg width="34" height="30" viewBox="0 0 66 58" xmlns="http://www.w3.org/2000/svg">
         <rect x="6" y="6" width="46" height="9" fill="#D7D4D0" stroke="#9E9A93"/>
         <rect x="6" y="6" width="9" height="46" fill="#D7D4D0" stroke="#9E9A93"/>
         <line x1="15" y1="52" x2="52" y2="52" stroke="#0F4C5C" stroke-width="3"/>
         <line x1="52" y1="15" x2="52" y2="52" stroke="#0F4C5C" stroke-width="3"/></svg>Ecke</label>
-    <label><i></i>
+    <label><input type="radio" class="rc" name="grp_geo">
       <svg width="34" height="30" viewBox="0 0 66 58" xmlns="http://www.w3.org/2000/svg">
         <rect x="6" y="6" width="9" height="46" fill="#D7D4D0" stroke="#9E9A93"/>
         <line x1="15" y1="14" x2="50" y2="14" stroke="#0F4C5C" stroke-width="3"/>
         <line x1="50" y1="10" x2="50" y2="18" stroke="#0F4C5C" stroke-width="3"/>
         <line x1="15" y1="52" x2="58" y2="52" stroke="#999" stroke-width="2"/></svg>Walk-In</label>
-    <label><i></i>
+    <label><input type="radio" class="rc" name="grp_geo">
       <svg width="34" height="30" viewBox="0 0 66 58" xmlns="http://www.w3.org/2000/svg">
         <rect x="10" y="6" width="46" height="9" fill="#D7D4D0" stroke="#9E9A93"/>
         <line x1="14" y1="15" x2="14" y2="52" stroke="#0F4C5C" stroke-width="3"/>
         <line x1="52" y1="15" x2="52" y2="52" stroke="#0F4C5C" stroke-width="3"/>
         <line x1="14" y1="52" x2="52" y2="52" stroke="#0F4C5C" stroke-width="3"/></svg>Dreiseitig</label>
-    <label><i></i>
+    <label><input type="radio" class="rc" name="grp_geo">
       <svg width="34" height="30" viewBox="0 0 66 58" xmlns="http://www.w3.org/2000/svg">
         <rect x="6" y="6" width="9" height="34" fill="#D7D4D0" stroke="#9E9A93"/>
         <rect x="15" y="40" width="45" height="12" rx="3" fill="#E9F2F3" stroke="#9AADB0"/>
@@ -212,9 +213,9 @@
     <div class="card">
       <div class="ct">Lot der Wände</div>
       <div class="minirow"><span class="lab">Wand 1 · Spalt X</span><input class="v" type="text"><span class="unit">mm</span>
-        <span class="dirbox"><label><i></i> zum Raum</label><label><i></i> zur Wand</label><label><i></i> gerade</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d5"> zum Raum</label><label><input type="radio" class="rc" name="grp_d5"> zur Wand</label><label><input type="radio" class="rc" name="grp_d5"> gerade</label></span></div>
       <div class="minirow"><span class="lab">Wand 2 · Spalt X</span><input class="v" type="text"><span class="unit">mm</span>
-        <span class="dirbox"><label><i></i> zum Raum</label><label><i></i> zur Wand</label><label><i></i> gerade</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d6"> zum Raum</label><label><input type="radio" class="rc" name="grp_d6"> zur Wand</label><label><input type="radio" class="rc" name="grp_d6"> gerade</label></span></div>
     </div>
   </div>
 
@@ -222,25 +223,25 @@
   <div class="sec">3 · Wie steht die Dusche unten? Bitte eine Spalte ankreuzen.</div>
   <div class="grid2">
     <div class="card">
-      <div class="ct"><span class="opt"><i></i> Auf Duschwanne</span></div>
+      <div class="ct"><span class="opt"><input type="radio" class="rc" name="grp_boden"> Auf Duschwanne</span></div>
       <div class="minirow"><span class="lab">Einrückmaß</span><input class="v" type="text"><span class="unit">mm · Außenkante Wanne bis Glas, Standard 25</span></div>
       <div class="minirow"><span class="lab">Wanne Breite</span><input class="v" type="text"><span class="unit">mm</span>
         <span class="lab" style="min-width:auto">Tiefe</span><input class="v" type="text"><span class="unit">mm</span></div>
       <div class="minirow"><span class="lab">Radius Viertelkreis</span><input class="v" type="text"><span class="unit">mm · nur bei Rundwanne</span></div>
       <div class="minirow"><span class="lab">Höhe Rand</span><input class="v" type="text"><span class="unit">mm über Boden</span></div>
       <div class="minirow"><span class="lab">Rand waagerecht</span>
-        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d7"> ja</label><label><input type="radio" class="rc" name="grp_d7"> nein</label></span></div>
     </div>
     <div class="card">
-      <div class="ct"><span class="opt"><i></i> Bodengleich / gefliest</span></div>
+      <div class="ct"><span class="opt"><input type="radio" class="rc" name="grp_boden"> Bodengleich / gefliest</span></div>
       <div class="minirow"><span class="lab">Gefälle zum Ablauf</span>
-        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d8"> ja</label><label><input type="radio" class="rc" name="grp_d8"> nein</label></span></div>
       <div class="minirow" style="margin-bottom:0"><span class="lab" style="min-width:auto">Glas-Außenkante steht auf:</span></div>
       <div class="minirow" style="margin-top:2px">
         <span class="dirbox">
-          <label><i></i> Innenkante Fuge</label>
-          <label><i></i> Mitte Fuge</label>
-          <label><i></i> Außenkante Fuge</label>
+          <label><input type="radio" class="rc" name="grp_d9"> Innenkante Fuge</label>
+          <label><input type="radio" class="rc" name="grp_d9"> Mitte Fuge</label>
+          <label><input type="radio" class="rc" name="grp_d9"> Außenkante Fuge</label>
         </span></div>
     </div>
   </div>
@@ -250,10 +251,10 @@
     <span style="font-weight:400;color:var(--muted);font-size:10px">&nbsp; z. B. Tür-Anschlag, Lage des Ablaufs, Fenster, Heizkörper</span>
   </div>
   <div class="extra">
-    <label><i></i> Fliesen-Bordüre, Höhe von <input class="s" type="text"> bis <input class="s" type="text"> mm</label>
-    <label><i></i> Schrägschnitt nötig <input class="s" type="text"> mm</label>
-    <label><i></i> Dachschräge</label>
-    <label><i></i> Festteil + Tür kombiniert</label>
+    <label><input type="checkbox" class="rc"> Fliesen-Bordüre, Höhe von <input class="s" type="text"> bis <input class="s" type="text"> mm</label>
+    <label><input type="checkbox" class="rc"> Schrägschnitt nötig <input class="s" type="text"> mm</label>
+    <label><input type="checkbox" class="rc"> Dachschräge</label>
+    <label><input type="checkbox" class="rc"> Festteil + Tür kombiniert</label>
   </div>
   <div class="sketch"><span class="lab">Platz für Ihre Skizze oder Notizen</span><textarea></textarea></div>
 

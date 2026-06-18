@@ -43,14 +43,15 @@
   .band.pre b{color:var(--warn);}
   .band .checks{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px;}
   .band .checks span{display:flex;align-items:center;gap:5px;color:#3a3a3a;}
-  .band .checks i{width:11px;height:11px;border:1.4px solid var(--warn);border-radius:2px;display:inline-block;flex-shrink:0;}
+  .band .checks i{width:5px;height:5px;border-radius:50%;background:var(--warn);display:inline-block;flex-shrink:0;margin-top:1px;}
   .rule{background:var(--accent-soft);border:1px solid #BBD2D8;}.rule b{color:var(--accent);}
   .sec{font-size:12px;font-weight:700;color:var(--accent);margin:9px 0 3px;padding-left:8px;border-left:4px solid var(--accent);}
   .grid2{display:flex;gap:12px;}
   .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:9px 11px;background:#fff;}
   .card .ct{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:5px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
   .opt{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:#333;font-size:10.5px;}
-  .opt i,.dirbox i{width:11px;height:11px;border:1.4px solid var(--accent);border-radius:2px;display:inline-block;flex-shrink:0;}
+    .rc{appearance:none;-webkit-appearance:none;-moz-appearance:none;width:13px;height:13px;flex-shrink:0;border:1.4px solid var(--accent);border-radius:2px;background:#fff;margin:0;padding:0;cursor:pointer;position:relative;vertical-align:middle;}
+  .rc:checked::after{content:"";position:absolute;left:3.5px;top:0px;width:4px;height:8px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg);}
   .minirow{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:10.5px;color:#333;flex-wrap:wrap;}
   .minirow .lab{min-width:104px;color:var(--muted);}
   .minirow input.v{width:56px;border:1.3px solid var(--measure);border-radius:3px;text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
@@ -157,12 +158,12 @@
     <div class="card">
       <div class="ct">Maße eintragen</div>
       <div class="minirow"><span class="lab">hohe Seite</span>
-        <span class="dirbox"><label><i></i> links</label><label><i></i> rechts</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d1"> links</label><label><input type="radio" class="rc" name="grp_d1"> rechts</label></span></div>
       <div class="minirow"><span class="lab">Breite B</span><input class="v" type="text"><span class="unit">mm</span></div>
       <div class="minirow"><span class="lab">Höhe hohe Seite</span><input class="v" type="text"><span class="unit">mm (H&#8321;)</span></div>
       <div class="minirow"><span class="lab">Höhe niedrige Seite</span><input class="v" type="text"><span class="unit">mm (H&#8322;)</span></div>
       <div class="minirow"><span class="lab">Knick oben (Kniestock)?</span>
-        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d2"> ja</label><label><input type="radio" class="rc" name="grp_d2"> nein</label></span></div>
       <div class="minirow"><span class="lab">falls ja: Höhe bis Knick</span><input class="v" type="text"><span class="unit">mm</span></div>
       <div class="minirow"><span class="lab">Abstand bis Knick</span><input class="v" type="text"><span class="unit">mm waagerecht</span></div>
       <div class="note2" style="margin:6px 0 0">Höhe immer senkrecht vom Boden bis zur Decke messen. Ein Knick ist eine zweite Schräge oder ein Übergang von senkrechter Wand zur Decke.</div>
@@ -177,15 +178,15 @@
       <div class="ct">Steht die Wand im Lot?</div>
       <div class="minirow"><span class="lab">Spalt X</span><input class="v" type="text"><span class="unit">mm</span></div>
       <div class="minirow"><span class="lab">Wand kippt</span>
-        <span class="dirbox"><label><i></i> zum Raum</label><label><i></i> zur Wand</label><label><i></i> gerade</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d3"> zum Raum</label><label><input type="radio" class="rc" name="grp_d3"> zur Wand</label><label><input type="radio" class="rc" name="grp_d3"> gerade</label></span></div>
     </div>
     <div class="card">
       <div class="ct">Untergrund</div>
-      <div class="minirow"><span class="opt"><i></i> Auf Duschwanne</span>
+      <div class="minirow"><span class="opt"><input type="radio" class="rc" name="grp_boden"> Auf Duschwanne</span>
         <span class="lab" style="min-width:auto">Einrückmaß</span><input class="v" type="text"><span class="unit">mm, Standard 25</span></div>
-      <div class="minirow" style="margin-bottom:0"><span class="opt"><i></i> Bodengleich, Glas-Außenkante steht auf:</span></div>
+      <div class="minirow" style="margin-bottom:0"><span class="opt"><input type="radio" class="rc" name="grp_boden"> Bodengleich, Glas-Außenkante steht auf:</span></div>
       <div class="minirow" style="margin-top:2px">
-        <span class="dirbox"><label><i></i> Innenkante Fuge</label><label><i></i> Mitte Fuge</label><label><i></i> Außenkante Fuge</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d4"> Innenkante Fuge</label><label><input type="radio" class="rc" name="grp_d4"> Mitte Fuge</label><label><input type="radio" class="rc" name="grp_d4"> Außenkante Fuge</label></span></div>
     </div>
   </div>
 

@@ -43,14 +43,15 @@
   .band.pre b{color:var(--warn);}
   .band .checks{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px;}
   .band .checks span{display:flex;align-items:center;gap:5px;color:#3a3a3a;}
-  .band .checks i{width:11px;height:11px;border:1.4px solid var(--warn);border-radius:2px;display:inline-block;flex-shrink:0;}
+  .band .checks i{width:5px;height:5px;border-radius:50%;background:var(--warn);display:inline-block;flex-shrink:0;margin-top:1px;}
   .rule{background:var(--accent-soft);border:1px solid #BBD2D8;}.rule b{color:var(--accent);}
   .sec{font-size:12px;font-weight:700;color:var(--accent);margin:9px 0 3px;padding-left:8px;border-left:4px solid var(--accent);}
   .grid2{display:flex;gap:12px;}
   .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:9px 11px;background:#fff;}
   .card .ct{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:5px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
   .opt{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:#333;font-size:10.5px;}
-  .opt i,.dirbox i{width:11px;height:11px;border:1.4px solid var(--accent);border-radius:2px;display:inline-block;flex-shrink:0;}
+    .rc{appearance:none;-webkit-appearance:none;-moz-appearance:none;width:13px;height:13px;flex-shrink:0;border:1.4px solid var(--accent);border-radius:2px;background:#fff;margin:0;padding:0;cursor:pointer;position:relative;vertical-align:middle;}
+  .rc:checked::after{content:"";position:absolute;left:3.5px;top:0px;width:4px;height:8px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg);}
   .minirow{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:10.5px;color:#333;flex-wrap:wrap;}
   .minirow .lab{min-width:104px;color:var(--muted);}
   .minirow input.v{width:56px;border:1.3px solid var(--measure);border-radius:3px;text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
@@ -115,7 +116,7 @@
 
   <div class="minirow" style="margin:6px 0">
     <span class="lab" style="min-width:auto;font-weight:700;color:var(--accent)">Worum geht es?</span>
-    <span class="dirbox"><label><i></i> Sitzbank</label><label><i></i> Vorwand</label><label><i></i> anderer Vorsprung</label></span>
+    <span class="dirbox"><label><input type="radio" class="rc" name="grp_d1"> Sitzbank</label><label><input type="radio" class="rc" name="grp_d1"> Vorwand</label><label><input type="radio" class="rc" name="grp_d1"> anderer Vorsprung</label></span>
   </div>
 
   <!-- ===================== 1 · LAGE UND GRÖSSE ===================== -->
@@ -172,7 +173,7 @@
     <div class="card">
       <div class="ct">Maße eintragen</div>
       <div class="minirow"><span class="lab">Seite des Ausschnitts</span>
-        <span class="dirbox"><label><i></i> links</label><label><i></i> rechts</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d2"> links</label><label><input type="radio" class="rc" name="grp_d2"> rechts</label></span></div>
       <div class="minirow"><span class="lab">a · Tiefe / Ausladung</span><input class="v" type="text"><span class="unit">mm in die Dusche</span></div>
       <div class="minirow"><span class="lab">b · Höhe</span><input class="v" type="text"><span class="unit">mm über Boden/Rand</span></div>
       <div class="minirow"><span class="lab">Breite entlang der Wand</span><input class="v" type="text"><span class="unit">mm</span></div>
@@ -188,18 +189,18 @@
     <div class="card">
       <div class="ct">Obere Kante <span style="font-weight:400;color:var(--muted);font-size:9.5px">(Auflage auf der Bank)</span></div>
       <div class="minirow"><span class="lab">waagerecht?</span>
-        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d3"> ja</label><label><input type="radio" class="rc" name="grp_d3"> nein</label></span></div>
       <div class="minirow"><span class="lab">wenn nein: Spalt X</span><input class="v" type="text"><span class="unit">mm bei Y</span></div>
       <div class="minirow"><span class="lab">fällt nach</span>
-        <span class="dirbox"><label><i></i> vorn (zum Raum)</label><label><i></i> hinten (zur Wand)</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d4"> vorn (zum Raum)</label><label><input type="radio" class="rc" name="grp_d4"> hinten (zur Wand)</label></span></div>
     </div>
     <div class="card">
       <div class="ct">Vordere Kante <span style="font-weight:400;color:var(--muted);font-size:9.5px">(Front der Bank / Vorwand)</span></div>
       <div class="minirow"><span class="lab">senkrecht / im Lot?</span>
-        <span class="dirbox"><label><i></i> ja</label><label><i></i> nein</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d5"> ja</label><label><input type="radio" class="rc" name="grp_d5"> nein</label></span></div>
       <div class="minirow"><span class="lab">wenn nein: Spalt X</span><input class="v" type="text"><span class="unit">mm bei Y</span></div>
       <div class="minirow"><span class="lab">kippt oben nach</span>
-        <span class="dirbox"><label><i></i> zum Raum</label><label><i></i> zur Wand</label></span></div>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d6"> zum Raum</label><label><input type="radio" class="rc" name="grp_d6"> zur Wand</label></span></div>
     </div>
   </div>
 
