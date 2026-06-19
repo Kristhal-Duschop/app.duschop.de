@@ -18,7 +18,7 @@
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{font-family:"Segoe UI",-apple-system,system-ui,sans-serif;color:var(--ink);
-    background:#EDEAE3;line-height:1.35;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    background:#EDEAE3;line-height:1.30;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   .toolbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;
     background:var(--accent);color:#fff;padding:10px 18px;font-size:14px;}
   .toolbar b{font-weight:600;}.toolbar .sp{flex:1;}
@@ -71,8 +71,8 @@
   .unit{color:var(--muted);font-size:10px;}
   .colhead{font-size:10.5px;font-weight:700;color:var(--accent);margin:1px 0 2px;}
   .geo{display:flex;gap:6px;flex-wrap:wrap;}
-  .geo label{flex:1;min-width:104px;border:1px solid var(--line);border-radius:7px;padding:5px 8px;
-    display:flex;align-items:center;gap:7px;font-size:10px;color:#333;background:#fff;}
+  .geo label{flex:1;min-width:88px;overflow-wrap:anywhere;border:1px solid var(--line);border-radius:7px;padding:5px 6px;
+    display:flex;align-items:center;gap:6px;font-size:9px;color:#333;background:#fff;}
   .geo label i{width:12px;height:12px;border:1.5px solid var(--accent);border-radius:2px;flex-shrink:0;}
   .geo svg{flex-shrink:0;}
   .extra{display:flex;gap:7px 16px;flex-wrap:wrap;font-size:10px;color:#333;margin:4px 0 0;}
@@ -191,7 +191,13 @@
         <rect x="6" y="6" width="9" height="34" fill="#D7D4D0" stroke="#9E9A93"/>
         <rect x="15" y="40" width="45" height="12" rx="3" fill="#E9F2F3" stroke="#9AADB0"/>
         <line x1="15" y1="10" x2="50" y2="10" stroke="#0F4C5C" stroke-width="3"/>
-        <line x1="50" y1="10" x2="50" y2="40" stroke="#0F4C5C" stroke-width="3"/></svg>Badewanne-Aufsatz</label>
+        <line x1="50" y1="10" x2="50" y2="40" stroke="#0F4C5C" stroke-width="3"/></svg>Badewannen&shy;aufsatz</label>
+    <label><input type="radio" class="rc" name="grp_geo">
+      <svg width="34" height="30" viewBox="0 0 66 58" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="6" width="40" height="9" fill="#D7D4D0" stroke="#9E9A93"/>
+        <rect x="48" y="15" width="12" height="37" rx="3" fill="#E9F2F3" stroke="#9AADB0"/>
+        <line x1="14" y1="15" x2="14" y2="52" stroke="#0F4C5C" stroke-width="3"/>
+        <line x1="14" y1="52" x2="46" y2="52" stroke="#0F4C5C" stroke-width="3"/></svg>Badewannen&shy;anschluss</label>
   </div>
 
   <div class="yline">
@@ -226,6 +232,9 @@
     <div class="card">
       <div class="ct"><span class="opt"><input type="radio" class="rc" name="grp_boden"> Auf Duschwanne</span></div>
       <div class="minirow"><span class="lab">Einrückmaß</span><input class="v" type="text"><span class="unit">mm · Außenkante Wanne bis Glas, Standard 25</span></div>
+      <div class="minirow"><span class="lab" style="min-width:auto">gemessen ab Außenkante Duschwanne?</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_dmess"> ja</label><label><input type="radio" class="rc" name="grp_dmess"> nein</label></span></div>
+      <div class="minirow"><span class="lab" style="min-width:auto">gemessen mit Einrückmaß</span><input class="v" type="text"><span class="unit">mm</span></div>
       <div class="minirow"><span class="lab">Wanne Breite</span><input class="v" type="text"><span class="unit">mm</span>
         <span class="lab" style="min-width:auto">Tiefe</span><input class="v" type="text"><span class="unit">mm</span></div>
       <div class="minirow"><span class="lab">Radius Viertelkreis</span><input class="v" type="text"><span class="unit">mm · nur bei Rundwanne</span></div>

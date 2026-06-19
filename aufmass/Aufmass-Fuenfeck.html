@@ -29,7 +29,7 @@
     font-family:"Segoe UI",-apple-system,system-ui,sans-serif;
     color:var(--ink);
     background:#EDEAE3;
-    line-height:1.4;
+    line-height:1.32;
     -webkit-print-color-adjust:exact;
     print-color-adjust:exact;
   }
@@ -327,6 +327,9 @@
       <div class="ct"><span class="opt"><input type="radio" class="rc" name="grp_boden"> Auf Duschwanne</span></div>
       <div class="minirow"><span class="lab">Einrückmaß</span>
         <input class="v" type="text"><span class="unit">mm · Außenkante Wanne bis Glas, Standard 25</span></div>
+      <div class="minirow"><span class="lab" style="min-width:auto">gemessen ab Außenkante Duschwanne?</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_dmess"> ja</label><label><input type="radio" class="rc" name="grp_dmess"> nein</label></span></div>
+      <div class="minirow"><span class="lab" style="min-width:auto">gemessen mit Einrückmaß</span><input class="v" type="text"><span class="unit">mm</span></div>
       <div class="minirow"><span class="lab">Höhe Rand</span>
         <input class="v" type="text"><span class="unit">mm über Boden</span></div>
       <div class="minirow"><span class="lab">Rand waagerecht</span>
@@ -334,8 +337,16 @@
     </div>
     <div class="card">
       <div class="ct"><span class="opt"><input type="radio" class="rc" name="grp_boden"> Bodengleich / gefliest</span></div>
-      <div class="minirow"><span class="lab">Gefälle zum Ablauf</span>
-        <span class="dirbox"><label><input type="radio" class="rc" name="grp_gef"> ja</label><label><input type="radio" class="rc" name="grp_gef"> nein</label></span></div>
+      <div class="minirow" style="margin-bottom:1px"><span class="lab" style="min-width:auto">Gefälle zum Ablauf, parallel zur Tür?</span></div>
+      <div class="minirow"><span class="lab">Glasseite 1</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_g1"> ja</label><label><input type="radio" class="rc" name="grp_g1"> nein</label></span>
+        <span class="lab" style="min-width:auto">· Breite</span><input class="v" type="text"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Glasseite 2</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_g2"> ja</label><label><input type="radio" class="rc" name="grp_g2"> nein</label></span>
+        <span class="lab" style="min-width:auto">· Breite</span><input class="v" type="text"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Glasseite 3</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_g3"> ja</label><label><input type="radio" class="rc" name="grp_g3"> nein</label></span>
+        <span class="lab" style="min-width:auto">· Breite</span><input class="v" type="text"><span class="unit">mm</span></div>
       <div class="minirow"><span class="lab" style="min-width:auto">Glas-Außenkante steht auf der Fuge:</span></div>
       <div class="minirow" style="margin-top:0">
         <span class="dirbox">

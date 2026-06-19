@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aufmaß-Datenblatt · Ecke · Kristhal Duschop</title>
+<title>Aufmaß-Datenblatt · Badewannenanschluss · Kristhal Duschop</title>
 <style>
   /* ===========================================================
-     Aufmaß-Vorlagenfamilie Kristhal Duschop · Blatt: ECKE
+     Aufmaß-Vorlagenfamilie Kristhal Duschop · Blatt: BADEWANNENANSCHLUSS
      Eine Datei, zwei Wege: am Bildschirm ausfüllen ODER ausdrucken.
      Druck: A4 hoch, eine Seite. PDF über Edge headless.
      =========================================================== */
@@ -142,7 +142,7 @@
 <body>
 
 <div class="toolbar no-print">
-  <b>Aufmaß-Datenblatt Ecke</b>
+  <b>Aufmaß-Datenblatt Badewannenanschluss</b>
   <span class="hint-screen">Am Bildschirm ausfüllen oder ausdrucken und von Hand eintragen.</span>
   <span class="sp"></span>
   <button onclick="window.print()">Drucken / als PDF speichern</button>
@@ -157,12 +157,12 @@
     </div>
     <div class="doctag">
       <div class="t1">Aufmaß-Datenblatt</div>
-      <div class="t2">Ecke</div>
+      <div class="t2">Badewannenanschluss</div>
     </div>
   </div>
 
-  <h1 class="title">Aufmaß Ecke</h1>
-  <p class="sub">Dusche in der Raumecke, zwei Wände und zwei Glasseiten. Bitte die roten Felder ausfüllen, alle Werte in Millimeter.</p>
+  <h1 class="title">Aufmaß Badewannenanschluss</h1>
+  <p class="sub">Eckdusche am Boden, zwei Glasseiten, eine grenzt an die Badewanne. Bitte die roten Felder ausfüllen, alle Werte in Millimeter.</p>
 
   <div class="row">
     <div class="fld"><label>Kunde / Projekt</label><input type="text"></div>
@@ -182,7 +182,7 @@
 
   <!-- ============ KERNREGEL ============ -->
   <div class="band rule">
-    <b>Wichtig:</b> Bitte nur die fertige Ecke so messen, wie sie ist.
+    <b>Wichtig:</b> Bitte nur die fertige Situation so messen, wie sie ist.
     <b>Ziehen Sie nichts ab</b> und rechnen Sie kein Spaltmaß ein. Die nötigen Abzüge für ein sauberes Schließen ermitteln wir.
   </div>
 
@@ -212,9 +212,9 @@
 
         <!-- Wände: Rückwand oben, Seitenwand links -->
         <rect x="44" y="30" width="236" height="18" fill="url(#wall)" stroke="#9E9A93"/>
-        <rect x="44" y="30" width="20" height="220" fill="url(#wall)" stroke="#9E9A93"/>
+        <rect x="40" y="48" width="24" height="200" rx="5" fill="#E9F2F3" stroke="#9AADB0"/>
         <text x="168" y="43" font-size="9.5" fill="#6a6a6a" text-anchor="middle">Wand (Rückwand)</text>
-        <text x="54" y="150" font-size="9.5" fill="#6a6a6a" text-anchor="middle" transform="rotate(-90 54 150)">Wand (Seitenwand)</text>
+        <text x="54" y="150" font-size="9.5" fill="#6a6a6a" text-anchor="middle" transform="rotate(-90 54 150)">Badewanne</text>
 
         <!-- Duschfläche -->
         <rect x="64" y="48" width="200" height="200" fill="#fff" stroke="#C7C2BA" stroke-dasharray="2 3"/>
@@ -275,7 +275,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="ct">Seitenwand <span style="font-weight:400;color:var(--muted);font-size:9.5px">(an Y1)</span></div>
+        <div class="ct">Wannenseite <span style="font-weight:400;color:var(--muted);font-size:9.5px">(an Y1)</span></div>
         <div class="minirow"><span class="lab">Spalt X</span>
           <input class="v" type="text"><span class="unit">mm</span></div>
         <div class="minirow"><span class="lab">Wand kippt</span>
