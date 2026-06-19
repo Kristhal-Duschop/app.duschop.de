@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aufmaß-Hilfe · Bezugskante am Boden · Kristhal Duschop</title>
+<style>
+  /* ===========================================================
+     Aufmaß-Vorlagenfamilie Kristhal Duschop · Hilfeblatt:
+     BEZUGSKANTE AM BODEN (Duschwanne / gefliester Boden)
+     Erklärblatt, A4 hoch, eine Seite. PDF über Edge headless.
+     =========================================================== */
+  :root{
+    --accent:#0F4C5C;--accent-soft:#E7EEF0;--measure:#C0392B;--ink:#1A1A1A;
+    --muted:#5F5F5F;--line:#D7D4D0;--light:#F4F1EC;--wall:#D7D4D0;
+    --warn:#B5530A;--warn-soft:#FBF0E4;--ok:#2D6A3E;--glass:#D8E3EE;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:"Segoe UI",-apple-system,system-ui,sans-serif;color:var(--ink);
+    background:#EDEAE3;line-height:1.4;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .toolbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;
+    background:var(--accent);color:#fff;padding:10px 18px;font-size:14px;}
+  .toolbar b{font-weight:600;}.toolbar .sp{flex:1;}
+  .toolbar button{font:600 14px/1 "Segoe UI",sans-serif;background:#fff;color:var(--accent);
+    border:0;border-radius:6px;padding:9px 16px;cursor:pointer;}
+  .toolbar button:hover{background:#eaf3f5;}
+  .hint-screen{font-size:12.5px;opacity:.9;}
+  .sheet{width:210mm;min-height:297mm;margin:18px auto;background:#fff;
+    padding:8mm 11mm 6mm;box-shadow:0 4px 20px rgba(0,0,0,.16);position:relative;}
+  .head{display:flex;align-items:flex-end;justify-content:space-between;
+    border-bottom:2px solid var(--accent);padding-bottom:7px;}
+  .brand{font-size:21px;font-weight:700;color:var(--accent);letter-spacing:.2px;}
+  .brand small{display:block;font-size:9.5px;font-weight:400;color:var(--muted);letter-spacing:.3px;margin-top:2px;}
+  .doctag{text-align:right;}.doctag .t1{font-size:9.5px;color:var(--muted);}
+  .doctag .t2{font-size:14px;font-weight:700;color:var(--accent);}
+  h1.title{font-size:19px;margin:8px 0 1px;}
+  .sub{font-size:11px;color:var(--muted);margin:0 0 7px;}
+  .keybox{background:var(--warn-soft);border:1px solid #E7C9A6;border-radius:6px;padding:9px 12px;margin:6px 0;font-size:11.5px;}
+  .keybox b{color:var(--warn);}
+  .sec{font-size:12px;font-weight:700;color:var(--accent);margin:10px 0 3px;padding-left:8px;border-left:4px solid var(--accent);}
+  .fcap{font-size:9.5px;color:var(--muted);font-style:italic;text-align:center;margin:2px 0 4px;}
+  .grid2{display:flex;gap:12px;align-items:flex-start;margin-top:4px;}
+  .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:9px 12px;background:#fff;}
+  .card .ct{font-size:11.5px;font-weight:700;color:var(--accent);margin-bottom:4px;}
+  .card p{margin:0;font-size:10.5px;color:#3a3a3a;line-height:1.5;}
+  .card p b{color:var(--accent);}
+  .legend{background:var(--light);border:1px solid var(--line);border-radius:7px;padding:8px 11px;margin:9px 0;font-size:10.5px;color:#333;}
+  .legend b{color:var(--accent);}
+  .foot{border-top:1px solid var(--line);padding-top:6px;display:flex;justify-content:space-between;font-size:9px;color:var(--muted);}
+  @page{size:A4;margin:0;}
+  @media print{body{background:#fff;}.toolbar{display:none;}
+    .sheet{margin:0;box-shadow:none;width:auto;min-height:auto;}}
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <b>Bezugskante am Boden</b>
+  <span class="hint-screen">Anleitung zum Ausdrucken oder Mitschicken. Erklärt, von welcher Kante aus Sie die Breite messen.</span>
+  <span class="sp"></span>
+  <button onclick="window.print()">Drucken / als PDF speichern</button>
+</div>
+
+<div class="sheet">
+
+  <div class="head">
+    <div class="brand">Kristhal Duschop<small>Glasduschen nach Maß · duschop.de</small></div>
+    <div class="doctag"><div class="t1">Aufmaß-Hilfe</div><div class="t2">Bezugskante</div></div>
+  </div>
+
+  <h1 class="title">Bezugskante am Boden: von wo zählt die Breite?</h1>
+  <p class="sub">Damit die Breite eindeutig ist, brauchen wir die Kante, von der aus Sie gemessen haben. Auf einer Duschwanne und bei gefliestem Boden ist diese Kante jeweils eine andere.</p>
+
+  <div class="keybox">
+    <b>Worauf es ankommt:</b> Sagen Sie uns immer, von welcher Kante aus Sie die Breite am Boden gemessen haben.
+    Auf einer <b>Duschwanne</b> ist das die Außenkante der Wanne oder das Glas mit dem Einrückmaß. Bei <b>gefliestem Boden</b>
+    ist es die Innen- oder Außenkante der Fuge, an der das Gefälle zum Ablauf beginnt.
+  </div>
+
+  <!-- ============ QUERSCHNITTE ============ -->
+  <div class="sec">1 · Zwei Fälle im Querschnitt</div>
+  <svg viewBox="0 0 760 244" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
+    <defs>
+      <pattern id="tile" width="26" height="13" patternUnits="userSpaceOnUse">
+        <rect width="26" height="13" fill="#ECE8E0"/>
+        <path d="M0 0 H26 M0 0 V13 M13 0 V13" stroke="#D2CCC2" stroke-width="1"/>
+      </pattern>
+      <marker id="ar" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#1A1A1A"/></marker>
+      <marker id="arS" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto">
+        <path d="M0,0 L9,4.5 L0,9 z" fill="#C0392B"/></marker>
+    </defs>
+
+    <!-- Panel-Titel + Trenner -->
+    <text x="20" y="18" font-size="11" font-weight="700" fill="#0F4C5C">A · Auf Duschwanne</text>
+    <text x="20" y="30" font-size="8" fill="#9a9a9a" font-style="italic">Schnitt durch die vordere Kante</text>
+    <text x="400" y="18" font-size="11" font-weight="700" fill="#0F4C5C">B · Bodengleich, gefliest</text>
+    <text x="400" y="30" font-size="8" fill="#9a9a9a" font-style="italic">Schnitt, Gefälle zum Ablauf</text>
+    <line x1="380" y1="40" x2="380" y2="226" stroke="#E0DCD5" stroke-width="1"/>
+
+    <!-- ===================== A · DUSCHWANNE ===================== -->
+    <!-- Unterboden + Wanne (Tasse) -->
+    <rect x="36" y="194" width="300" height="15" fill="#E3DED6" stroke="#C7C2BA"/>
+    <rect x="58" y="176" width="242" height="18" fill="#F4F1EC" stroke="#C7C2BA"/>
+    <line x1="300" y1="176" x2="300" y2="194" stroke="#9E9A93" stroke-width="1.6"/>
+    <text x="150" y="207" font-size="8.5" fill="#9a9a9a" text-anchor="middle" font-style="italic">Duschwanne</text>
+
+    <!-- Glas, eingerückt -->
+    <rect x="268" y="92" width="11" height="84" fill="#D8E3EE" stroke="#8ba3bb"/>
+    <line x1="273" y1="96" x2="273" y2="112" stroke="#f2f7fb" stroke-width="2"/>
+    <text x="262" y="86" font-size="9.5" fill="#5e7186" text-anchor="end">Glas</text>
+
+    <!-- Bezugslinien Glas + Außenkante -->
+    <line x1="273" y1="124" x2="273" y2="176" stroke="#9a9a9a" stroke-width="0.8" stroke-dasharray="3 2"/>
+    <line x1="300" y1="118" x2="300" y2="176" stroke="#0F4C5C" stroke-width="0.9" stroke-dasharray="3 2"/>
+    <text x="306" y="138" font-size="9" fill="#0F4C5C" font-weight="600">Außenkante</text>
+    <text x="306" y="149" font-size="9" fill="#0F4C5C" font-weight="600">Duschwanne</text>
+
+    <!-- Einrückmaß -->
+    <line x1="273" y1="150" x2="300" y2="150" stroke="#C0392B" stroke-width="1.4" marker-start="url(#arS)" marker-end="url(#arS)"/>
+    <text x="286" y="106" font-size="9.5" fill="#C0392B" font-weight="700" text-anchor="middle">Einrückmaß</text>
+    <text x="286" y="117" font-size="8.5" fill="#C0392B" text-anchor="middle">Standard 25 mm</text>
+    <line x1="286" y1="121" x2="286" y2="148" stroke="#C0392B" stroke-width="0.7"/>
+
+    <!-- Breite läuft nach links -->
+    <line x1="64" y1="166" x2="150" y2="166" stroke="#1A1A1A" stroke-width="0.9" marker-start="url(#ar)"/>
+    <text x="150" y="160" font-size="9" fill="#6a6a6a" text-anchor="end" font-style="italic">Breite</text>
+
+    <!-- ===================== B · GEFLIESTER BODEN ===================== -->
+    <!-- Unterboden -->
+    <rect x="434" y="200" width="294" height="13" fill="#E3DED6" stroke="#C7C2BA"/>
+    <!-- Raumseite, eben -->
+    <rect x="606" y="176" width="112" height="14" fill="url(#tile)" stroke="#C7C2BA"/>
+    <!-- Duschseite, mit Gefälle nach links -->
+    <polygon points="448,189 594,176 594,189 448,202" fill="url(#tile)" stroke="#C7C2BA"/>
+    <!-- Fuge -->
+    <rect x="594" y="176" width="12" height="13" fill="#CDBFA6" stroke="#B7A98C"/>
+
+    <!-- Glas auf der Fuge -->
+    <rect x="595" y="92" width="10" height="84" fill="#D8E3EE" stroke="#8ba3bb"/>
+    <line x1="600" y1="96" x2="600" y2="112" stroke="#f2f7fb" stroke-width="2"/>
+    <text x="590" y="86" font-size="9.5" fill="#5e7186" text-anchor="end">Glas</text>
+
+    <!-- Bezugslinien Innen-/Außenkante Fuge -->
+    <line x1="594" y1="124" x2="594" y2="176" stroke="#9a9a9a" stroke-width="0.8" stroke-dasharray="3 2"/>
+    <line x1="606" y1="124" x2="606" y2="176" stroke="#9a9a9a" stroke-width="0.8" stroke-dasharray="3 2"/>
+    <text x="588" y="139" font-size="8.5" fill="#333" text-anchor="end" font-weight="600">Innenkante</text>
+    <text x="588" y="149" font-size="8.5" fill="#333" text-anchor="end">Fuge</text>
+    <text x="612" y="139" font-size="8.5" fill="#333" font-weight="600">Außenkante</text>
+    <text x="612" y="149" font-size="8.5" fill="#333">Fuge</text>
+
+    <!-- Gefälle beginnt an der Fuge -->
+    <text x="470" y="150" font-size="9" fill="#C0392B" font-weight="700" text-anchor="middle">Gefälle beginnt</text>
+    <text x="470" y="160" font-size="9" fill="#C0392B" text-anchor="middle">an der Fuge</text>
+    <line x1="508" y1="156" x2="591" y2="180" stroke="#C0392B" stroke-width="0.7"/>
+
+    <!-- Ablauf -->
+    <rect x="452" y="190" width="20" height="5" fill="#B9C0C4" stroke="#8a929b"/>
+    <line x1="458" y1="190" x2="458" y2="195" stroke="#8a929b" stroke-width="0.6"/>
+    <line x1="466" y1="190" x2="466" y2="195" stroke="#8a929b" stroke-width="0.6"/>
+    <text x="462" y="186" font-size="8" fill="#6a6a6a" text-anchor="middle" font-style="italic">Ablauf</text>
+  </svg>
+  <p class="fcap">Querschnitte schematisch, nicht maßstäblich. Wichtig ist nur, von welcher Kante aus Sie die Breite gemessen haben.</p>
+
+  <!-- ============ ERKLÄRUNG JE FALL ============ -->
+  <div class="grid2">
+    <div class="card">
+      <div class="ct">A · Auf Duschwanne</div>
+      <p>Geben Sie die Breite entweder <b>bis zur Außenkante der Duschwanne</b> an oder <b>bis zum Glas</b>, also mit dem Einrückmaß (Standard 25 mm). Schreiben Sie dazu, welche der beiden Kanten Sie gemessen haben. Genau das fragt das Aufmaßblatt unten ab.</p>
+    </div>
+    <div class="card">
+      <div class="ct">B · Bodengleich, gefliest</div>
+      <p>Hier zählt die <b>Fuge, an der das Gefälle zum Ablauf beginnt</b>. Messen Sie bis zu dieser Kante und kreuzen Sie an, ob die Glas-Außenkante auf der <b>Innenkante, der Mitte oder der Außenkante</b> der Fuge stehen soll.</p>
+    </div>
+  </div>
+
+  <!-- ============ LEGENDE ============ -->
+  <div class="legend">
+    <b>Dazu passt:</b> Wie Sie die Neigung von Wand, Boden und Wannenrand mit der Wasserwaage messen, steht im Blatt
+    <b>Neigungen messen</b>. Im Zweifel ein, zwei Handyfotos der Kante mitschicken, dann ordnen wir das Maß sicher zu.
+  </div>
+
+  <!-- ============ FUSS ============ -->
+  <div class="foot">
+    <span>Kristhal Duschop · Tel. 09293 9339580 · info@duschop.de</span>
+    <span>Im Zweifel kurz anrufen, wir gehen es gemeinsam durch.</span>
+  </div>
+
+</div>
+</body>
+</html>
