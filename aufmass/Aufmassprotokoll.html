@@ -27,7 +27,7 @@
   .toolbar button:hover{background:#eaf3f5;}
   .hint-screen{font-size:12.5px;opacity:.9;}
   .sheet{width:210mm;min-height:297mm;margin:18px auto;background:#fff;
-    padding:6mm 11mm 5mm;box-shadow:0 4px 20px rgba(0,0,0,.16);position:relative;}
+    padding:5mm 11mm 4mm;box-shadow:0 4px 20px rgba(0,0,0,.16);position:relative;}
   .head{display:flex;align-items:flex-end;justify-content:space-between;
     border-bottom:2px solid var(--accent);padding-bottom:6px;}
   .brand{font-size:21px;font-weight:700;color:var(--accent);letter-spacing:.2px;}
@@ -52,14 +52,14 @@
   .yline{display:flex;align-items:center;gap:8px;margin:4px 0 2px;font-size:11px;color:var(--muted);}
   .yline .yi{display:inline-flex;align-items:center;gap:6px;color:#111;font-weight:600;}
   .yline input{width:62px;border:0;border-bottom:1px solid #444;text-align:center;font:600 12px/1 "Segoe UI";padding:2px 0;}
-  .sec{font-size:12px;font-weight:700;color:var(--accent);margin:7px 0 3px;padding-left:8px;border-left:4px solid var(--accent);}
+  .sec{font-size:12px;font-weight:700;color:var(--accent);margin:5px 0 2px;padding-left:8px;border-left:4px solid var(--accent);}
   .grid2{display:flex;gap:10px;}
-  .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:8px 11px;background:#fff;}
+  .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:7px 10px;background:#fff;}
   .card .ct{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px;display:flex;align-items:center;gap:7px;}
   .card .ct .opt{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:#333;font-size:10.5px;}
   .rc{appearance:none;-webkit-appearance:none;-moz-appearance:none;width:13px;height:13px;flex-shrink:0;border:1.4px solid var(--accent);border-radius:2px;background:#fff;margin:0;padding:0;cursor:pointer;position:relative;vertical-align:middle;}
   .rc:checked::after{content:"";position:absolute;left:3.5px;top:0px;width:4px;height:8px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg);}
-  .minirow{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:10.5px;color:#333;flex-wrap:wrap;}
+  .minirow{display:flex;align-items:center;gap:8px;margin:3px 0;font-size:10.5px;color:#333;flex-wrap:wrap;}
   .minirow .lab{min-width:78px;color:var(--muted);}
   .minirow input.v{width:54px;border:1.3px solid var(--measure);border-radius:3px;text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
   .tline{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:10.5px;}
@@ -84,7 +84,7 @@
   .sketch textarea{position:absolute;inset:0;border:0;background:transparent;resize:none;padding:21px 10px 6px;
     font:400 11px/1.5 "Segoe UI";color:#111;width:100%;height:100%;}
   .sketch textarea:focus{outline:none;}
-  .commit{font-size:9.5px;font-weight:600;text-align:center;color:#111;margin:7px 0 5px;}
+  .commit{font-size:9.5px;font-weight:600;text-align:center;color:#111;margin:5px 0 4px;}
   .foot{border-top:1px solid var(--line);padding-top:6px;display:flex;justify-content:space-between;font-size:9px;color:var(--muted);}
   @page{size:A4;margin:0;}
   @media print{body{background:#fff;}.toolbar{display:none;}
@@ -140,7 +140,7 @@
   <div class="sec">1 · Produkt und Ausführung</div>
   <div class="grid2">
     <div class="card">
-      <div class="ct">Glas und Oberfläche</div>
+      <div class="ct">Scharniere, Oberfläche und Glas</div>
       <div class="tline"><span class="lab">Serie / Art.-Nr.</span><input class="t" type="text"></div>
       <div class="tline"><span class="lab">Oberfläche</span><input class="t" type="text" placeholder="z. B. Chrom matt, schwarz matt, bronze matt"></div>
       <div class="tline"><span class="lab">Glasart</span><input class="t" type="text" placeholder="ESG klar · satiniert · getönt"></div>
@@ -191,7 +191,7 @@
         <rect x="6" y="6" width="9" height="34" fill="#D7D4D0" stroke="#9E9A93"/>
         <rect x="15" y="40" width="45" height="12" rx="3" fill="#E9F2F3" stroke="#9AADB0"/>
         <line x1="15" y1="10" x2="50" y2="10" stroke="#0F4C5C" stroke-width="3"/>
-        <line x1="50" y1="10" x2="50" y2="40" stroke="#0F4C5C" stroke-width="3"/></svg>Wannenaufsatz</label>
+        <line x1="50" y1="10" x2="50" y2="40" stroke="#0F4C5C" stroke-width="3"/></svg>Badewanne-Aufsatz</label>
   </div>
 
   <div class="yline">
@@ -202,12 +202,14 @@
   <div class="grid2">
     <div class="card" style="flex:1.15">
       <div class="ct">Glasmaße <span style="font-weight:400;color:var(--muted);font-size:9.5px">(Einbaumaß, nicht das fertige Glas)</span></div>
-      <div class="colhead">Breite an drei Höhen <span style="font-weight:400;color:var(--muted)">(mm)</span></div>
+      <div class="colhead">Nische <span style="font-weight:400;color:var(--muted)">· eine Breite an drei Höhen (mm)</span></div>
       <div class="minirow">
         <span class="lab" style="min-width:auto">oben</span><input class="v" type="text">
         <span class="lab" style="min-width:auto">Mitte</span><input class="v" type="text">
         <span class="lab" style="min-width:auto">unten</span><input class="v" type="text"></div>
-      <div class="minirow"><span class="lab">2. Glasseite / Tiefe</span><input class="v" type="text"><span class="unit">mm · bei Ecke oder U-Form</span></div>
+      <div class="colhead" style="margin-top:5px;border-top:1px dashed var(--line);padding-top:4px">Ecke <span style="font-weight:400;color:var(--muted)">· zwei Breiten, je Glasseite (mm)</span></div>
+      <div class="minirow"><span class="lab">Breite Glasseite 1</span><input class="v" type="text"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Breite Glasseite 2</span><input class="v" type="text"><span class="unit">mm</span></div>
     </div>
     <div class="card">
       <div class="ct">Lot der Wände</div>
@@ -233,8 +235,13 @@
     </div>
     <div class="card">
       <div class="ct"><span class="opt"><input type="radio" class="rc" name="grp_boden"> Bodengleich / gefliest</span></div>
-      <div class="minirow"><span class="lab">Gefälle zum Ablauf</span>
-        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d8"> ja</label><label><input type="radio" class="rc" name="grp_d8"> nein</label></span></div>
+      <div class="minirow" style="margin-bottom:1px"><span class="lab" style="min-width:auto">Gefälle zum Ablauf, parallel zur Tür?</span></div>
+      <div class="minirow"><span class="lab">Glasseite 1</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d8"> ja</label><label><input type="radio" class="rc" name="grp_d8"> nein</label></span>
+        <span class="lab" style="min-width:auto">· Breite</span><input class="v" type="text"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Glasseite 2</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d8b"> ja</label><label><input type="radio" class="rc" name="grp_d8b"> nein</label></span>
+        <span class="lab" style="min-width:auto">· Breite</span><input class="v" type="text"><span class="unit">mm</span></div>
       <div class="minirow" style="margin-bottom:0"><span class="lab" style="min-width:auto">Glas-Außenkante steht auf:</span></div>
       <div class="minirow" style="margin-top:2px">
         <span class="dirbox">
