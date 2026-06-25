@@ -18,7 +18,7 @@
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{font-family:"Segoe UI",-apple-system,system-ui,sans-serif;color:var(--ink);
-    background:#EDEAE3;line-height:1.30;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    background:#EDEAE3;line-height:1.2;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   .toolbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;
     background:var(--accent);color:#fff;padding:10px 18px;font-size:14px;}
   .toolbar b{font-weight:600;}.toolbar .sp{flex:1;}
@@ -42,7 +42,7 @@
   .fld input{width:100%;border:0;border-bottom:1px solid #444;background:transparent;
     font:600 12px/1.5 "Segoe UI",sans-serif;color:#111;padding:1px 2px;}
   .fld input:focus{outline:none;border-bottom:2px solid var(--accent);}
-  .band{border-radius:6px;padding:6px 11px;margin:6px 0;font-size:10.5px;}
+  .band{border-radius:6px;padding:5px 11px;margin:4px 0;font-size:10.5px;}
   .band.pre{background:var(--warn-soft);border:1px solid #E7C9A6;}
   .band.pre b{color:var(--warn);}
   .band .checks{display:flex;gap:16px;flex-wrap:wrap;margin-top:3px;}
@@ -79,7 +79,7 @@
   .extra label{display:inline-flex;align-items:center;gap:5px;}
   .extra i{width:11px;height:11px;border:1.4px solid var(--accent);border-radius:2px;display:inline-block;flex-shrink:0;}
   .extra input.s{width:42px;border:0;border-bottom:1px solid #999;text-align:center;font:600 10px/1 "Segoe UI";}
-  .sketch{border:1px solid var(--line);border-radius:7px;height:46px;position:relative;margin-top:5px;}
+  .sketch{border:1px solid var(--line);border-radius:7px;height:30px;position:relative;margin-top:4px;}
   .sketch .lab{position:absolute;top:6px;left:9px;font-size:10px;color:var(--muted);}
   .sketch textarea{position:absolute;inset:0;border:0;background:transparent;resize:none;padding:21px 10px 6px;
     font:400 11px/1.5 "Segoe UI";color:#111;width:100%;height:100%;}
@@ -243,6 +243,9 @@
       <div class="minirow"><span class="lab">Höhe Rand</span><input class="v" type="text"><span class="unit">mm über Boden</span></div>
       <div class="minirow"><span class="lab">Rand waagerecht</span>
         <span class="dirbox"><label><input type="radio" class="rc" name="grp_d7"> ja</label><label><input type="radio" class="rc" name="grp_d7"> nein</label></span></div>
+      <div class="minirow" style="margin:2px 0"><span class="lab" style="min-width:auto">wenn nein: Neigung X</span>
+        <input class="v" type="text"><span class="unit">mm</span>
+        <span class="lab" style="min-width:auto">· tiefere Seite</span><input class="v" type="text" style="width:84px"></div>
     </div>
     <div class="card">
       <div class="ct"><span class="opt"><input type="radio" class="rc" name="grp_boden"> Bodengleich / gefliest</span></div>
@@ -253,6 +256,8 @@
       <div class="minirow"><span class="lab">Glasseite 2</span>
         <span class="dirbox"><label><input type="radio" class="rc" name="grp_d8b"> ja</label><label><input type="radio" class="rc" name="grp_d8b"> nein</label></span>
         <span class="lab" style="min-width:auto">· Breite</span><input class="v" type="text"><span class="unit">mm</span></div>
+      <div class="minirow" style="margin:2px 0"><span class="lab" style="min-width:auto">wenn ja: Neigung X je Seite</span>
+        <input class="v" type="text" style="width:46px"><span class="unit">/</span><input class="v" type="text" style="width:46px"><span class="unit">mm</span></div>
       <div class="minirow" style="margin-bottom:0"><span class="lab" style="min-width:auto">Glas-Außenkante steht auf:</span></div>
       <div class="minirow" style="margin-top:2px">
         <span class="dirbox">

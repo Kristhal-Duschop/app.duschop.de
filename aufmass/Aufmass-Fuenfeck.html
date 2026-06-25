@@ -29,7 +29,7 @@
     font-family:"Segoe UI",-apple-system,system-ui,sans-serif;
     color:var(--ink);
     background:#EDEAE3;
-    line-height:1.32;
+    line-height:1.25;
     -webkit-print-color-adjust:exact;
     print-color-adjust:exact;
   }
@@ -94,7 +94,7 @@
     font:600 12px/1 "Segoe UI";padding:2px 0;}
 
   .sec{font-size:12px;font-weight:700;color:var(--accent);
-    margin:6px 0 2px;padding-left:8px;border-left:4px solid var(--accent);}
+    margin:5px 0 2px;padding-left:8px;border-left:4px solid var(--accent);}
 
   .mf{width:100%;height:100%;border:1.3px solid var(--measure);border-radius:3px;
     background:#fff;text-align:center;font:600 12px/1 "Segoe UI",sans-serif;color:#111;padding:0;}
@@ -107,7 +107,7 @@
   .card .ct .opt{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:#333;font-size:10.5px;}
   .rc{appearance:none;-webkit-appearance:none;-moz-appearance:none;width:13px;height:13px;flex-shrink:0;border:1.4px solid var(--accent);border-radius:2px;background:#fff;margin:0;padding:0;cursor:pointer;position:relative;vertical-align:middle;}
   .rc:checked::after{content:"";position:absolute;left:3.5px;top:0px;width:4px;height:8px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg);}
-  .minirow{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:10.5px;color:#333;}
+  .minirow{display:flex;align-items:center;gap:8px;margin:3px 0;font-size:10.5px;color:#333;}
   .minirow .lab{min-width:88px;color:var(--muted);}
   .minirow input.v{width:54px;border:1.3px solid var(--measure);border-radius:3px;
     text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
@@ -334,6 +334,9 @@
         <input class="v" type="text"><span class="unit">mm über Boden</span></div>
       <div class="minirow"><span class="lab">Rand waagerecht</span>
         <span class="dirbox"><label><input type="radio" class="rc" name="grp_randw"> ja</label><label><input type="radio" class="rc" name="grp_randw"> nein</label></span></div>
+      <div class="minirow" style="margin:2px 0"><span class="lab" style="min-width:auto">wenn nein: Neigung X</span>
+        <input class="v" type="text"><span class="unit">mm</span>
+        <span class="lab" style="min-width:auto">· tiefere Seite</span><input class="v" type="text" style="width:84px"></div>
     </div>
     <div class="card">
       <div class="ct"><span class="opt"><input type="radio" class="rc" name="grp_boden"> Bodengleich / gefliest</span></div>
@@ -347,6 +350,8 @@
       <div class="minirow"><span class="lab">Glasseite 3</span>
         <span class="dirbox"><label><input type="radio" class="rc" name="grp_g3"> ja</label><label><input type="radio" class="rc" name="grp_g3"> nein</label></span>
         <span class="lab" style="min-width:auto">· Breite</span><input class="v" type="text"><span class="unit">mm</span></div>
+      <div class="minirow" style="margin:2px 0"><span class="lab" style="min-width:auto">wenn ja: Neigung X je Seite</span>
+        <input class="v" type="text" style="width:42px"><span class="unit">/</span><input class="v" type="text" style="width:42px"><span class="unit">/</span><input class="v" type="text" style="width:42px"><span class="unit">mm</span></div>
       <div class="minirow"><span class="lab" style="min-width:auto">Glas-Außenkante steht auf der Fuge:</span></div>
       <div class="minirow" style="margin-top:0">
         <span class="dirbox">
@@ -361,7 +366,7 @@
   <!-- ============ MESS-LEGENDE ============ -->
   <div class="legend">
     <b>So messen Sie die Neigung:</b> Wasserwaage senkrecht an die Wand stellen und ins Lot bringen (Libelle mittig).
-    Am Ende den Spalt zwischen Waage und Wand messen, das ist <b>X</b>. <b>Y</b> ist die Länge Ihrer Wasserwaage.
+    Am Ende den Spalt zwischen Waage und Wand messen, das ist <b>X</b>. <b>Y</b> ist die Länge Ihrer Wasserwaage. Für die Neigung von <b>Wannenrand oder Boden</b> die Waage flach auflegen und den Spalt am tieferen Ende messen.
     Notieren Sie auch die Richtung. Die Diagonale messen Sie als gerade Strecke von Ecke zu Ecke. Im Zweifel ein Foto mit angelegter Wasserwaage mitschicken.
   </div>
 
