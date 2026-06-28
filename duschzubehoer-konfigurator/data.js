@@ -254,7 +254,10 @@
     { id: 'vigour-one-buerstengarnitur-onbu', title: 'Vigour one V1 WC-Bürstengarnitur, Kristallglas', handle: 'vigour-one-v1-buerstengarnitur-onbu', kategorie: 'badzubehoer', montage: ['wand'], price: '64,90', desc: 'WC-Bürstengarnitur Wandmontage, Kristallglas, verchromt.', isMain: false },
     { id: 'vigour-one-papierhalter-onph', title: 'Vigour one V1 Papierhalter mit Deckel, Bügelform', handle: 'vigour-one-v1-papierhalter-mit-deckel-onph', kategorie: 'badzubehoer', montage: ['wand'], price: '29,90', desc: 'Papierhalter mit Deckel, verchromt, Bügelform, Wandmontage.', isMain: false },
     { id: 'smedbo-xtra-ersatz-h234n3', title: 'Smedbo Xtra Ersatzbürstenkopf Set H234N/3, 3 Stück Weiß', handle: 'xtra-ersatzburstenkopf-set-3-stuck-in-weiss', kategorie: 'badzubehoer', price: '35,90', desc: 'Ersatzbürstenkopf-Set für Smedbo Xtra WC-Bürsten, 3 Stück, weiß.', isMain: false },
-    { id: 'vigour-one-handtuchhalter-onhh', title: 'Vigour one V1 Handtuchhalter, 2-teilig schwenkbar, 41 cm', handle: 'vigour-one-v1-handtuchhalter-onhh', kategorie: 'halter', montage: ['wand'], price: '43,90', desc: 'Handtuchhalter 2-teilig schwenkbar, 41 cm, verchromt, Wandmontage.', isMain: false }
+    { id: 'vigour-one-handtuchhalter-onhh', title: 'Vigour one V1 Handtuchhalter, 2-teilig schwenkbar, 41 cm', handle: 'vigour-one-v1-handtuchhalter-onhh', kategorie: 'halter', montage: ['wand'], price: '43,90', desc: 'Handtuchhalter 2-teilig schwenkbar, 41 cm, verchromt, Wandmontage.', isMain: false },
+    { id: 'halter-glasablage-dusche-quadratisch-fa10', title: 'Halter für Glasablage Dusche, quadratisch 29 mm, Messing massiv, 6 Oberflächen, Art.Nr. FA10', handle: 'halter-glasablage-dusche-quadratisch-fa10', kategorie: 'koerbe', montage: ['wand'], price: '15,90', desc: 'Klemmhalter aus massivem Messing zum Tragen einer Glasablage. Für 8 bis 10 mm Glas, 6 Oberflächen. Preis pro Stück, für eine Ablage zwei Halter.', isMain: false },
+    { id: 'halter-glasablage-dusche-rechteckig-fa11', title: 'Halter für Glasablage Dusche, rechteckig 100 mm, Messing massiv, 4 Oberflächen, Art.Nr. FA11', handle: 'halter-glasablage-dusche-rechteckig-fa11', kategorie: 'koerbe', montage: ['wand'], price: '31,90', desc: 'Klemmhalter aus massivem Messing zum Tragen einer Glasablage. Für 6 bis 10 mm Glas, 4 Oberflächen. Preis pro Stück, für eine Ablage zwei Halter.', isMain: false },
+    { id: 'halter-glasablage-dusche-rund-fa12', title: 'Halter für Glasablage Dusche, rund 49 mm, Messing massiv, 4 Oberflächen, Art.Nr. FA12', handle: 'halter-glasablage-dusche-rund-fa12', kategorie: 'koerbe', montage: ['wand'], price: '24,90', desc: 'Klemmhalter aus massivem Messing zum Tragen einer Glasablage. Für 6 bis 10 mm Glas, 4 Oberflächen. Preis pro Stück, für eine Ablage zwei Halter.', isMain: false }
 ];
 
     // Welle C: Wandhalter Stabistange ist Stabistangen-Teil, gehoert nicht ins Duschzubehoer-Tool.
@@ -492,7 +495,10 @@
     'handbrause-mit-3-strahlarten-rund-120-mm-chrom': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V22HB3RCH.png?v=1773389113',
     'handbrause-mit-3-funktionen-schwarz-matt-130-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V32HB3RSM.png?v=1773389545',
     'handbrause-mit-3-strahlarten-schwarz-matt-130-mm-softedge': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V32HB3ESM.png?v=1773389630',
-    'handbrause-mit-3-strahlarten-chrom-240-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V1HB5.png?v=1773388638'
+    'handbrause-mit-3-strahlarten-chrom-240-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V1HB5.png?v=1773388638',
+    'halter-glasablage-dusche-quadratisch-fa10': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/fa10ch.gif?v=1782652512',
+    'halter-glasablage-dusche-rechteckig-fa11': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/fa11ch.gif?v=1782652836',
+    'halter-glasablage-dusche-rund-fa12': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/fa12ch.gif?v=1782652925'
 };
 
     const montageConfig = {
