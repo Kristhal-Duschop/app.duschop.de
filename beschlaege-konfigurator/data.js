@@ -663,6 +663,20 @@
         priceMax: '36,90',
         desc: 'Selbstklebende quadratische Griffmuschel. Keine Glasbohrung n\u00f6tig!',
         serie: ''
+    },
+    {
+        id: 'muschel-schiebetuer-mittelplatte',
+        title: 'Griffmuschel mit Mittelplatte f\u00fcr Glas-Schiebet\u00fcr',
+        handle: 'griffmuschel-mit-mittelplatte-fur-glas-schiebetur-art-nr-sernhp2',
+        kategorie: 'griffmuschel',
+        befestigung: 'verschraubt',
+        form: '',
+        glasdicken: '',
+        colors: ['edelstahl-poliert','edelstahl-gebuerstet','graphit-matt','messing-matt','bronze-matt'],
+        price: '28,90',
+        priceMax: '69,50',
+        desc: 'Griffmuschel mit Mittelplatte f\u00fcr Glas-Schiebet\u00fcren, fl\u00e4chenb\u00fcndiger Griffpunkt zum beidseitigen \u00d6ffnen.',
+        serie: ''
     }
 ];
 
@@ -679,7 +693,22 @@
         'duschgriff-stangengriff-19-x-19-mm-lochabstand-203-mm-weiss',
         'duschgriff-stangengriff-19-x-19-mm-lochabstand-203-mm-kupfer',
         'duschgriff-stangengriff-19-x-19-mm-lochabstand-203-mm-goldfarbig',
-        'duschgriff-stangengriff-19-x-19-mm-lochabstand-203-mm-edelstahl-geburstet'
+        'duschgriff-stangengriff-19-x-19-mm-lochabstand-203-mm-edelstahl-geburstet',
+        // Punkthalter sind eine neue Warengruppe (weder Scharnier/Haltewinkel/
+        // Griff/Griffmuschel). Das Wizard-Schema (step1Defs, kategorie) kennt
+        // keinen Punkthalter-Pfad, daher KEINE Annotation mit erfundener
+        // Kategorie. Bewusst uebersprungen, bis ggf. eine eigene Kategorie
+        // bzw. ein eigener Punkthalter-Finder existiert.
+        'mini-punkthalter-glas-flaechenbuendig-6-8-mm',
+        // Serenity Duschschiebetuer-System (2026-07-01): Laufwerk-Teile passen
+        // nicht in die Berater-Achsen (Winkel/Montage/Tragkraft). Nur die
+        // Griffmuschel (muschel-schiebetuer-mittelplatte) ist annotiert; das
+        // Hauptsystem und die vier Laufwerk-/Ersatzteile werden uebersprungen.
+        'schiebetursystem-fur-glasduschen-2-m-laufschiene-ganzglas-optik-art-nr-ser78',
+        '90-grad-zubehor-kit-fur-schiebetursystem-glashalter-fur-eckdusche-art-nr-ser90',
+        'ersatz-laufrolle-fur-duschschiebetursystem-beschichtet-art-nr-sernr1',
+        'bodenfuhrung-fur-duschschiebetursystem-art-nr-serug2',
+        'ersatz-stopper-fur-duschschiebetursystem-art-nr-sernds1'
     ];
 
     const productImages = {
