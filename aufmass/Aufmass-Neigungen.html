@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aufmaß-Hilfe · Neigungen messen · Kristhal Duschop</title>
+<title>Aufmaß-Hilfe · Neigungen messen und eintragen · Kristhal Duschop</title>
 <style>
-  /* Aufmaß-Vorlagenfamilie Kristhal Duschop · NEIGUNGEN MESSEN (Erklärblatt) · A4 hoch, eine Seite */
+  /* Aufmaß-Vorlagenfamilie Kristhal Duschop · NEIGUNGEN messen + eintragen · A4 hoch, eine Seite */
   :root{
     --accent:#0F4C5C;--accent-soft:#E7EEF0;--measure:#C0392B;--ink:#1A1A1A;
     --muted:#5F5F5F;--line:#D7D4D0;--light:#F4F1EC;--wall:#D7D4D0;
@@ -14,7 +14,7 @@
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{font-family:"Segoe UI",-apple-system,system-ui,sans-serif;color:var(--ink);
-    background:#EDEAE3;line-height:1.4;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    background:#EDEAE3;line-height:1.32;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   .toolbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;
     background:var(--accent);color:#fff;padding:10px 18px;font-size:14px;}
   .toolbar b{font-weight:600;}.toolbar .sp{flex:1;}
@@ -23,35 +23,54 @@
   .toolbar button:hover{background:#eaf3f5;}
   .hint-screen{font-size:12.5px;opacity:.9;}
   .sheet{width:210mm;min-height:297mm;margin:18px auto;background:#fff;
-    padding:8mm 11mm 6mm;box-shadow:0 4px 20px rgba(0,0,0,.16);position:relative;}
+    padding:7mm 11mm 5mm;box-shadow:0 4px 20px rgba(0,0,0,.16);position:relative;}
   .head{display:flex;align-items:flex-end;justify-content:space-between;
     border-bottom:2px solid var(--accent);padding-bottom:7px;}
   .brand{font-size:21px;font-weight:700;color:var(--accent);letter-spacing:.2px;}
   .brand small{display:block;font-size:9.5px;font-weight:400;color:var(--muted);letter-spacing:.3px;margin-top:2px;}
   .doctag{text-align:right;}.doctag .t1{font-size:9.5px;color:var(--muted);}
   .doctag .t2{font-size:14px;font-weight:700;color:var(--accent);}
-  h1.title{font-size:19px;margin:8px 0 1px;}
-  .sub{font-size:11px;color:var(--muted);margin:0 0 7px;}
-  .band{border-radius:6px;padding:7px 11px;margin:6px 0;font-size:10.5px;}
+  h1.title{font-size:18px;margin:7px 0 1px;}
+  .sub{font-size:10.5px;color:var(--muted);margin:0 0 6px;}
+  .band{border-radius:6px;padding:6px 11px;margin:5px 0;font-size:10.5px;}
   .rule{background:var(--accent-soft);border:1px solid #BBD2D8;}.rule b{color:var(--accent);}
-  .sec{font-size:12px;font-weight:700;color:var(--accent);margin:9px 0 3px;padding-left:8px;border-left:4px solid var(--accent);}
-  .note2{background:var(--accent-soft);border:1px solid #BBD2D8;border-radius:6px;padding:7px 11px;font-size:10px;color:#243b40;margin:6px 0;}
+  .sec{font-size:12px;font-weight:700;color:var(--accent);margin:8px 0 2px;padding-left:8px;border-left:4px solid var(--accent);}
+  .note2{background:#FAFAF7;border:1px solid var(--line);border-radius:6px;padding:6px 11px;font-size:10px;color:#444;margin:5px 0;}
   .note2 b{color:var(--accent);}
-  .fcap{font-size:9.5px;color:var(--muted);font-style:italic;text-align:center;margin:1px 0 3px;}
-  .steps{display:flex;gap:8px;margin:5px 0 2px;}
-  .steps .st{flex:1;border:1px solid var(--line);border-radius:7px;padding:6px 10px;background:#FAFAF7;font-size:9.5px;color:#444;}
-  .steps .st b{color:var(--accent);font-size:10px;display:block;margin-bottom:1px;}
-  .foot{border-top:1px solid var(--line);padding-top:6px;display:flex;justify-content:space-between;font-size:9px;color:var(--muted);}
+  .fcap{font-size:9.5px;color:var(--muted);font-style:italic;text-align:center;margin:1px 0 2px;}
+
+  /* Eingabe-Formular */
+  .rc{appearance:none;-webkit-appearance:none;-moz-appearance:none;width:12px;height:12px;flex-shrink:0;
+    border:1.4px solid var(--accent);border-radius:2px;background:#fff;margin:0;cursor:pointer;position:relative;vertical-align:middle;}
+  .rc:checked::after{content:"";position:absolute;left:3px;top:0;width:3.5px;height:7px;
+    border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg);}
+  .form{border:1px solid var(--line);border-radius:7px;padding:7px 11px 8px;margin:4px 0;background:#fff;}
+  .yrow{display:flex;align-items:center;gap:7px;font-size:11px;margin-bottom:6px;color:#243b40;}
+  .yrow b{color:var(--accent);}
+  .yrow input{width:70px;border:0;border-bottom:1px solid #444;text-align:center;font:600 12px/1 "Segoe UI";padding:2px 0;}
+  .yrow .u{color:var(--muted);font-size:9.5px;}
+  .grid2f{display:flex;gap:10px;}
+  .fcard{flex:1;border:1px solid var(--line);border-radius:6px;padding:7px 9px;background:#FAFAF7;}
+  .fcard .ft{font-size:10.5px;font-weight:700;color:var(--accent);margin-bottom:1px;}
+  .fcard .fs{font-size:9px;color:var(--muted);margin-bottom:4px;}
+  .frow{display:flex;align-items:center;gap:6px;font-size:10px;color:#333;margin:4px 0;flex-wrap:wrap;}
+  .frow .fl{min-width:66px;color:#243b40;font-weight:600;}
+  .frow .x{width:44px;border:1.3px solid var(--measure);border-radius:3px;text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
+  .frow .u{color:var(--muted);font-size:9px;}
+  .frow .dir{display:inline-flex;gap:9px;margin-left:2px;}
+  .frow .dir label{display:inline-flex;align-items:center;gap:4px;color:#333;}
+  .foot{border-top:1px solid var(--line);padding-top:6px;margin-top:7px;display:flex;justify-content:space-between;font-size:9px;color:var(--muted);}
   @page{size:A4;margin:0;}
   @media print{body{background:#fff;}.toolbar{display:none;}
-    .sheet{margin:0;box-shadow:none;width:auto;min-height:auto;}}
+    .sheet{margin:0;box-shadow:none;width:auto;min-height:auto;}
+    .frow .x,.yrow input{outline:none;}}
 </style>
 </head>
 <body>
 
 <div class="toolbar no-print">
-  <b>Neigungen messen</b>
-  <span class="hint-screen">Anleitung zum Ausdrucken oder Mitschicken. Erklärt die Werte X und Y.</span>
+  <b>Neigungen messen und eintragen</b>
+  <span class="hint-screen">Am Bildschirm ausfüllen oder ausdrucken. Erklärt die Werte X und Y und nimmt sie gleich auf.</span>
   <span class="sp"></span>
   <button onclick="window.print()">Drucken / als PDF speichern</button>
 </div>
@@ -60,21 +79,21 @@
 
   <div class="head">
     <div class="brand">Kristhal Duschop<small>Glasduschen nach Maß · duschop.de</small></div>
-    <div class="doctag"><div class="t1">Aufmaß-Hilfe</div><div class="t2">Neigungen messen</div></div>
+    <div class="doctag"><div class="t1">Aufmaß-Hilfe</div><div class="t2">Neigungen</div></div>
   </div>
 
   <h1 class="title">Neigungen messen: Wand, Boden und Duschwanne</h1>
-  <p class="sub">So ermitteln Sie die Werte X und Y, nach denen wir auf jedem Aufmaßblatt fragen. Werkzeug: Wasserwaage (am besten 2 m), Zollstock.</p>
+  <p class="sub">So ermitteln Sie die Werte X und Y und tragen sie unten gleich ein. Werkzeug: Wasserwaage (am besten 2 m), Zollstock.</p>
 
   <div class="band rule">
     <b>Das Prinzip:</b> Wasserwaage anlegen und ins Lot bzw. in die Waage bringen (Libelle mittig), dann den Spalt <b>X</b> in mm messen.
     <b>Y</b> ist die Länge Ihrer Wasserwaage. Senkrecht an die Wand misst das Lot, flach auf Boden oder Wannenrand das Gefälle.
   </div>
 
-  <!-- ===================== A · WAND IM LOT ===================== -->
-  <div class="sec">1 · Steht die Wand im Lot? (Wasserwaage senkrecht)</div>
+  <!-- ===================== 1 · WAND IM LOT ===================== -->
+  <div class="sec">1 · Steht die Wand im Lot? (Wasserwaage senkrecht) &mdash; der Spalt X kann oben oder unten sein</div>
 
-  <svg viewBox="0 0 700 250" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
+  <svg viewBox="0 0 700 210" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
     <defs>
       <pattern id="wallB" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
         <rect width="7" height="7" fill="#DCD8D2"/><line x1="0" y1="0" x2="0" y2="7" stroke="#C3BEB6" stroke-width="1"/>
@@ -84,86 +103,125 @@
     </defs>
 
     <!-- linke Variante: Spalt OBEN -->
-    <text x="165" y="19" font-size="10" fill="#444" text-anchor="middle" font-weight="600">Spalt oben: Wand neigt sich nach hinten</text>
-    <line x1="45" y1="215" x2="335" y2="215" stroke="#444" stroke-width="2"/>
-    <polygon points="78,48 124,48 140,215 78,215" fill="url(#wallB)" stroke="#9E9A93"/>
-    <rect x="140" y="54" width="15" height="161" fill="#E8B600" stroke="#1A1A1A" stroke-width="1.3"/>
-    <rect x="140" y="54" width="15" height="6" fill="#1A1A1A"/><rect x="140" y="209" width="15" height="6" fill="#1A1A1A"/>
-    <rect x="142" y="72" width="11" height="18" fill="#A8D8A8" stroke="#1A1A1A" stroke-width="0.6"/>
-    <ellipse cx="147.5" cy="81" rx="3.2" ry="2.6" fill="#fff" stroke="#1A1A1A" stroke-width="0.5"/>
-    <line x1="124" y1="51" x2="140" y2="51" stroke="#C0392B" stroke-width="2" marker-start="url(#arR1)" marker-end="url(#arR1)"/>
-    <rect x="202" y="40" width="82" height="22" rx="4" fill="#C0392B"/>
-    <text x="243" y="55" font-size="12" fill="#fff" text-anchor="middle" font-weight="700">X = ___ mm</text>
-    <line x1="202" y1="51" x2="141" y2="51" stroke="#C0392B" stroke-width="0.8"/>
-    <line x1="178" y1="54" x2="156" y2="54" stroke="#0F4C5C" stroke-width="0.7" stroke-dasharray="3 2"/>
-    <line x1="178" y1="215" x2="156" y2="215" stroke="#0F4C5C" stroke-width="0.7" stroke-dasharray="3 2"/>
-    <line x1="178" y1="54" x2="178" y2="215" stroke="#0F4C5C" stroke-width="1.4" marker-start="url(#arA1)" marker-end="url(#arA1)"/>
-    <rect x="120" y="224" width="124" height="20" rx="4" fill="#0F4C5C"/>
-    <text x="182" y="238" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">Y = Länge der Waage</text>
-    <line x1="178" y1="215" x2="182" y2="224" stroke="#0F4C5C" stroke-width="0.8"/>
+    <text x="165" y="17" font-size="10" fill="#444" text-anchor="middle" font-weight="600">Spalt oben: Wand neigt sich nach hinten</text>
+    <line x1="45" y1="178" x2="335" y2="178" stroke="#444" stroke-width="2"/>
+    <polygon points="78,40 124,40 138,178 78,178" fill="url(#wallB)" stroke="#9E9A93"/>
+    <rect x="138" y="45" width="15" height="133" fill="#E8B600" stroke="#1A1A1A" stroke-width="1.3"/>
+    <rect x="138" y="45" width="15" height="6" fill="#1A1A1A"/><rect x="138" y="172" width="15" height="6" fill="#1A1A1A"/>
+    <rect x="140" y="60" width="11" height="16" fill="#A8D8A8" stroke="#1A1A1A" stroke-width="0.6"/>
+    <ellipse cx="145.5" cy="68" rx="3.2" ry="2.6" fill="#fff" stroke="#1A1A1A" stroke-width="0.5"/>
+    <line x1="124" y1="43" x2="138" y2="43" stroke="#C0392B" stroke-width="2" marker-start="url(#arR1)" marker-end="url(#arR1)"/>
+    <rect x="200" y="34" width="82" height="21" rx="4" fill="#C0392B"/>
+    <text x="241" y="49" font-size="12" fill="#fff" text-anchor="middle" font-weight="700">X = ___ mm</text>
+    <line x1="200" y1="44" x2="139" y2="44" stroke="#C0392B" stroke-width="0.8"/>
+    <line x1="176" y1="45" x2="156" y2="45" stroke="#0F4C5C" stroke-width="0.7" stroke-dasharray="3 2"/>
+    <line x1="176" y1="178" x2="156" y2="178" stroke="#0F4C5C" stroke-width="0.7" stroke-dasharray="3 2"/>
+    <line x1="176" y1="45" x2="176" y2="178" stroke="#0F4C5C" stroke-width="1.4" marker-start="url(#arA1)" marker-end="url(#arA1)"/>
+    <rect x="118" y="186" width="124" height="19" rx="4" fill="#0F4C5C"/>
+    <text x="180" y="199" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">Y = Länge der Waage</text>
+    <line x1="176" y1="178" x2="180" y2="186" stroke="#0F4C5C" stroke-width="0.8"/>
 
-    <text x="362" y="135" font-size="13" fill="#5F5F5F" text-anchor="middle" font-weight="600">oder</text>
+    <text x="362" y="112" font-size="13" fill="#5F5F5F" text-anchor="middle" font-weight="600">oder</text>
 
     <!-- rechte Variante: Spalt UNTEN -->
-    <text x="540" y="19" font-size="10" fill="#444" text-anchor="middle" font-weight="600">Spalt unten: Wand neigt sich zum Raum</text>
-    <line x1="405" y1="215" x2="695" y2="215" stroke="#444" stroke-width="2"/>
-    <polygon points="440,48 486,48 470,215 440,215" fill="url(#wallB)" stroke="#9E9A93"/>
-    <rect x="486" y="54" width="15" height="161" fill="#E8B600" stroke="#1A1A1A" stroke-width="1.3"/>
-    <rect x="486" y="54" width="15" height="6" fill="#1A1A1A"/><rect x="486" y="209" width="15" height="6" fill="#1A1A1A"/>
-    <rect x="488" y="170" width="11" height="18" fill="#A8D8A8" stroke="#1A1A1A" stroke-width="0.6"/>
-    <ellipse cx="493.5" cy="179" rx="3.2" ry="2.6" fill="#fff" stroke="#1A1A1A" stroke-width="0.5"/>
-    <line x1="470" y1="209" x2="486" y2="209" stroke="#C0392B" stroke-width="2" marker-start="url(#arR1)" marker-end="url(#arR1)"/>
-    <rect x="398" y="223" width="82" height="22" rx="4" fill="#C0392B"/>
-    <text x="439" y="238" font-size="12" fill="#fff" text-anchor="middle" font-weight="700">X = ___ mm</text>
-    <line x1="470" y1="210" x2="460" y2="223" stroke="#C0392B" stroke-width="0.8"/>
-    <line x1="521" y1="54" x2="501" y2="54" stroke="#0F4C5C" stroke-width="0.7" stroke-dasharray="3 2"/>
-    <line x1="521" y1="215" x2="501" y2="215" stroke="#0F4C5C" stroke-width="0.7" stroke-dasharray="3 2"/>
-    <line x1="521" y1="54" x2="521" y2="215" stroke="#0F4C5C" stroke-width="1.4" marker-start="url(#arA1)" marker-end="url(#arA1)"/>
-    <rect x="500" y="223" width="124" height="20" rx="4" fill="#0F4C5C"/>
-    <text x="562" y="237" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">Y = Länge der Waage</text>
-    <line x1="521" y1="215" x2="562" y2="223" stroke="#0F4C5C" stroke-width="0.8"/>
+    <text x="540" y="17" font-size="10" fill="#444" text-anchor="middle" font-weight="600">Spalt unten: Wand neigt sich zum Raum</text>
+    <line x1="405" y1="178" x2="695" y2="178" stroke="#444" stroke-width="2"/>
+    <polygon points="440,40 486,40 470,178 440,178" fill="url(#wallB)" stroke="#9E9A93"/>
+    <rect x="486" y="45" width="15" height="133" fill="#E8B600" stroke="#1A1A1A" stroke-width="1.3"/>
+    <rect x="486" y="45" width="15" height="6" fill="#1A1A1A"/><rect x="486" y="172" width="15" height="6" fill="#1A1A1A"/>
+    <rect x="488" y="147" width="11" height="16" fill="#A8D8A8" stroke="#1A1A1A" stroke-width="0.6"/>
+    <ellipse cx="493.5" cy="155" rx="3.2" ry="2.6" fill="#fff" stroke="#1A1A1A" stroke-width="0.5"/>
+    <line x1="470" y1="172" x2="486" y2="172" stroke="#C0392B" stroke-width="2" marker-start="url(#arR1)" marker-end="url(#arR1)"/>
+    <rect x="398" y="186" width="82" height="21" rx="4" fill="#C0392B"/>
+    <text x="439" y="201" font-size="12" fill="#fff" text-anchor="middle" font-weight="700">X = ___ mm</text>
+    <line x1="470" y1="173" x2="460" y2="186" stroke="#C0392B" stroke-width="0.8"/>
+    <line x1="521" y1="45" x2="501" y2="45" stroke="#0F4C5C" stroke-width="0.7" stroke-dasharray="3 2"/>
+    <line x1="521" y1="178" x2="501" y2="178" stroke="#0F4C5C" stroke-width="0.7" stroke-dasharray="3 2"/>
+    <line x1="521" y1="45" x2="521" y2="178" stroke="#0F4C5C" stroke-width="1.4" marker-start="url(#arA1)" marker-end="url(#arA1)"/>
+    <rect x="500" y="24" width="124" height="19" rx="4" fill="#0F4C5C"/>
+    <text x="562" y="37" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">Y = Länge der Waage</text>
+    <line x1="521" y1="45" x2="562" y2="43" stroke="#0F4C5C" stroke-width="0.8"/>
   </svg>
   <p class="fcap">Wasserwaage senkrecht halten, bis die Libelle mittig steht (= im Lot). Der Spalt zur Wand ist X, oben oder unten, je nach Neigung.</p>
 
-  <div class="steps">
-    <div class="st"><b>1 · Anlegen</b>Wasserwaage senkrecht an die Wand, dort wo später das Glas sitzt.</div>
-    <div class="st"><b>2 · Ins Lot</b>Verschieben, bis die senkrechte Libelle mittig steht.</div>
-    <div class="st"><b>3 · Messen</b>Spalt X messen und notieren, ob er oben oder unten ist.</div>
-  </div>
+  <!-- ===================== 2 · BODEN / DUSCHWANNE ===================== -->
+  <div class="sec">2 · Liegt Boden oder Wannenrand in der Waage? (Wasserwaage flach) &mdash; das tiefere Ende kann vorn oder hinten sein</div>
 
-  <!-- ===================== B · BODEN / DUSCHWANNE ===================== -->
-  <div class="sec">2 · Liegt der Boden oder Wannenrand in der Waage? (Wasserwaage flach)</div>
-
-  <svg viewBox="0 0 700 200" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
+  <svg viewBox="0 0 700 180" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
     <defs>
       <marker id="arR2" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#C0392B"/></marker>
       <marker id="arA2" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#0F4C5C"/></marker>
     </defs>
-    <polygon points="90,118 560,150 560,162 90,130" fill="#ECE8E0" stroke="#C7C2BA"/>
-    <text x="300" y="186" font-size="10" fill="#9a9a9a" text-anchor="middle" font-style="italic">Wannenrand / Boden unter dem Glas</text>
-    <rect x="90" y="102" width="470" height="16" fill="#E8B600" stroke="#1A1A1A" stroke-width="1.3"/>
-    <rect x="90" y="102" width="7" height="16" fill="#1A1A1A"/><rect x="553" y="102" width="7" height="16" fill="#1A1A1A"/>
-    <rect x="305" y="105" width="22" height="10" fill="#A8D8A8" stroke="#1A1A1A" stroke-width="0.6"/>
-    <ellipse cx="316" cy="110" rx="3" ry="3.4" fill="#fff" stroke="#1A1A1A" stroke-width="0.5"/>
-    <line x1="556" y1="118" x2="556" y2="150" stroke="#C0392B" stroke-width="2" marker-start="url(#arR2)" marker-end="url(#arR2)"/>
-    <rect x="566" y="120" width="78" height="24" rx="4" fill="#C0392B"/>
-    <text x="605" y="136" font-size="12" fill="#fff" text-anchor="middle" font-weight="700">X = ___ mm</text>
-    <line x1="90" y1="80" x2="560" y2="80" stroke="#0F4C5C" stroke-width="1.4" marker-start="url(#arA2)" marker-end="url(#arA2)"/>
-    <text x="325" y="73" font-size="11" fill="#0F4C5C" text-anchor="middle" font-weight="700">Y = Länge der Waage</text>
-  </svg>
-  <p class="fcap">Wasserwaage flach auf den Wannenrand bzw. den Boden entlang der Glaslinie legen, in die Waage bringen, dann den Spalt X am abfallenden Ende messen.</p>
 
-  <div class="note2">
-    <b>Gefälle zum Ablauf ist normal.</b> In einer bodengleichen Dusche fällt der Boden bewusst zum Ablauf. Wir möchten nur wissen, ob die Auflage unter dem Glas in der Waage liegt und um wie viel sie abweicht. Bei einer Duschwanne ist es derselbe Handgriff: Liegt der Rand in der Waage?
+    <!-- linke Variante: fällt nach rechts (tiefere Seite rechts) -->
+    <text x="170" y="18" font-size="10" fill="#444" text-anchor="middle" font-weight="600">Auflage fällt nach rechts</text>
+    <line x1="58" y1="60" x2="284" y2="60" stroke="#0F4C5C" stroke-width="1.3" marker-start="url(#arA2)" marker-end="url(#arA2)"/>
+    <text x="171" y="54" font-size="9.5" fill="#0F4C5C" text-anchor="middle" font-weight="700">Y = Länge der Waage</text>
+    <polygon points="58,98 300,122 300,133 58,109" fill="#ECE8E0" stroke="#C7C2BA"/>
+    <text x="140" y="164" font-size="9" fill="#9a9a9a" text-anchor="middle" font-style="italic">Wannenrand / Boden unter dem Glas</text>
+    <rect x="58" y="82" width="226" height="15" fill="#E8B600" stroke="#1A1A1A" stroke-width="1.3"/>
+    <rect x="58" y="82" width="7" height="15" fill="#1A1A1A"/><rect x="277" y="82" width="7" height="15" fill="#1A1A1A"/>
+    <rect x="161" y="85" width="18" height="9" fill="#A8D8A8" stroke="#1A1A1A" stroke-width="0.6"/>
+    <ellipse cx="170" cy="89.5" rx="3" ry="2.6" fill="#fff" stroke="#1A1A1A" stroke-width="0.5"/>
+    <line x1="291" y1="97" x2="291" y2="122" stroke="#C0392B" stroke-width="2" marker-start="url(#arR2)" marker-end="url(#arR2)"/>
+    <rect x="236" y="128" width="80" height="20" rx="4" fill="#C0392B"/>
+    <text x="276" y="142" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">X = ___ mm</text>
+    <line x1="291" y1="121" x2="291" y2="128" stroke="#C0392B" stroke-width="0.8"/>
+
+    <text x="350" y="104" font-size="13" fill="#5F5F5F" text-anchor="middle" font-weight="600">oder</text>
+
+    <!-- rechte Variante: fällt nach links (tiefere Seite links) -->
+    <text x="530" y="18" font-size="10" fill="#444" text-anchor="middle" font-weight="600">Auflage fällt nach links</text>
+    <line x1="416" y1="60" x2="642" y2="60" stroke="#0F4C5C" stroke-width="1.3" marker-start="url(#arA2)" marker-end="url(#arA2)"/>
+    <text x="529" y="54" font-size="9.5" fill="#0F4C5C" text-anchor="middle" font-weight="700">Y = Länge der Waage</text>
+    <polygon points="400,122 642,98 642,109 400,133" fill="#ECE8E0" stroke="#C7C2BA"/>
+    <text x="560" y="164" font-size="9" fill="#9a9a9a" text-anchor="middle" font-style="italic">Wannenrand / Boden unter dem Glas</text>
+    <rect x="416" y="82" width="226" height="15" fill="#E8B600" stroke="#1A1A1A" stroke-width="1.3"/>
+    <rect x="416" y="82" width="7" height="15" fill="#1A1A1A"/><rect x="635" y="82" width="7" height="15" fill="#1A1A1A"/>
+    <rect x="521" y="85" width="18" height="9" fill="#A8D8A8" stroke="#1A1A1A" stroke-width="0.6"/>
+    <ellipse cx="530" cy="89.5" rx="3" ry="2.6" fill="#fff" stroke="#1A1A1A" stroke-width="0.5"/>
+    <line x1="409" y1="97" x2="409" y2="122" stroke="#C0392B" stroke-width="2" marker-start="url(#arR2)" marker-end="url(#arR2)"/>
+    <rect x="384" y="128" width="80" height="20" rx="4" fill="#C0392B"/>
+    <text x="424" y="142" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">X = ___ mm</text>
+    <line x1="409" y1="121" x2="409" y2="128" stroke="#C0392B" stroke-width="0.8"/>
+  </svg>
+  <p class="fcap">Wasserwaage flach auf Wannenrand oder Boden entlang der Glaslinie legen, in die Waage bringen, dann den Spalt X <b>am tieferen Ende</b> messen. Das kann vorn, hinten, links oder rechts liegen. Gefälle zum Ablauf ist gewollt, wir wollen nur die Abweichung aus der Waage wissen.</p>
+
+  <!-- ===================== 3 · EINTRAGEN ===================== -->
+  <div class="sec">3 · Ihre Neigungswerte eintragen &mdash; nur ausfüllen, was auf Ihre Dusche zutrifft</div>
+  <div class="form">
+    <div class="yrow"><b>Länge Ihrer Wasserwaage&nbsp; Y =</b><input type="text"><span class="u">mm · gilt für alle X-Werte unten</span></div>
+    <div class="grid2f">
+      <div class="fcard">
+        <div class="ft">Wände (Waage senkrecht = Lot)</div>
+        <div class="fs">X am Spalt zur Wand, plus Richtung. Y1, Y2, Y3 sind die Punkte, an denen das Glas an eine Wand stößt.</div>
+        <div class="frow"><span class="fl">Wand an Y1</span>X<input class="x" type="text"><span class="u">mm</span>
+          <span class="dir"><label><input type="radio" class="rc" name="w1"> zum Raum</label><label><input type="radio" class="rc" name="w1"> zur Wand</label></span></div>
+        <div class="frow"><span class="fl">Wand an Y2</span>X<input class="x" type="text"><span class="u">mm</span>
+          <span class="dir"><label><input type="radio" class="rc" name="w2"> zum Raum</label><label><input type="radio" class="rc" name="w2"> zur Wand</label></span></div>
+        <div class="frow"><span class="fl">Wand an Y3</span>X<input class="x" type="text"><span class="u">mm</span>
+          <span class="dir"><label><input type="radio" class="rc" name="w3"> zum Raum</label><label><input type="radio" class="rc" name="w3"> zur Wand</label></span></div>
+      </div>
+      <div class="fcard">
+        <div class="ft">Wanne / Boden (Waage flach = Gefälle)</div>
+        <div class="fs">X am tieferen Ende, plus in welche Richtung die Auflage unter der Glasseite fällt.</div>
+        <div class="frow"><span class="fl">Glasseite 1</span>X<input class="x" type="text"><span class="u">mm</span>
+          <span class="dir"><label><input type="radio" class="rc" name="b1"> fällt außen</label><label><input type="radio" class="rc" name="b1"> fällt zur Wand</label></span></div>
+        <div class="frow"><span class="fl">Glasseite 2</span>X<input class="x" type="text"><span class="u">mm</span>
+          <span class="dir"><label><input type="radio" class="rc" name="b2"> fällt außen</label><label><input type="radio" class="rc" name="b2"> fällt zur Wand</label></span></div>
+        <div class="frow"><span class="fl">Glasseite 3</span>X<input class="x" type="text"><span class="u">mm</span>
+          <span class="dir"><label><input type="radio" class="rc" name="b3"> fällt außen</label><label><input type="radio" class="rc" name="b3"> fällt zur Wand</label></span></div>
+      </div>
+    </div>
   </div>
 
-  <div class="note2" style="background:#FAFAF7;border-color:var(--line);color:#444">
-    <b style="color:var(--accent)">Tipp:</b> Schicken Sie 2 bis 3 Handyfotos der angelegten Wasserwaage mit. Damit erkennen wir die Richtung der Neigung sofort. Die gemessenen Werte tragen Sie auf Ihrem Aufmaßblatt ein.
+  <div class="note2">
+    <b style="color:var(--accent)">Tipp:</b> Schicken Sie zusätzlich 2 bis 3 Handyfotos der angelegten Wasserwaage mit, dann erkennen wir die Richtung der Neigung sofort. Im Zweifel kurz anrufen, wir gehen es gemeinsam durch.
   </div>
 
   <div class="foot">
     <span>Kristhal Duschop · Tel. 09293 9339580 · info@duschop.de</span>
-    <span>Im Zweifel kurz anrufen, wir gehen es gemeinsam durch.</span>
+    <span>Ausgefüllt zurück: Foto oder Scan per E-Mail</span>
   </div>
 
 </div>
