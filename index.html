@@ -12,16 +12,54 @@
     <meta property="og:title" content="Duschop Tools | Online-Berater f&uuml;r Glasduschen-Zubeh&ouml;r">
     <meta property="og:description" content="Schritt-f&uuml;r-Schritt-Berater f&uuml;r Duschdichtungen, Beschl&auml;ge, Profile, Glas und Zubeh&ouml;r, aus 25 Jahren Praxis.">
     <meta property="og:site_name" content="Duschop Tools">
+    <meta property="og:image" content="https://duschop.de/cdn/shop/files/Duschop_Hero_Bronze_Dusche_schmal.jpg?v=1781022295&amp;width=1200">
+    <meta property="og:locale" content="de_DE">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Duschop Tools | Online-Berater f&uuml;r Glasduschen-Zubeh&ouml;r">
     <meta name="twitter:description" content="Schritt-f&uuml;r-Schritt-Berater f&uuml;r Duschdichtungen, Beschl&auml;ge, Profile, Glas und Zubeh&ouml;r.">
+    <meta name="twitter:image" content="https://duschop.de/cdn/shop/files/Duschop_Hero_Bronze_Dusche_schmal.jpg?v=1781022295&amp;width=1200">
 
     <link rel="canonical" href="https://app.duschop.de/">
+    <link rel="icon" type="image/png" href="/Kristhal_Logo_Symbol_trans.png">
+    <link rel="apple-touch-icon" href="/Kristhal_Logo_Symbol_trans.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://app.duschop.de/#website",
+                "url": "https://app.duschop.de/",
+                "name": "Duschop Tools",
+                "description": "Online-Berater für Glasduschen-Zubehör: Dichtungen, Beschläge, Profile, Glas und Zubehör Schritt für Schritt finden.",
+                "inLanguage": "de-DE",
+                "publisher": { "@id": "https://app.duschop.de/#organization" }
+            },
+            {
+                "@type": "Organization",
+                "@id": "https://app.duschop.de/#organization",
+                "name": "Kristhal Duschop",
+                "url": "https://duschop.de/",
+                "logo": "https://app.duschop.de/Kristhal_Logo_Marke_trans.png",
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "+49 9293 9339580",
+                    "contactType": "customer service",
+                    "availableLanguage": "German"
+                }
+            }
+        ]
+    }
+    </script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -418,6 +456,8 @@
             transform: scale(1.08);
         }
 
+        .card-icon svg { display: block; }
+
         .card-badge {
             position: absolute;
             top: 18px;
@@ -508,6 +548,80 @@
 
         .wa-banner span.wa-text {
             white-space: nowrap;
+        }
+
+        /* ============================================
+           Aufmass-Banner
+           ============================================ */
+        .aufmass-banner {
+            max-width: 1200px;
+            margin: 56px auto 0;
+            padding: 0 24px;
+        }
+
+        .aufmass-inner {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--accent);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 28px 30px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .aufmass-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--accent-glow);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .aufmass-text { flex: 1; min-width: 260px; }
+
+        .aufmass-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
+        }
+
+        .aufmass-desc {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+            max-width: 640px;
+        }
+
+        .aufmass-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 22px;
+            border-radius: 10px;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .aufmass-cta:hover { background: var(--accent); }
+
+        .aufmass-cta svg { width: 14px; height: 14px; }
+
+        @media (max-width: 768px) {
+            .aufmass-banner { margin-top: 40px; padding: 0 20px; }
+            .aufmass-inner { padding: 22px 20px; gap: 16px; }
         }
 
         /* ============================================
@@ -823,7 +937,7 @@
 
                 <a href="dichtungs-konfigurator/index.html" class="tool-card">
                     <div class="card-badge">Konfigurator</div>
-                    <div class="card-icon">&#x2699;&#xFE0F;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="6" width="14" height="36" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><line x1="13" y1="9" x2="13" y2="39" stroke="#f2f7fb" stroke-width="2"/><path d="M24 12 h5 v24 h-5" stroke="#c8956c" stroke-width="2.5" fill="none"/><line x1="29" y1="16" x2="37" y2="16" stroke="#c8956c" stroke-width="2.5"/><line x1="29" y1="32" x2="37" y2="32" stroke="#c8956c" stroke-width="2.5"/></svg></div>
                     <h2 class="card-title">Dichtungs-Konfigurator</h2>
                     <p class="card-description">Ihre individuelle Duschdichtung nach Ma&szlig;: Typ, L&auml;nge und Profil frei w&auml;hlbar, auch f&uuml;r Sonderformen.</p>
                     <div class="card-cta">
@@ -834,7 +948,7 @@
 
                 <a href="dichtung-seitlich-finder/index.html" class="tool-card">
                     <div class="card-badge">Finder</div>
-                    <div class="card-icon">&#x1F50D;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="6" width="12" height="36" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><rect x="31" y="6" width="12" height="36" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><line x1="19" y1="8" x2="19" y2="40" stroke="#c8956c" stroke-width="2.5"/><line x1="19" y1="13" x2="29" y2="17" stroke="#c8956c" stroke-width="2"/><line x1="19" y1="24" x2="29" y2="28" stroke="#c8956c" stroke-width="2"/><line x1="19" y1="35" x2="29" y2="39" stroke="#c8956c" stroke-width="2"/></svg></div>
                     <h2 class="card-title">Dichtung Seitlich</h2>
                     <p class="card-description">Die passende Seitendichtung f&uuml;r Ihre Glasdusche, mit Glasdicke und Spaltma&szlig; in 3 Schritten zum Treffer.</p>
                     <div class="card-cta">
@@ -845,7 +959,7 @@
 
                 <a href="dichtung-unten-finder/index.html" class="tool-card">
                     <div class="card-badge">Finder</div>
-                    <div class="card-icon">&#x1F50D;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="38" width="40" height="6" fill="#1a1a2e"/><rect x="17" y="4" width="14" height="26" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><line x1="20" y1="7" x2="20" y2="27" stroke="#f2f7fb" stroke-width="2"/><rect x="15" y="30" width="18" height="4" rx="1" fill="#c8956c"/><line x1="18" y1="34" x2="18" y2="37" stroke="#a87a52" stroke-width="2"/><line x1="30" y1="34" x2="30" y2="37" stroke="#a87a52" stroke-width="2"/></svg></div>
                     <h2 class="card-title">Dichtung Unten</h2>
                     <p class="card-description">Die richtige Unterdichtung f&uuml;r Ihre Duscht&uuml;r, mit oder ohne Schwallprofil, gerade oder gebogen.</p>
                     <div class="card-cta">
@@ -856,7 +970,7 @@
 
                 <a href="dichtung-gebogen-finder/index.html" class="tool-card">
                     <div class="card-badge">Finder</div>
-                    <div class="card-icon">&#x27FF;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="4" y1="45" x2="45" y2="45" stroke="#1a1a2e" stroke-width="3"/><path d="M10 42 A 28 28 0 0 1 42 10" stroke="#d8e3ee" stroke-width="6" fill="none"/><path d="M10 42 A 28 28 0 0 1 42 10" stroke="#8ba3bb" stroke-width="1.2" fill="none"/><path d="M6 44 A 34 34 0 0 1 44 6" stroke="#c8956c" stroke-width="2.5" fill="none"/></svg></div>
                     <h2 class="card-title">Dichtung Gebogen</h2>
                     <p class="card-description">Die passende gebogene Bodendichtung f&uuml;r Viertelkreis- oder F&uuml;nfeck-Duschen mit Rundglas.</p>
                     <div class="card-cta">
@@ -867,7 +981,7 @@
 
                 <a href="magnetdichtung-finder/index.html" class="tool-card">
                     <div class="card-badge">Finder</div>
-                    <div class="card-icon">&#x1F9F2;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="6" width="12" height="36" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><rect x="33" y="6" width="12" height="36" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><rect x="16" y="8" width="4" height="32" rx="1" fill="#c8956c"/><rect x="28" y="8" width="4" height="32" rx="1" fill="#c8956c"/><line x1="22" y1="14" x2="26" y2="14" stroke="#a87a52" stroke-width="2"/><line x1="22" y1="24" x2="26" y2="24" stroke="#a87a52" stroke-width="2"/><line x1="22" y1="34" x2="26" y2="34" stroke="#a87a52" stroke-width="2"/></svg></div>
                     <h2 class="card-title">Magnetdichtung</h2>
                     <p class="card-description">Das passende Magnetdichtungs-Set f&uuml;r Ihre Duschkabine, mit dem richtigen &Ouml;ffnungswinkel.</p>
                     <div class="card-cta">
@@ -878,7 +992,7 @@
 
                 <a href="wintergarten-konfigurator/index.html" class="tool-card">
                     <div class="card-badge">Konfigurator</div>
-                    <div class="card-icon">&#x1F3E0;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 21 L24 5 L44 21" stroke="#1a1a2e" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="24" width="13" height="18" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><rect x="27" y="24" width="13" height="18" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><rect x="22" y="24" width="4" height="18" rx="1" fill="#c8956c"/></svg></div>
                     <h2 class="card-title">Wintergarten-Dichtung</h2>
                     <p class="card-description">Dichtung f&uuml;r Wintergarten oder Sommergarten, gegen Zugluft, Regen und Insekten zwischen den Gl&auml;sern.</p>
                     <div class="card-cta">
@@ -906,7 +1020,7 @@
 
                 <a href="beschlaege-konfigurator/index.html" class="tool-card">
                     <div class="card-badge">Finder</div>
-                    <div class="card-icon">&#x1F6AA;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="8" height="40" fill="#1a1a2e"/><rect x="26" y="8" width="14" height="32" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><line x1="29" y1="11" x2="29" y2="37" stroke="#f2f7fb" stroke-width="2"/><rect x="12" y="17" width="6" height="14" rx="1" fill="#a87a52"/><rect x="17" y="20" width="13" height="8" rx="1" fill="#c8956c"/></svg></div>
                     <h2 class="card-title">Beschl&auml;ge-Finder</h2>
                     <p class="card-description">Scharnier, Haltewinkel, T&uuml;rgriff oder Griffmuschel f&uuml;r Ihre Glasdusche, in der gew&uuml;nschten Oberfl&auml;che.</p>
                     <div class="card-cta">
@@ -917,7 +1031,7 @@
 
                 <a href="stabistangen-konfigurator/index.html" class="tool-card">
                     <div class="card-badge">Konfigurator</div>
-                    <div class="card-icon">&#x1F4CF;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="8" height="40" fill="#1a1a2e"/><rect x="32" y="10" width="12" height="34" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><line x1="35" y1="13" x2="35" y2="41" stroke="#f2f7fb" stroke-width="2"/><line x1="12" y1="17" x2="35" y2="17" stroke="#c8956c" stroke-width="3"/><rect x="12" y="13" width="4" height="8" rx="1" fill="#a87a52"/><circle cx="36" cy="17" r="3.5" fill="#a87a52"/></svg></div>
                     <h2 class="card-title">Stabistangen-Konfigurator</h2>
                     <p class="card-description">Stabilisierungsstange f&uuml;r Ihre Glasdusche nach Ma&szlig;, mit Befestigung, L&auml;nge und Oberfl&auml;che frei w&auml;hlbar.</p>
                     <div class="card-cta">
@@ -928,7 +1042,7 @@
 
                 <a href="metallprofile-konfigurator/index.html" class="tool-card">
                     <div class="card-badge">Konfigurator</div>
-                    <div class="card-icon">&#x1F527;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="18" y="4" width="12" height="32" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><line x1="21" y1="7" x2="21" y2="33" stroke="#f2f7fb" stroke-width="2"/><path d="M14 28 V 42 H 34 V 28" stroke="#c8956c" stroke-width="3" fill="none"/><line x1="8" y1="44" x2="40" y2="44" stroke="#1a1a2e" stroke-width="3"/></svg></div>
                     <h2 class="card-title">Metallprofile-Konfigurator</h2>
                     <p class="card-description">Wand- oder Bodenprofil f&uuml;r Ihre Glasdusche nach Ma&szlig;, mit Profilart, L&auml;nge und Oberfl&auml;che.</p>
                     <div class="card-cta">
@@ -939,7 +1053,7 @@
 
                 <a href="farbenfinder/index.html" class="tool-card">
                     <div class="card-badge">Finder</div>
-                    <div class="card-icon">&#x1F3A8;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="17" r="9" fill="#e8ecf0" stroke="#9aa7b5" stroke-width="1.2"/><circle cx="32" cy="17" r="9" fill="#1a1a2e"/><circle cx="24" cy="31" r="9" fill="#c8956c"/></svg></div>
                     <h2 class="card-title">Farbenfinder</h2>
                     <p class="card-description">Sie haben schon eine Oberfl&auml;che im Bad und suchen Passendes dazu? Alle Produkte im gleichen Look, Chrom, Schwarz, Messing, Bronze und mehr.</p>
                     <div class="card-cta">
@@ -967,7 +1081,7 @@
 
                 <a href="duschglas-konfigurator/index.html" class="tool-card">
                     <div class="card-badge">Konfigurator</div>
-                    <div class="card-icon">&#x1FA9F;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="6" width="24" height="30" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><line x1="12" y1="9" x2="12" y2="33" stroke="#f2f7fb" stroke-width="2"/><path d="M8 42 h24" stroke="#c8956c" stroke-width="2"/><path d="M11 39.5 L8 42 L11 44.5 M29 39.5 L32 42 L29 44.5" stroke="#c8956c" stroke-width="2" fill="none"/><path d="M38 6 v30" stroke="#c8956c" stroke-width="2"/><path d="M35.5 9 L38 6 L40.5 9 M35.5 33 L38 36 L40.5 33" stroke="#c8956c" stroke-width="2" fill="none"/></svg></div>
                     <h2 class="card-title">Duschglas-Konfigurator</h2>
                     <p class="card-description">ESG-Sicherheitsglas nach Ma&szlig;, Klarglas, Milchglas, Antikorrosion oder Motivglas, mit den passenden Ausschnitten.</p>
                     <div class="card-cta">
@@ -978,7 +1092,7 @@
 
                 <a href="duschzubehoer-konfigurator/index.html" class="tool-card">
                     <div class="card-badge">Finder</div>
-                    <div class="card-icon">&#x1F6BF;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="4" width="12" height="40" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><line x1="11" y1="7" x2="11" y2="41" stroke="#f2f7fb" stroke-width="2"/><line x1="20" y1="14" x2="30" y2="14" stroke="#a87a52" stroke-width="2.5"/><line x1="20" y1="30" x2="30" y2="30" stroke="#a87a52" stroke-width="2.5"/><line x1="30" y1="9" x2="30" y2="35" stroke="#c8956c" stroke-width="3"/><path d="M34 18 v10 a4 4 0 0 0 8 0 v-6" stroke="#c8956c" stroke-width="2" fill="none"/></svg></div>
                     <h2 class="card-title">Duschzubeh&ouml;r-Finder</h2>
                     <p class="card-description">K&ouml;rbe, Ablagen, Handtuchhalter, Brausen, Haken, das passende Zubeh&ouml;r f&uuml;r Ihre Dusche in wenigen Schritten.</p>
                     <div class="card-cta">
@@ -989,7 +1103,7 @@
 
                 <a href="reinigungs-konfigurator/index.html" class="tool-card">
                     <div class="card-badge">Finder</div>
-                    <div class="card-icon">&#x1F9F4;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="6" width="26" height="36" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.5"/><line x1="19" y1="9" x2="19" y2="14" stroke="#f2f7fb" stroke-width="2"/><rect x="12" y="17" width="30" height="4" rx="1.5" fill="#1a1a2e"/><rect x="25" y="21" width="4" height="9" rx="1" fill="#a87a52"/><circle cx="20" cy="28" r="2.2" fill="#c8956c"/><circle cx="35" cy="27" r="2.2" fill="#c8956c"/><circle cx="23" cy="36" r="2.2" fill="#c8956c"/><circle cx="33" cy="37" r="2.2" fill="#c8956c"/></svg></div>
                     <h2 class="card-title">Reinigung &amp; Pflege</h2>
                     <p class="card-description">Das richtige Reinigungs- und Pflegeprodukt f&uuml;r Ihr Duschglas, Kalk entfernen, versiegeln oder beides in einem.</p>
                     <div class="card-cta">
@@ -1000,7 +1114,7 @@
 
                 <a href="montagebedarf-konfigurator/index.html" class="tool-card">
                     <div class="card-badge">Finder</div>
-                    <div class="card-icon">&#x1F527;</div>
+                    <div class="card-icon"><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="30" width="40" height="14" rx="1" fill="#1a1a2e"/><line x1="24" y1="10" x2="24" y2="38" stroke="#c8956c" stroke-width="3.5"/><rect x="17" y="5" width="14" height="5" rx="1.5" fill="#a87a52"/><line x1="20" y1="15" x2="28" y2="18" stroke="#a87a52" stroke-width="2"/><line x1="20" y1="21" x2="28" y2="24" stroke="#a87a52" stroke-width="2"/><line x1="20" y1="27" x2="28" y2="30" stroke="#a87a52" stroke-width="2"/></svg></div>
                     <h2 class="card-title">Montagebedarf-Finder</h2>
                     <p class="card-description">Das richtige Montagematerial f&uuml;r Ihre Dusche, D&uuml;bel, Silikon, Abdichtung oder Kleber, passend zum Projekt.</p>
                     <div class="card-cta">
@@ -1015,6 +1129,33 @@
     </main>
 
     <!-- ============================================
+         Aufmass-Vorlagen-Banner
+         ============================================ -->
+    <section class="aufmass-banner">
+        <div class="aufmass-inner">
+            <div class="aufmass-icon">
+                <svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="8" y="10" width="24" height="30" rx="2" fill="#f2f7fb" stroke="#8ba3bb" stroke-width="1.5"/>
+                    <line x1="13" y1="18" x2="27" y2="18" stroke="#8ba3bb" stroke-width="1.5"/>
+                    <line x1="13" y1="24" x2="27" y2="24" stroke="#8ba3bb" stroke-width="1.5"/>
+                    <line x1="13" y1="30" x2="22" y2="30" stroke="#8ba3bb" stroke-width="1.5"/>
+                    <path d="M34 14 L34 38" stroke="#c8956c" stroke-width="2"/>
+                    <path d="M31 17 L34 14 L37 17" stroke="#c8956c" stroke-width="2" fill="none"/>
+                    <path d="M31 35 L34 38 L37 35" stroke="#c8956c" stroke-width="2" fill="none"/>
+                </svg>
+            </div>
+            <div class="aufmass-text">
+                <div class="aufmass-title">Ma&szlig;-Glasdusche geplant? Aufma&szlig; selbst aufnehmen</div>
+                <p class="aufmass-desc">Vorlagen f&uuml;r Nische, Ecke, Walk-in, Dachschr&auml;ge und mehr. Am Bildschirm ausf&uuml;llen oder ausdrucken, Ma&szlig;e eintragen und als Foto an uns zur&uuml;cksenden.</p>
+            </div>
+            <a href="aufmass/" class="aufmass-cta" data-track="hub-aufmass">
+                Zu den Aufma&szlig;-Vorlagen
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================
          Ratgeber-Schiene
          ============================================ -->
     <section class="ratgeber-section" id="ratgeber" style="scroll-margin-top:80px;">
@@ -1027,7 +1168,7 @@
             <div class="ratgeber-grid">
 
                 <a href="dichtungen/index.html" class="ratgeber-card">
-                    <div class="card-icon">&#x1F4D6;</div>
+                    <div class="card-icon"><svg width="26" height="26" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 12 C 19 8 11 8 6 10 V 38 C 11 36 19 36 24 40 C 29 36 37 36 42 38 V 10 C 37 8 29 8 24 12 Z" fill="rgba(242,247,251,0.10)" stroke="#e8c4a8" stroke-width="2" stroke-linejoin="round"/><line x1="24" y1="12" x2="24" y2="40" stroke="#e8c4a8" stroke-width="1.5"/><line x1="11" y1="17" x2="19" y2="16" stroke="#c8956c" stroke-width="1.5"/><line x1="11" y1="23" x2="19" y2="22" stroke="#c8956c" stroke-width="1.5"/><line x1="29" y1="16" x2="37" y2="17" stroke="#c8956c" stroke-width="1.5"/><line x1="29" y1="22" x2="37" y2="23" stroke="#c8956c" stroke-width="1.5"/></svg></div>
                     <div class="card-title">Dichtungs-Ratgeber</div>
                     <div class="card-description">Glasdicke und Spaltma&szlig; verstehen, Kombi-Profile f&uuml;r 6 &amp; 8 mm, Montage-Anleitung.</div>
                     <div class="card-cta">
@@ -1037,7 +1178,7 @@
                 </a>
 
                 <a href="reinigung/index.html" class="ratgeber-card">
-                    <div class="card-icon">&#x1F4D6;</div>
+                    <div class="card-icon"><svg width="26" height="26" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 12 C 19 8 11 8 6 10 V 38 C 11 36 19 36 24 40 C 29 36 37 36 42 38 V 10 C 37 8 29 8 24 12 Z" fill="rgba(242,247,251,0.10)" stroke="#e8c4a8" stroke-width="2" stroke-linejoin="round"/><line x1="24" y1="12" x2="24" y2="40" stroke="#e8c4a8" stroke-width="1.5"/><line x1="11" y1="17" x2="19" y2="16" stroke="#c8956c" stroke-width="1.5"/><line x1="11" y1="23" x2="19" y2="22" stroke="#c8956c" stroke-width="1.5"/><line x1="29" y1="16" x2="37" y2="17" stroke="#c8956c" stroke-width="1.5"/><line x1="29" y1="22" x2="37" y2="23" stroke="#c8956c" stroke-width="1.5"/></svg></div>
                     <div class="card-title">Reinigungs-Ratgeber</div>
                     <div class="card-description">Duschglas reinigen und sch&uuml;tzen, Kalkflecken entfernen, Glasversiegelung, Pflegetipps.</div>
                     <div class="card-cta">
@@ -1047,7 +1188,7 @@
                 </a>
 
                 <a href="montagebedarf/index.html" class="ratgeber-card">
-                    <div class="card-icon">&#x1F4D6;</div>
+                    <div class="card-icon"><svg width="26" height="26" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 12 C 19 8 11 8 6 10 V 38 C 11 36 19 36 24 40 C 29 36 37 36 42 38 V 10 C 37 8 29 8 24 12 Z" fill="rgba(242,247,251,0.10)" stroke="#e8c4a8" stroke-width="2" stroke-linejoin="round"/><line x1="24" y1="12" x2="24" y2="40" stroke="#e8c4a8" stroke-width="1.5"/><line x1="11" y1="17" x2="19" y2="16" stroke="#c8956c" stroke-width="1.5"/><line x1="11" y1="23" x2="19" y2="22" stroke="#c8956c" stroke-width="1.5"/><line x1="29" y1="16" x2="37" y2="17" stroke="#c8956c" stroke-width="1.5"/><line x1="29" y1="22" x2="37" y2="23" stroke="#c8956c" stroke-width="1.5"/></svg></div>
                     <div class="card-title">Montage-Ratgeber</div>
                     <div class="card-description">Alles f&uuml;r die Glasdusch-Montage, D&uuml;bel, Kleber, Silikon, Abdichtung und Werkzeug.</div>
                     <div class="card-cta">
@@ -1057,7 +1198,7 @@
                 </a>
 
                 <a href="wintergarten-dichtungen/index.html" class="ratgeber-card">
-                    <div class="card-icon">&#x1F4D6;</div>
+                    <div class="card-icon"><svg width="26" height="26" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 12 C 19 8 11 8 6 10 V 38 C 11 36 19 36 24 40 C 29 36 37 36 42 38 V 10 C 37 8 29 8 24 12 Z" fill="rgba(242,247,251,0.10)" stroke="#e8c4a8" stroke-width="2" stroke-linejoin="round"/><line x1="24" y1="12" x2="24" y2="40" stroke="#e8c4a8" stroke-width="1.5"/><line x1="11" y1="17" x2="19" y2="16" stroke="#c8956c" stroke-width="1.5"/><line x1="11" y1="23" x2="19" y2="22" stroke="#c8956c" stroke-width="1.5"/><line x1="29" y1="16" x2="37" y2="17" stroke="#c8956c" stroke-width="1.5"/><line x1="29" y1="22" x2="37" y2="23" stroke="#c8956c" stroke-width="1.5"/></svg></div>
                     <div class="card-title">Wintergarten-Ratgeber</div>
                     <div class="card-description">Dichtungen f&uuml;r Winterg&auml;rten aus Polycarbonat, UV-best&auml;ndig, hochtransparent.</div>
                     <div class="card-cta">
@@ -1077,6 +1218,7 @@
                 <span class="footer-brand">Ein Service von <a href="https://duschop.de">duschop.de</a></span>
             </div>
             <div class="footer-links">
+                <a href="tel:+4992939339580" title="Telefonische Beratung">&#9742; 09293 9339580</a>
                 <a href="https://duschop.de/policies/legal-notice">Impressum</a>
                 <a href="https://duschop.de/policies/privacy-policy">Datenschutz</a>
             </div>
