@@ -64,15 +64,51 @@
                     shortLabel: 'Kategorie',
                     question: 'Was suchen Sie für Ihre Dusche?',
                     hint: 'Wählen Sie die Produktkategorie, wir zeigen Ihnen die passenden Produkte.',
+                    // Schema-Icons statt Emoji, gleiche Bildsprache wie Hub und die
+                    // uebrigen Tools: Glas hellblau, Wand beige, Metall im Akzentton.
+                    // Zwei Kategorien trugen vorher denselben Haken-Emoji.
                     options: [
-                        { value: 'koerbe',     label: 'Duschkörbe & Ablagen', desc: 'Seifenkörbe, Schwammkörbe, Eckkörbe und Duschregale.',                            icon: '🧺', badge: { type: 'standard', text: 'Häufig' } },
-                        { value: 'halter',     label: 'Handtuchhalter',        desc: 'Handtuchhalter, -stangen und -ringe für Glasdusche, Wand und Heizkörper.',         icon: '🪝' },
-                        { value: 'haken',      label: 'Haken & Halter',         desc: 'Duschhaken, Hakenleisten und Halter zum Einhängen an der Glaswand.',               icon: '🪝' },
-                        { value: 'brausen',    label: 'Brausen & Armaturen',   desc: 'Kopfbrausen, Handbrausen, Brausestangen, Thermostate und Brausesets.',             icon: '🚿' },
-                        { value: 'hocker',     label: 'Duschhocker',            desc: 'Komfortable Hocker aus Aluminium oder Plexiglas, rutschfest und stilvoll.',     icon: '🪑' },
-                        { value: 'vorhang',    label: 'Duschvorhänge & Stangen', desc: 'Vorhangstangen aus Edelstahl/Alu, Textil-Duschvorhänge und Zubehör.',         icon: '🎭' },
-                        { value: 'wannen',     label: 'Duschrinnen & Abläufe', desc: 'Duschrinnen, Roste, Abläufe und Ablaufgarnituren, befliesbar oder sichtbar.',    icon: '🛁' },
-                        { value: 'badzubehoer', label: 'Bad- & WC-Zubehör',     desc: 'Seifenspender, Kosmetikspiegel, Zahnputzbecher, WC-Bürsten, Duschabzieher.', icon: '🪥' }
+                        {
+                            value: 'koerbe', label: 'Duschkörbe & Ablagen',
+                            desc: 'Seifenkörbe, Schwammkörbe, Eckkörbe und Duschregale.',
+                            icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none"><rect x="2" y="4" width="6" height="32" rx="1" fill="#e8e4df" stroke="#999" stroke-width="1.5"/><path d="M9 23 L34 23" stroke="#c8956c" stroke-width="3" stroke-linecap="round"/><path d="M11 23 L11 29 M32 23 L32 29 M11 29 L32 29" stroke="#c8956c" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><rect x="14" y="12" width="6" height="11" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-width="1.5"/><rect x="24" y="16" width="5" height="7" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-width="1.5"/></svg>',
+                            badge: { type: 'standard', text: 'Häufig' }
+                        },
+                        {
+                            value: 'halter', label: 'Handtuchhalter',
+                            desc: 'Handtuchhalter, -stangen und -ringe für Glasdusche, Wand und Heizkörper.',
+                            icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none"><rect x="2" y="4" width="6" height="32" rx="1" fill="#e8e4df" stroke="#999" stroke-width="1.5"/><path d="M9 11 L36 11" stroke="#c8956c" stroke-width="3" stroke-linecap="round"/><path d="M15 12 L15 31 Q15 34 18 34 L24 34 Q27 34 27 31 L27 12" fill="#f0ece8" stroke="#b9b2aa" stroke-width="1.5" stroke-linejoin="round"/><path d="M21 15 L21 30" stroke="#b9b2aa" stroke-width="1.2"/></svg>'
+                        },
+                        {
+                            value: 'haken', label: 'Haken & Halter',
+                            desc: 'Duschhaken, Hakenleisten und Halter zum Einhängen an der Glaswand.',
+                            icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none"><rect x="6" y="4" width="18" height="32" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-width="2"/><path d="M9 8 L9 15" stroke="#f2f7fb" stroke-width="2" stroke-linecap="round"/><path d="M19 9 L29 9 Q32 9 32 12 L32 20 Q32 25 27 25" stroke="#c8956c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+                        },
+                        {
+                            value: 'brausen', label: 'Brausen & Armaturen',
+                            desc: 'Kopfbrausen, Handbrausen, Brausestangen, Thermostate und Brausesets.',
+                            icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none"><path d="M20 3 L20 9" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round"/><path d="M9 14 Q20 8 31 14 Z" fill="#e8e4df" stroke="#c8956c" stroke-width="2.5" stroke-linejoin="round"/><path d="M13 20 L11 29 M20 20 L20 32 M27 20 L29 29" stroke="#7ab8e0" stroke-width="2.2" stroke-linecap="round"/></svg>'
+                        },
+                        {
+                            value: 'hocker', label: 'Duschhocker',
+                            desc: 'Komfortable Hocker aus Aluminium oder Plexiglas, rutschfest und stilvoll.',
+                            icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none"><rect x="5" y="11" width="30" height="6" rx="2" fill="#d4eeff" stroke="#7ab8e0" stroke-width="2"/><path d="M10 17 L6 35 M30 17 L34 35" stroke="#c8956c" stroke-width="2.8" stroke-linecap="round"/><path d="M11 26 L29 26" stroke="#c8956c" stroke-width="2.2" stroke-linecap="round"/></svg>'
+                        },
+                        {
+                            value: 'vorhang', label: 'Duschvorhänge & Stangen',
+                            desc: 'Vorhangstangen aus Edelstahl/Alu, Textil-Duschvorhänge und Zubehör.',
+                            icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none"><path d="M3 8 L37 8" stroke="#c8956c" stroke-width="3" stroke-linecap="round"/><circle cx="11" cy="8" r="2" fill="#c8956c"/><circle cx="20" cy="8" r="2" fill="#c8956c"/><circle cx="29" cy="8" r="2" fill="#c8956c"/><path d="M9 12 Q13 20 9 28 Q13 33 9 36 M20 12 Q24 20 20 28 Q24 33 20 36 M31 12 Q35 20 31 28 Q35 33 31 36" stroke="#7ab8e0" stroke-width="2" stroke-linecap="round"/></svg>'
+                        },
+                        {
+                            value: 'wannen', label: 'Duschrinnen & Abläufe',
+                            desc: 'Duschrinnen, Roste, Abläufe und Ablaufgarnituren, befliesbar oder sichtbar.',
+                            icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none"><path d="M18 6 L18 15 M22 4 L22 15" stroke="#7ab8e0" stroke-width="2.2" stroke-linecap="round"/><path d="M2 27 L38 27" stroke="#1a1a2e" stroke-width="2.5" stroke-linecap="round"/><rect x="9" y="21" width="22" height="6" rx="1" fill="#e8e4df" stroke="#999" stroke-width="1.5"/><path d="M13 22.5 L13 25.5 M17 22.5 L17 25.5 M21 22.5 L21 25.5 M25 22.5 L25 25.5" stroke="#c8956c" stroke-width="1.8" stroke-linecap="round"/></svg>'
+                        },
+                        {
+                            value: 'badzubehoer', label: 'Bad- & WC-Zubehör',
+                            desc: 'Seifenspender, Kosmetikspiegel, Zahnputzbecher, WC-Bürsten, Duschabzieher.',
+                            icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none"><rect x="10" y="14" width="18" height="22" rx="2" fill="#d4eeff" stroke="#7ab8e0" stroke-width="2"/><path d="M14 19 L14 27" stroke="#f2f7fb" stroke-width="2.2" stroke-linecap="round"/><path d="M19 14 L19 8 L30 8" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="14" y="4" width="10" height="4" rx="1" fill="#c8956c"/><path d="M30 11 L30 14" stroke="#7ab8e0" stroke-width="2" stroke-linecap="round"/></svg>'
+                        }
                     ]
                 },
                 {
