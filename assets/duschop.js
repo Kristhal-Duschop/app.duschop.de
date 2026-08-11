@@ -189,8 +189,25 @@
             return product.variants[0] || null;
         },
 
+        /**
+         * Herkunfts-Parameter fuer die Rueckwege in den Shop (seit 11.08.2026).
+         * Ohne diese Markierung kann Shopify keine Bestellung einem Tool zuordnen,
+         * app.duschop.de taucht in der Referrer-Auswertung gar nicht auf.
+         * campaign = erstes Pfadsegment, also der Tool-Ordner ("magnetdichtung-finder"),
+         * auf dem Hub "hub". content = der ?von=-Marker der Shop-Seite, die hergeschickt
+         * hat, damit die Kette Collection -> Tool -> Bestellung durchgehend lesbar ist.
+         * Bewusst nur an Produktlinks, NICHT an den products.json-Fetch (Zeile ~108).
+         */
+        _herkunft: function () {
+            var seg = (window.location.pathname || '/').split('/').filter(Boolean)[0] || 'hub';
+            var q = '?utm_source=app.duschop.de&utm_medium=tool&utm_campaign=' + encodeURIComponent(seg);
+            var von = /[?&]von=([^&]*)/.exec(window.location.search || '');
+            if (von && von[1]) q += '&utm_content=' + encodeURIComponent(decodeURIComponent(von[1]));
+            return q;
+        },
+
         productUrl: function (product) {
-            return SHOPIFY_BASE + '/products/' + product.handle;
+            return SHOPIFY_BASE + '/products/' + product.handle + this._herkunft();
         },
 
         /**

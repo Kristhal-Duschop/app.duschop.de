@@ -320,6 +320,10 @@
     // === Welle C: Klebe-Sets + TOX-Sortimente ===
     { id: 'giese-gifix-88001', title: 'Giese Gifix Klebe-Set 88001', handle: 'giese-gifix-klebeset-88001', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben', 'beides'], price: '9,90', desc: 'Klebe-Set für Wandbefestigung ohne Bohren. Speziell für leichte Bad-Accessoires.', isMain: false },
     { id: 'smedbo-icomposite-gluemix', title: 'Smedbo XTRA iComposite GlueMix Montagekleber', handle: 'smedbo-xtra-icomposite-gluemix-6000-10', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben', 'beides'], price: '13,95', desc: 'Bohrerfreier Montagekleber von Smedbo. Für Bad-Accessoires aus der XTRA-Serie.', isMain: false },
+    { id: 'smedbo-icomposite-icleaner', title: 'Smedbo XTRA iComposite iCleaner Reinigungstuch', handle: 'xtra-icomposite-icleaner-reinigungstuch-fur-die-klebemontage-art-nr-6000-11', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['kleben', 'beides'], price: '3,10', desc: 'Reinigungstuch zur Vorbereitung der Klebefläche. Entfettet den Untergrund für sicheren Halt des Montageklebers.', isMain: false },
+    // 11.08.2026: Eintrag 'smedbo-extra-iglue-ifast' (Art.Nr. 6000-14) entfernt, das Produkt ist
+    // im Shop ARCHIVED und der Link lief auf 404. Nachfolger waere 'smedbo-xtra-icomposite-gluemix-6000-10'
+    // (Montagekleber bohrerfrei, ACTIVE), Aufnahme aber erst nach Freigabe durch Thomas.
     { id: 'smedbo-xtra-adapter', title: 'Smedbo XTRA Adapter zum Kleben (2er-Set)', handle: 'smedbo-xtra-adapter-kleben', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['kleben', 'beides'], price: '10,90', desc: 'Adapter-Set für Smedbo XTRA-Halter ohne Bohren. Chrom oder Schwarz.', isMain: false },
     { id: 'tox-duebel-sortiment', title: 'TOX Dübel-Sortiment L-Boxx Micro Allround 140-tlg.', handle: 'tox-duebel-sortiment-l-boxx-micro-allround', type: 'duebel', vorhaben: ['glasdusche'], befestigung: ['bohren', 'beides'], price: '17,90', desc: 'Allround-Dübelsortiment mit 140 Teilen in praktischer L-Boxx.', isMain: false },
     { id: 'tox-torx-schrauben', title: 'TOX Torx-Schrauben Sortiment L-Boxx 260 Stück', handle: 'tox-torx-schrauben-sortiment-l-boxx', type: 'schrauben', vorhaben: ['glasdusche'], befestigung: ['bohren', 'beides'], price: '31,50', desc: 'Torx-Schrauben in vier Längen, 260 Stück, sortiert in L-Boxx.', isMain: false },
@@ -329,6 +333,8 @@
     { id: 'tox-bleistift', title: 'TOX Zimmermanns-Bleistift Neon 250 mm', handle: 'tox-zimmermanns-bleistift-neon', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['bohren', 'kleben', 'beides'], price: '1,50', desc: 'Großer Zimmermanns-Bleistift in Neon, 250 mm, Härtegrad HB.', isMain: false },
     { id: 'tox-o-ring-box', title: 'TOX Basic Box O-Ring Sortiment 225-tlg.', handle: 'tox-basic-box-o-ring-sortiment', type: 'zubehoer-montage', vorhaben: ['glasdusche', 'duschwanne', 'fugen'], befestigung: ['bohren', 'kleben', 'beides'], price: '17,90', desc: 'O-Ring-Sortiment mit 225 Teilen in 18 verschiedenen Größen.', isMain: false },
     { id: 'tox-camping-set', title: 'TOX Mini Camping-Set L-BOXX', handle: 'tox-mini-camping-set-l-boxx', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['bohren', 'beides'], price: '36,90', desc: 'Zeltsicherung mit Schraubheringen in L-BOXX. Off-Topic, aber im TOX-Sortiment.', isMain: false }
+,
+    { id: 'veribor-saugheber-2kopf', title: 'Veribor Saugheber 2-Kopf für Glasscheiben, 50 kg Tragkraft', handle: 'veribor-saugheber-2-kopf-fur-glasscheiben-50-kg-tragkraft-kipphebel-art-nr-bo602-1g', type: 'werkzeug', vorhaben: ['glasdusche'], befestigung: ['bohren', 'kleben', 'beides'], price: '64,90', desc: 'Vakuum-Saugheber mit zwei Saugtellern zum sicheren Tragen und millimetergenauen Einsetzen von Glasscheiben. 50 kg Tragkraft.', isMain: false }
 ,];
 
     const productImages = {
@@ -359,7 +365,8 @@
     'handsage-vernickelt-fur-den-zuschnitt-von-duschdichtungsprofilen-art-nr-671146': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Saege_e338ee08-400f-4e58-b378-200566d23095.jpg?v=1744804681',
     'cuttermesser-fur-den-zuschnitt-von-duschdichtungsprofilen-art-nr-745118': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Cuttermesser9mm.jpg?v=1744804760',
     'unbenannt-28-mai_21-47': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_5ee63f2c-6557-4cbf-b88c-2db05616f616.jpg?v=1748464730',
-    'arbeitshandschuh-fur-montagen-transport-u-handwerkliche-tatigkeiten-typ-flex-fit-nylonfeinstrick-grau-schwarz-abriebfest-und-vielseitig-einsetzbar-art-nr-00690010x': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/HandschuheTox.jpg?v=1749129735'
+    'arbeitshandschuh-fur-montagen-transport-u-handwerkliche-tatigkeiten-typ-flex-fit-nylonfeinstrick-grau-schwarz-abriebfest-und-vielseitig-einsetzbar-art-nr-00690010x': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/HandschuheTox.jpg?v=1749129735',
+    'veribor-saugheber-2-kopf-fur-glasscheiben-50-kg-tragkraft-kipphebel-art-nr-bo602-1g': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BO_602_1G_PF1_A.png?v=1784362050'
 };
 
     function filterProducts(state, list) {

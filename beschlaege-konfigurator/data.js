@@ -376,6 +376,19 @@
         desc: 'Fl\u00e4chenb\u00fcndiger 90\u00b0-Eck-Verbinder aus Messing f\u00fcr Glas-Glas-Verbindung in Eckduschen. Verdeckte Schrauben mit Aufsteck-Abdeckung.',
         serie: 'MURELLO'
     },
+    {
+        id: 'haltewinkel-2798-gw',
+        title: 'Haltewinkel Wandhalter feststehende Scheibe ohne Glasbohrung 2798',
+        handle: 'haltewinkel-als-wandhalter-fur-feststehende-scheiben-zur-stabilisierung-ohne-glasbohrung-chrom-glanz-art-nr-2798',
+        kategorie: 'haltewinkel',
+        montage: 'glas-wand',
+        glasdicken: '8-12 mm',
+        colors: ['chrom-poliert'],
+        price: '20,90',
+        priceMax: '20,90',
+        desc: 'Klemm-Wandhalter f\u00fcr frei- und feststehende Scheiben, stabilisiert an der Wand ohne Bohrung im Glas. Messing, Chrom glanz. Ausf\u00fchrung Links oder Rechts.',
+        serie: ''
+    },
 
     // ===================== ZUBEHOER =====================
     {
@@ -729,6 +742,7 @@
     'bellagio-winkelverbinder-glas-wand-90-bel90s': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/bel90s-ch-1_69a2c54a-6e0c-4352-bb05-d48d2612174d.jpg?v=1773414789',
     'lugano_wandwinkel': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/lu90sch.jpg?v=1773416819',
     'bellagio-winkelverbinder-90-glas-glas': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/bel090-ch-2.jpg?v=1773415342',
+    'haltewinkel-als-wandhalter-fur-feststehende-scheiben-zur-stabilisierung-ohne-glasbohrung-chrom-glanz-art-nr-2798': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/haltewinkel-2798-featured-1800x1200.jpg?v=1782997790',
 
     // Tuergriffe
     'duschtuergriff-rund': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/EUSDK1-CH.jpg?v=1773413148',
