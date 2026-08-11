@@ -16,6 +16,11 @@
     --duschop-primary-light: #252542;
     --duschop-accent: #c8956c;
     --duschop-accent-dark: #a87a52;
+    /* Kontrastfester Akzent: fuer kleinen Text auf hellem Grund und fuer
+       Flaechen mit weisser Schrift. #c8956c erreicht dort nur 2.6:1,
+       #a87a52 nur 3.8:1, beides unter der Lesbarkeitsgrenze von 4.5:1. */
+    --duschop-accent-strong: #8f6238;
+    --duschop-accent-strong-hover: #7d5528;
     --duschop-accent-light: #e8c4a8;
     --duschop-accent-glow: rgba(200, 149, 108, 0.15);
 
@@ -27,12 +32,13 @@
     /* Text */
     --duschop-text: #2d2d2d;
     --duschop-text-light: #6b6b6b;
-    --duschop-text-muted: #9a9a9a;
+    --duschop-text-muted: #6f6f6f;   /* war #9a9a9a mit 2.81:1, jetzt 4.7:1 auf dem Seitenhintergrund */
     --duschop-border: #e8e4df;
     --duschop-border-strong: #d4cec5;
 
     /* Status */
     --duschop-success: #27ae60;
+    --duschop-success-strong: #1e8449;  /* fuer weisse Schrift auf farbiger Flaeche */
     --duschop-success-bg: #f0fdf4;
     --duschop-success-text: #166534;
     --duschop-warning: #d4a72c;
@@ -185,7 +191,7 @@
 .duschop-hero-badge {
     display: inline-block;
     background: var(--duschop-accent-glow);
-    color: var(--duschop-accent-dark);
+    color: var(--duschop-accent-strong);
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -350,7 +356,7 @@
 .duschop-progress-dot.is-active {
     border-color: var(--duschop-accent);
     background: var(--duschop-accent);
-    color: white;
+    color: var(--duschop-primary);
     box-shadow: 0 0 0 4px var(--duschop-accent-glow);
 }
 
@@ -375,7 +381,7 @@
     white-space: nowrap;
 }
 
-.duschop-progress-label.is-active { color: var(--duschop-accent-dark); }
+.duschop-progress-label.is-active { color: var(--duschop-accent-strong); }
 .duschop-progress-label.is-done { color: var(--duschop-primary); }
 
 .duschop-progress-line {
@@ -522,7 +528,7 @@
 }
 
 .duschop-opt-badge.is-standard {
-    background: var(--duschop-success);
+    background: var(--duschop-success-strong);
 }
 
 .duschop-opt-badge.is-rare {
@@ -531,6 +537,7 @@
 
 .duschop-opt-badge.is-trend {
     background: var(--duschop-accent);
+    color: var(--duschop-primary);   /* weiss auf Akzent waere 2.63:1 */
 }
 
 /* Color-Swatch Variant (für Farbe als Option) */
@@ -788,14 +795,14 @@
 }
 
 .duschop-btn-primary {
-    background: var(--duschop-accent);
+    background: var(--duschop-accent-strong);
     color: white;
-    border-color: var(--duschop-accent);
+    border-color: var(--duschop-accent-strong);
 }
 
 .duschop-btn-primary:hover {
-    background: var(--duschop-accent-dark);
-    border-color: var(--duschop-accent-dark);
+    background: var(--duschop-accent-strong-hover);
+    border-color: var(--duschop-accent-strong-hover);
     transform: translateY(-1px);
 }
 
@@ -1231,4 +1238,56 @@
     .duschop-wa-sticky-text { display: none; }
     .duschop-nav { flex-direction: row; gap: 8px; }
     .duschop-btn { flex: 1; justify-content: center; }
+}
+
+/* ============================================================
+   Tastatur-Bedienung und Bewegungsarmut
+   Ergaenzt am 12.08.2026. Vorher enthielt diese Datei keine
+   einzige :focus-Regel, und der Slider hatte outline: none.
+   Wer mit der Tastatur bedient, sah also nicht, wo er steht.
+   ============================================================ */
+.duschop-app :focus-visible,
+.duschop-app button:focus-visible,
+.duschop-app a:focus-visible,
+.duschop-app input:focus-visible {
+    outline: 3px solid var(--duschop-primary);
+    outline-offset: 2px;
+    border-radius: var(--duschop-radius-sm, 8px);
+}
+
+/* Auswahl-Kacheln bekommen zusaetzlich den Akzentrand, damit der Fokus
+   auch auf dunklem Untergrund und bei hohem Umgebungslicht auffaellt. */
+.duschop-app .duschop-opt:focus-visible {
+    outline: 3px solid var(--duschop-primary);
+    outline-offset: 3px;
+    border-color: var(--duschop-accent);
+}
+
+/* Der Bereichsregler blendet seinen Standard-Fokus aus (appearance: none).
+   Der Griff bekommt deshalb einen eigenen sichtbaren Ring. */
+.duschop-slider-track input[type="range"]:focus-visible {
+    outline: 3px solid var(--duschop-primary);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+.duschop-slider-track input[type="range"]:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 4px var(--duschop-accent-glow), 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+.duschop-slider-track input[type="range"]:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 4px var(--duschop-accent-glow), 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Wer Bewegung im Betriebssystem abgestellt hat, bekommt keine. */
+@media (prefers-reduced-motion: reduce) {
+    .duschop-app *,
+    .duschop-app *::before,
+    .duschop-app *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .duschop-app .duschop-opt:hover {
+        transform: none;
+    }
 }

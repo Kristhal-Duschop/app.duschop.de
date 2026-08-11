@@ -603,18 +603,26 @@
             }
         }
         var sizeClass = step.optionSize === 'small' ? ' is-small' : '';
-        var html = '<div class="duschop-options' + sizeClass + '">';
+        // role="group" mit der Frage als Beschriftung, damit Screenreader die
+        // Kacheln als zusammengehoerige Auswahl ansagen. aria-pressed traegt
+        // den ausgewaehlten Zustand, der sonst nur an der Rahmenfarbe haengt.
+        var frage = this._frageText(step);
+        var html = '<div class="duschop-options' + sizeClass + '" role="group"'
+            + (frage ? ' aria-label="' + this._esc(frage) + '"' : '') + '>';
         (options || []).forEach(function (opt) {
             var selected = this.answers[step.key] === opt.value;
-            html += '<button class="duschop-opt' + (selected ? ' is-selected' : '') + '" data-step-key="' + this._esc(step.key) + '" data-value="' + this._esc(opt.value) + '">';
+            html += '<button type="button" class="duschop-opt' + (selected ? ' is-selected' : '') + '"'
+                + ' aria-pressed="' + (selected ? 'true' : 'false') + '"'
+                + ' data-step-key="' + this._esc(step.key) + '" data-value="' + this._esc(opt.value) + '">';
             if (opt.badge) {
                 html += '<div class="duschop-opt-badge is-' + this._esc(opt.badge.type || 'standard') + '">' + this._esc(opt.badge.text) + '</div>';
             }
             if (opt.swatch) {
-                html += '<div class="duschop-opt-swatch" style="background:' + opt.swatch + '"></div>';
+                html += '<div class="duschop-opt-swatch" aria-hidden="true" style="background:' + opt.swatch + '"></div>';
             } else if (opt.icon) {
-                // icon kann HTML enthalten (z.B. SVG) — bewusst nicht escapen
-                html += '<div class="duschop-opt-icon">' + opt.icon + '</div>';
+                // icon kann HTML enthalten (z.B. SVG) — bewusst nicht escapen.
+                // Rein dekorativ, deshalb fuer Screenreader ausgeblendet.
+                html += '<div class="duschop-opt-icon" aria-hidden="true">' + opt.icon + '</div>';
             }
             html += '<div class="duschop-opt-label">' + this._esc(opt.label) + '</div>';
             if (opt.desc) html += '<div class="duschop-opt-desc">' + this._esc(opt.desc) + '</div>';
@@ -622,6 +630,15 @@
         }.bind(this));
         html += '</div>';
         return html;
+    };
+
+    // Fragetext eines Steps, egal ob statisch oder als Funktion hinterlegt.
+    DuschopWizard.prototype._frageText = function (step) {
+        try {
+            return (typeof step.questionFn === 'function')
+                ? step.questionFn(this.answers, this.allProducts)
+                : step.question;
+        } catch (e) { return step.question || ''; }
     };
 
     DuschopWizard.prototype._renderSlider = function (step) {
