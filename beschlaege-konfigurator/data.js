@@ -690,7 +690,30 @@
         priceMax: '69,50',
         desc: 'Griffmuschel mit Mittelplatte f\u00fcr Glas-Schiebet\u00fcren, fl\u00e4chenb\u00fcndiger Griffpunkt zum beidseitigen \u00d6ffnen.',
         serie: ''
-    }
+    },
+
+    // Nachgetragen 11.08.2026: Diese Produkte liegen in den Shop-Collections,
+    // hatten aber keine Annotation und waren damit im Tool nicht erreichbar.
+    { id: 'bels344', title: 'Pendeltürband Sauna 90° Glas-Wand BELS344', handle: 'pendelturband-sauna-90-glas-wand-einstellbar-fur-8-mm-glas-12-oberflachen-art-nr-bels344', kategorie: 'scharnier', montage: 'glas-wand', typ: 'pendel', glasdicken: '8 mm', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','weiss-matt','messing-poliert','messing-matt','graphit-poliert','graphit-matt','bronze-matt','kupfer-matt','kupfer-poliert'], price: '104,10', priceMax: '194,00', desc: 'Pendeltürband für die Sauna-Glastür, hitzefest und einstellbar. Für 8 mm Glas.', isMain: false },
+    { id: 'bels380', title: 'Pendeltürband Sauna 180° Glas-Glas BELS380', handle: 'pendelturband-sauna-180-glas-glas-einstellbar-fur-8-mm-glas-12-oberflachen-art-nr-bels380', kategorie: 'scharnier', montage: 'glas-glas', typ: 'pendel', glasdicken: '8 mm', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','weiss-matt','messing-poliert','messing-matt','graphit-poliert','graphit-matt','bronze-matt','kupfer-matt','kupfer-poliert'], price: '132,70', priceMax: '226,70', desc: 'Pendeltürband für die Sauna, wenn die Glastür an eine feste Glasfläche anschlägt. Für 8 mm Glas.', isMain: false },
+    { id: 'nob092', title: 'Nobiallo Pendeltürband 90° Glas-Glas Hebe-Senk NOB092', handle: 'nobiallo-pendelturband-90-glas-glas-hebe-senk-50-kg-8-10-mm-esg', kategorie: 'scharnier', montage: 'glas-glas', typ: 'pendel', hebeSenk: true, glasdicken: '8/10 mm', tragkraft: '50 kg', serie: 'Nobiallo', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'], price: '159,90', priceMax: '169,90', desc: 'Pendeltürband Glas-Glas mit Hebe-Senk-Mechanik, hebt die Tür beim Öffnen an. 50 kg.', isMain: false },
+    { id: 'emily-glas-glas', title: 'Drehbares Duschtürprofil Emily Hebe-Senk Glas-Glas', handle: 'drehbares-duschturprofil-typ-emily-glas-glas', kategorie: 'scharnier', montage: 'glas-glas', typ: 'pendel', hebeSenk: true, glasdicken: '6 mm', serie: 'Emily', colors: ['chrom-poliert','schwarz-matt','messing-matt','silber-matt'], price: '208,90', priceMax: '251,90', desc: 'Drehbares Türprofil für 180° Pendeltür mit Festteil, für 6 mm ESG. Mit Hebe-Senk-Mechanik.', isMain: false },
+    { id: 'como-anschlag-90-gg-aussen', title: 'COMO Anschlagband 90° Glas-Glas nach außen öffnend', handle: 'como-anschlagband-90-glas-glas-nach-aussen-offnend-messing-massiv-8-10-mm-esg-verdeckte-verschraubung', kategorie: 'scharnier', montage: 'glas-glas', typ: 'anschlag', winkel: 90, glasdicken: '8/10 mm', serie: 'COMO', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'], price: '99,90', priceMax: '109,90', desc: 'Eck-Anschlagband, das nach außen öffnet. Eckiges Messing-Design, verdeckte Verschraubung.', isMain: false },
+    { id: 'como-anschlag-135-gg', title: 'COMO Anschlagband 135° Glas-Glas', handle: 'como-anschlagband-135-glas-glas-messing-massiv-8-10-mm-esg-verdeckte-verschraubung-eckiges-design', kategorie: 'scharnier', montage: 'glas-glas', typ: 'anschlag', winkel: 135, glasdicken: '8/10 mm', serie: 'COMO', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'], price: '99,90', priceMax: '109,90', desc: 'Anschlagband für die fünfeckige Dusche mit abgeschrägter Ecke. Verdeckte Verschraubung.', isMain: false },
+    { id: 'como-anschlag-180-gw', title: 'COMO Anschlagband 180° Glas-Wand', handle: 'como-anschlagband-180-glas-wand-messing-massiv-8-10-mm-esg-verdeckte-verschraubung-eckiges-design', kategorie: 'scharnier', montage: 'glas-wand', typ: 'anschlag', winkel: 180, glasdicken: '8/10 mm', serie: 'COMO', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'], price: '94,90', priceMax: '99,90', desc: 'Anschlagband, das Glastür und Wand in einer geraden Flucht verbindet. Verdeckte Verschraubung.', isMain: false },
+    { id: 'como-wandwinkel-90s', title: 'COMO Wandwinkel 90° Glas-Wand COM90S', handle: 'como-wandwinkel-90-glas-wand-festteil-verbinder-messing-massiv-8-10-mm-esg', kategorie: 'haltewinkel', montage: 'glas-wand', glasdicken: '8/10 mm', serie: 'COMO', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','messing-matt','bronze-matt'], price: '39,90', priceMax: '99,90', desc: 'Verbindet ein feststehendes Glasfestteil rechtwinklig mit der Wand. Passend zur COMO-Serie.', isMain: false },
+    { id: 'como-verbinder-180-gw', title: 'COMO Verbinder 180° Glas-Wand COM180S', handle: 'como-verbinder-180-glas-wand-festteil-verbinder-messing-massiv-8-10-mm-esg', kategorie: 'haltewinkel', montage: 'glas-wand', glasdicken: '8/10 mm', serie: 'COMO', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'], price: '64,90', priceMax: '69,90', desc: 'Verbindet ein Glasfestteil fluchtend mit der Wand, ohne Winkel.', isMain: false },
+    { id: 'como-winkelverbinder-090', title: 'COMO Winkelverbinder 90° Glas-Glas COM090', handle: 'como-winkelverbinder-90-glas-glas-eckverbindung-messing-massiv-8-10-mm-esg', kategorie: 'haltewinkel', montage: 'glas-glas', glasdicken: '8/10 mm', serie: 'COMO', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','messing-matt','bronze-matt'], price: '49,90', priceMax: '99,90', desc: 'Verbindet zwei feststehende Glasscheiben rechtwinklig in der Ecke.', isMain: false },
+    { id: 'haltewinkel-eckverbinder-2960', title: 'Haltewinkel Eckverbinder Glas-Glas 90° ohne Glasbohrung 2960', handle: 'haltewinkel-als-eckverbinder-glas-glas-90-fur-feststehende-scheiben-ohne-glasbohrung-2-oberflachen-art-nr-2960', kategorie: 'haltewinkel', montage: 'glas-glas', glasdicken: '6 bis 10 mm', colors: ['chrom-poliert','silber-matt'], price: '23,90', desc: 'Eckverbinder für zwei feststehende Scheiben, klemmt ohne Bohrung im Glas.', isMain: false },
+    { id: 'sauna-griffstange-holz', title: 'Sauna-Griffstange Holz beidseitig SA6X6', handle: 'sauna-griffstange-holz-beidseitig-lochabstand-152-mm-fur-6-bis-12-mm-glas-art-nr-sa6x6', kategorie: 'griff', grifftyp: 'stangengriff', glasdicken: '6 bis 12 mm', colors: ['edelstahl-poliert','edelstahl-gebuerstet'], price: '113,90', priceMax: '125,30', desc: 'Griffstange aus Holz für die Saunatür, wird auch bei Hitze nicht heiß. Lochabstand 152 mm.', isMain: false },
+    { id: 'euro-tuerknopf-30', title: 'Euro Duschtürknopf einseitig Ø 30 mm EUSDK1S', handle: 'euro-duschtuerknopf-messing-einseitig-30-mm-eusdk1s', kategorie: 'griff', grifftyp: 'knopf', glasdicken: '6 bis 12 mm', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'], price: '16,90', desc: 'Einzelner Knopf für eine Türseite, massives Messing, Ø 30 mm.', isMain: false },
+    { id: 'schiebetuer-colette', title: 'Schiebetür-Beschlagset Colette für Nische und Ecke', handle: 'schiebetur-beschlagset-colette-fur-nischen-und-eckduschen-edelstahl-matt-ohne-glas-art-nr-52-07-4000', kategorie: 'schiebetuer', schiebeteil: 'system', colors: ['edelstahl-gebuerstet'], price: '479,90', priceMax: '789,90', desc: 'Komplettes Beschlagset für die rahmenlose Schiebetür in Nische oder Ecke, ohne Glas.', isMain: false },
+    { id: 'schiebetuer-ser78', title: 'Schiebetürsystem 2 m Laufschiene Ganzglas-Optik SER78', handle: 'schiebetursystem-fur-glasduschen-2-m-laufschiene-ganzglas-optik-art-nr-ser78', kategorie: 'schiebetuer', schiebeteil: 'system', colors: ['edelstahl-poliert','edelstahl-gebuerstet','schwarz-matt','graphit-matt','messing-matt','bronze-matt'], price: '379,90', priceMax: '555,90', desc: 'Laufschienensystem 2 m für die flächenbündige Ganzglas-Schiebetür.', isMain: false },
+    { id: 'schiebetuer-stopper', title: 'Ersatz-Stopper für Schiebetürsystem SERNDS1', handle: 'ersatz-stopper-fur-duschschiebetursystem-art-nr-sernds1', kategorie: 'schiebetuer', schiebeteil: 'ersatzteil', colors: ['edelstahl-poliert','edelstahl-gebuerstet','schwarz-matt','graphit-matt','messing-matt','bronze-matt'], price: '26,30', priceMax: '53,80', desc: 'Begrenzt den Lauf der Schiebetür und definiert die Endposition.', isMain: false },
+    { id: 'schiebetuer-bodenfuehrung', title: 'Bodenführung für Schiebetürsystem SERUG2', handle: 'bodenfuhrung-fur-duschschiebetursystem-art-nr-serug2', kategorie: 'schiebetuer', schiebeteil: 'ersatzteil', colors: ['edelstahl-poliert','edelstahl-gebuerstet','graphit-matt','messing-matt','bronze-matt'], price: '30,90', priceMax: '44,70', desc: 'Hält die untere Kante der Schiebetür in der Spur, verhindert seitliches Ausschwenken.', isMain: false },
+    { id: 'schiebetuer-laufrolle', title: 'Ersatz-Laufrolle für Schiebetürsystem SERNR1', handle: 'ersatz-laufrolle-fur-duschschiebetursystem-beschichtet-art-nr-sernr1', kategorie: 'schiebetuer', schiebeteil: 'ersatzteil', colors: ['edelstahl-poliert','edelstahl-gebuerstet','schwarz-matt','graphit-matt','messing-matt','bronze-matt'], price: '39,30', priceMax: '49,20', desc: 'Beschichtete Laufrolle als Ersatz für eine verschlissene Rolle.', isMain: false },
+    { id: 'schiebetuer-kit-90', title: '90-Grad-Zubehör-Kit für Schiebetürsystem SER90', handle: '90-grad-zubehor-kit-fur-schiebetursystem-glashalter-fur-eckdusche-art-nr-ser90', kategorie: 'schiebetuer', schiebeteil: 'ersatzteil', colors: ['edelstahl-poliert','edelstahl-gebuerstet','schwarz-matt','graphit-matt','messing-matt','bronze-matt'], price: '15,80', priceMax: '30,30', desc: 'Erweitert das Schiebetürsystem um ein rechtwinkliges Fixteil für die Eckdusche.', isMain: false },
+    { id: 'lugano-schraubenabdeckung', title: 'Lugano Schraubenabdeckung Glasseite rund LUGRC', handle: 'lugano-schraubenabdeckung-glasseite-rund-lugrc', kategorie: 'zubehoer', typ: 'abdeckung', serie: 'Lugano', colors: ['chrom-poliert','schwarz-matt'], price: '4,90', desc: 'Runde Abdeckung für die glasseitige Verschraubung der Lugano-Serie.', isMain: false },
 ];
 
     // Handles, die vom Annotation-Sync uebersprungen werden sollen.
@@ -712,16 +735,15 @@
         // keinen Punkthalter-Pfad, daher KEINE Annotation mit erfundener
         // Kategorie. Bewusst uebersprungen, bis ggf. eine eigene Kategorie
         // bzw. ein eigener Punkthalter-Finder existiert.
-        'mini-punkthalter-glas-flaechenbuendig-6-8-mm',
-        // Serenity Duschschiebetuer-System (2026-07-01): Laufwerk-Teile passen
-        // nicht in die Berater-Achsen (Winkel/Montage/Tragkraft). Nur die
-        // Griffmuschel (muschel-schiebetuer-mittelplatte) ist annotiert; das
-        // Hauptsystem und die vier Laufwerk-/Ersatzteile werden uebersprungen.
-        'schiebetursystem-fur-glasduschen-2-m-laufschiene-ganzglas-optik-art-nr-ser78',
-        '90-grad-zubehor-kit-fur-schiebetursystem-glashalter-fur-eckdusche-art-nr-ser90',
-        'ersatz-laufrolle-fur-duschschiebetursystem-beschichtet-art-nr-sernr1',
-        'bodenfuhrung-fur-duschschiebetursystem-art-nr-serug2',
-        'ersatz-stopper-fur-duschschiebetursystem-art-nr-sernds1'
+        'mini-punkthalter-glas-flaechenbuendig-6-8-mm'
+        // Serenity Duschschiebetuer-System: Die Sperre vom 01.07.2026 ist am
+        // 11.08.2026 aufgehoben. Sie war ausdruecklich daran gebunden, dass es
+        // keinen passenden Pfad gibt ("bis ggf. eine eigene Kategorie
+        // existiert"). Genau die gibt es jetzt: die Kategorie schiebetuer mit
+        // der eigenen Achse schiebeteil (system / ersatzteil). Damit passen die
+        // Laufwerk-Teile, ohne sie in Winkel/Montage/Tragkraft zu pressen.
+        // Der Punkthalter bleibt gesperrt, fuer ihn gibt es weiterhin keinen
+        // ehrlichen Pfad; Haltewinkel waere eine erfundene Kategorie.
     ];
 
     const productImages = {
@@ -786,6 +808,26 @@
 };
 
     const step1Defs = {
+    schiebetuer: {
+        title: 'Komplettes System oder ein einzelnes Teil?',
+        subtitle: 'Bauen Sie eine Schiebetür neu auf, oder ersetzen Sie ein Teil an einer vorhandenen?',
+        options: [
+            {
+                value: 'system',
+                name: 'Komplettes Schiebetür-System',
+                desc: 'Laufschiene, Rollen und Beschläge als Set. Das Glas kommt separat dazu.',
+                meta: 'Neuaufbau',
+                icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="2" y="6" width="36" height="4" rx="1" fill="#c8956c" stroke="none"/><circle cx="12" cy="12" r="3"/><circle cx="28" cy="12" r="3"/><rect x="6" y="15" width="28" height="21" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-width="2"/></svg>'
+            },
+            {
+                value: 'ersatzteil',
+                name: 'Einzelteil oder Ersatzteil',
+                desc: 'Laufrolle, Stopper, Bodenführung oder das Eck-Kit einzeln nachkaufen.',
+                meta: 'Reparatur und Erweiterung',
+                icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="2" y="8" width="36" height="4" rx="1" fill="#c8956c" stroke="none"/><circle cx="20" cy="20" r="7"/><circle cx="20" cy="20" r="2.5" fill="#c8956c" stroke="none"/><path d="M20 27 L20 34"/></svg>'
+            }
+        ]
+    },
     scharnier: {
         title: 'Wie wird das Scharnier montiert?',
         subtitle: 'W\u00e4hlen Sie, ob die T\u00fcr an einer Wand oder an einer Glasscheibe befestigt wird.',

@@ -62,6 +62,8 @@
                         if (p.grifftyp !== state.subtyp) return false;
                     } else if (state.kategorie === 'griffmuschel') {
                         if (p.befestigung !== state.subtyp) return false;
+                    } else if (state.kategorie === 'schiebetuer') {
+                        if (p.schiebeteil !== state.subtyp) return false;
                     }
                 }
                 if (state.color && p.colors && p.colors.indexOf(state.color) === -1) return false;
@@ -111,8 +113,13 @@
             // includeStaticOnly: true behaelt veraltete Annotations als Fallback —
             // damit der Wizard nicht „leer" wirkt, wenn ein Produkt vom Shop fehlt.
             fetchProducts: function () {
+                // Zweite Collection, weil die Schiebetuer-Systeme nicht in der
+                // Beschlaege-Collection liegen. Ohne sie waere die Kategorie leer.
                 return DuschopShopifyClient.fetchCollectionMerged(
-                    'beschlagsteile-und-scharniere-fur-duschabtrennungen-aus-glas',
+                    [
+                        'beschlagsteile-und-scharniere-fur-duschabtrennungen-aus-glas',
+                        'schiebetursysteme-fur-glasduschen-laufschienen-rollen-und-beschlage'
+                    ],
                     D.products,
                     { includeStaticOnly: true }
                 );
@@ -157,6 +164,18 @@
                             label: 'Griffmuschel',
                             desc: 'Flache Muschelgriffe zum Verschrauben oder Aufkleben.',
                             icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><ellipse cx="20" cy="20" rx="12" ry="8"/><path d="M12 20 Q20 28 28 20" fill="rgba(200,149,108,0.15)"/></svg>'
+                        },
+                        {
+                            value: 'schiebetuer',
+                            label: 'Schiebetür-System',
+                            desc: 'Laufschienen, Rollen und Ersatzteile für Glas-Schiebetüren.',
+                            icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="2" y="6" width="36" height="4" rx="1" fill="#c8956c" stroke="none"/><circle cx="12" cy="12" r="3"/><circle cx="28" cy="12" r="3"/><rect x="6" y="15" width="28" height="21" rx="1" fill="#d4eeff" stroke="#7ab8e0" stroke-width="2"/></svg>'
+                        },
+                        {
+                            value: 'zubehoer',
+                            label: 'Zubehör & Ersatzteile',
+                            desc: 'Abdeckungen, Montageplatten und Kleinteile zu den Beschlagserien.',
+                            icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><circle cx="20" cy="20" r="6"/><path d="M20 4 L20 10 M20 30 L20 36 M4 20 L10 20 M30 20 L36 20"/><path d="M9 9 L13 13 M27 27 L31 31 M31 9 L27 13 M13 27 L9 31"/></svg>'
                         }
                     ],
                     tip: {
@@ -177,6 +196,11 @@
                     hintFn: function (state) {
                         var def = D.step1Defs[state.kategorie];
                         return def ? def.subtitle : '';
+                    },
+                    skipFn: function (state) {
+                        // Kategorien ohne Untertypen (z.B. Zubehoer) haetten hier eine
+                        // leere Auswahl und damit eine Sackgasse. Lieber ueberspringen.
+                        return !D.step1Defs[state.kategorie];
                     },
                     optionsFn: function (state, allProducts) {
                         var def = D.step1Defs[state.kategorie];
