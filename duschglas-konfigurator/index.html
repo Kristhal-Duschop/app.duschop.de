@@ -66,6 +66,12 @@
                             icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none"><rect x="8" y="4" width="24" height="32" rx="2" fill="#e8e8e8" stroke="#a8a8a8" stroke-width="2"/></svg>'
                         },
                         {
+                            value: 'getoent',
+                            label: 'Getönt (Rauchglas)',
+                            desc: 'Durchgefärbtes Grauglas. Halbtransparent, ruhiger als Klarglas, offener als Milchglas.',
+                            icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none"><rect x="8" y="4" width="24" height="32" rx="2" fill="#b8bcc0" stroke="#7d8288" stroke-width="2"/><rect x="11" y="7" width="4" height="26" rx="1" fill="#ffffff" opacity="0.25"/></svg>'
+                        },
+                        {
                             value: 'motiv',
                             label: 'Mit Motiv / Design',
                             desc: 'Individuelles Design per Lasertechnologie. Über 40 Motive verfügbar.',
@@ -85,10 +91,12 @@
                         return 'Standard-ESG für die meisten Anwendungen.';
                     },
                     skipFn: function (state) {
-                        // Satiniert gibt es nur als Standard-ESG, Motivglas nur in einer
-                        // Ausfuehrung (ueber 40 Motive im selben Produkt). In beiden Faellen
-                        // waere die Frage eine Scheinwahl, deshalb Step ueberspringen.
-                        return state.glasoptik === 'satiniert' || state.glasoptik === 'motiv';
+                        // Satiniert, getoent und Motivglas gibt es jeweils nur in einer
+                        // Ausfuehrung. Die Frage waere dort eine Scheinwahl, deshalb
+                        // Step ueberspringen.
+                        return state.glasoptik === 'satiniert'
+                            || state.glasoptik === 'getoent'
+                            || state.glasoptik === 'motiv';
                     },
                     optionsFn: function (state) {
                         if (state.glasoptik === 'klar') {

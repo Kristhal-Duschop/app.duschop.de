@@ -187,7 +187,15 @@
         price: '4,50',
         desc: 'Speziell geformte B\u00fcrste f\u00fcr die Reinigung von Fliesenfugen. F\u00fcr regelm\u00e4\u00dfige Pflege zwischen den Fliesen.',
         isSet: false
-    }
+    },
+
+    // Nachgetragen 12.08.2026: lagen in der Shop-Collection, hatten aber keine
+    // Annotation und waren damit ueber den Wizard nicht erreichbar.
+    { id: 'pflegeschwamm', title: 'Pflegeschwamm für empfindliche Oberflächen, schleifmittelfreies Vlies', handle: 'pflegeschwamm-fur-empfindliche-oberflachen-schleifmittelfreies-vlies-blau-weiss-ca-7-x-15-cm-art-nr-41227', type: 'zubehoer', ziel: ['reinigung','beides'], verschmutzung: ['leicht','mittel'], oberflaeche: ['unbeschichtet','beschichtet','unbekannt'], price: '1,50', desc: 'Schleifmittelfreies Vlies zum Auftragen des Reinigers. Kratzt auch auf beschichtetem Glas nicht.' },
+    { id: 'profi-set-1615', title: 'Profi-Reinigungs-Set für hartnäckige Verkrustungen', handle: 'profi-reinigungs-set-fur-hartnackige-verkrustungen-mehrstufen-system-fur-stark-verkalktes-duschglas-art-nr-1615', type: 'set', ziel: ['reinigung'], verschmutzung: ['stark'], oberflaeche: ['unbeschichtet'], price: '74,90', desc: 'Mehrstufen-System für jahrelang eingebrannten Kalk. Für Glas, das schon aufgegeben war.', isSet: true },
+    { id: 'reinigungs-set-1615ssr', title: 'Reinigungs-Set für Ablagerungen und starke Verschmutzungen', handle: 'reinigungs-set-fur-ablagerungen-und-starke-verschmutzungen-mehrstufige-duschglas-reinigung-mit-saure-vorreiniger-art-nr-1615ssr', type: 'set', ziel: ['reinigung'], verschmutzung: ['mittel','stark'], oberflaeche: ['unbeschichtet'], price: '34,90', desc: 'Mehrstufige Reinigung mit saurem Vorreiniger, wenn ein einzelner Reiniger nicht mehr reicht.', isSet: true },
+    { id: 'shine3-polierpaste', title: 'iWETEC Shine³ Polierpaste 500 g', handle: 'iwetec-shine-polierpaste-reinigen-polieren-und-schutzen-in-einem-arbeitsgang-500-g-art-nr-907611', type: 'reiniger', ziel: ['reinigung','schutz','beides'], verschmutzung: ['mittel','stark'], oberflaeche: ['unbeschichtet'], price: '39,90', desc: 'Reinigt, poliert und versiegelt in einem Arbeitsgang. Auch für matte Armaturen und angelaufenes Metall.' },
+    { id: 'glas-versiegelung-tpc16', title: 'Glas-Versiegelung für Duschglas, 473 ml', handle: 'glas-versiegelung-fur-duschglas-wasser-und-schmutzabweisend-transparent-473-ml-art-nr-tpc16', type: 'beschichtung', ziel: ['schutz','beides'], verschmutzung: ['leicht','mittel','stark'], oberflaeche: ['unbeschichtet'], price: '32,90', desc: 'Versiegelt die Glasporen, Wasser perlt ab. Die Pflege wird spürbar leichter.' },
 ];
 
     const productImages = {

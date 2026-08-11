@@ -1,6 +1,13 @@
 ﻿/* MONTAGEBEDARF-FINDER, Daten v1 */
 (function (global) {
     'use strict';
+    // Bewusst NICHT annotiert (12.08.2026): Schallschutzset Waschtisch
+    // (schallschutzset-waschtisch-...) und Waschtisch-Befestigungssatz M10
+    // (waschtisch-befestigungssatz-m10-...). Beide liegen in der Collection,
+    // haben aber keinen Duschbezug. Die vier Vorhaben des Wizards heissen
+    // Glasdusche, Duschwanne, Nassbereich und Fugen; ein Waschtisch passt
+    // unter keines davon, ohne dass man es hinbiegt.
+
 
     const products = [
     // === BEFESTIGUNG (Duebel & Schrauben) ===
@@ -335,6 +342,13 @@
     { id: 'tox-camping-set', title: 'TOX Mini Camping-Set L-BOXX', handle: 'tox-mini-camping-set-l-boxx', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['bohren', 'beides'], price: '36,90', desc: 'Zeltsicherung mit Schraubheringen in L-BOXX. Off-Topic, aber im TOX-Sortiment.', isMain: false }
 ,
     { id: 'veribor-saugheber-2kopf', title: 'Veribor Saugheber 2-Kopf für Glasscheiben, 50 kg Tragkraft', handle: 'veribor-saugheber-2-kopf-fur-glasscheiben-50-kg-tragkraft-kipphebel-art-nr-bo602-1g', type: 'werkzeug', vorhaben: ['glasdusche'], befestigung: ['bohren', 'kleben', 'beides'], price: '64,90', desc: 'Vakuum-Saugheber mit zwei Saugtellern zum sicheren Tragen und millimetergenauen Einsetzen von Glasscheiben. 50 kg Tragkraft.', isMain: false }
+,
+
+// Nachgetragen 12.08.2026: lagen in der Shop-Collection, hatten aber keine
+// Annotation und waren damit ueber den Wizard nicht erreichbar.
+    { id: 'montage-kleber-129941', title: 'Montage-Kleber für Duschkörbe und Bad-Accessoires', handle: 'montage-kleber-129941', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben','beides'], price: '6,90', desc: 'Kleber für die bohrfreie Montage von Duschkörben und Accessoires mit Klebe-Wandadapter.' },
+    { id: 'ersatzpads-3m', title: 'Selbstklebende Ersatzpads 3M, 2 Stück', handle: 'selbstklebende-ersatzpads-3m-2-stuck-art-nr-698', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben','beides'], price: '9,20', desc: 'Ersatzpads für selbstklebende Haken und Halter, wenn das Original-Pad seine Kraft verloren hat.' },
+    { id: 'metallkleber-hochfest', title: 'Metallkleber hochfest, 50 ml', handle: 'metallkleber-hochfest-50-ml-zum-einkleben-von-rohrverbindern-und-gewinden-art-nr-19-1330-000-00', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben','beides'], price: '24,70', desc: 'Anaerober Kleber zum Einkleben von Rohrverbindern in Stabistangen und zum Sichern von Gewinden.' }
 ,];
 
     const productImages = {

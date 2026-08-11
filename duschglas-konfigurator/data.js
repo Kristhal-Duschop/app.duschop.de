@@ -55,6 +55,31 @@
         isMain: true
     },
     {
+        id: 'parsol-grau',
+        title: 'Parsol Grau Rauchglas, ESG nach Maß',
+        handle: 'parsol-grau-rauchglas-fur-duschtrennwande-esg-nach-mass',
+        type: 'glas',
+        glasoptik: 'getoent',
+        qualitaet: 'standard',
+        glasdicken: ['6', '8', '10'],
+        price: '309,00',
+        priceMax: '619,00',
+        desc: 'Durchgefärbtes Rauchglas in Grau, halbtransparent. Breite 200 bis 1400 mm, Höhe 2000 mm. 6, 8 oder 10 mm.',
+        isMain: true
+    },
+    {
+        id: 'restposten-klarglas',
+        title: 'Restposten Kristhal Duschglas 8 mm Klarglas',
+        handle: 'restposten-kristhal-duschglas-klarglas-durchsichtig-fur-duschtrennwande',
+        type: 'glas',
+        glasoptik: 'klar',
+        qualitaet: 'standard',
+        glasdicken: ['8'],
+        price: '109,00',
+        desc: 'Fertiges ESG-Klarglas aus dem Restposten, feste Größe, sofort lieferbar. Deutlich günstiger als Maßanfertigung.',
+        isMain: false
+    },
+    {
         id: 'easyclean',
         title: 'Easyclean Nanobeschichtung f\u00fcr Duschglas',
         handle: 'easyclean-glasbeschichtung',

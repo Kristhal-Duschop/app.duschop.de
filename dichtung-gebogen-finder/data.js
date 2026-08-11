@@ -2,6 +2,10 @@
 (function (global) {
     'use strict';
 
+    // Bewusst NICHT annotiert (12.08.2026): das gebogene Alu-Schwallprofil
+    // 8881/8882. Es liegt in der Collection der gebogenen Dichtungen, ist aber
+    // ein Profil und keine Dichtung; Glasdicke und Spaltmass, auf die dieser
+    // Finder filtert, gibt es dafuer nicht.
     const GF_PRODUCTS = [
   {
     id: '5102.550',

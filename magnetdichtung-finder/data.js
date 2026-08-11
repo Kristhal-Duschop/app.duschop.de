@@ -1,6 +1,12 @@
 /* MAGNETDICHTUNG-FINDER, Daten v1 */
 (function (global) {
     'use strict';
+    // Bewusst NICHT annotiert (12.08.2026): die beiden Magnettraegerprofile
+    // 74.109 und 52.05.0300. Sie liegen in der Magnetdichtungs-Collection,
+    // sind aber Traegerprofile und keine Dichtungen. Die Achsen dieses
+    // Finders (Winkel, Glasdicke, Spaltmass) treffen auf sie nicht zu.
+    // Beide sind ueber den Metallprofile-Konfigurator auffindbar.
+
 
     const PRODUCTS = [
   {
