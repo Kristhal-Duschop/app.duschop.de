@@ -35,9 +35,21 @@
         new DuschopWizard({
             mount: '#duschop-app',
             toolSlug: 'duschzubehoer-finder',
-            // Zwei Collections, weil die Kategorie "Duschvorhaenge & Stangen" nicht in
-            // dusche_accessoire liegt. Ohne die zweite lief dieser Schritt ins Leere.
-            fetchProducts: function () { return DuschopShopifyClient.fetchCollectionMerged(['dusche_accessoire', 'duschvorhang-stangen'], D.products); },
+            // Der Finder deckt mehr ab als eine einzelne Shop-Collection. Vorhaenge,
+            // Haken, Handtuchhalter, Koerbe, Ablagen und Hocker liegen jeweils in
+            // eigenen Collections; ohne sie fanden 112 fertig beschriebene Produkte
+            // im Tool nie ihr Live-Gegenstueck und waren unerreichbar.
+            fetchProducts: function () {
+                return DuschopShopifyClient.fetchCollectionMerged([
+                    'dusche_accessoire',
+                    'duschvorhang-stangen',
+                    'halter-haken',
+                    'handtuchhalter',
+                    'duschkorbe',
+                    'duschablage',
+                    'duschhocker'
+                ], D.products);
+            },
 
             hero: {
                 badge: 'In bis zu 2 Schritten zum passenden Zubehör',

@@ -117,7 +117,38 @@
             return naechste(0);
         },
 
+        /**
+         * Ein Produkt aus products.json ist im Schnitt rund 5 KB gross, und der
+         * groesste Brocken davon ist body_html, das kein Tool rendert. Ueber die
+         * Leitung kommt die Antwort komprimiert, im localStorage liegt sie aber
+         * unkomprimiert. Ohne dieses Ausduennen sprengt schon eine mittlere
+         * Collection zusammen mit den anderen Tools das Speicherlimit, setItem
+         * wirft still, und der Cache faellt unbemerkt weg.
+         * Behalten wird genau das, was gerendert oder gefiltert wird.
+         */
+        _ausduennen: function (produkte) {
+            return (produkte || []).map(function (p) {
+                return {
+                    handle: p.handle,
+                    title: p.title,
+                    images: (p.images || []).slice(0, 3).map(function (b) { return { src: b.src }; }),
+                    variants: (p.variants || []).map(function (v) {
+                        return {
+                            id: v.id,
+                            title: v.title,
+                            price: v.price,
+                            available: v.available,
+                            option1: v.option1,
+                            option2: v.option2,
+                            option3: v.option3
+                        };
+                    })
+                };
+            });
+        },
+
         fetchCollection: function (handle) {
+            var self = this;
             var cacheKey = CACHE_PREFIX + handle;
             // Cache prüfen
             try {
@@ -132,13 +163,14 @@
 
             return this._fetchAllPages(SHOPIFY_BASE + '/collections/' + handle + '/products.json')
                 .then(function (products) {
+                    var schlank = self._ausduennen(products);
                     try {
                         localStorage.setItem(cacheKey, JSON.stringify({
                             _ts: Date.now(),
-                            products: products
+                            products: schlank
                         }));
                     } catch (e) {}
-                    return products;
+                    return schlank;
                 });
         },
 
