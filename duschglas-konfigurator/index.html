@@ -67,7 +67,7 @@
                         {
                             value: 'motiv',
                             label: 'Mit Motiv / Design',
-                            desc: 'Individuelles Design per Lasertechnologie. Über 80 Motive verfügbar.',
+                            desc: 'Individuelles Design per Lasertechnologie. Über 40 Motive verfügbar.',
                             icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none"><rect x="6" y="4" width="28" height="32" rx="2" fill="#e8d8f0" stroke="#a090c0" stroke-width="1.5"/><circle cx="20" cy="18" r="6" stroke="#8070a0" stroke-width="1.5" fill="none"/></svg>',
                             badge: { type: 'trend', text: 'Premium' }
                         }
@@ -78,30 +78,22 @@
                 {
                     key: 'qualitaet',
                     shortLabel: 'Qualität',
-                    questionFn: function (state) {
-                        if (state.glasoptik === 'motiv') return 'Welche Motivserie?';
-                        return 'Welche Glasqualität?';
-                    },
+                    question: 'Welche Glasqualität?',
                     hintFn: function (state) {
-                        if (state.glasoptik === 'motiv') return 'Zwei Serien mit je über 40 Motiven, per Laser dauerhaft ins Glas eingearbeitet.';
                         if (state.glasoptik === 'klar') return 'Standard-ESG oder Premium-Antikorrosionsglas, für dauerhaft klare Sicht.';
                         return 'Standard-ESG für die meisten Anwendungen.';
                     },
                     skipFn: function (state) {
-                        // Bei satiniert gibt es nur Standard, Step überspringen, vorbelegen
-                        return state.glasoptik === 'satiniert';
+                        // Satiniert gibt es nur als Standard-ESG, Motivglas nur in einer
+                        // Ausfuehrung (ueber 40 Motive im selben Produkt). In beiden Faellen
+                        // waere die Frage eine Scheinwahl, deshalb Step ueberspringen.
+                        return state.glasoptik === 'satiniert' || state.glasoptik === 'motiv';
                     },
                     optionsFn: function (state) {
                         if (state.glasoptik === 'klar') {
                             return [
                                 { value: 'standard',      label: 'Standard ESG Klarglas',           desc: D.qualitaetDefs.standard.desc },
-                                { value: 'antikorrosion', label: 'Antikorrosionsglas (SGG Timeless)', desc: D.qualitaetDefs.antikorrosion.desc, badge: { type: 'trend', text: 'Premium' } }
-                            ];
-                        }
-                        if (state.glasoptik === 'motiv') {
-                            return [
-                                { value: 'serie-paimu', label: 'Serie Paimu', desc: D.qualitaetDefs['serie-paimu'].desc },
-                                { value: 'serie-makai', label: 'Serie Makai', desc: D.qualitaetDefs['serie-makai'].desc }
+                                { value: 'antikorrosion', label: 'Antikorrosionsglas mit Nano-Versiegelung', desc: D.qualitaetDefs.antikorrosion.desc, badge: { type: 'trend', text: 'Premium' } }
                             ];
                         }
                         return [];

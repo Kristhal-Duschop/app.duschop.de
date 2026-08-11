@@ -736,7 +736,7 @@
     'bellagio-pendelturband-90-glas-glas-anschraubplatte-einseitig-inkl-abdeckplatten-einstellbar-art-nr-bel392': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BEL392CH_f112a662-5c46-4907-894c-c2f89d2110e1.png?v=1773418312',
     'lugano-duschband-180-glas-glas-mit-hebe-senk-funktion': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/lug180l_-_ch_-12_66d6c33b-e3ad-4f4e-9f46-766ee510fb70.jpg?v=1773417291',
     'pendelturband-mit-hebe-senk-funktion-glas-glas': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/N0B044RCH.png?v=1773417835',
-    'bellagio-pendelturband-180-glas-glas-bel380-50-kg-8-10-mm-esg-kopie': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Como_Glas_1.png?v=1774028226',
+    'bellagio-pendelturband-180-glas-glas-bel380-50-kg-8-10-mm-esg-kopie': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Como_3.png?v=1774025988',
 
     // Haltewinkel
     'bellagio-winkelverbinder-glas-wand-90-bel90s': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/bel90s-ch-1_69a2c54a-6e0c-4352-bb05-d48d2612174d.jpg?v=1773414789',
@@ -745,21 +745,21 @@
     'haltewinkel-als-wandhalter-fur-feststehende-scheiben-zur-stabilisierung-ohne-glasbohrung-chrom-glanz-art-nr-2798': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/haltewinkel-2798-featured-1800x1200.jpg?v=1782997790',
 
     // Tuergriffe
-    'duschtuergriff-rund': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/EUSDK1-CH.jpg?v=1773413148',
-    'dusch-tuergriff': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/6702_1.jpg?v=1768301345',
-    'dusch-turgriff-flugelform-art-nr-8297': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/8297.jpg?v=1768299553',
+    'duschtuergriff-rund': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/EUSDK1.png?v=1773309314',
+    'dusch-tuergriff': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/6702_Tuergriff_zylindrisch_weiss.png?v=1784546217',
+    'dusch-turgriff-flugelform-art-nr-8297': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Griff_8297.png?v=1767357797',
     'dusch-tuergriff-kegelform': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/0510.jpg?v=1768301576',
-    'duschturgriff-eckig-art-nr-sdk300': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/SDK300CH.jpg?v=1773413198',
+    'duschturgriff-eckig-art-nr-sdk300': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/SDK300_2_b168f951-3c20-429d-951e-e27f155cdd26.png?v=1773311324',
     'dusch-turgriff-quader-art-nr-0517': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/0517.jpg?v=1768301825',
-    'duschgriff-eckig-40x40mm-beidseitig-glasdusche': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/eckig_40_ch_1.jpg?v=1773413264',
-    'duschturknopf-aluminium-30mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/EUSDK2-CH.jpg?v=1773413322',
-    'dusch-turknopf-v2a-in-schwarz-fur-8-12-mm-glasstarke': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/v2a_102_ch.jpg?v=1773413370',
-    'dusch-tuerknopf-4106': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/4106.jpg?v=1768302053',
-    'dusch-tuerknopf-107': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/107.jpg?v=1768302230',
-    'dusch-tuerknopf-v2a-101': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/101.jpg?v=1768302419',
-    'knopfgriff-rund-40mm-beidseitig-glasdusche': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/knopf_40_ch_1.jpg?v=1773413416',
-    'duschgriff-stangengriff': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Stangengriff_CH_1.jpg?v=1773413460',
-    'edelstahl-griffstange_19mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/53_1.jpg?v=1768302676',
+    'duschgriff-eckig-40x40mm-beidseitig-glasdusche': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/8237ZNPVD22.jpg?v=1775901702',
+    'duschturknopf-aluminium-30mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/EUSDK2_2.png?v=1768326668',
+    'dusch-turknopf-v2a-in-schwarz-fur-8-12-mm-glasstarke': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Griff_102_poliert.png?v=1773321911',
+    'dusch-tuerknopf-4106': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/4106.3.jpg?v=1776149300',
+    'dusch-tuerknopf-107': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/107.13.jpg?v=1776148965',
+    'dusch-tuerknopf-v2a-101': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/101.1.jpg?v=1776148443',
+    'knopfgriff-rund-40mm-beidseitig-glasdusche': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/8236ZNPVD22.jpg?v=1775900566',
+    'duschgriff-stangengriff': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Griffstange_Crl_1.png?v=1767360153',
+    'edelstahl-griffstange_19mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/53-schwarz_2.jpg?v=1772698908',
 
     // Griffmuscheln
     'griffmuschel-aus-edelstahl-fur-glasturen-o-60-mm-38-mm-mit-bohrung-verschraubt': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Griffmuschel_rund-2_3.jpg',

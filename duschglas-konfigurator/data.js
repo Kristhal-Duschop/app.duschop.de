@@ -18,14 +18,14 @@
     },
     {
         id: 'antikorrosionsglas',
-        title: 'SGG Timeless Planiclear \u2013 Antikorrosions-Duschglas ESG',
-        handle: 'anti-korrosionsglas-sgg-timeless-planiclear-korrosionsbestandiges-esg-fur-duschtrennwande',
+        title: 'Antikorrosionsglas mit Nano-Versiegelung und Lotus-Effekt',
+        handle: 'anti-korrosionsglas-mit-nano-veredelung',
         type: 'glas',
         glasoptik: 'klar',
         qualitaet: 'antikorrosion',
-        glasdicken: ['8', '10'],
+        glasdicken: ['8'],
         price: '279,00',
-        desc: 'Korrosionsbest\u00e4ndiges ESG von Saint-Gobain. Widersteht Glaskorrosion (Blindwerden) dauerhaft. Breite 200\u20131200 mm, 8 oder 10 mm.',
+        desc: 'Antikorrosions-ESG mit werkseitiger Nano-Versiegelung, Wasser perlt ab. 10 Jahre Garantie. Breite 200 bis 1400 mm, H\u00f6he 2000/2100 mm, 8 mm.',
         isMain: true,
         highlight: true
     },
@@ -43,27 +43,15 @@
         highlight: true
     },
     {
-        id: 'motivglas-paimu',
-        title: 'ESG Motivglas Serie Paimu \u2013 Lasertechnologie',
-        handle: 'esg-sicherheitsglas-fur-duschen-mit-motiv-oder-bild-mittels-lasertechnologie-uber-40-motive-zur-auswahl-kopie',
-        type: 'glas',
-        glasoptik: 'motiv',
-        qualitaet: 'serie-paimu',
-        glasdicken: ['8'],
-        price: '699,00',
-        desc: 'Duschglas mit individuellem Motiv per Lasertechnologie. Serie Paimu: Wasser- und Naturmotive. 8 mm ESG, ab 500 mm Breite.',
-        isMain: true
-    },
-    {
-        id: 'motivglas-makai',
-        title: 'ESG Motivglas Serie Makai \u2013 Lasertechnologie',
+        id: 'motivglas',
+        title: 'Designduschglas mit Lasergravur, \u00fcber 40 Motive',
         handle: 'duschglas_mit_motiv',
         type: 'glas',
         glasoptik: 'motiv',
-        qualitaet: 'serie-makai',
+        qualitaet: 'motiv',
         glasdicken: ['8'],
         price: '699,00',
-        desc: 'Duschglas mit individuellem Motiv per Lasertechnologie. Serie Makai: Florale und abstrakte Designs. 8 mm ESG, ab 500 mm Breite.',
+        desc: 'Duschglas mit individuellem Motiv per Lasertechnologie, \u00fcber 40 Motive von floral bis abstrakt. 8 mm ESG, ab 500 mm Breite.',
         isMain: true
     },
     {
@@ -88,28 +76,16 @@
         desc: 'Nahezu farbneutrales Glas ohne den typischen Gr\u00fcnstich. Maximale Klarheit und Brillanz f\u00fcr anspruchsvolle Badgestaltung.',
         isMain: false
     },
-    {
-        id: 'antikorrosionsglas-vetroshower',
-        title: 'vetroShower Antikorrosionsglas mit Nano-Veredelung',
-        handle: 'anti-korrosionsglas-vetroshower-mit-nano-veredelung',
-        type: 'glas',
-        glasoptik: 'klar',
-        qualitaet: 'antikorrosion',
-        glasdicken: ['8'],
-        price: '279,00',
-        desc: 'Anti-Korrosions-ESG mit werksseitiger Nano-Veredelung, 10 Jahre Garantie. Breite 200\u20131400 mm, H\u00f6he 2000/2100 mm. 8 mm.',
-        isMain: true
-    }];
+];
 
     const productImages = {
     'sicherheitsglas-esg-fur-duschtrennwande': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/ESG.png?v=1768485378',
-    'anti-korrosionsglas-sgg-timeless-planiclear-korrosionsbestandiges-esg-fur-duschtrennwande': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Timeless_1_1978fdaa-4e7d-42a4-8c29-ecdebfd656b8.png?v=1767099231',
+    'anti-korrosionsglas-mit-nano-veredelung': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/vetroShower.png?v=1777109177',
     'kristhal-satinato-einscheiben-sicherheitsglas-esg-fur-duschtrennwande': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Satinato_Milchglas_2.png?v=1746638054',
     'duschglas_mit_motiv': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Lasermotiv_b2761e21-0f3d-4723-8186-3145bdecae94.jpg?v=1769002885',
-    'esg-sicherheitsglas-fur-duschen-mit-motiv-oder-bild-mittels-lasertechnologie-uber-40-motive-zur-auswahl-kopie': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Lasermotiv_27.jpg?v=1768647224',
     'easyclean-glasbeschichtung': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Easy-Clean_2_8c1f39d4-2998-4cd0-b66d-1c6b5b148088.png?v=1773563753',
     'mehrpreis-fur-weissglas-nahezu-farbneutrales-glas-ohne-grunstich': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Weissglas_2.png?v=1767100026',
-    'restposten-kristhal-duschglas-klarglas-durchsichtig-fur-duschtrennwande': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/esg-glas-8mm_2a6c2.png'
+    'restposten-kristhal-duschglas-klarglas-durchsichtig-fur-duschtrennwande': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/esg-glas-8mm_2a6c2aaf-d737-4940-b54d-3319650d2d00.jpg?v=1767100408'
 };
 
     const qualitaetDefs = {
@@ -119,19 +95,14 @@
         info: 'Standard-ESG bietet 5-fache Biegefestigkeit gegen\u00fcber normalem Glas und sicheres Bruchverhalten. F\u00fcr die allermeisten Anwendungen die richtige Wahl.'
     },
     'antikorrosion': {
-        name: 'Antikorrosionsglas (SGG Timeless)',
-        desc: 'Premium-Glas von Saint-Gobain mit dauerhaftem Korrosionsschutz. Verhindert das gef\u00fcrchtete \u201eBlindwerden\u201c der Glasoberfl\u00e4che.',
-        info: 'Glaskorrosion entsteht durch Kalk und Feuchtigkeit und l\u00e4sst Glas mit der Zeit milchig-stumpf wirken. SGG Timeless Planiclear ist dagegen dauerhaft gesch\u00fctzt \u2013 die Premium-Wahl f\u00fcr langj\u00e4hrige Klarheit.'
+        name: 'Antikorrosionsglas mit Nano-Versiegelung',
+        desc: 'Premium-Glas mit dauerhaftem Korrosionsschutz und zus\u00e4tzlicher Nano-Versiegelung. Verhindert das gef\u00fcrchtete \u201eBlindwerden\u201c der Glasoberfl\u00e4che.',
+        info: 'Glaskorrosion entsteht durch Kalk und Feuchtigkeit und l\u00e4sst Glas mit der Zeit milchig-stumpf wirken. Dieses Glas ist dagegen dauerhaft gesch\u00fctzt, dazu perlt Wasser auf der nanoversiegelten Seite ab. 10 Jahre Garantie.'
     },
-    'serie-paimu': {
-        name: 'Serie Paimu',
-        desc: 'Wasser- und Naturmotive \u2013 dynamische Designs inspiriert von Wellen, Str\u00f6mungen und organischen Formen.',
-        info: 'Die Serie Paimu umfasst \u00fcber 40 verschiedene Motive, die per Lasertechnologie dauerhaft in das Glas eingearbeitet werden. Das Motiv ist beidseitig sichtbar.'
-    },
-    'serie-makai': {
-        name: 'Serie Makai',
-        desc: 'Florale und abstrakte Designs \u2013 elegante Muster von Bl\u00e4ttern, Blumen bis zu modernen Grafiken.',
-        info: 'Die Serie Makai bietet \u00fcber 40 Designmotive f\u00fcr ein individuelles Badezimmer. Jedes Motiv wird per Lasertechnologie dauerhaft in das ESG-Glas eingearbeitet.'
+    'motiv': {
+        name: 'Designglas mit Lasergravur',
+        desc: '\u00dcber 40 Motive, von floral \u00fcber abstrakt bis zu Wasser- und Naturmustern, dauerhaft ins Glas eingearbeitet.',
+        info: 'Das Motiv wird per Lasertechnologie dauerhaft in das ESG-Glas eingearbeitet und ist beidseitig sichtbar. Die Motivwahl treffen Sie nach der Bestellung gemeinsam mit uns.'
     }
 };
 
