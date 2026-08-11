@@ -140,7 +140,7 @@
         type: 'klemmprofil',
         material: 'alu',
         einbau: 'auf-fliese',
-        colors: ['chrom-poliert', 'schwarz-matt'],
+        colors: ['chrom-poliert','schwarz-matt','edelstahl-gebuerstet'],
         abschluss: ['klemmung'],
         price: '125,90',
         priceMax: '159,50',

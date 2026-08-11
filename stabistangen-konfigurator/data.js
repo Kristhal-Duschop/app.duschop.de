@@ -85,7 +85,7 @@
         type: 'set',
         montage: ['wand-glas'],
         form: 'rund-19',
-        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'schwarz-matt'],
+        colors: ['edelstahl-poliert','edelstahl-gebuerstet','schwarz-matt'],
         price: '59,90',
         desc: 'Massives Edelstahl-Set, 90\u00b0, inkl. Wandhalter und Glashalter.',
         isSet: true
@@ -201,7 +201,7 @@
         type: 'set',
         montage: ['glas-decke'],
         form: 'rund-19',
-        colors: ['edelstahl-poliert', 'edelstahl-gebuerstet'],
+        colors: ['edelstahl-gebuerstet','chrom-poliert','schwarz-matt','messing-matt'],
         price: '40,90',
         desc: 'Edelstahl-Set rund \u00d8 19 mm, 250 mm L\u00e4nge, poliert oder geb\u00fcrstet.',
         isSet: true
@@ -213,7 +213,7 @@
         type: 'set',
         montage: ['glas-decke'],
         form: 'eckig-20',
-        colors: ['edelstahl-poliert', 'edelstahl-gebuerstet'],
+        colors: ['edelstahl-poliert','edelstahl-gebuerstet','schwarz-matt'],
         price: '56,20',
         desc: 'Edelstahl-Set eckig 20\u00d720 mm, 250 mm L\u00e4nge, poliert oder geb\u00fcrstet.',
         isSet: true
