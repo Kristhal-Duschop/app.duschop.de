@@ -5,8 +5,8 @@
     const products = [
     // === DUSCHKOERBE & ABLAGEN ===
     // -- Wandmontage (Bohren) --
-    { id: 'eck-schwammkorb', title: 'Eck-Schwammkorb verchromt 250x172x61 mm VIGOUR one', handle: 'eck-schwammkorb-verchromt-250x172x61-mm-vigour-one-wandmontage', kategorie: 'koerbe', montage: ['wand'], price: '33,90', desc: 'Verchromter Eck-Schwammkorb f\u00fcr die Wandmontage. Kompaktes Eckformat, ideal f\u00fcr kleine Duschen.', isMain: false },
-    { id: 'schwammkorb-recht', title: 'Schwammkorb verchromt rechteckig 205x104x60 mm VIGOUR one', handle: 'schwammkorb-verchromt-rechteckig-205x104x60-mm-vigour-one-wandmontage', kategorie: 'koerbe', montage: ['wand'], price: '31,90', desc: 'Rechteckiger Schwammkorb f\u00fcr die Wandmontage. Verchromt, robust und pflegeleicht.', isMain: false },
+
+
     { id: 'seifenkorb-trinnity', title: 'Seifenkorb Chrom geschlossen 130x100 mm \u2013 TRINNITY', handle: 'seifenkorb-chrom-geschlossen-130x100-mm-trinnity', kategorie: 'koerbe', montage: ['wand'], price: '18,90', desc: 'Geschlossener Seifenkorb aus verchromtem Messing. Kompakt und ideal f\u00fcr Seifenst\u00fccke.', isMain: false },
     // -- Brausestange --
     { id: 'schwammkorb-brause', title: 'Schwammkorb f\u00fcr Brausestangen \u2013 Praktisch & hochwertig', handle: 'schwammkorb-fur-brausestangen-praktisch-hochwertig', kategorie: 'koerbe', montage: ['brausestange'], price: '89,90', desc: 'Hochwertiger Schwammkorb zur Montage an der Brausestange. Kein Bohren n\u00f6tig.', isMain: true },
@@ -33,7 +33,7 @@
     { id: 'duschregal-einfliesen', title: 'Duschregal zum Einfliesen 100x250 mm', handle: 'duschregal-zum-einfliesen-100-250-mm', kategorie: 'koerbe', montage: ['einfliesen'], price: '65,95', priceMax: '69,95', desc: 'Wandnische f\u00fcr Shampoo und Duschgel. Wird beim Fliesen eingebaut \u2013 nahtloses Design.', isMain: true },
     { id: 'duschregal-einfliesen-gelocht', title: 'Duschregal zum Einfliesen gelocht 100x250 mm', handle: 'duschregal-zum-einfliesen-gelocht-100-250-mm', kategorie: 'koerbe', montage: ['einfliesen'], price: '65,90', priceMax: '69,95', desc: 'Gelochtes Duschregal zum Einfliesen. Gute Wasserabf\u00fchrung durch Lochung.', isMain: false },
     { id: 'duschregal-alu-250', title: 'Duschregal Aluminium Schwarz 250x250 mm', handle: 'duschregal-aluminium-off-schwarz', kategorie: 'koerbe', montage: ['wand'], price: '89,95', desc: 'Stilvolles Duschregal aus Aluminium in Schwarz. 250x250 mm, Wandmontage.', isMain: false },
-    { id: 'duschregal-alu-klein', title: 'Duschregal Aluminium Schwarz \u2013 modernes Design', handle: 'duschregal-aluminium-schwarz', kategorie: 'koerbe', montage: ['wand'], price: '79,90', desc: 'Modernes Duschregal aus eloxiertem Aluminium in Schwarz. Wandmontage.', isMain: false },
+    { id: 'duschregal-alu-klein', title: 'Duschregal Aluminium Schwarz \u2013 modernes Design', handle: 'smedbo-sideline-duschregal-hide-db5020', kategorie: 'koerbe', montage: ['wand'], price: '79,90', desc: 'Modernes Duschregal aus eloxiertem Aluminium in Schwarz. Wandmontage.', isMain: false },
 
     // === HANDTUCHHALTER ===
     { id: 'smedbo-handtuch-2', title: 'Smedbo Handtuchhalter 2-reihig f\u00fcr Glasduschwand', handle: 'smedbo-handtuchhalter-2-reihig-fur-glasduschwand-zur-befestigung-an-glaskante-art-nr-dk3102', kategorie: 'halter', montage: ['glas'], price: '168,90', desc: 'Doppelreihiger Handtuchhalter zur Befestigung an der Glaskante. Kein Bohren n\u00f6tig.', isMain: true, highlight: true },
@@ -41,7 +41,7 @@
     { id: 'giese-universal', title: 'Giese Manufaktur Handtuchhalter \u201eUniversal\u201c', handle: 'giese-universal-31050', kategorie: 'halter', montage: ['wand', 'glas'], price: '129,90', priceMax: '135,90', desc: 'Zeitloser Handtuchhalter von Giese. F\u00fcr Wandmontage oder Glasmontage geeignet.', isMain: true },
     { id: 'giese-server', title: 'Giese Server Badetuchhalter \u2013 ohne Bohren', handle: 'giese-server-badetuchhalter-stilvoller-komfort-ohne-bohren', kategorie: 'halter', montage: ['glas', 'kleben'], price: '214,90', priceMax: '239,90', desc: 'Stilvoller Badetuchhalter f\u00fcr Glasduschen. Montage ohne Bohren, Premium-Qualit\u00e4t.', isMain: true, highlight: true },
     { id: 'giese-badmoebel', title: 'Giese Handtuchhalter f\u00fcr Waschtisch- oder Schrankmontage', handle: 'giese-badmoebel-91756', kategorie: 'halter', montage: ['moebel'], price: '109,00', priceMax: '79,90', desc: 'Handtuchhalter zur Montage am Waschtisch oder Schrank. Ohne Wandbohren.', isMain: false },
-    { id: 'handtuchring', title: 'Handtuchring HOME \u2013 geb\u00fcrstetes Messing', handle: 'handtuchring', kategorie: 'halter', montage: ['wand'], price: '58,90', desc: 'Eleganter Handtuchring aus geb\u00fcrstetem Messing. Wandmontage mit verdeckter Befestigung.', isMain: false },
+
     { id: 'vigour-haken-one', title: 'Vigour Handtuchhaken one V1 verchromt \u2013 50 mm', handle: 'handtuchhaken-verchromt-50-mm-vigour-one-wandmontage-verdeckte-befestigung', kategorie: 'halter', montage: ['wand'], price: '6,90', desc: 'Verchromter Handtuchhaken mit verdeckter Wandmontage. Kompakt und zeitlos.', isMain: false },
     { id: 'vigour-haken-magnet', title: 'Vigour Handtuchhaken V3 verchromt \u2013 Magnetbefestigung', handle: 'handtuchhaken-indiv-3-0-einteilig-chrom-magnet-vigour', kategorie: 'halter', montage: ['magnet'], price: '59,90', desc: 'Handtuchhaken mit Magnetbefestigung f\u00fcr Heizk\u00f6rper. Einfach aufsetzen, kein Bohren.', isMain: false },
     { id: 'vigour-haken-clivia', title: 'Vigour Handtuchhaken clivia V2 verchromt \u2013 \u00d8 30 mm', handle: 'handtuchhaken-clivia-30-mm-verchromt-vigour', kategorie: 'halter', montage: ['wand'], price: '8,90', desc: 'Runder Handtuchhaken \u00d8 30 mm. Verchromt, verdeckte Wandmontage.', isMain: false },
@@ -98,12 +98,12 @@
     { id: 'wandhalter-zweiteilig', title: 'Zweiteiliger Wandhalter Edelstahl \u2013 Duschvorhangstangen', handle: 'zweiteiliger-wandhalter-aus-edelstahl-duschvorhangstangen-zubehor-fur-nischenmontage', kategorie: 'vorhang', montage: ['vorhangstange'], price: '12,90', desc: 'Zweiteiliger Wandhalter f\u00fcr Nischenmontage. Edelstahl.', isMain: false },
 
     // === DUSCHWANNEN & ABLAEUFE ===
-    { id: 'wanne-120-90', title: 'VIGOUR Acryl-Duschwanne \u201eone\u201c 120x90x2,5 cm', handle: 'acryl-duschwanne-120-90', kategorie: 'wannen', montage: ['freistehend'], price: '339,00', desc: 'Gro\u00dfz\u00fcgige Acryl-Duschwanne 120x90 cm. Nur 2,5 cm flach, Markenqualit\u00e4t von VIGOUR.', isMain: true, highlight: true },
-    { id: 'wanne-140-90', title: 'VIGOUR Acryl-Duschwanne \u201eone\u201c 140x90x3,5 cm', handle: 'rechteckige-acryl-duschwanne-140-90', kategorie: 'wannen', montage: ['freistehend'], price: '399,00', desc: 'XL-Duschwanne 140x90 cm. Premium Acryl, 3,5 cm flach, VIGOUR-Qualit\u00e4t.', isMain: true },
-    { id: 'wanne-100-100', title: 'VIGOUR Acryl-Duschwanne \u201eone\u201c 100x100x2,5 cm', handle: 'acryl-duschwanne-100-100-cm-flach', kategorie: 'wannen', montage: ['freistehend'], price: '289,00', desc: 'Quadratische Duschwanne 100x100 cm. Flach und gro\u00dfz\u00fcgig.', isMain: true },
-    { id: 'wanne-90-90', title: 'VIGOUR Acryl-Duschwanne \u201eone\u201c 90x90x2,5 cm', handle: 'acryl-duschwanne-90-90-2-5', kategorie: 'wannen', montage: ['freistehend'], price: '259,00', desc: 'Kompakte Duschwanne 90x90 cm. 2,5 cm flach, Markenqualit\u00e4t.', isMain: false },
-    { id: 'ablauf-flach', title: 'Flacher Duschwannenablauf DN40/DN50', handle: 'flacher-duschwannenablauf', kategorie: 'wannen', montage: ['freistehend'], price: '39,90', desc: 'Flache Ablaufgarnitur f\u00fcr 90 mm Duschwannen. DN40/DN50 Anschluss.', isMain: false },
-    { id: 'ablauf-abdeckung', title: 'Abdeckhaube f\u00fcr Duschwannenablauf 90 mm \u2013 \u00d8 115 mm verchromt', handle: 'abdeckhaube-fur-duschwannenablauf-90-mm-o-115-mm-verchromt', kategorie: 'wannen', montage: ['freistehend'], price: '27,90', desc: 'Verchromte Abdeckhaube f\u00fcr den Duschwannenablauf. \u00d8 115 mm, optischer Upgrade.', isMain: false },
+
+
+
+
+
+
 
     // === BAD- & WC-ZUBEHOER ===
     { id: 'seifenspender-satin', title: 'SATIN SQUARE Seifenspender \u2013 modern und leicht zu reinigen', handle: 'seifenspender-satin-square', kategorie: 'badzubehoer', montage: ['freistehend'], price: '11,95', desc: 'Formsch\u00f6ner Seifenspender im SATIN SQUARE Design. Leicht zu reinigen.', isMain: false },
@@ -121,7 +121,7 @@
     { id: 'design-haken-45x45', title: 'Design Haken 45x45; Matt Schwarz oder Edelstahl verchromt', handle: 'design-haken-45x45', kategorie: 'haken', montage: ['kleben'], price: '11,95', desc: 'Haken für Bad und Dusche.', isMain: false },
     { id: 'design-haken-mini-30x30', title: 'Design Haken Mini 30x30, 45x45 mm; Matt Schwarz, Edelstahl verchromt', handle: 'design-haken-mini-30x30', kategorie: 'haken', montage: ['kleben'], price: '5,95', desc: 'Haken für Bad und Dusche.', isMain: false },
     { id: 'design-haken-mini-30x30-selbstklebend-matt-schwarz-oder-edelstahl-verchromt-art-nr-1082', title: 'Design-Wandhaken Hexagon selbstklebend (45x52 mm)  Edelstahl  Schwarz Matt oder Chrom', handle: 'design-haken-mini-30x30-selbstklebend-matt-schwarz-oder-edelstahl-verchromt-art-nr-1082', kategorie: 'haken', montage: ['kleben'], price: '10,95', desc: 'Selbstklebender Haken, kein Bohren nötig.', isMain: false },
-    { id: 'doppel-halter-fur-glasdusche-zum-einhangen-an-glaskante', title: 'Doppel-Halter für Glasdusche zum Einhängen an Glaskante', handle: 'doppel-halter-fur-glasdusche-zum-einhangen-an-glaskante', kategorie: 'haken', montage: ['glas'], price: '19,90', desc: 'Haken zum Einhängen an der Glasduschwand.', isMain: false },
+
     { id: 'giese-bigset-giese-30022', title: 'Giese Bigset Eckmodell Duschkorb 2-fach, werkzeuglos abnehmbar, Massivmessing verchromt, Art.Nr. 30022', handle: 'giese-bigset-giese-30022', kategorie: 'koerbe', montage: ['wand'], price: '148,00', desc: 'Eck-Duschkorb für die Wandmontage, werkzeuglos abnehmbar.', isMain: true },
     { id: 'giese-highbord-giese-30456', title: 'Giese Bodyguard Highbord Duschkorb 1-fach mit Rasierer-Halter, HPL Boden schwarz, für 6 oder 8 mm Glas, Art.Nr. 30456-14', handle: 'giese-highbord-giese-30456', kategorie: 'koerbe', montage: ['glas'], price: '107,00', desc: 'Duschkorb zum Einhängen an der Glasduschwand Inkl. Rasierer-Halter.', isMain: false },
     { id: 'giese-highbord-giese-30455', title: 'Giese Bodyguard Highbord Duschkorb 1-fach mit Rasierer-Halter, HPL Boden weiss, für 6 oder 8 mm Glas, Art.Nr. 30455', handle: 'giese-highbord-giese-30455', kategorie: 'koerbe', montage: ['glas'], price: '101,00', desc: 'Duschkorb zum Einhängen an der Glasduschwand Inkl. Rasierer-Halter.', isMain: false },
@@ -239,7 +239,7 @@
     { id: 'brausegarnitur-mit-handbrause-3-strahlarten-chrom-900-mm-wandstange', title: 'VIGOUR Brausegarnitur Individual 1.0 | 3 Strahlarten | 90 cm Wandstange | Chrom mit Antikalk', handle: 'brausegarnitur-mit-handbrause-3-strahlarten-chrom-900-mm-wandstange', kategorie: 'brausen', montage: ['wand'], price: '64,90', desc: 'Brausegarnitur mit 90 cm Wandstange, 3 Strahlarten, Chrom.', isMain: true },
     { id: 'brausegarnitur-mit-handbrause-3-strahlarten-chrom-600-mm-wandstange', title: 'VIGOUR Brausegarnitur V1 | 60 cm Wandstange | 3 Strahlarten | Antikalk | Chrom', handle: 'brausegarnitur-mit-handbrause-3-strahlarten-chrom-600-mm-wandstange', kategorie: 'brausen', montage: ['wand'], price: '58,90', desc: 'Brausegarnitur mit 60 cm Wandstange, 3 Strahlarten, Chrom.', isMain: false },
     { id: 'handbrause-mit-3-strahlarten-verchromt-130-mm-softedge', title: 'VIGOUR Handbrause V3 softedge | 3 Strahlarten | 130 mm | Antikalk | Chrom', handle: 'handbrause-mit-3-strahlarten-verchromt-130-mm-softedge', kategorie: 'brausen', montage: ['wand'], price: '93,90', desc: 'Verchromte Handbrause mit Antikalk-System.', isMain: false },
-    { id: 'handbrause-mit-regenstrahl-verchromt-120-mm-rund-1-strahlig', title: 'VIGOUR Handbrause individual V2 | 1-fach Regenstrahl | Ø 120 mm | Antikalk | Chrom', handle: 'handbrause-mit-regenstrahl-verchromt-120-mm-rund-1-strahlig', kategorie: 'brausen', montage: ['wand'], price: '39,90', desc: 'Verchromte Handbrause mit Antikalk-System.', isMain: false },
+
     { id: 'handbrause-mit-3-strahlarten-rund-120-mm-chrom', title: 'Vigour Handbrause V3 individual 2.2 verchromt  3 Strahlarten, rund, komplett verchromt  Art.Nr. V22HB3RCH', handle: 'handbrause-mit-3-strahlarten-rund-120-mm-chrom', kategorie: 'brausen', montage: ['wand'], price: '44,90', desc: 'Verchromte Handbrause mit Antikalk-System.', isMain: false },
     { id: 'handbrause-mit-3-funktionen-schwarz-matt-130-mm', title: 'Vigour Handbrause V3 schwarz matt  3 Strahlarten, Ø 130 mm, rund, Antikalk  Art.Nr. V32HB3RSM', handle: 'handbrause-mit-3-funktionen-schwarz-matt-130-mm', kategorie: 'brausen', montage: ['wand'], price: '96,90', desc: 'Handbrause in Schwarz matt mit Antikalk-System.', isMain: false },
     { id: 'handbrause-mit-3-strahlarten-schwarz-matt-130-mm-softedge', title: 'Vigour Handbrause V3 softedge schwarz matt  3 Strahlarten, 130 mm, Antikalk  Art.Nr. V32HB3ESM', handle: 'handbrause-mit-3-strahlarten-schwarz-matt-130-mm-softedge', kategorie: 'brausen', montage: ['wand'], price: '97,80', desc: 'Handbrause in Schwarz matt mit Antikalk-System.', isMain: false },
@@ -268,8 +268,6 @@
     ];
 
     const productImages = {
-    'eck-schwammkorb-verchromt-250x172x61-mm-vigour-one-wandmontage': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/ONESWK_2.jpg?v=1758363288',
-    'schwammkorb-verchromt-rechteckig-205x104x60-mm-vigour-one-wandmontage': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/ONSWK_2.jpg?v=1758362848',
     'seifenkorb-chrom-geschlossen-130x100-mm-trinnity': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Seifenkorbchromgeschlossen130x100mmTRINNITY_3.jpg?v=1758362439',
     'schwammkorb-fur-brausestangen-praktisch-hochwertig': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/9014015010_5.jpg?v=1758270028',
     'brausestangenkorb-universell-und-hochwertig': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/9014020010_7.jpg?v=1758269367',
@@ -296,13 +294,12 @@
     'duschregal-zum-einfliesen-100-250-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DB3062.11.jpg?v=1753952833',
     'duschregal-zum-einfliesen-gelocht-100-250-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DK3061.jpg?v=1766956749',
     'duschregal-aluminium-off-schwarz': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DB5021.2.jpg?v=1753888957',
-    'duschregal-aluminium-schwarz': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DB5020.2.jpg?v=1753887750',
+    'smedbo-sideline-duschregal-hide-db5020': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/DB5020.2.jpg?v=1753887750',
     'smedbo-handtuchhalter-2-reihig-fur-glasduschwand-zur-befestigung-an-glaskante-art-nr-dk3102': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Handtuchhalter_2-reihig_3.jpg?v=1763036552',
     'smedbo-handtuchhalter-1-reihig-fur-glasduschwand-zur-befestigung-an-glaskante-art-nr-dk3101': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Handtuchhalter_1-reihig_4.jpg?v=1763037637',
     'giese-universal-31050': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/31050.png?v=1770390207',
     'giese-server-badetuchhalter-stilvoller-komfort-ohne-bohren': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/11858_6.png?v=1770315394',
     'giese-badmoebel-91756': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/91754_1.png?v=1770394786',
-    'handtuchring': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_bafe677c-44b6-4bdc-825d-9877c15aee71.jpg?v=1751029',
     'handtuchhaken-verchromt-50-mm-vigour-one-wandmontage-verdeckte-befestigung': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/ONHA_9.jpg?v=1758364352',
     'handtuchhaken-indiv-3-0-einteilig-chrom-magnet-vigour': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/freepik__bitte-erstelle-von-dem-produkt-ein-professionelles__9709',
     'handtuchhaken-clivia-30-mm-verchromt-vigour': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/freepik__bitte-erstelle-von-dem-produkt-ein-professionnelle__7463',
@@ -352,12 +349,6 @@
     'deckenhulse-aus-edelstahl-befestigung-fur-deckenstutzen-von-duschvorhangstangen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BB-DL-01-deckenlager.jpg?v=1748615056',
     'duschvorhanghaken-aus-edelstahl-zubehor-fur-duschstangen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BB-DH-01-edelstahl-haken_1.jpg?v=1764785170',
     'zweiteiliger-wandhalter-aus-edelstahl-duschvorhangstangen-zubehor-fur-nischenmontage': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BB-WLZT-01-zweiteiliges-wandlager_1.jpg?v=1764785133',
-    'acryl-duschwanne-120-90': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschwanne_Vigour_120x90x3.000.jpg?v=1753547298',
-    'rechteckige-acryl-duschwanne-140-90': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschwanne_Vigour_140x90x3.00.jpg?v=1753546389',
-    'acryl-duschwanne-100-100-cm-flach': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschwanne_Vigour_90x90x2_5.0_6ea17da0-ef87-4e0a-9495-5a4060eea96',
-    'acryl-duschwanne-90-90-2-5': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschwanne_Vigour_90x90x2_5.0.jpg?v=1753530451',
-    'flacher-duschwannenablauf': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/AblaufFunktionseinheitTempoplex90mm.1.jpg?v=1753548218',
-    'abdeckhaube-fur-duschwannenablauf-90-mm-o-115-mm-verchromt': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Ablaufabdeckung_10.jpg?v=1764233172',
     'seifenspender-satin-square': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Seifenspender_BB_11_452acafb-fef0-48e4-8149-28357f840abf.jpg',
     'seifenspender-wandmodell-gold-geburstet-porzellan-200-m': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_550f2a36-de51-48ea-a8f0-48f3e293b88f.jpg?v=1751007',
     'seifenspender-wandmodell-geburstetes-messing-fur-stilvolle-bader': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_1809848a-e5d0-458c-a33b-37e8826aa8cd.jpg?v=1750969',
@@ -371,7 +362,6 @@
     'design-haken-45x45': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/1092_c72c24a0-394c-4773-a8ee-20b129eb28e7.jpg',
     'design-haken-mini-30x30': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Minihaken_7.jpg?v=1765385092',
     'design-haken-mini-30x30-selbstklebend-matt-schwarz-oder-edelstahl-verchromt-art-nr-1082': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Hexagon_4.jpg?v=1765386882',
-    'doppel-halter-fur-glasdusche-zum-einhangen-an-glaskante': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/4590.jpg?v=1742635257',
     'giese-bigset-giese-30022': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/30022.png?v=1777393067',
     'giese-highbord-giese-30456': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/30456-14.png?v=1777389949',
     'giese-highbord-giese-30455': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/30455.png?v=1777389953',
@@ -493,7 +483,6 @@
     'brausegarnitur-mit-handbrause-3-strahlarten-chrom-900-mm-wandstange': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V1BG905.png?v=1773390623',
     'brausegarnitur-mit-handbrause-3-strahlarten-chrom-600-mm-wandstange': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/VIGOUR_Brausegarnitur_V1_12dfdb5b-cac3-49d6-8',
     'handbrause-mit-3-strahlarten-verchromt-130-mm-softedge': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/VIGOUR_Handbrause_V3.png?v=1773389248',
-    'handbrause-mit-regenstrahl-verchromt-120-mm-rund-1-strahlig': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V22HB1R.png?v=1773389466',
     'handbrause-mit-3-strahlarten-rund-120-mm-chrom': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V22HB3RCH.png?v=1773389113',
     'handbrause-mit-3-funktionen-schwarz-matt-130-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V32HB3RSM.png?v=1773389545',
     'handbrause-mit-3-strahlarten-schwarz-matt-130-mm-softedge': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/V32HB3ESM.png?v=1773389630',

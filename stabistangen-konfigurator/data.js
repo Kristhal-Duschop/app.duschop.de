@@ -342,19 +342,7 @@
     },
 
     // T-Verbinder
-    {
-        id: 't-verbinder-12',
-        title: 'T-Verbinder \u00d8 12 mm',
-        handle: 't-verbinder_12mm',
-        type: 't-verbinder',
-        montage: ['glas-glas'],
-        form: 'rund-12',
-        colors: ['bronze-matt', 'schwarz-matt', 'edelstahl-gebuerstet', 'chrom-poliert', 'messing-poliert', 'messing-matt', 'graphit-poliert', 'graphit-matt', 'weiss-matt', 'kupfer-poliert', 'kupfer-matt'],
-        price: '24,90',
-        priceMax: '34,90',
-        desc: 'T-Verbinder f\u00fcr 12-mm-Stangen, ideal f\u00fcr Glas-Glas-Verbindungen.',
-        isSet: false
-    },
+
     {
         id: 't-verbinder-19',
         title: 'T-Verbinder kurz \u00d8 19 mm',
@@ -387,7 +375,6 @@
     'drehbarer-glashalter-fur-stabilisierungsstange-o-19-mm-einseitig-geschlossen-endstuck': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/S4V_Chromglanz.jpg?v=1773394603',
     'senkrechter-glashalter-stabilisierungsstange-19-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/S9_Chormglanz.jpg?v=1773394629',
     'glashalter_offen_19-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Glashalter_Loch_gebuerstet.jpg?v=1772802441',
-    't-verbinder_12mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/s1250-bbrz-02.jpg?v=1768843581',
     't-verbinder-kurz-fur-stabilisierungsstange-19-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/freepik__das-bild-img1-zeigt-einen-thalter-einer-stabistang__52097.jpg?v=1757595331',
     'stabilisierungsstangen-set': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Stabi_3.2.jpg?v=1751384854',
     'glas-wand-45-edelstahl-stabistangen-set-19-mm-rohr-art-nr-6017-6019': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/6019_6017_2.png?v=1773307663',
