@@ -35,7 +35,9 @@
         new DuschopWizard({
             mount: '#duschop-app',
             toolSlug: 'duschzubehoer-finder',
-            fetchProducts: function () { return DuschopShopifyClient.fetchCollectionMerged('dusche_accessoire', D.products); },
+            // Zwei Collections, weil die Kategorie "Duschvorhaenge & Stangen" nicht in
+            // dusche_accessoire liegt. Ohne die zweite lief dieser Schritt ins Leere.
+            fetchProducts: function () { return DuschopShopifyClient.fetchCollectionMerged(['dusche_accessoire', 'duschvorhang-stangen'], D.products); },
 
             hero: {
                 badge: 'In bis zu 2 Schritten zum passenden Zubehör',
@@ -56,7 +58,7 @@
                         { value: 'brausen',    label: 'Brausen & Armaturen',   desc: 'Kopfbrausen, Handbrausen, Brausestangen, Thermostate und Brausesets.',             icon: '🚿' },
                         { value: 'hocker',     label: 'Duschhocker',            desc: 'Komfortable Hocker aus Aluminium oder Plexiglas, rutschfest und stilvoll.',     icon: '🪑' },
                         { value: 'vorhang',    label: 'Duschvorhänge & Stangen', desc: 'Vorhangstangen aus Edelstahl/Alu, Textil-Duschvorhänge und Zubehör.',         icon: '🎭' },
-                        { value: 'wannen',     label: 'Duschwannen & Abläufe', desc: 'Acryl-Duschwannen in verschiedenen Größen und flache Abläufe.',                  icon: '🛁' },
+                        { value: 'wannen',     label: 'Duschrinnen & Abläufe', desc: 'Duschrinnen, Roste, Abläufe und Ablaufgarnituren, befliesbar oder sichtbar.',    icon: '🛁' },
                         { value: 'badzubehoer', label: 'Bad- & WC-Zubehör',     desc: 'Seifenspender, Kosmetikspiegel, Zahnputzbecher, WC-Bürsten, Duschabzieher.', icon: '🪥' }
                     ]
                 },

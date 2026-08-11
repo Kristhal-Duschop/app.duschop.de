@@ -92,6 +92,31 @@
     var DuschopShopifyClient = {
         normalizeText: normalizeText,
 
+        // Mehrere Collections nacheinander holen und zu einer Liste zusammenlegen,
+        // Dubletten ueber den handle raus. Gebraucht, weil ein Tool nicht immer
+        // genau einer Shop-Collection entspricht: Der Duschzubehoer-Finder deckt
+        // die Kategorie "Duschvorhaenge & Stangen" ab, deren Produkte aber in einer
+        // eigenen Collection liegen. Vorher lief dieser Schritt ins Leere.
+        fetchCollections: function (handles) {
+            var self = this;
+            var liste = [].concat(handles);
+            var alle = [];
+            var gesehen = {};
+
+            function naechste(i) {
+                if (i >= liste.length) return Promise.resolve(alle);
+                return self.fetchCollection(liste[i]).then(function (produkte) {
+                    (produkte || []).forEach(function (p) {
+                        if (gesehen[p.handle]) return;
+                        gesehen[p.handle] = true;
+                        alle.push(p);
+                    });
+                    return naechste(i + 1);
+                });
+            }
+            return naechste(0);
+        },
+
         fetchCollection: function (handle) {
             var cacheKey = CACHE_PREFIX + handle;
             // Cache prüfen
@@ -229,7 +254,12 @@
             var byStaticHandle = {};
             (staticProducts || []).forEach(function (s) { byStaticHandle[s.handle] = s; });
 
-            return self.fetchCollection(handle).then(function (live) {
+            // handle darf ein String oder ein Array von Collection-Handles sein
+            var holen = Array.isArray(handle)
+                ? self.fetchCollections(handle)
+                : self.fetchCollection(handle);
+
+            return holen.then(function (live) {
                 if (!live || live.length === 0) {
                     return (staticProducts || []).map(function (s) {
                         var c = {}; Object.keys(s).forEach(function (k) { c[k] = s[k]; });
