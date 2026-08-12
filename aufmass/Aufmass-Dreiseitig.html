@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="/Kristhal_Logo_Symbol_trans.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Aufmaß-Datenblatt · Dreiseitig / U-Form · Kristhal Duschop</title>
 <style>
   /* ===========================================================
@@ -19,7 +17,7 @@
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{font-family:"Segoe UI",-apple-system,system-ui,sans-serif;color:var(--ink);
-    background:#EDEAE3;line-height:1.25;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    background:#EDEAE3;line-height:1.16;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   .toolbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;
     background:var(--accent);color:#fff;padding:10px 18px;font-size:14px;}
   .toolbar b{font-weight:600;}.toolbar .sp{flex:1;}
@@ -28,56 +26,56 @@
   .toolbar button:hover{background:#eaf3f5;}
   .hint-screen{font-size:12.5px;opacity:.9;}
   .sheet{width:210mm;min-height:297mm;margin:18px auto;background:#fff;
-    padding:6mm 11mm 4mm;box-shadow:0 4px 20px rgba(0,0,0,.16);position:relative;}
+    padding:5mm 11mm 3mm;box-shadow:0 4px 20px rgba(0,0,0,.16);position:relative;}
   .head{display:flex;align-items:flex-end;justify-content:space-between;
     border-bottom:2px solid var(--accent);padding-bottom:7px;}
   .brand{font-size:21px;font-weight:700;color:var(--accent);letter-spacing:.2px;}
   .brand small{display:block;font-size:9.5px;font-weight:400;color:var(--muted);letter-spacing:.3px;margin-top:2px;}
   .doctag{text-align:right;}.doctag .t1{font-size:9.5px;color:var(--muted);}
   .doctag .t2{font-size:14px;font-weight:700;color:var(--accent);}
-  h1.title{font-size:20px;margin:8px 0 1px;}
-  .sub{font-size:11px;color:var(--muted);margin:0 0 7px;}
+  h1.title{font-size:20px;margin:5px 0 1px;}
+  .sub{font-size:11px;color:var(--muted);margin:0 0 4px;}
   .row{display:flex;gap:10px;flex-wrap:wrap;}
   .fld{flex:1;min-width:120px;}
   .fld label{display:block;font-size:8.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:1px;}
   .fld input{width:100%;border:0;border-bottom:1px solid #444;background:transparent;
     font:600 12px/1.6 "Segoe UI",sans-serif;color:#111;padding:1px 2px;}
   .fld input:focus{outline:none;border-bottom:2px solid var(--accent);}
-  .band{border-radius:6px;padding:7px 11px;margin:6px 0;font-size:10.5px;}
+  .band{border-radius:6px;padding:5px 11px;margin:4px 0;font-size:10.5px;}
   .band.pre{background:var(--warn-soft);border:1px solid #E7C9A6;}
   .band.pre b{color:var(--warn);}
   .band .checks{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px;}
   .band .checks span{display:flex;align-items:center;gap:5px;color:#3a3a3a;}
   .band .checks i{width:5px;height:5px;border-radius:50%;background:var(--warn);display:inline-block;flex-shrink:0;margin-top:1px;}
   .rule{background:var(--accent-soft);border:1px solid #BBD2D8;}.rule b{color:var(--accent);}
-  .yline{display:flex;align-items:center;gap:8px;margin:5px 0 2px;font-size:11px;color:var(--muted);}
+  .yline{display:flex;align-items:center;gap:8px;margin:3px 0 1px;font-size:11px;color:var(--muted);}
   .yline .yi{display:inline-flex;align-items:center;gap:6px;color:#111;font-weight:600;}
   .yline input{width:62px;border:0;border-bottom:1px solid #444;text-align:center;font:600 12px/1 "Segoe UI";padding:2px 0;}
-  .sec{font-size:12px;font-weight:700;color:var(--accent);margin:5px 0 2px;padding-left:8px;border-left:4px solid var(--accent);}
+  .sec{font-size:12px;font-weight:700;color:var(--accent);margin:4px 0 1px;padding-left:8px;border-left:4px solid var(--accent);}
   .mf{width:100%;height:100%;border:1.3px solid var(--measure);border-radius:3px;background:#fff;
     text-align:center;font:600 12px/1 "Segoe UI",sans-serif;color:#111;padding:0;}
   .mf:focus{outline:2px solid var(--accent);}
-  .grid2{display:flex;gap:10px;}
-  .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:9px 11px;background:#fff;}
+  .grid2{display:flex;gap:9px;}
+  .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:6px 9px;background:#fff;}
   .card .ct{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:5px;display:flex;align-items:center;gap:7px;}
   .card .ct .opt{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:#333;font-size:10.5px;}
   .rc{appearance:none;-webkit-appearance:none;-moz-appearance:none;width:13px;height:13px;flex-shrink:0;border:1.4px solid var(--accent);border-radius:2px;background:#fff;margin:0;padding:0;cursor:pointer;position:relative;vertical-align:middle;}
   .rc:checked::after{content:"";position:absolute;left:3.5px;top:0px;width:4px;height:8px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg);}
-  .minirow{display:flex;align-items:center;gap:8px;margin:3px 0;font-size:10.5px;color:#333;}
-  .minirow .lab{min-width:74px;color:var(--muted);}
+  .minirow{display:flex;align-items:center;gap:6px;margin:2px 0;font-size:10px;color:#333;}
+  .minirow .lab{min-width:66px;color:var(--muted);}
   .minirow input.v{width:54px;border:1.3px solid var(--measure);border-radius:3px;text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
-  .dirbox{display:inline-flex;align-items:center;gap:13px;flex-wrap:wrap;}
+  .dirbox{display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;}
   .dirbox label{display:inline-flex;align-items:center;gap:5px;color:#333;}
   .unit{color:var(--muted);font-size:10px;}
   .colhead{font-size:11px;font-weight:700;color:var(--accent);margin:2px 0 1px;}
-  .legend{background:var(--light);border:1px solid var(--line);border-radius:7px;padding:7px 10px;margin:7px 0;font-size:10px;color:#333;}
+  .legend{background:var(--light);border:1px solid var(--line);border-radius:7px;padding:5px 10px;margin:4px 0;font-size:10px;color:#333;}
   .legend b{color:var(--accent);}
-  .sketch{border:1px solid var(--line);border-radius:7px;height:36px;position:relative;margin-top:4px;}
+  .sketch{border:1px solid var(--line);border-radius:7px;height:28px;position:relative;margin-top:4px;}
   .sketch .lab{position:absolute;top:6px;left:9px;font-size:10px;color:var(--muted);}
   .sketch textarea{position:absolute;inset:0;border:0;background:transparent;resize:none;padding:22px 10px 8px;
     font:400 11px/1.5 "Segoe UI";color:#111;width:100%;height:100%;}
   .sketch textarea:focus{outline:none;}
-  .commit{font-size:9.5px;font-weight:600;text-align:center;color:#111;margin:7px 0 5px;}
+  .commit{font-size:9px;font-weight:600;text-align:center;color:#111;margin:4px 0 3px;}
   .foot{border-top:1px solid var(--line);padding-top:6px;display:flex;justify-content:space-between;font-size:9px;color:var(--muted);}
   @page{size:A4;margin:0;}
   @media print{body{background:#fff;}.toolbar{display:none;}
@@ -105,8 +103,9 @@
 
   <div class="row">
     <div class="fld"><label>Kunde / Projekt</label><input type="text"></div>
-    <div class="fld" style="max-width:120px"><label>Datum</label><input type="text"></div>
-    <div class="fld" style="max-width:150px"><label>Telefon</label><input type="text"></div>
+    <div class="fld" style="max-width:118px"><label>Bestell-Nr.</label><input type="text"></div>
+    <div class="fld" style="max-width:102px"><label>Datum</label><input type="text"></div>
+    <div class="fld" style="max-width:132px"><label>Telefon</label><input type="text"></div>
   </div>
 
   <div class="band pre">
@@ -134,7 +133,7 @@
 
     <!-- linke Spalte: Draufsicht der U-Form -->
     <div style="flex:1.5">
-      <svg viewBox="0 0 420 290" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
+      <svg viewBox="0 0 420 290" width="100%" data-fit="1" height="258" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
         <defs>
           <pattern id="wall" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
             <rect width="7" height="7" fill="#DCD8D2"/><line x1="0" y1="0" x2="0" y2="7" stroke="#C3BEB6" stroke-width="1"/>
@@ -247,6 +246,32 @@
     </div>
   </div>
 
+
+  <!-- ============ GLAS UND AUFTEILUNG ============ -->
+  <div class="sec">3 · Glas und Aufteilung</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ct">Glasdicke</div>
+      <div class="minirow"><span class="lab">Dicke</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_dick"> 6</label><label><input type="radio" class="rc" name="grp_dick"> 8</label><label><input type="radio" class="rc" name="grp_dick"> 10</label></span><span class="unit">mm</span></div>
+      <div class="minirow" style="margin:0"><span class="lab" style="min-width:auto;font-size:9.5px">Mit dem Messschieber an der freien Kante messen.</span></div>
+      <div class="minirow" style="margin-top:4px;border-top:1px dashed var(--line);padding-top:4px">
+        <span class="lab">Rechter Winkel</span><span class="unit">600 / 800 gemessen</span>
+        <input class="v" type="text" style="width:52px"><span class="unit">mm, soll 1000</span></div>
+      <div class="minirow" style="margin:0"><span class="lab" style="min-width:auto;font-size:9.5px">600 mm an der einen Wand, 800 an der anderen, Abstand der Punkte messen.</span></div>
+    </div>
+    <div class="card">
+      <div class="ct">Tür oder Festteil? <span style="font-weight:400;color:var(--muted);font-size:9.5px">Anschlag von außen gesehen</span></div>
+      <div class="minirow"><span class="lab">Glasseite 1</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_rolle1"> Tür DIN links</label><label><input type="radio" class="rc" name="grp_rolle1"> Tür DIN rechts</label><label><input type="radio" class="rc" name="grp_rolle1"> Festteil</label></span></div>
+      <div class="minirow"><span class="lab">Glasseite 2</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_rolle2"> Tür DIN links</label><label><input type="radio" class="rc" name="grp_rolle2"> Tür DIN rechts</label><label><input type="radio" class="rc" name="grp_rolle2"> Festteil</label></span></div>
+      <div class="minirow"><span class="lab">Glasseite 3</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_rolle3"> Tür DIN links</label><label><input type="radio" class="rc" name="grp_rolle3"> Tür DIN rechts</label><label><input type="radio" class="rc" name="grp_rolle3"> Festteil</label></span></div>
+      <div class="minirow" style="margin:0"><span class="lab" style="min-width:auto;font-size:9.5px">Zwei Türen über Eck sind spiegelbildlich.</span></div>
+    </div>
+  </div>
+
   <div class="legend">
     <b>So messen Sie die Neigung:</b> Wasserwaage senkrecht an die Wand stellen und ins Lot bringen (Libelle mittig).
     Am Ende den Spalt zwischen Waage und Wand messen, das ist <b>X</b>. <b>Y</b> ist die Länge Ihrer Wasserwaage. Für die Neigung von <b>Wannenrand oder Boden</b> die Waage flach auflegen und den Spalt am tieferen Ende messen.
@@ -264,7 +289,7 @@
 
   <div class="foot">
     <span>Kristhal Duschop · Tel. 09293 9339580 · info@duschop.de</span>
-    <span>Ausgefüllt zurück: Foto oder Scan per E-Mail</span>
+    <span>Vor der Fertigung erhalten Sie eine Freigabezeichnung · zurück per Foto oder Scan</span>
   </div>
 
 </div>

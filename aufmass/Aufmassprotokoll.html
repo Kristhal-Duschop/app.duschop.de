@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="/Kristhal_Logo_Symbol_trans.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Aufmaßprotokoll · Komplett · Kristhal Duschop</title>
 <style>
   /* ===========================================================
@@ -56,19 +54,19 @@
   .yline input{width:62px;border:0;border-bottom:1px solid #444;text-align:center;font:600 12px/1 "Segoe UI";padding:2px 0;}
   .sec{font-size:12px;font-weight:700;color:var(--accent);margin:5px 0 2px;padding-left:8px;border-left:4px solid var(--accent);}
   .grid2{display:flex;gap:10px;}
-  .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:7px 10px;background:#fff;}
+  .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:6px 9px;background:#fff;}
   .card .ct{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px;display:flex;align-items:center;gap:7px;}
   .card .ct .opt{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:#333;font-size:10.5px;}
   .rc{appearance:none;-webkit-appearance:none;-moz-appearance:none;width:13px;height:13px;flex-shrink:0;border:1.4px solid var(--accent);border-radius:2px;background:#fff;margin:0;padding:0;cursor:pointer;position:relative;vertical-align:middle;}
   .rc:checked::after{content:"";position:absolute;left:3.5px;top:0px;width:4px;height:8px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg);}
-  .minirow{display:flex;align-items:center;gap:8px;margin:3px 0;font-size:10.5px;color:#333;flex-wrap:wrap;}
-  .minirow .lab{min-width:78px;color:var(--muted);}
+  .minirow{display:flex;align-items:center;gap:6px;margin:2px 0;font-size:10px;color:#333;flex-wrap:wrap;}
+  .minirow .lab{min-width:66px;color:var(--muted);}
   .minirow input.v{width:54px;border:1.3px solid var(--measure);border-radius:3px;text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
-  .tline{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:10.5px;}
-  .tline .lab{min-width:78px;color:var(--muted);}
+  .tline{display:flex;align-items:center;gap:7px;margin:3px 0;font-size:10px;}
+  .tline .lab{min-width:66px;color:var(--muted);}
   .tline input.t{flex:1;border:0;border-bottom:1px solid #999;background:transparent;font:600 11px/1.5 "Segoe UI";color:#111;padding:1px 2px;}
   .tline input.t:focus{outline:none;border-bottom:1.5px solid var(--accent);}
-  .dirbox{display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .dirbox{display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;}
   .dirbox label{display:inline-flex;align-items:center;gap:5px;color:#333;}
   .unit{color:var(--muted);font-size:10px;}
   .colhead{font-size:10.5px;font-weight:700;color:var(--accent);margin:1px 0 2px;}
@@ -116,8 +114,9 @@
   <!-- ============ STAMMDATEN ============ -->
   <div class="row">
     <div class="fld"><label>Aufmaß durch / Händler</label><input type="text"></div>
-    <div class="fld" style="max-width:120px"><label>Datum</label><input type="text"></div>
-    <div class="fld" style="max-width:150px"><label>Telefon</label><input type="text"></div>
+    <div class="fld" style="max-width:120px"><label>Bestell-Nr.</label><input type="text"></div>
+    <div class="fld" style="max-width:105px"><label>Datum</label><input type="text"></div>
+    <div class="fld" style="max-width:135px"><label>Telefon</label><input type="text"></div>
   </div>
   <div class="row" style="margin-top:3px">
     <div class="fld"><label>Kunde / Bauvorhaben</label><input type="text"></div>
@@ -146,18 +145,27 @@
       <div class="tline"><span class="lab">Serie / Art.-Nr.</span><input class="t" type="text"></div>
       <div class="tline"><span class="lab">Oberfläche</span><input class="t" type="text" placeholder="z. B. Chrom matt, schwarz matt, bronze matt"></div>
       <div class="tline"><span class="lab">Glasart</span><input class="t" type="text" placeholder="ESG klar · satiniert · getönt"></div>
-      <div class="minirow"><span class="lab">Glashöhe</span><input class="v" type="text"><span class="unit">mm gewünscht, z. B. 2000</span></div>
+      <div class="minirow"><span class="lab">Dicke</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_dick"> 6</label><label><input type="radio" class="rc" name="grp_dick"> 8</label><label><input type="radio" class="rc" name="grp_dick"> 10</label></span>
+        <span class="unit">mm</span>
+        <span class="lab" style="min-width:auto">· Höhe</span><input class="v" type="text" style="width:48px"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Beschläge</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_bez"> Kristhal</label><label><input type="radio" class="rc" name="grp_bez"> bauseits</label></span>
+        <span class="lab" style="min-width:auto">· Bohrbild</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_bb"> ja</label><label><input type="radio" class="rc" name="grp_bb"> nein</label></span></div>
     </div>
     <div class="card">
-      <div class="ct">Ausführung</div>
-      <div class="minirow"><span class="lab">Öffnung</span>
-        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d1"> DIN links</label><label><input type="radio" class="rc" name="grp_d1"> DIN rechts</label><label><input type="radio" class="rc" name="grp_d1"> Festteil ohne Tür</label></span></div>
-      <div class="tline"><span class="lab">Türgriff Art.-Nr.</span><input class="t" type="text"></div>
-      <div class="minirow"><span class="lab">Griffhöhe</span><input class="v" type="text"><span class="unit">mm / Standard</span></div>
-      <div class="minirow"><span class="lab">Nano-Beschichtung</span>
-        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d3"> ja</label><label><input type="radio" class="rc" name="grp_d3"> nein</label></span></div>
-      <div class="minirow"><span class="lab">Antikorrosionsglas</span>
-        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d4"> ja</label><label><input type="radio" class="rc" name="grp_d4"> nein</label></span></div>
+      <div class="ct">Ausführung <span style="font-weight:400;color:var(--muted);font-size:9.5px">Anschlag von außen gesehen</span></div>
+      <div class="minirow"><span class="lab">Glasseite 1</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d1"> Tür DIN links</label><label><input type="radio" class="rc" name="grp_d1"> Tür DIN rechts</label><label><input type="radio" class="rc" name="grp_d1"> Festteil</label></span></div>
+      <div class="minirow"><span class="lab">Glasseite 2</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d1b"> Tür DIN links</label><label><input type="radio" class="rc" name="grp_d1b"> Tür DIN rechts</label><label><input type="radio" class="rc" name="grp_d1b"> Festteil</label></span></div>
+      <div class="minirow" style="margin:1px 0"><span class="lab" style="min-width:auto;font-size:9.5px">Zwei Türen über Eck sind spiegelbildlich, deshalb je Seite einzeln ankreuzen.</span></div>
+      <div class="minirow"><span class="lab">Türgriff</span><input class="v" type="text" style="width:86px"><span class="unit">Art.-Nr.</span>
+        <span class="lab" style="min-width:auto">· Griff</span><input class="v" type="text" style="width:46px"><span class="unit">mm v. UK</span></div>
+      <div class="minirow"><span class="lab">Veredelung</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d3"> Nano</label><label><input type="radio" class="rc" name="grp_d3"> ohne</label></span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_d4"> Antikorrosion</label><label><input type="radio" class="rc" name="grp_d4"> ohne</label></span></div>
     </div>
   </div>
 
@@ -217,9 +225,13 @@
         <span class="lab" style="min-width:auto">oben</span><input class="v" type="text">
         <span class="lab" style="min-width:auto">Mitte</span><input class="v" type="text">
         <span class="lab" style="min-width:auto">unten</span><input class="v" type="text"></div>
-      <div class="colhead" style="margin-top:5px;border-top:1px dashed var(--line);padding-top:4px">Ecke <span style="font-weight:400;color:var(--muted)">· zwei Breiten, je Glasseite (mm)</span></div>
-      <div class="minirow"><span class="lab">Breite Glasseite 1</span><input class="v" type="text"><span class="unit">mm</span></div>
-      <div class="minirow"><span class="lab">Breite Glasseite 2</span><input class="v" type="text"><span class="unit">mm</span></div>
+      <div class="colhead" style="margin-top:4px;border-top:1px dashed var(--line);padding-top:3px">Ecke <span style="font-weight:400;color:var(--muted)">· je Glasseite oben und unten (mm)</span></div>
+      <div class="minirow"><span class="lab">Glasseite 1</span>
+        <span class="unit">oben</span><input class="v" type="text" style="width:48px">
+        <span class="unit">unten</span><input class="v" type="text" style="width:48px"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Glasseite 2</span>
+        <span class="unit">oben</span><input class="v" type="text" style="width:48px">
+        <span class="unit">unten</span><input class="v" type="text" style="width:48px"><span class="unit">mm</span></div>
     </div>
     <div class="card">
       <div class="ct">Lot der Wände</div>
@@ -227,6 +239,9 @@
         <span class="dirbox"><label><input type="radio" class="rc" name="grp_d5"> zum Raum</label><label><input type="radio" class="rc" name="grp_d5"> zur Wand</label><label><input type="radio" class="rc" name="grp_d5"> gerade</label></span></div>
       <div class="minirow"><span class="lab">Wand 2 · Spalt X</span><input class="v" type="text"><span class="unit">mm</span>
         <span class="dirbox"><label><input type="radio" class="rc" name="grp_d6"> zum Raum</label><label><input type="radio" class="rc" name="grp_d6"> zur Wand</label><label><input type="radio" class="rc" name="grp_d6"> gerade</label></span></div>
+      <div class="colhead" style="margin-top:4px;border-top:1px dashed var(--line);padding-top:3px">Steht die Ecke im rechten Winkel?</div>
+      <div class="minirow"><span class="lab">Probe 600 / 800</span><input class="v" type="text"><span class="unit">mm gemessen, soll 1000</span></div>
+      <div class="minirow" style="margin:1px 0"><span class="lab" style="min-width:auto;font-size:9.5px">Von der Ecke 600 mm an der einen Wand, 800 mm an der anderen, Abstand der Punkte messen.</span></div>
     </div>
   </div>
 
@@ -235,19 +250,19 @@
   <div class="grid2">
     <div class="card">
       <div class="ct"><span class="opt"><input type="radio" class="rc" name="grp_boden"> Auf Duschwanne</span></div>
-      <div class="minirow"><span class="lab">Einrückmaß</span><input class="v" type="text"><span class="unit">mm · Außenkante Wanne bis Glas, Standard 25</span></div>
-      <div class="minirow"><span class="lab" style="min-width:auto">gemessen ab Außenkante Duschwanne?</span>
-        <span class="dirbox"><label><input type="radio" class="rc" name="grp_dmess"> ja</label><label><input type="radio" class="rc" name="grp_dmess"> nein</label></span></div>
-      <div class="minirow"><span class="lab" style="min-width:auto">gemessen mit Einrückmaß</span><input class="v" type="text"><span class="unit">mm</span></div>
-      <div class="minirow"><span class="lab">Wanne Breite</span><input class="v" type="text"><span class="unit">mm</span>
-        <span class="lab" style="min-width:auto">Tiefe</span><input class="v" type="text"><span class="unit">mm</span></div>
-      <div class="minirow"><span class="lab">Radius Viertelkreis</span><input class="v" type="text"><span class="unit">mm · nur bei Rundwanne</span></div>
-      <div class="minirow"><span class="lab">Höhe Rand</span><input class="v" type="text"><span class="unit">mm über Boden</span></div>
+      <div class="minirow"><span class="lab">Einrückmaß</span><input class="v" type="text" style="width:46px"><span class="unit">mm · Außenkante Wanne bis Glas, Standard 25</span></div>
+      <div class="minirow"><span class="lab" style="min-width:auto">ab Außenkante?</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_dmess"> ja</label><label><input type="radio" class="rc" name="grp_dmess"> nein</label></span>
+        <span class="lab" style="min-width:auto">· mit Einrückmaß</span><input class="v" type="text" style="width:46px"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Wanne</span>
+        <span class="unit">Breite</span><input class="v" type="text" style="width:46px">
+        <span class="unit">Tiefe</span><input class="v" type="text" style="width:46px"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Randhöhe</span><input class="v" type="text" style="width:46px"><span class="unit">mm</span>
+        <span class="lab" style="min-width:auto">· Radius</span><input class="v" type="text" style="width:46px"><span class="unit">mm bei Rundwanne</span></div>
       <div class="minirow"><span class="lab">Rand waagerecht</span>
         <span class="dirbox"><label><input type="radio" class="rc" name="grp_d7"> ja</label><label><input type="radio" class="rc" name="grp_d7"> nein</label></span></div>
       <div class="minirow" style="margin:2px 0"><span class="lab" style="min-width:auto">wenn nein: Neigung X</span>
-        <input class="v" type="text"><span class="unit">mm</span>
-        <span class="lab" style="min-width:auto">· tiefere Seite</span><input class="v" type="text" style="width:84px"></div>
+        <input class="v" type="text" style="width:44px"><span class="unit">mm · tiefere Seite</span><input class="v" type="text" style="width:68px"></div>
     </div>
     <div class="card">
       <div class="ct"><span class="opt"><input type="radio" class="rc" name="grp_boden"> Bodengleich / gefliest</span></div>
@@ -267,6 +282,14 @@
           <label><input type="radio" class="rc" name="grp_d9"> Mitte Fuge</label>
           <label><input type="radio" class="rc" name="grp_d9"> Außenkante Fuge</label>
         </span></div>
+    </div>
+  </div>
+  <div class="grid2" style="margin-top:4px">
+    <div class="card">
+      <div class="minirow" style="margin:1px 0"><span class="lab">Luft unten</span>
+        <span class="lab" style="min-width:auto">Tür</span><input class="v" type="text" style="width:44px"><span class="unit">mm</span>
+        <span class="lab" style="min-width:auto">· Festteil</span><input class="v" type="text" style="width:44px"><span class="unit">mm</span>
+        <span class="lab" style="min-width:auto;font-size:9.5px">Tür und Festteil sind oben bündig, unten meist nicht. Beide Werte bestimmen die Bandhöhen.</span></div>
     </div>
   </div>
 
@@ -290,7 +313,7 @@
   <!-- ============ FUSS ============ -->
   <div class="foot">
     <span>Kristhal Duschop · Tel. 09293 9339580 · info@duschop.de</span>
-    <span>Ausgefüllt zurück: Foto oder Scan per E-Mail</span>
+    <span>Vor der Fertigung erhalten Sie eine Freigabezeichnung · zurück per Foto oder Scan</span>
   </div>
 
 </div>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aufmaß-Datenblatt · Glas, Beschläge und Bearbeitung · Kristhal Duschop</title>
+<style>
+  /* ===========================================================
+     Aufmaß-Vorlagenfamilie Kristhal Duschop · Blatt: GLAS UND BESCHLÄGE
+     Ergänzung zur Einbausituation. Erfasst alles, was für den
+     Zuschnitt und die Glasbearbeitung gebraucht wird.
+     Druck: A4 hoch, eine Seite. PDF über Edge headless.
+     =========================================================== */
+  :root{
+    --accent:#0F4C5C;--accent-soft:#E7EEF0;--measure:#C0392B;--ink:#1A1A1A;
+    --muted:#5F5F5F;--line:#D7D4D0;--light:#F4F1EC;--wall:#D7D4D0;
+    --warn:#B5530A;--warn-soft:#FBF0E4;--stop:#A32020;--stop-soft:#FBECEC;--ok:#2D6A3E;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:"Segoe UI",-apple-system,system-ui,sans-serif;color:var(--ink);
+    background:#EDEAE3;line-height:1.19;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .toolbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;
+    background:var(--accent);color:#fff;padding:10px 18px;font-size:14px;}
+  .toolbar b{font-weight:600;}.toolbar .sp{flex:1;}
+  .toolbar button{font:600 14px/1 "Segoe UI",sans-serif;background:#fff;color:var(--accent);
+    border:0;border-radius:6px;padding:9px 16px;cursor:pointer;}
+  .toolbar button:hover{background:#eaf3f5;}
+  .hint-screen{font-size:12.5px;opacity:.9;}
+  .sheet{width:210mm;min-height:297mm;margin:18px auto;background:#fff;
+    padding:5mm 11mm 3mm;box-shadow:0 4px 20px rgba(0,0,0,.16);position:relative;}
+  .head{display:flex;align-items:flex-end;justify-content:space-between;
+    border-bottom:2px solid var(--accent);padding-bottom:5px;}
+  .brand{font-size:20px;font-weight:700;color:var(--accent);letter-spacing:.2px;}
+  .brand small{display:block;font-size:9.5px;font-weight:400;color:var(--muted);letter-spacing:.3px;margin-top:2px;}
+  .doctag{text-align:right;}.doctag .t1{font-size:9.5px;color:var(--muted);}
+  .doctag .t2{font-size:14px;font-weight:700;color:var(--accent);}
+  h1.title{font-size:19px;margin:5px 0 1px;}
+  .sub{font-size:10.5px;color:var(--muted);margin:0 0 4px;}
+  .row{display:flex;gap:10px;flex-wrap:wrap;}
+  .fld{flex:1;min-width:110px;}
+  .fld label{display:block;font-size:8.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:1px;}
+  .fld input{width:100%;border:0;border-bottom:1px solid #444;background:transparent;
+    font:600 12px/1.5 "Segoe UI",sans-serif;color:#111;padding:1px 2px;}
+  .fld input:focus{outline:none;border-bottom:2px solid var(--accent);}
+  .band{border-radius:6px;padding:5px 11px;margin:4px 0;font-size:10.5px;}
+  .rule{background:var(--accent-soft);border:1px solid #BBD2D8;}.rule b{color:var(--accent);}
+  .stop{background:var(--stop-soft);border:1px solid #E4B9B9;}.stop b{color:var(--stop);}
+  .sec{font-size:12px;font-weight:700;color:var(--accent);margin:5px 0 2px;padding-left:8px;border-left:4px solid var(--accent);}
+  .grid2{display:flex;gap:10px;}
+  .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:7px 10px;background:#fff;}
+  .card .ct{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px;display:flex;align-items:center;gap:7px;}
+  .rc{appearance:none;-webkit-appearance:none;-moz-appearance:none;width:13px;height:13px;flex-shrink:0;
+    border:1.4px solid var(--accent);border-radius:2px;background:#fff;margin:0;padding:0;cursor:pointer;position:relative;vertical-align:middle;}
+  .rc:checked::after{content:"";position:absolute;left:3.5px;top:0px;width:4px;height:8px;
+    border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg);}
+  .minirow{display:flex;align-items:center;gap:6px;margin:2px 0;font-size:10px;color:#333;flex-wrap:wrap;}
+  .minirow .lab{min-width:68px;color:var(--muted);}
+  .minirow input.v{width:52px;border:1.3px solid var(--measure);border-radius:3px;text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
+  .tline{display:flex;align-items:center;gap:8px;margin:3px 0;font-size:10.5px;}
+  .tline .lab{min-width:80px;color:var(--muted);}
+  .tline input.t{flex:1;border:0;border-bottom:1px solid #999;background:transparent;font:600 11px/1.5 "Segoe UI";color:#111;padding:1px 2px;}
+  .tline input.t:focus{outline:none;border-bottom:1.5px solid var(--accent);}
+  .dirbox{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .dirbox label{display:inline-flex;align-items:center;gap:5px;color:#333;}
+  .unit{color:var(--muted);font-size:10px;}
+  table.parts{width:100%;border-collapse:collapse;font-size:10px;margin-top:2px;}
+  table.parts th{background:var(--accent-soft);color:var(--accent);font-size:9px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.4px;padding:2px 4px;border:1px solid var(--line);text-align:left;}
+  table.parts td{border:1px solid var(--line);padding:1px 4px;vertical-align:middle;}
+  table.parts td.k{background:#FBFAF8;color:var(--muted);font-weight:600;font-size:9.5px;white-space:nowrap;}
+  table.parts input.c{width:100%;border:0;border-bottom:1px solid #BFBAB2;background:transparent;
+    text-align:center;font:600 11px/1.3 "Segoe UI";color:#111;padding:0;}
+  table.parts input.c:focus{outline:none;border-bottom:1.5px solid var(--accent);}
+  table.parts .pick{display:flex;gap:9px;justify-content:center;font-size:9.5px;color:#333;}
+  table.parts .pick label{display:inline-flex;align-items:center;gap:4px;}
+  .legend{background:var(--light);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin:5px 0;font-size:10px;color:#333;}
+  .legend b{color:var(--accent);}
+  .shots{display:flex;gap:7px;margin-top:3px;}
+  .shots div{flex:1;border:1px solid var(--line);border-radius:6px;padding:3px 7px;font-size:8.5px;color:#333;background:#FBFAF8;}
+  .shots div b{display:block;color:var(--accent);font-size:9px;margin-bottom:1px;}
+  .commit{font-size:9px;font-weight:600;text-align:center;color:#111;margin:4px 0 3px;}
+  .foot{border-top:1px solid var(--line);padding-top:6px;display:flex;justify-content:space-between;font-size:9px;color:var(--muted);}
+  @page{size:A4;margin:0;}
+  @media print{body{background:#fff;}.toolbar{display:none;}
+    .sheet{margin:0;box-shadow:none;width:auto;min-height:auto;}}
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <b>Aufmaß-Datenblatt Glas und Beschläge</b>
+  <span class="hint-screen">Am Bildschirm ausfüllen oder ausdrucken und von Hand eintragen.</span>
+  <span class="sp"></span>
+  <button onclick="window.print()">Drucken / als PDF speichern</button>
+</div>
+
+<div class="sheet">
+
+  <!-- ============ KOPF ============ -->
+  <div class="head">
+    <div class="brand">Kristhal Duschop<small>Glasduschen nach Maß · duschop.de</small></div>
+    <div class="doctag"><div class="t1">Aufmaß-Datenblatt</div><div class="t2">Glas und Beschläge</div></div>
+  </div>
+
+  <h1 class="title">Glas, Beschläge und Bearbeitung</h1>
+  <p class="sub">Beilage zum Blatt Ihrer Einbausituation. <b style="color:var(--accent)">Links und rechts gelten immer von außen gesehen</b>, mit Blick von der trockenen Seite.</p>
+
+  <div class="row">
+    <div class="fld"><label>Kunde / Bauvorhaben</label><input type="text"></div>
+    <div class="fld" style="max-width:130px"><label>Bestell-Nr.</label><input type="text"></div>
+    <div class="fld" style="max-width:110px"><label>Datum</label><input type="text"></div>
+    <div class="fld" style="max-width:140px"><label>Telefon</label><input type="text"></div>
+  </div>
+
+  <!-- ============ 1 · DAS GLAS ============ -->
+  <div class="sec">1 · Das Glas</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ct">Glasdicke <span style="font-weight:400;color:var(--muted);font-size:9.5px">Pflichtangabe</span></div>
+      <div class="minirow"><span class="lab">Dicke</span>
+        <span class="dirbox">
+          <label><input type="radio" class="rc" name="grp_dick"> 6 mm</label>
+          <label><input type="radio" class="rc" name="grp_dick"> 8 mm</label>
+          <label><input type="radio" class="rc" name="grp_dick"> 10 mm</label>
+          <label><input type="radio" class="rc" name="grp_dick"> andere</label>
+          <input class="v" type="text" style="width:44px"><span class="unit">mm</span>
+        </span></div>
+      <div class="minirow" style="margin-top:0"><span class="lab" style="min-width:auto;font-size:9.5px">
+        Mit dem Messschieber mittig an der freien Kante messen. 6 und 8 mm sind mit dem Auge nicht zu unterscheiden.</span></div>
+      <div class="minirow"><span class="lab">Glashöhe</span><input class="v" type="text"><span class="unit">mm</span>
+        <span class="lab" style="min-width:auto">· Scheiben</span><input class="v" type="text" style="width:38px"><span class="unit">Stück</span></div>
+    </div>
+    <div class="card">
+      <div class="ct">Glasart und Oberfläche</div>
+      <div class="minirow"><span class="lab">Glasart</span>
+        <span class="dirbox">
+          <label><input type="radio" class="rc" name="grp_art"> Klar (ESG)</label>
+          <label><input type="radio" class="rc" name="grp_art"> Satiniert</label>
+          <label><input type="radio" class="rc" name="grp_art"> Getönt</label>
+        </span></div>
+      <div class="minirow"><span class="lab">Antikorrosion</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_anti"> ja</label><label><input type="radio" class="rc" name="grp_anti"> nein</label></span>
+        <span class="lab" style="min-width:auto">· Easy-Clean Nano</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_nano"> ja</label><label><input type="radio" class="rc" name="grp_nano"> nein</label></span></div>
+      <div class="minirow" style="margin:0"><span class="lab" style="min-width:auto;font-size:9.5px">
+        Beides sind eigene Positionen und liegen auf der Innenseite, der Wasserseite.</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 2 · AUFTEILUNG UND ANSCHLAG ============ -->
+  <div class="sec">2 · Aufteilung und Anschlag <span style="font-weight:400;color:var(--muted);font-size:10px">&nbsp; eine Zeile je Scheibe</span></div>
+  <table class="parts">
+    <tr>
+      <th style="width:58px">Scheibe</th>
+      <th style="width:120px">Was ist es?</th>
+      <th style="width:62px">Breite mm</th>
+      <th style="width:62px">Höhe mm</th>
+      <th style="width:132px">Bänder sitzen (von außen)</th>
+      <th>Schließt gegen</th>
+    </tr>
+    <tr>
+      <td class="k">1</td>
+      <td><span class="pick"><label><input type="radio" class="rc" name="grp_r1"> Tür</label><label><input type="radio" class="rc" name="grp_r1"> Festteil</label></span></td>
+      <td><input class="c" type="text"></td><td><input class="c" type="text"></td>
+      <td><span class="pick"><label><input type="radio" class="rc" name="grp_b1"> links</label><label><input type="radio" class="rc" name="grp_b1"> rechts</label><label><input type="radio" class="rc" name="grp_b1"> ohne</label></span></td>
+      <td><input class="c" type="text" style="text-align:left" placeholder="Wand · Festteil · zweite Tür"></td>
+    </tr>
+    <tr>
+      <td class="k">2</td>
+      <td><span class="pick"><label><input type="radio" class="rc" name="grp_r2"> Tür</label><label><input type="radio" class="rc" name="grp_r2"> Festteil</label></span></td>
+      <td><input class="c" type="text"></td><td><input class="c" type="text"></td>
+      <td><span class="pick"><label><input type="radio" class="rc" name="grp_b2"> links</label><label><input type="radio" class="rc" name="grp_b2"> rechts</label><label><input type="radio" class="rc" name="grp_b2"> ohne</label></span></td>
+      <td><input class="c" type="text" style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td class="k">3</td>
+      <td><span class="pick"><label><input type="radio" class="rc" name="grp_r3"> Tür</label><label><input type="radio" class="rc" name="grp_r3"> Festteil</label></span></td>
+      <td><input class="c" type="text"></td><td><input class="c" type="text"></td>
+      <td><span class="pick"><label><input type="radio" class="rc" name="grp_b3"> links</label><label><input type="radio" class="rc" name="grp_b3"> rechts</label><label><input type="radio" class="rc" name="grp_b3"> ohne</label></span></td>
+      <td><input class="c" type="text" style="text-align:left"></td>
+    </tr>
+  </table>
+  <div class="band rule" style="margin-top:4px">
+    <b>Zwei Türen über Eck sind spiegelbildlich.</b> Die eine hängt links, die andere rechts. Bitte für jede Tür einzeln ankreuzen und nicht einmal für beide.
+    Bänder und Griff werden vor dem Härten ins Glas gearbeitet, danach ist keine Änderung mehr möglich.
+  </div>
+
+  <!-- ============ 3 · BESCHLÄGE ============ -->
+  <div class="sec">3 · Beschläge</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ct">Woher kommen die Beschläge?</div>
+      <div class="minirow"><span class="lab">Bezug</span>
+        <span class="dirbox">
+          <label><input type="radio" class="rc" name="grp_bez"> über Kristhal</label>
+          <label><input type="radio" class="rc" name="grp_bez"> bauseits</label>
+          <label><input type="radio" class="rc" name="grp_bez"> teils / teils</label>
+        </span></div>
+      <div class="tline"><span class="lab">Serie / Art.-Nr.</span><input class="t" type="text" placeholder="z. B. Bellagio BEL344"></div>
+      <div class="tline"><span class="lab">Griff Art.-Nr.</span><input class="t" type="text"></div>
+      <div class="minirow"><span class="lab">Bohrbild liegt bei</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_bb"> ja</label><label><input type="radio" class="rc" name="grp_bb"> folgt</label><label><input type="radio" class="rc" name="grp_bb"> nicht nötig</label></span></div>
+    </div>
+    <div class="card" style="background:var(--stop-soft);border-color:#E4B9B9">
+      <div class="ct" style="color:var(--stop)">Beschläge nicht von uns? Dann brauchen wir das Bohrbild.</div>
+      <div class="minirow" style="margin:1px 0"><span class="lab" style="min-width:auto;font-size:10px;color:#3a3a3a">
+        Jeder Hersteller bohrt anders. Eine Angabe wie „Ø 38 innen, 90 Grad" genügt nicht, weil ein Scharnier-Senkloch aus Durchgang plus Senkung besteht und beides je Modell anders ausfällt.
+        Bitte das Maßblatt mitschicken: <b>Durchgang, Senkung, Winkel, Senktiefe, Randabstand.</b>
+        Fehlt es, warten wir mit der Bestellung, statt zu raten. Gehärtetes Glas lässt sich nicht nachbohren.</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 4 · LAGE DER BEARBEITUNG ============ -->
+  <div class="sec">4 · Wo sitzen Bänder, Griff und Bohrungen?</div>
+  <div class="grid2">
+    <div class="card" style="flex:1.45">
+      <div class="ct">Unser Standard, wenn Sie nichts anderes angeben</div>
+      <div class="minirow"><span class="lab">Bänder</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_band"> Standard</label><label><input type="radio" class="rc" name="grp_band"> abweichend</label></span>
+        <input class="v" type="text" style="width:40px"><span class="unit">v. OK</span>
+        <input class="v" type="text" style="width:40px"><span class="unit">v. UK</span></div>
+      <div class="minirow"><span class="lab">Griff</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_griff"> Standard</label><label><input type="radio" class="rc" name="grp_griff"> abweichend</label></span>
+        <input class="v" type="text" style="width:40px"><span class="unit">v. UK</span>
+        <span class="unit">Standardmaße siehe Skizze rechts</span></div>
+      <div class="minirow"><span class="lab">Griff seitlich</span><input class="v" type="text" style="width:40px"><span class="unit">mm v. Schließkante</span>
+        <span class="lab" style="min-width:auto">· Bohrung Ø</span><input class="v" type="text" style="width:40px"><span class="unit">mm</span></div>
+      <div class="minirow"><span class="lab">Senkloch nötig</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_senk"> ja</label><label><input type="radio" class="rc" name="grp_senk"> nein</label><label><input type="radio" class="rc" name="grp_senk"> weiß ich nicht</label></span>
+        <span class="unit">bei ja ist das Bohrbild Pflicht</span></div>
+      <div class="minirow"><span class="lab">Alte Scheibe</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_alt"> liegt als Muster vor</label><label><input type="radio" class="rc" name="grp_alt"> nein</label></span>
+        <span class="lab" style="min-width:auto;font-size:9.5px">dann gelten deren Bohrungen, nicht unser Standard</span></div>
+    </div>
+    <div class="card" style="flex:.8">
+      <div class="ct">Maße immer von Ober- und Unterkante</div>
+      <svg viewBox="0 0 190 210" height="118" style="width:100%;display:block;margin:1px auto 0" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
+        <!-- Scheibe -->
+        <rect x="46" y="14" width="96" height="180" fill="#F2F7F8" stroke="#0F4C5C" stroke-width="1.6"/>
+        <text x="94" y="112" font-size="8.5" fill="#9a9a9a" text-anchor="middle" font-style="italic">Türglas</text>
+        <text x="94" y="122" font-size="7.5" fill="#b3b3b3" text-anchor="middle" font-style="italic">von außen</text>
+        <!-- Bandausschnitte links -->
+        <rect x="46" y="40" width="13" height="15" fill="#C0392B" opacity=".85"/>
+        <rect x="46" y="153" width="13" height="15" fill="#C0392B" opacity=".85"/>
+        <!-- Griffbohrung rechts -->
+        <circle cx="130" cy="120" r="4.6" fill="#C0392B"/>
+        <!-- Bemaßung oben 250 -->
+        <line x1="30" y1="14" x2="30" y2="47" stroke="#1A1A1A" stroke-width=".9"/>
+        <line x1="26" y1="14" x2="34" y2="14" stroke="#1A1A1A" stroke-width=".9"/>
+        <line x1="26" y1="47" x2="34" y2="47" stroke="#1A1A1A" stroke-width=".9"/>
+        <text x="26" y="34" font-size="9" fill="#C0392B" font-weight="700" text-anchor="end">250</text>
+        <!-- Bemaßung unten 250 -->
+        <line x1="30" y1="161" x2="30" y2="194" stroke="#1A1A1A" stroke-width=".9"/>
+        <line x1="26" y1="161" x2="34" y2="161" stroke="#1A1A1A" stroke-width=".9"/>
+        <line x1="26" y1="194" x2="34" y2="194" stroke="#1A1A1A" stroke-width=".9"/>
+        <text x="26" y="181" font-size="9" fill="#C0392B" font-weight="700" text-anchor="end">250</text>
+        <!-- Bemaßung Griff 1000 v UK -->
+        <line x1="160" y1="120" x2="160" y2="194" stroke="#1A1A1A" stroke-width=".9"/>
+        <line x1="156" y1="120" x2="164" y2="120" stroke="#1A1A1A" stroke-width=".9"/>
+        <line x1="156" y1="194" x2="164" y2="194" stroke="#1A1A1A" stroke-width=".9"/>
+        <text x="166" y="160" font-size="9" fill="#C0392B" font-weight="700">1000</text>
+        <!-- Kantenlabel -->
+        <text x="94" y="9" font-size="8" fill="#6a6a6a" text-anchor="middle">Oberkante OK</text>
+        <text x="94" y="205" font-size="8" fill="#6a6a6a" text-anchor="middle">Unterkante UK</text>
+      </svg>
+      <div class="minirow" style="margin:0"><span class="lab" style="min-width:auto;font-size:9.5px">
+        Rot ist Glasbearbeitung. Alle Höhen zählen ab Ober- oder Unterkante des Glases, nie ab Boden oder Wanne.</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 5 · UNTEN ============ -->
+  <div class="sec">5 · Was passiert unten am Glas?</div>
+  <div class="card">
+    <div class="minirow"><span class="lab">Tür unten</span>
+      <span class="dirbox"><label><input type="radio" class="rc" name="grp_u1"> Dichtung</label><label><input type="radio" class="rc" name="grp_u1"> frei</label></span>
+      <span class="lab" style="min-width:auto">· Luft unter dem Glas</span><input class="v" type="text" style="width:40px"><span class="unit">mm</span></div>
+    <div class="minirow"><span class="lab">Festteil unten</span>
+      <span class="dirbox"><label><input type="radio" class="rc" name="grp_u2"> Silikon</label><label><input type="radio" class="rc" name="grp_u2"> U-Profil</label><label><input type="radio" class="rc" name="grp_u2"> Dichtung</label></span>
+      <span class="lab" style="min-width:auto">· Luft</span><input class="v" type="text" style="width:40px"><span class="unit">mm</span></div>
+    <div class="minirow" style="margin:0"><span class="lab" style="min-width:auto;font-size:9.5px">
+      Tür und Festteil sind oben bündig, unten meist nicht. Die Tür braucht Luft zum Schwenken. Damit die Bänder trotzdem fluchten, brauchen wir beide Werte.</span></div>
+  </div>
+
+  <!-- ============ 6 · FOTOS ============ -->
+  <div class="sec">6 · Diese Fotos ersparen uns die Rückfrage</div>
+  <div class="shots">
+    <div><b>1 · Gesamtansicht</b>Nische oder Ecke frontal, ganze Situation.</div>
+    <div><b>2 · Anschluss</b>Ecke oder Wanne, wo das Glas aufsteht, aus der Nähe.</div>
+    <div><b>3 · Wasserwaage</b>Angelegte Waage mit sichtbarem Spalt.</div>
+    <div><b>4 · Alter Beschlag</b>Bohrung oder Beschlag nah, mit Zollstock daneben.</div>
+  </div>
+
+  <!-- ============ FREIGABE ============ -->
+  <div class="band rule" style="margin-top:5px">
+    <b>So geht es weiter:</b> Aus Ihren Angaben zeichnen wir eine Freigabezeichnung und schicken sie als PDF. Erst nach Ihrer schriftlichen Freigabe geht das Glas in die Fertigung. Bis dahin lässt sich jedes Maß ändern.
+  </div>
+
+  <!-- ============ VERBINDLICHKEIT ============ -->
+  <div class="commit">
+    Ich habe selbst gemessen und die Angaben geprüft. Mir ist bekannt, dass die Fertigung nach diesen Angaben erfolgt und die Verantwortung für die Richtigkeit beim Auftraggeber liegt.
+  </div>
+
+  <!-- ============ FUSS ============ -->
+  <div class="foot">
+    <span>Kristhal Duschop · Tel. 09293 9339580 · info@duschop.de</span>
+    <span>Ausgefüllt zurück: Foto oder Scan per E-Mail</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="/Kristhal_Logo_Symbol_trans.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Aufmaß-Datenblatt · Fünfeckdusche · Kristhal Duschop</title>
 <style>
   /* ===========================================================
@@ -31,7 +29,7 @@
     font-family:"Segoe UI",-apple-system,system-ui,sans-serif;
     color:var(--ink);
     background:#EDEAE3;
-    line-height:1.25;
+    line-height:1.16;
     -webkit-print-color-adjust:exact;
     print-color-adjust:exact;
   }
@@ -56,7 +54,7 @@
     width:210mm;min-height:297mm;
     margin:18px auto;
     background:#fff;
-    padding:6mm 11mm 4mm;
+    padding:5mm 11mm 3mm;
     box-shadow:0 4px 20px rgba(0,0,0,.16);
     position:relative;
   }
@@ -96,24 +94,24 @@
     font:600 12px/1 "Segoe UI";padding:2px 0;}
 
   .sec{font-size:12px;font-weight:700;color:var(--accent);
-    margin:5px 0 2px;padding-left:8px;border-left:4px solid var(--accent);}
+    margin:4px 0 1px;padding-left:8px;border-left:4px solid var(--accent);}
 
   .mf{width:100%;height:100%;border:1.3px solid var(--measure);border-radius:3px;
     background:#fff;text-align:center;font:600 12px/1 "Segoe UI",sans-serif;color:#111;padding:0;}
   .mf:focus{outline:2px solid var(--accent);}
 
-  .grid2{display:flex;gap:10px;align-items:flex-start;}
+  .grid2{display:flex;gap:9px;align-items:flex-start;}
   .card{flex:1;border:1px solid var(--line);border-radius:7px;padding:8px 11px;background:#fff;}
   .card .ct{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:5px;
     display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
   .card .ct .opt{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:#333;font-size:10.5px;}
   .rc{appearance:none;-webkit-appearance:none;-moz-appearance:none;width:13px;height:13px;flex-shrink:0;border:1.4px solid var(--accent);border-radius:2px;background:#fff;margin:0;padding:0;cursor:pointer;position:relative;vertical-align:middle;}
   .rc:checked::after{content:"";position:absolute;left:3.5px;top:0px;width:4px;height:8px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg);}
-  .minirow{display:flex;align-items:center;gap:8px;margin:3px 0;font-size:10.5px;color:#333;}
+  .minirow{display:flex;align-items:center;gap:6px;margin:2px 0;font-size:10px;color:#333;}
   .minirow .lab{min-width:88px;color:var(--muted);}
   .minirow input.v{width:54px;border:1.3px solid var(--measure);border-radius:3px;
     text-align:center;font:600 11px/1 "Segoe UI";padding:3px 0;}
-  .dirbox{display:inline-flex;align-items:center;gap:11px;flex-wrap:wrap;}
+  .dirbox{display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;}
   .dirbox label{display:inline-flex;align-items:center;gap:5px;color:#333;}
   .unit{color:var(--muted);font-size:10px;}
   .colhead{font-size:10.5px;font-weight:700;color:var(--accent);margin:4px 0 1px;}
@@ -122,7 +120,7 @@
     padding:6px 10px;margin:5px 0;font-size:10px;color:#333;}
   .legend b{color:var(--accent);}
 
-  .sketch{border:1px solid var(--line);border-radius:7px;height:30px;position:relative;margin-top:4px;}
+  .sketch{border:1px solid var(--line);border-radius:7px;height:28px;position:relative;margin-top:4px;}
   .sketch .lab{position:absolute;top:6px;left:9px;font-size:10px;color:var(--muted);}
   .sketch textarea{position:absolute;inset:0;border:0;background:transparent;resize:none;
     padding:20px 10px 6px;font:400 11px/1.5 "Segoe UI";color:#111;width:100%;height:100%;}
@@ -168,8 +166,9 @@
 
   <div class="row">
     <div class="fld"><label>Kunde / Projekt</label><input type="text"></div>
-    <div class="fld" style="max-width:120px"><label>Datum</label><input type="text"></div>
-    <div class="fld" style="max-width:150px"><label>Telefon</label><input type="text"></div>
+    <div class="fld" style="max-width:118px"><label>Bestell-Nr.</label><input type="text"></div>
+    <div class="fld" style="max-width:102px"><label>Datum</label><input type="text"></div>
+    <div class="fld" style="max-width:132px"><label>Telefon</label><input type="text"></div>
   </div>
 
   <!-- ============ VORBEDINGUNG ============ -->
@@ -201,7 +200,7 @@
 
     <!-- linke Spalte: Draufsicht -->
     <div style="flex:1.35">
-      <svg viewBox="0 0 380 300" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
+      <svg viewBox="0 0 380 300" width="100%" data-fit="1" height="226" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
         <defs>
           <pattern id="wall" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
             <rect width="7" height="7" fill="#DCD8D2"/>
@@ -364,6 +363,31 @@
     </div>
   </div>
 
+  <!-- ============ GLAS UND AUFTEILUNG ============ -->
+  <div class="sec">3 · Glas und Aufteilung</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ct">Glasdicke</div>
+      <div class="minirow"><span class="lab">Dicke</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_dick"> 6</label><label><input type="radio" class="rc" name="grp_dick"> 8</label><label><input type="radio" class="rc" name="grp_dick"> 10</label></span><span class="unit">mm</span></div>
+      <div class="minirow" style="margin:0"><span class="lab" style="min-width:auto;font-size:9.5px">Mit dem Messschieber an der freien Kante messen.</span></div>
+      <div class="minirow" style="margin-top:4px;border-top:1px dashed var(--line);padding-top:4px">
+        <span class="lab">Rechter Winkel</span><span class="unit">600 / 800 gemessen</span>
+        <input class="v" type="text" style="width:52px"><span class="unit">mm, soll 1000</span></div>
+      <div class="minirow" style="margin:0"><span class="lab" style="min-width:auto;font-size:9.5px">600 mm an der einen Wand, 800 an der anderen, Abstand der Punkte messen.</span></div>
+    </div>
+    <div class="card">
+      <div class="ct">Tür oder Festteil? <span style="font-weight:400;color:var(--muted);font-size:9.5px">Anschlag von außen gesehen</span></div>
+      <div class="minirow"><span class="lab">Glasseite 1</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_rolle1"> Tür DIN links</label><label><input type="radio" class="rc" name="grp_rolle1"> Tür DIN rechts</label><label><input type="radio" class="rc" name="grp_rolle1"> Festteil</label></span></div>
+      <div class="minirow"><span class="lab">Diagonale / Tür</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_rolle2"> Tür DIN links</label><label><input type="radio" class="rc" name="grp_rolle2"> Tür DIN rechts</label><label><input type="radio" class="rc" name="grp_rolle2"> Festteil</label></span></div>
+      <div class="minirow"><span class="lab">Glasseite 3</span>
+        <span class="dirbox"><label><input type="radio" class="rc" name="grp_rolle3"> Tür DIN links</label><label><input type="radio" class="rc" name="grp_rolle3"> Tür DIN rechts</label><label><input type="radio" class="rc" name="grp_rolle3"> Festteil</label></span></div>
+      <div class="minirow" style="margin:0"><span class="lab" style="min-width:auto;font-size:9.5px">Zwei Türen über Eck sind spiegelbildlich.</span></div>
+    </div>
+  </div>
+
   <!-- ============ MESS-LEGENDE ============ -->
   <div class="legend">
     <b>So messen Sie die Neigung:</b> Wasserwaage senkrecht an die Wand stellen und ins Lot bringen (Libelle mittig).
@@ -388,7 +412,7 @@
   <!-- ============ FUSS ============ -->
   <div class="foot">
     <span>Kristhal Duschop · Tel. 09293 9339580 · info@duschop.de</span>
-    <span>Ausgefüllt zurück: Foto oder Scan per E-Mail</span>
+    <span>Vor der Fertigung erhalten Sie eine Freigabezeichnung · zurück per Foto oder Scan</span>
   </div>
 
 </div>
