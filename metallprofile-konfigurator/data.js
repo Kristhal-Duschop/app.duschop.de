@@ -88,12 +88,12 @@
     // ====================================
     {
         id: 'alu-u-profil-silikon',
-        title: 'Alu U-Profil zur Silikonverklebung \u2013 13 Farben \u2013 Art.Nr. SDCD3812',
+        title: 'Alu U-Profil zur Silikonverklebung \u2013 14 Farben \u2013 Art.Nr. SDCD3812',
         handle: 'alu-u-profil',
         type: 'profil',
         material: 'alu',
         einbau: 'auf-fliese',
-        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'schwarz-matt', 'silber-matt', 'graphit-poliert', 'graphit-matt', 'messing-poliert', 'messing-matt', 'messing-matt-gebuerstet', 'bronze-matt', 'weiss-matt', 'kupfer-poliert', 'kupfer-matt'],
+        colors: ['chrom-poliert', 'edelstahl-gebuerstet', 'schwarz-matt', 'silber-matt', 'graphit-poliert', 'graphit-matt', 'messing-poliert', 'messing-matt', 'messing-matt-gebuerstet', 'bronze-matt', 'weiss-matt', 'weiss-glaenzend', 'kupfer-poliert', 'kupfer-matt'],
         abschluss: ['silikonverklebung'],
         price: '39,50',
         priceMax: '99,90',
@@ -296,6 +296,7 @@
     'kupfer-poliert': { name: 'Kupfer poliert gl\u00e4nzend (Rose-Gold)', gradient: 'linear-gradient(135deg, #d4956a 0%, #c07d50 25%, #e0a57a 50%, #b07040 75%, #cc8d60 100%)', finish: 'Gl\u00e4nzend' },
     'kupfer-matt': { name: 'Kupfer matt geb\u00fcrstet', gradient: 'linear-gradient(135deg, #b8805a 0%, #a06840 25%, #c49068 50%, #905a32 75%, #af7850 100%)', finish: 'Matt' },
     'weiss-matt': { name: 'Wei\u00df matt', gradient: 'linear-gradient(135deg, #f5f2ef 0%, #e8e4e0 25%, #faf8f6 50%, #e0dcd8 75%, #f0ece8 100%)', finish: 'Matt' },
+    'weiss-glaenzend': { name: 'Wei\u00df gl\u00e4nzend', gradient: 'linear-gradient(135deg, #ffffff 0%, #e6ebef 25%, #ffffff 50%, #dde4ea 75%, #f4f7fa 100%)', finish: 'Gl\u00e4nzend' },
     'transparent': { name: 'Transparent', gradient: 'linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 25%, #fafafa 50%, #e0e0e0 75%, #f5f5f5 100%)', finish: 'Transparent' }
 };
 

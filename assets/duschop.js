@@ -363,7 +363,8 @@
         'graphit-poliert':      { name: 'Graphit poliert',        gradient: 'linear-gradient(135deg, #5a5a5a 0%, #454545 25%, #666666 50%, #3a3a3a 75%, #525252 100%)' },
         'kupfer-matt':          { name: 'Kupfer matt',            gradient: 'linear-gradient(135deg, #b8805a 0%, #a06840 25%, #c49068 50%, #905a32 75%, #af7850 100%)' },
         'kupfer-poliert':       { name: 'Kupfer poliert',         gradient: 'linear-gradient(135deg, #d4956a 0%, #c07d50 25%, #e0a57a 50%, #b07040 75%, #cc8d60 100%)' },
-        'weiss-matt':           { name: 'Weiß matt',              gradient: 'linear-gradient(135deg, #f5f2ef 0%, #e8e4e0 25%, #faf8f6 50%, #e0dcd8 75%, #f0ece8 100%)' }
+        'weiss-matt':           { name: 'Weiß matt',              gradient: 'linear-gradient(135deg, #f5f2ef 0%, #e8e4e0 25%, #faf8f6 50%, #e0dcd8 75%, #f0ece8 100%)' },
+        'weiss-glaenzend':      { name: 'Weiß glänzend',          gradient: 'linear-gradient(135deg, #ffffff 0%, #e6ebef 25%, #ffffff 50%, #dde4ea 75%, #f4f7fa 100%)' }
     };
 
     // ============================================================
