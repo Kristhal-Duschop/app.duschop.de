@@ -256,10 +256,13 @@
     <!-- rechte Spalte: Höhe + Lot der beiden Wände -->
     <div style="flex:1;display:flex;flex-direction:column;gap:7px;">
       <div class="card">
-        <div class="ct">Gewünschte Glashöhe</div>
+        <div class="ct">Glashöhe und Maße oben</div>
         <div class="minirow"><span class="lab">Höhe</span>
           <input class="v" type="text"><span class="unit">mm</span>
           <span style="color:var(--muted);font-size:9.5px">z. B. 2000</span></div>
+        <div class="minirow"><span class="lab">Breite oben</span><input class="v" type="text"><span class="unit">·</span>
+          <span class="lab" style="min-width:auto">Tiefe oben</span><input class="v" type="text"><span class="unit">mm</span></div>
+        <div class="minirow" style="margin:0"><span class="lab" style="min-width:auto;font-size:9.5px">Die Maße in der Skizze unten am Boden messen, hier dasselbe Maß oben auf Glashöhe. Aus dem Unterschied schneiden wir das Glas passend schräg.</span></div>
       </div>
 
       <div class="colhead">Stehen die Wände im Lot?</div>
@@ -373,7 +376,7 @@
     <span style="font-weight:400;color:var(--muted);font-size:10px">&nbsp; z. B. Tür-Anschlag, Winkel der Ecke, Fenster, Heizkörper, Lage des Ablaufs</span>
   </div>
   <div class="sketch">
-    <span class="lab">Platz für Ihre Skizze oder Notizen</span>
+    <span class="lab">Platz für kurze Notizen. Eine Skizze gern auf der Rückseite oder als Foto mitschicken.</span>
     <textarea></textarea>
   </div>
 

@@ -81,6 +81,7 @@
   @page{size:A4;margin:0;}
   @media print{body{background:#fff;}.toolbar{display:none;}
     .sheet{margin:0;box-shadow:none;width:auto;min-height:auto;}.mf,.minirow input.v{outline:none;}}
+  .rolle .dirbox{gap:9px;flex-wrap:nowrap;white-space:nowrap;}.rolle .lab{min-width:52px;}
 </style>
 </head>
 <body>
@@ -179,7 +180,7 @@
   </p>
 
   <!-- ============ LOT + WANNE ============ -->
-  <div class="sec">2 · Lot der Wand und Maße der Badewanne</div>
+  <div class="sec">2 · Lot der Wand, Armatur und Maße der Badewanne</div>
   <div class="grid2">
     <div class="card">
       <div class="ct">Steht die Wand im Lot?</div>
@@ -187,6 +188,10 @@
         <span style="color:var(--muted);font-size:9.5px">(Wasserwaage senkrecht)</span></div>
       <div class="minirow"><span class="lab">Wand kippt</span>
         <span class="dirbox"><label><input type="radio" class="rc" name="grp_d1"> zum Raum</label><label><input type="radio" class="rc" name="grp_d1"> zur Wand</label><label><input type="radio" class="rc" name="grp_d1"> gerade</label></span></div>
+      <div class="colhead" style="margin-top:6px">Armatur und Brausehalter <span style="font-weight:400;color:var(--muted);font-size:9.5px">nur bei Klapp- oder Schwenkflügel</span></div>
+      <div class="minirow"><span class="lab">Ausladung</span><input class="v" type="text"><span class="unit">mm ab fertiger Wand in den Raum</span></div>
+      <div class="minirow"><span class="lab">Höhe</span><input class="v" type="text"><span class="unit">mm über Wannenrand</span></div>
+      <div class="minirow"><span class="lab">Lage</span><input class="v" type="text"><span class="unit">mm entlang der Wanne, ab der Glas-Wand</span></div>
     </div>
     <div class="card">
       <div class="ct">Die Badewanne</div>
@@ -213,9 +218,9 @@
     </div>
     <div class="card">
       <div class="ct">Tür oder Festteil? <span style="font-weight:400;color:var(--muted);font-size:9.5px">Anschlag von außen gesehen</span></div>
-      <div class="minirow"><span class="lab">Glas 1</span>
+      <div class="minirow rolle"><span class="lab">Glas 1</span>
         <span class="dirbox"><label><input type="radio" class="rc" name="grp_rolle1"> Tür DIN links</label><label><input type="radio" class="rc" name="grp_rolle1"> Tür DIN rechts</label><label><input type="radio" class="rc" name="grp_rolle1"> Festteil</label><label><input type="radio" class="rc" name="grp_rolle1"> keins</label></span></div>
-      <div class="minirow"><span class="lab">Glas 2</span>
+      <div class="minirow rolle"><span class="lab">Glas 2</span>
         <span class="dirbox"><label><input type="radio" class="rc" name="grp_rolle2"> Tür DIN links</label><label><input type="radio" class="rc" name="grp_rolle2"> Tür DIN rechts</label><label><input type="radio" class="rc" name="grp_rolle2"> Festteil</label><label><input type="radio" class="rc" name="grp_rolle2"> keins</label></span></div>
       <div class="minirow" style="margin:1px 0"><span class="lab" style="min-width:auto;font-size:9.5px">
         Bei zwei Flügeln jede Scheibe einzeln ankreuzen, sie sind meist spiegelbildlich.</span></div>
@@ -229,9 +234,9 @@
   </div>
 
   <div class="sec" style="margin-bottom:2px">Anmerkungen / eigene Skizze
-    <span style="font-weight:400;color:var(--muted);font-size:10px">&nbsp; z. B. Klappteil gewünscht, Armatur-Lage, Fenster, Dachschräge</span>
+    <span style="font-weight:400;color:var(--muted);font-size:10px">&nbsp; z. B. Klappteil gewünscht, Brausestange, Fenster, Dachschräge</span>
   </div>
-  <div class="sketch"><span class="lab">Platz für Ihre Skizze oder Notizen</span><textarea></textarea></div>
+  <div class="sketch"><span class="lab">Platz für kurze Notizen. Eine Skizze gern auf der Rückseite oder als Foto mitschicken.</span><textarea></textarea></div>
 
   <div class="commit">
     Ich habe selbst gemessen und die Maße geprüft. Mir ist bekannt, dass die Fertigung nach diesen Angaben erfolgt und die Verantwortung für die Richtigkeit beim Auftraggeber liegt.
