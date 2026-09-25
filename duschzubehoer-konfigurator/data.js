@@ -775,6 +775,14 @@
     { id: 'smedbo-villa-schwenkbare-handtuchstange-doppelt-chrom-poliert-oder-messing-poliert-art-nr-k226', title: 'Smedbo VILLA Schwenkbare Handtuchstange, doppelt, Chrom poliert oder Messing poliert, Art.Nr. K226', handle: 'smedbo-villa-schwenkbare-handtuchstange-doppelt-chrom-poliert-oder-messing-poliert-art-nr-k226', kategorie: 'halter', montage: ['wand'], price: '85,90', desc: '', isMain: false },
     { id: 'giese-duschablage-mit-hoher-reling-einlegeboden-und-glasabzieher-schwarz-312-mm-art-nr-11829', title: 'Giese Duschablage mit hoher Reling, Einlegeboden und Glasabzieher, schwarz, 312 mm, Art.Nr. 11829', handle: 'giese-duschablage-mit-hoher-reling-einlegeboden-und-glasabzieher-schwarz-312-mm-art-nr-11829', kategorie: 'koerbe', montage: ['wand'], price: '266,00', desc: '', isMain: false },
     { id: 'giese-duschablage-mit-hoher-reling-einlegeboden-und-glasabzieher-weiss-312-mm-art-nr-11828', title: 'Giese Duschablage mit hoher Reling, Einlegeboden und Glasabzieher, weiß, 312 mm, Art.Nr. 11828', handle: 'giese-duschablage-mit-hoher-reling-einlegeboden-und-glasabzieher-weiss-312-mm-art-nr-11828', kategorie: 'koerbe', montage: ['wand'], price: '254,00', desc: '', isMain: false },
+    // 25.09.2026, Freigabe Thomas: Kategorie-Wechsel (Glasabzieher, Seifenschale,
+    // Zahnputzbecher) und Badreling-Set.
+    { id: 'glasabzieher-aus-silikon-giese-31192', title: 'Giese Glasabzieher – ergonomischer Silikon-Griff in Schwarz matt, Art.Nr. 31192-14', handle: 'glasabzieher-aus-silikon-giese-31192', kategorie: 'badzubehoer', price: '38,00', desc: '', isMain: false },
+    { id: 'home-halter-mit-seifenschale-glas-art-nr-hk342', title: 'HOME Halter mit Seifenschale, Glas, Art.Nr. HK342', handle: 'home-halter-mit-seifenschale-glas-art-nr-hk342', kategorie: 'koerbe', montage: ['wand'], price: '36,40', desc: '', isMain: false },
+    { id: 'home-halter-mit-seifenschale-porzellan-art-nr-hk342p', title: 'HOME Halter mit Seifenschale, Porzellan, Art.Nr. HK342P', handle: 'home-halter-mit-seifenschale-porzellan-art-nr-hk342p', kategorie: 'koerbe', montage: ['wand'], price: '41,00', desc: '', isMain: false },
+    { id: 'home-halter-mit-zahnputzbecher-glas-98-mm-art-nr-hk343', title: 'HOME Halter mit Zahnputzbecher, Glas 98 mm, Art.Nr. HK343', handle: 'home-halter-mit-zahnputzbecher-glas-98-mm-art-nr-hk343', kategorie: 'badzubehoer', price: '36,40', desc: '', isMain: false },
+    { id: 'home-halter-mit-zahnputzbecher-porzellan-98-mm-art-nr-hk343p', title: 'HOME Halter mit Zahnputzbecher, Porzellan 98 mm, Art.Nr. HK343P', handle: 'home-halter-mit-zahnputzbecher-porzellan-98-mm-art-nr-hk343p', kategorie: 'badzubehoer', price: '41,00', desc: '', isMain: false },
+    { id: 'badreling-set-o-19-mm-edelstahl-geburstet-oder-poliert-100-cm-komplett', title: 'Badreling-Set 100 cm – V2A Edelstahl Ø 19 mm, komplett', handle: 'badreling-set-o-19-mm-edelstahl-geburstet-oder-poliert-100-cm-komplett', kategorie: 'halter', montage: ['wand'], price: '65,90', desc: '', isMain: false },
 ];
 
     // Welle C: Wandhalter Stabistange ist Stabistangen-Teil, gehoert nicht ins Duschzubehoer-Tool.
@@ -802,7 +810,19 @@
         'smedbo-villa-wannengriff-chrom-poliert-oder-messing-poliert-art-nr-k225',
         'stabistange-rohr-19-mm-edelstahl',
         'wandhalter-reling-o-19-mm-v2a-edelstahl-art-nr-fritz',
-        'haltegriff-gewinkelt-135-grad-verchromt'
+        'haltegriff-gewinkelt-135-grad-verchromt',
+        // 25.09.2026, Freigabe Thomas: Beschreibung nennt keine Befestigung; erst nach
+        // Datenblatt oder Foto annotieren.
+        'smedbo-dry-badetuchhaken-edelstahl-verchromt-art-nr-fk731',
+        'smedbo-dry-handtuchhaken-2-stuck-edelstahl-verchromt-art-nr-fk730',
+        'smedbo-dry-multihaken-edelstahl-verchromt-art-nr-fk732',
+        'smedbo-ice-mehrzweckhaken-2-stuck-chrom-poliert-art-nr-ok3455',
+        'smedbo-pool-mehrzweckhaken-2-stuck-chrom-poliert-art-nr-zk3455',
+        'doppelte-handtuchstange-art-nr-212',
+        'gastehandtuchhalter-waagerecht-oder-senkrecht-montierbar-art-nr-300',
+        'handtuchstange-art-nr-211',
+        'schwammkorb-mit-integriertem-glasabzieher-abnehmbar-verchromt-art-nr-901-4021',
+        'smedbo-dry-ablage-edelstahl-verchromt-art-nr-fk737'
     ];
 
     const productImages = {
