@@ -36,7 +36,15 @@
         new DuschopWizard({
             mount: '#duschop-app',
             toolSlug: 'reinigung-pflege',
-            fetchProducts: function () { return DuschopShopifyClient.fetchCollectionMerged('duschglas-reinigungs-set', D.products); },
+            // Drei Collections: Einzelreiniger und Versiegelungen (Invisible Shield,
+            // BriteGuard) liegen nicht in der Set-Collection und fielen sonst weg.
+            fetchProducts: function () {
+                return DuschopShopifyClient.fetchCollectionMerged([
+                    'duschglas-reinigungs-set',
+                    'glasreiniger_dusche',
+                    'glasbeschichtungsmittel'
+                ], D.products);
+            },
 
             hero: {
                 badge: 'In 3 Schritten zum richtigen Produkt',

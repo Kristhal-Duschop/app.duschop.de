@@ -118,7 +118,12 @@
                 return DuschopShopifyClient.fetchCollectionMerged(
                     [
                         'beschlagsteile-und-scharniere-fur-duschabtrennungen-aus-glas',
-                        'schiebetursysteme-fur-glasduschen-laufschienen-rollen-und-beschlage'
+                        'schiebetursysteme-fur-glasduschen-laufschienen-rollen-und-beschlage',
+                        // Seit der Collection-Aufteilung im September liegen Griffe,
+                        // Griffmuscheln, Winkel und Emily nicht mehr in der Hauptcollection.
+                        'griff_duschtur',
+                        'haltewinkel',
+                        'drehbare-duschprofile'
                     ],
                     D.products,
                     { includeStaticOnly: true }

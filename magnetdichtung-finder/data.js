@@ -175,6 +175,44 @@
       '8': { '200 cm': 52830803460419, '250 cm': 52830803525955 }
     }
   },
+  // Schwarze Ausfuehrungen (seit 25.09.2026): dasselbe Profil 6052/6062 in Schwarz,
+  // Spaltmasse deshalb wie bei den weissen Eintraegen oben.
+  {
+    id: '6052/6062-B-180',
+    name: 'Magnetdichtung 180° fluchtend (2x 67,5°), schwarz',
+    artNr: '6052/6062-B',
+    handle: 'schwarze-tur-magnetdichtung-180-anschlag-aus-2x-67-5-magnetdichtung-1-paar-6052-6062-b',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/schwarze-tur-magnetdichtung-180-anschlag-aus-2x-67-5-magnetd_3x2_acc848fb-6195-42a0-b82d-11f9cdff1eca.png?v=1790257876',
+    glass: [6, 8],
+    angle: [180],
+    gapByGlass: { '6': [19, 21], '8': [23, 25] },
+    priceFrom: 39.90,
+    bestseller: false,
+    desc: 'Das 180°-Magnetpaar aus 67,5°-Profilen in Schwarz, passend zu schwarzen Beschlägen und Profilen.',
+    lengths: ['200 cm', '250 cm'],
+    variants: {
+      '6': { '200 cm': 52830765482307, '250 cm': 52830765547843 },
+      '8': { '200 cm': 52830765515075, '250 cm': 52830765580611 }
+    }
+  },
+  {
+    id: '6052/6062-B-135',
+    name: 'Magnetdichtung 135° für Fünfeckduschen (2x 67,5°), schwarz',
+    artNr: '6052/6062-B',
+    handle: 'schwarze-tur-magnetdichtung-135-1-paar-einer-funfeckdusche-fur-6-und-8-mm-universal-art-nr-6052-6062-b',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/D4500A32-B9E6-4464-B244-6D06F8E9392E.png?v=1742636552',
+    glass: [6, 8],
+    angle: [135],
+    gapByGlass: { '6': [9, 19], '8': [12, 24] },
+    priceFrom: 39.90,
+    bestseller: false,
+    desc: 'Das 135°-Magnetpaar für Fünfeckduschen in Schwarz, passend zu schwarzen Beschlägen und Profilen.',
+    lengths: ['200 cm', '250 cm'],
+    variants: {
+      '6': { '200 cm': 52830765220163, '250 cm': 52830765285699 },
+      '8': { '200 cm': 52830765252931, '250 cm': 52830765318467 }
+    }
+  },
   {
     id: '6092/6082-135',
     name: 'Magnetdichtung 135° (1x 45° + 1x 90°)',
@@ -262,6 +300,26 @@
     desc: 'Sonderwinkel 112° asymmetrisch, für Fünfeckduschen mit nicht-Standard-Winkel. Für 9, 10, 12 und 13 mm Glas.',
     lengths: ['200 cm'],
     variants: {}
+  },
+  {
+    id: '52091400',
+    name: 'Magnetstreifendichtung selbstklebend 180°, Set aufschiebbar + anklebbar',
+    artNr: '52091400',
+    handle: 'magnetstreifendichtung-selbstklebend-180-set-aufschiebbar-und-anklebbar-fur-glas-wand-und-glas-glas-6-8-mm-glas-art-nr-52091400',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/52091400_magnetdichtung_selbstklebend.jpg',
+    glass: [6, 8],
+    angle: [180],
+    gapByGlass: { '6': [11, 11], '8': [13, 13] },
+    gapMin: 11,
+    gapMax: 13,
+    priceFrom: 39.90,
+    bestseller: false,
+    desc: 'Für Glas-Wand: Magnetdichtung zum Aufschieben plus selbstklebender Magnetstreifen als Gegenstück auf Wand, Profil oder Glas. 6 und 8 mm, 200 oder 225 cm.',
+    lengths: ['200 cm', '225 cm'],
+    variants: {
+      '6': { '200 cm': 54833605181763, '225 cm': 54833605214531 },
+      '8': { '200 cm': 54833605181763, '225 cm': 54833605214531 }
+    }
   }
 ];
 
@@ -270,7 +328,11 @@
     // Gehoeren in metallprofile-konfigurator, nicht in magnetdichtung-finder.
     const _syncSkip = [
         'magnettragerprofil-fur-nischensituation-zum-aufstecken-einer-magnetdichtung-art-nr-74-109',
-        'magnettragerprofil-fur-nischensituation-zum-aufstecken-einer-duschturdichtung-art-nr-52-05-0300'
+        'magnettragerprofil-fur-nischensituation-zum-aufstecken-einer-duschturdichtung-art-nr-52-05-0300',
+        // Magnetstreifen 6099 ist ein Einzelstreifen zum Aufkleben, kein Dichtungspaar mit
+        // eigenem Spaltmass. Er wirkt nur mit einem Gegenstueck, das Spaltmass ergibt sich
+        // aus der Kombination. Nicht geraten, deshalb ohne Annotation (25.09.2026).
+        'magnetstreifendichtung-selbstklebend-6099-typ-a'
     ];
 
     function filterProducts(state, includeGap, list) {

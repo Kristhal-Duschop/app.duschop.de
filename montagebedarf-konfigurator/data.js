@@ -182,76 +182,8 @@
         isMain: false
     },
 
-    // === ABDICHTUNG (Mapei Nassbereich unter Fliesen) ===
-    {
-        id: 'mapei-abdichtungsbahn',
-        title: 'Mapei Mapeguard WP 200 \u2013 Abdichtungsbahn f\u00fcr Dusche & Bad',
-        handle: 'mapei_abdichtungsbahn',
-        type: 'abdichtung',
-        vorhaben: ['nassbereich'],
-        befestigung: ['bohren', 'kleben', 'beides'],
-        price: '39,90',
-        priceMax: '349,00',
-        desc: 'Hochflexible Verbund-Abdichtungsbahn f\u00fcr Wand und Boden. DIN 18534 konform. Direkt unter Fliesen verlegbar \u2013 ohne Trocknungszeit.',
-        isMain: true,
-        highlight: true
-    },
-    {
-        id: 'mapei-dichtband',
-        title: 'Mapei Mapeguard ST \u2013 Dichtband f\u00fcr Ecken & Fugen',
-        handle: 'mapei_dichtband_dusche',
-        type: 'abdichtung',
-        vorhaben: ['nassbereich'],
-        befestigung: ['bohren', 'kleben', 'beides'],
-        price: '5,90',
-        priceMax: '54,90',
-        desc: 'Elastisches Dichtband zum Abdichten von Boden-Wand-Anschl\u00fcssen und Bewegungsfugen. Wasserdicht nach DIN 18534.',
-        isMain: true
-    },
-    {
-        id: 'mapei-dichtecke-innen',
-        title: 'Mapei Dichtecke Innen \u2013 12x12 cm, 90\u00b0',
-        handle: 'mapeguard-ic-dichtecke-innen',
-        type: 'abdichtung',
-        vorhaben: ['nassbereich'],
-        befestigung: ['bohren', 'kleben', 'beides'],
-        price: '6,90',
-        desc: 'Vorgefertigte Dichtecke f\u00fcr 90\u00b0-Innenecken. Passt sich flexibel an und gew\u00e4hrleistet wasserdichte Eckabdichtung.',
-        isMain: false
-    },
-    {
-        id: 'mapei-dichtecke-aussen',
-        title: 'Mapei Mapeguard EC \u2013 Dichtecke Au\u00dfen 270\u00b0',
-        handle: 'mapeguard-ec-dichtecke-aussen-art-nr-2853025',
-        type: 'abdichtung',
-        vorhaben: ['nassbereich'],
-        befestigung: ['bohren', 'kleben', 'beides'],
-        price: '6,90',
-        desc: 'Vorgefertigte Dichtecke f\u00fcr Au\u00dfenecken. Einfach einbauen f\u00fcr l\u00fcckenlose Abdichtung an vorspringenden Ecken.',
-        isMain: false
-    },
-    {
-        id: 'mapei-manschette',
-        title: 'Mapei Mapeguard PC \u2013 Dichtmanschette Rohr 15\u201338 mm',
-        handle: 'mapeguard-pc',
-        type: 'abdichtung',
-        vorhaben: ['nassbereich'],
-        befestigung: ['bohren', 'kleben', 'beides'],
-        price: '6,95',
-        desc: 'Rohrdurchf\u00fchrungsmanschette f\u00fcr Leitungen mit 15\u201338 mm Durchmesser. Abdichtung an Rohrdurchf\u00fchrungen in Wand und Boden.',
-        isMain: false
-    },
-    {
-        id: 'mapeflex',
-        title: 'Mapei Mapeflex MS45 \u2013 Hybrid-Dichtstoff f\u00fcr Dusche & Bad',
-        handle: 'mapeflex-ms45-ms-dicht-und-klebstoff',
-        type: 'abdichtung',
-        vorhaben: ['nassbereich'],
-        befestigung: ['bohren', 'kleben', 'beides'],
-        price: '11,50',
-        desc: 'MS-Polymer Dicht- und Klebstoff. Dauerhaft elastisch, schimmelhemmend, \u00fcberstreichbar. Zum Verkleben der Abdichtungsbahn.',
-        isMain: false
-    },
+    // Mapei-Abdichtung (6 Eintraege) am 25.09.2026 entfernt: Sortiment seit 05.09.2026
+    // pausiert, Produkte auf DRAFT (Wiki entscheidung-mapei-pausiert).
 
     // === WANNENDICHTBAND ===
     {
@@ -276,6 +208,17 @@
         befestigung: ['bohren', 'kleben', 'beides'],
         price: '98,90',
         desc: 'Premium-Wannendichtband mit zus\u00e4tzlichem Schallschutz nach DIN 4109. Verhindert K\u00f6rperschall\u00fcbertragung in angrenzende R\u00e4ume.',
+        isMain: true
+    },
+    {
+        id: 'wannenabdichtband-set-trwdb',
+        title: 'Wannenabdichtband-Set 3,4 m – DIN 18534, Nass- und Trockenanbindung',
+        handle: 'wannenabdichtband-set-3-4-m-din-18534-nass-und-trockenanbindung-art-nr-trwdb',
+        type: 'wannendichtband',
+        vorhaben: ['duschwanne'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '49,90',
+        desc: 'Komplettes Set für die Wannenanbindung nach DIN 18534: selbstklebendes Wannenabdichtband 80 mm plus Vliesstreifen, für Nass- und Trockenanbindung vor dem Verfliesen.',
         isMain: true
     },
     {
@@ -367,12 +310,6 @@
     'care-silikonspray': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Silikonspray.jpg?v=1753604050',
     'fugenabdeckprofil-pvc-weiss-bp25-ubergang-duschwanne-zu-fliesenwand': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Fugenprofil_PP_9_efe00c7a-6557-4d14-abdc-295a5d614b95.png?v=1773215506',
     'zubehor-set-fur-fugenabdeckprofil-bpt-25-innenecke-endkappen-weiss': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BPT25_7b86427c-99e0-4663-acb2-886450f4550e.png?v=1776160821',
-    'mapei_abdichtungsbahn': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Abdichtung_unter_Fliese_1.png?v=1767877044',
-    'mapei_dichtband_dusche': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Abdichtung_unter_Fliese_9.png?v=1767877096',
-    'mapeguard-ic-dichtecke-innen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Abdichtung_unter_Fliese_6.png?v=1767877140',
-    'mapeguard-ec-dichtecke-aussen-art-nr-2853025': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Abdichtung_unter_Fliese_2.png?v=1767877178',
-    'mapeguard-pc': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Manschette_1.png?v=1767878275',
-    'mapeflex-ms45-ms-dicht-und-klebstoff': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Polymerkleber.png?v=1767878721',
     'densaband_basis': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Densaband_Basic3_18d751b6-32ec-444a-9543-98ba098c5d79.jpg?v=1770049307',
     'densaband_schallschutz-dichtband': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Densaband_Schallschutz_3.jpg?v=1770048794',
     'densaband-bohrlochset': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Bohrlochset1.jpg?v=1746171064',

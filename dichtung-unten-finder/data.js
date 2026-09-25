@@ -100,6 +100,25 @@
     }
   },
   {
+    id: '009C',
+    name: 'Duschdichtung mit Wasserabweislippe & Abtropfkante',
+    artNr: '009C',
+    handle: 'duschdichtung-mit-dreieckiger-wasserabweislippe-abtropfkante-und-dichtlippe-unten-art-nr-009c',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/009C_foto.jpg?v=1787057585',
+    glass: [6, 8],
+    gapMin: 9, gapMax: 10,
+    form: 'gerade',
+    doorType: ['dreh'],
+    priceFrom: 11.90,
+    bestseller: false,
+    desc: 'Dreieckige Wasserabweislippe (ca. 13 mm) mit Abtropfkante plus Dichtlippe unten, für einen Bodenspalt von 9 bis 10 mm.',
+    lengths: ['65 cm', '100 cm'],
+    variants: {
+      '6': { '65 cm': 54753116062019, '100 cm': 54753123369283 },
+      '8': { '65 cm': 54753123402051, '100 cm': 54753123434819 }
+    }
+  },
+  {
     id: '009A2',
     name: 'Schleiflippendichtung mit Wasserabweiser',
     artNr: '009A2',
@@ -335,7 +354,7 @@
     id: '3249G',
     name: 'Gebogene Duschdichtung Rinnenform kürzbare Lippe',
     artNr: '3249G',
-    handle: 'gebogene-dusch-turdichtung-fur-6-u-8-mm-glas-mit-abtropfleiste-in-rinnenform-und-doppelter-lippe-nach-unten-kurz-u-lang-98-5-cm-fur-6-und-8-mm-universal-art-nr-3249g',
+    handle: 'dichtung-viertelkreis-gebogen-passend-kermi-pasa-3249g',
     image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/3249geb2.jpg',
     glass: [6, 8],
     gapMin: 8, gapMax: 15,
@@ -373,7 +392,7 @@
     id: '4269G',
     name: 'Gebogene Bodendichtung 2-flg. Viertelkreis 4/5 mm | 1 Paar',
     artNr: '4269G',
-    handle: 'gebogene-dusch-turdichtung-fur-2-flg-viertelkreisduschen-mit-4-u-5-mm-glasdicke-mit-sehr-kurzer-abtropfleiste-1-paar-2-tlg-4269g',
+    handle: 'dichtung-viertelkreis-passend-kermi-ibiza-2000-nova-2000-4269g',
     image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/E2268312-7733-4651-BADD-1140EB2283A2.png',
     glass: [4, 5],
     gapMin: 3, gapMax: 5,
@@ -393,7 +412,7 @@
   { id: '5101-135', name: 'Gebogene Bodendichtung 5101.135 (Fünfeck 135°)', artNr: '5101.135', handle: 'gebogene-dusch-turdichtung-135-fur-funfeckduschen-art-nr-5101-135', image: '', glass: [8], form: ['gebogen'], doorType: ['dreh'], gapMin: 14, gapMax: 16, priceFrom: 33.50, desc: 'Gebogen 135° für Fünfeckduschen, verstärkte Lippe, Einzelstück oder Paar.' },
   { id: 'S009B1', name: 'Polycarbonat-Bodendichtung S009B1', artNr: 'S009B1', handle: 'duschdichtung-mit-doppelten-dichtgummi-unten-hochtransparent-glasklar-art-nr-s009b1', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 7, gapMax: 9, priceFrom: 12.30, desc: 'Polycarbonat hochtransparent, doppelte Lippe, Spalt 7–9 mm, in 65/100 cm.' },
   { id: '8879', name: 'Duschdichtung 8879 kurze Lippe', artNr: '8879', handle: 'dusch-turdichtung-mit-kurzer-abtropfleiste-und-kurzer-lippe-nach-unten-art-nr-8879', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 3, gapMax: 5, priceFrom: 14.90, desc: 'Kurze Abtropfleiste und kurze Lippe nach unten, Spalt ca. 4 mm.' },
-  { id: '3249', name: 'Duschdichtung 3249 Rinnenform', artNr: '3249', handle: 'dusch-turdichtung-fur-6-u-8-mm-glas-mit-abtropfleiste-in-rinnenform-und-doppelter-lippe-nach-unten-kurz-u-lang-98-5-cm-fur-6-und-8-mm-universal-art-nr-3249', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 5, gapMax: 16, priceFrom: 49.90, desc: 'Abtropfleiste in Rinnenform mit doppelter Lippe nach unten, kurz und lang, 98,5 cm.' },
+  { id: '3249', name: 'Duschdichtung 3249 Rinnenform', artNr: '3249', handle: 'dichtung-duschtuer-unten-passend-kermi-atea-pasa-3249', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 5, gapMax: 16, priceFrom: 49.90, desc: 'Abtropfleiste in Rinnenform mit doppelter Lippe nach unten, kurz und lang, 98,5 cm.' },
   { id: '956-914', name: 'Polycarbonat-Bodendichtung 956/914', artNr: '956/914', handle: 'duschdichtung-mit-doppelten-dichtgummi-unten-und-abtropfleiste-aus-hartem-kunststoff-art-nr-956-914', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 9, gapMax: 10, priceFrom: 15.90, desc: 'Doppelte Lippe mit Abtropfleiste aus hartem Kunststoff, Spalt 9–10 mm.' },
   { id: '009B3', name: 'Universaldichtung 009B3 (5 mm Raster)', artNr: '009B3', handle: 'universaldichtung-mit-anpassbarer-langer-lippe-5-mm-raster-und-abtropfleiste-oben-art-nr-009b3', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 19, gapMax: 25, priceFrom: 14.90, desc: 'Anpassbare lange Lippe im 5 mm Raster, Abtropfleiste oben, Spalt 19–25 mm.' },
   { id: '5102-135', name: 'Gebogene Bodendichtung 5102.135 (Fünfeck 135° Schleiflippe)', artNr: '5102.135', handle: 'gebogene-dusch-turdichtung-135-fur-funfeckduschen-art-nr-5102-135', image: '', glass: [8], form: ['gebogen'], doorType: ['dreh'], gapMin: 12, gapMax: 13, priceFrom: 33.50, desc: 'Gebogen 135° für Fünfeckduschen mit Schleiflippe, Einzelstück oder Paar.' },

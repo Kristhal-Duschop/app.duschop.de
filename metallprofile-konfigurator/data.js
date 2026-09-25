@@ -148,6 +148,32 @@
         isMain: true
     },
     {
+        id: 'klemmprofil-cr-eumbset',
+        title: 'Klemmen-Set f\u00fcr Klemmprofil Typ CR, 10 Klemmen f\u00fcr 4 m \u2013 Art.Nr. EUMBSET',
+        handle: 'klemmen-set-fur-klemmprofil-typ-cr-art-nr-eumbset',
+        type: 'klemmprofil',
+        material: 'alu',
+        einbau: 'auf-fliese',
+        colors: ['chrom-poliert','schwarz-matt','edelstahl-gebuerstet'],
+        abschluss: ['klemmung'],
+        price: '64,90',
+        desc: 'Macht aus dem 8-mm-Set ein Klemmprofil f\u00fcr 10, 12 oder 12,76 mm Glas. Profil und Abdeckprofile bleiben, nur die Klemmen werden getauscht.',
+        isMain: false
+    },
+    {
+        id: 'klemmprofil-cr-eumbec',
+        title: 'Endkappen f\u00fcr Klemmprofil Typ CR, 2 St\u00fcck \u2013 Art.Nr. EUMBEC',
+        handle: 'endkappen-fur-klemmprofil-typ-cr-art-nr-eumbec',
+        type: 'klemmprofil',
+        material: 'alu',
+        einbau: 'auf-fliese',
+        colors: ['chrom-poliert','edelstahl-gebuerstet'],
+        abschluss: ['klemmung'],
+        price: '4,90',
+        desc: 'Endkappen in der Glasdicke des Profils (8, 10, 12 oder 12,76 mm), zum Nachkaufen oder nach dem Umr\u00fcsten mit dem Klemmen-Set.',
+        isMain: false
+    },
+    {
         id: 'klemmprofil-gr-eckig',
         title: 'Klemmprofil-Set Typ GR mit eckigen Abdeckprofilen \u2013 Art.Nr. 74127',
         handle: 'klemmprofil-set-mit-eckigen-abdeckprofilen-art-nr-74127',
@@ -177,7 +203,7 @@
     {
         id: 'led-klemmprofil-eckig',
         title: 'LED-Klemmprofil-Set mit eckigen Abdeckprofilen \u2013 inkl. L-Profil f\u00fcr LED',
-        handle: 'led-klemmprofil-set-mit-eckigen-abdeckprofilen-typ-gr-fur-glasdicke-8-mm-inkl-l-profil-13-x-13-mm-fur-led-lichtband',
+        handle: 'klemmprofil-set-mit-eckigen-abdeckprofilen-art-nr-74127',
         type: 'klemmprofil',
         material: 'alu',
         einbau: 'auf-fliese',
@@ -191,7 +217,7 @@
     {
         id: 'led-klemmprofil-rund',
         title: 'LED-Klemmprofil-Set mit abgerundeten Abdeckprofilen \u2013 inkl. L-Profil f\u00fcr LED',
-        handle: 'led-klemmprofil-set-mit-abgerundeten-abdeckprofilen-fur-wandbefestigung-art-nr-74128',
+        handle: 'klemmprofil-set-mit-abgerundeten-abdeckprofilen-fur-wandbefestigung-art-nr-74128',
         type: 'klemmprofil',
         material: 'alu',
         einbau: 'auf-fliese',
@@ -274,8 +300,8 @@
     'klemmprofil-set-mit-abdeckprofilen-art-nr-eumb': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8115.png?v=1766944402',
     'klemmprofil-set-mit-eckigen-abdeckprofilen-art-nr-74127': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/127_2024-06-09T08_59_03.530Z.png?v=1742635526',
     'klemmprofil-set-mit-abgerundeten-abdeckprofilen-fur-wandbefestigung-art-nr-74128': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/GR-Profil_rund.jpg?v=1763023810',
-    'led-klemmprofil-set-mit-eckigen-abdeckprofilen-typ-gr-fur-glasdicke-8-mm-inkl-l-profil-13-x-13-mm-fur-led-lichtband': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Klemmprofil_4.jpg?v=1763023712',
-    'led-klemmprofil-set-mit-abgerundeten-abdeckprofilen-fur-wandbefestigung-art-nr-74128': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/GR-Profil_rund.jpg?v=1763023810',
+    'klemmprofil-set-mit-eckigen-abdeckprofilen-art-nr-74127': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Klemmprofil_4.jpg?v=1763023712',
+    'klemmprofil-set-mit-abgerundeten-abdeckprofilen-fur-wandbefestigung-art-nr-74128': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/GR-Profil_rund.jpg?v=1763023810',
     // Zubeh\u00f6r
     'sanitaer-silikon-otto-s100-premium-qualitat-300-ml': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/S100.png?v=1770918900',
     'transparente-unterlagen-fur-rahmenlose-glasduschen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_8afe7acc-8818-46bf-ad58-e05d0f0569b9.jpg?v=1757793855'

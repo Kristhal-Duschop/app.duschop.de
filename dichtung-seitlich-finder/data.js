@@ -424,6 +424,8 @@
   { id: '6062-6072-112', name: 'Magnetdichtung 6062/6072 112° Sonderwinkel', artNr: '6062/6072', handle: 'magnetdichtungspaar_112grad_sonderwinkel', glass: [9,10,12,13], application: ['glas-glas'], doorType: ['dreh'], arrangement: ['fluchtend'], gapMin: 16, gapMax: 18, priceFrom: 39.90, desc: 'Magnetdichtung 112° Sonderwinkel asymmetrisch, für Fünfeckduschen mit nicht-Standard-Winkel.' },
   { id: '8857', name: 'Lippendichtung 8857 180° fluchtend mit kurzer U-Schiene', artNr: '8857', handle: 'lippendichtung-180-glas-glas-fluchtend-mit-kurzer-u-schiene-gewolbte-lippe-fur-8-mm-glas-art-nr-8857', glass: [8], application: ['glas-glas'], doorType: ['dreh'], arrangement: ['fluchtend'], gapMin: 5, gapMax: 11, priceFrom: 27.90, desc: 'Lippendichtung 180° fluchtend, gewölbte Lippe mit kurzer U-Schiene (ca. 5 mm Aufschub) für festen Sitz, speziell für 8 mm Glas.' }
 ,
+  { id: '52091400', name: 'Magnetstreifendichtung 52091400 180° selbstklebendes Gegenstück', artNr: '52091400', handle: 'magnetstreifendichtung-selbstklebend-180-set-aufschiebbar-und-anklebbar-fur-glas-wand-und-glas-glas-6-8-mm-glas-art-nr-52091400', glass: [6,8], application: ['glas-wand','glas-glas'], doorType: ['dreh'], arrangement: ['fluchtend'], gapMin: 11, gapMax: 13, priceFrom: 39.90, desc: 'Magnetdichtung 180° zum Aufschieben plus selbstklebender Magnetstreifen als Gegenstück auf Wand, Profil oder Glas, für 6/8 mm Glas.' }
+,
 
   // =============================================
   // POLYCARBONAT-DICHTUNGEN f\u00fcr \u00dcBERLAPPEND (Dreh+Schiebe)

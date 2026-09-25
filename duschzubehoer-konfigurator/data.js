@@ -291,6 +291,7 @@
     { id: 'vorhangstange-alu-l', title: 'Aluminium-Duschvorhangstange L-Form über Eck mit Innenlaufrohr, Art.Nr. BB-SL', handle: 'aluminium-duschvorhangstange-l-form-uber-eck-mit-innenlaufrohr-art-nr-bb-sl', kategorie: 'vorhang', price: '180,50', priceMax: '260,00', desc: 'Vorhangstange in L-Form über Eck, Innenlaufrohr, für Duschen ohne Nische.', isMain: false },
     { id: 'vorhangstange-alu-5eck', title: 'Aluminium-Duschvorhangstange 5-Eck über Eck mit Innenlaufrohr, Art.Nr. BB-S5', handle: 'aluminium-duschvorhangstange-5-eck-uber-eck-mit-innenlaufrohr-art-nr-bb-s5', kategorie: 'vorhang', price: '197,50', priceMax: '248,60', desc: 'Vorhangstange für die Fünfeck-Dusche, Innenlaufrohr, über Eck geführt.', isMain: false },
     { id: 'vorhangstange-alu-viertelkreis', title: 'Aluminium-Duschvorhangstange Viertelkreis mit Innenlaufrohr, Art.Nr. BB-SVK', handle: 'aluminium-duschvorhangstange-viertelkreis-mit-innenlaufrohr-art-nr-bb-svk', kategorie: 'vorhang', price: '305,40', priceMax: '340,50', desc: 'Gebogene Vorhangstange für die Viertelkreis-Dusche, Innenlaufrohr.', isMain: false },
+    { id: 'design-wischer-4607', title: 'Design-Wischer mit Wandhaken, Aluminium eloxiert', handle: 'design-wischer-mit-wandhaken-250-mm-aluminium-eloxiert-art-nr-900-4607-017', kategorie: 'badzubehoer', price: '37,90', desc: 'Flacher Duschwischer aus eloxiertem Aluminium, 250 mm Wischlippe, hängt an eigenem Wandhaken zum Schrauben.', isMain: false },
 ];
 
     // Welle C: Wandhalter Stabistange ist Stabistangen-Teil, gehoert nicht ins Duschzubehoer-Tool.

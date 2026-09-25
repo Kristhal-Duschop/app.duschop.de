@@ -84,11 +84,25 @@
         highlight: false
     },
 
+    {
+        id: 'intensiv-set-061023',
+        title: 'Intensiv-Set für stark verkalktes Duschglas',
+        handle: 'intensiv-set-verkalktes-duschglas-kalkloeser-stahlwolle-061023',
+        type: 'set',
+        ziel: ['reinigung'],
+        verschmutzung: ['stark'],
+        oberflaeche: ['unbeschichtet'],
+        price: '39,90',
+        desc: 'DuschBlitz 2000, saures Sanitärreiniger-Konzentrat und 2 m superfeine Stahlwolle für jahrelang festsitzenden Kalk. Nicht für beschichtetes Glas.',
+        isSet: true,
+        highlight: false
+    },
+
     // === REINIGER (Einzelprodukte) ===
     {
         id: 'duschblitz-2000',
         title: 'DuschBlitz 2000 Pflegereiniger 750 ml',
-        handle: 'duschblitz-2000-flasche-a-750-ml-art-nr-di6903015',
+        handle: 'duschkabinenreiniger-kalk-duschglas-750-ml',
         type: 'reiniger',
         ziel: ['reinigung', 'beides'],
         verschmutzung: ['leicht', 'mittel', 'stark'],
@@ -122,6 +136,19 @@
         oberflaeche: ['unbeschichtet', 'unbekannt'],
         price: '19,60',
         desc: 'Transparente Polymer-Beschichtung mit Lotuseffekt. F\u00fcllt mikroskopische Poren und verhindert, dass Kalk und Seife haften. Einfache DIY-Anwendung.',
+        isSet: false
+    },
+    {
+        id: 'briteguard-pro',
+        title: 'BriteGuard® Pro Glasversiegelung 100 oder 500 ml',
+        handle: 'briteguard_bohle',
+        type: 'beschichtung',
+        ziel: ['schutz', 'beides'],
+        verschmutzung: ['leicht', 'mittel', 'stark'],
+        oberflaeche: ['unbeschichtet', 'unbekannt'],
+        price: '19,90',
+        priceMax: '73,90',
+        desc: 'Werkstatt-Versiegelung von Bohle mit Lotuseffekt, ausgelegt auf 100.000 Wischzüge. 100 ml reichen für eine Glasdusche.',
         isSet: false
     },
     {
@@ -184,6 +211,13 @@
     { id: 'reinigungs-set-1615ssr', title: 'Reinigungs-Set für Ablagerungen und starke Verschmutzungen', handle: 'reinigungs-set-fur-ablagerungen-und-starke-verschmutzungen-mehrstufige-duschglas-reinigung-mit-saure-vorreiniger-art-nr-1615ssr', type: 'set', ziel: ['reinigung'], verschmutzung: ['mittel','stark'], oberflaeche: ['unbeschichtet'], price: '34,90', desc: 'Mehrstufige Reinigung mit saurem Vorreiniger, wenn ein einzelner Reiniger nicht mehr reicht.', isSet: true },
     { id: 'shine3-polierpaste', title: 'iWETEC Shine³ Polierpaste 500 g', handle: 'iwetec-shine-polierpaste-reinigen-polieren-und-schutzen-in-einem-arbeitsgang-500-g-art-nr-907611', type: 'reiniger', ziel: ['reinigung','schutz','beides'], verschmutzung: ['mittel','stark'], oberflaeche: ['unbeschichtet'], price: '39,90', desc: 'Reinigt, poliert und versiegelt in einem Arbeitsgang. Auch für matte Armaturen und angelaufenes Metall.' },
     { id: 'glas-versiegelung-tpc16', title: 'Glas-Versiegelung für Duschglas, 473 ml', handle: 'glas-versiegelung-fur-duschglas-wasser-und-schmutzabweisend-transparent-473-ml-art-nr-tpc16', type: 'beschichtung', ziel: ['schutz','beides'], verschmutzung: ['leicht','mittel','stark'], oberflaeche: ['unbeschichtet'], price: '32,90', desc: 'Versiegelt die Glasporen, Wasser perlt ab. Die Pflege wird spürbar leichter.' },
+    // Aus der Collection glasreiniger_dusche nachgetragen (25.09.2026). Bewusst ohne
+    // Annotation: iWETEC Abfluss-Free (Rohrreiniger, kein Duschglas-Bezug).
+    { id: 'profi-glasreiniger-eb1701', title: 'Profi-Glasreiniger Spraydose 600 ml, EB1701', handle: 'profi-glasreiniger-fur-duschglas-und-spiegel-spraydose-600-ml-art-nr-eb1701', type: 'reiniger', ziel: ['reinigung','beides'], verschmutzung: ['leicht'], oberflaeche: ['unbeschichtet','beschichtet','unbekannt'], price: '12,90', priceMax: '32,90', desc: 'Schaumreiniger aus der Glasverarbeitung, haftet an senkrechtem Glas und nimmt Fingerabdrücke und Wasserflecken streifenfrei ab.', isSet: false },
+    { id: 'radora-brillant-358', title: 'Radora Brillant Spezialreiniger 500 ml, Art. 358', handle: 'radora-brillant-fensterglanz-leicht-abrasiver-glasreiniger-gegen-silikonschleier-und-schlieren-500-ml-art-nr-358', type: 'reiniger', ziel: ['reinigung'], verschmutzung: ['mittel'], oberflaeche: ['unbeschichtet'], price: '36,90', desc: 'Leicht abrasiv, entfernt Saugnapfabdrücke, Trennmittelfilm und Silikonreste auf neuem Glas.', isSet: false },
+    { id: 'iwetec-ssr85', title: 'iWETEC SSR85 Säurereiniger-Konzentrat 1 L', handle: 'iwetec-ssr85-reiniger', type: 'reiniger', ziel: ['reinigung'], verschmutzung: ['stark'], oberflaeche: ['unbeschichtet'], price: '19,50', desc: 'Säurekonzentrat mit pH 1 gegen Kalk, Rost und Zementschleier. Nicht für beschichtetes Glas.', isSet: false },
+    { id: 'abzieher-riva', title: 'Duschabzieher Riva mit weicher Abziehlippe', handle: 'duschabzieher-duschwischer-mit-weicher-abziehlippe', type: 'zubehoer', ziel: ['schutz','beides'], verschmutzung: ['leicht','mittel','stark'], oberflaeche: ['unbeschichtet','beschichtet','unbekannt'], price: '5,90', priceMax: '6,50', desc: 'Nach jedem Duschen einmal abziehen, dann trocknet kein Kalk an. Wahlweise mit Haken.', isSet: false },
+    { id: 'abzieher-smart', title: 'Duschabzieher Smart, Silikon mit Edelstahlkern', handle: 'duschwischer-als-glasabzieher-silikonummantelt', type: 'zubehoer', ziel: ['schutz','beides'], verschmutzung: ['leicht','mittel','stark'], oberflaeche: ['unbeschichtet','beschichtet','unbekannt'], price: '17,95', desc: 'Durchgehend mit Silikon ummantelt, Edelstahlkern, mit Wandhalterung.', isSet: false },
 ];
 
     const productImages = {
@@ -193,10 +227,10 @@
     'duschblitz-bundle-doppelter-glanz-fur-streifenfreie-duschen-2x-duschblitz-3m-stahlwolle-0000-fur-sauberes-duschglas': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Reinigungs-Set_queer_Bundle.jpg',
     'kristhal-top-reinigungs-set-fur-verhartete-verschmutzungen-der-oberflachen-von-duschglasern-art-nr-061022': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/061022.png',
     'kristhal-top-reinigungs-set-fur-leicht-verschmutzte-oberflachen-von-duschglasern-art-nr-0307': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/0307.jpg',
-    'duschblitz-2000-flasche-a-750-ml-art-nr-di6903015': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschblitz_Format.jpg',
+    'duschkabinenreiniger-kalk-duschglas-750-ml': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duschblitz_Format.jpg',
     'kalkreiniger_sanitaerreiniger': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Foerch_Sanitaerreiniger11.jpg',
     'invisible-shield-nanobeschichtung-mit-lotuseffekt': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Inivisible_Shield_1.png',
-    'briteguard\u00ae-pro-500-ml-fur-glatte-und-leicht-zu-reinigende-glasoberflachen-wie-z-b-duschtrennwande-aus-glas-mit-spruhkopf': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BriteGuardExpress2.jpg',
+    'briteguard_bohle': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BriteGuardExpress2.jpg',
     'easyclean-glasbeschichtung': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Easy-Clean_2_8c1f39d4-2998-4cd0-b66d-1c6b5b148088.png',
     'kristhal-superfeine-stahlwolle-typ-0000-fur-reinigung-und-politur-von-glas-speziell-zum-saubern-von-hartnackigen-ablagerungen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Stahlwolle_3.jpg',
     'kristhal-duschglas-reinigungstuch-der-extraklasse-high-performance-tuch-40x40-cm-typ-bavariaclean': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Bavariaclean3-01.jpg'
