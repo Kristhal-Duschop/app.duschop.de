@@ -799,7 +799,7 @@
         'haken-fuer-designkoerbe-641510',
         'haltegriff-gerade-32-mm-verchromt',
         'kristhal-top-reinigungs-set-fur-leicht-verschmutzte-oberflachen-von-duschglasern-art-nr-0307',
-        'unbenannt-28-mai_21-47',
+        'klotzhebel-holz-glasmontage',
         'montage-kleber-129941',
         'sichtblende-duschkorb-129210',
         'sichtblende-duschkorb-129310',

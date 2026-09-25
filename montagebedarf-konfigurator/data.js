@@ -259,7 +259,7 @@
     {
         id: 'klotzhebel',
         title: 'Klotzhebel aus Holz',
-        handle: 'unbenannt-28-mai_21-47',
+        handle: 'klotzhebel-holz-glasmontage',
         type: 'werkzeug',
         vorhaben: ['glasdusche'],
         befestigung: ['bohren', 'kleben', 'beides'],
@@ -315,7 +315,7 @@
     'densaband-bohrlochset': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Bohrlochset1.jpg?v=1746171064',
     'handsage-vernickelt-fur-den-zuschnitt-von-duschdichtungsprofilen-art-nr-671146': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Saege_e338ee08-400f-4e58-b378-200566d23095.jpg?v=1744804681',
     'cuttermesser-fur-den-zuschnitt-von-duschdichtungsprofilen-art-nr-745118': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Cuttermesser9mm.jpg?v=1744804760',
-    'unbenannt-28-mai_21-47': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_5ee63f2c-6557-4cbf-b88c-2db05616f616.jpg?v=1748464730',
+    'klotzhebel-holz-glasmontage': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_5ee63f2c-6557-4cbf-b88c-2db05616f616.jpg?v=1748464730',
     'arbeitshandschuh-fur-montagen-transport-u-handwerkliche-tatigkeiten-typ-flex-fit-nylonfeinstrick-grau-schwarz-abriebfest-und-vielseitig-einsetzbar-art-nr-00690010x': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/HandschuheTox.jpg?v=1749129735',
     'veribor-saugheber-2-kopf-fur-glasscheiben-50-kg-tragkraft-kipphebel-art-nr-bo602-1g': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BO_602_1G_PF1_A.png?v=1784362050'
 };
