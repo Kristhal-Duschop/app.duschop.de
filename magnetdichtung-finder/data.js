@@ -224,7 +224,7 @@
     image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/6092-6082_3.png',
     glass: [6, 8],
     angle: [135],
-    gapByGlass: { '6': [15, 20], '8': [18, 24] },
+    gapByGlass: { '6': [10, 10], '8': [13, 13] },
     priceFrom: 39.90,
     bestseller: false,
     desc: 'Asymmetrische Kombination (45° + 90°) für Fünfeckduschen. Alternative zum symmetrischen 2x 67,5°-Paar.',
