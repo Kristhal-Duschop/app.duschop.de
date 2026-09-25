@@ -320,6 +320,13 @@
     'veribor-saugheber-2-kopf-fur-glasscheiben-50-kg-tragkraft-kipphebel-art-nr-bo602-1g': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BO_602_1G_PF1_A.png?v=1784362050'
 };
 
+    // Vom Annotations-Sync und vom Audit uebersprungen (25.09.2026): Waschtisch-Teile,
+    // der Finder deckt Dusche, Duschwanne und Fugen ab.
+    const _syncSkip = [
+        'schallschutzset-waschtisch-60-bis-80-cm-korperschalldammung-din-52219-art-nr-schalluniwt',
+        'waschtisch-befestigungssatz-m10-x-140-stahl-verzinkt-mit-dubel-und-mutter-art-nr-wtb'
+    ];
+
     function filterProducts(state, list) {
         return (list || products).filter(function (p) {
             if (state.vorhaben && (!p.vorhaben || p.vorhaben.indexOf(state.vorhaben) === -1)) return false;

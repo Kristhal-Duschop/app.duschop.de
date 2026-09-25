@@ -6,6 +6,10 @@
     // 8881/8882. Es liegt in der Collection der gebogenen Dichtungen, ist aber
     // ein Profil und keine Dichtung; Glasdicke und Spaltmass, auf die dieser
     // Finder filtert, gibt es dafuer nicht.
+    const _syncSkip = [
+        'schwallprofil-aus-alu-gebogen-15-x-8-mm-art-nr-8881-8882'
+    ];
+
     const GF_PRODUCTS = [
   {
     id: '5102.550',
@@ -209,6 +213,9 @@
 
     function filterProducts(state, includeGap, list) {
         return (list || GF_PRODUCTS).filter(function (p) {
+            // Live-Produkte ohne Annotation (z.B. das Schwallprofil) haben weder
+            // Glasdicke noch Form und rutschten sonst durch jeden Filter (25.09.2026).
+            if (!p.glass || !p.form) return false;
             if (state.glass != null && p.glass && p.glass.indexOf(parseInt(state.glass)) === -1) return false;
             if (state.form && p.form && p.form.indexOf(state.form) === -1) return false;
             if (includeGap !== false && state.gap != null && p.gapMin != null && p.gapMax != null) {

@@ -236,6 +236,12 @@
     'kristhal-duschglas-reinigungstuch-der-extraklasse-high-performance-tuch-40x40-cm-typ-bavariaclean': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Bavariaclean3-01.jpg'
 };
 
+    // Vom Annotations-Sync und vom Audit uebersprungen (25.09.2026): iWETEC Abfluss-Free
+    // ist ein Abflussreiniger, bewusst ohne Annotation.
+    const _syncSkip = [
+        'iwetec-abfluss-free-1-liter'
+    ];
+
     function filterProducts(state, list) {
         return (list || products).filter(function (p) {
             if (state.ziel && (!p.ziel || p.ziel.indexOf(state.ziel) === -1)) return false;
