@@ -6,7 +6,7 @@
 <link rel="icon" type="image/png" href="/Kristhal_Logo_Symbol_trans.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <title>Montagebedarf-Finder | duschop.de</title>
-    <meta name="description" content="Das passende Montagematerial f&uuml;r Ihre Glasdusche, Duschwanne, Nassbereich oder Fugen finden, D&uuml;bel, Schrauben, Kleber, Silikon oder Abdichtung in 2 Schritten.">
+    <meta name="description" content="Das passende Montagematerial f&uuml;r Ihre Glasdusche, Duschwanne oder Silikonfugen finden, D&uuml;bel, Schrauben, Kleber, Silikon oder Dichtb&auml;nder in 2 Schritten.">
     <link rel="stylesheet" href="../assets/duschop.css">
     <style>html, body { margin: 0; padding: 0; } body { background: var(--duschop-bg, #f8f6f3); }</style>
 </head>
@@ -64,12 +64,17 @@
                             desc: 'Duschwanne oder Duschrinne einbauen, Wandanschluss normgerecht abdichten.',
                             icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 28L36 28"/><path d="M6 28L6 32C6 34 8 36 10 36L30 36C32 36 34 34 34 32L34 28"/><path d="M8 28L8 20C8 18 10 16 12 16L28 16C30 16 32 18 32 20L32 28"/></svg>'
                         },
-                        {
-                            value: 'nassbereich',
-                            label: 'Nassbereich abdichten',
-                            desc: 'Wand und Boden unter Fliesen wasserdicht machen (DIN 18534).',
-                            icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="28" height="28" rx="2" fill="none"/><path d="M16 10L20 6L24 10" stroke="#c8956c" stroke-width="2" fill="none"/><path d="M20 6L20 20"/><circle cx="20" cy="24" r="2" fill="#c8956c" opacity="0.4"/></svg>'
-                        },
+                        // 'Nassbereich abdichten' seit 25.09.2026 ausgeblendet: ohne Mapei (pausiert
+                        // seit 05.09.2026, Wiki entscheidung-mapei-pausiert) fuehrt der Shop keine
+                        // Flaechenabdichtung, die Option zeigte nur Bohrlochset und Cuttermesser.
+                        // Rueckkehr: Block einkommentieren und 'nassbereich' wieder in die
+                        // vorhaben der Abdichtprodukte in data.js aufnehmen.
+                        // {
+                        //     value: 'nassbereich',
+                        //     label: 'Nassbereich abdichten',
+                        //     desc: 'Wand und Boden unter Fliesen wasserdicht machen (DIN 18534).',
+                        //     icon: '<svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="28" height="28" rx="2" fill="none"/><path d="M16 10L20 6L24 10" stroke="#c8956c" stroke-width="2" fill="none"/><path d="M20 6L20 20"/><circle cx="20" cy="24" r="2" fill="#c8956c" opacity="0.4"/></svg>'
+                        // },
                         {
                             value: 'fugen',
                             label: 'Silikonfugen erneuern',
