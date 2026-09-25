@@ -97,15 +97,27 @@
             ],
 
             match: function (state, allProducts) {
-                var matched = D.filterProducts(state, undefined, allProducts);
+                // Spaltmass sortiert statt filtert: passende Dichtungen (Shopwert je
+                // Glasdicke, +-1 mm) stehen oben, die uebrigen bleiben mit ihrem
+                // Spaltmass sichtbar, falls ungenau gemessen wurde.
+                var matched = D.filterProducts(state, false, allProducts);
+                function spalt(p) { return p.gapByGlass && p.gapByGlass[state.glass]; }
+                function passt(p) {
+                    var r = spalt(p), g = parseFloat(state.gap);
+                    return !!r && !isNaN(g) && g >= r[0] - 1 && g <= r[1] + 1;
+                }
                 matched.sort(function (a, b) {
+                    if (passt(a) !== passt(b)) return passt(a) ? -1 : 1;
                     if (a.bestseller && !b.bestseller) return -1;
                     if (!a.bestseller && b.bestseller) return 1;
                     return 0;
                 });
                 return matched.map(function (p, idx) {
                     var badges = [];
-                    if (p.bestseller) badges.push({ type: 'perfect', text: 'Bestseller' });
+                    var r = spalt(p);
+                    if (passt(p)) badges.push({ type: 'perfect', text: 'Passt zu Ihrem Spalt' });
+                    else if (r) badges.push({ text: 'Spaltmaß ' + (r[0] === r[1] ? 'ca. ' + r[0] : r[0] + '–' + r[1]) + ' mm' });
+                    if (p.bestseller) badges.push({ type: 'match', text: 'Bestseller' });
                     badges.push({ type: 'match', text: state.angle + '°' });
                     badges.push({ type: 'match', text: 'Glas ' + state.glass + ' mm' });
                     return {

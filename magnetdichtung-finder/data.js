@@ -35,7 +35,7 @@
     image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/CA905A83-A179-47ED-A466-2CB2573064C3.png',
     glass: [6, 8, 10],
     angle: [90],
-    gapByGlass: { '6': [15, 15], '8': [17, 18], '10': [16, 16] },
+    gapByGlass: { '6': [15, 15], '8': [18, 18], '10': [16, 16] },
     priceFrom: 39.90,
     bestseller: true,
     desc: 'Unser Bestseller für 90°-Ecken. Schmaler Magnetstreifen, auch für 10 mm Glas verfügbar. In 200 cm und 250 cm.',
@@ -73,7 +73,8 @@
     glass: [6, 8],
     angle: [90],
     pendel: true,
-    gapByGlass: { '6': [18, 26], '8': [20, 28] },
+    // Shop: Luecke ca. 20 mm bei 6 und 8 mm (26/28 ist das Aussenmass Glas-Glas)
+    gapByGlass: { '6': [20, 20], '8': [20, 20] },
     priceFrom: 39.90,
     bestseller: true,
     desc: 'Speziell für Pendeltüren die nach innen UND außen öffnen. Asymmetrisches Profil (6042 + 6092), die Tür schließt in beide Richtungen magnetisch.',
@@ -165,7 +166,8 @@
     image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/IMG-8128.png',
     glass: [6, 8],
     angle: [135],
-    gapByGlass: { '6': [9, 19], '8': [12, 24] },
+    // Shop: Luecke ca. 10 / 13 mm (19/24 ist das Aussenmass Glas-Glas)
+    gapByGlass: { '6': [10, 10], '8': [13, 13] },
     priceFrom: 39.90,
     bestseller: true,
     desc: 'Speziell für Fünfeckduschen mit 135°-Winkel. Zwei 67,5°-Profile ergeben zusammen den passenden Winkel.',
@@ -203,7 +205,8 @@
     image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/D4500A32-B9E6-4464-B244-6D06F8E9392E.png?v=1742636552',
     glass: [6, 8],
     angle: [135],
-    gapByGlass: { '6': [9, 19], '8': [12, 24] },
+    // Shop: Luecke ca. 10 / 13 mm (19/24 ist das Aussenmass Glas-Glas)
+    gapByGlass: { '6': [10, 10], '8': [13, 13] },
     priceFrom: 39.90,
     bestseller: false,
     desc: 'Das 135°-Magnetpaar für Fünfeckduschen in Schwarz, passend zu schwarzen Beschlägen und Profilen.',
@@ -290,14 +293,17 @@
     artNr: '6062/6072',
     handle: 'magnetdichtungspaar_112grad_sonderwinkel',
     image: '',
-    glass: [9, 10, 12, 13],
+    // Shop: 6 und 8 mm Glas, Spaltmass ca. 9 / 13 mm (vorher standen die Spalt-Tags als
+    // Glasdicken hier). 112 Grad ist im Wizard nicht waehlbar, der Eintrag bleibt, damit
+    // das Produkt nicht als unannotiert in jeder Trefferliste erscheint.
+    glass: [6, 8],
     angle: [112],
-    gapByGlass: { '9': [16, 18], '10': [16, 18], '12': [16, 18], '13': [16, 18] },
-    gapMin: 16,
-    gapMax: 18,
+    gapByGlass: { '6': [9, 9], '8': [13, 13] },
+    gapMin: 9,
+    gapMax: 13,
     priceFrom: 39.90,
     bestseller: false,
-    desc: 'Sonderwinkel 112° asymmetrisch, für Fünfeckduschen mit nicht-Standard-Winkel. Für 9, 10, 12 und 13 mm Glas.',
+    desc: 'Sonderwinkel 112° asymmetrisch, für Fünfeckduschen mit nicht-Standard-Winkel. Für 6 und 8 mm Glas.',
     lengths: ['200 cm'],
     variants: {}
   },
@@ -337,6 +343,9 @@
 
     function filterProducts(state, includeGap, list) {
         return (list || PRODUCTS).filter(function (p) {
+            // Live-Produkte ohne Annotation (z.B. _syncSkip) haben weder Winkel noch
+            // Glasdicke und rutschten sonst durch jeden Filter.
+            if (!p.angle || !p.glass) return false;
             if (state.angle != null && p.angle && p.angle.indexOf(parseInt(state.angle)) === -1) return false;
             if (state.glass != null && p.glass && p.glass.indexOf(parseInt(state.glass)) === -1) return false;
             if (includeGap !== false && state.gap != null && p.gapMin != null && p.gapMax != null) {
