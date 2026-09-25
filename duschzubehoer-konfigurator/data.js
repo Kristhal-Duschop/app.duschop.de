@@ -525,7 +525,8 @@
             { value: 'wand', name: 'Wandmontage (Bohren)', desc: 'Klassische Befestigung mit Schrauben und D\u00fcbeln. Maximaler Halt, dauerhaft.', meta: 'Bohren & Schrauben', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><path d="M8 32L18 22"/><path d="M18 22L28 12"/><circle cx="30" cy="10" r="3" fill="none"/></svg>' },
             { value: 'glas', name: 'An Glaswand einh\u00e4ngen', desc: 'Einfach \u00fcber die Glaskante h\u00e4ngen. Kein Bohren, kein Kleben. Flexibel repositionierbar.', meta: 'Ohne Bohren', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="16" y="4" width="3" height="32" fill="none"/><path d="M19 12L30 12L30 28L19 28"/><path d="M22 16L26 16" opacity="0.4"/><path d="M22 20L26 20" opacity="0.4"/><path d="M22 24L26 24" opacity="0.4"/></svg>' },
             { value: 'brausestange', name: 'An Brausestange', desc: 'Montage an der bestehenden Brausestange. Kein Bohren, sofort einsatzbereit.', meta: 'Ohne Bohren', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><path d="M20 4L20 36"/><path d="M14 14L26 14L26 28L14 28Z" fill="none"/><path d="M16 18L24 18" opacity="0.4"/><path d="M16 22L24 22" opacity="0.4"/></svg>' },
-            { value: 'kleben', name: 'Selbstklebend', desc: 'Einfach auf die Fliesenwand kleben. Kein Werkzeug n\u00f6tig.', meta: 'Ohne Bohren', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="10" y="10" width="20" height="20" rx="2" fill="none"/><path d="M15 20L25 20" opacity="0.4"/><path d="M20 15L20 25" opacity="0.4"/></svg>' }
+            { value: 'kleben', name: 'Selbstklebend', desc: 'Einfach auf die Fliesenwand kleben. Kein Werkzeug n\u00f6tig.', meta: 'Ohne Bohren', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="10" y="10" width="20" height="20" rx="2" fill="none"/><path d="M15 20L25 20" opacity="0.4"/><path d="M20 15L20 25" opacity="0.4"/></svg>' },
+            { value: 'andere', name: 'Andere Befestigung', desc: 'Zum Einfliesen, für Duscharmaturen oder freistehend.', meta: 'Sonderfälle', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><circle cx="12" cy="20" r="2" fill="#c8956c"/><circle cx="20" cy="20" r="2" fill="#c8956c"/><circle cx="28" cy="20" r="2" fill="#c8956c"/></svg>' }
         ]
     },
     halter: {
@@ -535,7 +536,8 @@
         options: [
             { value: 'glas', name: 'An Glasduschwand', desc: 'Befestigung direkt an der Glaskante. Kein Bohren in die Fliese, kein Kleben.', meta: 'Glasmontage', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="16" y="4" width="3" height="32" fill="none"/><path d="M19 14L32 14"/><path d="M19 22L32 22"/></svg>' },
             { value: 'wand', name: 'Wandmontage (Bohren)', desc: 'Klassische Wandbefestigung mit Schrauben und D\u00fcbeln. Maximaler Halt.', meta: 'Bohren & Schrauben', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><path d="M8 32L18 22"/><path d="M18 22L28 12"/><circle cx="30" cy="10" r="3" fill="none"/></svg>' },
-            { value: 'kleben', name: 'Kleben / Silikon', desc: 'Befestigung mit Kleber oder Silikon-Pads. Bohrfrei, schonend f\u00fcr Fliesen.', meta: 'Ohne Bohren', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="10" y="10" width="20" height="20" rx="2" fill="none"/><path d="M15 20L25 20" opacity="0.4"/><path d="M20 15L20 25" opacity="0.4"/></svg>' }
+            { value: 'kleben', name: 'Kleben / Silikon', desc: 'Befestigung mit Kleber oder Silikon-Pads. Bohrfrei, schonend f\u00fcr Fliesen.', meta: 'Ohne Bohren', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="10" y="10" width="20" height="20" rx="2" fill="none"/><path d="M15 20L25 20" opacity="0.4"/><path d="M20 15L20 25" opacity="0.4"/></svg>' },
+            { value: 'andere', name: 'Andere Befestigung', desc: 'Für Badmöbel, mit Magnet oder als Standmodell.', meta: 'Sonderfälle', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><circle cx="12" cy="20" r="2" fill="#c8956c"/><circle cx="20" cy="20" r="2" fill="#c8956c"/><circle cx="28" cy="20" r="2" fill="#c8956c"/></svg>' }
         ]
     },
     haken: {
@@ -545,17 +547,24 @@
         options: [
             { value: 'glas', name: 'An Glasduschwand', desc: 'Einfach \u00fcber die Glaskante h\u00e4ngen. Sofort einsatzbereit, flexibel repositionierbar.', meta: 'Einh\u00e4ngen', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="16" y="4" width="3" height="32" fill="none"/><path d="M19 12L28 12L28 22"/><circle cx="28" cy="24" r="2" fill="#c8956c"/></svg>' },
             { value: 'wand', name: 'Wandmontage (Bohren)', desc: 'Haken f\u00fcr Wandbefestigung mit Schrauben und D\u00fcbeln.', meta: 'Bohren & Schrauben', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><path d="M8 32L18 22"/><path d="M18 22L28 12"/><circle cx="30" cy="10" r="3" fill="none"/></svg>' },
-            { value: 'kleben', name: 'Selbstklebend', desc: 'Selbstklebende Haken ohne Bohren. Einfach auf die Fliesenwand kleben.', meta: 'Ohne Bohren', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="10" y="10" width="20" height="20" rx="2" fill="none"/><path d="M15 20L25 20" opacity="0.4"/><path d="M20 15L20 25" opacity="0.4"/></svg>' }
+            { value: 'kleben', name: 'Selbstklebend', desc: 'Selbstklebende Haken ohne Bohren. Einfach auf die Fliesenwand kleben.', meta: 'Ohne Bohren', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><rect x="10" y="10" width="20" height="20" rx="2" fill="none"/><path d="M15 20L25 20" opacity="0.4"/><path d="M20 15L20 25" opacity="0.4"/></svg>' },
+            { value: 'andere', name: 'Andere Befestigung', desc: 'An Relingstangen Ø 19 mm eingehängt.', meta: 'Sonderfälle', icon: '<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#c8956c" stroke-width="2.5"><circle cx="12" cy="20" r="2" fill="#c8956c"/><circle cx="20" cy="20" r="2" fill="#c8956c"/><circle cx="28" cy="20" r="2" fill="#c8956c"/></svg>' }
         ]
     }
 };
+
+    const andereMontage = ['einfliesen', 'moebel', 'magnet', 'reling', 'freistehend', 'armatur'];
 
     const skipMontageCategories = ['brausen', 'hocker', 'vorhang', 'wannen', 'badzubehoer'];
 
     function filterProducts(state, list) {
         return (list || products).filter(function (p) {
             if (state.kategorie && p.kategorie !== state.kategorie) return false;
-            if (state.montage && (!p.montage || p.montage.indexOf(state.montage) === -1)) return false;
+            // 'andere' sammelt Montagearten ohne eigene Kachel (einfliesen, moebel, ...),
+            // sonst waeren diese Produkte im Wizard unerreichbar.
+            if (state.montage === 'andere') {
+                if (!p.montage || !p.montage.some(function (m) { return andereMontage.indexOf(m) !== -1; })) return false;
+            } else if (state.montage && (!p.montage || p.montage.indexOf(state.montage) === -1)) return false;
             return true;
         });
     }
