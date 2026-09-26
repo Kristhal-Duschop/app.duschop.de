@@ -38,6 +38,8 @@
     // State (LocalStorage-basierte Cross-Tool-Persistenz)
     // ============================================================
     var STATE_KEY = 'duschop:state:v1';
+    // Treffer, die sofort sichtbar sind; der Rest kommt per „Weitere anzeigen“.
+    var RESULTS_LIMIT = 30;
     var STATE_TTL = 1000 * 60 * 60 * 24 * 7; // 7 Tage
 
     var DuschopState = {
@@ -903,17 +905,28 @@
         if (this.results.length === 0) {
             html += this._renderNoResults();
         } else {
+            // Alle Treffer rendern, ab Nr. 31 versteckt; sonst waeren sie ohne
+            // Nachladen unerreichbar, obwohl die Ueberschrift sie mitzaehlt.
             html += '<div class="duschop-products">';
-            this.results.slice(0, 30).forEach(function (item, idx) {
+            this.results.forEach(function (item, idx) {
                 html += this._renderProductCard(item, idx === 0);
             }.bind(this));
             html += '</div>';
+            if (this.results.length > RESULTS_LIMIT) {
+                html += '<div class="duschop-more" style="text-align:center;margin:24px 0;">'
+                    + '<button class="duschop-btn duschop-btn-secondary" data-action="more">Weitere '
+                    + (this.results.length - RESULTS_LIMIT) + ' Produkte anzeigen</button></div>';
+            }
         }
 
         // Conversion-Layer
         html += this._renderConversion();
 
         resultsEl.innerHTML = html;
+
+        resultsEl.querySelectorAll('.duschop-products > .duschop-product').forEach(function (card, idx) {
+            if (idx >= RESULTS_LIMIT) card.style.display = 'none';
+        });
 
         // Event-Listener für Chip-Edit
         resultsEl.querySelectorAll('[data-edit-step]').forEach(function (btn) {
@@ -960,6 +973,12 @@
         resultsEl.querySelectorAll('[data-action]').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 var action = btn.getAttribute('data-action');
+                if (action === 'more') {
+                    resultsEl.querySelectorAll('.duschop-products > .duschop-product').forEach(function (card) {
+                        card.style.display = '';
+                    });
+                    btn.parentNode.remove();
+                }
                 if (action === 'restart') selfRef._restart();
                 if (action === 'next') selfRef._next();
                 if (action === 'prev') selfRef._prev();
