@@ -497,7 +497,7 @@
                 html += (vIdx + 1);
             }
             html += '</div>';
-            html += '<div class="duschop-progress-label ' + status + '">' + this._esc(step.shortLabel || step.key) + '</div>';
+            html += '<div class="duschop-progress-label ' + status + '">' + this._esc(this._shortLabel(step)) + '</div>';
             html += '</div>';
             if (vIdx < visibleSteps.length - 1) {
                 html += '<div class="duschop-progress-line ' + (idx < this.currentStep ? 'is-done' : '') + '"></div>';
@@ -895,7 +895,7 @@
             var answer = this.answers[step.key];
             if (answer === undefined) return;
             var displayValue = this._getAnswerDisplay(step, answer);
-            html += '<div class="duschop-chip"><strong>' + this._esc(step.shortLabel || step.key) + ':</strong> ' + this._esc(displayValue) + ' <button class="duschop-chip-edit" data-edit-step="' + idx + '" title="Ändern">✕</button></div>';
+            html += '<div class="duschop-chip"><strong>' + this._esc(this._shortLabel(step)) + ':</strong> ' + this._esc(displayValue) + ' <button class="duschop-chip-edit" data-edit-step="' + idx + '" title="Ändern">✕</button></div>';
         }.bind(this));
         html += '</div>';
 
@@ -1049,6 +1049,13 @@
             if (opt) return opt.label;
         }
         return value;
+    };
+
+    // Kurzname eines Schritts für Fortschrittsleiste und Filter-Chips. Optional
+    // shortLabelFn(answers), wenn der Name von einer früheren Antwort abhängt.
+    DuschopWizard.prototype._shortLabel = function (step) {
+        if (typeof step.shortLabelFn === 'function') return step.shortLabelFn(this.answers);
+        return step.shortLabel || step.key;
     };
 
     DuschopWizard.prototype._esc = function (str) {

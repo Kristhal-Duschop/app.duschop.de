@@ -783,6 +783,14 @@
     { id: 'home-halter-mit-zahnputzbecher-glas-98-mm-art-nr-hk343', title: 'HOME Halter mit Zahnputzbecher, Glas 98 mm, Art.Nr. HK343', handle: 'home-halter-mit-zahnputzbecher-glas-98-mm-art-nr-hk343', kategorie: 'badzubehoer', art: 'seife', price: '36,40', desc: '', isMain: false },
     { id: 'home-halter-mit-zahnputzbecher-porzellan-98-mm-art-nr-hk343p', title: 'HOME Halter mit Zahnputzbecher, Porzellan 98 mm, Art.Nr. HK343P', handle: 'home-halter-mit-zahnputzbecher-porzellan-98-mm-art-nr-hk343p', kategorie: 'badzubehoer', art: 'seife', price: '41,00', desc: '', isMain: false },
     { id: 'badreling-set-o-19-mm-edelstahl-geburstet-oder-poliert-100-cm-komplett', title: 'Badreling-Set 100 cm – V2A Edelstahl Ø 19 mm, komplett', handle: 'badreling-set-o-19-mm-edelstahl-geburstet-oder-poliert-100-cm-komplett', kategorie: 'halter', montage: ['wand'], price: '65,90', desc: '', isMain: false },
+    // 26.09.2026, Freigabe Thomas: Befestigung per Herstellerangabe belegt (Smedbo: Assembly Screw,
+    // screws included; Avenarius 9014021010: Wandmontage zum Schrauben).
+    { id: 'smedbo-ice-mehrzweckhaken-2-stuck-chrom-poliert-art-nr-ok3455', title: 'Smedbo ICE Mehrzweckhaken, 2 Stück, Chrom poliert, Art.Nr. OK3455', handle: 'smedbo-ice-mehrzweckhaken-2-stuck-chrom-poliert-art-nr-ok3455', kategorie: 'haken', montage: ['wand'], price: '20,00', desc: '', isMain: false },
+    { id: 'smedbo-pool-mehrzweckhaken-2-stuck-chrom-poliert-art-nr-zk3455', title: 'Smedbo POOL Mehrzweckhaken, 2 Stück, Chrom poliert, Art.Nr. ZK3455', handle: 'smedbo-pool-mehrzweckhaken-2-stuck-chrom-poliert-art-nr-zk3455', kategorie: 'haken', montage: ['wand'], price: '19,10', desc: '', isMain: false },
+    { id: 'doppelte-handtuchstange-art-nr-212', title: 'Doppelte Handtuchstange, Art.Nr. 212', handle: 'doppelte-handtuchstange-art-nr-212', kategorie: 'halter', montage: ['wand'], price: '101,70', desc: '', isMain: false },
+    { id: 'gastehandtuchhalter-waagerecht-oder-senkrecht-montierbar-art-nr-300', title: 'Gästehandtuchhalter, waagerecht oder senkrecht montierbar, Art.Nr. 300', handle: 'gastehandtuchhalter-waagerecht-oder-senkrecht-montierbar-art-nr-300', kategorie: 'halter', montage: ['wand'], price: '66,00', desc: '', isMain: false },
+    { id: 'handtuchstange-art-nr-211', title: 'Handtuchstange, Art.Nr. 211', handle: 'handtuchstange-art-nr-211', kategorie: 'halter', montage: ['wand'], price: '63,80', desc: '', isMain: false },
+    { id: 'schwammkorb-mit-integriertem-glasabzieher-abnehmbar-verchromt-art-nr-901-4021', title: 'Schwammkorb mit integriertem Glasabzieher, abnehmbar, verchromt, Art.Nr. 901 4021', handle: 'schwammkorb-mit-integriertem-glasabzieher-abnehmbar-verchromt-art-nr-901-4021', kategorie: 'koerbe', montage: ['wand'], price: '199,00', desc: '', isMain: false },
 ];
 
     // Welle C: Wandhalter Stabistange ist Stabistangen-Teil, gehoert nicht ins Duschzubehoer-Tool.
@@ -811,17 +819,11 @@
         'stabistange-rohr-19-mm-edelstahl',
         'wandhalter-reling-o-19-mm-v2a-edelstahl-art-nr-fritz',
         'haltegriff-gewinkelt-135-grad-verchromt',
-        // 25.09.2026, Freigabe Thomas: Beschreibung nennt keine Befestigung; erst nach
-        // Datenblatt oder Foto annotieren.
+        // 26.09.2026: Zubehoer zum Einhaengen am Smedbo DRY Handtuchwaermer (FK700 ff.),
+        // keine eigene Befestigung, ohne Waermer nicht nutzbar.
         'smedbo-dry-badetuchhaken-edelstahl-verchromt-art-nr-fk731',
         'smedbo-dry-handtuchhaken-2-stuck-edelstahl-verchromt-art-nr-fk730',
         'smedbo-dry-multihaken-edelstahl-verchromt-art-nr-fk732',
-        'smedbo-ice-mehrzweckhaken-2-stuck-chrom-poliert-art-nr-ok3455',
-        'smedbo-pool-mehrzweckhaken-2-stuck-chrom-poliert-art-nr-zk3455',
-        'doppelte-handtuchstange-art-nr-212',
-        'gastehandtuchhalter-waagerecht-oder-senkrecht-montierbar-art-nr-300',
-        'handtuchstange-art-nr-211',
-        'schwammkorb-mit-integriertem-glasabzieher-abnehmbar-verchromt-art-nr-901-4021',
         'smedbo-dry-ablage-edelstahl-verchromt-art-nr-fk737',
         // 25.09.2026, Pruefliste Runde 1 "draussen" (Freigabe Thomas): ohne Duschbezug
         // (Montagematerial, Handtuchwaermer, Ersatzteile, Schiebetuer, Waschtisch,

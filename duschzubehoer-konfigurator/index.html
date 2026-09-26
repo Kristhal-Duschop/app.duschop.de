@@ -122,6 +122,10 @@
                 {
                     key: 'montage',
                     shortLabel: 'Montage',
+                    // Bad/WC filtert nach Produktart statt nach Montage
+                    shortLabelFn: function (state) {
+                        return state.kategorie === 'badzubehoer' ? 'Produktart' : 'Montage';
+                    },
                     questionFn: function (state) {
                         var cfg = D.montageConfig[state.kategorie];
                         return cfg ? cfg.title : 'Wie soll das Zubehör befestigt werden?';
