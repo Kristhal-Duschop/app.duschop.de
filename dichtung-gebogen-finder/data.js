@@ -105,7 +105,7 @@
     id: '3249G',
     name: 'Gebogene Duschdichtung Rinnenform kürzbare Lippe',
     artNr: '3249G',
-    handle: 'dichtung-viertelkreis-gebogen-passend-kermi-pasa-3249g',
+    handle: 'duschdichtung-viertelkreis-gebogen-rinnenform-6-8-mm-glas',
     image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/3249geb2.jpg',
     glass: [6, 8],
     gapMin: 8, gapMax: 15,
