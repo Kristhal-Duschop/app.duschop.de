@@ -29,6 +29,15 @@
     return window.location.pathname || '/';
   }
 
+  // Nur der Hostname der Herkunft, nie Pfad oder Parameter (gclid, _gl, fbclid sind Personendaten)
+  function getReferrerHost() {
+    try {
+      return document.referrer ? new URL(document.referrer).hostname : '';
+    } catch (e) {
+      return '';
+    }
+  }
+
   function send(payload) {
     payload.timestamp = new Date().toISOString();
     try {
@@ -51,7 +60,7 @@
   send({
     type: 'pageview',
     page: getPage(),
-    referrer: document.referrer || '',
+    referrer: getReferrerHost(),
     screen: window.innerWidth + 'x' + window.innerHeight,
     language: navigator.language || '',
     device: getDevice()

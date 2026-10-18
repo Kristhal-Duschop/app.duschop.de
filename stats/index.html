@@ -171,10 +171,10 @@
 <div class="login-overlay" id="loginOverlay">
     <div class="login-box">
         <h2>Duschop Analytics</h2>
-        <p>Bitte Passwort eingeben</p>
-        <input type="password" id="loginPassword" placeholder="Passwort" autofocus>
+        <p>Bitte Zugangsschlüssel eingeben</p>
+        <input type="password" id="loginPassword" placeholder="Zugangsschlüssel" autofocus>
         <button onclick="checkLogin()">Anmelden</button>
-        <div class="login-error" id="loginError">Falsches Passwort</div>
+        <div class="login-error" id="loginError">Falscher Zugangsschlüssel</div>
     </div>
 </div>
 
@@ -274,8 +274,9 @@
     // Apps Script URL (gleiche URL wie der Tracker — GET liefert JSON-Daten)
     var API_URL = 'https://script.google.com/macros/s/AKfycbxOw6BDI6kCd6TfZ-owHmlJyyFpfJyhUi-pl17LSHsYFueYPBek1sBcJZQXEAFilO8/exec';
 
-    // Passwort (einfacher Schutz — kein echtes Auth-System)
-    var PASSWORD_HASH = 'e5d139fe6f57e44a9013ec030de9460280b193867ed67b1bf1a851cd6b8a80cf'; // "duschop2026"
+    // Zugangsschlüssel: wird nicht hier geprüft, sondern vom Apps Script (Skripteigenschaft STATS_TOKEN).
+    // Ohne gültigen Schlüssel liefert der Server keine Daten.
+    var TOKEN_KEY = 'duschop_stats_token';
 
     // ---- STATE ----
     var pageviews = [];
@@ -286,27 +287,26 @@
     var chartDevices = null;
 
     // ---- LOGIN ----
-    window.checkLogin = async function () {
-        var pw = document.getElementById('loginPassword').value;
-        var hash = await sha256(pw);
-        if (hash === PASSWORD_HASH) {
-            document.getElementById('loginOverlay').classList.add('hidden');
-            document.getElementById('mainContent').style.display = '';
-            sessionStorage.setItem('duschop_auth', '1');
-            loadData();
-        } else {
-            document.getElementById('loginError').style.display = 'block';
-        }
+    window.checkLogin = function () {
+        var token = document.getElementById('loginPassword').value.trim();
+        if (!token) return;
+        sessionStorage.setItem(TOKEN_KEY, token);
+        document.getElementById('loginError').style.display = 'none';
+        document.getElementById('loginOverlay').classList.add('hidden');
+        document.getElementById('mainContent').style.display = '';
+        loadData();
     };
+
+    function showLogin(error) {
+        sessionStorage.removeItem(TOKEN_KEY);
+        document.getElementById('mainContent').style.display = 'none';
+        document.getElementById('loginOverlay').classList.remove('hidden');
+        document.getElementById('loginError').style.display = error ? 'block' : 'none';
+    }
 
     document.getElementById('loginPassword').addEventListener('keydown', function (e) {
         if (e.key === 'Enter') window.checkLogin();
     });
-
-    async function sha256(str) {
-        var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-        return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
-    }
 
     // ---- DATEN LADEN ----
     window.loadData = async function () {
@@ -321,8 +321,12 @@
         document.getElementById('statusBar').textContent = 'Daten werden geladen...';
 
         try {
-            var res = await fetch(API_URL);
+            var res = await fetch(API_URL + '?token=' + encodeURIComponent(sessionStorage.getItem(TOKEN_KEY) || ''));
             var data = await res.json();
+            if (data.status === 'unauthorized') {
+                showLogin(true);
+                return;
+            }
             pageviews = (data.pageviews || []).map(function (r) {
                 return {
                     timestamp: String(r.timestamp || ''),
@@ -632,7 +636,7 @@
         var tbody = document.querySelector('#clicksTable tbody');
         tbody.innerHTML = sorted.map(function (e) {
             var pct = Math.round((e.count / max) * 100);
-            return '<tr><td>' + escHtml(e.text) + '</td><td>' + (typeLabels[e.type] || e.type) +
+            return '<tr><td>' + escHtml(e.text) + '</td><td>' + escHtml(typeLabels[e.type] || e.type) +
                 '</td><td class="count">' + e.count + '</td>' +
                 '<td><div class="bar-cell"><div class="bar-visual" style="width:' + pct + '%"></div></div></td></tr>';
         }).join('');
@@ -645,7 +649,7 @@
     }
 
     // ---- AUTO-LOGIN (nach allen Definitionen) ----
-    if (sessionStorage.getItem('duschop_auth') === '1') {
+    if (sessionStorage.getItem(TOKEN_KEY)) {
         document.getElementById('loginOverlay').classList.add('hidden');
         document.getElementById('mainContent').style.display = '';
         loadData();
