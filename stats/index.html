@@ -263,6 +263,25 @@
         </table>
     </div>
 
+    <!-- Wizard-Trichter -->
+    <div class="chart-panel" style="margin-top:24px;">
+        <div class="chart-title">Wizard-Trichter je Tool</div>
+        <table class="data-table" id="wizardTable">
+            <thead><tr><th>Tool</th><th style="text-align:right">Start</th><th style="text-align:right">Ergebnis</th><th style="text-align:right">Produktklick</th><th style="text-align:right">WhatsApp</th><th style="text-align:right">Start &rarr; Ergebnis</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Abbruchschritt -->
+    <div class="chart-panel" style="margin-top:24px;">
+        <div class="chart-title">Schritte und Abbruch je Tool</div>
+        <table class="data-table" id="stepsTable">
+            <thead><tr><th>Tool</th><th>Schritte (abgeschlossen)</th><th>Gr&ouml;&szlig;ter Verlust</th></tr></thead>
+            <tbody></tbody>
+        </table>
+        <div class="kpi-sub" style="margin-top:12px;">N&auml;herung ohne Nutzer-ID: z&auml;hlt abgeschlossene Schritte je Tool. Zur&uuml;ck-Klicks z&auml;hlen doppelt, &uuml;bersprungene Schritte fehlen.</div>
+    </div>
+
     <div class="status-bar" id="statusBar"></div>
 </main>
 
@@ -281,6 +300,7 @@
     // ---- STATE ----
     var pageviews = [];
     var clicks = [];
+    var wizard = [];
     var currentRange = 1;
     var chartViews = null;
     var chartTools = null;
@@ -346,10 +366,20 @@
                     target_url: r.target_url || ''
                 };
             });
+            wizard = (data.wizard || []).map(function (r) {
+                return {
+                    timestamp: String(r.timestamp || ''),
+                    type: r.type || '',
+                    tool: r.tool || '(unbekannt)',
+                    step_index: r.step_index === '' || r.step_index == null ? null : Number(r.step_index),
+                    step_key: r.step_key || ''
+                };
+            });
 
             document.getElementById('statusBar').textContent =
                 'Zuletzt aktualisiert: ' + new Date().toLocaleString('de-DE') +
-                ' | ' + pageviews.length + ' Pageviews, ' + clicks.length + ' Clicks geladen';
+                ' | ' + pageviews.length + ' Pageviews, ' + clicks.length + ' Clicks, ' +
+                wizard.length + ' Wizard-Ereignisse geladen';
             render();
         } catch (err) {
             document.getElementById('statusBar').textContent = 'Fehler beim Laden: ' + err.message;
@@ -490,6 +520,9 @@
         renderDevicesChart(fPV);
         renderReferrerTable(fPV);
         renderClicksTable(fCL);
+        var fWZ = filterByRange(wizard);
+        renderWizardTable(fWZ);
+        renderStepsTable(fWZ);
     }
 
     function countBy(arr, key) {
@@ -639,6 +672,66 @@
             return '<tr><td>' + escHtml(e.text) + '</td><td>' + escHtml(typeLabels[e.type] || e.type) +
                 '</td><td class="count">' + e.count + '</td>' +
                 '<td><div class="bar-cell"><div class="bar-visual" style="width:' + pct + '%"></div></div></td></tr>';
+        }).join('');
+    }
+
+    // Start → Ergebnis → Produktklick / WhatsApp je Tool, sortiert nach Starts.
+    function renderWizardTable(data) {
+        var tools = {};
+        data.forEach(function (r) {
+            var t = tools[r.tool] || (tools[r.tool] = { start: 0, complete: 0, click: 0, conv: 0 });
+            if (r.type === 'wizard_start') t.start++;
+            else if (r.type === 'wizard_complete') t.complete++;
+            else if (r.type === 'result_click') t.click++;
+            else if (r.type === 'conversion') t.conv++;
+        });
+        var sorted = Object.entries(tools).sort(function (a, b) { return b[1].start - a[1].start; });
+        var tbody = document.querySelector('#wizardTable tbody');
+        if (!sorted.length) { tbody.innerHTML = '<tr><td colspan="6">Keine Wizard-Daten im Zeitraum</td></tr>'; return; }
+        tbody.innerHTML = sorted.map(function (e) {
+            var t = e[1];
+            var quote = t.start > 0 ? Math.round((t.complete / t.start) * 100) + '%' : '—';
+            return '<tr><td>' + escHtml(e[0]) + '</td><td class="count">' + t.start + '</td><td class="count">' +
+                t.complete + '</td><td class="count">' + t.click + '</td><td class="count">' + t.conv +
+                '</td><td class="count">' + quote + '</td></tr>';
+        }).join('');
+    }
+
+    // Je Tool: Start, abgeschlossene Schritte nach step_index, Ergebnis; größter Rückgang zwischen zwei Stufen.
+    function renderStepsTable(data) {
+        var tools = {};
+        data.forEach(function (r) {
+            var t = tools[r.tool] || (tools[r.tool] = { start: 0, complete: 0, steps: {} });
+            if (r.type === 'wizard_start') t.start++;
+            else if (r.type === 'wizard_complete') t.complete++;
+            else if (r.type === 'wizard_step' && r.step_index !== null) {
+                var s = t.steps[r.step_index] || (t.steps[r.step_index] = { key: r.step_key, count: 0 });
+                s.count++;
+            }
+        });
+        var sorted = Object.entries(tools).sort(function (a, b) { return b[1].start - a[1].start; });
+        var tbody = document.querySelector('#stepsTable tbody');
+        if (!sorted.length) { tbody.innerHTML = '<tr><td colspan="3">Keine Wizard-Daten im Zeitraum</td></tr>'; return; }
+        tbody.innerHTML = sorted.map(function (e) {
+            var t = e[1];
+            var stufen = [{ name: 'Start', count: t.start }];
+            Object.keys(t.steps).map(Number).sort(function (a, b) { return a - b; }).forEach(function (i) {
+                stufen.push({ name: t.steps[i].key || ('Schritt ' + (i + 1)), count: t.steps[i].count });
+            });
+            stufen.push({ name: 'Ergebnis', count: t.complete });
+            var verlust = null;
+            for (var i = 1; i < stufen.length; i++) {
+                var diff = stufen[i - 1].count - stufen[i].count;
+                if (diff > 0 && (!verlust || diff > verlust.diff)) {
+                    verlust = { diff: diff, von: stufen[i - 1], nach: stufen[i] };
+                }
+            }
+            var kette = stufen.map(function (s) { return escHtml(s.name) + ' ' + s.count; }).join(' &rarr; ');
+            var text = verlust
+                ? 'vor ' + escHtml(verlust.nach.name) + ': &minus;' + verlust.diff +
+                  ' (' + Math.round((verlust.diff / verlust.von.count) * 100) + '%)'
+                : '—';
+            return '<tr><td>' + escHtml(e[0]) + '</td><td>' + kette + '</td><td>' + text + '</td></tr>';
         }).join('');
     }
 
