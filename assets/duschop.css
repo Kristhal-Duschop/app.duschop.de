@@ -5,7 +5,7 @@
    Resets, damit Shopify-Theme-Einbettungen nicht brechen.
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('fonts/fonts.css');
 
 /* ============================================================
    1. Design-Tokens (CSS-Variablen)
@@ -1124,6 +1124,18 @@
 /* ============================================================
    16. WhatsApp-Sticky-Banner (überall einsetzbar)
    ============================================================ */
+/* Impressum/Datenschutz unter jedem Tool; Abstand unten, damit das WhatsApp-Banner nichts verdeckt */
+.duschop-legal {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 24px 16px 96px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;  /* liegt außerhalb von .duschop-app, daher ohne Variablen */
+    font-size: 13px;
+}
+.duschop-legal a { color: #6f6f6f; }
+.duschop-legal a:hover { color: #8f6238; }
+
 .duschop-wa-sticky {
     position: fixed;
     bottom: 20px;
