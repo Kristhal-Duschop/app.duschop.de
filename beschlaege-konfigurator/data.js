@@ -737,6 +737,10 @@
     { id: 'griffstange-eulp-300', title: 'Griffstange Ø 19 mm V2A, 300 mm, EULP', handle: 'edelstahl-griffstange-dusche', kategorie: 'griff', grifftyp: 'stangengriff', glasdicken: '8–10 mm', colors: ['edelstahl-gebuerstet','edelstahl-poliert'], price: '48,90', desc: 'Beidseitige Griffstange aus V2A-Vollmaterial, 300 mm lang, Ø 19 mm.', serie: '', isMain: false },
     { id: 'knopf-v2a-106', title: 'Dusch-Türknopf V2A massiv Ø 38 mm, Art.Nr. 106', handle: 'dusch-tuerknopf-v2a-106', kategorie: 'griff', grifftyp: 'knopf', glasdicken: '8–12 mm', colors: ['edelstahl-poliert','edelstahl-gebuerstet'], price: '31,60', desc: 'Massiver Edelstahl-Türknopf, Ø 38 mm und 35 mm tief. Poliert oder gebürstet.', serie: '', isMain: false },
     { id: 'knopf-alu-5207-1170', title: 'Duschtürknopf Aluminium glanzverchromt Ø 32 mm, 1 Paar, 52.07.1170', handle: 'duschtuerknopf-52-07-1170-aluminium-glanzverchromt-32-mm-glasstaerke-8-12-mm', kategorie: 'griff', grifftyp: 'knopf', glasdicken: '8–12 mm', colors: ['chrom-poliert'], price: '14,90', desc: 'Kompakter Türknopf aus Aluminium, glanzverchromt, als Paar durch das Glas verschraubt.', serie: '', isMain: false },
+    // BEL354 (angelegt 12.10.2026)
+    { id: 'bellagio-gw-180', title: 'Bellagio Pendeltürband 180° Glas-Wand BEL354', handle: 'bellagio-pendelturband-180-glas-wand-bel354', kategorie: 'scharnier', montage: 'glas-wand', typ: 'pendel', winkel: 180, hebeSenk: false, glasdicken: '8/10 mm', tragkraft: '50 kg', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'], price: '130,90', priceMax: '138,90', desc: 'Eckiges Pendeltürband, Tür in einer Flucht mit der Wand. 50 kg, 8 oder 10 mm ESG. 3 Oberflächen.', serie: 'Bellagio', isMain: false },
+    // BEL180S (angelegt 22.10.2026)
+    { id: 'bellagio-verbinder-180-gw', title: 'Bellagio Verbinder 180° Glas-Wand BEL180S', handle: 'bellagio-verbinder-glas-wand-180-bel180s', kategorie: 'haltewinkel', montage: 'glas-wand', glasdicken: '8/10 mm', serie: 'Bellagio', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','weiss-matt','graphit-poliert','graphit-matt','messing-poliert','messing-matt','bronze-matt','kupfer-poliert','kupfer-matt'], price: '63,30', priceMax: '87,20', desc: 'Verbindet ein Glasfestteil fluchtend mit der Wand, eckiges Bellagio-Design. Glasbohrung 16 mm, 12 Oberflächen.', isMain: false },
 ];
 
     // Handles, die vom Annotation-Sync uebersprungen werden sollen.
@@ -758,7 +762,10 @@
         // keinen Punkthalter-Pfad, daher KEINE Annotation mit erfundener
         // Kategorie. Bewusst uebersprungen, bis ggf. eine eigene Kategorie
         // bzw. ein eigener Punkthalter-Finder existiert.
-        'mini-punkthalter-glas-flaechenbuendig-6-8-mm'
+        'mini-punkthalter-glas-flaechenbuendig-6-8-mm',
+        // 09.10.2026: zweiter Punkthalter (flaechenbuendig, 6-8/10-12 mm),
+        // gleiche Begruendung wie oben, kein Punkthalter-Pfad im Wizard.
+        'punkthalter-gm-pico-glas-spiegel-flaechenbuendig'
         // Serenity Duschschiebetuer-System: Die Sperre vom 01.07.2026 ist am
         // 11.08.2026 aufgehoben. Sie war ausdruecklich daran gebunden, dass es
         // keinen passenden Pfad gibt ("bis ggf. eine eigene Kategorie
