@@ -68,6 +68,19 @@
         isMain: true
     },
     {
+        id: 'riffelglas',
+        title: 'Riffelglas ESG 8 mm nach Maß, Rillen senkrecht oder waagerecht',
+        handle: 'riffelglas-esg-8-mm-nach-mass',
+        type: 'glas',
+        glasoptik: 'struktur',
+        qualitaet: 'standard',
+        glasdicken: ['8'],
+        price: '279,00',
+        priceMax: '869,00',
+        desc: 'Riffelglas mit feinen Rillen im 5-mm-Raster, senkrecht oder waagerecht. Blickdicht verzerrend, lichtdurchlässig. Breite 200 bis 1400 mm, Höhe 2000/2100 mm, 8 mm.',
+        isMain: true
+    },
+    {
         id: 'restposten-klarglas',
         title: 'Restposten Kristhal Duschglas 8 mm Klarglas',
         handle: 'restposten-kristhal-duschglas-klarglas-durchsichtig-fur-duschtrennwande',
@@ -110,7 +123,8 @@
     'duschglas_mit_motiv': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Lasermotiv_b2761e21-0f3d-4723-8186-3145bdecae94.jpg?v=1769002885',
     'easyclean-glasbeschichtung': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Easy-Clean_2_8c1f39d4-2998-4cd0-b66d-1c6b5b148088.png?v=1773563753',
     'mehrpreis-fur-weissglas-nahezu-farbneutrales-glas-ohne-grunstich': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Weissglas_2.png?v=1767100026',
-    'restposten-kristhal-duschglas-klarglas-durchsichtig-fur-duschtrennwande': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/esg-glas-8mm_2a6c2aaf-d737-4940-b54d-3319650d2d00.jpg?v=1767100408'
+    'restposten-kristhal-duschglas-klarglas-durchsichtig-fur-duschtrennwande': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/esg-glas-8mm_2a6c2aaf-d737-4940-b54d-3319650d2d00.jpg?v=1767100408',
+    'riffelglas-esg-8-mm-nach-mass': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/riffelglas-senkrecht-beispielbild.png?v=1793013010'
 };
 
     const qualitaetDefs = {
@@ -156,6 +170,8 @@
         return (list || products).filter(function (p) {
             if (state.glasoptik && p.glasoptik !== state.glasoptik && p.glasoptik !== 'alle') return false;
             if (state.qualitaet && p.qualitaet !== state.qualitaet && p.qualitaet !== 'alle') return false;
+            // Riffelglas gibt es ohne Beschichtung, Easyclean passt nicht auf die Rillen
+            if (state.glasoptik === 'struktur' && p.type === 'veredelung') return false;
             return true;
         });
     }
