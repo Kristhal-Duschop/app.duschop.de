@@ -292,6 +292,9 @@
     { id: 'montage-kleber-129941', title: 'Montage-Kleber für Duschkörbe und Bad-Accessoires', handle: 'montage-kleber-129941', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben','beides'], price: '6,90', desc: 'Kleber für die bohrfreie Montage von Duschkörben und Accessoires mit Klebe-Wandadapter.' },
     { id: 'ersatzpads-3m', title: 'Selbstklebende Ersatzpads 3M, 2 Stück', handle: 'selbstklebende-ersatzpads-3m-2-stuck-art-nr-698', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben','beides'], price: '9,20', desc: 'Ersatzpads für selbstklebende Haken und Halter, wenn das Original-Pad seine Kraft verloren hat.' },
     { id: 'metallkleber-hochfest', title: 'Metallkleber hochfest, 50 ml', handle: 'metallkleber-hochfest-50-ml-zum-einkleben-von-rohrverbindern-und-gewinden-art-nr-19-1330-000-00', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben','beides'], price: '24,70', desc: 'Anaerober Kleber zum Einkleben von Rohrverbindern in Stabistangen und zum Sichern von Gewinden.' }
+,
+// 27.10.2026: Gehrungsschere BO5109700 neu (Freigabe Thomas).
+    { id: 'gehrungsschere', title: 'Gehrungsschere für Duschdichtungen und Gummiprofile', handle: 'gehrungsschere-duschdichtungen-gummiprofile-45-grad', type: 'werkzeug', vorhaben: ['glasdusche', 'duschwanne'], befestigung: ['bohren', 'kleben', 'beides'], price: '69,90', desc: 'Schere mit 45°-Anschlag für gerade und Gehrungsschnitte an Duschdichtungen und Gummiprofilen.', isMain: false }
 ,];
 
     const productImages = {
@@ -317,7 +320,8 @@
     'cuttermesser-fur-den-zuschnitt-von-duschdichtungsprofilen-art-nr-745118': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Cuttermesser9mm.jpg?v=1744804760',
     'klotzhebel-holz-glasmontage': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_5ee63f2c-6557-4cbf-b88c-2db05616f616.jpg?v=1748464730',
     'arbeitshandschuh-fur-montagen-transport-u-handwerkliche-tatigkeiten-typ-flex-fit-nylonfeinstrick-grau-schwarz-abriebfest-und-vielseitig-einsetzbar-art-nr-00690010x': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/HandschuheTox.jpg?v=1749129735',
-    'veribor-saugheber-2-kopf-fur-glasscheiben-50-kg-tragkraft-kipphebel-art-nr-bo602-1g': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BO_602_1G_PF1_A.png?v=1784362050'
+    'veribor-saugheber-2-kopf-fur-glasscheiben-50-kg-tragkraft-kipphebel-art-nr-bo602-1g': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BO_602_1G_PF1_A.png?v=1784362050',
+    'gehrungsschere-duschdichtungen-gummiprofile-45-grad': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/gehrungsschere-dichtungen-3x2.png?v=1793122942'
 };
 
     // Vom Annotations-Sync und vom Audit uebersprungen (25.09.2026): Waschtisch-Teile,
