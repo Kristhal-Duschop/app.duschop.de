@@ -817,7 +817,7 @@
         'smedbo-pool-wannengriff-chrom-poliert-art-nr-zk325',
         'smedbo-villa-wannengriff-chrom-poliert-oder-messing-poliert-art-nr-k225',
         'stabistange-rohr-19-mm-edelstahl',
-        'wandhalter-reling-o-19-mm-v2a-edelstahl-art-nr-fritz',
+        'wandhalter-reling-o-19-mm-v2a-edelstahl',
         'haltegriff-gewinkelt-135-grad-verchromt',
         // 26.09.2026: Zubehoer zum Einhaengen am Smedbo DRY Handtuchwaermer (FK700 ff.),
         // keine eigene Befestigung, ohne Waermer nicht nutzbar.
