@@ -523,7 +523,7 @@
         colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
         price: '19,50',
         priceMax: '29,50',
-        desc: 'V2A Edelstahl-Knopf, massiv. In Schwarz, Chrom oder Edelstahl.',
+        desc: 'V2A Edelstahl-Knopf. In Schwarz, Chrom oder Edelstahl.',
         serie: ''
     },
     {
@@ -558,7 +558,7 @@
         handle: 'dusch-tuerknopf-v2a-101',
         kategorie: 'griff',
         grifftyp: 'knopf',
-        glasdicken: '6\u201310 mm',
+        glasdicken: '8\u201312 mm',
         colors: ['chrom-poliert','edelstahl-gebuerstet'],
         price: '19,50',
         desc: 'Gro\u00dfer V2A Edelstahl-Knopf \u00d8 40 mm. Chrom oder Edelstahl geb\u00fcrstet.',
@@ -598,11 +598,11 @@
         handle: 'edelstahl-griffstange_19mm',
         kategorie: 'griff',
         grifftyp: 'stangengriff',
-        glasdicken: '6\u201312 mm',
+        glasdicken: '8\u201340 mm',
         colors: ['schwarz-matt','edelstahl-gebuerstet','chrom-poliert'],
         price: '39,90',
         priceMax: '149,90',
-        desc: 'Beidseitige V2A Edelstahl-Griffstange \u00d8 19 mm. L\u00e4ngen 200\u20131000 mm.',
+        desc: 'Beidseitige V2A Edelstahl-Griffstange \u00d8 19 mm. L\u00e4nge 300 mm, Lochabstand 200 mm.',
         serie: ''
     },
 
@@ -614,7 +614,7 @@
         kategorie: 'griffmuschel',
         befestigung: 'verschraubt',
         form: 'rund',
-        glasdicken: '6\u201312 mm',
+        glasdicken: '8\u201312 mm',
         colors: ['chrom-poliert','schwarz-matt','edelstahl-gebuerstet'],
         price: '25,90',
         priceMax: '39,90',
@@ -628,11 +628,11 @@
         kategorie: 'griffmuschel',
         befestigung: 'verschraubt',
         form: 'rund',
-        glasdicken: '6\u201312 mm',
+        glasdicken: '8\u201312 mm',
         colors: ['schwarz-matt','chrom-poliert','edelstahl-gebuerstet'],
         price: '27,90',
         priceMax: '42,90',
-        desc: 'Offene runde Griffmuschel aus V2A. Griffmulde oben offen.',
+        desc: 'Offene runde Griffmuschel aus V2A. \u00d6ffnung \u00d8 38 mm geht ganz durch.',
         serie: ''
     },
     {
@@ -656,11 +656,11 @@
         kategorie: 'griffmuschel',
         befestigung: 'verschraubt',
         form: 'eckig',
-        glasdicken: '6\u201312 mm',
+        glasdicken: '8\u201312 mm',
         colors: ['schwarz-matt','edelstahl-gebuerstet'],
         price: '36,90',
         priceMax: '68,90',
-        desc: 'Quadratische Edelstahl-Griffmuschel zum Verschrauben. Beidseitig oder einseitig.',
+        desc: 'Quadratische Edelstahl-Griffmuschel zum Verschrauben. Beidseitig.',
         serie: ''
     },
     {
