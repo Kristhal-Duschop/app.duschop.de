@@ -743,7 +743,7 @@
             return;
         }
 
-        list.innerHTML = hits.slice(0, 60).map(function (p) {
+        list.innerHTML = hits.map(function (p) {
             var img = p.images && p.images[0] ? p.images[0].src : null;
             var price = p.variants && p.variants[0] ? p.variants[0].price : null;
             var priceFmt = price ? ('ab ' + window.DuschopShopifyClient.formatPrice(price)) : '';
