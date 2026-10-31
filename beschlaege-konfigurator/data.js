@@ -528,15 +528,15 @@
     },
     {
         id: 'knopf-4106',
-        title: 'Duscht\u00fcrknopf \u00d8 25 mm Art. 4106',
+        title: 'Duscht\u00fcrknopf eckig 20\u00d720 mm Art. 4106',
         handle: 'dusch-tuerknopf-4106',
         kategorie: 'griff',
         grifftyp: 'knopf',
-        glasdicken: '6\u201310 mm',
+        glasdicken: '8\u201312 mm',
         colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
         price: '23,50',
         priceMax: '35,90',
-        desc: 'Kompakter Messing-Knopf \u00d8 25 mm. Klassisches Design.',
+        desc: 'Kompakter eckiger Knopf aus V2A-Edelstahl, 20\u00d720 mm.',
         serie: ''
     },
     {
@@ -545,11 +545,11 @@
         handle: 'dusch-tuerknopf-107',
         kategorie: 'griff',
         grifftyp: 'knopf',
-        glasdicken: '6\u201310 mm',
+        glasdicken: '6\u201312 mm',
         colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
         price: '23,50',
         priceMax: '35,90',
-        desc: 'Gr\u00f6\u00dferer Messing-Knopf \u00d8 35 mm. Angenehme Haptik.',
+        desc: 'Runder Knopf aus V2A-Edelstahl \u00d8 35 mm mit Griffmulde.',
         serie: ''
     },
     {
