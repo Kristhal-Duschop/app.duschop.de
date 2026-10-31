@@ -442,7 +442,7 @@
         grifftyp: 'rundgriff',
         glasdicken: '6\u201310 mm',
         colors: ['chrom-poliert'],
-        price: '52,90',
+        price: '58,90',
         desc: 'Eleganter Griff in Fl\u00fcgelform. Chrom poliert, Messing.',
         serie: ''
     },
