@@ -559,9 +559,9 @@
         kategorie: 'griff',
         grifftyp: 'knopf',
         glasdicken: '6\u201310 mm',
-        colors: ['edelstahl-poliert','edelstahl-gebuerstet'],
+        colors: ['chrom-poliert','edelstahl-gebuerstet'],
         price: '19,50',
-        desc: 'Gro\u00dfer V2A Edelstahl-Knopf \u00d8 40 mm. Poliert oder geb\u00fcrstet.',
+        desc: 'Gro\u00dfer V2A Edelstahl-Knopf \u00d8 40 mm. Chrom oder Edelstahl geb\u00fcrstet.',
         serie: ''
     },
     {
@@ -599,7 +599,7 @@
         kategorie: 'griff',
         grifftyp: 'stangengriff',
         glasdicken: '6\u201312 mm',
-        colors: ['schwarz-matt','edelstahl-gebuerstet','edelstahl-poliert'],
+        colors: ['schwarz-matt','edelstahl-gebuerstet','chrom-poliert'],
         price: '39,90',
         priceMax: '149,90',
         desc: 'Beidseitige V2A Edelstahl-Griffstange \u00d8 19 mm. L\u00e4ngen 200\u20131000 mm.',
@@ -735,7 +735,7 @@
     { id: 'eido-s40-400009', title: 'Eido S40 Längsverbinder Glas-Glas 180°, flächenbündig, 400009', handle: 'eido-s40-langsverbinder-glas-glas-180-flachenbundig-mit-senklochbohrung-8-mm-esg-art-nr-400009', kategorie: 'haltewinkel', montage: 'glas-glas', winkel: 180, hebeSenk: false, glasdicken: '8 mm', colors: ['chrom-poliert'], price: '120,40', desc: 'Flächenbündiger Verbinder für zwei feste Scheiben in einer Flucht, mit Senklochbohrung. Für 8 mm ESG.', serie: 'Eido S40', isMain: false },
     // Aus der Collection griff_duschtur nachgetragen (25.09.2026).
     { id: 'griffstange-eulp-300', title: 'Griffstange Ø 19 mm V2A, 300 mm, EULP', handle: 'edelstahl-griffstange-dusche', kategorie: 'griff', grifftyp: 'stangengriff', glasdicken: '8–10 mm', colors: ['edelstahl-gebuerstet','edelstahl-poliert'], price: '48,90', desc: 'Beidseitige Griffstange aus V2A-Vollmaterial, 300 mm lang, Ø 19 mm.', serie: '', isMain: false },
-    { id: 'knopf-v2a-106', title: 'Dusch-Türknopf V2A massiv Ø 38 mm, Art.Nr. 106', handle: 'dusch-tuerknopf-v2a-106', kategorie: 'griff', grifftyp: 'knopf', glasdicken: '8–12 mm', colors: ['edelstahl-poliert','edelstahl-gebuerstet'], price: '31,60', desc: 'Massiver Edelstahl-Türknopf, Ø 38 mm und 35 mm tief. Poliert oder gebürstet.', serie: '', isMain: false },
+    { id: 'knopf-v2a-106', title: 'Dusch-Türknopf V2A massiv Ø 38 mm, Art.Nr. 106', handle: 'dusch-tuerknopf-v2a-106', kategorie: 'griff', grifftyp: 'knopf', glasdicken: '8–12 mm', colors: ['chrom-poliert','edelstahl-gebuerstet'], price: '31,60', desc: 'Massiver Edelstahl-Türknopf, Ø 38 mm und 35 mm tief. Chrom oder Edelstahl gebürstet.', serie: '', isMain: false },
     { id: 'knopf-alu-5207-1170', title: 'Duschtürknopf Aluminium glanzverchromt Ø 32 mm, 1 Paar, 52.07.1170', handle: 'duschtuerknopf-52-07-1170-aluminium-glanzverchromt-32-mm-glasstaerke-8-12-mm', kategorie: 'griff', grifftyp: 'knopf', glasdicken: '8–12 mm', colors: ['chrom-poliert'], price: '14,90', desc: 'Kompakter Türknopf aus Aluminium, glanzverchromt, als Paar durch das Glas verschraubt.', serie: '', isMain: false },
     // BEL354 (angelegt 12.10.2026)
     { id: 'bellagio-gw-180', title: 'Bellagio Pendeltürband 180° Glas-Wand BEL354', handle: 'bellagio-pendelturband-180-glas-wand-bel354', kategorie: 'scharnier', montage: 'glas-wand', typ: 'pendel', winkel: 180, hebeSenk: false, glasdicken: '8/10 mm', tragkraft: '50 kg', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'], price: '130,90', priceMax: '138,90', desc: 'Eckiges Pendeltürband, Tür in einer Flucht mit der Wand. 50 kg, 8 oder 10 mm ESG. 3 Oberflächen.', serie: 'Bellagio', isMain: false },

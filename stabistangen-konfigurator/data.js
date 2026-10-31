@@ -97,7 +97,7 @@
         type: 'set',
         montage: ['wand-glas'],
         form: 'rund-19',
-        colors: ['edelstahl-gebuerstet', 'edelstahl-poliert'],
+        colors: ['edelstahl-gebuerstet', 'chrom-poliert'],
         price: '59,90',
         priceMax: '65,90',
         desc: 'V2A Edelstahl-Set, 1000 oder 1250 mm L\u00e4nge w\u00e4hlbar.',
@@ -213,7 +213,7 @@
         type: 'set',
         montage: ['glas-decke'],
         form: 'eckig-20',
-        colors: ['edelstahl-poliert','edelstahl-gebuerstet','schwarz-matt'],
+        colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'],
         price: '56,20',
         desc: 'Edelstahl-Set eckig 20\u00d720 mm, 250 mm L\u00e4nge, poliert oder geb\u00fcrstet.',
         isSet: true
@@ -282,7 +282,7 @@
         type: 'wandhalter',
         montage: ['wand-glas'],
         form: 'rund-19',
-        colors: ['edelstahl-gebuerstet', 'edelstahl-poliert'],
+        colors: ['edelstahl-gebuerstet', 'chrom-poliert'],
         price: '23,90',
         desc: 'V2A Edelstahl-Wandflansch f\u00fcr 45\u00b0-Montage.',
         isSet: false
@@ -335,7 +335,7 @@
         type: 'glashalter',
         montage: ['wand-glas', 'glas-glas'],
         form: 'rund-19',
-        colors: ['edelstahl-gebuerstet', 'edelstahl-poliert'],
+        colors: ['edelstahl-gebuerstet', 'chrom-poliert'],
         price: '13,90',
         desc: 'Offener, drehbarer Glashalter aus V2A Edelstahl.',
         isSet: false
