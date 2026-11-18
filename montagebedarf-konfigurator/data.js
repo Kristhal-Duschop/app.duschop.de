@@ -255,6 +255,18 @@
         desc: 'Praktischer Holz-Klotzhebel zum Anheben und Positionieren von schweren Glasscheiben bei der Montage.',
         isMain: false
     },
+    // 07.10.2026: OTTO Fugenfux neu im Sortiment (Kundenfrage aus Telefonat, Bezug Silconia).
+    {
+        id: 'otto-fugenfux',
+        title: 'OTTO Fugenfux Multitool – Fugenglätter',
+        handle: 'otto-fugenfux-multitool-fugenglaetter-silikon',
+        type: 'werkzeug',
+        vorhaben: ['glasdusche', 'duschwanne', 'fugen'],
+        befestigung: ['bohren', 'kleben', 'beides'],
+        price: '12,90',
+        desc: 'Glättwerkzeug mit runden Profilen 6,3, 8,3 und 10 mm, zieht die frische Silikonfuge in einem Zug sauber ab.',
+        isMain: false
+    },
     // === Welle C: Klebe-Sets + TOX-Sortimente ===
     { id: 'giese-gifix-88001', title: 'Giese Gifix Klebe-Set 88001', handle: 'giese-gifix-klebeset-88001', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben', 'beides'], price: '9,90', desc: 'Klebe-Set für Wandbefestigung ohne Bohren. Speziell für leichte Bad-Accessoires.', isMain: false },
     { id: 'smedbo-icomposite-gluemix', title: 'Smedbo XTRA iComposite GlueMix Montagekleber', handle: 'smedbo-xtra-icomposite-gluemix-6000-10', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben', 'beides'], price: '13,95', desc: 'Bohrerfreier Montagekleber von Smedbo. Für Bad-Accessoires aus der XTRA-Serie.', isMain: false },
@@ -276,6 +288,9 @@
     { id: 'ersatzpads-3m', title: 'Selbstklebende Ersatzpads 3M, 2 Stück', handle: 'selbstklebende-ersatzpads-3m-2-stuck-art-nr-698', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben','beides'], price: '9,20', desc: 'Ersatzpads für selbstklebende Haken und Halter, wenn das Original-Pad seine Kraft verloren hat.' },
     { id: 'metallkleber-hochfest', title: 'Metallkleber hochfest, 50 ml', handle: 'metallkleber-hochfest-50-ml-zum-einkleben-von-rohrverbindern-und-gewinden-art-nr-19-1330-000-00', type: 'kleber', vorhaben: ['glasdusche'], befestigung: ['kleben','beides'], price: '24,70', desc: 'Anaerober Kleber zum Einkleben von Rohrverbindern in Stabistangen und zum Sichern von Gewinden.' }
 ,
+// 08.10.2026: Montage-Set 1/2/3 mm neu (Kundenfrage Plaud-Telefonat, welche Unterlagen fuer Glasdusche mit U-Profil).
+    { id: 'unterlagen-montage-set', title: 'Montage-Set transparente Unterlagen 1/2/3 mm, je 5 Stück', handle: 'montage-set-transparente-unterlagen-1-2-3-mm', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['bohren', 'kleben', 'beides'], price: '4,50', priceMax: '26,30', desc: '15 transparente Unterlagen 6×51 mm, je 5 Stück in 1, 2 und 3 mm. Reicht für eine typische rahmenlose Glasdusche mit U-Profil.', isMain: false }
+,
 // 27.10.2026: Gehrungsschere BO5109700 neu (Freigabe Thomas).
     { id: 'gehrungsschere', title: 'Gehrungsschere für Duschdichtungen und Gummiprofile', handle: 'gehrungsschere-duschdichtungen-gummiprofile-45-grad', type: 'werkzeug', vorhaben: ['glasdusche', 'duschwanne'], befestigung: ['bohren', 'kleben', 'beides'], price: '69,90', desc: 'Schere mit 45°-Anschlag für gerade und Gehrungsschnitte an Duschdichtungen und Gummiprofilen.', isMain: false }
 ,];
@@ -285,7 +300,8 @@
     'allzweckdubel-fur-dusche-u-bad-6x36-6x51-oder-8x51-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/PT1_Tri.jpg?v=1746179320',
     'schrauben-zum-verbinden-von-duschprofilen-aus-aluminium-art-nr-59881650': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Marketing_240.jpg?v=1757693678',
     'transparente-unterlagen-fur-rahmenlose-glasduschen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_8afe7acc-8818-46bf-ad58-e05d0f0569b9.jpg?v=1757793855',
-    'einlagen-zur-trennung-von-glas-und-metall': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_1bdf4675-c497-4c4f-bbb7-d95a4abe05fc.jpg?v=1766952891',
+    'montage-set-transparente-unterlagen-1-2-3-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/PSB-MIX-15_set_v2.jpg?v=1791483210',
+    'einlagen-zur-trennung-von-glas-und-metall':'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_1bdf4675-c497-4c4f-bbb7-d95a4abe05fc.jpg?v=1766952891',
     'zettex-ms-polymerkleber-strongbond-ms-80-maximale-klebkraft-fur-hoch-beanspruchte-flachen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/MS80_2.jpg?v=1770917009',
     'zettex-ms-70': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/MS70.png?v=1770916801',
     'zettex-ms-polymerkleber-ms-60-der-flexible-universalkleber': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/MS60_1.jpg?v=1758175014',
@@ -300,7 +316,8 @@
     'densaband-bohrlochset': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Bohrlochset1.jpg?v=1746171064',
     'handsage-vernickelt-fur-den-zuschnitt-von-duschdichtungsprofilen-art-nr-671146': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Saege_e338ee08-400f-4e58-b378-200566d23095.jpg?v=1744804681',
     'cuttermesser-fur-den-zuschnitt-von-duschdichtungsprofilen-art-nr-745118': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Cuttermesser9mm.jpg?v=1744804760',
-    'klotzhebel-holz-glasmontage': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_5ee63f2c-6557-4cbf-b88c-2db05616f616.jpg?v=1748464730',
+    'otto-fugenfux-multitool-fugenglaetter-silikon': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/OTTO-Fugenfux-Multitool-3x2.jpg?v=1791394571',
+    'klotzhebel-holz-glasmontage':'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_5ee63f2c-6557-4cbf-b88c-2db05616f616.jpg?v=1748464730',
     'arbeitshandschuh-fur-montagen-transport-u-handwerkliche-tatigkeiten-typ-flex-fit-nylonfeinstrick-grau-schwarz-abriebfest-und-vielseitig-einsetzbar-art-nr-00690010x': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/HandschuheTox.jpg?v=1749129735',
     'veribor-saugheber-2-kopf-fur-glasscheiben-50-kg-tragkraft-kipphebel-art-nr-bo602-1g': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BO_602_1G_PF1_A.png?v=1784362050',
     'gehrungsschere-duschdichtungen-gummiprofile-45-grad': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/gehrungsschere-dichtungen-3x2.png?v=1793122942'
