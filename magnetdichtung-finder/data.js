@@ -102,6 +102,44 @@
       '8': { '200 cm': 52830787993923 }
     }
   },
+  // 18.11.2026: 008CW neu im Shop (01.10.2026), ein Produkt fuer 180° und 135°, daher zwei Eintraege.
+  // Varianten = Paar. 135°: Shop nennt nur das Aussenmass (19 / 21 mm), die Luecke ist nicht belegt,
+  // deshalb dort ohne gapByGlass (Produkt bleibt sichtbar, wird nur nicht nach oben sortiert).
+  {
+    id: '008CW-180',
+    name: 'Magnetdichtung 180° mit schrägem Magnetstreifen',
+    artNr: '008CW',
+    handle: 'magnetdichtung-180-135-schraeger-magnetstreifen-art-nr-008cw',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/008CW_1.jpg?v=1793625979',
+    glass: [6, 8],
+    angle: [180],
+    gapByGlass: { '6': [20, 20], '8': [20, 20] },
+    priceFrom: 39.90,
+    bestseller: false,
+    desc: 'Schräger, weiß ummantelter Magnetstreifen. Bei 180° ca. 20 mm Spalt, bei 6 und 8 mm Glas gleich, das Maß muss auf etwa 1 mm stimmen. Auch als Einzelstück und als Paar 6 + 8 mm.',
+    lengths: ['200 cm'],
+    variants: {
+      '6': { '200 cm': 54856901951811 },
+      '8': { '200 cm': 54856901984579 }
+    }
+  },
+  {
+    id: '008CW-135',
+    name: 'Magnetdichtung 135° mit schrägem Magnetstreifen',
+    artNr: '008CW',
+    handle: 'magnetdichtung-180-135-schraeger-magnetstreifen-art-nr-008cw',
+    image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/008CW_1.jpg?v=1793625979',
+    glass: [6, 8],
+    angle: [135],
+    priceFrom: 39.90,
+    bestseller: false,
+    desc: 'Dasselbe Paar wie bei 180°, passt auch an der 135°-Tür der Fünfeckdusche. Spaltmaß außen gemessen ca. 19 mm (6 mm Glas) bzw. 21 mm (8 mm Glas).',
+    lengths: ['200 cm'],
+    variants: {
+      '6': { '200 cm': 54856901951811 },
+      '8': { '200 cm': 54856901984579 }
+    }
+  },
   {
     id: '6092',
     name: 'Magnetdichtung 180° fluchtend (schmaler Streifen)',

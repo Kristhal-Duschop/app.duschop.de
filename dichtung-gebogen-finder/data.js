@@ -177,7 +177,8 @@
     id: '4269G',
     name: 'Gebogene Bodendichtung 2-flg. Viertelkreis',
     artNr: '4269G',
-    handle: 'dichtung-viertelkreis-passend-kermi-ibiza-2000-nova-2000-4269g',
+    // 18.11.2026: Handle im Shop umbenannt (alter lief per 301).
+    handle: 'duschdichtung-viertelkreis-gebogen-2-tueren-4-5-mm-glas-paar',
     image: 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/E2268312-7733-4651-BADD-1140EB2283A2.png',
     glass: [4, 5],
     gapMin: 4, gapMax: 6,

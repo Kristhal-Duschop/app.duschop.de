@@ -25,18 +25,6 @@
         highlight: true
     },
     {
-        id: 'tox-tri',
-        title: 'TOX Allzweckd\u00fcbel TRI f\u00fcr Dusche und Bad',
-        handle: 'tox-allzweckduebel-tri',
-        type: 'duebel',
-        vorhaben: ['glasdusche'],
-        befestigung: ['bohren', 'beides'],
-        price: '0,15',
-        priceMax: '11,65',
-        desc: 'Dreifach-Spreizd\u00fcbel mit optimaler Verankerung in Voll- und Hohlbaustoffen. F\u00fcr leichte bis mittlere Befestigungen.',
-        isMain: false
-    },
-    {
         id: 'blechschrauben',
         title: 'Blechschrauben A2 TX 3,9x16 mm inkl. Abdeckkappen',
         handle: 'schrauben-zum-verbinden-von-duschprofilen-aus-aluminium-art-nr-59881650',
@@ -275,15 +263,10 @@
     // im Shop ARCHIVED und der Link lief auf 404. Kein Ersatz noetig: der Nachfolger
     // 'smedbo-xtra-icomposite-gluemix-6000-10' steht bereits als eigener Eintrag direkt darueber.
     { id: 'smedbo-xtra-adapter', title: 'Smedbo XTRA Adapter zum Kleben (2er-Set)', handle: 'smedbo-xtra-adapter-kleben', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['kleben', 'beides'], price: '10,90', desc: 'Adapter-Set für Smedbo XTRA-Halter ohne Bohren. Chrom oder Schwarz.', isMain: false },
-    { id: 'tox-duebel-sortiment', title: 'TOX Dübel-Sortiment L-Boxx Micro Allround 140-tlg.', handle: 'tox-duebel-sortiment-l-boxx-micro-allround', type: 'duebel', vorhaben: ['glasdusche'], befestigung: ['bohren', 'beides'], price: '17,90', desc: 'Allround-Dübelsortiment mit 140 Teilen in praktischer L-Boxx.', isMain: false },
-    { id: 'tox-torx-schrauben', title: 'TOX Torx-Schrauben Sortiment L-Boxx 260 Stück', handle: 'tox-torx-schrauben-sortiment-l-boxx', type: 'schrauben', vorhaben: ['glasdusche'], befestigung: ['bohren', 'beides'], price: '31,50', desc: 'Torx-Schrauben in vier Längen, 260 Stück, sortiert in L-Boxx.', isMain: false },
-    { id: 'tox-starter-set', title: 'TOX Starter Set Dübel-Sortiment 264-tlg.', handle: 'tox-starter-set-sortiment', type: 'duebel', vorhaben: ['glasdusche'], befestigung: ['bohren', 'beides'], price: '21,95', desc: 'Komplettes Starter-Set mit 264 Dübeln in verschiedenen Größen.', isMain: false },
-    { id: 'tox-handschuh', title: 'TOX Arbeitshandschuh Flex Fit', handle: 'tox-arbeitshandschuh-flex-fit', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['bohren', 'kleben', 'beides'], price: '4,50', desc: 'Nylonfeinstrick-Handschuh in S bis XL. Gutes Tastgefühl für feine Montagearbeiten.', isMain: false },
-    { id: 'tox-meterstab', title: 'TOX Meterstab farbenfroh 2 m', handle: 'tox-meterstab-farbenfroh', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['bohren', 'kleben', 'beides'], price: '6,95', desc: 'Klassischer 2 m-Meterstab mit Winkelmessfunktion. Farbenfroh.', isMain: false },
-    { id: 'tox-bleistift', title: 'TOX Zimmermanns-Bleistift Neon 250 mm', handle: 'tox-zimmermanns-bleistift-neon', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['bohren', 'kleben', 'beides'], price: '1,50', desc: 'Großer Zimmermanns-Bleistift in Neon, 250 mm, Härtegrad HB.', isMain: false },
-    { id: 'tox-o-ring-box', title: 'TOX Basic Box O-Ring Sortiment 225-tlg.', handle: 'tox-basic-box-o-ring-sortiment', type: 'zubehoer-montage', vorhaben: ['glasdusche', 'duschwanne', 'fugen'], befestigung: ['bohren', 'kleben', 'beides'], price: '17,90', desc: 'O-Ring-Sortiment mit 225 Teilen in 18 verschiedenen Größen.', isMain: false },
-    { id: 'tox-camping-set', title: 'TOX Mini Camping-Set L-BOXX', handle: 'tox-mini-camping-set-l-boxx', type: 'zubehoer-montage', vorhaben: ['glasdusche'], befestigung: ['bohren', 'beides'], price: '36,90', desc: 'Zeltsicherung mit Schraubheringen in L-BOXX. Off-Topic, aber im TOX-Sortiment.', isMain: false }
-,
+    // 18.11.2026: 9 TOX-Eintraege entfernt (TRI, Duebel-/Torx-/Starter-Sortiment, Handschuh,
+    // Meterstab, Bleistift, O-Ring-Box, Camping-Set). Thomas hat die Produkte am 01.10.2026
+    // auf DRAFT gesetzt (TOX nur noch Aqua Stop Pro), Links liefen auf 404. Kein aktives
+    // Produkt mit gleicher Artikelnummer vorhanden. Bei Reaktivierung aus Git zurueckholen.
     { id: 'veribor-saugheber-2kopf', title: 'Veribor Saugheber 2-Kopf für Glasscheiben, 50 kg Tragkraft', handle: 'veribor-saugheber-2-kopf-fur-glasscheiben-50-kg-tragkraft-kipphebel-art-nr-bo602-1g', type: 'werkzeug', vorhaben: ['glasdusche'], befestigung: ['bohren', 'kleben', 'beides'], price: '64,90', desc: 'Vakuum-Saugheber mit zwei Saugtellern zum sicheren Tragen und millimetergenauen Einsetzen von Glasscheiben. 50 kg Tragkraft.', isMain: false }
 ,
 
@@ -300,7 +283,6 @@
     const productImages = {
     'allzweckdubel-mit-schraube-fur-dusche-u-bad-aqua-stop-pro': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Duebelschraube.png?v=1768235881',
     'allzweckdubel-fur-dusche-u-bad-6x36-6x51-oder-8x51-mm': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/PT1_Tri.jpg?v=1746179320',
-    'tox-allzweckduebel-tri': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/0101000XX.1.jpg?v=1775896654',
     'schrauben-zum-verbinden-von-duschprofilen-aus-aluminium-art-nr-59881650': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Marketing_240.jpg?v=1757693678',
     'transparente-unterlagen-fur-rahmenlose-glasduschen': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_8afe7acc-8818-46bf-ad58-e05d0f0569b9.jpg?v=1757793855',
     'einlagen-zur-trennung-von-glas-und-metall': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/FullSizeRender_1bdf4675-c497-4c4f-bbb7-d95a4abe05fc.jpg?v=1766952891',
