@@ -116,6 +116,12 @@
     },
 ];
 
+    // 18.11.2026, Freigabe Thomas (Audit 01.11.): Die Massdusche ist eine komplette Duschabtrennung
+    // als Planungsprodukt, keine Glasart. Der Finder filtert nach Glasoptik und Glasdicke.
+    const _syncSkip = [
+        'duschabtrennung-nach-mass-individuell-geplant'
+    ];
+
     const productImages = {
     'sicherheitsglas-esg-fur-duschtrennwande': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/ESG.png?v=1768485378',
     'anti-korrosionsglas-mit-nano-veredelung': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/vetroShower.png?v=1777109177',
