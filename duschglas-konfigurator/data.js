@@ -68,6 +68,19 @@
         isMain: true
     },
     {
+        id: 'parsol-bronze',
+        title: 'Parsol Bronze Rauchglas, ESG nach Maß',
+        handle: 'parsol-bronze-rauchglas-fur-duschtrennwande-esg-nach-mass',
+        type: 'glas',
+        glasoptik: 'getoent',
+        qualitaet: 'standard',
+        glasdicken: ['6', '8', '10'],
+        price: '309,00',
+        priceMax: '619,00',
+        desc: 'Durchgefärbtes Rauchglas in Bronze, halbtransparent. Breite 200 bis 1400 mm, Höhe 2000 oder 2100 mm. 6, 8 oder 10 mm.',
+        isMain: false
+    },
+    {
         id: 'riffelglas',
         title: 'Riffelglas ESG 8 mm nach Maß, Rillen senkrecht oder waagerecht',
         handle: 'riffelglas-esg-8-mm-nach-mass',

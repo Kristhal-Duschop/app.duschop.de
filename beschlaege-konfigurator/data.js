@@ -219,7 +219,7 @@
     {
         id: 'como-gg-180',
         title: 'COMO Anschlagband 180\u00b0 Glas-Glas',
-        handle: 'bellagio-pendelturband-180-glas-glas-bel380-50-kg-8-10-mm-esg-kopie',
+        handle: 'como-anschlagband-180-glas-glas-com180',
         kategorie: 'scharnier',
         montage: 'glas-glas',
         typ: 'anschlag',
@@ -228,7 +228,7 @@
         glasdicken: '8/10 mm',
         colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt','messing-matt','bronze-matt'],
         price: '79,90',
-        priceMax: '89,90',
+        priceMax: '159,90',
         desc: 'Anschlagband 180\u00b0 Glas-Glas. Eckiges Messing-Design, verdeckte Verschraubung.',
         serie: 'COMO'
     },
@@ -715,6 +715,8 @@
     { id: 'schiebetuer-kit-90', title: '90-Grad-Zubehör-Kit für Schiebetürsystem SER90', handle: '90-grad-zubehor-kit-fur-schiebetursystem-glashalter-fur-eckdusche-art-nr-ser90', kategorie: 'schiebetuer', schiebeteil: 'ersatzteil', colors: ['edelstahl-poliert','edelstahl-gebuerstet','schwarz-matt','graphit-matt','messing-matt','bronze-matt'], price: '15,80', priceMax: '30,30', desc: 'Erweitert das Schiebetürsystem um ein rechtwinkliges Fixteil für die Eckdusche.', isMain: false },
     { id: 'schiebetuer-verbinder-90', title: '90-Grad-Verbinder für Schiebetürsystem SERC2', handle: '90-grad-verbinder-fur-schiebetursystem-eckeinstieg-mit-zwei-schiebeturen-art-nr-serc2', kategorie: 'schiebetuer', schiebeteil: 'ersatzteil', colors: ['edelstahl-poliert','edelstahl-gebuerstet','graphit-matt'], price: '42,70', priceMax: '51,60', desc: 'Verbindet zwei Schiebetürsysteme zum 90-Grad-Eckeinstieg mit zwei Schiebetüren.', isMain: false },
     { id: 'lugano-schraubenabdeckung', title: 'Lugano Schraubenabdeckung Glasseite rund LUGRC', handle: 'lugano-schraubenabdeckung-glasseite-rund-lugrc', kategorie: 'zubehoer', typ: 'abdeckung', serie: 'Lugano', colors: ['chrom-poliert','schwarz-matt'], price: '4,90', desc: 'Runde Abdeckung für die glasseitige Verschraubung der Lugano-Serie.', isMain: false },
+    { id: 'duschtuer-stopper-90-tss300', title: 'Duschtür-Stopper 90° zum Aufklemmen auf das Festteil, ohne Bohren, TSS300', handle: 'duschtuer-stopper-90-festteil-aufklemmen-tss300', kategorie: 'zubehoer', typ: 'stopper', glasdicken: '8/10 mm', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'], price: '39,90', desc: 'Wird auf die Kante des Festteils geklemmt und fängt die Tür im 90°-Winkel ab. Ohne Bohren, links oder rechts.', isMain: false },
+    { id: 'duschtuer-stopper-180-tfs300', title: 'Duschtür-Stopper 180° zum Aufklemmen auf das Festteil, ohne Bohren, TFS300', handle: 'duschtuer-stopper-180-festteil-aufklemmen-tfs300', kategorie: 'zubehoer', typ: 'stopper', glasdicken: '8/10 mm', colors: ['chrom-poliert','edelstahl-gebuerstet','schwarz-matt'], price: '44,90', desc: 'Wird auf die Kante des Festteils geklemmt und fängt die Tür in einer Flucht (180°) ab. Ohne Bohren, links oder rechts.', isMain: false },
     { id: 'slim-elegance-sqh15', title: 'Griffgarnitur Slim Elegance eckig 15×15 mm SQH15', handle: 'griffgarnitur-slim-elegance-15x15-sqh15', kategorie: 'griff', grifftyp: 'stangengriff', glasdicken: '6 bis 10 mm', serie: 'Slim Elegance', colors: ['chrom-poliert','schwarz-matt','edelstahl-gebuerstet','graphit-matt','messing-matt','kupfer-matt'], price: '49,90', priceMax: '102,90', desc: 'Schlanker eckiger Stangengriff 15×15 mm, Lochabstand 300, 400 oder 500 mm. Bohrung Ø 8 mm bei 315 mm Länge, sonst Ø 10 mm.', isMain: false },
     // Eido S40 (seit 02.09.2026 im Shop, am 25.09.2026 nachgetragen). Nur Chrom poliert, nur 8 mm ESG.
     { id: 'eido-s40-401001', title: 'Eido S40 Scharnier Glas-Wand 90°, Wandbefestigung außen, 401001', handle: 'eido-s40-scharnier-glas-wand-90-wandbefestigung-aussen-8-mm-esg-art-nr-401001', kategorie: 'scharnier', montage: 'glas-wand', winkel: 90, hebeSenk: false, glasdicken: '8 mm', colors: ['chrom-poliert'], price: '131,20', desc: 'Flächenbündiges Scharnier für 8 mm ESG, Befestigung an der Wand außen.', serie: 'Eido S40', isMain: false },
@@ -732,6 +734,7 @@
     { id: 'eido-s40-400002', title: 'Eido S40 Wandwinkel Glas-Wand 90° innen, flächenbündig, 400002', handle: 'eido-s40-wandwinkel-glas-wand-90-innen-flachenbundig-mit-senklochbohrung-8-mm-esg-art-nr-400002', kategorie: 'haltewinkel', montage: 'glas-wand', winkel: 90, hebeSenk: false, glasdicken: '8 mm', colors: ['chrom-poliert'], price: '88,20', desc: 'Flächenbündiger Wandwinkel mit Senklochbohrung, Wandschenkel innen. Für 8 mm ESG.', serie: 'Eido S40', isMain: false },
     { id: 'eido-s40-400005', title: 'Eido S40 Winkelverbinder Glas-Glas 90°, flächenbündig, 400005', handle: 'eido-s40-winkelverbinder-glas-glas-90-flachenbundig-mit-senklochbohrung-8-mm-esg-art-nr-400005', kategorie: 'haltewinkel', montage: 'glas-glas', winkel: 90, hebeSenk: false, glasdicken: '8 mm', colors: ['chrom-poliert'], price: '120,40', desc: 'Flächenbündiger Eckverbinder für zwei feste Scheiben im 90-Grad-Winkel, mit Senklochbohrung. Für 8 mm ESG.', serie: 'Eido S40', isMain: false },
     { id: 'eido-s40-400007', title: 'Eido S40 Winkelverbinder Glas-Glas 270°, flächenbündig, 400007', handle: 'eido-s40-winkelverbinder-glas-glas-270-flachenbundig-mit-senklochbohrung-8-mm-esg-art-nr-400007', kategorie: 'haltewinkel', montage: 'glas-glas', winkel: 270, hebeSenk: false, glasdicken: '8 mm', colors: ['chrom-poliert'], price: '129,00', desc: 'Flächenbündiger Eckverbinder für zwei feste Scheiben an der Außenecke (270°), mit Senklochbohrung. Für 8 mm ESG.', serie: 'Eido S40', isMain: false },
+    { id: 'eido-s40-400008', title: 'Eido S40 Winkelverbinder Glas-Glas 135°, einstellbar, flächenbündig, 400008', handle: 'eido-s40-winkelverbinder-glas-glas-einstellbar-135-flachenbundig-mit-senklochbohrung-8-mm-esg-art-nr-400008', kategorie: 'haltewinkel', montage: 'glas-glas', winkel: 135, hebeSenk: false, glasdicken: '8 mm', colors: ['chrom-poliert'], price: '182,80', desc: 'Einstellbarer Eckverbinder für zwei feste Scheiben, typisch 135° bei der Fünfeckdusche, mit Senklochbohrung. Für 8 mm ESG.', serie: 'Eido S40', isMain: false },
     { id: 'eido-s40-400009', title: 'Eido S40 Längsverbinder Glas-Glas 180°, flächenbündig, 400009', handle: 'eido-s40-langsverbinder-glas-glas-180-flachenbundig-mit-senklochbohrung-8-mm-esg-art-nr-400009', kategorie: 'haltewinkel', montage: 'glas-glas', winkel: 180, hebeSenk: false, glasdicken: '8 mm', colors: ['chrom-poliert'], price: '120,40', desc: 'Flächenbündiger Verbinder für zwei feste Scheiben in einer Flucht, mit Senklochbohrung. Für 8 mm ESG.', serie: 'Eido S40', isMain: false },
     // Aus der Collection griff_duschtur nachgetragen (25.09.2026).
     { id: 'griffstange-eulp-300', title: 'Griffstange Ø 19 mm V2A, 300 mm, EULP', handle: 'edelstahl-griffstange-dusche', kategorie: 'griff', grifftyp: 'stangengriff', glasdicken: '8–10 mm', colors: ['edelstahl-gebuerstet','edelstahl-poliert'], price: '48,90', desc: 'Beidseitige Griffstange aus V2A-Vollmaterial, 300 mm lang, Ø 19 mm.', serie: '', isMain: false },
@@ -784,7 +787,9 @@
         'mini-punkthalter-glas-flaechenbuendig-6-8-mm',
         // 09.10.2026: zweiter Punkthalter (flaechenbuendig, 6-8/10-12 mm),
         // gleiche Begruendung wie oben, kein Punkthalter-Pfad im Wizard.
-        'punkthalter-gm-pico-glas-spiegel-flaechenbuendig'
+        'punkthalter-gm-pico-glas-spiegel-flaechenbuendig',
+        // 21.11.2026: BO-2020 ist ein Wandprofil, annotiert im Metallprofile-Finder.
+        'drehbares-duschtuer-wandprofil-classic-t-wandprofil-8-mm-bo-2020'
         // Serenity Duschschiebetuer-System: Die Sperre vom 01.07.2026 ist am
         // 11.08.2026 aufgehoben. Sie war ausdruecklich daran gebunden, dass es
         // keinen passenden Pfad gibt ("bis ggf. eine eigene Kategorie
@@ -807,7 +812,7 @@
     'bellagio-pendelturband-90-glas-glas-anschraubplatte-einseitig-inkl-abdeckplatten-einstellbar-art-nr-bel392': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/BEL392CH_f112a662-5c46-4907-894c-c2f89d2110e1.png?v=1773418312',
     'lugano-duschband-180-glas-glas-mit-hebe-senk-funktion': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/lug180l_-_ch_-12_66d6c33b-e3ad-4f4e-9f46-766ee510fb70.jpg?v=1773417291',
     'pendelturband-mit-hebe-senk-funktion-glas-glas': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/N0B044RCH.png?v=1773417835',
-    'bellagio-pendelturband-180-glas-glas-bel380-50-kg-8-10-mm-esg-kopie': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Como_3.png?v=1774025988',
+    'como-anschlagband-180-glas-glas-com180': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/Como_3.png?v=1774025988',
 
     // Haltewinkel
     'bellagio-winkelverbinder-glas-wand-90-bel90s': 'https://cdn.shopify.com/s/files/1/0936/3439/6483/files/bel90s-ch-1_69a2c54a-6e0c-4352-bb05-d48d2612174d.jpg?v=1773414789',
