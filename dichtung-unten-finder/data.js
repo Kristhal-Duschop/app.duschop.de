@@ -409,7 +409,6 @@
     }
   },
   // === Welle C: 11 Bodendichtungen ===
-  { id: '835', name: 'Schleiflippendichtung 835', artNr: '835', handle: 'schleiflippendichtung-mit-abtropfleiste-fur-lucken-von-10-12-mm-art-nr-835', image: '', glass: [8], form: ['gerade'], doorType: ['dreh','schiebe'], gapMin: 10, gapMax: 12, priceFrom: 13.90, desc: 'Schleiflippe mit Abtropfleiste innen, für 8 mm Glas, Spalt 10–12 mm.' },
   { id: '5101-135', name: 'Gebogene Bodendichtung 5101.135 (Fünfeck 135°)', artNr: '5101.135', handle: 'gebogene-dusch-turdichtung-135-fur-funfeckduschen-art-nr-5101-135', image: '', glass: [8], form: ['gebogen'], doorType: ['dreh'], gapMin: 14, gapMax: 16, priceFrom: 33.50, desc: 'Gebogen 135° für Fünfeckduschen, verstärkte Lippe, Einzelstück oder Paar.' },
   { id: 'S009B1', name: 'Polycarbonat-Bodendichtung S009B1', artNr: 'S009B1', handle: 'duschdichtung-mit-doppelten-dichtgummi-unten-hochtransparent-glasklar-art-nr-s009b1', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 7, gapMax: 9, priceFrom: 12.30, desc: 'Polycarbonat hochtransparent, doppelte Lippe, Spalt 7–9 mm, in 65/100 cm.' },
   { id: '8879', name: 'Duschdichtung 8879 kurze Lippe', artNr: '8879', handle: 'dusch-turdichtung-mit-kurzer-abtropfleiste-und-kurzer-lippe-nach-unten-art-nr-8879', image: '', glass: [6,8], form: ['gerade'], doorType: ['dreh'], gapMin: 3, gapMax: 5, priceFrom: 14.90, desc: 'Kurze Abtropfleiste und kurze Lippe nach unten, Spalt ca. 4 mm.' },
