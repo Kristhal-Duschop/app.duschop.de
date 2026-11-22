@@ -189,8 +189,6 @@
         return (list || products).filter(function (p) {
             if (state.glasoptik && p.glasoptik !== state.glasoptik && p.glasoptik !== 'alle') return false;
             if (state.qualitaet && p.qualitaet !== state.qualitaet && p.qualitaet !== 'alle') return false;
-            // Riffelglas gibt es ohne Beschichtung, Easyclean passt nicht auf die Rillen
-            if (state.glasoptik === 'struktur' && p.type === 'veredelung') return false;
             return true;
         });
     }

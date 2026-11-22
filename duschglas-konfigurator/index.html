@@ -126,10 +126,6 @@
                     key: 'veredelung',
                     shortLabel: 'Veredelung',
                     question: 'Möchten Sie eine Veredelung?',
-                    skipFn: function (state) {
-                        // Riffelglas wird ohne Beschichtung geliefert
-                        return state.glasoptik === 'struktur';
-                    },
                     hint: 'Optionale Upgrades für mehr Langlebigkeit. „Keine" ist eine vollwertige Wahl, Sie bekommen trotzdem ein hochwertiges ESG-Glas.',
                     optionsFn: function (state) {
                         var opts = [
