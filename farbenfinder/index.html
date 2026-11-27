@@ -749,7 +749,7 @@
             var price = p.variants && p.variants[0] ? p.variants[0].price : null;
             var priceFmt = price ? ('ab ' + window.DuschopShopifyClient.formatPrice(price)) : '';
             return '' +
-                '<a class="ff-product-item" href="https://duschop.de/products/' + p.handle + '" target="_blank" rel="noopener" data-track="ff-direct-product">' +
+                '<a class="ff-product-item" href="' + window.DuschopShopifyClient.productUrl(p) + '" target="_blank" rel="noopener" data-track="ff-direct-product">' +
                     (img
                         ? '<img class="ff-product-thumb" src="' + img + '" alt="" loading="lazy">'
                         : '<div class="ff-product-thumb"></div>') +

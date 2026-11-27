@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/Kristhal_Logo_Symbol_trans.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <title>Welches Teil brauche ich? | duschop.de</title>
+    <meta name="description" content="Sie wissen, was an Ihrer Dusche anders werden soll, aber nicht, wie das Teil hei&szlig;t? Zwei Fragen, dann zeigen wir Ihnen den passenden Berater oder schauen uns Ihr Foto an.">
+    <link rel="stylesheet" href="../assets/duschop.css">
+    <style>
+        html, body { margin: 0; padding: 0; }
+        body { background: var(--duschop-bg, #f8f6f3); font-family: Inter, system-ui, sans-serif; color: var(--duschop-text, #2d2d2d); }
+        .tf-wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px 120px; }
+        .tf-badge { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--duschop-accent-strong, #8f6238); margin-bottom: 8px; }
+        .tf-title { font-size: 28px; line-height: 1.2; margin: 0 0 10px; color: var(--duschop-primary, #1a1a2e); }
+        .tf-lead { font-size: 16px; line-height: 1.55; color: var(--duschop-text-light, #6b6b6b); margin: 0 0 28px; }
+        .tf-q { font-size: 19px; font-weight: 700; margin: 0 0 6px; color: var(--duschop-primary, #1a1a2e); }
+        .tf-hint { font-size: 14px; color: var(--duschop-text-muted, #6f6f6f); margin: 0 0 16px; }
+        .tf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+        .tf-opt { text-align: left; background: #fff; border: 1.5px solid var(--duschop-border, #e8e4df); border-radius: 12px; padding: 16px; cursor: pointer; font: inherit; color: inherit; display: flex; gap: 12px; align-items: flex-start; transition: border-color .15s, box-shadow .15s; }
+        .tf-opt:hover { border-color: var(--duschop-accent, #c8956c); box-shadow: 0 2px 10px rgba(26,26,46,.06); }
+        .tf-opt:focus-visible { outline: 3px solid var(--duschop-accent-strong, #8f6238); outline-offset: 2px; }
+        .tf-opt[aria-pressed="true"] { border-color: var(--duschop-accent-strong, #8f6238); box-shadow: 0 0 0 1px var(--duschop-accent-strong, #8f6238); }
+        .tf-opt svg { width: 40px; height: 40px; flex-shrink: 0; }
+        .tf-opt-label { font-weight: 700; font-size: 15px; display: block; margin-bottom: 3px; }
+        .tf-opt-desc { font-size: 13px; color: var(--duschop-text-light, #6b6b6b); line-height: 1.4; display: block; }
+        .tf-step { margin-bottom: 28px; }
+        .tf-back { background: none; border: none; color: var(--duschop-accent-strong, #8f6238); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; padding: 0; margin-bottom: 18px; }
+        .tf-back:focus-visible { outline: 3px solid var(--duschop-accent-strong, #8f6238); outline-offset: 2px; }
+        .tf-result { background: #fff; border: 1.5px solid var(--duschop-border, #e8e4df); border-radius: 14px; padding: 22px; }
+        .tf-state { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px; margin-bottom: 12px; }
+        .tf-state.sicher { background: #e7f5ec; color: #1d6b3d; }
+        .tf-state.bestaetigen { background: #fdf1e4; color: #8a4f10; }
+        .tf-state.foto { background: #e9eef6; color: #23406b; }
+        .tf-result h2 { font-size: 21px; margin: 0 0 8px; color: var(--duschop-primary, #1a1a2e); }
+        .tf-result p { font-size: 15px; line-height: 1.55; margin: 0 0 14px; }
+        .tf-measure { background: var(--duschop-bg-deep, #f5f0eb); border-radius: 10px; padding: 12px 14px; font-size: 14px; line-height: 1.5; margin: 0 0 18px; }
+        .tf-measure strong { display: block; margin-bottom: 4px; }
+        .tf-measure ul { margin: 0; padding-left: 18px; }
+        .tf-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tf-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 10px; font-weight: 700; font-size: 15px; text-decoration: none; }
+        .tf-btn:focus-visible { outline: 3px solid var(--duschop-primary, #1a1a2e); outline-offset: 2px; }
+        .tf-btn-primary { background: var(--duschop-accent-strong, #8f6238); color: #fff; }
+        .tf-btn-primary:hover { background: var(--duschop-accent-strong-hover, #7d5528); }
+        .tf-btn-secondary { background: #fff; color: var(--duschop-primary, #1a1a2e); border: 1.5px solid var(--duschop-border-strong, #d4cec5); }
+        .tf-btn-secondary:hover { border-color: var(--duschop-primary, #1a1a2e); }
+        .tf-btn svg { width: 18px; height: 18px; }
+        .tf-phone { font-size: 14px; color: var(--duschop-text-light, #6b6b6b); margin-top: 16px; }
+        .tf-phone a { color: var(--duschop-accent-strong, #8f6238); font-weight: 600; }
+        @media (max-width: 520px) { .tf-title { font-size: 24px; } .tf-grid { grid-template-columns: 1fr; } .tf-btn { width: 100%; justify-content: center; } }
+        @media (prefers-reduced-motion: reduce) { .tf-opt { transition: none; } }
+    </style>
+</head>
+<body>
+
+    <div class="duschop-app" style="background:transparent;">
+        <header class="duschop-header">
+            <div class="duschop-header-inner">
+                <a href="../" class="duschop-back-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    Alle Berater
+                </a>
+                <div class="duschop-tool-title">DUSCHOP <span>TEIL FINDEN</span></div>
+                <a href="https://duschop.de" class="duschop-header-link">&rarr; zum Shop</a>
+            </div>
+        </header>
+    </div>
+
+    <main class="tf-wrap">
+        <div class="tf-badge">Ohne Fachbegriffe</div>
+        <h1 class="tf-title">Welches Teil brauche ich?</h1>
+        <p class="tf-lead">Sie wissen, was an Ihrer Dusche anders werden soll, aber nicht, wie das Teil hei&szlig;t? Beantworten Sie ein oder zwei Fragen. Wir f&uuml;hren Sie zum passenden Berater, und wo ein Foto mehr sagt, schauen wir es uns selbst an.</p>
+        <div id="tf-app" aria-live="polite"></div>
+    </main>
+
+    <footer class="duschop-legal">
+        <a href="https://duschop.de/policies/legal-notice">Impressum</a>
+        <a href="https://duschop.de/policies/privacy-policy">Datenschutz</a>
+    </footer>
+
+    <a href="https://wa.me/4917654505183?text=Hallo%2C%20ich%20wei%C3%9F%20nicht%2C%20welches%20Teil%20ich%20f%C3%BCr%20meine%20Dusche%20brauche.%20Ich%20schicke%20Ihnen%20ein%20Foto." class="duschop-wa-sticky" target="_blank" rel="noopener" data-track="whatsapp-teil-finder">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="duschop-wa-sticky-text">Foto per WhatsApp</span>
+    </a>
+
+    <script>
+    (function () {
+        'use strict';
+
+        var WA = 'https://wa.me/4917654505183?text=';
+        var TEL = '09293 9339580';
+        var TEL_HREF = 'tel:+4992939339580';
+
+        // Icons in der Bildsprache der Hub-Karten (viewBox 0 0 48 48).
+        var I = {
+            unten: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="19" y="6" width="10" height="28" rx="1.5" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.2"/><rect x="8" y="40" width="32" height="5" rx="1" fill="#1a1a2e"/><path d="M24 35 q-3 3 0 5 q3-2 0-5z" fill="#8ba3bb"/></svg>',
+            seitlich: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="6" width="6" height="36" fill="#1a1a2e"/><rect x="15" y="6" width="10" height="36" rx="1.5" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.2"/><path d="M30 22 q-3 3 0 5 q3-2 0-5z" fill="#8ba3bb"/><line x1="12" y1="14" x2="15" y2="14" stroke="#c8956c" stroke-width="2"/><line x1="12" y1="34" x2="15" y2="34" stroke="#c8956c" stroke-width="2"/></svg>',
+            tuer: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="8" width="4" height="32" rx="1" fill="#1a1a2e"/><rect x="12" y="10" width="22" height="5" rx="1.5" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.1" transform="rotate(30 13 12)"/><rect x="33" y="8" width="5" height="32" rx="1" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.1"/><path d="M30 30 L34 26" stroke="#c8956c" stroke-width="2" stroke-linecap="round"/></svg>',
+            wackelt: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="6" width="5" height="36" fill="#1a1a2e"/><rect x="20" y="8" width="8" height="34" rx="1.5" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.2"/><line x1="11" y1="12" x2="20" y2="12" stroke="#c8956c" stroke-width="2.4" stroke-linecap="round"/><path d="M33 18 q3 6 0 12" fill="none" stroke="#8ba3bb" stroke-width="1.4" stroke-linecap="round"/><path d="M37 15 q4 9 0 18" fill="none" stroke="#8ba3bb" stroke-width="1.4" stroke-linecap="round"/></svg>',
+            beschlag: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="6" width="6" height="36" fill="#1a1a2e"/><rect x="22" y="6" width="9" height="36" rx="1.5" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.2"/><rect x="10" y="12" width="16" height="8" rx="2" fill="#c8956c"/><rect x="10" y="30" width="16" height="8" rx="2" fill="#c8956c"/></svg>',
+            farbe: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="16" cy="17" r="9" fill="#e8ecf0" stroke="#9aa7b5" stroke-width="1.2"/><circle cx="32" cy="17" r="9" fill="#1a1a2e"/><circle cx="24" cy="31" r="9" fill="#c8956c"/></svg>',
+            wintergarten: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 20 L24 8 L42 20" fill="none" stroke="#1a1a2e" stroke-width="2.4" stroke-linejoin="round"/><rect x="9" y="20" width="14" height="20" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.2"/><rect x="25" y="20" width="14" height="20" fill="#d8e3ee" stroke="#8ba3bb" stroke-width="1.2"/></svg>',
+            anders: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="12" width="32" height="24" rx="4" fill="#f2f7fb" stroke="#8ba3bb" stroke-width="1.4"/><circle cx="24" cy="24" r="7" fill="#d8e3ee" stroke="#1a1a2e" stroke-width="1.6"/><rect x="14" y="9" width="8" height="4" rx="1" fill="#1a1a2e"/></svg>'
+        };
+
+        // Messhinweise: genau die Werte, nach denen die Ziel-Berater fragen.
+        var M = {
+            unten: ['Glasdicke an der Kante (meist 6 oder 8 mm)', 'Spalt zwischen Glasunterkante und Boden, an der weitesten Stelle'],
+            seitlich: ['Glasdicke an der Kante', 'Breite des Spalts, an der weitesten Stelle', 'Ob die Scheiben gerade, im rechten Winkel oder schr&auml;g zueinander stehen'],
+            magnet: ['Glasdicke an der Kante', 'Spalt zwischen den Glasscheiben', 'Winkel der Scheiben zueinander (180, 90 oder 135 Grad)'],
+            stabi: ['Breite der Glaswand', 'Ab 90 cm Breite empfehlen wir eine Stabistange, ab 1 m ist sie Pflicht'],
+            beschlag: ['Glasdicke an der Kante', 'Oberfl&auml;che des vorhandenen Beschlags (Chrom, Schwarz, Edelstahl &hellip;)'],
+            wintergarten: ['Glasdicke', 'Wie die Scheiben aneinanderstoßen (gerade oder im Winkel)']
+        };
+
+        // Ausg&auml;nge: sicher / bestaetigen / foto. Kein Ausgang tut so, als w&uuml;sste das Tool mehr, als es wei&szlig;.
+        var R = {
+            unten_gerade: { state: 'sicher', tool: 'dichtung-unten-finder', title: 'Sie brauchen eine untere Duschdichtung', text: 'Sie sitzt an der Unterkante der Glast&uuml;r und schlie&szlig;t den Spalt zum Boden. Der Berater fragt Glasdicke, Spaltma&szlig; und T&uuml;rtyp ab und zeigt nur Profile, die passen.', measure: 'unten', cta: 'Zum Bodendichtungs-Berater' },
+            unten_gebogen: { state: 'sicher', tool: 'dichtung-gebogen-finder', title: 'Sie brauchen eine gebogene Bodendichtung', text: 'Bei Viertelkreis- und F&uuml;nfeckduschen muss das Profil zur Kr&uuml;mmung des Glases passen. Der Berater zeigt nur gebogene Profile.', measure: 'unten', cta: 'Zum Berater f&uuml;r gebogenes Glas' },
+            seitlich_magnet: { state: 'sicher', tool: 'magnetdichtung-finder', title: 'Sie brauchen eine Magnetdichtung', text: 'Sie h&auml;lt die T&uuml;r beim Schlie&szlig;en an der Nachbarscheibe und dichtet die Fuge ab. Magnetdichtungen gibt es nur paarweise passend zu Winkel und Glasdicke.', measure: 'magnet', cta: 'Zum Magnetdichtungs-Berater' },
+            seitlich_ohne: { state: 'sicher', tool: 'dichtung-seitlich-finder', title: 'Sie brauchen eine seitliche Duschdichtung', text: 'Je nach Lage ist das eine Lippen-, Ballon- oder Mitteldichtung. Der Berater fragt Einsatzort, T&uuml;rtyp, Scheibenstellung und Spaltma&szlig; ab.', measure: 'seitlich', cta: 'Zum Berater f&uuml;r Seitendichtungen' },
+            seitlich_unklar: { state: 'bestaetigen', tool: 'dichtung-seitlich-finder', title: 'Wahrscheinlich eine seitliche Dichtung', text: 'Ob Lippen-, Ballon- oder Magnetdichtung, h&auml;ngt davon ab, wie die T&uuml;r schlie&szlig;t. Probieren Sie den Berater. Sind Sie bei einer Frage unsicher, schicken Sie uns ein Foto der Fuge bei geschlossener T&uuml;r.', measure: 'seitlich', cta: 'Zum Berater f&uuml;r Seitendichtungen' },
+            tuer: { state: 'bestaetigen', tool: 'magnetdichtung-finder', title: 'Meist ist es die Magnetdichtung', text: 'Bleibt die T&uuml;r nicht zu oder federt zur&uuml;ck, h&auml;lt in den meisten F&auml;llen die Magnetdichtung nicht mehr. Kann auch ein Scharnier sein, das nachgibt. Schicken Sie uns im Zweifel ein Foto von Scharnier und Schlie&szlig;kante.', measure: 'magnet', cta: 'Zum Magnetdichtungs-Berater' },
+            wackelt: { state: 'sicher', tool: 'stabistangen-konfigurator', title: 'Sie brauchen eine Stabistange', text: 'Sie verbindet die Glaswand mit der Wand und h&auml;lt sie ruhig. Der Berater fragt Montageart, Form und Oberfl&auml;che ab.', measure: 'stabi', cta: 'Zum Stabistangen-Berater' },
+            beschlag: { state: 'bestaetigen', tool: 'beschlaege-konfigurator', title: 'Ein Beschlag in passender Bauart', text: 'Scharniere, Halter und Griffe gibt es in vielen Serien. Im Berater finden Sie Bauart und Oberfl&auml;che. Soll das neue Teil in vorhandene Bohrungen passen, schicken Sie uns vorher ein Foto, wir pr&uuml;fen die Serie.', measure: 'beschlag', cta: 'Zum Beschl&auml;ge-Berater' },
+            farbe: { state: 'sicher', tool: 'farbenfinder', title: 'Alles in Ihrer Oberfl&auml;che', text: 'W&auml;hlen Sie Ihre Oberfl&auml;che, Sie sehen alle Teile, die es darin gibt. Bei Bronze und Messing weichen T&ouml;ne je nach Hersteller ab, ein Foto Ihrer Armatur hilft.', cta: 'Zum Farbenfinder' },
+            wintergarten: { state: 'sicher', tool: 'wintergarten-konfigurator', title: 'Sie brauchen eine Wintergarten-Dichtung', text: 'UV-best&auml;ndige Dichtungen f&uuml;r die Fugen zwischen den Glasscheiben. Der Berater fragt Verbindungsart und Glasdicke ab.', measure: 'wintergarten', cta: 'Zum Wintergarten-Berater' },
+            foto: { state: 'foto', title: 'Schicken Sie uns ein Foto, wir finden das Teil', text: 'Manche Teile erkennt man nur auf dem Bild. Fotografieren Sie die Stelle aus etwa einem Meter Abstand und einmal ganz nah. Legen Sie wenn m&ouml;glich einen Zollstock daneben. Wir melden uns mit dem passenden Artikel.' }
+        };
+
+        var FLOW = {
+            start: {
+                q: 'Was soll an Ihrer Dusche anders werden?',
+                hint: 'W&auml;hlen Sie, was am besten passt.',
+                opts: [
+                    { v: 'unten', label: 'Wasser kommt unten an der T&uuml;r heraus', desc: 'Zwischen Glas und Boden oder Duschwanne.', icon: I.unten, next: 'unten' },
+                    { v: 'seitlich', label: 'Wasser kommt seitlich heraus', desc: 'An der Fuge zur Wand oder zur Nachbarscheibe.', icon: I.seitlich, next: 'seitlich' },
+                    { v: 'tuer', label: 'Die T&uuml;r bleibt nicht zu', desc: 'Sie federt zur&uuml;ck oder schlie&szlig;t nicht mehr sauber.', icon: I.tuer, result: 'tuer' },
+                    { v: 'wackelt', label: 'Die Glaswand soll fester stehen', desc: 'Sie schwingt beim Anfassen oder T&uuml;r&ouml;ffnen mit.', icon: I.wackelt, result: 'wackelt' },
+                    { v: 'beschlag', label: 'Ein Scharnier, Halter oder Griff soll neu', desc: 'Ersatz oder eine neue Oberfl&auml;che.', icon: I.beschlag, result: 'beschlag' },
+                    { v: 'farbe', label: 'Teile passend zu meiner Armatur', desc: 'Chrom, Schwarz, Messing, Bronze und mehr.', icon: I.farbe, result: 'farbe' },
+                    { v: 'wintergarten', label: 'Wintergarten oder Terrassendach', desc: 'Dichtung zwischen den Glasscheiben.', icon: I.wintergarten, result: 'wintergarten' },
+                    { v: 'anders', label: 'Etwas anderes oder ich wei&szlig; es nicht', desc: 'Wir schauen uns Ihr Foto an.', icon: I.anders, result: 'foto' }
+                ]
+            },
+            unten: {
+                q: 'Ist das Glas gerade oder gebogen?',
+                hint: 'Viertelkreis- und F&uuml;nfeckduschen haben gebogenes Glas.',
+                opts: [
+                    { v: 'gerade', label: 'Gerade', desc: 'Flache Glasscheibe, die meisten Duschen.', result: 'unten_gerade' },
+                    { v: 'gebogen', label: 'Gebogen', desc: 'Viertelkreis oder F&uuml;nfeck.', result: 'unten_gebogen' },
+                    { v: 'unklar', label: 'Wei&szlig; ich nicht', desc: 'Wir schauen es uns an.', result: 'foto' }
+                ]
+            },
+            seitlich: {
+                q: 'Schlie&szlig;t die T&uuml;r dort mit einer Magnetleiste?',
+                hint: 'Eine Magnetleiste h&auml;lt die T&uuml;r h&ouml;rbar am Nachbarglas fest.',
+                opts: [
+                    { v: 'magnet', label: 'Ja, mit Magnet', desc: 'Die T&uuml;r schnappt beim Schlie&szlig;en an.', result: 'seitlich_magnet' },
+                    { v: 'ohne', label: 'Nein, ohne Magnet', desc: 'Weiche Lippe oder gar keine Dichtung.', result: 'seitlich_ohne' },
+                    { v: 'unklar', label: 'Wei&szlig; ich nicht', desc: '', result: 'seitlich_unklar' }
+                ]
+            }
+        };
+
+        var app = document.getElementById('tf-app');
+        var path = ['start'];
+        var answers = [];
+        var von = (/[?&]von=([^&]*)/.exec(window.location.search) || [])[1];
+
+        function toolHref(tool) {
+            // ?von= tr&auml;gt duschop.js als utm_content an die Produktlinks weiter.
+            return '../' + tool + '/?von=' + encodeURIComponent(von ? 'teil-finder-' + decodeURIComponent(von) : 'teil-finder');
+        }
+
+        function plain(html) {
+            var d = document.createElement('div');
+            d.innerHTML = html;
+            return d.textContent;
+        }
+
+        function waHref() {
+            var txt = 'Hallo, ich brauche Hilfe bei der Auswahl. ' +
+                answers.map(plain).join(' / ') + '. Ich schicke Ihnen ein Foto.';
+            return WA + encodeURIComponent(txt);
+        }
+
+        function renderStep(key) {
+            var s = FLOW[key];
+            var html = '';
+            if (path.length > 1) html += '<button type="button" class="tf-back" data-act="back">&larr; Zur&uuml;ck</button>';
+            html += '<section class="tf-step"><h2 class="tf-q" id="tf-q">' + s.q + '</h2>' +
+                '<p class="tf-hint">' + s.hint + '</p>' +
+                '<div class="tf-grid" role="group" aria-labelledby="tf-q">';
+            s.opts.forEach(function (o, i) {
+                html += '<button type="button" class="tf-opt" aria-pressed="false" data-i="' + i + '" data-track="teil-finder-' + key + '-' + o.v + '">' +
+                    (o.icon || '') +
+                    '<span><span class="tf-opt-label">' + o.label + '</span>' +
+                    (o.desc ? '<span class="tf-opt-desc">' + o.desc + '</span>' : '') + '</span></button>';
+            });
+            html += '</div></section>';
+            app.innerHTML = html;
+            var first = app.querySelector('.tf-opt');
+            if (first && path.length > 1) first.focus();
+        }
+
+        function renderResult(id) {
+            var r = R[id];
+            var labels = { sicher: 'Passt sicher', bestaetigen: 'Wahrscheinlich, bitte kurz pr&uuml;fen', foto: 'Wir schauen es uns an' };
+            var html = '<button type="button" class="tf-back" data-act="back">&larr; Zur&uuml;ck</button>' +
+                '<div class="tf-result" tabindex="-1" id="tf-result">' +
+                '<span class="tf-state ' + r.state + '">' + labels[r.state] + '</span>' +
+                '<h2>' + r.title + '</h2><p>' + r.text + '</p>';
+            if (r.measure && M[r.measure]) {
+                html += '<div class="tf-measure"><strong>Das brauchen Sie im Berater:</strong><ul>' +
+                    M[r.measure].map(function (m) { return '<li>' + m + '</li>'; }).join('') + '</ul></div>';
+            }
+            html += '<div class="tf-actions">';
+            if (r.tool) {
+                html += '<a class="tf-btn tf-btn-primary" href="' + toolHref(r.tool) + '" data-track="teil-finder-ziel-' + r.tool + '">' + r.cta +
+                    ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>';
+                html += '<a class="tf-btn tf-btn-secondary" href="' + waHref(r) + '" target="_blank" rel="noopener" data-track="teil-finder-foto-' + id + '">Lieber Foto schicken</a>';
+            } else {
+                html += '<a class="tf-btn tf-btn-primary" href="' + waHref(r) + '" target="_blank" rel="noopener" data-track="teil-finder-foto-' + id + '">Foto per WhatsApp schicken</a>';
+            }
+            html += '</div><p class="tf-phone">Lieber sprechen? <a href="' + TEL_HREF + '" data-track="teil-finder-telefon">' + TEL + '</a></p></div>';
+            app.innerHTML = html;
+            document.getElementById('tf-result').focus();
+        }
+
+        function render() {
+            var cur = path[path.length - 1];
+            // Einleitung nur auf der ersten Frage, sonst rutscht der Weiter-Knopf mobil unter den Rand.
+            document.querySelector('.tf-lead').hidden = path.length > 1;
+            if (cur.indexOf('result:') === 0) renderResult(cur.slice(7));
+            else renderStep(cur);
+        }
+
+        app.addEventListener('click', function (e) {
+            var btn = e.target.closest('button');
+            if (!btn) return;
+            if (btn.dataset.act === 'back') {
+                path.pop();
+                answers.pop();
+                render();
+                return;
+            }
+            var step = FLOW[path[path.length - 1]];
+            var o = step && step.opts[+btn.dataset.i];
+            if (!o) return;
+            answers.push(o.label);
+            path.push(o.next ? o.next : 'result:' + o.result);
+            render();
+            window.scrollTo({ top: 0, behavior: 'auto' });
+        });
+
+        render();
+    })();
+    </script>
+
+    <script src="../tracker.js" async></script>
+</body>
+</html>
